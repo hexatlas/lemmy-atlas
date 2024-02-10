@@ -1,0 +1,392 @@
+/* Imports */
+
+@import "leaflet/dist/leaflet.css";
+@import "./Atlas.css";
+
+:root {
+  /* colors */
+  /* https://colordesigner.io/#FFCC0D-FF7326-FF194D-BF2669-702A8C */
+  --atlas-color-primary: 282.86 53.85% 35.69%;
+  --atlas-color-secondary: 333.73 66.81% 44.9%;
+  --atlas-color-tertiary: 47.36 100% 52.55%;
+  --atlas-color-accent: 346.43 100% 54.9%;
+  --atlas-color-link: 165 59% 62%;
+
+  --atlas-color-comment-red: hsla(0, 35%, 50%, 0.5);
+  --atlas-color-comment-yellow: hsla(50, 35%, 50%, 0.5);
+  --atlas-color-comment-green: hsla(100, 35%, 50%, 0.5);
+  --atlas-color-comment-blue: hsla(150, 35%, 50%, 0.5);
+  --atlas-color-comment-teal: hsla(200, 35%, 50%, 0.5);
+  --atlas-color-comment-purple: hsla(250, 35%, 50%, 0.5);
+  --atlas-color-comment-pink: hsla(300, 35%, 50%, 0.5);
+
+  --atlas-color-dark: 282.86 0% 13%;
+  --atlas-color-grey: 282.86 0% 27%;
+  --atlas-color-lightgrey: 282.86 0% 80%;
+  --atlas-color-light: 282.86 100% 98.5%;
+
+  --atlas-color-info: 226.43 100% 54.9%;
+  --atlas-color-success: 166.43 100% 54.9%;
+  --atlas-color-warning: 46.43 100% 54.9%;
+  --atlas-color-error: 346.43 100% 54.9%;
+
+  /* font-families */
+  --atlas-font-sans: Arial, Helvetica, sans-serif;
+  --atlas-font-serif: serif;
+  --atlas-font-cursive: cursive;
+  --atlas-font-mono: mono;
+
+  --atlas-line-height: 1.2;
+
+  /* sizes */
+  --phi: 1.6180339887498948482rem; /* Golden Ratio */
+
+  --atlas-size-00: calc(var(--phi) * 9);
+  --atlas-size-01: calc(var(--phi) * 8);
+  --atlas-size-02: calc(var(--phi) * 7);
+  --atlas-size-03: calc(var(--phi) * 6);
+  --atlas-size-04: calc(var(--phi) * 5);
+  --atlas-size-05: calc(var(--phi) * 4);
+  --atlas-size-06: calc(var(--phi) * 3);
+  --atlas-size-07: calc(var(--phi) * 2);
+  --atlas-size-08: var(--phi);
+  --atlas-size-09: calc(var(--phi) / 2);
+  --atlas-size-10: calc(var(--phi) / 3);
+  --atlas-size-11: calc(var(--phi) / 4);
+  --atlas-size-12: calc(var(--phi) / 5);
+  --atlas-size-13: calc(var(--phi) / 6);
+  --atlas-size-14: calc(var(--phi) / 7);
+  --atlas-size-15: calc(var(--phi) / 8);
+  --atlas-size-16: calc(var(--phi) / 9);
+
+  --atlas-min-width: 12.5rem; /* Mobile: 250px / 16px */
+  --atlas-max-width: 85.375rem; /* Desktop: 1920px / 16px */
+  --atlas-max-char: 80ch;
+
+  /* border radius */
+
+  --atlas-border-radius-1: var(--atlas-size-12);
+  --atlas-border-radius-2: var(--atlas-size-14);
+
+  /* opacities */
+
+  --atlas-opacity-1: 0.15;
+  --atlas-opacity-2: 0.5;
+  --atlas-opacity-3: 0.95;
+
+  /* timing */
+
+  --atlas-timing-function: cubic-bezier(0.1, 0.1, 0.4, 1);
+
+  --atlas-time-1: 50ms;
+  --atlas-time-2: 150ms;
+  --atlas-time-3: 450ms;
+  --atlas-time-4: 3s;
+  --atlas-time-5: 18s;
+
+  --atlas-transition-fast: var(--atlas-time-1) var(--atlas-timing-function);
+  --atlas-transition-slow: var(--atlas-time-2) var(--atlas-timing-function);
+  --atlas-timing-fast: var(--atlas-time-3) var(--atlas-timing-function) infinite;
+  --atlas-timing-slow: var(--atlas-time-4) var(--atlas-timing-function) infinite;
+  --atlas-timing-gradient: var(--atlas-time-5) var(--atlas-timing-function)
+    infinite alternate-reverse;
+
+  /* shadows */
+
+  --atlas-shadow-1: 0 var(--atlas-size-16) var(--atlas-size-16)
+      hsl(var(--atlas-color-dark) / 0.08),
+    0 var(--atlas-size-15) var(--atlas-size-15)
+      hsl(var(--atlas-color-dark) / 0.061),
+    0 var(--atlas-size-14) var(--atlas-size-14)
+      hsl(var(--atlas-color-dark) / 0.052),
+    0 var(--atlas-size-13) var(--atlas-size-13)
+      hsl(var(--atlas-color-dark) / 0.046),
+    0 var(--atlas-size-12) var(--atlas-size-12)
+      hsl(var(--atlas-color-dark) / 0.04),
+    0 var(--atlas-size-11) var(--atlas-size-11)
+      hsl(var(--atlas-color-dark) / 0.034),
+    0 var(--atlas-size-10) var(--atlas-size-10)
+      hsl(var(--atlas-color-dark) / 0.028),
+    0 var(--atlas-size-09) var(--atlas-size-09)
+      hsl(var(--atlas-color-dark) / 0.019);
+
+  --atlas-shadow-inset: inset 0 var(--atlas-size-16) var(--atlas-size-16)
+      hsl(var(--atlas-color-dark) / 0.08),
+    inset 0 var(--atlas-size-15) var(--atlas-size-15)
+      hsl(var(--atlas-color-dark) / 0.061),
+    inset 0 var(--atlas-size-14) var(--atlas-size-14)
+      hsl(var(--atlas-color-dark) / 0.052),
+    inset 0 var(--atlas-size-13) var(--atlas-size-13)
+      hsl(var(--atlas-color-dark) / 0.046),
+    inset 0 var(--atlas-size-12) var(--atlas-size-12)
+      hsl(var(--atlas-color-dark) / 0.04),
+    inset 0 var(--atlas-size-11) var(--atlas-size-11)
+      hsl(var(--atlas-color-dark) / 0.034),
+    inset 0 var(--atlas-size-10) var(--atlas-size-10)
+      hsl(var(--atlas-color-dark) / 0.028),
+    inset 0 var(--atlas-size-09) var(--atlas-size-09)
+      hsl(var(--atlas-color-dark) / 0.019);
+  --atlas-shadow-text: 0 var(--atlas-size-16) var(--atlas-size-16)
+      hsl(var(--atlas-color-dark) / 0.08),
+    0 var(--atlas-size-15) var(--atlas-size-15)
+      hsl(var(--atlas-color-dark) / 0.061),
+    0 var(--atlas-size-14) var(--atlas-size-14)
+      hsl(var(--atlas-color-dark) / 0.052),
+    0 var(--atlas-size-13) var(--atlas-size-13)
+      hsl(var(--atlas-color-dark) / 0.046),
+    0 var(--atlas-size-12) var(--atlas-size-12)
+      hsl(var(--atlas-color-dark) / 0.04),
+    0 var(--atlas-size-11) var(--atlas-size-11)
+      hsl(var(--atlas-color-dark) / 0.034),
+    0 var(--atlas-size-10) var(--atlas-size-10)
+      hsl(var(--atlas-color-dark) / 0.028),
+    0 var(--atlas-size-09) var(--atlas-size-09)
+      hsl(var(--atlas-color-dark) / 0.019);
+}
+
+/* 
+    RESETS
+*/
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  text-decoration: none;
+  text-indent: 0;
+}
+
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+p,
+a,
+figure,
+picture {
+  margin: 0;
+  text-decoration: inherit;
+  color: inherit;
+}
+
+code {
+  display: block;
+  text-transform: lowercase;
+}
+
+/* 
+    BASE
+ */
+
+html {
+  height: -webkit-fill-available;
+  font-size: 95%;
+  scroll-snap-type: y proximity;
+} /*16px*/
+
+body {
+  /* background: hsl(var(--atlas-color-dark)); */
+  background-color: hsl(var(--atlas-color-dark) / var(--atlas-opacity-3));
+  opacity: 1;
+  background-image: linear-gradient(
+      30deg,
+      #000000 12%,
+      transparent 12.5%,
+      transparent 87%,
+      #000000 87.5%,
+      #000000
+    ),
+    linear-gradient(
+      150deg,
+      #000000 12%,
+      transparent 12.5%,
+      transparent 87%,
+      #000000 87.5%,
+      #000000
+    ),
+    linear-gradient(
+      30deg,
+      #000000 12%,
+      transparent 12.5%,
+      transparent 87%,
+      #000000 87.5%,
+      #000000
+    ),
+    linear-gradient(
+      150deg,
+      #000000 12%,
+      transparent 12.5%,
+      transparent 87%,
+      #000000 87.5%,
+      #000000
+    ),
+    linear-gradient(
+      60deg,
+      hsl(var(--atlas-color-dark)) 25%,
+      transparent 25.5%,
+      transparent 75%,
+      hsl(var(--atlas-color-dark)) 75%,
+      hsl(var(--atlas-color-dark))
+    ),
+    linear-gradient(
+      60deg,
+      hsl(var(--atlas-color-dark)) 25%,
+      transparent 25.5%,
+      transparent 75%,
+      hsl(var(--atlas-color-dark)) 75%,
+      hsl(var(--atlas-color-dark))
+    );
+  background-size: 46px 81px;
+  background-position: 0 0, 0 0, 23px 40px, 23px 40px, 0 0, 23px 40px;
+  background-attachment: fixed;
+  font-family: var(--atlas-font-sans);
+  font-weight: 400;
+  line-height: var(--atlas-line-height);
+  color: hsl(var(--atlas-color-light) / var(--atlas-opacity-3));
+  min-height: 100vh;
+  min-height: 100dvh;
+}
+
+section {
+  scroll-snap-align: start;
+}
+
+p {
+  margin-bottom: var(--atlas-size-12);
+}
+
+a {
+  color: hsl(var(--atlas-color-link) / var(--atlas-opacity-3));
+  background: none !important;
+
+  border-radius: var(--atlas-size-15);
+  transition: var(--atlas-transition-slow);
+
+  &:hover {
+    /* border-bottom: var(--atlas-size-11) solid; */
+    opacity: var(--atlas-opacity-2);
+    transition: var(--atlas-transition-fast);
+  }
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+  font-family: var(--atlas-font-sans);
+  font-weight: 400;
+  line-height: 1;
+  margin-bottom: var(--atlas-size-10);
+  text-shadow: var(--atlas-shadow-text);
+  max-width: var(--atlas-max-char);
+}
+
+/* Headings */
+
+h1 {
+  font-family: var(--atlas-font-cursive);
+  /* font-size: var(--atlas-size-04); */
+  font-size: clamp(var(--atlas-size-09), 11.089vw + 1rem, var(--atlas-size-07));
+  font-weight: 900;
+}
+
+h2 {
+  /* font-size: var(--atlas-size-05); */
+  font-size: clamp(var(--atlas-size-10), 6.854vw + 1rem, var(--atlas-size-08));
+  font-weight: 400;
+}
+
+/* Subheadings */
+
+h3 {
+  /* font-size: var(--atlas-size-07); */
+  font-size: clamp(var(--atlas-size-10), 4.236vw + 1rem, var(--atlas-size-08));
+  font-weight: 400;
+}
+
+h4 {
+  /* font-size: var(--atlas-size-07); */
+  font-size: clamp(var(--atlas-size-09), 2.618vw + 1rem, var(--atlas-size-08));
+  text-transform: uppercase;
+  font-weight: 900;
+}
+
+h5 {
+  /* font-size: var(--atlas-size-09); */
+  font-size: clamp(var(--atlas-size-09), 1.618vw + 1rem, var(--atlas-size-08));
+  text-transform: uppercase;
+}
+
+blockquote {
+  border-left: var(--atlas-size-15) solid
+    hsl(var(--atlas-color-light) / var(--atlas-opacity-1));
+  padding-left: var(--atlas-size-10);
+  margin-top: var(--atlas-size-09);
+  margin-bottom: var(--atlas-size-12);
+}
+
+small,
+.text_small {
+  font-size: var(--atlas-size-09);
+}
+
+img,
+picture {
+  max-width: 100%;
+  display: block;
+}
+
+input[type="text"],
+textarea,
+select,
+button,
+progress {
+  /* font: inherit; */
+  padding: 0 var(--atlas-size-10);
+  height: var(--atlas-size-07);
+  border-width: 0;
+  border-radius: var(--atlas-size-10);
+
+  transition: border-radius var(--atlas-transition-fast);
+}
+
+hr {
+  opacity: var(--atlas-opacity-1);
+}
+
+th {
+  text-align: left;
+}
+
+td {
+  min-width: var(--atlas-size-03);
+  vertical-align: top;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.highlight {
+  background: hsl(var(--atlas-color-light) / var(--atlas-opacity-1));
+  color: hsl(var(--atlas-color-tertiary) / var(--atlas-opacity-3));
+  padding: 0 var(--atlas-size-10);
+  margin-right: var(--atlas-size-12);
+  border-radius: var(--atlas-border-radius-1);
+  font-weight: 900;
+  text-shadow: var(--atlas-shadow-text);
+  box-shadow: var(--atlas-shadow-inset);
+}
