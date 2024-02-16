@@ -1,5 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from "react";
-import { useMap } from "react-leaflet";
+import { useEffect, useMemo, useState } from "react";
 
 // https://www.radix-ui.com/primitives/docs/components/tabs
 import * as Tabs from "@radix-ui/react-tabs";
@@ -13,8 +12,9 @@ import AtlasNexusCard from "./AtlasNexus";
 
 import {
   lemmyInstances,
-  communityTypes,
-  locationTypes,
+  listingTypes,
+  regionTypes,
+  searchTypes,
   sortTypes,
 } from "./Atlas_Config";
 
@@ -31,6 +31,7 @@ export default function Atlas() {
   */
   // DEVICE
   const [isMobile, setIsMobile] = useState(null);
+  const [nexusSize, setNexusSize] = useState(1.6180339887498948482 ^ 512);
 
   // LOCATION
   const [map, setMap] = useState(null);
@@ -43,9 +44,7 @@ export default function Atlas() {
       country: "Country",
       name: "Administrative Region",
     });
-  const [activeLocationType, setActiveLocationType] = useState(
-    locationTypes[0]
-  ); // Default: Country Sort
+  const [activeRegionType, setActiveRegionType] = useState(regionTypes[0]); // Default: Country Sort
   const [locationQuery, setLocationQuery] = useState("");
 
   // DATA
@@ -63,7 +62,11 @@ export default function Atlas() {
   const [activeLemmyInstance, setActiveLemmyInstance] = useState(
     lemmyInstances[0] // Default: hexbear.net
   );
-  const [activeCommunityType, setActiveCommunityType] = useState(null);
+  const [activeCommunity, setActiveCommunity] = useState(
+    activeLemmyInstance.community_id
+  ); // c/News
+  const [activeSearchType, setActiveSearchType] = useState(searchTypes[1]); // Default: Comments
+  const [activeListingType, setActiveListingType] = useState(listingTypes[1]); // Default: Local
   const [activeSortType, setActiveSortType] = useState(sortTypes[1]); // Default: New Sort
 
   /*
@@ -76,7 +79,7 @@ export default function Atlas() {
       country: "Country",
       name: "Administrative Region",
     });
-    setActiveLocationType(locationTypes[0]); // Default: Country Sort
+    setActiveRegionType(regionTypes[0]); // Default: Country Sort
     setLocationQuery("");
 
     // DATA
@@ -94,7 +97,9 @@ export default function Atlas() {
     setActiveLemmyInstance(
       lemmyInstances[0] // Default: hexbear.net
     );
-    setActiveCommunityType(null);
+    setActiveCommunity(null);
+    setActiveSearchType(searchTypes[1]); // Default: Comments
+    setActiveListingType(listingTypes[1]); // Default: Local
     setActiveSortType(sortTypes[1]); // Default: New Sort
   }
 
@@ -130,7 +135,7 @@ export default function Atlas() {
       activeAdministrativeRegion,
       ...administrativeRegionClickHistoryArray,
     ]);
-    console.log(administrativeRegionClickHistoryArray);
+    // console.log(administrativeRegionClickHistoryArray);
   }, [activeAdministrativeRegion]);
 
   // Handle Browser Back Button
@@ -186,35 +191,44 @@ export default function Atlas() {
     isMobile,
     resetAtlas,
 
+    nexusSize,
+    setNexusSize,
+
     // Location
     map,
     setMap,
 
-    administrativeRegionClickHistoryArray,
-    setAdministrativeRegionClickHistoryArray,
+    regionTypes,
+    activeRegionType,
+    setActiveRegionType,
 
     activeAdministrativeRegion,
     setActiveAdministrativeRegion,
 
+    administrativeRegionClickHistoryArray,
+    setAdministrativeRegionClickHistoryArray,
+
     locationQuery,
     setLocationQuery,
-
-    lemmyInstances,
-    activeLemmyInstance,
-    setActiveLemmyInstance,
 
     // Data
     activeIndicator,
     setActiveIndicator,
 
     // Community
-    communityTypes,
-    activeCommunityType,
-    setActiveCommunityType,
+    lemmyInstances,
+    activeLemmyInstance,
+    setActiveLemmyInstance,
 
-    locationTypes,
-    activeLocationType,
-    setActiveLocationType,
+    activeCommunity,
+    setActiveCommunity,
+
+    activeSearchType,
+    setActiveSearchType,
+
+    listingTypes,
+    activeListingType,
+    setActiveListingType,
 
     sortTypes,
     activeSortType,
@@ -227,7 +241,7 @@ export default function Atlas() {
 
   const DisplayAtlasMap = useMemo(
     () => <AtlasMap {...interfaceProps} />,
-    [activeAdministrativeRegion, activeLocationType]
+    [activeAdministrativeRegion, activeRegionType]
   );
 
   return (
@@ -235,83 +249,17 @@ export default function Atlas() {
       className={`atlas ${
         activeAdministrativeRegion.country !== "Country" && "atlas--active"
       }`}
+      style={{
+        gridTemplateColumns: `1.6180339887498948482fr ${nexusSize}px`,
+      }}
     >
       <div
         className={`map-container ${
-          activeAdministrativeRegion.country !== "Country" &&
-          "map-container--active"
+          activeAdministrativeRegion.country !== "Country" && "map-container--active"
         }`}
       >
         {DisplayAtlasMap}
-        <div className="active-country-container">
-          <div className="right-slot">
-            <button className="reset-button" onClick={resetAtlas}>
-              ⟲
-            </button>
-          </div>
-          <h1
-            className={`country-administrative-region ${
-              activeLocationType === "AdministrativeRegion" &&
-              "active-location-type"
-            }`}
-            role="button"
-            tabIndex={0}
-            onClick={() => setActiveLocationType(locationTypes[1])}
-            onKeyDown={(e) => {
-              if (e.key === "Enter" || e.key === "Space") {
-                setActiveLocationType(locationTypes[1]);
-              }
-            }}
-          >
-            {activeAdministrativeRegion.name}
-          </h1>
-
-          <h5
-            className={`country-name ${
-              activeLocationType === "Country" && "active-location-type"
-            }`}
-            role="button"
-            tabIndex={0}
-            onClick={() => setActiveLocationType(locationTypes[0])}
-            onKeyDown={(e) => {
-              if (e.key === "Enter" || e.key === "Space") {
-                setActiveLocationType(locationTypes[0]);
-              }
-            }}
-          >
-            {activeAdministrativeRegion.country}
-          </h5>
-          <AtlasInterface {...interfaceProps} />
-          <div className="country-administrative-region-click-history">
-            {administrativeRegionClickHistoryArray &&
-              administrativeRegionClickHistoryArray.map(
-                (adminregion, index) => {
-                  if (
-                    index === 0 ||
-                    index > 5 ||
-                    adminregion.country === "Country"
-                  )
-                    return;
-                  return (
-                    <div
-                      className="country-administrative-region-click-history-item"
-                      role="button"
-                      tabIndex={0}
-                      onClick={() => setActiveAdministrativeRegion(adminregion)}
-                      onKeyDown={(e) => {
-                        if (e.key === "Enter" || e.key === "Space") {
-                          setActiveAdministrativeRegion(adminregion);
-                        }
-                      }}
-                    >
-                      <h2>{adminregion.name}</h2>
-                      <h6>{adminregion.country}</h6>
-                    </div>
-                  );
-                }
-              )}
-          </div>
-        </div>
+        <AtlasInterface {...interfaceProps} />
       </div>
 
       <Tabs.Root

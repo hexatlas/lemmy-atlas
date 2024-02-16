@@ -1,3 +1,5 @@
+// https://www.imf.org/external/datamapper/api/help
+
 import { useState, useEffect, useRef } from "react";
 
 import * as d3 from "d3";
@@ -16,32 +18,44 @@ const AtlasNexusIMFData = ({
   isMobile,
   resetAtlas,
 
+  nexusSize,
+  setNexusSize,
+
   // Location
   map,
   setMap,
 
+  regionTypes,
+  activeRegionType,
+  setActiveRegionType,
+
   activeAdministrativeRegion,
   setActiveAdministrativeRegion,
 
+  administrativeRegionClickHistoryArray,
+  setAdministrativeRegionClickHistoryArray,
+
   locationQuery,
   setLocationQuery,
-
-  lemmyInstances,
-  activeLemmyInstance,
-  setActiveLemmyInstance,
 
   // Data
   activeIndicator,
   setActiveIndicator,
 
   // Community
-  communityTypes,
-  activeCommunityType,
-  setActiveCommunityType,
+  lemmyInstances,
+  activeLemmyInstance,
+  setActiveLemmyInstance,
 
-  locationTypes,
-  activeLocationType,
-  setActiveLocationType,
+  activeCommunity,
+  setActiveCommunity,
+
+  activeSearchType,
+  setActiveSearchType,
+
+  listingTypes,
+  activeListingType,
+  setActiveListingType,
 
   sortTypes,
   activeSortType,
@@ -67,8 +81,6 @@ const AtlasNexusIMFData = ({
       */
 
   // Transfroms, filters and sorts IMF Indicators JSON
-
-  const indicatorsUrl = `/.netlify/functions/proxy/?indicator=indicators`;
 
   const LineChart = ({ data }) => {
     const svgRef = useRef();
@@ -97,7 +109,7 @@ const AtlasNexusIMFData = ({
       // Dynamically adjust y-axis scale based on data variance
       const y = d3
         .scaleLinear()
-        .domain([d3.min(Object.values(data)), d3.max(Object.values(data))])
+        .domain([0, d3.max(Object.values(data))])
         .nice()
         .range([height, 0]);
 
@@ -161,9 +173,7 @@ const AtlasNexusIMFData = ({
       return (
         <>
           {!loading && (
-            <div>
-              No data available for the specified indicator and country.
-            </div>
+            <div>No data available for the specified indicator and country.</div>
           )}
         </>
       );
@@ -179,11 +189,7 @@ const AtlasNexusIMFData = ({
         <p>
           <strong>Unit:</strong> {activeIndicator.unit}
         </p>
-        <Collapsible.Root
-          className="CollapsibleRoot"
-          open={open}
-          onOpenChange={setOpen}
-        >
+        <Collapsible.Root className="CollapsibleRoot" open={open} onOpenChange={setOpen}>
           <div
             style={{
               display: "flex",
@@ -195,7 +201,13 @@ const AtlasNexusIMFData = ({
               <p>Raw Data</p>
             </span>
             <Collapsible.Trigger asChild>
-              <button className="icon-button">{open ? "x" : "ⓘ"}</button>
+              <button
+                className="icon-button"
+                role="button"
+                aria-label={open ? "Hide information" : "Show more Information"}
+              >
+                {open ? "x" : "ⓘ"}
+              </button>
             </Collapsible.Trigger>
           </div>
 
@@ -205,9 +217,7 @@ const AtlasNexusIMFData = ({
                 <li
                   key={year}
                   className={`${
-                    Number(year) === new Date().getFullYear()
-                      ? "hightlight"
-                      : ""
+                    Number(year) === new Date().getFullYear() ? "highlight" : ""
                   }`}
                 >
                   {year}:
@@ -236,6 +246,7 @@ const AtlasNexusIMFData = ({
       }
 
       const result = await response.json();
+      console.log(result.values, "result.value");
 
       setData(result.values);
     } catch (error) {
@@ -247,8 +258,15 @@ const AtlasNexusIMFData = ({
   };
 
   useEffect(() => {
-    const apiUrl = `/.netlify/functions/proxy/?indicator=${activeIndicator.name}&country=${activeAdministrativeRegion["ISO3166-1-Alpha-3"]}`;
-    fetchData(apiUrl);
+    if (activeIndicator && activeAdministrativeRegion.country !== "Country") {
+      const apiUrl = `/.netlify/functions/data_imf_api/?indicator=${
+        activeIndicator.name
+      }&country=${activeAdministrativeRegion["ISO3166-1-Alpha-3"]}/${
+        administrativeRegionClickHistoryArray[0].country !== "Country" &&
+        administrativeRegionClickHistoryArray[0]["ISO3166-1-Alpha-3"]
+      }`;
+      fetchData(apiUrl);
+    }
   }, [activeAdministrativeRegion, activeIndicator]);
 
   // const IndicatorDropdown = ({ indicators }) => {
@@ -280,10 +298,9 @@ const AtlasNexusIMFData = ({
 
   return (
     <>
-      {" "}
       <DropdownMenu.Root>
         <DropdownMenu.Trigger asChild>
-          <button className="icon-button" aria-label="Customise options">
+          <button className="icon-button" aria-label="IMF Data Settings Menu">
             ☰
           </button>
         </DropdownMenu.Trigger>
@@ -293,6 +310,7 @@ const AtlasNexusIMFData = ({
               <div
                 className="reset-container"
                 role="button"
+                aria-label={"Reset Settings"}
                 tabIndex={0}
                 onClick={resetAtlas}
                 onKeyDown={(e) => {
@@ -306,9 +324,7 @@ const AtlasNexusIMFData = ({
               </div>
             </DropdownMenu.Item>
             <DropdownMenu.Separator className="dropdown-menu-separator" />
-            <DropdownMenu.Label className="dropdown-menu-label">
-              Data
-            </DropdownMenu.Label>
+            <DropdownMenu.Label className="dropdown-menu-label">Data</DropdownMenu.Label>
             <DropdownMenu.Sub>
               <DropdownMenu.SubTrigger className="dropdown-menu-subtrigger">
                 data.imf.org
@@ -344,11 +360,7 @@ const AtlasNexusIMFData = ({
           </DropdownMenu.Content>
         </DropdownMenu.Portal>
       </DropdownMenu.Root>
-      <Collapsible.Root
-        className="CollapsibleRoot"
-        open={open}
-        onOpenChange={setOpen}
-      >
+      <Collapsible.Root className="CollapsibleRoot" open={open} onOpenChange={setOpen}>
         <div
           style={{
             display: "flex",
@@ -357,7 +369,12 @@ const AtlasNexusIMFData = ({
         >
           <h3>{activeIndicator.label}:</h3>
           <Collapsible.Trigger asChild>
-            <button className="icon-button">{open ? "x" : "ⓘ"}</button>
+            <button
+              className="icon-button"
+              aria-label={open ? "Hide information" : "Show more Information"}
+            >
+              {open ? "x" : "ⓘ"}
+            </button>
           </Collapsible.Trigger>
         </div>
         <div className="indicator-name">

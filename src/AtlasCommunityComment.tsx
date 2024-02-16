@@ -13,6 +13,7 @@ import AtlasCommunityUserInfoCard from "./AtlasCommunityUserInfoCard";
 
 function Comment({
   post,
+  community,
   lemmyInstance,
   sort,
   ratioDetector,
@@ -21,6 +22,7 @@ function Comment({
   const [open, setOpen] = useState(true);
   const [replies, setReplies] = useState(null);
   const pronounsArray = userPronouns(post?.creator?.display_name);
+
   function handleReplies() {
     let client: LemmyHttp = new LemmyHttp(lemmyInstance?.baseUrl);
 
@@ -31,7 +33,6 @@ function Comment({
     };
 
     client.getComments(form).then((res) => {
-      // console.log(res?.comments, "res | response");
       setReplies(res?.comments);
     });
   }
@@ -55,19 +56,12 @@ function Comment({
 
         {/* AVATAR PROFILE PICTURE */}
         <AtlasCommunityUserInfoCard post={post} lemmyInstance={lemmyInstance}>
-          <div
-            className="user-avatar-container"
-            tabIndex={0}
-            // href={post?.creator?.actor_id}
-            // target="_blank"
-            // rel="noopener noreferrer"
-          >
+          <div className="user-avatar-container" tabIndex={0}>
             <img
               className="user-avatar-image"
               src={post?.creator?.avatar}
               alt={
-                (post?.creator?.display_name &&
-                  post?.creator?.display_name[0]) ||
+                (post?.creator?.display_name && post?.creator?.display_name[0]) ||
                 post?.creator?.name[0]
               }
             />
@@ -97,6 +91,7 @@ function Comment({
             Banned
           </a>
         )}
+
         {/* {post?.comment.distinguished && (
           <p className="comment-mod">Distinguished</p>
         )} */}
@@ -141,14 +136,25 @@ function Comment({
             </a>
           )}
 
-          {commentDepth < 1 && post?.post?.nsfw && (
+          {commentDepth < 1 && post?.community?.id != community?.counts?.community_id && (
+            <>
+              <small> in </small>
+              <a
+                href={post?.community?.actor_id}
+                // className="community-button"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <small>{post?.community?.name}</small>
+              </a>
+            </>
+          )}
+          {commentDepth < 1 && (post?.post?.nsfw || post?.community?.nsfw) && (
             <p className="comment-nsfw">NSFW</p>
           )}
 
           {/* Comment Body */}
-          <ReactMarkdown className="comment-body">
-            {post?.comment.content}
-          </ReactMarkdown>
+          <ReactMarkdown className="comment-body">{post?.comment.content}</ReactMarkdown>
 
           {/* Replies */}
           <div
@@ -158,11 +164,11 @@ function Comment({
           >
             {/* Reply Count */}
             {post?.counts.child_count > 0 && !replies && (
-              // <p className="comment-replycount">
               <p
                 className="reply-button"
                 role="button"
                 tabIndex={0}
+                aria-label="Show Replies"
                 onClick={handleReplies}
                 onKeyDown={(e) => {
                   if (e.key === "Enter" || e.key === "Space") {
@@ -175,7 +181,6 @@ function Comment({
                   post?.counts.child_count > 1 ? "ies" : "y"
                 }`}
               </p>
-              // </p>
             )}
 
             {/* Reply Comments */}
@@ -185,6 +190,7 @@ function Comment({
                 return (
                   <Comment
                     key={`${reply.creator.id}${reply.comment.id}${index}`}
+                    community={community}
                     post={reply}
                     lemmyInstance={lemmyInstance}
                     commentDepth={commentDepth + 1}

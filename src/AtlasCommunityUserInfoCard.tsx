@@ -6,7 +6,7 @@ import * as HoverCard from "@radix-ui/react-hover-card";
 
 // https://github.com/LemmyNet/lemmy-js-client
 // https://join-lemmy.org/api/classes/LemmyHttp.html
-import { LemmyHttp } from "lemmy-js-client";
+import { LemmyHttp, GetPersonDetails } from "lemmy-js-client";
 
 import { userPronouns } from "./hooks/useDataTransform";
 
@@ -17,9 +17,22 @@ function AtlasCommunityUserInfoCard({ children, post, lemmyInstance }) {
   const updateDay = new Date(post?.creator?.updated).toDateString();
   const pronounsArray = userPronouns(post?.creator?.display_name);
 
+  function loadUserDetails() {
+    let client: LemmyHttp = new LemmyHttp(lemmyInstance?.baseUrl);
+
+    let form: GetPersonDetails = {
+      person_id: post?.creator.id,
+    };
+
+    client.getPersonDetails(form).then((res) => {
+      console.log(res, "res | User");
+      setUser(res?.comments);
+    });
+  }
+
   return (
     //   --atlas-time-2: 150ms;
-    <HoverCard.Root openDelay={150} closeDelay={450}>
+    <HoverCard.Root openDelay={150} closeDelay={450} onOpenChange={loadUserDetails}>
       <HoverCard.Trigger asChild>{children}</HoverCard.Trigger>
       <HoverCard.Portal>
         <HoverCard.Content
@@ -45,7 +58,7 @@ function AtlasCommunityUserInfoCard({ children, post, lemmyInstance }) {
           >
             {post?.creator?.banner && (
               <img
-                className="user-banner"
+                className="banner-image"
                 src={post?.creator?.banner}
                 alt={post?.creator?.display_name || post?.creator?.name}
               />
@@ -75,12 +88,8 @@ function AtlasCommunityUserInfoCard({ children, post, lemmyInstance }) {
               }}
             >
               <div>
-                {post?.creator_is_admin && (
-                  <small className="user-mod">Admin</small>
-                )}
-                {post?.creator_is_moderator && (
-                  <small className="user-mod">Mod</small>
-                )}
+                {post?.creator_is_admin && <small className="user-mod">Admin</small>}
+                {post?.creator_is_moderator && <small className="user-mod">Mod</small>}
                 {post?.creator?.banned && (
                   <small>
                     <a
@@ -108,9 +117,7 @@ function AtlasCommunityUserInfoCard({ children, post, lemmyInstance }) {
 
                 <div className="user-pronouns">
                   {pronounsArray &&
-                    pronounsArray.map((pronoun, index) => (
-                      <h6 key={index}>{pronoun}</h6>
-                    ))}
+                    pronounsArray.map((pronoun, index) => <h6 key={index}>{pronoun}</h6>)}
                 </div>
                 <small>🎂 {cakeDay}</small>
                 {post?.creator?.updated && (

@@ -34,13 +34,23 @@ export const lemmyInstances: Array<lemmyInstance> = [
   },
 ];
 
-export const communityTypes: Array<string> = ["All", "Local", "Global"]; // ToDo
-
-export const locationTypes: Array<string> = [
-  "Country",
-  "AdministrativeRegion",
-  "Combined",
+export const searchTypes: Array<string> = [
+  "All",
+  "Comments",
+  "Posts",
+  "Communities",
+  "Users",
+  "Url",
 ];
+
+export const listingTypes: Array<string> = [
+  "All",
+  "Local",
+  "Subscribed",
+  "ModeratorView",
+];
+
+export const regionTypes: Array<string> = ["Country", "AdministrativeRegion", "Combined"];
 
 export const sortTypes: Array<string> = [
   "Active",
@@ -284,19 +294,10 @@ export const euroArea = [
   "ESP",
 ];
 
-export const majorAdvancedEconomies = [
-  "CAN",
-  "FRA",
-  "DEU",
-  "ITA",
-  "JPN",
-  "GBR",
-  "USA",
-];
+export const majorAdvancedEconomies = ["CAN", "FRA", "DEU", "ITA", "JPN", "GBR", "USA"];
 
 export const otherAdvancedEconomies = advancedEconomies.filter(
-  (country) =>
-    !majorAdvancedEconomies.includes(country) && !euroArea.includes(country)
+  (country) => !majorAdvancedEconomies.includes(country) && !euroArea.includes(country)
 );
 
 export const europeanUnion = [

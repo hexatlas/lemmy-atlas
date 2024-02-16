@@ -9,7 +9,7 @@ import {
 } from "react-leaflet";
 import { LatLngExpression, latLngBounds } from "leaflet";
 import { GeoJsonObject } from "geojson";
-import administrativeRegionsData from "./data/provinces_optimized.json";
+import administrativeRegionsData from "./data/administrative_regions_optimized.json";
 
 import { baseLayers, overlayLayers } from "./Atlas_Config";
 import Minimap from "./AtlasMapMiniMap";
@@ -19,32 +19,44 @@ export default function AtlasMap({
   isMobile,
   resetAtlas,
 
+  nexusSize,
+  setNexusSize,
+
   // Location
   map,
   setMap,
 
+  regionTypes,
+  activeRegionType,
+  setActiveRegionType,
+
   activeAdministrativeRegion,
   setActiveAdministrativeRegion,
 
+  administrativeRegionClickHistoryArray,
+  setAdministrativeRegionClickHistoryArray,
+
   locationQuery,
   setLocationQuery,
-
-  lemmyInstances,
-  activeLemmyInstance,
-  setActiveLemmyInstance,
 
   // Data
   activeIndicator,
   setActiveIndicator,
 
   // Community
-  communityTypes,
-  activeCommunityType,
-  setActiveCommunityType,
+  lemmyInstances,
+  activeLemmyInstance,
+  setActiveLemmyInstance,
 
-  locationTypes,
-  activeLocationType,
-  setActiveLocationType,
+  activeCommunity,
+  setActiveCommunity,
+
+  activeSearchType,
+  setActiveSearchType,
+
+  listingTypes,
+  activeListingType,
+  setActiveListingType,
 
   sortTypes,
   activeSortType,
@@ -59,10 +71,7 @@ export default function AtlasMap({
     setActiveAdministrativeRegion(clickedAdministrativeRegion);
   };
 
-  const onEachAdministrativeRegion = (
-    administrativeRegion: any,
-    layer: any
-  ) => {
+  const onEachAdministrativeRegion = (administrativeRegion: any, layer: any) => {
     layer.bindPopup(
       `<i>${administrativeRegion.properties.name}</i>, ${administrativeRegion.properties.country} | ${administrativeRegion.properties["ISO3166-1-Alpha-3"]}`
     );
@@ -94,16 +103,14 @@ export default function AtlasMap({
   useEffect(() => {
     let administrativeRegionArray = latLngBounds(null, null);
     if (activeAdministrativeRegion.country !== "Country") {
-      switch (activeLocationType) {
+      switch (activeRegionType) {
         case "AdministrativeRegion":
           map?.eachLayer((administrativeRegion) => {
             if (
               administrativeRegion.feature?.properties.name ===
               activeAdministrativeRegion.name
             )
-              administrativeRegionArray.extend(
-                administrativeRegion.getBounds()
-              );
+              administrativeRegionArray.extend(administrativeRegion.getBounds());
           });
           break;
         default:
@@ -112,9 +119,7 @@ export default function AtlasMap({
               administrativeRegion.feature?.properties.country ===
               activeAdministrativeRegion.country
             )
-              administrativeRegionArray.extend(
-                administrativeRegion.getBounds()
-              );
+              administrativeRegionArray.extend(administrativeRegion.getBounds());
           });
           break;
       }
@@ -122,7 +127,7 @@ export default function AtlasMap({
       setTimeout(() => map.invalidateSize(), 300);
       map?.fitBounds(administrativeRegionArray);
     }
-  }, [activeAdministrativeRegion, activeLocationType]);
+  }, [activeAdministrativeRegion, activeRegionType]);
 
   return (
     <MapContainer
@@ -134,9 +139,7 @@ export default function AtlasMap({
       // maxZoom={10}
       maxZoom={18}
       scrollWheelZoom={true}
-      placeholder={
-        <noscript>You need to enable JavaScript to see this map.</noscript>
-      }
+      placeholder={<noscript>You need to enable JavaScript to see this map.</noscript>}
       ref={setMap}
     >
       <ScaleControl position="bottomleft" />
@@ -158,11 +161,7 @@ export default function AtlasMap({
           ))}
         {overlayLayers &&
           overlayLayers.map((layer, index) => (
-            <LayersControl.Overlay
-              key={index}
-              checked={layer.checked}
-              name={layer.name}
-            >
+            <LayersControl.Overlay key={index} checked={layer.checked} name={layer.name}>
               <TileLayer
                 url={layer.url}
                 attribution={layer.attribution}

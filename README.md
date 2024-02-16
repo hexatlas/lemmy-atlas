@@ -1,4 +1,4 @@
-# Component Tree
+# Main Component Tree
 
 ```
 Atlas
@@ -10,14 +10,36 @@ Atlas
       Comments
       ToDo: Posts
    Nexus
-      ToDo: Class Structure
-      ToDo: Trade
+      IMFData
+
+      // Todo
+      Class Structure
+         Industrialists
+         Finance Capitalists
+         Landowners
+         Intelligentsia
+         Bourgeoise
+         Proletariat
+         Armed Forces
       Economy
-         IMF Data
-      ToDo: Information
-         ToDo: Media Landscape
-      ToDo: Dipolomacy
-      ToDo: Military
+         Industrial Centers
+         Commodities
+         Energy
+         Ports
+         etc.
+      Trade
+         Imports
+         Exports
+      Information
+         Media Landscape
+         Think Tanks
+         Diplomats
+      Dipolomacy
+         Embassies, Consulates
+         Ambassadors
+      Military
+         Bases
+         Forces
 ```
 
 # Atlas Visual Language
@@ -28,7 +50,7 @@ Primary [Purple]
 Secondary [Pink]
 Tertiary [Yellow]
 
-_Caution_ [Secondary]: Select an _option_ [Primary] to reveal _selected information_ [Tertiary].
+_Attention_ [Secondary]: Select an _option_ [Primary] to reveal _selected information_ [Tertiary].
 
 ## Sizes
 

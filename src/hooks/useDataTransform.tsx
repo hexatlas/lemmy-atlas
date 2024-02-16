@@ -44,18 +44,40 @@ export function TimeAgo({ dateString }: TimeAgoProps) {
   const years = Math.floor(months / 12);
 
   if (years > 0) {
-    return <span>{years === 1 ? "a year ago" : `${years} years ago`}</span>;
+    return (
+      <span title={`${pastDate}`}>
+        {years === 1 ? "a year ago" : `${years} years ago`}
+      </span>
+    );
   } else if (months > 0) {
-    return <span>{months === 1 ? "a month ago" : `${months} months ago`}</span>;
+    return (
+      <span title={`${pastDate}`}>
+        {months === 1 ? "a month ago" : `${months} months ago`}
+      </span>
+    );
   } else if (days > 0) {
-    return <span>{days === 1 ? "a day ago" : `${days} days ago`}</span>;
+    return (
+      <span title={`${pastDate}`}>
+        {days === 1 ? "a day ago" : `${days} days ago`}
+      </span>
+    );
   } else if (hours > 0) {
-    return <span>{hours === 1 ? "an hour ago" : `${hours} hours ago`}</span>;
+    return (
+      <span title={`${pastDate}`}>
+        {hours === 1 ? "an hour ago" : `${hours} hours ago`}
+      </span>
+    );
   } else if (minutes > 0) {
     return (
-      <span>{minutes === 1 ? "a minute ago" : `${minutes} minutes ago`}</span>
+      <span title={`${pastDate}`}>
+        {minutes === 1 ? "a minute ago" : `${minutes} minutes ago`}
+      </span>
     );
   } else {
-    return <span>{seconds <= 1 ? "just now" : `${seconds} seconds ago`}</span>;
+    return (
+      <span title={`${pastDate}`}>
+        {seconds <= 1 ? "just now" : `${seconds} seconds ago`}
+      </span>
+    );
   }
 }
