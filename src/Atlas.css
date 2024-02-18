@@ -682,6 +682,20 @@ a.comment-creator {
   fill: white;
 }
 
+.user-comments {
+  background-color: hsl(var(--atlas-color-dark) / var(--atlas-opacity-3));
+  color: hsl(var(--atlas-color-light) / var(--atlas-opacity-3));
+  padding: var(--atlas-size-10);
+  border-radius: var(--atlas-border-radius-1);
+  max-height: calc(var(--atlas-size-00) * 2);
+  overflow-y: scroll;
+  box-shadow: var(--atlas-shadow-1);
+}
+
+.user-comments .user-avatar-container {
+  display: none;
+}
+
 @keyframes slideUpAndFade {
   0% {
     opacity: 0;

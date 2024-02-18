@@ -55,7 +55,12 @@ function Comment({
         </Collapsible.Trigger>
 
         {/* AVATAR PROFILE PICTURE */}
-        <AtlasCommunityUserInfoCard post={post} lemmyInstance={lemmyInstance}>
+        <AtlasCommunityUserInfoCard
+          post={post}
+          lemmyInstance={lemmyInstance}
+          community={community}
+          sort={sort}
+        >
           <div className="user-avatar-container" tabIndex={0}>
             <img
               className="user-avatar-image"

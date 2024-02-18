@@ -10,7 +10,9 @@ import { LemmyHttp, GetPersonDetails } from "lemmy-js-client";
 
 import { userPronouns } from "./hooks/useDataTransform";
 
-function AtlasCommunityUserInfoCard({ children, post, lemmyInstance }) {
+import Comment from "./AtlasCommunityComment";
+
+function AtlasCommunityUserInfoCard({ children, post, lemmyInstance, sort, community }) {
   const [user, setUser] = useState(null);
 
   const cakeDay = new Date(post.creator.published).toDateString();
@@ -26,28 +28,20 @@ function AtlasCommunityUserInfoCard({ children, post, lemmyInstance }) {
 
     client.getPersonDetails(form).then((res) => {
       console.log(res, "res | User");
-      setUser(res?.comments);
+      setUser(res);
     });
   }
 
   return (
-    //   --atlas-time-2: 150ms;
     <HoverCard.Root openDelay={150} closeDelay={450} onOpenChange={loadUserDetails}>
       <HoverCard.Trigger asChild>{children}</HoverCard.Trigger>
       <HoverCard.Portal>
         <HoverCard.Content
           collisionPadding={1.6180339887498948482 ^ 14}
-          //   {
-          //   top: 1.6180339887498948482 ^ 14,
-          //   bottom: 1.6180339887498948482 ^ 14,
-          //   left: 1.6180339887498948482 ^ 14,
-          //   right: 1.6180339887498948482 ^ 14,
-          // }
           className={`user-info-card-content ${
             (post?.creator_is_admin || post?.creator_is_moderator) &&
             "user-info-card-content-hightlighted"
           }`}
-          // sideOffset={"var(--atlas-size-00)"}
         >
           <div
             style={{
@@ -135,11 +129,26 @@ function AtlasCommunityUserInfoCard({ children, post, lemmyInstance }) {
 
               <div style={{ display: "flex", gap: 15 }}>
                 <div style={{ display: "flex", gap: 5 }}>
-                  <div>161</div> <div>Posts</div>
+                  <div>{user?.person_view?.counts?.post_count}</div> <div>Posts</div>
                 </div>
                 <div style={{ display: "flex", gap: 5 }}>
-                  <div>1312</div> <div>Comments</div>
+                  <div>{user?.person_view?.counts?.comment_count}</div>
+                  <div>Comments</div>
                 </div>
+              </div>
+
+              <div className="user-comments">
+                {user &&
+                  user?.comments.map((comment, index) => (
+                    <Comment
+                      key={`${index}`}
+                      post={comment}
+                      community={community}
+                      lemmyInstance={lemmyInstance}
+                      sort={sort}
+                      ratioDetector={undefined}
+                    ></Comment>
+                  ))}
               </div>
             </div>
           </div>
