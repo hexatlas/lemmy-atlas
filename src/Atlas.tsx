@@ -65,7 +65,7 @@ export default function Atlas() {
   const [activeCommunity, setActiveCommunity] = useState(
     activeLemmyInstance.community_id
   ); // c/News
-  const [activeSearchType, setActiveSearchType] = useState(searchTypes[1]); // Default: Comments
+  const [activeSearchType, setActiveSearchType] = useState(searchTypes[2]); // Default: Comments
   const [activeListingType, setActiveListingType] = useState(listingTypes[1]); // Default: Local
   const [activeSortType, setActiveSortType] = useState(sortTypes[1]); // Default: New Sort
 

@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
 
 import Comment from "./AtlasCommunityComment";
+import Post from "./AtlasCommunityPost";
 import { searchTypes } from "./Atlas_Config";
 
 export default function AtlasCommunity({
@@ -129,14 +130,31 @@ export default function AtlasCommunity({
     };
 
     client.search(form).then((res) => {
-      if (res.comments.length < 10) {
+      if (res?.comments.length < 10 || res?.posts.length < 10) {
         setMaxResults(true);
       }
-      console.log(res, "handleCommunityRefresh | AtlasCommuntiy");
 
-      setCountrySearchResult((prevResults) =>
-        currentPage === 1 ? res.comments : [...prevResults, ...res.comments]
-      );
+      console.log(res, "handleCommunityRefresh | AtlasCommuntiy");
+      console.log(activeSearchType, countrySearchResult, "searchtype | searchresult");
+
+      // ToDo: BUG in here
+      switch (activeSearchType) {
+        case "Posts":
+          if (res?.posts)
+            setCountrySearchResult((prevResults) =>
+              currentPage === 1 ? res?.posts : [...prevResults, ...res?.posts]
+            );
+          break;
+        case "Comments":
+          if (res?.comments)
+            setCountrySearchResult((prevResults) =>
+              currentPage === 1 ? res?.comments : [...prevResults, ...res?.comments]
+            );
+          break;
+        default:
+          setCountrySearchResult([]);
+          break;
+      }
     });
   }
 
@@ -185,7 +203,8 @@ export default function AtlasCommunity({
   useEffect(() => {
     setCurrentPage(1);
     setMaxResults(false);
-  }, [activeAdministrativeRegion, activeRegionType, locationQuery]);
+    setCountrySearchResult([]);
+  }, [activeAdministrativeRegion, activeRegionType, activeSearchType, locationQuery]);
 
   useEffect(() => {
     setActiveCommunity(null);
@@ -330,7 +349,7 @@ export default function AtlasCommunity({
                         key={index}
                         className="dropdown-menu-radio-item"
                         value={sort}
-                        disabled={index != 1}
+                        // disabled={index != 1}
                       >
                         <DropdownMenu.ItemIndicator className="dropdown-menu-itemIndicator">
                           ✔
@@ -436,17 +455,36 @@ export default function AtlasCommunity({
         </div>
       )}
       {countrySearchResult ? (
-        <div className="comment-reply-container">
-          {countrySearchResult.map((post, index) => (
-            <Comment
-              key={`${post?.comment.id}${index}`}
-              post={post}
-              community={activeCommunity}
-              lemmyInstance={activeLemmyInstance}
-              sort={activeSortType}
-              ratioDetector={undefined}
-            />
-          ))}
+        <div className="post-reply-container">
+          {activeSearchType === "Comments" &&
+            countrySearchResult.map(
+              (comment, index) =>
+                comment?.comment?.removed ||
+                comment?.comment?.deleted || (
+                  <Comment
+                    key={`${comment?.comment.id}${index}`}
+                    post={comment}
+                    community={activeCommunity}
+                    lemmyInstance={activeLemmyInstance}
+                    sort={activeSortType}
+                    ratioDetector={undefined}
+                  />
+                )
+            )}
+          {activeSearchType === "Posts" &&
+            countrySearchResult.map(
+              (post, index) =>
+                post?.post?.removed ||
+                post?.post?.deleted || (
+                  <Post
+                    key={`${post?.post.id}${index}`}
+                    post={post}
+                    community={activeCommunity}
+                    lemmyInstance={activeLemmyInstance}
+                    sort={activeSortType}
+                  />
+                )
+            )}
         </div>
       ) : (
         <p>Loading</p>

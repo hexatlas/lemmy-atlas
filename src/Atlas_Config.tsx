@@ -38,16 +38,16 @@ export const searchTypes: Array<string> = [
   "All",
   "Comments",
   "Posts",
-  "Communities",
-  "Users",
-  "Url",
+  // "Communities",
+  // "Users",
+  // "Url",
 ];
 
 export const listingTypes: Array<string> = [
   "All",
   "Local",
-  "Subscribed",
-  "ModeratorView",
+  // "Subscribed",
+  // "ModeratorView",
 ];
 
 export const regionTypes: Array<string> = ["Country", "AdministrativeRegion", "Combined"];

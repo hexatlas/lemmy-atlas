@@ -90,7 +90,7 @@ function AtlasCommunityUserInfoCard({ children, post, lemmyInstance, sort, commu
                       href={`${lemmyInstance.baseUrl}modlog?page=1&userId=${post?.creator?.id}`}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="comment-nsfw"
+                      className="post-alert"
                     >
                       Banned
                     </a>
@@ -137,7 +137,7 @@ function AtlasCommunityUserInfoCard({ children, post, lemmyInstance, sort, commu
                 </div>
               </div>
 
-              <div className="user-comments">
+              <div className="user-posts">
                 {user &&
                   user?.comments.map((comment, index) => (
                     <Comment

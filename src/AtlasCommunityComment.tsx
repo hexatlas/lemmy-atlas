@@ -43,17 +43,16 @@ function Comment({
 
   return (
     <Collapsible.Root
-      className={`community-post comment-collapse-root ${
-        post?.counts.score > ratioDetector && "comment-ratio-active"
+      className={`community-reply post-collapse-root ${
+        post?.counts.score > ratioDetector && "post-highlight"
       }`}
       open={open}
       onOpenChange={setOpen}
     >
-      <div className="comment-info-container">
+      <div className="post-info-container">
         <Collapsible.Trigger>
-          <div className="comment-collapse-trigger">{open ? "⊟" : "⊞"}</div>
+          <div className="post-collapse-trigger">{open ? "⊟" : "⊞"}</div>
         </Collapsible.Trigger>
-
         {/* AVATAR PROFILE PICTURE */}
         <AtlasCommunityUserInfoCard
           post={post}
@@ -75,7 +74,7 @@ function Comment({
 
         {/* User / Poster */}
         <a
-          className="comment-creator"
+          className="post-creator"
           href={post?.creator?.actor_id}
           target="_blank"
           rel="noopener noreferrer"
@@ -97,33 +96,29 @@ function Comment({
           </a>
         )}
 
-        {/* {post?.comment.distinguished && (
-          <p className="comment-mod">Distinguished</p>
-        )} */}
+        {post?.comment.distinguished && <p className="post-alert">📌</p>}
 
         {/* Score Count / Upvotes / Downvotes */}
-        <p className="comment-vote-container">
+        <p className="post-vote-container">
           {Number(post?.counts.downvotes) === 0 || (
-            <sup className={`comment-vote comment-vote-upvotes`}>
-              {post?.counts.upvotes}
-            </sup>
+            <sup className={`post-vote post-vote-upvotes`}>{post?.counts.upvotes}</sup>
           )}
           <span
-            className={`comment-vote commment-vote-score comment-score-${
+            className={`post-vote commment-vote-score post-score-${
               post?.counts.score > 0 ? "positive" : "negative"
             }`}
           >
             {post?.counts.score}
           </span>
           {Number(post?.counts.downvotes) === 0 || (
-            <sub className={`comment-vote comment-vote-downvotes`}>
+            <sub className={`post-vote post-vote-downvotes`}>
               {post?.counts.downvotes}
             </sub>
           )}
         </p>
 
         {/* Timestamp */}
-        <small className="comment-timestamp">
+        <small className="post-timestamp">
           <TimeAgo dateString={post?.comment.published} />
         </small>
       </div>
@@ -132,7 +127,7 @@ function Comment({
           {/* OP Post */}
           {commentDepth < 1 && (
             <a
-              className="comment-post"
+              className="post-post"
               href={post?.comment.ap_id}
               target="_blank"
               rel="noopener noreferrer"
@@ -155,17 +150,15 @@ function Comment({
             </>
           )}
           {commentDepth < 1 && (post?.post?.nsfw || post?.community?.nsfw) && (
-            <p className="comment-nsfw">NSFW</p>
+            <p className="post-alert">NSFW</p>
           )}
 
           {/* Comment Body */}
-          <ReactMarkdown className="comment-body">{post?.comment.content}</ReactMarkdown>
+          <ReactMarkdown className="post-body">{post?.comment.content}</ReactMarkdown>
 
           {/* Replies */}
           <div
-            className={`comment-reply-container comment-reply-depth-${
-              (commentDepth % 7) + 1
-            }`}
+            className={`post-reply-container post-reply-depth-${(commentDepth % 7) + 1}`}
           >
             {/* Reply Count */}
             {post?.counts.child_count > 0 && !replies && (
@@ -181,7 +174,7 @@ function Comment({
                   }
                 }}
               >
-                <span className="comment-replycount-icon">↪</span>
+                <span className="post-replycount-icon">↪</span>
                 {`${post?.counts.child_count} repl${
                   post?.counts.child_count > 1 ? "ies" : "y"
                 }`}

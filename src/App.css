@@ -12,13 +12,13 @@
   --atlas-color-accent: 346.43 100% 54.9%;
   --atlas-color-link: 165 59% 62%;
 
-  --atlas-color-comment-red: hsla(0, 35%, 50%, 0.5);
-  --atlas-color-comment-yellow: hsla(50, 35%, 50%, 0.5);
-  --atlas-color-comment-green: hsla(100, 35%, 50%, 0.5);
-  --atlas-color-comment-blue: hsla(150, 35%, 50%, 0.5);
-  --atlas-color-comment-teal: hsla(200, 35%, 50%, 0.5);
-  --atlas-color-comment-purple: hsla(250, 35%, 50%, 0.5);
-  --atlas-color-comment-pink: hsla(300, 35%, 50%, 0.5);
+  --atlas-color-post-red: hsla(0, 35%, 50%, 0.5);
+  --atlas-color-post-yellow: hsla(50, 35%, 50%, 0.5);
+  --atlas-color-post-green: hsla(100, 35%, 50%, 0.5);
+  --atlas-color-post-blue: hsla(150, 35%, 50%, 0.5);
+  --atlas-color-post-teal: hsla(200, 35%, 50%, 0.5);
+  --atlas-color-post-purple: hsla(250, 35%, 50%, 0.5);
+  --atlas-color-post-pink: hsla(300, 35%, 50%, 0.5);
 
   --atlas-color-dark: 282.86 0% 13%;
   --atlas-color-grey: 282.86 0% 27%;
@@ -88,60 +88,39 @@
   --atlas-transition-slow: var(--atlas-time-2) var(--atlas-timing-function);
   --atlas-timing-fast: var(--atlas-time-3) var(--atlas-timing-function) infinite;
   --atlas-timing-slow: var(--atlas-time-4) var(--atlas-timing-function) infinite;
-  --atlas-timing-gradient: var(--atlas-time-5) var(--atlas-timing-function)
-    infinite alternate-reverse;
+  --atlas-timing-gradient: var(--atlas-time-5) var(--atlas-timing-function) infinite
+    alternate-reverse;
 
   /* shadows */
 
   --atlas-shadow-1: 0 var(--atlas-size-16) var(--atlas-size-16)
       hsl(var(--atlas-color-dark) / 0.08),
-    0 var(--atlas-size-15) var(--atlas-size-15)
-      hsl(var(--atlas-color-dark) / 0.061),
-    0 var(--atlas-size-14) var(--atlas-size-14)
-      hsl(var(--atlas-color-dark) / 0.052),
-    0 var(--atlas-size-13) var(--atlas-size-13)
-      hsl(var(--atlas-color-dark) / 0.046),
-    0 var(--atlas-size-12) var(--atlas-size-12)
-      hsl(var(--atlas-color-dark) / 0.04),
-    0 var(--atlas-size-11) var(--atlas-size-11)
-      hsl(var(--atlas-color-dark) / 0.034),
-    0 var(--atlas-size-10) var(--atlas-size-10)
-      hsl(var(--atlas-color-dark) / 0.028),
-    0 var(--atlas-size-09) var(--atlas-size-09)
-      hsl(var(--atlas-color-dark) / 0.019);
+    0 var(--atlas-size-15) var(--atlas-size-15) hsl(var(--atlas-color-dark) / 0.061),
+    0 var(--atlas-size-14) var(--atlas-size-14) hsl(var(--atlas-color-dark) / 0.052),
+    0 var(--atlas-size-13) var(--atlas-size-13) hsl(var(--atlas-color-dark) / 0.046),
+    0 var(--atlas-size-12) var(--atlas-size-12) hsl(var(--atlas-color-dark) / 0.04),
+    0 var(--atlas-size-11) var(--atlas-size-11) hsl(var(--atlas-color-dark) / 0.034),
+    0 var(--atlas-size-10) var(--atlas-size-10) hsl(var(--atlas-color-dark) / 0.028),
+    0 var(--atlas-size-09) var(--atlas-size-09) hsl(var(--atlas-color-dark) / 0.019);
 
   --atlas-shadow-inset: inset 0 var(--atlas-size-16) var(--atlas-size-16)
       hsl(var(--atlas-color-dark) / 0.08),
-    inset 0 var(--atlas-size-15) var(--atlas-size-15)
-      hsl(var(--atlas-color-dark) / 0.061),
-    inset 0 var(--atlas-size-14) var(--atlas-size-14)
-      hsl(var(--atlas-color-dark) / 0.052),
-    inset 0 var(--atlas-size-13) var(--atlas-size-13)
-      hsl(var(--atlas-color-dark) / 0.046),
-    inset 0 var(--atlas-size-12) var(--atlas-size-12)
-      hsl(var(--atlas-color-dark) / 0.04),
-    inset 0 var(--atlas-size-11) var(--atlas-size-11)
-      hsl(var(--atlas-color-dark) / 0.034),
-    inset 0 var(--atlas-size-10) var(--atlas-size-10)
-      hsl(var(--atlas-color-dark) / 0.028),
-    inset 0 var(--atlas-size-09) var(--atlas-size-09)
-      hsl(var(--atlas-color-dark) / 0.019);
+    inset 0 var(--atlas-size-15) var(--atlas-size-15) hsl(var(--atlas-color-dark) / 0.061),
+    inset 0 var(--atlas-size-14) var(--atlas-size-14) hsl(var(--atlas-color-dark) / 0.052),
+    inset 0 var(--atlas-size-13) var(--atlas-size-13) hsl(var(--atlas-color-dark) / 0.046),
+    inset 0 var(--atlas-size-12) var(--atlas-size-12) hsl(var(--atlas-color-dark) / 0.04),
+    inset 0 var(--atlas-size-11) var(--atlas-size-11) hsl(var(--atlas-color-dark) / 0.034),
+    inset 0 var(--atlas-size-10) var(--atlas-size-10) hsl(var(--atlas-color-dark) / 0.028),
+    inset 0 var(--atlas-size-09) var(--atlas-size-09) hsl(var(--atlas-color-dark) / 0.019);
   --atlas-shadow-text: 0 var(--atlas-size-16) var(--atlas-size-16)
       hsl(var(--atlas-color-dark) / 0.08),
-    0 var(--atlas-size-15) var(--atlas-size-15)
-      hsl(var(--atlas-color-dark) / 0.061),
-    0 var(--atlas-size-14) var(--atlas-size-14)
-      hsl(var(--atlas-color-dark) / 0.052),
-    0 var(--atlas-size-13) var(--atlas-size-13)
-      hsl(var(--atlas-color-dark) / 0.046),
-    0 var(--atlas-size-12) var(--atlas-size-12)
-      hsl(var(--atlas-color-dark) / 0.04),
-    0 var(--atlas-size-11) var(--atlas-size-11)
-      hsl(var(--atlas-color-dark) / 0.034),
-    0 var(--atlas-size-10) var(--atlas-size-10)
-      hsl(var(--atlas-color-dark) / 0.028),
-    0 var(--atlas-size-09) var(--atlas-size-09)
-      hsl(var(--atlas-color-dark) / 0.019);
+    0 var(--atlas-size-15) var(--atlas-size-15) hsl(var(--atlas-color-dark) / 0.061),
+    0 var(--atlas-size-14) var(--atlas-size-14) hsl(var(--atlas-color-dark) / 0.052),
+    0 var(--atlas-size-13) var(--atlas-size-13) hsl(var(--atlas-color-dark) / 0.046),
+    0 var(--atlas-size-12) var(--atlas-size-12) hsl(var(--atlas-color-dark) / 0.04),
+    0 var(--atlas-size-11) var(--atlas-size-11) hsl(var(--atlas-color-dark) / 0.034),
+    0 var(--atlas-size-10) var(--atlas-size-10) hsl(var(--atlas-color-dark) / 0.028),
+    0 var(--atlas-size-09) var(--atlas-size-09) hsl(var(--atlas-color-dark) / 0.019);
 }
 
 /* 
