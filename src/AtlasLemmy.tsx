@@ -6,11 +6,11 @@ import { useEffect, useState } from "react";
 // https://www.radix-ui.com/primitives/docs/components/dropdown-menu
 import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
 
-import Comment from "./AtlasCommunityComment";
-import Post from "./AtlasCommunityPost";
+import Comment from "./AtlasLemmyComment";
+import Post from "./AtlasLemmyPost";
 import { searchTypes } from "./Atlas_Config";
 
-export default function AtlasCommunity({
+export default function AtlasLemmy({
   // Util
   isMobile,
   resetAtlas,
@@ -63,9 +63,10 @@ export default function AtlasCommunity({
   administrativeRegionStyleHovered,
 }) {
   const [communityList, setCommunityList] = useState(null);
-  const [countrySearchResult, setCountrySearchResult] = useState(null);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [maxResults, setMaxResults] = useState(false);
+  const [regionSearchResult, setRegionSearchResult] = useState(null);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const [hasMore, setHasMore] = useState(false);
 
   /*
     Handlers
@@ -131,35 +132,17 @@ export default function AtlasCommunity({
 
     client.search(form).then((res) => {
       if (res?.comments.length < 10 || res?.posts.length < 10) {
-        setMaxResults(true);
+        setHasMore(true);
       }
 
       console.log(res, "handleCommunityRefresh | AtlasCommuntiy");
-      console.log(activeSearchType, countrySearchResult, "searchtype | searchresult");
 
-      // ToDo: BUG in here
-      switch (activeSearchType) {
-        case "Posts":
-          if (res?.posts)
-            setCountrySearchResult((prevResults) =>
-              currentPage === 1 ? res?.posts : [...prevResults, ...res?.posts]
-            );
-          break;
-        case "Comments":
-          if (res?.comments)
-            setCountrySearchResult((prevResults) =>
-              currentPage === 1 ? res?.comments : [...prevResults, ...res?.comments]
-            );
-          break;
-        default:
-          setCountrySearchResult([]);
-          break;
-      }
+      setRegionSearchResult(res);
     });
   }
 
   // Gets list of communites from active lemmy instance
-  function handleCommunityList(isInitial = false) {
+  function handleCommunityList() {
     let form: ListCommunities = {
       type_: activeListingType,
       sort: "TopAll",
@@ -185,9 +168,17 @@ export default function AtlasCommunity({
     });
   }
 
-  // Event handler for "View More" button
-  const handleViewMore = () => {
-    setCurrentPage((prevPage) => prevPage + 1);
+  const handleScroll = () => {
+    // Check if user has scrolled to the bottom
+    if (
+      window.innerHeight + document.documentElement.scrollTop ===
+      document.documentElement.offsetHeight
+    ) {
+      // Fetch more comments if there are more to fetch
+      if (hasMore) {
+        // fetchComments();
+      }
+    }
   };
 
   const handleSearch = (e) => {
@@ -199,16 +190,18 @@ export default function AtlasCommunity({
     useEffects
   */
 
+  //  init
+
   // Reset Query when location or location query is changed
   useEffect(() => {
     setCurrentPage(1);
-    setMaxResults(false);
-    setCountrySearchResult([]);
+    setHasMore(false);
+    setRegionSearchResult(null);
   }, [activeAdministrativeRegion, activeRegionType, activeSearchType, locationQuery]);
 
   useEffect(() => {
     setActiveCommunity(null);
-    handleCommunityList(true);
+    handleCommunityList();
   }, [activeLemmyInstance]);
 
   useEffect(() => {
@@ -223,9 +216,11 @@ export default function AtlasCommunity({
     activeCommunity,
     activeListingType,
     activeSortType,
+    activeSearchType,
     currentPage,
     locationQuery,
   ]);
+
   return (
     <>
       <DropdownMenu.Root>
@@ -454,10 +449,10 @@ export default function AtlasCommunity({
           </h5>
         </div>
       )}
-      {countrySearchResult ? (
+      {regionSearchResult ? (
         <div className="post-reply-container">
-          {activeSearchType === "Comments" &&
-            countrySearchResult.map(
+          {regionSearchResult.comments.length > 0 &&
+            regionSearchResult.comments.map(
               (comment, index) =>
                 comment?.comment?.removed ||
                 comment?.comment?.deleted || (
@@ -471,44 +466,33 @@ export default function AtlasCommunity({
                   />
                 )
             )}
-          {activeSearchType === "Posts" &&
-            countrySearchResult.map(
-              (post, index) =>
-                post?.post?.removed ||
-                post?.post?.deleted || (
-                  <Post
-                    key={`${post?.post.id}${index}`}
-                    post={post}
-                    community={activeCommunity}
-                    lemmyInstance={activeLemmyInstance}
-                    sort={activeSortType}
-                  />
-                )
-            )}
+
+          {regionSearchResult.posts.length > 0 &&
+            regionSearchResult.posts.map((post, index) => {
+              return (
+                <Post
+                  key={`${post?.post.id}${index}`}
+                  post={post}
+                  community={activeCommunity}
+                  lemmyInstance={activeLemmyInstance}
+                  sort={activeSortType}
+                />
+              );
+            })}
         </div>
       ) : (
         <p>Loading</p>
       )}
-      {/* Show View More Button only when there */}
-      {countrySearchResult && !maxResults ? (
-        <button
-          role="button"
-          className="view-more"
-          onClick={handleViewMore}
-          aria-label="View More Comments"
-        >
-          View More
-        </button>
-      ) : (
-        <p>No more results.</p>
+
+      {activeSearchType === "Posts" && regionSearchResult && (
+        <p>{regionSearchResult.posts === 0 && "No results."}</p>
       )}
-      <p>{countrySearchResult === 0 && "No results."}</p>
       <a
         href={encodeURI(
           `${activeLemmyInstance.baseUrl}search?q=${encodeURIComponent(
             handleSearchQuery()
           )}&type=${activeSearchType}&listingType=${activeListingType}&communityId=${
-            activeLemmyInstance?.community_id
+            activeCommunity?.counts?.community_id
           }&page=${currentPage}&sort=${activeSortType}`
         )}
         target="_blank"

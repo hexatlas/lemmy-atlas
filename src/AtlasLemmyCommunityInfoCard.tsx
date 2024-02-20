@@ -10,9 +10,9 @@ import { LemmyHttp, GetPersonDetails } from "lemmy-js-client";
 
 import { userPronouns } from "./hooks/useDataTransform";
 
-import Comment from "./AtlasCommunityComment";
+import Comment from "./AtlasLemmyComment";
 
-function AtlasCommunityUserInfoCard({ children, post, lemmyInstance, sort, community }) {
+function AtlasLemmyInfoCard({ children, post, lemmyInstance, sort, community }) {
   const [user, setUser] = useState(null);
 
   const cakeDay = new Date(post.creator.published).toDateString();
@@ -160,4 +160,4 @@ function AtlasCommunityUserInfoCard({ children, post, lemmyInstance, sort, commu
   );
 }
 
-export default AtlasCommunityUserInfoCard;
+export default AtlasLemmyInfoCard;

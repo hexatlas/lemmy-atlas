@@ -9,7 +9,7 @@ import * as Collapsible from "@radix-ui/react-collapsible";
 import { GetComments, LemmyHttp } from "lemmy-js-client";
 
 import { TimeAgo, userPronouns } from "./hooks/useDataTransform";
-import AtlasCommunityUserInfoCard from "./AtlasCommunityUserInfoCard";
+import AtlasLemmyUserInfoCard from "./AtlasLemmyUserInfoCard";
 
 function Comment({
   post,
@@ -54,7 +54,7 @@ function Comment({
           <div className="post-collapse-trigger">{open ? "⊟" : "⊞"}</div>
         </Collapsible.Trigger>
         {/* AVATAR PROFILE PICTURE */}
-        <AtlasCommunityUserInfoCard
+        <AtlasLemmyUserInfoCard
           post={post}
           lemmyInstance={lemmyInstance}
           community={community}
@@ -70,7 +70,7 @@ function Comment({
               }
             />
           </div>
-        </AtlasCommunityUserInfoCard>
+        </AtlasLemmyUserInfoCard>
 
         {/* User / Poster */}
         <a

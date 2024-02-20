@@ -5,7 +5,7 @@ Atlas
    Map
       Interface
       Minimap
-   Community
+   Lemmy
       UserInfoCard
       Comments
       ToDo: Posts

@@ -10,10 +10,10 @@ import { GetComments, LemmyHttp } from "lemmy-js-client";
 
 import { TimeAgo, userPronouns } from "./hooks/useDataTransform";
 
-import Comment from "./AtlasCommunityComment";
-import AtlasCommunityUserInfoCard from "./AtlasCommunityUserInfoCard";
+import Comment from "./AtlasLemmyComment";
+import AtlasLemmyUserInfoCard from "./AtlasLemmyUserInfoCard";
 
-function Post({ post }, community, lemmyInstance, sort, commentDepth = 0) {
+function Post({ post, community, lemmyInstance, sort, commentDepth = 0 }) {
   const [open, setOpen] = useState(false);
   const [replies, setReplies] = useState(null);
   const pronounsArray = userPronouns(post?.creator?.display_name);
@@ -22,7 +22,7 @@ function Post({ post }, community, lemmyInstance, sort, commentDepth = 0) {
     let client: LemmyHttp = new LemmyHttp(lemmyInstance?.baseUrl);
 
     let form: GetComments = {
-      parent_id: post?.post.id,
+      parent_id: post?.id,
       max_depth: 1,
       sort: sort,
     };
@@ -33,22 +33,18 @@ function Post({ post }, community, lemmyInstance, sort, commentDepth = 0) {
       setReplies(res?.comments);
     });
   }
-
-  // useEffect(() => {
-  //   console.log(replies, "replies", "POST - Comment replies");
-  // }, [replies]);
+  console.log(post);
 
   return (
     <Collapsible.Root
       className={`community-post post-collapse-root ${
-        (post?.featured_community || post?.featured_local) && "post-highlight"
+        (post?.post.featured_community || post?.post.featured_local) && "post-featured"
       }`}
       open={open}
       onOpenChange={setOpen}
     >
       <div className="post-info-container">
         <div>
-          {" "}
           {(post?.post.featured_community || post?.post.featured_local) && (
             <small className="post-pinned">📌</small>
           )}
@@ -78,24 +74,45 @@ function Post({ post }, community, lemmyInstance, sort, commentDepth = 0) {
         <div className="post-thumbnail-container" tabIndex={0}>
           <img
             className="post-thumbnail-image"
-            src={post?.post?.thumbnail_url}
+            src={post?.post.thumbnail_url}
             alt={`Post Thumbnail`}
           />
         </div>
         <div>
           {/* OP Post */}
           {commentDepth < 1 && (
-            <a
-              className="post-post"
-              // href={post?.comment.ap_id}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <small>{post?.post?.name}</small>
-            </a>
+            <div>
+              {post?.post.locked && <small className="post-pinned">🔒</small>}
+              <a
+                className="post-post"
+                // href={post?.comment.ap_id}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <small>{post?.post.name}</small>
+              </a>
+            </div>
           )}
 
           <div className="post-info-wrapper">
+            {/* AVATAR PROFILE PICTURE */}
+            <AtlasLemmyUserInfoCard
+              post={post}
+              lemmyInstance={lemmyInstance}
+              community={community}
+              sort={sort}
+            >
+              <div className="user-avatar-container" tabIndex={0}>
+                <img
+                  className="user-avatar-image"
+                  src={post?.creator?.avatar}
+                  alt={
+                    (post?.creator?.display_name && post?.creator?.display_name[0]) ||
+                    post?.creator?.name[0]
+                  }
+                />
+              </div>
+            </AtlasLemmyUserInfoCard>
             {/* User / Poster */}
             <a
               className="post-creator"
@@ -109,10 +126,30 @@ function Post({ post }, community, lemmyInstance, sort, commentDepth = 0) {
               {pronounsArray &&
                 pronounsArray.map((pronoun, index) => <p key={index}>{pronoun}</p>)}
             </div>
+
+            {/* COMMUNITY */}
             {commentDepth < 1 &&
               post?.community?.id != community?.counts?.community_id && (
                 <>
                   <small> to </small>
+                  <AtlasLemmyUserInfoCard
+                    post={post}
+                    lemmyInstance={lemmyInstance}
+                    community={post?.community}
+                    sort={sort}
+                  >
+                    <div className="user-avatar-container" tabIndex={0}>
+                      <img
+                        className="user-avatar-image"
+                        src={post?.community?.icon}
+                        alt={
+                          (post?.creator?.display_name &&
+                            post?.creator?.display_name[0]) ||
+                          post?.creator?.name[0]
+                        }
+                      />
+                    </div>
+                  </AtlasLemmyUserInfoCard>
                   <a
                     href={post?.community?.actor_id}
                     // className="community-button"
@@ -134,7 +171,11 @@ function Post({ post }, community, lemmyInstance, sort, commentDepth = 0) {
       <Collapsible.Content>
         <>
           {/* Comment Body */}
-          <ReactMarkdown className="post-body">{post?.post.body}</ReactMarkdown>
+          {post?.post?.removed && <p className="post-body">Comment removed.</p>}
+          {post?.post?.deleted && <p className="post-body">Comment deleted.</p>}
+          {!(post?.post?.removed || post?.post?.deleted) && (
+            <ReactMarkdown className="post-body">{post?.post.body}</ReactMarkdown>
+          )}
 
           {/* Replies */}
           <div

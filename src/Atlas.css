@@ -242,7 +242,7 @@
   color: hsl(var(--atlas-color-tertiary) / var(--atlas-opacity-3));
 }
 
-/* Community */
+/* Lemmy */
 
 .community-list {
   margin: var(--atlas-size-08) 0;

@@ -6,7 +6,7 @@ import * as Tabs from "@radix-ui/react-tabs";
 // Import Components
 
 import AtlasMap from "./AtlasMap";
-import AtlasCommunity from "./AtlasCommunity";
+import AtlasLemmy from "./AtlasLemmy";
 import AtlasInterface from "./AtlasMapInterface";
 import AtlasNexusCard from "./AtlasNexus";
 
@@ -272,14 +272,14 @@ export default function Atlas() {
             Nexus
           </Tabs.Trigger>
           <Tabs.Trigger className="tabs-trigger" value="CommentsTab">
-            Community
+            Fediverse
           </Tabs.Trigger>
         </Tabs.List>
         <Tabs.Content className="tabs-content" value="InfoTab">
           <AtlasNexusCard interfaceProps={interfaceProps} />
         </Tabs.Content>
         <Tabs.Content className="tabs-content" value="CommentsTab">
-          <AtlasCommunity {...interfaceProps} />
+          <AtlasLemmy {...interfaceProps} />
         </Tabs.Content>
       </Tabs.Root>
     </div>
