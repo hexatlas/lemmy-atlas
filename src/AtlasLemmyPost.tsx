@@ -87,7 +87,7 @@ function Post({ post, community, lemmyInstance, sort, commentDepth = 0 }) {
               {post?.post.locked && <small className="post-pinned">🔒</small>}
               <a
                 className="post-post"
-                // href={post?.comment.ap_id}
+                href={post?.post.ap_id}
                 target="_blank"
                 rel="noopener noreferrer"
               >
