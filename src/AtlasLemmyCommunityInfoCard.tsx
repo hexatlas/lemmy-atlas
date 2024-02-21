@@ -94,26 +94,41 @@ function AtlasLemmyCommunityInfoCard({ children, post, lemmyInstance, sort, comm
                 <h5>{community?.name}</h5>
 
                 <div className="community-stats">
-                  <h6>
-                    {communityDetails?.community_view.counts.subscribers.toLocaleString()}{" "}
-                    Subs
-                  </h6>{" "}
-                  <h6>
-                    {communityDetails?.community_view.counts.users_active_day.toLocaleString()}{" "}
-                    Daily
-                  </h6>{" "}
-                  <h6>
-                    {communityDetails?.community_view.counts.users_active_week.toLocaleString()}{" "}
-                    Weekly
-                  </h6>{" "}
-                  <h6>
-                    {communityDetails?.community_view.counts.users_active_month.toLocaleString()}{" "}
-                    Monthly
-                  </h6>{" "}
-                  <h6>
-                    {communityDetails?.community_view.counts.users_active_half_year.toLocaleString()}{" "}
-                    Half Year
-                  </h6>
+                  <p>
+                    <b>
+                      {communityDetails?.community_view.counts.subscribers.toLocaleString()}{" "}
+                    </b>{" "}
+                    <br />
+                    <i>Subs</i>
+                  </p>{" "}
+                  <p>
+                    <b>
+                      {communityDetails?.community_view.counts.users_active_day.toLocaleString()}{" "}
+                    </b>{" "}
+                    <br />
+                    <i>Daily</i>
+                  </p>{" "}
+                  <p>
+                    <b>
+                      {communityDetails?.community_view.counts.users_active_week.toLocaleString()}{" "}
+                    </b>{" "}
+                    <br />
+                    <i>Weekly</i>
+                  </p>{" "}
+                  <p>
+                    <b>
+                      {communityDetails?.community_view.counts.users_active_month.toLocaleString()}{" "}
+                    </b>{" "}
+                    <br />
+                    <i>Monthly</i>
+                  </p>{" "}
+                  <p>
+                    <b>
+                      {communityDetails?.community_view.counts.users_active_half_year.toLocaleString()}{" "}
+                    </b>{" "}
+                    <br />
+                    <i>Half Year</i>
+                  </p>
                 </div>
 
                 <small>🎂 {cakeDay}</small>

@@ -112,7 +112,7 @@ function AtlasLemmyUserInfoCard({ children, post, lemmyInstance, sort, community
 
                 <div className="user-pronouns">
                   {pronounsArray &&
-                    pronounsArray.map((pronoun, index) => <h6 key={index}>{pronoun}</h6>)}
+                    pronounsArray.map((pronoun, index) => <p key={index}>{pronoun}</p>)}
                 </div>
                 <small>🎂 {cakeDay}</small>
                 {post?.creator?.updated && (
