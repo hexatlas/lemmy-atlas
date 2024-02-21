@@ -6,10 +6,14 @@ function AtlasLemmyCommunity({
   sort,
   community,
   showCommunityIcon = true,
+  icon = post?.community?.icon,
+  display_name = post?.community?.display_name,
+  name = post?.community?.name,
+  prefix = "to",
 }) {
   return (
-    <>
-      <small> to </small>
+    <div className="community-wrapper">
+      {prefix && <small className="post-to">{prefix}</small>}
 
       {showCommunityIcon && (
         <LemmyCommunityInfoCard
@@ -18,14 +22,11 @@ function AtlasLemmyCommunity({
           sort={sort}
           community={post?.community}
         >
-          <div className="user-avatar-container" tabIndex={0}>
+          <div className="community-avatar-container" tabIndex={0}>
             <img
-              className="user-avatar-image"
-              src={post?.community?.icon}
-              alt={
-                (community?.display_name && community?.display_name[0]) ||
-                community?.name[0]
-              }
+              className="community-avatar-image"
+              src={icon}
+              alt={(display_name && display_name[0]) || name[0]}
             />
           </div>
         </LemmyCommunityInfoCard>
@@ -38,7 +39,7 @@ function AtlasLemmyCommunity({
       >
         <small>{post?.community?.name}</small>
       </a>
-    </>
+    </div>
   );
 }
 

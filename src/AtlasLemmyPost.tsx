@@ -22,18 +22,20 @@ function Post({ post, community, lemmyInstance, sort, commentDepth = 0 }) {
     let client: LemmyHttp = new LemmyHttp(lemmyInstance?.baseUrl);
 
     let form: GetComments = {
-      parent_id: post?.id,
-      max_depth: 1,
-      sort: sort,
+      post_id: post?.id,
+      // max_depth: 1,
+      // sort: sort,
+      // limit: 100,
     };
 
     client.getComments(form).then((res) => {
-      console.log(res);
+      console.log(res, "getComments");
 
       setReplies(res?.comments);
     });
   }
-  console.log(post);
+
+  console.log(post, "Post");
 
   return (
     <Collapsible.Root
@@ -75,10 +77,10 @@ function Post({ post, community, lemmyInstance, sort, commentDepth = 0 }) {
           <img
             className="post-thumbnail-image"
             src={post?.post.thumbnail_url}
-            alt={`Post Thumbnail`}
+            alt={`💬`}
           />
         </div>
-        <div>
+        <div className="post-meta">
           {/* OP Post */}
           {commentDepth < 1 && (
             <div>
@@ -119,23 +121,26 @@ function Post({ post, community, lemmyInstance, sort, commentDepth = 0 }) {
               <TimeAgo dateString={post?.post.published} />
             </small>
           </div>
+          {/* Reply Count */}
+          {post?.counts.comments > 0 && (
+            <p className="comment-count">{`🧵 ${post?.counts.comments} `}</p>
+          )}
         </div>
       </div>
       <Collapsible.Content>
         <>
           {/* Comment Body */}
-          {post?.post?.removed && <p className="post-body">Comment removed.</p>}
-          {post?.post?.deleted && <p className="post-body">Comment deleted.</p>}
+          {post?.post?.removed && <p className="post-body">🚮 Comment removed.</p>}
+          {post?.post?.deleted && <p className="post-body">🗑️ Comment deleted.</p>}
           {!(post?.post?.removed || post?.post?.deleted) && (
             <ReactMarkdown className="post-body">{post?.post.body}</ReactMarkdown>
           )}
-
           {/* Replies */}
           <div
             className={`post-reply-container post-reply-depth-${(commentDepth % 7) + 1}`}
           >
             {/* Reply Count */}
-            {post?.counts.child_count > 0 && !replies && (
+            {post?.counts.comments > 0 && !replies && (
               <p
                 className="reply-button"
                 role="button"
@@ -149,8 +154,8 @@ function Post({ post, community, lemmyInstance, sort, commentDepth = 0 }) {
                 }}
               >
                 <span className="post-replycount-icon">↪</span>
-                {`${post?.counts.child_count} repl${
-                  post?.counts.child_count > 1 ? "ies" : "y"
+                {`${post?.counts.comments} comment${
+                  post?.counts.comments > 1 ? "s" : ""
                 }`}
               </p>
             )}
@@ -158,22 +163,22 @@ function Post({ post, community, lemmyInstance, sort, commentDepth = 0 }) {
             {/* Reply Comments */}
             {replies &&
               replies.map((reply, index) => {
-                if (reply.comment.id == post?.comment.id) return; // filter parent commment from API response
                 return (
                   <Comment
-                    key={`${reply.creator.id}${reply.comment.id}${index}`}
+                    key={`${reply.creator.id}${index}`}
                     community={community}
                     post={reply}
                     lemmyInstance={lemmyInstance}
                     commentDepth={commentDepth + 1}
                     sort={sort}
-                    ratioDetector={post?.counts.score}
+                    ratioDetector={reply?.counts.score}
                   />
                 );
               })}
           </div>
         </>
       </Collapsible.Content>
+
       <hr />
     </Collapsible.Root>
   );

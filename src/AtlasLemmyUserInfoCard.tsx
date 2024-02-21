@@ -11,7 +11,7 @@ import { LemmyHttp, GetPersonDetails } from "lemmy-js-client";
 import { userPronouns } from "./hooks/useDataTransform";
 
 import Comment from "./AtlasLemmyComment";
-import LemmyUser from "./AtlasLemmyUser";
+import LemmyCommunity from "./AtlasLemmyCommunity";
 
 function AtlasLemmyUserInfoCard({ children, post, lemmyInstance, sort, community }) {
   const [user, setUser] = useState(null);
@@ -127,6 +127,30 @@ function AtlasLemmyUserInfoCard({ children, post, lemmyInstance, sort, community
                   <ReactMarkdown>{post?.creator?.bio}</ReactMarkdown>
                 </div>
               )}
+              {user?.moderates.length > 0 && (
+                <div className="mod-wrapper">
+                  <small className="community-mod">Mods</small>
+                  <div className="mod-list">
+                    {user?.moderates.map((community, index) => {
+                      return (
+                        <div className="mod-user">
+                          <LemmyCommunity
+                            key={`${index}${community.id}`}
+                            post={community}
+                            lemmyInstance={lemmyInstance}
+                            sort={sort}
+                            community={community}
+                            icon={community?.icon}
+                            display_name={community?.display_name}
+                            name={community?.name}
+                            prefix={null}
+                          />
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+              )}
 
               <div style={{ display: "flex", gap: 15 }}>
                 <div style={{ display: "flex", gap: 5 }}>
@@ -140,7 +164,7 @@ function AtlasLemmyUserInfoCard({ children, post, lemmyInstance, sort, community
               </div>
 
               <div className="user-posts">
-                {user &&
+                {user?.comments.length > 0 &&
                   user?.comments.map((comment, index) => (
                     <Comment
                       key={`${comment?.id}${index}`}

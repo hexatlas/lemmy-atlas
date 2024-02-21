@@ -60,7 +60,7 @@ function AtlasLemmyCommunityInfoCard({ children, post, lemmyInstance, sort, comm
             {community?.icon && (
               <a
                 className={`user-avatar-container user-avatar-infocard ${
-                  post?.creator?.banner && "user-avatar-banner-offset"
+                  community?.banner && "user-avatar-banner-offset"
                 }`}
                 href={community?.actor_id}
                 target="_blank"
@@ -168,7 +168,7 @@ function AtlasLemmyCommunityInfoCard({ children, post, lemmyInstance, sort, comm
                       <div className="mod-user">
                         <LemmyUser
                           key={`${index}${moderators.id}`}
-                          post={post}
+                          post={moderator}
                           community={community}
                           sort={sort}
                           id={moderator?.id}

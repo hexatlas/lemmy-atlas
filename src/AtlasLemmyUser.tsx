@@ -16,7 +16,7 @@ function AtlasLemmyUser({
 }) {
   const pronounsArray = userPronouns(display_name);
   return (
-    <>
+    <div className="user-wrapper">
       {showInfoCard ? (
         <LemmyUserInfoCard
           post={post}
@@ -64,7 +64,7 @@ function AtlasLemmyUser({
           Banned
         </a>
       )}
-    </>
+    </div>
   );
 }
 

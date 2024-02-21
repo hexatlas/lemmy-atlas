@@ -50,7 +50,7 @@ function Comment({
       open={open}
       onOpenChange={setOpen}
     >
-      <div className="post-info-container">
+      <div className="comment-info-container">
         <Collapsible.Trigger>
           <div className="post-collapse-trigger">{open ? "⊟" : "⊞"}</div>
         </Collapsible.Trigger>

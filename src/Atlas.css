@@ -311,12 +311,18 @@
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: var(--atlas-size-12);
+  /* gap: var(--atlas-size-12); */
 }
 
 .community-post .post-info-container {
   display: grid;
   grid-template-columns: var(--atlas-size-08) var(--atlas-size-06) 1fr;
+  gap: var(--atlas-size-09);
+  margin: var(--atlas-size-13) 0;
+}
+.comment-info-container {
+  display: flex;
+  align-items: center;
   gap: var(--atlas-size-09);
   margin: var(--atlas-size-13) 0;
 }
@@ -397,8 +403,16 @@ sup.post-vote {
   border-color: hsl(var(--atlas-color-dark) / var(--atlas-opacity-2));
 }
 
-.post-timestamp {
+.post-timestamp,
+.comment-count,
+.post-to {
   opacity: var(--atlas-opacity-2);
+  margin: 0 var(--atlas-size-12);
+}
+
+.post-meta {
+  display: grid;
+  gap: var(--atlas-size-12);
 }
 
 .post-alert {
@@ -561,9 +575,19 @@ sup.post-vote {
   border-left: var(--atlas-size-15) solid var(--atlas-color-post-pink);
 }
 
+/* Lemmy user */
+
+.user-wrapper,
+.community-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 0 var(--atlas-size-12);
+}
+
 /* User Info Card */
 
 .user-avatar-container,
+.community-avatar-container,
 .post-thumbnail-container {
   overflow: hidden;
   user-select: none;
@@ -571,7 +595,6 @@ sup.post-vote {
   width: var(--atlas-size-08);
   height: var(--atlas-size-08);
   border-radius: var(--atlas-border-radius-1);
-  margin: 0 var(--atlas-size-12);
 
   cursor: pointer;
   background-color: hsl(var(--atlas-color-light) / var(--atlas-opacity-1)) !important;
@@ -579,6 +602,19 @@ sup.post-vote {
   text-shadow: var(--atlas-shadow-text);
   text-align: center;
   font-weight: 900;
+  box-shadow: var(--atlas-shadow-inset);
+}
+
+.post-thumbnail-container img {
+  height: 100%;
+  width: 100%;
+  line-height: var(--atlas-size-06);
+  object-fit: cover;
+}
+
+.community-avatar-container {
+  background-color: hsl(var(--atlas-color-light) / var(--atlas-opacity-2)) !important;
+  color: hsl(var(--atlas-color-dark) / var(--atlas-opacity-2));
 }
 
 .post-thumbnail-container {
@@ -592,11 +628,13 @@ sup.post-vote {
   box-shadow: var(--atlas-shadow-1);
 }
 
-.user-avatar-container:focus {
+.user-avatar-container:focus,
+.community-avatar-container:focus {
   box-shadow: var(--atlas-shadow-1);
 }
 
-.user-avatar-image {
+.user-avatar-image,
+.community-avatar-image {
   height: 100%;
   width: 100%;
   object-fit: cover;
@@ -681,6 +719,11 @@ a.post-creator {
   max-height: var(--atlas-size-00);
   overflow-y: scroll;
 }
+
+.user-info-card-content .mod-list a {
+  color: hsl(var(--atlas-color-dark) / var(--atlas-opacity-3));
+}
+
 .mod-user {
   display: flex;
   flex-wrap: wrap;
@@ -742,7 +785,7 @@ a.post-creator {
 }
 
 .user-info-card-content .user-avatar-container,
-.community-info-card-content .user-avatar-container {
+.community-info-card-content .community-avatar-container {
   margin: 0;
 }
 
@@ -1205,9 +1248,12 @@ a.post-creator {
 }
 
 .leaflet-control-layers-toggle:after {
-  content: "";
+  content: "🗺️";
+  line-height: var(--atlas-size-07);
+  font-size: var(--atlas-size-08);
+  text-align: center;
   position: absolute;
-  background-image: url(/layer.svg) !important;
+  text-shadow: var(--atlas-shadow-text);
   background-size: var(--atlas-size-08);
   background-position: center;
   background-repeat: no-repeat;
