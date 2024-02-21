@@ -289,6 +289,17 @@
   transition: var(--atlas-transition-slow);
 }
 
+/* Comunity Info Card */
+
+.community-info-card-content .user-pronouns h6 {
+  background-color: hsl(var(--atlas-color-dark) / var(--atlas-opacity-1));
+  color: hsl(var(--atlas-color-light) / var(--atlas-opacity-3));
+}
+
+.community-info-card-content-hightlighted {
+  background-color: hsl(var(--atlas-color-secondary) / var(--atlas-opacity-2));
+}
+
 /* Post, Comment */
 
 .post-info-container,
@@ -645,16 +656,34 @@ a.post-creator {
   }
 }
 
-.user-mod {
+.user-mod,
+.community-mod {
   font-style: italic;
 }
 
-.user-pronouns {
+.mod-list {
+  background: hsl(var(--atlas-color-tertiary) / var(--atlas-opacity-2));
+  padding: var(--atlas-size-10);
+  display: grid;
+  gap: var(--atlas-size-10);
+  box-shadow: var(--atlas-shadow-inset);
+  border-radius: var(--atlas-border-radius-1);
+}
+.mod-user {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--atlas-size-12);
+}
+
+.user-pronouns,
+.community-stats {
   display: flex;
   gap: var(--atlas-size-14);
 }
 
-.user-pronouns h6 {
+.user-pronouns h6,
+.community-stats h6 {
   padding: var(--atlas-size-12) var(--atlas-size-10);
   margin-bottom: var(--atlas-size-12);
   border-radius: var(--atlas-border-radius-1);
@@ -706,10 +735,6 @@ a.post-creator {
   max-height: calc(var(--atlas-size-00) * 2);
   overflow-y: scroll;
   box-shadow: var(--atlas-shadow-1);
-}
-
-.user-posts .user-avatar-container {
-  display: none;
 }
 
 @keyframes slideUpAndFade {

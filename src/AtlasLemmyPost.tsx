@@ -8,15 +8,15 @@ import * as Collapsible from "@radix-ui/react-collapsible";
 // https://join-lemmy.org/api/classes/LemmyHttp.html
 import { GetComments, LemmyHttp } from "lemmy-js-client";
 
-import { TimeAgo, userPronouns } from "./hooks/useDataTransform";
+import { TimeAgo } from "./hooks/useDataTransform";
 
 import Comment from "./AtlasLemmyComment";
-import AtlasLemmyUserInfoCard from "./AtlasLemmyUserInfoCard";
+import LemmyUser from "./AtlasLemmyUser";
+import LemmyCommunity from "./AtlasLemmyCommunity";
 
 function Post({ post, community, lemmyInstance, sort, commentDepth = 0 }) {
   const [open, setOpen] = useState(false);
   const [replies, setReplies] = useState(null);
-  const pronounsArray = userPronouns(post?.creator?.display_name);
 
   function handleReplies() {
     let client: LemmyHttp = new LemmyHttp(lemmyInstance?.baseUrl);
@@ -95,70 +95,23 @@ function Post({ post, community, lemmyInstance, sort, commentDepth = 0 }) {
           )}
 
           <div className="post-info-wrapper">
-            {/* AVATAR PROFILE PICTURE */}
-            <AtlasLemmyUserInfoCard
+            {/* User / Poster */}
+            <LemmyUser
               post={post}
               lemmyInstance={lemmyInstance}
               community={community}
               sort={sort}
-            >
-              <div className="user-avatar-container" tabIndex={0}>
-                <img
-                  className="user-avatar-image"
-                  src={post?.creator?.avatar}
-                  alt={
-                    (post?.creator?.display_name && post?.creator?.display_name[0]) ||
-                    post?.creator?.name[0]
-                  }
-                />
-              </div>
-            </AtlasLemmyUserInfoCard>
-            {/* User / Poster */}
-            <a
-              className="post-creator"
-              href={post?.creator?.actor_id}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              {post?.creator?.name}
-            </a>
-            <div className="user-pronouns">
-              {pronounsArray &&
-                pronounsArray.map((pronoun, index) => <p key={index}>{pronoun}</p>)}
-            </div>
+            />
 
             {/* COMMUNITY */}
             {commentDepth < 1 &&
               post?.community?.id != community?.counts?.community_id && (
-                <>
-                  <small> to </small>
-                  <AtlasLemmyUserInfoCard
-                    post={post}
-                    lemmyInstance={lemmyInstance}
-                    community={post?.community}
-                    sort={sort}
-                  >
-                    <div className="user-avatar-container" tabIndex={0}>
-                      <img
-                        className="user-avatar-image"
-                        src={post?.community?.icon}
-                        alt={
-                          (post?.creator?.display_name &&
-                            post?.creator?.display_name[0]) ||
-                          post?.creator?.name[0]
-                        }
-                      />
-                    </div>
-                  </AtlasLemmyUserInfoCard>
-                  <a
-                    href={post?.community?.actor_id}
-                    // className="community-button"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <small>{post?.community?.name}</small>
-                  </a>
-                </>
+                <LemmyCommunity
+                  post={post}
+                  sort={sort}
+                  community={community}
+                  lemmyInstance={lemmyInstance}
+                />
               )}
 
             {/* Timestamp */}

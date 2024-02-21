@@ -8,8 +8,9 @@ import * as Collapsible from "@radix-ui/react-collapsible";
 // https://join-lemmy.org/api/classes/LemmyHttp.html
 import { GetComments, LemmyHttp } from "lemmy-js-client";
 
-import { TimeAgo, userPronouns } from "./hooks/useDataTransform";
-import AtlasLemmyUserInfoCard from "./AtlasLemmyUserInfoCard";
+import { TimeAgo } from "./hooks/useDataTransform";
+import LemmyUser from "./AtlasLemmyUser";
+import LemmyCommunity from "./AtlasLemmyCommunity";
 
 function Comment({
   post,
@@ -18,10 +19,10 @@ function Comment({
   sort,
   ratioDetector,
   commentDepth = 0,
+  showUserAvatar = true,
 }) {
   const [open, setOpen] = useState(true);
   const [replies, setReplies] = useState(null);
-  const pronounsArray = userPronouns(post?.creator?.display_name);
 
   function handleReplies() {
     let client: LemmyHttp = new LemmyHttp(lemmyInstance?.baseUrl);
@@ -54,47 +55,14 @@ function Comment({
           <div className="post-collapse-trigger">{open ? "⊟" : "⊞"}</div>
         </Collapsible.Trigger>
         {/* AVATAR PROFILE PICTURE */}
-        <AtlasLemmyUserInfoCard
+
+        <LemmyUser
           post={post}
           lemmyInstance={lemmyInstance}
           community={community}
           sort={sort}
-        >
-          <div className="user-avatar-container" tabIndex={0}>
-            <img
-              className="user-avatar-image"
-              src={post?.creator?.avatar}
-              alt={
-                (post?.creator?.display_name && post?.creator?.display_name[0]) ||
-                post?.creator?.name[0]
-              }
-            />
-          </div>
-        </AtlasLemmyUserInfoCard>
-
-        {/* User / Poster */}
-        <a
-          className="post-creator"
-          href={post?.creator?.actor_id}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          {post?.creator?.name}
-        </a>
-        <div className="user-pronouns">
-          {pronounsArray &&
-            pronounsArray.map((pronoun, index) => <p key={index}>{pronoun}</p>)}
-        </div>
-        {post?.creator?.banned && (
-          <a
-            href={`${lemmyInstance.baseUrl}modlog?page=1&userId=${post?.creator?.id}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="comment-nsfw"
-          >
-            Banned
-          </a>
-        )}
+          showInfoCard={showUserAvatar}
+        />
 
         {post?.comment.distinguished && <p className="post-alert">📌</p>}
 
@@ -137,17 +105,13 @@ function Comment({
           )}
 
           {commentDepth < 1 && post?.community?.id != community?.counts?.community_id && (
-            <>
-              <small> in </small>
-              <a
-                href={post?.community?.actor_id}
-                // className="community-button"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <small>{post?.community?.name}</small>
-              </a>
-            </>
+            <LemmyCommunity
+              post={post}
+              sort={sort}
+              community={community}
+              lemmyInstance={lemmyInstance}
+              showCommunityIcon={false}
+            />
           )}
           {commentDepth < 1 && (post?.post?.nsfw || post?.community?.nsfw) && (
             <p className="post-alert">NSFW</p>

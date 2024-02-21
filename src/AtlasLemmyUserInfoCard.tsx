@@ -11,6 +11,7 @@ import { LemmyHttp, GetPersonDetails } from "lemmy-js-client";
 import { userPronouns } from "./hooks/useDataTransform";
 
 import Comment from "./AtlasLemmyComment";
+import LemmyUser from "./AtlasLemmyUser";
 
 function AtlasLemmyUserInfoCard({ children, post, lemmyInstance, sort, community }) {
   const [user, setUser] = useState(null);
@@ -129,10 +130,11 @@ function AtlasLemmyUserInfoCard({ children, post, lemmyInstance, sort, community
 
               <div style={{ display: "flex", gap: 15 }}>
                 <div style={{ display: "flex", gap: 5 }}>
-                  <div>{user?.person_view?.counts?.post_count}</div> <div>Posts</div>
+                  <div>{user?.person_view?.counts?.post_count.toLocaleString()}</div>{" "}
+                  <div>Posts</div>
                 </div>
                 <div style={{ display: "flex", gap: 5 }}>
-                  <div>{user?.person_view?.counts?.comment_count}</div>
+                  <div>{user?.person_view?.counts?.comment_count.toLocaleString()}</div>
                   <div>Comments</div>
                 </div>
               </div>
@@ -141,12 +143,13 @@ function AtlasLemmyUserInfoCard({ children, post, lemmyInstance, sort, community
                 {user &&
                   user?.comments.map((comment, index) => (
                     <Comment
-                      key={`${index}`}
+                      key={`${comment?.id}${index}`}
                       post={comment}
                       community={community}
                       lemmyInstance={lemmyInstance}
                       sort={sort}
                       ratioDetector={undefined}
+                      showUserAvatar={false}
                     ></Comment>
                   ))}
               </div>
