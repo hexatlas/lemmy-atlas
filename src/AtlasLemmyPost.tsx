@@ -15,12 +15,13 @@ import LemmyUser from "./AtlasLemmyUser";
 import LemmyCommunity from "./AtlasLemmyCommunity";
 
 function Post({ post, community, lemmyInstance, sort, commentDepth = 0 }) {
-  const [open, setOpen] = useState(false);
+  const [openPost, setOpenPost] = useState(false);
   const [replies, setReplies] = useState(null);
 
   function handleReplies() {
     let client: LemmyHttp = new LemmyHttp(lemmyInstance?.baseUrl);
 
+    console.log(post, "post | handleReplies");
     let form: GetComments = {
       post_id: post?.post.id,
       sort: sort,
@@ -38,8 +39,8 @@ function Post({ post, community, lemmyInstance, sort, commentDepth = 0 }) {
       className={`community-post post-collapse-root ${
         (post?.post.featured_community || post?.post.featured_local) && "post-featured"
       }`}
-      open={open}
-      onOpenChange={setOpen}
+      open={openPost}
+      onOpenChange={setOpenPost}
     >
       <div className="post-info-container">
         <div>
@@ -65,7 +66,7 @@ function Post({ post, community, lemmyInstance, sort, commentDepth = 0 }) {
             )}
           </p>
           <Collapsible.Trigger>
-            <div className="post-collapse-trigger">{open ? "⊟" : "⊞"}</div>
+            <div className="post-collapse-trigger">{openPost ? "⊟" : "⊞"}</div>
           </Collapsible.Trigger>
         </div>
         {/* Post Thumbnail */}
@@ -123,6 +124,7 @@ function Post({ post, community, lemmyInstance, sort, commentDepth = 0 }) {
           )}
         </div>
       </div>
+
       <Collapsible.Content>
         <>
           {/* Post Body */}

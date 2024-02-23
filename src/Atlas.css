@@ -1060,7 +1060,7 @@ a.post-creator {
 
   background-color: hsl(var(--atlas-color-secondary) / var(--atlas-opacity-3));
   border: 1px solid hsl(var(--atlas-color-light) / var(--atlas-opacity-1));
-  border-radius: var(--atlas-border-radius-2);
+  border-radius: var(--atlas-border-radius-1);
 
   backdrop-filter: blur(var(--atlas-size-11));
   -webkit-backdrop-filter: blur(var(--atlas-size-11));
@@ -1356,12 +1356,25 @@ a.post-creator {
   width: 100%;
 }
 
-.leaflet-control:hover,
-.leaflet-control-zoom > a:hover {
+.leaflet-control:hover {
   background: hsl(var(--atlas-color-light) / var(--atlas-opacity-2)) !important;
+  border-radius: var(--atlas-border-radius-1);
   backdrop-filter: blur(var(--atlas-size-16)) !important;
   -webkit-backdrop-filter: blur(var(--atlas-size-16)) !important;
-  border-radius: var(--atlas-border-radius-1);
+}
+
+.leaflet-control-zoom {
+  border-right: var(--atlas-size-14) solid
+    hsl(var(--atlas-color-secondary) / var(--atlas-opacity-3)) !important;
+  overflow: hidden;
+}
+
+.leaflet-control-zoom > a:hover {
+  background: hsl(var(--atlas-color-primary) / var(--atlas-opacity-3)) !important;
+  color: hsl(var(--atlas-color-light) / var(--atlas-opacity-3)) !important;
+  border-radius: var(--atlas-size-14);
+
+  opacity: 1;
 }
 
 .leaflet-control:hover.leaflet-control-layers-expanded {

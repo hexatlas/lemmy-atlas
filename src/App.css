@@ -65,7 +65,7 @@
 
   /* border radius */
 
-  --atlas-border-radius-1: var(--atlas-size-12);
+  --atlas-border-radius-1: var(--atlas-size-10) var(--atlas-size-14);
   --atlas-border-radius-2: var(--atlas-size-14);
 
   /* opacities */
@@ -331,7 +331,7 @@ progress {
   padding: 0 var(--atlas-size-10);
   height: var(--atlas-size-07);
   border-width: 0;
-  border-radius: var(--atlas-size-10);
+  border-radius: var(--atlas-border-radius-1);
 
   transition: border-radius var(--atlas-transition-fast);
 }
