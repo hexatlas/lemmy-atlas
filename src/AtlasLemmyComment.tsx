@@ -118,7 +118,7 @@ function Comment({
           )}
 
           {/* Comment Body */}
-          <ReactMarkdown className="post-body">{post?.comment.content}</ReactMarkdown>
+          <ReactMarkdown className="comment-body">{post?.comment.content}</ReactMarkdown>
 
           {/* Replies */}
           <div

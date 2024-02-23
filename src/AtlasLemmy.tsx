@@ -8,7 +8,10 @@ import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
 
 import Comment from "./AtlasLemmyComment";
 import Post from "./AtlasLemmyPost";
+import LemmyCommunityInfoCard from "./AtlasLemmyCommunityInfoCard";
+
 import { searchTypes } from "./Atlas_Config";
+import AtlasLemmyCommunityInfoCard from "./AtlasLemmyCommunityInfoCard";
 
 export default function AtlasLemmy({
   // Util
@@ -63,10 +66,13 @@ export default function AtlasLemmy({
   administrativeRegionStyleHovered,
 }) {
   const [communityList, setCommunityList] = useState(null);
+  const [currentCommunityPage, setCurrentCommunityPage] = useState<number>(1);
+  const [hasMoreCommunities, setHasMoreCommunities] = useState<boolean>(true);
+
   const [regionSearchResult, setRegionSearchResult] = useState(null);
   const [loading, setLoading] = useState<boolean>(false);
-  const [currentPage, setCurrentPage] = useState<number>(1);
-  const [hasMore, setHasMore] = useState(false);
+  const [currentSearchResultPage, setCurrentSearchResultPage] = useState<number>(1);
+  const [hasMore, setHasMore] = useState<boolean>(false);
 
   /*
     Handlers
@@ -116,7 +122,8 @@ export default function AtlasLemmy({
 
   function handleCommunityRefresh() {
     if (locationQuery) {
-      handleSearchCommunity(locationQuery);
+      setCurrentCommunityPage(1);
+      handleSearchCommunities(locationQuery);
     } else {
       handleCommunityList();
     }
@@ -127,16 +134,13 @@ export default function AtlasLemmy({
       listing_type: activeListingType,
       sort: activeSortType,
       q: handleSearchQuery(),
-      page: currentPage,
+      page: currentSearchResultPage,
     };
 
     client.search(form).then((res) => {
       if (res?.comments.length < 10 || res?.posts.length < 10) {
         setHasMore(true);
       }
-
-      console.log(res, "handleCommunityRefresh | AtlasCommuntiy");
-
       setRegionSearchResult(res);
     });
   }
@@ -146,16 +150,23 @@ export default function AtlasLemmy({
     let form: ListCommunities = {
       type_: activeListingType,
       sort: "TopAll",
-      // sort: isInitial ? "TopAll" : activeSortType,
+      page: currentCommunityPage,
     };
 
     client.listCommunities(form).then((res) => {
-      console.log(res, "handleCommunityList | response");
-      setCommunityList(res?.communities);
+      if (res?.communities.length < 10) {
+        setHasMoreCommunities(false);
+      }
+      setCommunityList(() =>
+        currentCommunityPage === 1
+          ? res?.communities
+          : [...communityList, ...res?.communities]
+      );
     });
   }
 
-  function handleSearchCommunity(searchQuery) {
+  // Searches for Communites, used in Query Field
+  function handleSearchCommunities(searchQuery) {
     let form: Search = {
       q: searchQuery,
       type_: "Communities",
@@ -163,7 +174,6 @@ export default function AtlasLemmy({
     };
 
     client.search(form).then((res) => {
-      console.log(res?.communities, "handleSearchCommunity");
       setCommunityList(res?.communities);
     });
   }
@@ -194,15 +204,23 @@ export default function AtlasLemmy({
 
   // Reset Query when location or location query is changed
   useEffect(() => {
-    setCurrentPage(1);
+    setCurrentSearchResultPage(1);
     setHasMore(false);
     setRegionSearchResult(null);
   }, [activeAdministrativeRegion, activeRegionType, activeSearchType, locationQuery]);
 
+  // Reset when Lemmy Instance is changed
   useEffect(() => {
+    setCommunityList(null);
     setActiveCommunity(null);
+    setCurrentCommunityPage(1);
+    setHasMoreCommunities(true);
     handleCommunityList();
   }, [activeLemmyInstance]);
+
+  useEffect(() => {
+    handleCommunityList();
+  }, [currentCommunityPage]);
 
   useEffect(() => {
     const debounce = setTimeout(() => {
@@ -217,7 +235,7 @@ export default function AtlasLemmy({
     activeListingType,
     activeSortType,
     activeSearchType,
-    currentPage,
+    currentSearchResultPage,
     locationQuery,
   ]);
 
@@ -387,6 +405,7 @@ export default function AtlasLemmy({
           </DropdownMenu.Content>
         </DropdownMenu.Portal>
       </DropdownMenu.Root>
+
       {activeCommunity && activeCommunity?.community?.banner && (
         <img
           className="banner-image"
@@ -395,16 +414,17 @@ export default function AtlasLemmy({
         />
       )}
 
-      {activeCommunity && (
-        <a
-          href={activeCommunity?.community?.actor_id}
-          target="_blank"
-          rel="noopener noreferrer"
+      {activeCommunity?.community && (
+        <LemmyCommunityInfoCard
+          lemmyInstance={activeLemmyInstance}
+          community={activeCommunity?.community}
+          sort={activeSortType}
         >
-          {activeCommunity?.community?.name}
-        </a>
+          <button className="icon-button" aria-label={"Show Community Information"}>
+            ⓘ
+          </button>
+        </LemmyCommunityInfoCard>
       )}
-
       <div className="search-form">
         <label htmlFor="search-input" className="sr-only">
           Query Selected Location
@@ -437,6 +457,16 @@ export default function AtlasLemmy({
               </button>
             );
           })}
+        {/* {hasMoreCommunities && (
+          <button
+            role="button"
+            className="community-button community-button-more"
+            onClick={() => setCurrentCommunityPage(currentCommunityPage + 1)}
+            aria-label="View More Communites"
+          >
+            +
+          </button>
+        )} */}
       </div>
       {locationQuery && (
         <div className="community-querylocation">
@@ -493,7 +523,7 @@ export default function AtlasLemmy({
             handleSearchQuery()
           )}&type=${activeSearchType}&listingType=${activeListingType}&communityId=${
             activeCommunity?.counts?.community_id
-          }&page=${currentPage}&sort=${activeSortType}`
+          }&page=${currentSearchResultPage}&sort=${activeSortType}`
         )}
         target="_blank"
         rel="noopener noreferrer"

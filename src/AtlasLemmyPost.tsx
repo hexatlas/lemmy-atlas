@@ -21,21 +21,20 @@ function Post({ post, community, lemmyInstance, sort, commentDepth = 0 }) {
   function handleReplies() {
     let client: LemmyHttp = new LemmyHttp(lemmyInstance?.baseUrl);
 
+    console.log(post, "post | handleReplies");
     let form: GetComments = {
-      post_id: post?.id,
-      // max_depth: 1,
-      // sort: sort,
-      // limit: 100,
+      post_id: post?.post.id,
+      sort: sort,
+      max_depth: 1,
+      type_: "All",
+      limit: 0,
     };
-
     client.getComments(form).then((res) => {
-      console.log(res, "getComments");
+      console.log(res, "handleReplies | getComments");
 
       setReplies(res?.comments);
     });
   }
-
-  console.log(post, "Post");
 
   return (
     <Collapsible.Root
@@ -129,12 +128,13 @@ function Post({ post, community, lemmyInstance, sort, commentDepth = 0 }) {
       </div>
       <Collapsible.Content>
         <>
-          {/* Comment Body */}
+          {/* Post Body */}
           {post?.post?.removed && <p className="post-body">🚮 Comment removed.</p>}
           {post?.post?.deleted && <p className="post-body">🗑️ Comment deleted.</p>}
           {!(post?.post?.removed || post?.post?.deleted) && (
             <ReactMarkdown className="post-body">{post?.post.body}</ReactMarkdown>
           )}
+
           {/* Replies */}
           <div
             className={`post-reply-container post-reply-depth-${(commentDepth % 7) + 1}`}

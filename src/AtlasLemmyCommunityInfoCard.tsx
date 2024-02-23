@@ -13,12 +13,11 @@ import { userPronouns } from "./hooks/useDataTransform";
 import LemmyUser from "./AtlasLemmyUser";
 import Post from "./AtlasLemmyPost";
 
-function AtlasLemmyCommunityInfoCard({ children, post, lemmyInstance, sort, community }) {
+function AtlasLemmyCommunityInfoCard({ children, lemmyInstance, sort, community }) {
   const [communityDetails, setCommunityDetails] = useState(null);
 
   const cakeDay = new Date(community?.published).toDateString();
   const updateDay = new Date(community?.updated).toDateString();
-  const pronounsArray = userPronouns(post?.creator?.display_name);
 
   function loadCommunityDetails() {
     let client: LemmyHttp = new LemmyHttp(lemmyInstance?.baseUrl);
@@ -28,8 +27,6 @@ function AtlasLemmyCommunityInfoCard({ children, post, lemmyInstance, sort, comm
     };
 
     client.getCommunity(form).then((res) => {
-      console.log(res, "loadCommunityDetails");
-
       setCommunityDetails(res);
     });
   }
@@ -69,7 +66,7 @@ function AtlasLemmyCommunityInfoCard({ children, post, lemmyInstance, sort, comm
                 <img
                   className="user-avatar-image"
                   src={community?.icon}
-                  alt={post?.creator?.display_name || post?.creator?.name}
+                  alt={"Community Icon"}
                 />
               </a>
             )}
@@ -90,8 +87,11 @@ function AtlasLemmyCommunityInfoCard({ children, post, lemmyInstance, sort, comm
                     <p className="post-alert">NSFW</p>
                   </small>
                 )}
-
-                <h5>{community?.name}</h5>
+                <h5 className="community-name">
+                  <a href={community?.actor_id} target="_blank" rel="noopener noreferrer">
+                    {community?.name}
+                  </a>
+                </h5>
 
                 <div className="community-stats">
                   <p>
@@ -132,14 +132,14 @@ function AtlasLemmyCommunityInfoCard({ children, post, lemmyInstance, sort, comm
                 </div>
 
                 <small>🎂 {cakeDay}</small>
-                {post?.creator?.updated && (
+                {community?.updated && (
                   <>
                     <br />
                     <small>🖊️ {updateDay}</small>
                   </>
                 )}
               </div>
-              {post?.creator?.bio && (
+              {community?.description && (
                 <div className="user-bio">
                   <ReactMarkdown>{community?.description}</ReactMarkdown>
                 </div>

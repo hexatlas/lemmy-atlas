@@ -162,7 +162,9 @@ code {
  */
 
 html {
-  height: -webkit-fill-available;
+  height: 100dvh;
+  /* height: -webkit-fill-available; */
+  /* height: 100%; */
   font-size: 95%;
   scroll-snap-type: y proximity;
 } /*16px*/
@@ -226,8 +228,8 @@ body {
   font-weight: 400;
   line-height: var(--atlas-line-height);
   color: hsl(var(--atlas-color-light) / var(--atlas-opacity-3));
-  min-height: 100vh;
-  min-height: 100dvh;
+  /* min-height: 100vh; */
+  /* min-height: 100dvh; */
 }
 
 section {

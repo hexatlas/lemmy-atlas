@@ -28,7 +28,6 @@ function AtlasLemmyUserInfoCard({ children, post, lemmyInstance, sort, community
     };
 
     client.getPersonDetails(form).then((res) => {
-      console.log(res, "res | User");
       setUser(res);
     });
   }
