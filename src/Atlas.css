@@ -209,12 +209,13 @@
 .country-administrative-region {
   color: hsl(var(--atlas-color-dark) / var(--atlas-opacity-3));
   padding: var(--atlas-size-10);
-  /* text-transform: uppercase; */
+  padding-left: var(--atlas-size-08);
   font-weight: 900;
   margin: 0;
   cursor: pointer;
   white-space: pre-line;
   word-wrap: break-word;
+
   /* word-break: break-all; */
   /* font-size: inherit; */
 }
@@ -1084,7 +1085,7 @@ a.post-creator {
 
 .icon-button {
   position: sticky;
-  top: var(--atlas-size-06);
+  top: var(--atlas-size-10);
   z-index: 9;
   float: right;
   width: var(--atlas-size-07);
@@ -1195,6 +1196,9 @@ a.post-creator {
 
 @media only screen and (max-width: 768px) {
   .tabs-root {
+    height: -webkit-fill-available;
+    min-height: 100vh;
+    min-height: 100dvh;
   }
 }
 
