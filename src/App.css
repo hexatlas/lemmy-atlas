@@ -162,7 +162,6 @@ code {
  */
 
 html {
-  /* height: 100dvh; */
   height: -webkit-fill-available;
   height: 100%;
   font-size: 95%;
@@ -229,8 +228,6 @@ body {
   line-height: var(--atlas-line-height);
   color: hsl(var(--atlas-color-light) / var(--atlas-opacity-3));
   height: 100%;
-  /* min-height: 100vh; */
-  /* min-height: 100dvh; */
 }
 
 section {

@@ -1180,8 +1180,8 @@ a.post-creator {
 .tabs-root {
   display: flex;
   flex-direction: column;
-  max-height: 100vh;
-  max-height: 100dvh;
+  height: 100vh;
+  height: 100dvh;
   position: relative;
   box-shadow: var(--atlas-shadow-1);
   z-index: 999;
@@ -1195,9 +1195,6 @@ a.post-creator {
 
 @media only screen and (max-width: 768px) {
   .tabs-root {
-    min-height: 100dvh;
-    /* overflow: unset; */
-    /* overflow-y: unset; */
   }
 }
 
