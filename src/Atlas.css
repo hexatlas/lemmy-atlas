@@ -1137,6 +1137,7 @@ a.post-creator {
   display: flex;
   flex-direction: column;
   max-height: 100vh;
+  max-height: 100dvh;
   position: relative;
   box-shadow: var(--atlas-shadow-1);
   z-index: 999;
@@ -1150,7 +1151,7 @@ a.post-creator {
 
 @media only screen and (max-width: 768px) {
   .tabs-root {
-    min-height: 100vh;
+    min-height: 100dvh;
     /* overflow: unset; */
     /* overflow-y: unset; */
   }
@@ -1242,7 +1243,7 @@ a.post-creator {
 
 .map-container {
   transition: all var(--atlas-transition-slow);
-  height: 100vh;
+  height: 100%;
   position: relative;
 }
 
