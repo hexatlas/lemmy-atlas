@@ -17,7 +17,6 @@ function AtlasLemmyCommunity({
 
       {showCommunityIcon && (
         <LemmyCommunityInfoCard
-          post={post}
           lemmyInstance={lemmyInstance}
           sort={sort}
           community={post?.community}

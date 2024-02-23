@@ -351,6 +351,7 @@
   background-color: hsl(var(--atlas-color-light) / var(--atlas-opacity-1));
   padding: var(--atlas-size-10);
   border-radius: var(--atlas-border-radius-1);
+  box-shadow: var(--atlas-shadow-inset);
 }
 
 .user-pronouns p,
@@ -1141,6 +1142,10 @@ a.post-creator {
   z-index: 999;
   overflow: hidden;
   overflow-y: scroll;
+
+  background-color: hsl(var(--atlas-color-dark) / var(--atlas-opacity-1));
+  backdrop-filter: blur(var(--atlas-size-09));
+  -webkit-backdrop-filter: blur(var(--atlas-size-09));
 }
 
 @media only screen and (max-width: 768px) {
@@ -1227,9 +1232,6 @@ a.post-creator {
   flex-grow: 1;
   padding: 0 var(--atlas-size-10);
   padding-bottom: var(--atlas-size-01);
-  background-color: hsl(var(--atlas-color-dark));
-  /* border-bottom-left-radius: 6px; */
-  /* border-bottom-right-radius: 6px; */
   outline: none;
 }
 .tabs-content:focus {
