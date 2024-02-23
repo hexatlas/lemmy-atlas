@@ -246,11 +246,11 @@
 .map-mobile-indicator {
   /* font-size: var(--atlas-size-0); */
   position: sticky;
-  bottom: var(--atlas-size-08);
+  bottom: var(--atlas-size-06);
   right: var(--atlas-size-10);
   display: flex;
   align-items: center;
-  gap: var(--atlas-size-12);
+  gap: var(--atlas-size-14);
 
   background-color: hsl(var(--atlas-color-tertiary) / var(--atlas-opacity-2));
   color: hsl(var(--atlas-color-dark) / var(--atlas-opacity-3));
@@ -273,6 +273,7 @@
   box-shadow: var(--atlas-shadow-1);
   min-width: var(--atlas-size-07);
   overflow: hidden;
+  margin-right: var(--atlas-size-10);
 }
 
 .map-button:hover {
@@ -1198,7 +1199,6 @@ a.post-creator {
   .tabs-root {
     height: -webkit-fill-available;
     min-height: 100vh;
-    min-height: 100dvh;
   }
 }
 
