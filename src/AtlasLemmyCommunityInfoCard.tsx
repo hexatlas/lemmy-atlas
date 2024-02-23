@@ -89,6 +89,7 @@ function AtlasLemmyCommunityInfoCard({ children, lemmyInstance, sort, community 
                 )}
                 <h5 className="community-name">
                   <a href={community?.actor_id} target="_blank" rel="noopener noreferrer">
+                    <span className="prefix">c/</span>
                     {community?.name}
                   </a>
                 </h5>

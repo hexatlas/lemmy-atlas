@@ -143,7 +143,7 @@ export default function AtlasLemmy({
         setHasMore(true);
       }
       setRegionSearchResult(res);
-      tabsContentRef.current.scrollTop = 500;
+      tabsContentRef.current.scrollTop = 0;
     });
   }
 

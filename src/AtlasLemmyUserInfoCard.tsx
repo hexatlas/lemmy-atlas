@@ -103,10 +103,14 @@ function AtlasLemmyUserInfoCard({ children, post, lemmyInstance, sort, community
                       textDecoration: "line-through",
                     }}
                   >
+                    <span className="prefix">u/</span>
                     {post?.creator?.name}
                   </h5>
                 ) : (
-                  <h5>{post?.creator?.name}</h5>
+                  <h5>
+                    <span className="prefix">u/</span>
+                    {post?.creator?.name}
+                  </h5>
                 )}
 
                 <div className="user-pronouns">

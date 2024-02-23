@@ -255,11 +255,7 @@ export default function Atlas() {
         gridTemplateColumns: `1.6180339887498948482fr ${nexusSize}px`,
       }}
     >
-      <div
-        className={`map-container ${
-          activeAdministrativeRegion.country !== "Country" && "map-container--active"
-        }`}
-      >
+      <div className={`map-container`}>
         {DisplayAtlasMap}
         <AtlasInterface {...interfaceProps} />
       </div>
@@ -283,6 +279,40 @@ export default function Atlas() {
         <Tabs.Content className="tabs-content" value="CommentsTab" ref={tabsContentRef}>
           <AtlasLemmy {...interfaceProps} />
         </Tabs.Content>
+        {isMobile && (
+          <div className="map-mobile-indicator">
+            <button
+              className="map-button"
+              onClick={() =>
+                window.scrollTo({
+                  top: 0,
+                  behavior: "smooth",
+                })
+              }
+            >
+              🗺️
+            </button>
+            {locationQuery && (
+              <small>
+                <i>{locationQuery}</i>
+                <span className="prefix"> in</span>
+              </small>
+            )}
+            <small>
+              {" "}
+              {activeRegionType === "Country"
+                ? activeAdministrativeRegion.country !== "Country" &&
+                  activeAdministrativeRegion.country
+                : activeAdministrativeRegion.name}
+            </small>
+            {activeCommunity && (
+              <h6>
+                <span className="prefix">c/</span>
+                {activeCommunity && activeCommunity?.community?.name}
+              </h6>
+            )}
+          </div>
+        )}
       </Tabs.Root>
     </div>
   );
