@@ -63,7 +63,7 @@ export default function Atlas() {
   const [activeLemmyInstance, setActiveLemmyInstance] = useState(
     lemmyInstances[0] // Default: hexbear.net
   );
-  const [activeCommunity, setActiveCommunity] = useState(
+  const [activeCommunity, setActiveCommunity] = useState<any>(
     activeLemmyInstance.community_id
   ); // c/News
   const [activeSearchType, setActiveSearchType] = useState(searchTypes[2]); // Default: Comments
