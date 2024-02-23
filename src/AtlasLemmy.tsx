@@ -17,6 +17,7 @@ export default function AtlasLemmy({
   // Util
   isMobile,
   resetAtlas,
+  tabsContentRef,
 
   nexusSize,
   setNexusSize,
@@ -142,6 +143,7 @@ export default function AtlasLemmy({
         setHasMore(true);
       }
       setRegionSearchResult(res);
+      tabsContentRef.current.scrollTop = 500;
     });
   }
 

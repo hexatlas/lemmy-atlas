@@ -112,7 +112,6 @@ function Post({ post, community, lemmyInstance, sort, commentDepth = 0 }) {
                   lemmyInstance={lemmyInstance}
                 />
               )}
-
             {/* Timestamp */}
             <small className="post-timestamp">
               <TimeAgo dateString={post?.post.published} />

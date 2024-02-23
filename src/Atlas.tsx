@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState, useRef } from "react";
 
 // https://www.radix-ui.com/primitives/docs/components/tabs
 import * as Tabs from "@radix-ui/react-tabs";
@@ -26,6 +26,7 @@ export default function Atlas() {
     name: string;
   }
 
+  const tabsContentRef = useRef();
   /*
     useStates
   */
@@ -190,6 +191,7 @@ export default function Atlas() {
     // Util
     isMobile,
     resetAtlas,
+    tabsContentRef,
 
     nexusSize,
     setNexusSize,
@@ -278,7 +280,7 @@ export default function Atlas() {
         <Tabs.Content className="tabs-content" value="InfoTab">
           <AtlasNexusCard interfaceProps={interfaceProps} />
         </Tabs.Content>
-        <Tabs.Content className="tabs-content" value="CommentsTab">
+        <Tabs.Content className="tabs-content" value="CommentsTab" ref={tabsContentRef}>
           <AtlasLemmy {...interfaceProps} />
         </Tabs.Content>
       </Tabs.Root>

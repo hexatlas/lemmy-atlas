@@ -342,6 +342,10 @@
   margin: var(--atlas-size-13) 0;
 }
 
+.comment-body {
+  padding: var(--atlas-size-14);
+}
+
 .post-info-container button {
   padding: 0;
   /* height: var(--atlas-size-07); */
@@ -405,7 +409,7 @@ sup.post-vote {
   color: hsl(var(--atlas-color-secondary) / var(--atlas-opacity-3));
 }
 
-.post-highlight > div > .post-body {
+.post-highlight > div > .comment-body {
   background: hsl(var(--atlas-color-tertiary) / var(--atlas-opacity-3));
   border-radius: var(--atlas-border-radius-1);
   padding: var(--atlas-size-10);
@@ -413,11 +417,8 @@ sup.post-vote {
   position: relative;
 }
 
-.post-highlight > div > .post-body p {
-  color: hsl(var(--atlas-color-dark) / var(--atlas-opacity-3));
-}
-
-.post-highlight > div > .post-body a {
+.post-highlight > div > .comment-body p,
+.post-highlight > div > .comment-body a {
   color: hsl(var(--atlas-color-dark) / var(--atlas-opacity-3));
 }
 
@@ -426,10 +427,13 @@ sup.post-vote {
 }
 
 .post-timestamp,
-.comment-count,
-.post-to {
+.comment-count {
   opacity: var(--atlas-opacity-2);
   margin: 0 var(--atlas-size-12);
+}
+
+.post-to {
+  margin: 0;
 }
 
 .post-meta {
@@ -454,7 +458,8 @@ sup.post-vote {
   margin-bottom: var(--atlas-size-10);
 }
 
-.post-body img {
+.post-body img,
+.comment-body img {
   display: inline;
 }
 .reply-button {
@@ -604,6 +609,7 @@ sup.post-vote {
   display: flex;
   align-items: center;
   gap: 0 var(--atlas-size-12);
+  margin-right: var(--atlas-size-12);
 }
 
 /* User Info Card */
@@ -1243,14 +1249,15 @@ a.post-creator {
 
 .map-container {
   transition: all var(--atlas-transition-slow);
-  height: 100%;
+  height: 100vh;
+  height: 100dvh;
   position: relative;
 }
 
 @media only screen and (max-width: 768px) {
-  /* .map-container--active {
-    height: 61.81vh;
-  } */
+  .map-container {
+    max-height: -webkit-fill-available;
+  }
 }
 
 .leaflet-container {
