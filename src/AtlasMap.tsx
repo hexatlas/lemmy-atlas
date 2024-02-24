@@ -66,8 +66,9 @@ export default function AtlasMap({
   administrativeRegionStyle,
   administrativeRegionStyleHovered,
 }) {
-  const onClickAdministrativeRegion = (e) => {
+  const onClickAdministrativeRegion = (e, isDoubleCLick = false) => {
     const clickedAdministrativeRegion = e.target.feature.properties;
+    if (isDoubleCLick) setActiveRegionType("AdministrativeRegion");
     setActiveAdministrativeRegion(clickedAdministrativeRegion);
   };
 
@@ -94,9 +95,15 @@ export default function AtlasMap({
       }) => {
         onClickAdministrativeRegion(e);
       },
-      // dblclick: (e) => {
-      //   console.log(e)
-      // },
+      dblclick: (e: {
+        target: {
+          options: any;
+          feature: { properties: { [x: string]: any } };
+          getCenter: () => LatLngExpression;
+        };
+      }) => {
+        onClickAdministrativeRegion(e, true);
+      },
     });
   };
 
