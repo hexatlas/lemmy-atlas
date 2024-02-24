@@ -665,12 +665,17 @@ sup.post-vote {
   border-radius: var(--atlas-border-radius-1);
 
   cursor: pointer;
-  background-color: hsl(var(--atlas-color-light) / var(--atlas-opacity-1)) !important;
+  background-color: hsl(var(--atlas-color-light) / var(--atlas-opacity-1));
   color: hsl(var(--atlas-color-light) / var(--atlas-opacity-2));
   text-shadow: var(--atlas-shadow-text);
   text-align: center;
   font-weight: 900;
   box-shadow: var(--atlas-shadow-inset);
+}
+
+.post-thumbnail-container {
+  background-color: hsl(var(--atlas-color-light) / var(--atlas-opacity-1)) !important;
+  color: hsl(var(--atlas-color-light) / var(--atlas-opacity-3));
 }
 
 .post-thumbnail-container img {

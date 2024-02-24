@@ -15,6 +15,8 @@ import LemmyUser from "./AtlasLemmyUser";
 import LemmyCommunity from "./AtlasLemmyCommunity";
 
 function Post({ post, community, lemmyInstance, sort, commentDepth = 0 }) {
+  console.log(post);
+
   const [openPost, setOpenPost] = useState(false);
   const [replies, setReplies] = useState(null);
 
@@ -70,13 +72,17 @@ function Post({ post, community, lemmyInstance, sort, commentDepth = 0 }) {
           </Collapsible.Trigger>
         </div>
         {/* Post Thumbnail */}
-        <div className="post-thumbnail-container" tabIndex={0}>
+        <button
+          className="post-thumbnail-container"
+          tabIndex={0}
+          onClick={() => setOpenPost(!openPost)}
+        >
           <img
             className="post-thumbnail-image"
             src={post?.post.thumbnail_url}
             alt={`🧵`}
           />
-        </div>
+        </button>
         <div className="post-meta">
           {/* OP Post */}
           {commentDepth < 1 && (
@@ -126,6 +132,20 @@ function Post({ post, community, lemmyInstance, sort, commentDepth = 0 }) {
 
       <Collapsible.Content>
         <>
+          {post?.post.url && (
+            <a href={post?.post.url} target="_blank" rel="noopener noreferrer">
+              {post?.post.url}
+            </a>
+          )}
+
+          {post?.post.thumbnail_url && (
+            <img
+              className="post-thumbnail-image"
+              src={post?.post.thumbnail_url}
+              alt={`🧵`}
+            />
+          )}
+
           {/* Post Body */}
           {post?.post?.removed && <p className="post-body">🚮 Comment removed.</p>}
           {post?.post?.deleted && <p className="post-body">🗑️ Comment deleted.</p>}
