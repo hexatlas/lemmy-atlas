@@ -246,7 +246,7 @@
 .map-mobile-indicator {
   /* font-size: var(--atlas-size-0); */
   position: sticky;
-  bottom: var(--atlas-size-06);
+  bottom: var(--atlas-size-08);
   right: var(--atlas-size-10);
   display: flex;
   align-items: center;
