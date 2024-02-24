@@ -74,7 +74,7 @@ function Post({ post, community, lemmyInstance, sort, commentDepth = 0 }) {
           <img
             className="post-thumbnail-image"
             src={post?.post.thumbnail_url}
-            alt={`💬`}
+            alt={`🧵`}
           />
         </div>
         <div className="post-meta">
@@ -119,7 +119,7 @@ function Post({ post, community, lemmyInstance, sort, commentDepth = 0 }) {
           </div>
           {/* Reply Count */}
           {post?.counts.comments > 0 && (
-            <p className="comment-count">{`🧵 ${post?.counts.comments} `}</p>
+            <p className="comment-count">{`💬 ${post?.counts.comments}`}</p>
           )}
         </div>
       </div>
@@ -151,7 +151,7 @@ function Post({ post, community, lemmyInstance, sort, commentDepth = 0 }) {
                   }
                 }}
               >
-                <span className="post-replycount-icon">↪</span>
+                <span className="post-replycount-icon">💬</span>
                 {`${post?.counts.comments} comment${
                   post?.counts.comments > 1 ? "s" : ""
                 }`}

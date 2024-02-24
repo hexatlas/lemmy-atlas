@@ -138,7 +138,7 @@ function Comment({
                   }
                 }}
               >
-                <span className="post-replycount-icon">↪</span>
+                <span className="post-replycount-icon">💬</span>
                 {`${post?.counts.child_count} repl${
                   post?.counts.child_count > 1 ? "ies" : "y"
                 }`}
