@@ -388,7 +388,6 @@
 
 .post-info-container button {
   padding: 0;
-  /* height: var(--atlas-size-07); */
 }
 
 .community-post .post-body {
@@ -431,10 +430,15 @@
 .post-mod {
   color: hsl(var(--atlas-color-light) / var(--atlas-opacity-3));
 }
-
+p.post-vote,
 sub.post-vote,
 sup.post-vote {
   color: hsl(var(--atlas-color-light) / var(--atlas-opacity-2));
+}
+
+p.post-vote {
+  text-align: center;
+  font-size: var(--atlas-size-09);
 }
 
 .commment-vote-score {

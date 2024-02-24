@@ -45,14 +45,14 @@ function Post({ post, community, lemmyInstance, sort, commentDepth = 0 }) {
       onOpenChange={setOpenPost}
     >
       <div className="post-info-container">
-        <div>
+        <div className="post-info-expand">
           {(post?.post.featured_community || post?.post.featured_local) && (
             <small className="post-pinned">📌</small>
           )}
           {/* Score Count / Upvotes / Downvotes */}
           <p className="post-vote-container">
             {Number(post?.counts.downvotes) === 0 || (
-              <sup className={`post-vote post-vote-upvotes`}>{post?.counts.upvotes}</sup>
+              <p className={`post-vote post-vote-upvotes`}>{post?.counts.upvotes}</p>
             )}
             <span
               className={`post-vote commment-vote-score post-score-${
@@ -62,17 +62,15 @@ function Post({ post, community, lemmyInstance, sort, commentDepth = 0 }) {
               {post?.counts.score}
             </span>
             {Number(post?.counts.downvotes) === 0 || (
-              <sub className={`post-vote post-vote-downvotes`}>
-                {post?.counts.downvotes}
-              </sub>
+              <p className={`post-vote post-vote-downvotes`}>{post?.counts.downvotes}</p>
             )}
           </p>
-          <Collapsible.Trigger>
+          {/* <Collapsible.Trigger>
             <div className="post-collapse-trigger">{openPost ? "⊟" : "⊞"}</div>
-          </Collapsible.Trigger>
+          </Collapsible.Trigger> */}
         </div>
         {/* Post Thumbnail */}
-        <button
+        <Collapsible.Trigger
           className="post-thumbnail-container"
           tabIndex={0}
           onClick={() => setOpenPost(!openPost)}
@@ -82,7 +80,7 @@ function Post({ post, community, lemmyInstance, sort, commentDepth = 0 }) {
             src={post?.post.thumbnail_url}
             alt={`🧵`}
           />
-        </button>
+        </Collapsible.Trigger>
         <div className="post-meta">
           {/* OP Post */}
           {commentDepth < 1 && (
@@ -133,7 +131,12 @@ function Post({ post, community, lemmyInstance, sort, commentDepth = 0 }) {
       <Collapsible.Content>
         <>
           {post?.post.url && (
-            <a href={post?.post.url} target="_blank" rel="noopener noreferrer">
+            <a
+              href={post?.post.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="post-url"
+            >
               {post?.post.url}
             </a>
           )}
