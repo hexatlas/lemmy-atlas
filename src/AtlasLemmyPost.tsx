@@ -45,7 +45,7 @@ function Post({ post, community, lemmyInstance, sort, commentDepth = 0 }) {
       onOpenChange={setOpenPost}
     >
       <div className="post-info-container">
-        <div className="post-info-expand">
+        <div>
           {(post?.post.featured_community || post?.post.featured_local) && (
             <small className="post-pinned">📌</small>
           )}
