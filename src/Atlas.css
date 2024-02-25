@@ -1136,6 +1136,7 @@ a.post-creator {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  margin-top: var(--atlas-size-10);
   margin-left: var(--atlas-size-09);
 
   color: hsl(var(--atlas-color-light) / var(--atlas-opacity-3));
