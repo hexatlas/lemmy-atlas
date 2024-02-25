@@ -13,21 +13,21 @@ interface lemmyInstance {
 export const lemmyInstances: Array<lemmyInstance> = [
   {
     id: 0,
-    label: <i>lib</i>,
+    label: "hexbear.net",
     baseUrl: "https://hexbear.net/",
     community_id: 6, // !news@hexbear.net
     default: true,
   },
   {
     id: 1,
-    label: "radlib",
+    label: "lemmy.ml",
     baseUrl: "https://lemmy.ml/",
     community_id: 14788, // !worldnews@lemmy.ml
     default: false,
   },
   {
     id: 2,
-    label: "tankie",
+    label: "lemmygrad.ml",
     baseUrl: "https://lemmygrad.ml/",
     community_id: 109, // !worldnews@lemmygrad.ml
     default: false,
@@ -35,7 +35,7 @@ export const lemmyInstances: Array<lemmyInstance> = [
 ];
 
 export const searchTypes: Array<string> = [
-  "All",
+  // "All",
   "Comments",
   "Posts",
   // "Communities",
