@@ -315,7 +315,7 @@ export default function AtlasLemmy({
             </DropdownMenu.Sub>
             <DropdownMenu.Separator className="dropdown-menu-separator" />
             <DropdownMenu.Label className="dropdown-menu-label">
-              {activeSearchType}
+              {activeSearchType} by {activeSortType}
             </DropdownMenu.Label>
             <DropdownMenu.Sub>
               <DropdownMenu.SubTrigger className="dropdown-menu-subtrigger">
@@ -367,9 +367,7 @@ export default function AtlasLemmy({
               ))}
             </DropdownMenu.RadioGroup>
             <DropdownMenu.Separator className="dropdown-menu-separator" />
-            <DropdownMenu.Label className="dropdown-menu-label">
-              Search
-            </DropdownMenu.Label>
+            <DropdownMenu.Label className="dropdown-menu-label">Type</DropdownMenu.Label>
             <DropdownMenu.RadioGroup
               value={activeSearchType}
               onValueChange={setActiveSearchType}
