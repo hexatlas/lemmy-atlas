@@ -360,7 +360,9 @@ export default function AtlasLemmy({
                   <DropdownMenu.ItemIndicator className="dropdown-menu-itemIndicator">
                     ✔
                   </DropdownMenu.ItemIndicator>
-                  {type}
+                  {type === "AdministrativeRegion" && activeAdministrativeRegion.name}
+                  {type === "Country" && activeAdministrativeRegion.country}
+                  {type === "Combined" && "Combined Search"}
                 </DropdownMenu.RadioItem>
               ))}
             </DropdownMenu.RadioGroup>
@@ -388,7 +390,7 @@ export default function AtlasLemmy({
             </DropdownMenu.RadioGroup>
             <DropdownMenu.Separator className="dropdown-menu-separator" />
             <DropdownMenu.Label className="dropdown-menu-label">
-              Listing
+              {activeLemmyInstance.label}
             </DropdownMenu.Label>
             <DropdownMenu.RadioGroup
               value={activeListingType}
