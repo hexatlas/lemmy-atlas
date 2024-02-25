@@ -510,7 +510,7 @@ p.post-vote {
 
 .post-body {
   opacity: var(--atlas-opacity-3);
-  margin-top: var(--atlas-size-09);
+  margin-top: var(--atlas-size-12);
   margin-bottom: var(--atlas-size-10);
   word-wrap: break-word;
 }
