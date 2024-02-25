@@ -280,7 +280,14 @@ export default function Atlas() {
           <AtlasLemmy {...interfaceProps} />
         </Tabs.Content>
         {isMobile && (
-          <div className="map-mobile-indicator">
+          <div
+            className={`map-mobile-indicator ${
+              (locationQuery ||
+                activeAdministrativeRegion.country !== "Country" ||
+                activeCommunity) &&
+              "map-mobile-indicator-active"
+            }`}
+          >
             <button
               className="map-button"
               onClick={() =>

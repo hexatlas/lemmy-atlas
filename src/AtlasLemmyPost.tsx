@@ -74,6 +74,7 @@ function Post({ post, community, lemmyInstance, sort, commentDepth = 0 }) {
           className="post-thumbnail-container"
           tabIndex={0}
           onClick={() => setOpenPost(!openPost)}
+          aria-label="Expand Post"
         >
           <img
             className="post-thumbnail-image"
@@ -137,16 +138,23 @@ function Post({ post, community, lemmyInstance, sort, commentDepth = 0 }) {
               rel="noopener noreferrer"
               className="post-url"
             >
-              {post?.post.url}
+              🔗 {post?.post.url}
             </a>
           )}
 
           {post?.post.thumbnail_url && (
-            <img
-              className="post-thumbnail-image"
-              src={post?.post.thumbnail_url}
-              alt={`🧵`}
-            />
+            <button
+              className=""
+              tabIndex={0}
+              onClick={() => setOpenPost(!openPost)}
+              aria-label="Expand Post"
+            >
+              <img
+                className="post-thumbnail-image"
+                src={post?.post.thumbnail_url}
+                alt={`🧵`}
+              />
+            </button>
           )}
 
           {/* Post Body */}
