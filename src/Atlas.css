@@ -963,6 +963,10 @@ a.post-creator {
   transform: scale(1.312);
 }
 
+.community-post[data-state="closed"] .post-thumbnail-container img {
+  transform: unset;
+}
+
 .community-post[data-state="closed"] .post-thumbnail-container img:hover {
   transform: scale(1.312);
 }
