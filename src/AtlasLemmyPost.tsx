@@ -65,9 +65,6 @@ function Post({ post, community, lemmyInstance, sort, commentDepth = 0 }) {
               <p className={`post-vote post-vote-downvotes`}>{post?.counts.downvotes}</p>
             )}
           </p>
-          {/* <Collapsible.Trigger>
-            <div className="post-collapse-trigger">{openPost ? "⊟" : "⊞"}</div>
-          </Collapsible.Trigger> */}
         </div>
         {/* Post Thumbnail */}
         <Collapsible.Trigger
@@ -79,7 +76,7 @@ function Post({ post, community, lemmyInstance, sort, commentDepth = 0 }) {
           <img
             className="post-thumbnail-image"
             src={post?.post.thumbnail_url}
-            alt={`🧵`}
+            alt={`🪧`}
           />
         </Collapsible.Trigger>
         <div className="post-meta">
@@ -144,16 +141,12 @@ function Post({ post, community, lemmyInstance, sort, commentDepth = 0 }) {
 
           {post?.post.thumbnail_url && (
             <button
-              className=""
+              className="post-image-container"
               tabIndex={0}
               onClick={() => setOpenPost(!openPost)}
               aria-label="Expand Post"
             >
-              <img
-                className="post-thumbnail-image"
-                src={post?.post.thumbnail_url}
-                alt={`🧵`}
-              />
+              <img className="post-image" src={post?.post.thumbnail_url} alt={`🧵`} />
             </button>
           )}
 

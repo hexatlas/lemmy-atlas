@@ -391,6 +391,14 @@
   margin: var(--atlas-size-13) 0;
 }
 
+.post-image-container {
+  padding: 0;
+  margin-top: var(--atlas-size-10);
+  overflow: hidden;
+  height: unset;
+  border-radius: var(--atlas-border-radius-1);
+}
+
 .comment-body {
   padding: var(--atlas-size-14);
 }
