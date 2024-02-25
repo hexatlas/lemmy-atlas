@@ -54,16 +54,6 @@ function AtlasLemmyUser({
         {pronounsArray &&
           pronounsArray.map((pronoun, index) => <p key={index}>{pronoun}</p>)}
       </div>
-      {banned && (
-        <a
-          href={`${lemmyInstance.baseUrl}modlog?page=1&userId=${id}`}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="comment-nsfw"
-        >
-          Banned
-        </a>
-      )}
     </div>
   );
 }
