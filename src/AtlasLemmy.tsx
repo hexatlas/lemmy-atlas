@@ -71,8 +71,8 @@ export default function AtlasLemmy({
   const [hasMoreCommunities, setHasMoreCommunities] = useState<boolean>(true);
 
   const [regionSearchResult, setRegionSearchResult] = useState(null);
-  const [comments, setComments] = useState([]);
-  const [posts, setPosts] = useState([]);
+  const [comments, setComments] = useState(null);
+  const [posts, setPosts] = useState(null);
   const [loading, setLoading] = useState<boolean>(false);
   const [currentSearchResultPage, setCurrentSearchResultPage] = useState<number>(1);
   const [hasMore, setHasMore] = useState<boolean>(true);
@@ -149,7 +149,7 @@ export default function AtlasLemmy({
       ) {
         setHasMore(false);
       }
-      console.log(comments, "commen");
+      console.log(posts, "posts");
 
       if (res?.comments) setComments([...res?.comments]);
 
@@ -367,7 +367,11 @@ export default function AtlasLemmy({
               ))}
             </DropdownMenu.RadioGroup>
             <DropdownMenu.Separator className="dropdown-menu-separator" />
-            <DropdownMenu.Label className="dropdown-menu-label">Type</DropdownMenu.Label>
+            <DropdownMenu.Label className="dropdown-menu-label">
+              {activeCommunity?.community?.name
+                ? "c/" + activeCommunity?.community.name
+                : "Type"}
+            </DropdownMenu.Label>
             <DropdownMenu.RadioGroup
               value={activeSearchType}
               onValueChange={setActiveSearchType}
@@ -518,6 +522,15 @@ export default function AtlasLemmy({
               />
             ))}
         </div>
+      )}
+
+      {true && (
+        <button
+          className="view-more"
+          onClick={() => setCurrentSearchResultPage(currentSearchResultPage + 1)}
+        >
+          View More
+        </button>
       )}
 
       {/* {activeSearchType === "Posts" && regionSearchResult && (
