@@ -320,6 +320,8 @@ picture {
   display: block;
   filter: blur(var(--atlas-size-08));
   transition: var(--atlas-transition-slow);
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
 }
 
 img:hover,
