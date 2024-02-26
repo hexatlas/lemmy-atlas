@@ -518,6 +518,7 @@ export default function AtlasLemmy({
                 post={post}
                 community={activeCommunity}
                 lemmyInstance={activeLemmyInstance}
+                activeListingType={activeListingType}
                 sort={activeSortType}
               />
             ))}

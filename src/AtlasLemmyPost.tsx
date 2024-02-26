@@ -14,7 +14,14 @@ import Comment from "./AtlasLemmyComment";
 import LemmyUser from "./AtlasLemmyUser";
 import LemmyCommunity from "./AtlasLemmyCommunity";
 
-function Post({ post, community, lemmyInstance, sort, commentDepth = 0 }) {
+function Post({
+  post,
+  community,
+  lemmyInstance,
+  sort,
+  activeListingType,
+  commentDepth = 0,
+}) {
   console.log(post);
 
   const [openPost, setOpenPost] = useState(false);
@@ -28,7 +35,7 @@ function Post({ post, community, lemmyInstance, sort, commentDepth = 0 }) {
       post_id: post?.post.id,
       sort: sort,
       max_depth: 1,
-      type_: "All",
+      type_: activeListingType,
       limit: 0,
     };
     client.getComments(form).then((res) => {
