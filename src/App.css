@@ -318,6 +318,25 @@ img,
 picture {
   max-width: 100%;
   display: block;
+  filter: blur(var(--atlas-size-08));
+  transition: var(--atlas-transition-slow);
+}
+
+img:hover,
+picture:hover,
+img:focus,
+picture:focus,
+img[title],
+picture[title],
+img:active,
+picture:active,
+img:target,
+picture:target,
+.post-thumbnail-image,
+.user-avatar-image,
+.community-avatar-image,
+.banner-image {
+  filter: none;
 }
 
 input[type="text"],
