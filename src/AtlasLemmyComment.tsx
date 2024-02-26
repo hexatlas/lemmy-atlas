@@ -118,7 +118,14 @@ function Comment({
           )}
 
           {/* Comment Body */}
-          <ReactMarkdown className="comment-body">{post?.comment.content}</ReactMarkdown>
+          {post?.comment?.removed && <p className="comment-body">🚮 Comment removed.</p>}
+          {post?.comment?.deleted && <p className="comment-body">🗑️ Comment deleted.</p>}
+          {!(post?.comment?.removed || post?.comment?.deleted) &&
+            post?.comment.content && (
+              <ReactMarkdown className="comment-body">
+                {post?.comment.content}
+              </ReactMarkdown>
+            )}
 
           {/* Replies */}
           <div
