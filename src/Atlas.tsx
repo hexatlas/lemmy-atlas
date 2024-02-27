@@ -26,7 +26,7 @@ export default function Atlas() {
     name: string;
   }
 
-  const tabsContentRef = useRef();
+  const sideBarRef = useRef();
   /*
     useStates
   */
@@ -191,7 +191,7 @@ export default function Atlas() {
     // Util
     isMobile,
     resetAtlas,
-    tabsContentRef,
+    sideBarRef,
 
     nexusSize,
     setNexusSize,
@@ -264,6 +264,7 @@ export default function Atlas() {
         id="atlas-tabs"
         className="atlas-tabs tabs-root"
         defaultValue="CommentsTab"
+        ref={sideBarRef}
       >
         <Tabs.List className="tabs-list" aria-label="Manage your account">
           <Tabs.Trigger className="tabs-trigger" value="InfoTab">
@@ -276,7 +277,7 @@ export default function Atlas() {
         <Tabs.Content className="tabs-content" value="InfoTab">
           <AtlasNexusCard interfaceProps={interfaceProps} />
         </Tabs.Content>
-        <Tabs.Content className="tabs-content" value="CommentsTab" ref={tabsContentRef}>
+        <Tabs.Content className="tabs-content" value="CommentsTab">
           <AtlasLemmy {...interfaceProps} />
         </Tabs.Content>
         {isMobile && (

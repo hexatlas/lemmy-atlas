@@ -22,15 +22,12 @@ function Post({
   activeListingType,
   commentDepth = 0,
 }) {
-  console.log(post);
-
   const [openPost, setOpenPost] = useState(false);
   const [replies, setReplies] = useState(null);
 
   function handleReplies() {
     let client: LemmyHttp = new LemmyHttp(lemmyInstance?.baseUrl);
 
-    console.log(post, "post | handleReplies");
     let form: GetComments = {
       post_id: post?.post.id,
       sort: sort,

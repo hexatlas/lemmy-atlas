@@ -17,7 +17,7 @@ export default function AtlasLemmy({
   // Util
   isMobile,
   resetAtlas,
-  tabsContentRef,
+  sideBarRef,
 
   nexusSize,
   setNexusSize,
@@ -71,8 +71,8 @@ export default function AtlasLemmy({
   const [hasMoreCommunities, setHasMoreCommunities] = useState<boolean>(true);
 
   const [regionSearchResult, setRegionSearchResult] = useState(null);
-  const [comments, setComments] = useState(null);
-  const [posts, setPosts] = useState(null);
+  const [comments, setComments] = useState([]);
+  const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [currentSearchResultPage, setCurrentSearchResultPage] = useState<number>(1);
   const [hasMore, setHasMore] = useState<boolean>(true);
@@ -122,8 +122,16 @@ export default function AtlasLemmy({
   }
 
   let client: LemmyHttp = new LemmyHttp(activeLemmyInstance?.baseUrl);
+  let form: Search = {
+    community_id: activeCommunity?.counts?.community_id,
+    type_: activeSearchType,
+    listing_type: activeListingType,
+    sort: activeSortType,
+    q: handleSearchQuery(),
+    page: currentSearchResultPage,
+  };
 
-  function handleCommunityRefresh() {
+  function handleUpdate() {
     if (locationQuery) {
       setCurrentCommunityPage(1);
       handleSearchCommunities(locationQuery);
@@ -131,33 +139,50 @@ export default function AtlasLemmy({
       handleCommunityList();
     }
 
-    let form: Search = {
-      community_id: activeCommunity?.counts?.community_id,
-      type_: activeSearchType,
-      listing_type: activeListingType,
-      sort: activeSortType,
-      q: handleSearchQuery(),
-      page: currentSearchResultPage,
-    };
-
     client.search(form).then((res) => {
-      console.log(res);
+      setPosts([]);
+      setComments([]);
 
-      if (
-        (activeSearchType === "Comments" && res?.comments.length < 10) ||
-        (activeSearchType === "Posts" && res?.posts.length < 10)
-      ) {
-        setHasMore(false);
+      if (activeSearchType === "Comments") {
+        setPosts([]);
+        if (res?.comments.length < 10) {
+          setHasMore(false);
+        }
+        if (comments && res?.comments) setComments(res?.comments);
       }
-      console.log(posts, "posts");
 
-      if (res?.comments) setComments([...res?.comments]);
+      if (activeSearchType === "Posts") {
+        setComments([]);
+        if (res?.posts.length < 10) {
+          setHasMore(false);
+        }
+        if (posts && res?.posts) setPosts(res?.posts);
+      }
 
-      if (res?.posts) setPosts([...res?.posts]);
+      if (sideBarRef.current) sideBarRef.current.scrollTop = 0;
+    });
+  }
 
-      // setRegionSearchResult(res);
+  function handleShowMore() {
+    client.search(form).then((res) => {
+      setPosts([]);
+      setComments([]);
 
-      if (tabsContentRef.current) tabsContentRef.current.scrollTop = 0;
+      if (activeSearchType === "Comments") {
+        setPosts([]);
+        if (res?.comments.length < 10) {
+          setHasMore(false);
+        }
+        if (comments && res?.comments) setComments([...comments, ...res?.comments]);
+      }
+
+      if (activeSearchType === "Posts") {
+        setComments([]);
+        if (res?.posts.length < 10) {
+          setHasMore(false);
+        }
+        if (posts && res?.posts) setPosts([...posts, ...res?.posts]);
+      }
     });
   }
 
@@ -196,13 +221,12 @@ export default function AtlasLemmy({
 
   const handleScroll = () => {
     // Check if user has scrolled to the bottom
-    if (
-      window.innerHeight + document.documentElement.scrollTop ===
-      document.documentElement.offsetHeight
-    ) {
+    if (sideBarRef.current.scrollTop > sideBarRef.current.scrollTopMax - 69) {
       // Fetch more comments if there are more to fetch
       if (hasMore) {
-        // fetchComments();
+        console.log("SCROLL");
+
+        setCurrentSearchResultPage(currentSearchResultPage + 1);
       }
     }
   };
@@ -216,20 +240,28 @@ export default function AtlasLemmy({
     useEffects
   */
 
+  // useEffect(() => {
+  //   if (sideBarRef && sideBarRef.current)
+  //     sideBarRef.current.addEventListener("scroll", handleScroll, false);
+
+  //   return () => {
+  //     if (sideBarRef && sideBarRef.current)
+  //       sideBarRef.current.addEventListener("scroll", handleScroll, false);
+  //   };
+  // }, []);
+
   //  init
 
   // Reset Query when location or location query is changed
   useEffect(() => {
-    setComments(null);
-    setPosts(null);
+    setComments([]);
+    setPosts([]);
     setCurrentSearchResultPage(1);
     setHasMore(false);
   }, [activeAdministrativeRegion, activeRegionType, activeSearchType, locationQuery]);
 
   // Reset when Lemmy Instance is changed
   useEffect(() => {
-    setComments(null);
-    setPosts(null);
     setCommunityList(null);
     setActiveCommunity(null);
     setCurrentCommunityPage(1);
@@ -243,7 +275,7 @@ export default function AtlasLemmy({
 
   useEffect(() => {
     const debounce = setTimeout(() => {
-      handleCommunityRefresh();
+      handleUpdate();
     }, 1312);
     return () => clearTimeout(debounce);
   }, [
@@ -254,9 +286,42 @@ export default function AtlasLemmy({
     activeListingType,
     activeSortType,
     activeSearchType,
-    currentSearchResultPage,
     locationQuery,
   ]);
+
+  useEffect(() => {
+    const debounce = setTimeout(() => {
+      handleShowMore();
+    }, 1312);
+    return () => clearTimeout(debounce);
+  }, [currentSearchResultPage]);
+
+  const BasedClientDetector = () => {
+    const isFirefox = navigator.userAgent.toLowerCase().indexOf("firefox") > -1;
+    const isLinux = navigator.platform.toLowerCase().indexOf("linux") > -1;
+
+    // ToDo: Add Adblock detection
+
+    return (
+      <div className="based-client-detector">
+        {isFirefox && isLinux && <p>Based Check Passed 🫡</p>}
+        {!isFirefox && (
+          <p>
+            ⚠️ ⚠️ ⚠️ Switch to{" "}
+            <a
+              href="https://www.mozilla.org/en-US/firefox/browsers/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Firefox
+            </a>
+            .
+          </p>
+        )}
+        {!isLinux && !isMobile && <p>⚠️ ⚠️ ⚠️ Why are you not using linux 😡</p>}
+      </div>
+    );
+  };
 
   return (
     <>
@@ -415,7 +480,6 @@ export default function AtlasLemmy({
           </DropdownMenu.Content>
         </DropdownMenu.Portal>
       </DropdownMenu.Root>
-
       {activeCommunity && activeCommunity?.community?.banner && (
         <img
           className="banner-image"
@@ -423,7 +487,6 @@ export default function AtlasLemmy({
           alt={`${activeCommunity?.community?.name} Community Banner`}
         />
       )}
-
       {activeCommunity?.community && (
         <LemmyCommunityInfoCard
           lemmyInstance={activeLemmyInstance}
@@ -489,7 +552,7 @@ export default function AtlasLemmy({
           </h5>
         </div>
       )}
-      {comments && (
+      {comments && activeSearchType === "Comments" && (
         <div className="post-reply-container">
           {comments.length > 0 &&
             comments.map(
@@ -497,7 +560,7 @@ export default function AtlasLemmy({
                 comment?.comment?.removed ||
                 comment?.comment?.deleted || (
                   <Comment
-                    key={`${comment?.comment.id}${index}`}
+                    key={`${comment?.comment.id}${index * Math.random()}`}
                     post={comment}
                     community={activeCommunity}
                     lemmyInstance={activeLemmyInstance}
@@ -508,13 +571,12 @@ export default function AtlasLemmy({
             )}
         </div>
       )}
-
-      {posts && (
+      {posts && activeSearchType === "Posts" && (
         <div className="post-reply-container">
           {posts.length > 0 &&
             posts.map((post, index) => (
               <Post
-                key={`${post?.post.id}${index}`}
+                key={`${post?.post.id}${index * Math.random()}`}
                 post={post}
                 community={activeCommunity}
                 lemmyInstance={activeLemmyInstance}
@@ -524,7 +586,6 @@ export default function AtlasLemmy({
             ))}
         </div>
       )}
-
       {true && (
         <button
           className="view-more"
@@ -533,7 +594,6 @@ export default function AtlasLemmy({
           View More
         </button>
       )}
-
       {/* {activeSearchType === "Posts" && regionSearchResult && (
         <p>{regionSearchResult.posts === 0 && "No results."}</p>
       )} */}
@@ -549,7 +609,8 @@ export default function AtlasLemmy({
         rel="noopener noreferrer"
       >
         view in {activeLemmyInstance.baseUrl}
-      </a>
+      </a>{" "}
+      <BasedClientDetector />
     </>
   );
 }
