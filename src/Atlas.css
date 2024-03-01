@@ -100,7 +100,8 @@
 
 .reset-button,
 .reply-button,
-.windows-resize-button {
+.windows-resize-button,
+.random-button {
   background-color: transparent;
   height: unset;
   color: unset;
@@ -126,7 +127,14 @@
   font-size: var(--atlas-size-08);
 }
 
+.random-button {
+  position: absolute;
+  left: var(--atlas-size-09);
+  bottom: var(--atlas-size-12);
+}
+
 .windows-resize-button:hover,
+.random-button:hover,
 .active-country-container-collapse-trigger:hover {
   text-shadow: var(--atlas-shadow-text);
   color: hsl(var(--atlas-color-primary) / var(--atlas-opacity-3));

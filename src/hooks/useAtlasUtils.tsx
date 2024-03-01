@@ -1,6 +1,7 @@
 // import center from "@turf/center";
 import L from "leaflet";
 import { useState } from "react";
+import administrativeRegionsData from "../data/administrative_regions_optimized.json";
 
 // export function getColor(d) {
 //   return d > 25
@@ -19,6 +20,14 @@ import { useState } from "react";
 // export function getCenterOfGeoJson(geoJson) {
 //   return center(geoJson).geometry.coordinates.reverse();
 // }
+
+export function handleRandom(setActiveAdministrativeRegion) {
+  setActiveAdministrativeRegion(
+    administrativeRegionsData?.features[
+      Math.floor(administrativeRegionsData?.features.length * Math.random())
+    ].properties
+  );
+}
 
 export function layersUtils(geoJsonRef, mapRef) {
   function highlightOnClick(e) {
