@@ -8,8 +8,9 @@ import * as Collapsible from "@radix-ui/react-collapsible";
 // https://join-lemmy.org/api/classes/LemmyHttp.html
 import { GetComments, LemmyHttp } from "lemmy-js-client";
 
-import { TimeAgo, userPronouns } from "./hooks/useDataTransform";
-import AtlasCommunityUserInfoCard from "./AtlasCommunityUserInfoCard";
+import { TimeAgo } from "./hooks/useDataTransform";
+import LemmyUser from "./AtlasLemmyUser";
+import LemmyCommunity from "./AtlasLemmyCommunity";
 
 function Comment({
   post,
@@ -18,10 +19,10 @@ function Comment({
   sort,
   ratioDetector,
   commentDepth = 0,
+  showUserAvatar = true,
 }) {
   const [open, setOpen] = useState(true);
   const [replies, setReplies] = useState(null);
-  const pronounsArray = userPronouns(post?.creator?.display_name);
 
   function handleReplies() {
     let client: LemmyHttp = new LemmyHttp(lemmyInstance?.baseUrl);
@@ -43,87 +44,49 @@ function Comment({
 
   return (
     <Collapsible.Root
-      className={`community-post comment-collapse-root ${
-        post?.counts.score > ratioDetector && "comment-ratio-active"
+      className={`community-reply post-collapse-root ${
+        post?.counts.score > ratioDetector && "post-highlight"
       }`}
       open={open}
       onOpenChange={setOpen}
     >
       <div className="comment-info-container">
         <Collapsible.Trigger>
-          <div className="comment-collapse-trigger">{open ? "⊟" : "⊞"}</div>
+          <div className="post-collapse-trigger">{open ? "⊟" : "⊞"}</div>
         </Collapsible.Trigger>
-
         {/* AVATAR PROFILE PICTURE */}
-        <AtlasCommunityUserInfoCard
+
+        <LemmyUser
           post={post}
           lemmyInstance={lemmyInstance}
           community={community}
           sort={sort}
-        >
-          <div className="user-avatar-container" tabIndex={0}>
-            <img
-              className="user-avatar-image"
-              src={post?.creator?.avatar}
-              alt={
-                (post?.creator?.display_name && post?.creator?.display_name[0]) ||
-                post?.creator?.name[0]
-              }
-            />
-          </div>
-        </AtlasCommunityUserInfoCard>
+          showInfoCard={showUserAvatar}
+        />
 
-        {/* User / Poster */}
-        <a
-          className="comment-creator"
-          href={post?.creator?.actor_id}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          {post?.creator?.name}
-        </a>
-        <div className="user-pronouns">
-          {pronounsArray &&
-            pronounsArray.map((pronoun, index) => <p key={index}>{pronoun}</p>)}
-        </div>
-        {post?.creator?.banned && (
-          <a
-            href={`${lemmyInstance.baseUrl}modlog?page=1&userId=${post?.creator?.id}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="comment-nsfw"
-          >
-            Banned
-          </a>
-        )}
-
-        {/* {post?.comment.distinguished && (
-          <p className="comment-mod">Distinguished</p>
-        )} */}
+        {post?.comment.distinguished && <p className="post-alert">📌</p>}
 
         {/* Score Count / Upvotes / Downvotes */}
-        <p className="comment-vote-container">
+        <p className="post-vote-container">
           {Number(post?.counts.downvotes) === 0 || (
-            <sup className={`comment-vote comment-vote-upvotes`}>
-              {post?.counts.upvotes}
-            </sup>
+            <sup className={`post-vote post-vote-upvotes`}>{post?.counts.upvotes}</sup>
           )}
           <span
-            className={`comment-vote commment-vote-score comment-score-${
+            className={`post-vote commment-vote-score post-score-${
               post?.counts.score > 0 ? "positive" : "negative"
             }`}
           >
             {post?.counts.score}
           </span>
           {Number(post?.counts.downvotes) === 0 || (
-            <sub className={`comment-vote comment-vote-downvotes`}>
+            <sub className={`post-vote post-vote-downvotes`}>
               {post?.counts.downvotes}
             </sub>
           )}
         </p>
 
         {/* Timestamp */}
-        <small className="comment-timestamp">
+        <small className="post-timestamp">
           <TimeAgo dateString={post?.comment.published} />
         </small>
       </div>
@@ -132,7 +95,7 @@ function Comment({
           {/* OP Post */}
           {commentDepth < 1 && (
             <a
-              className="comment-post"
+              className="post-post"
               href={post?.comment.ap_id}
               target="_blank"
               rel="noopener noreferrer"
@@ -142,30 +105,31 @@ function Comment({
           )}
 
           {commentDepth < 1 && post?.community?.id != community?.counts?.community_id && (
-            <>
-              <small> in </small>
-              <a
-                href={post?.community?.actor_id}
-                // className="community-button"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <small>{post?.community?.name}</small>
-              </a>
-            </>
+            <LemmyCommunity
+              post={post}
+              sort={sort}
+              community={community}
+              lemmyInstance={lemmyInstance}
+              showCommunityIcon={false}
+            />
           )}
           {commentDepth < 1 && (post?.post?.nsfw || post?.community?.nsfw) && (
-            <p className="comment-nsfw">NSFW</p>
+            <p className="post-alert">NSFW</p>
           )}
 
           {/* Comment Body */}
-          <ReactMarkdown className="comment-body">{post?.comment.content}</ReactMarkdown>
+          {post?.comment?.removed && <p className="comment-body">🚮 Comment removed.</p>}
+          {post?.comment?.deleted && <p className="comment-body">🗑️ Comment deleted.</p>}
+          {!(post?.comment?.removed || post?.comment?.deleted) &&
+            post?.comment.content && (
+              <ReactMarkdown className="comment-body">
+                {post?.comment.content}
+              </ReactMarkdown>
+            )}
 
           {/* Replies */}
           <div
-            className={`comment-reply-container comment-reply-depth-${
-              (commentDepth % 7) + 1
-            }`}
+            className={`post-reply-container post-reply-depth-${(commentDepth % 7) + 1}`}
           >
             {/* Reply Count */}
             {post?.counts.child_count > 0 && !replies && (
@@ -181,7 +145,7 @@ function Comment({
                   }
                 }}
               >
-                <span className="comment-replycount-icon">↪</span>
+                <span className="post-replycount-icon">💬</span>
                 {`${post?.counts.child_count} repl${
                   post?.counts.child_count > 1 ? "ies" : "y"
                 }`}

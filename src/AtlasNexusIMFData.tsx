@@ -246,8 +246,6 @@ const AtlasNexusIMFData = ({
       }
 
       const result = await response.json();
-      console.log(result.values, "result.value");
-
       setData(result.values);
     } catch (error) {
       console.log(error);

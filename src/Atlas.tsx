@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState, useRef } from "react";
 
 // https://www.radix-ui.com/primitives/docs/components/tabs
 import * as Tabs from "@radix-ui/react-tabs";
@@ -6,7 +6,7 @@ import * as Tabs from "@radix-ui/react-tabs";
 // Import Components
 
 import AtlasMap from "./AtlasMap";
-import AtlasCommunity from "./AtlasCommunity";
+import AtlasLemmy from "./AtlasLemmy";
 import AtlasInterface from "./AtlasMapInterface";
 import AtlasNexusCard from "./AtlasNexus";
 
@@ -26,6 +26,7 @@ export default function Atlas() {
     name: string;
   }
 
+  const sideBarRef = useRef();
   /*
     useStates
   */
@@ -62,10 +63,10 @@ export default function Atlas() {
   const [activeLemmyInstance, setActiveLemmyInstance] = useState(
     lemmyInstances[0] // Default: hexbear.net
   );
-  const [activeCommunity, setActiveCommunity] = useState(
+  const [activeCommunity, setActiveCommunity] = useState<any>(
     activeLemmyInstance.community_id
   ); // c/News
-  const [activeSearchType, setActiveSearchType] = useState(searchTypes[1]); // Default: Comments
+  const [activeSearchType, setActiveSearchType] = useState(searchTypes[1]); // Default: Posts
   const [activeListingType, setActiveListingType] = useState(listingTypes[1]); // Default: Local
   const [activeSortType, setActiveSortType] = useState(sortTypes[1]); // Default: New Sort
 
@@ -190,6 +191,7 @@ export default function Atlas() {
     // Util
     isMobile,
     resetAtlas,
+    sideBarRef,
 
     nexusSize,
     setNexusSize,
@@ -253,11 +255,7 @@ export default function Atlas() {
         gridTemplateColumns: `1.6180339887498948482fr ${nexusSize}px`,
       }}
     >
-      <div
-        className={`map-container ${
-          activeAdministrativeRegion.country !== "Country" && "map-container--active"
-        }`}
-      >
+      <div className={`map-container`}>
         {DisplayAtlasMap}
         <AtlasInterface {...interfaceProps} />
       </div>
@@ -266,21 +264,63 @@ export default function Atlas() {
         id="atlas-tabs"
         className="atlas-tabs tabs-root"
         defaultValue="CommentsTab"
+        ref={sideBarRef}
       >
         <Tabs.List className="tabs-list" aria-label="Manage your account">
           <Tabs.Trigger className="tabs-trigger" value="InfoTab">
             Nexus
           </Tabs.Trigger>
           <Tabs.Trigger className="tabs-trigger" value="CommentsTab">
-            Community
+            Fediverse
           </Tabs.Trigger>
         </Tabs.List>
         <Tabs.Content className="tabs-content" value="InfoTab">
           <AtlasNexusCard interfaceProps={interfaceProps} />
         </Tabs.Content>
         <Tabs.Content className="tabs-content" value="CommentsTab">
-          <AtlasCommunity {...interfaceProps} />
+          <AtlasLemmy {...interfaceProps} />
         </Tabs.Content>
+        {isMobile && (
+          <div
+            className={`map-mobile-indicator ${
+              (locationQuery ||
+                activeAdministrativeRegion.country !== "Country" ||
+                activeCommunity) &&
+              "map-mobile-indicator-active"
+            }`}
+          >
+            <button
+              className="map-button"
+              onClick={() =>
+                window.scrollTo({
+                  top: 0,
+                  behavior: "smooth",
+                })
+              }
+            >
+              🗺️
+            </button>
+            {locationQuery && (
+              <small>
+                <i>{locationQuery}</i>
+                <span className="prefix"> in</span>
+              </small>
+            )}
+            <small>
+              {" "}
+              {activeRegionType === "Country"
+                ? activeAdministrativeRegion.country !== "Country" &&
+                  activeAdministrativeRegion.country
+                : activeAdministrativeRegion.name}
+            </small>
+            {activeCommunity && (
+              <h6>
+                <span className="prefix">c/</span>
+                {activeCommunity && activeCommunity?.community?.name}
+              </h6>
+            )}
+          </div>
+        )}
       </Tabs.Root>
     </div>
   );

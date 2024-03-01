@@ -13,21 +13,21 @@ interface lemmyInstance {
 export const lemmyInstances: Array<lemmyInstance> = [
   {
     id: 0,
-    label: <i>lib</i>,
+    label: "hexbear.net",
     baseUrl: "https://hexbear.net/",
     community_id: 6, // !news@hexbear.net
     default: true,
   },
   {
     id: 1,
-    label: "radlib",
+    label: "lemmy.ml",
     baseUrl: "https://lemmy.ml/",
     community_id: 14788, // !worldnews@lemmy.ml
     default: false,
   },
   {
     id: 2,
-    label: "tankie",
+    label: "lemmygrad.ml",
     baseUrl: "https://lemmygrad.ml/",
     community_id: 109, // !worldnews@lemmygrad.ml
     default: false,
@@ -35,19 +35,19 @@ export const lemmyInstances: Array<lemmyInstance> = [
 ];
 
 export const searchTypes: Array<string> = [
-  "All",
+  // "All",
   "Comments",
   "Posts",
-  "Communities",
-  "Users",
-  "Url",
+  // "Communities",
+  // "Users",
+  // "Url",
 ];
 
 export const listingTypes: Array<string> = [
   "All",
   "Local",
-  "Subscribed",
-  "ModeratorView",
+  // "Subscribed",
+  // "ModeratorView",
 ];
 
 export const regionTypes: Array<string> = ["Country", "AdministrativeRegion", "Combined"];
@@ -145,6 +145,7 @@ export const baseLayers: Array<mapLayer> = [
     name: "OpenTopoMap",
     url: "https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png",
     maxZoom: 20,
+    checked: true,
     attribution:
       'Map data: &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, <a href="http://viewfinderpanoramas.org">SRTM</a> | Map style: &copy; <a href="https://opentopomap.org">OpenTopoMap</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA</a>)',
   },
@@ -159,7 +160,6 @@ export const baseLayers: Array<mapLayer> = [
     name: "OpenStreetMap.Mapnik",
     url: "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
     maxZoom: 19,
-    checked: true,
     attribution:
       '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
   },

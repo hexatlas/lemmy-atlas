@@ -10,9 +10,10 @@ import { LemmyHttp, GetPersonDetails } from "lemmy-js-client";
 
 import { userPronouns } from "./hooks/useDataTransform";
 
-import Comment from "./AtlasCommunityComment";
+import Comment from "./AtlasLemmyComment";
+import LemmyCommunity from "./AtlasLemmyCommunity";
 
-function AtlasCommunityUserInfoCard({ children, post, lemmyInstance, sort, community }) {
+function AtlasLemmyUserInfoCard({ children, post, lemmyInstance, sort, community }) {
   const [user, setUser] = useState(null);
 
   const cakeDay = new Date(post.creator.published).toDateString();
@@ -27,7 +28,6 @@ function AtlasCommunityUserInfoCard({ children, post, lemmyInstance, sort, commu
     };
 
     client.getPersonDetails(form).then((res) => {
-      console.log(res, "res | User");
       setUser(res);
     });
   }
@@ -90,7 +90,7 @@ function AtlasCommunityUserInfoCard({ children, post, lemmyInstance, sort, commu
                       href={`${lemmyInstance.baseUrl}modlog?page=1&userId=${post?.creator?.id}`}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="comment-nsfw"
+                      className="post-alert"
                     >
                       Banned
                     </a>
@@ -103,15 +103,19 @@ function AtlasCommunityUserInfoCard({ children, post, lemmyInstance, sort, commu
                       textDecoration: "line-through",
                     }}
                   >
+                    <span className="prefix">u/</span>
                     {post?.creator?.name}
                   </h5>
                 ) : (
-                  <h5>{post?.creator?.name}</h5>
+                  <h5>
+                    <span className="prefix">u/</span>
+                    {post?.creator?.name}
+                  </h5>
                 )}
 
                 <div className="user-pronouns">
                   {pronounsArray &&
-                    pronounsArray.map((pronoun, index) => <h6 key={index}>{pronoun}</h6>)}
+                    pronounsArray.map((pronoun, index) => <p key={index}>{pronoun}</p>)}
                 </div>
                 <small>🎂 {cakeDay}</small>
                 {post?.creator?.updated && (
@@ -126,27 +130,53 @@ function AtlasCommunityUserInfoCard({ children, post, lemmyInstance, sort, commu
                   <ReactMarkdown>{post?.creator?.bio}</ReactMarkdown>
                 </div>
               )}
+              {user?.moderates.length > 0 && (
+                <div className="mod-wrapper">
+                  <small className="community-mod">Mods</small>
+                  <div className="mod-list">
+                    {user?.moderates.map((community, index) => {
+                      return (
+                        <div className="mod-user">
+                          <LemmyCommunity
+                            key={`${index}${community.id}`}
+                            post={community}
+                            lemmyInstance={lemmyInstance}
+                            sort={sort}
+                            community={community}
+                            icon={community?.icon}
+                            display_name={community?.display_name}
+                            name={community?.name}
+                            prefix={null}
+                          />
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+              )}
 
               <div style={{ display: "flex", gap: 15 }}>
                 <div style={{ display: "flex", gap: 5 }}>
-                  <div>{user?.person_view?.counts?.post_count}</div> <div>Posts</div>
+                  <div>{user?.person_view?.counts?.post_count.toLocaleString()}</div>{" "}
+                  <div>Posts</div>
                 </div>
                 <div style={{ display: "flex", gap: 5 }}>
-                  <div>{user?.person_view?.counts?.comment_count}</div>
+                  <div>{user?.person_view?.counts?.comment_count.toLocaleString()}</div>
                   <div>Comments</div>
                 </div>
               </div>
 
-              <div className="user-comments">
-                {user &&
+              <div className="user-posts">
+                {user?.comments.length > 0 &&
                   user?.comments.map((comment, index) => (
                     <Comment
-                      key={`${index}`}
+                      key={`${comment?.id}${index}`}
                       post={comment}
                       community={community}
                       lemmyInstance={lemmyInstance}
                       sort={sort}
                       ratioDetector={undefined}
+                      showUserAvatar={false}
                     ></Comment>
                   ))}
               </div>
@@ -160,4 +190,4 @@ function AtlasCommunityUserInfoCard({ children, post, lemmyInstance, sort, commu
   );
 }
 
-export default AtlasCommunityUserInfoCard;
+export default AtlasLemmyUserInfoCard;

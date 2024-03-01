@@ -3,6 +3,7 @@ import administrativeRegionsData from "./data/administrative_regions_optimized.j
 
 // https://www.radix-ui.com/primitives/docs/components/collapsible
 import * as Collapsible from "@radix-ui/react-collapsible";
+import { handleRandom } from "./hooks/useAtlasUtils";
 
 export default function AtlasInterface({
   // Util
@@ -165,7 +166,16 @@ export default function AtlasInterface({
           >
             ↔
           </button>
-        )}
+        )}{" "}
+        <button
+          role="button"
+          title="Select Random Administrative Region"
+          aria-label="Random Button - Select Random Administrative Region"
+          className="random-button"
+          onClick={() => handleRandom(setActiveAdministrativeRegion)}
+        >
+          🎲
+        </button>
         <button
           role="button"
           title="Reset Atlas to default settings"
@@ -245,11 +255,12 @@ export default function AtlasInterface({
         >
           {activeAdministrativeRegion.country}
         </h5>
+
         <div id="country-search">
           <LocationSearch
             data={administrativeRegionsData.features}
             setActiveAdministrativeRegion={setActiveAdministrativeRegion}
-          />
+          />{" "}
         </div>
         <div className="country-administrative-region-click-history">
           {administrativeRegionClickHistoryArray &&
