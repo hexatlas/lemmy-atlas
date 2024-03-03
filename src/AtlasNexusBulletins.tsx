@@ -50,28 +50,40 @@ export function AtlasNexusReadingList({
   administrativeRegionStyle,
   administrativeRegionStyleHovered,
 }) {
+  console.log(
+    encodeURI(activeAdministrativeRegion.country).toLowerCase().replace(/%20/g, "-")
+  );
+
   return (
     <div>
-      <h3>Reading List</h3>
-      <a
-        href={`https://bulletins.hexbear.net/tags/${encodeURI(
-          activeAdministrativeRegion.country
-        ).toLowerCase()}`}
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        72T's approved Reading List about {activeAdministrativeRegion.country}
-      </a>
-      <h3>News Bulletins</h3>
-      <a
-        href={`https://bulletins.hexbear.net/posts/readinglist/#${encodeURI(
-          activeAdministrativeRegion.country
-        ).toLowerCase()}`}
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        72T's Bulletins on {activeAdministrativeRegion.country}
-      </a>
+      {activeAdministrativeRegion.country != "Country" && (
+        <>
+          <h3>Reading List</h3>
+          <a
+            href={`https://bulletins.hexbear.net/posts/readinglist/#${encodeURI(
+              activeAdministrativeRegion.country
+            )
+              .toLowerCase()
+              .replace(/%20/g, "-")}`}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Hexbear reading list about {activeAdministrativeRegion.country}
+          </a>
+          <h3>News Bulletins</h3>
+          <a
+            href={`https://bulletins.hexbear.net/tags/${encodeURI(
+              activeAdministrativeRegion.country
+            )
+              .toLowerCase()
+              .replace(/%20/g, "-")}`}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            72T's Bulletins on {activeAdministrativeRegion.country}
+          </a>
+        </>
+      )}
     </div>
   );
 }
