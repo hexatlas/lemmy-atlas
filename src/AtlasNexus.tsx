@@ -3,15 +3,12 @@ import * as Tabs from "@radix-ui/react-tabs";
 
 import AtlasNexusClassStructure from "./AtlasNexusClassStructure";
 import AtlasNexusIMFData from "./AtlasNexusIMFData";
+import AtlasNexusBulletins from "./AtlasNexusBulletins";
 
 function AtlasNexusCard({ interfaceProps }) {
   return (
     <>
-      <Tabs.Root
-        id="atlas-tabs"
-        className="nexus-card"
-        defaultValue="ClassStructureTab"
-      >
+      <Tabs.Root id="atlas-tabs" className="nexus-card" defaultValue="ClassStructureTab">
         <Tabs.List className="tabs-list" aria-label="Manage your account">
           <Tabs.Trigger className="tabs-trigger" value="ClassStructureTab">
             Class Structure
@@ -19,12 +16,18 @@ function AtlasNexusCard({ interfaceProps }) {
           <Tabs.Trigger className="tabs-trigger" value="IMFDataTab">
             IMF Data
           </Tabs.Trigger>
+          <Tabs.Trigger className="tabs-trigger" value="ReadingList">
+            Bulletins
+          </Tabs.Trigger>
         </Tabs.List>
         <Tabs.Content className="tabs-content" value="ClassStructureTab">
           <AtlasNexusClassStructure />
         </Tabs.Content>
         <Tabs.Content className="tabs-content" value="IMFDataTab">
           <AtlasNexusIMFData {...interfaceProps} />
+        </Tabs.Content>
+        <Tabs.Content className="tabs-content" value="ReadingList">
+          <AtlasNexusBulletins {...interfaceProps} />
         </Tabs.Content>
       </Tabs.Root>
     </>
