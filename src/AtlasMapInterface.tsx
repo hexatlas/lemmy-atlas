@@ -223,38 +223,42 @@ export default function AtlasInterface({
         </>
       )}
       <Collapsible.Content>
-        <h1
-          className={`country-administrative-region ${
-            activeRegionType === "AdministrativeRegion" && "active-location-type"
-          }`}
-          role="button"
-          aria-label={`Select ${activeAdministrativeRegion.name}`}
-          tabIndex={0}
-          onClick={() => setActiveRegionType(regionTypes[1])}
-          onKeyDown={(e) => {
-            if (e.key === "Enter" || e.key === "Space") {
-              setActiveRegionType(regionTypes[1]);
-            }
-          }}
-        >
-          {activeAdministrativeRegion.name}
-        </h1>
-        <h5
-          className={`country-name ${
-            activeRegionType === "Country" && "active-location-type"
-          }`}
-          role="button"
-          aria-label={`Select ${activeAdministrativeRegion.country}`}
-          tabIndex={0}
-          onClick={() => setActiveRegionType(regionTypes[0])}
-          onKeyDown={(e) => {
-            if (e.key === "Enter" || e.key === "Space") {
-              setActiveRegionType(regionTypes[0]);
-            }
-          }}
-        >
-          {activeAdministrativeRegion.country}
-        </h5>
+        {activeAdministrativeRegion.country !== "Country" && (
+          <>
+            <h1
+              className={`country-administrative-region ${
+                activeRegionType === "AdministrativeRegion" && "active-location-type"
+              }`}
+              role="button"
+              aria-label={`Select ${activeAdministrativeRegion.name}`}
+              tabIndex={0}
+              onClick={() => setActiveRegionType(regionTypes[1])}
+              onKeyDown={(e) => {
+                if (e.key === "Enter" || e.key === "Space") {
+                  setActiveRegionType(regionTypes[1]);
+                }
+              }}
+            >
+              {activeAdministrativeRegion.name}
+            </h1>
+            <h5
+              className={`country-name ${
+                activeRegionType === "Country" && "active-location-type"
+              }`}
+              role="button"
+              aria-label={`Select ${activeAdministrativeRegion.country}`}
+              tabIndex={0}
+              onClick={() => setActiveRegionType(regionTypes[0])}
+              onKeyDown={(e) => {
+                if (e.key === "Enter" || e.key === "Space") {
+                  setActiveRegionType(regionTypes[0]);
+                }
+              }}
+            >
+              {activeAdministrativeRegion.country}
+            </h5>
+          </>
+        )}
 
         <div id="country-search">
           <LocationSearch
