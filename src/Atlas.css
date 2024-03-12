@@ -489,8 +489,9 @@ p.post-vote {
   box-shadow: var(--atlas-shadow-inset);
   position: relative;
 }
-
+.post-highlight > div > .comment-body,
 .post-highlight > div > .comment-body p,
+.post-highlight > div > .comment-body li,
 .post-highlight > div > .comment-body a {
   color: hsl(var(--atlas-color-dark) / var(--atlas-opacity-3));
 }
