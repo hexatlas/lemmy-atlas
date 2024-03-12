@@ -2,9 +2,11 @@ const fetch = require("node-fetch");
 
 exports.handler = async function (event, context) {
   try {
-    const { country } = event.queryStringParameters || {};
+    const { country, index } = event.queryStringParameters || {};
 
     let apiUrl = `https://bulletins.hexbear.net/tags/${country}/index.xml`;
+
+    if (index) apiUrl = "https://bulletins.hexbear.net/index.xml";
 
     const response = await fetch(apiUrl);
     const xmlData = await response.text();

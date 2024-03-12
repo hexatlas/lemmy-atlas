@@ -184,27 +184,29 @@ export function AtlasNexusReadingList({
         .toLowerCase()
         .replace(/%20/g, "-")}`;
       fetchBulletinsRSS(apiUrl);
+    } else {
+      const apiUrl = `/.netlify/functions/72T_bulletins/?index=true`;
+      fetchBulletinsRSS(apiUrl);
     }
   }, [activeAdministrativeRegion]);
 
   return (
     <div>
-      {activeAdministrativeRegion.country != "Country" && (
-        <>
-          <h3>Reading List</h3>
-          <a
-            href={`https://bulletins.hexbear.net/posts/readinglist/#${encodeURI(
-              activeAdministrativeRegion.country
-            )
-              .toLowerCase()
-              .replace(/%20/g, "-")}`}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            🔗 Hexbear Reading List: {activeAdministrativeRegion.country}
-          </a>
-        </>
-      )}
+      <h3>Reading List</h3>
+      <a
+        href={`https://bulletins.hexbear.net/posts/readinglist/#${encodeURI(
+          activeAdministrativeRegion.country
+        )
+          .toLowerCase()
+          .replace(/%20/g, "-")}`}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        📚📕 Hexbear Reading List:
+        {activeAdministrativeRegion.country != "Country" &&
+          activeAdministrativeRegion.country}
+      </a>
+
       {bulletinsData && (
         <>
           <h3>{bulletinsData.title}</h3>
