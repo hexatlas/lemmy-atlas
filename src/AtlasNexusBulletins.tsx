@@ -222,7 +222,12 @@ export function AtlasNexusReadingList({
                     <p className="bulletin-publish-date highlight">
                       🗓️ {new Date(bulletin.pubDate).toDateString()}
                     </p>
-                    <a href={bulletin.link} target="_blank" rel="noopener noreferrer">
+                    <a
+                      className="bulletin-link"
+                      href={bulletin.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
                       🔗 {bulletin.title}
                     </a>
                     <ReactMarkdown>{`📰 ${bulletin.description}`}</ReactMarkdown>

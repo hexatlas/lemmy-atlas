@@ -486,6 +486,7 @@ p.post-vote {
   border-radius: var(--atlas-border-radius-1);
   padding: var(--atlas-size-10);
   margin: var(--atlas-size-10);
+  box-shadow: var(--atlas-shadow-inset);
   position: relative;
 }
 
