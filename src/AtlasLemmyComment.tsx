@@ -20,8 +20,9 @@ function Comment({
   ratioDetector,
   commentDepth = 0,
   showUserAvatar = true,
+  isOpen = true,
 }) {
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(isOpen);
   const [replies, setReplies] = useState(null);
 
   function handleReplies() {

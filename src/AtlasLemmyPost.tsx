@@ -21,8 +21,9 @@ function Post({
   sort,
   activeListingType,
   commentDepth = 0,
+  isOpen = false,
 }) {
-  const [openPost, setOpenPost] = useState(false);
+  const [openPost, setOpenPost] = useState(isOpen);
   const [replies, setReplies] = useState(null);
 
   function handleReplies() {

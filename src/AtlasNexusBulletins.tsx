@@ -3,7 +3,10 @@ import ReactMarkdown from "react-markdown";
 
 // https://github.com/LemmyNet/lemmy-js-client
 // https://join-lemmy.org/api/classes/LemmyHttp.html
-import { GetComments, LemmyHttp } from "lemmy-js-client";
+import { Search, LemmyHttp } from "lemmy-js-client";
+
+import Comment from "./AtlasLemmyComment";
+import Post from "./AtlasLemmyPost";
 
 export function AtlasNexusReadingList({
   // Util
@@ -89,14 +92,89 @@ export function AtlasNexusReadingList({
         items: items,
       };
 
-      console.log(parsedData, "resp");
-
       setBulletinsData(parsedData);
     } catch (error) {
       console.log(error);
       setBulletinsData({ error: error.message });
     }
   };
+
+  function HexBearNews({ bulletin }) {
+    const [comments, setComments] = useState([]);
+    const [posts, setPosts] = useState([]);
+    const [isLoaded, setIsLoaded] = useState(false);
+
+    function getHexbear(bulletinURL) {
+      let client: LemmyHttp = new LemmyHttp(activeLemmyInstance?.baseUrl);
+      let form: Search = {
+        community_id: activeCommunity?.counts?.community_id,
+        type_: "All",
+        listing_type: "All",
+        sort: activeSortType,
+        q: bulletinURL,
+        creator_id: 19956, // https://hexbear.net/u/SeventyTwoTrillion
+      };
+
+      client.search(form).then((res) => {
+        setComments([]);
+        setPosts([]);
+
+        if (comments && res?.comments) setComments(res?.comments);
+        if (posts && res?.posts) setPosts(res?.posts);
+        setIsLoaded(true);
+      });
+    }
+
+    return (
+      <div className="bulletin-community">
+        {!isLoaded && (
+          <p
+            className="reply-button"
+            role="button"
+            tabIndex={0}
+            aria-label="Show Replies"
+            onClick={() => getHexbear(bulletin.link)}
+            onKeyDown={(e) => {
+              if (e.key === "Enter" || e.key === "Space") {
+                () => getHexbear(bulletin.link);
+              }
+            }}
+          >
+            <span className="post-replycount-icon">💬</span> /c/news
+          </p>
+        )}
+        {posts && (
+          <div className="post-reply-container">
+            {posts.length > 0 &&
+              posts.map((post, index) => (
+                <Post
+                  key={index}
+                  post={post}
+                  community={{ id: 6 }}
+                  lemmyInstance={activeLemmyInstance}
+                  activeListingType={activeListingType}
+                  sort={activeSortType}
+                />
+              ))}
+          </div>
+        )}
+        {comments &&
+          comments.map((comment, index) => {
+            return (
+              <Comment
+                key={index}
+                community={{ id: 6 }}
+                post={comment}
+                lemmyInstance={activeLemmyInstance}
+                sort={activeSortType}
+                ratioDetector={comment?.counts.score}
+                isOpen={false}
+              />
+            );
+          })}
+      </div>
+    );
+  }
 
   useEffect(() => {
     if (activeAdministrativeRegion.country !== "Country") {
@@ -123,32 +201,34 @@ export function AtlasNexusReadingList({
             target="_blank"
             rel="noopener noreferrer"
           >
-            Hexbear reading list about {activeAdministrativeRegion.country}
+            🔗 Hexbear Reading List: {activeAdministrativeRegion.country}
           </a>
-
-          {bulletinsData && (
-            <>
-              <h3>{bulletinsData.title}</h3>
-              <p> {bulletinsData.description}</p>
-              <a href={bulletinsData.link} target="_blank" rel="noopener noreferrer">
-                {bulletinsData.link}
-              </a>
-              {bulletinsData.items &&
-                bulletinsData.items.map((bulletin) => {
-                  return (
-                    <div className="bulletin-item">
-                      <p className="bulletin-publish-date highlight">
-                        🗓️ {new Date(bulletin.pubDate).toDateString()}
-                      </p>
-                      <a href={bulletin.link} target="_blank" rel="noopener noreferrer">
-                        🔗 {bulletin.title}
-                      </a>
-                      <ReactMarkdown>{`📰 ${bulletin.description}`}</ReactMarkdown>
-                    </div>
-                  );
-                })}
-            </>
-          )}
+        </>
+      )}
+      {bulletinsData && (
+        <>
+          <h3>{bulletinsData.title}</h3>
+          <p> {bulletinsData.description}</p>
+          <a href={bulletinsData.link} target="_blank" rel="noopener noreferrer">
+            🔗 {bulletinsData.link}
+          </a>
+          {bulletinsData.items &&
+            bulletinsData.items.map((bulletin, index) => {
+              return (
+                <>
+                  <div className="bulletin-item" key={index}>
+                    <p className="bulletin-publish-date highlight">
+                      🗓️ {new Date(bulletin.pubDate).toDateString()}
+                    </p>
+                    <a href={bulletin.link} target="_blank" rel="noopener noreferrer">
+                      🔗 {bulletin.title}
+                    </a>
+                    <ReactMarkdown>{`📰 ${bulletin.description}`}</ReactMarkdown>
+                    <HexBearNews bulletin={bulletin} />
+                  </div>
+                </>
+              );
+            })}
         </>
       )}
     </div>
