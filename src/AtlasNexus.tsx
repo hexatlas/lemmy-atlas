@@ -17,7 +17,7 @@ function AtlasNexusCard({ interfaceProps }) {
             IMF Data
           </Tabs.Trigger>
           <Tabs.Trigger className="tabs-trigger" value="ReadingList">
-            Bulletins
+            72T's Bulletins
           </Tabs.Trigger>
         </Tabs.List>
         <Tabs.Content className="tabs-content" value="ClassStructureTab">

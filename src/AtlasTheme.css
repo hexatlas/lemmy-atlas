@@ -1,7 +1,6 @@
 /* Imports */
 
 @import "leaflet/dist/leaflet.css";
-@import "./Atlas.css";
 
 :root {
   /* colors */

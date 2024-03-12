@@ -1,0 +1,18 @@
+.bulletin-item {
+  background: hsl(var(--atlas-color-light) / var(--atlas-opacity-1));
+  margin-top: var(--atlas-size-12);
+  padding: var(--atlas-size-10);
+  border-radius: var(--atlas-border-radius-1);
+  box-shadow: var(--atlas-shadow-inset);
+
+  display: grid;
+  gap: var(--atlas-size-12);
+}
+
+p.bulletin-publish-date {
+  background: hsl(var(--atlas-color-dark) / var(--atlas-opacity-3));
+  box-shadow: var(--atlas-shadow-1);
+  padding: var(--atlas-size-12) var(--atlas-size-10);
+  margin: 0;
+  justify-self: flex-end;
+}

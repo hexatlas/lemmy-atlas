@@ -1,5 +1,5 @@
 import Atlas from "./Atlas";
-import "./App.css";
+import "./Atlas.css";
 
 function App() {
   return (
