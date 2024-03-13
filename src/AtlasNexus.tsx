@@ -8,7 +8,7 @@ import AtlasNexusBulletins from "./AtlasNexusBulletins";
 function AtlasNexusCard({ interfaceProps }) {
   return (
     <>
-      <Tabs.Root id="atlas-tabs" className="nexus-card" defaultValue="ClassStructureTab">
+      <Tabs.Root id="atlas-tabs" className="nexus-card" defaultValue="Bulletins">
         <Tabs.List className="tabs-list" aria-label="Manage your account">
           <Tabs.Trigger className="tabs-trigger" value="ClassStructureTab">
             Class Structure
@@ -16,7 +16,7 @@ function AtlasNexusCard({ interfaceProps }) {
           <Tabs.Trigger className="tabs-trigger" value="IMFDataTab">
             IMF Data
           </Tabs.Trigger>
-          <Tabs.Trigger className="tabs-trigger" value="ReadingList">
+          <Tabs.Trigger className="tabs-trigger" value="Bulletins">
             72T's Bulletins
           </Tabs.Trigger>
         </Tabs.List>
@@ -26,7 +26,7 @@ function AtlasNexusCard({ interfaceProps }) {
         <Tabs.Content className="tabs-content" value="IMFDataTab">
           <AtlasNexusIMFData {...interfaceProps} />
         </Tabs.Content>
-        <Tabs.Content className="tabs-content" value="ReadingList">
+        <Tabs.Content className="tabs-content" value="Bulletins">
           <AtlasNexusBulletins {...interfaceProps} />
         </Tabs.Content>
       </Tabs.Root>
