@@ -66,7 +66,7 @@ export default function Atlas() {
   const [activeCommunity, setActiveCommunity] = useState<any>(
     activeLemmyInstance.community_id
   ); // c/News
-  const [activeSearchType, setActiveSearchType] = useState(searchTypes[1]); // Default: Posts
+  const [activeSearchType, setActiveSearchType] = useState(searchTypes[0]); // Default: Comments
   const [activeListingType, setActiveListingType] = useState(listingTypes[1]); // Default: Local
   const [activeSortType, setActiveSortType] = useState(sortTypes[1]); // Default: New Sort
 
@@ -99,7 +99,7 @@ export default function Atlas() {
       lemmyInstances[0] // Default: hexbear.net
     );
     setActiveCommunity(null);
-    setActiveSearchType(searchTypes[1]); // Default: Comments
+    setActiveSearchType(searchTypes[0]); // Default: Comments
     setActiveListingType(listingTypes[1]); // Default: Local
     setActiveSortType(sortTypes[1]); // Default: New Sort
   }
