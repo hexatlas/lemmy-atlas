@@ -231,6 +231,13 @@
   /* font-size: inherit; */
 }
 
+.region-name {
+  color: hsl(var(--atlas-color-dark) / var(--atlas-opacity-3));
+  white-space: pre-line;
+  word-wrap: break-word;
+  font-weight: 900;
+}
+
 .country-administrative-region-click-history {
   margin-top: var(--atlas-size-08);
   color: hsl(var(--atlas-color-dark) / var(--atlas-opacity-2));

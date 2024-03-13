@@ -1,5 +1,5 @@
 import { useState } from "react";
-import administrativeRegionsData from "./data/administrative_regions_optimized.json";
+import administrativeRegionsData from "./data/administrative_regions_extended.json";
 
 // https://www.radix-ui.com/primitives/docs/components/collapsible
 import * as Collapsible from "@radix-ui/react-collapsible";
@@ -219,7 +219,12 @@ export default function AtlasInterface({
             }}
           >
             {activeAdministrativeRegion.country}
-          </h6>
+          </h6>{" "}
+          <p className="region-name">
+            {activeAdministrativeRegion["intermediate-region"]}
+          </p>
+          <p className="region-name">{activeAdministrativeRegion["sub-region"]}</p>
+          <p className="region-name">{activeAdministrativeRegion.region}</p>
         </>
       )}
       <Collapsible.Content>
@@ -257,6 +262,11 @@ export default function AtlasInterface({
             >
               {activeAdministrativeRegion.country}
             </h5>
+            <p className="region-name">
+              {activeAdministrativeRegion["intermediate-region"]}
+            </p>
+            <p className="region-name">{activeAdministrativeRegion["sub-region"]}</p>
+            <p className="region-name">{activeAdministrativeRegion.region}</p>
           </>
         )}
 

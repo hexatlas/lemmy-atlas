@@ -9,7 +9,7 @@ import {
 } from "react-leaflet";
 import { LatLngExpression, latLngBounds } from "leaflet";
 import { GeoJsonObject } from "geojson";
-import administrativeRegionsData from "./data/administrative_regions_optimized.json";
+import administrativeRegionsData from "./data/administrative_regions_extended.json";
 
 import { baseLayers, overlayLayers } from "./Atlas_Config";
 import Minimap from "./AtlasMapMiniMap";

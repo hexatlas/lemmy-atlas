@@ -1,7 +1,7 @@
 // import center from "@turf/center";
 import L from "leaflet";
 import { useState } from "react";
-import administrativeRegionsData from "../data/administrative_regions_optimized.json";
+import administrativeRegionsData from "../data/administrative_regions_extended.json";
 
 // export function getColor(d) {
 //   return d > 25
