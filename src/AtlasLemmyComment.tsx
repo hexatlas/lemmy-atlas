@@ -111,7 +111,7 @@ function Comment({
               sort={sort}
               community={community}
               lemmyInstance={lemmyInstance}
-              showCommunityIcon={false}
+              showCommunityIcon={community?.id != post?.community?.id}
             />
           )}
           {commentDepth < 1 && (post?.post?.nsfw || post?.community?.nsfw) && (
