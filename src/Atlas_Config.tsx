@@ -50,7 +50,14 @@ export const listingTypes: Array<string> = [
   // "ModeratorView",
 ];
 
-export const regionTypes: Array<string> = ["Country", "AdministrativeRegion", "Combined"];
+export const regionTypes: Array<string> = [
+  "Country",
+  "AdministrativeRegion",
+  "Region",
+  "SubRegion",
+  "IntermediateRegion",
+  "Combined",
+];
 
 export const sortTypes: Array<string> = [
   "Active",
