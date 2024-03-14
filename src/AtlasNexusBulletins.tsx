@@ -217,23 +217,21 @@ export function AtlasNexusReadingList({
           {bulletinsData.items &&
             bulletinsData.items.map((bulletin, index) => {
               return (
-                <>
-                  <div className="bulletin-item" key={index}>
-                    <p className="bulletin-publish-date highlight">
-                      🗓️ {new Date(bulletin.pubDate).toDateString()}
-                    </p>
-                    <a
-                      className="bulletin-link"
-                      href={bulletin.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      🔗 {bulletin.title}
-                    </a>
-                    <ReactMarkdown>{`📰 ${bulletin.description}`}</ReactMarkdown>
-                    <HexBearNews bulletin={bulletin} />
-                  </div>
-                </>
+                <div className="bulletin-item" key={index}>
+                  <p className="bulletin-publish-date highlight">
+                    🗓️ {new Date(bulletin.pubDate).toDateString()}
+                  </p>
+                  <a
+                    className="bulletin-link"
+                    href={bulletin.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    🔗 {bulletin.title}
+                  </a>
+                  <ReactMarkdown>{`📰 ${bulletin.description}`}</ReactMarkdown>
+                  <HexBearNews bulletin={bulletin} />
+                </div>
               );
             })}
         </>
