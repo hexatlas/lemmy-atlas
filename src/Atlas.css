@@ -77,7 +77,7 @@
 }
 
 .search-input {
-  max-width: var(--atlas-size-01);
+  width: 100%;
   box-shadow: var(--atlas-shadow-inset);
 }
 
