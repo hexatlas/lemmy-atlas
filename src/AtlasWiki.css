@@ -1,3 +1,7 @@
 .prolewiki img {
   filter: none;
 }
+
+.mw-editsection {
+  display: none;
+}

@@ -3,6 +3,7 @@ import ReactMarkdown from "react-markdown";
 
 export function AtlasProleWiki({
   wikiURL,
+  isProleWiki = false,
 
   // Util
   isMobile,
@@ -82,17 +83,43 @@ export function AtlasProleWiki({
 
   return (
     <div className="prolewiki">
-      <a
-        href={`https://en.prolewiki.org/?search=${encodeURI(
-          activeRegionType
-            ? activeAdministrativeRegion.country
-            : activeAdministrativeRegion.name
-        )}`}
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        🔗 View {activeAdministrativeRegion.country} on ProleWiki
-      </a>
+      {isProleWiki ? (
+        <>
+          <p>
+            Please consider contributing knowledge on{" "}
+            <a
+              href={`https://en.prolewiki.org/?search=${encodeURI(
+                activeRegionType
+                  ? activeAdministrativeRegion.country
+                  : activeAdministrativeRegion.name
+              )}`}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {activeAdministrativeRegion.country} on {wikiURL}
+            </a>
+          </p>
+        </>
+      ) : (
+        <>
+          <p>
+            Please consider correcting information on{" "}
+            <a
+              href={`${wikiURL}?search=${encodeURI(
+                activeRegionType
+                  ? activeAdministrativeRegion.country
+                  : activeAdministrativeRegion.name
+              )}`}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {activeAdministrativeRegion.country} on {wikiURL}
+            </a>
+          </p>
+        </>
+      )}
+      <hr />
+      <br />
       {proleWiki && (
         <>
           <h3>{proleWiki.title}</h3>

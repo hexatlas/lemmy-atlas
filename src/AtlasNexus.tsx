@@ -37,7 +37,11 @@ function AtlasNexusCard({ interfaceProps }) {
           <AtlasNexusBulletins {...interfaceProps} />
         </Tabs.Content>
         <Tabs.Content className="tabs-content" value="ProleWiki">
-          <AtlasWiki wikiURL={"https://en.prolewiki.org/"} {...interfaceProps} />
+          <AtlasWiki
+            wikiURL={"https://en.prolewiki.org/"}
+            {...interfaceProps}
+            isProleWiki={true}
+          />
         </Tabs.Content>
         <Tabs.Content className="tabs-content" value="BougieWiki">
           <AtlasWiki wikiURL={"https://en.wikipedia.org/w/"} {...interfaceProps} />
