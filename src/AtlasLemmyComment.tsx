@@ -37,8 +37,6 @@ function Comment({
     };
 
     client.getComments(form).then((res) => {
-      console.log(res?.comments);
-
       setReplies(res?.comments);
     });
   }
@@ -78,8 +76,6 @@ function Comment({
     };
 
     client.getComments(form).then((res) => {
-      console.log(res?.comments);
-
       setContext(res?.comments);
     });
   }

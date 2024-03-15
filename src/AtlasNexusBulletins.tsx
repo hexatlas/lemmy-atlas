@@ -95,7 +95,6 @@ export function AtlasNexusReadingList({
       setBulletinsData(parsedData);
     } catch (error) {
       console.log(error);
-      setBulletinsData({ error: error.message });
     }
   };
 

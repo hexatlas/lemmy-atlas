@@ -6,7 +6,7 @@ exports.handler = async function (event, context) {
   try {
     const { country } = event.queryStringParameters || {};
 
-    let apiUrl = `https://en.prolewiki.org/rest.php/v1/page/${country}`;
+    let apiUrl = `https://en.prolewiki.org/api.php?action=parse&page=${country}&format=json&redirects`;
 
     let response = await fetch(apiUrl);
     let data = await response.json();

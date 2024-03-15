@@ -25,9 +25,6 @@ function AtlasLemmyCommunityInfoCard({ children, lemmyInstance, sort, community 
     let form: GetCommunity = {
       id: community?.id,
     };
-
-    console.log(community?.id);
-
     client.getCommunity(form).then((res) => {
       setCommunityDetails(res);
     });

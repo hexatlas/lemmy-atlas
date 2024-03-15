@@ -136,7 +136,6 @@ export default function Atlas() {
       activeAdministrativeRegion,
       ...administrativeRegionClickHistoryArray,
     ]);
-    // console.log(administrativeRegionClickHistoryArray);
   }, [activeAdministrativeRegion]);
 
   // Handle Browser Back Button

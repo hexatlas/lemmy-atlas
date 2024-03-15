@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import ReactMarkdown from "react-markdown";
-import parseInfo from "infobox-parser";
 
 export function AtlasProleWiki({
   // Util
@@ -55,7 +54,6 @@ export function AtlasProleWiki({
   administrativeRegionStyleHovered,
 }) {
   const [proleWiki, setProleWiki] = useState(null);
-  const [infoCard, setInfoCard] = useState(null);
 
   const fetchProleWiki = async (url) => {
     try {
@@ -65,8 +63,7 @@ export function AtlasProleWiki({
         throw new Error(`HTTP error! Status: ${response.status}`);
       }
       const result = await response.json();
-      setProleWiki(result);
-      if (result.source) setInfoCard(parseInfo(result.source));
+      setProleWiki(result?.parse);
     } catch (error) {
       console.log(error);
     }
@@ -76,16 +73,13 @@ export function AtlasProleWiki({
     if (activeAdministrativeRegion.country !== "Country") {
       const apiUrl = `/.netlify/functions/prolewiki/?country=${encodeURI(
         activeAdministrativeRegion.country
-      ).toLowerCase()}`;
-      fetchProleWiki(apiUrl);
-    } else {
-      const apiUrl = `/.netlify/functions/prolewiki/?index=true`;
+      )}`;
       fetchProleWiki(apiUrl);
     }
   }, [activeAdministrativeRegion]);
 
   return (
-    <div>
+    <div className="prolewiki">
       <a
         href={`https://en.prolewiki.org/?search=${encodeURI(
           activeAdministrativeRegion.country
@@ -93,12 +87,12 @@ export function AtlasProleWiki({
         target="_blank"
         rel="noopener noreferrer"
       >
-        🔗 {activeAdministrativeRegion.country}
+        🔗 View {activeAdministrativeRegion.country} on ProleWiki
       </a>
       {proleWiki && (
         <>
           <h3>{proleWiki.title}</h3>
-          <p>{JSON.stringify(proleWiki?.source)}</p>
+          <div dangerouslySetInnerHTML={{ __html: proleWiki?.text["*"] }}></div>
         </>
       )}
     </div>
