@@ -45,7 +45,7 @@ export default function Atlas() {
       country: "Country",
       name: "Administrative Region",
     });
-  const [activeRegionType, setActiveRegionType] = useState(regionTypes[0]); // Default: Country Sort
+  const [activeRegionType, setActiveRegionType] = useState(regionTypes[1]); // Default: Country Sort
   const [locationQuery, setLocationQuery] = useState("");
 
   // DATA

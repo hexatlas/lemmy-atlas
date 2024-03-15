@@ -51,12 +51,19 @@ export const listingTypes: Array<string> = [
 ];
 
 export const regionTypes: Array<string> = [
-  "Country",
-  "AdministrativeRegion",
-  "Region",
-  "SubRegion",
-  "IntermediateRegion",
-  "Combined",
+  "name",
+  "country",
+  "country-code",
+  "region",
+  "sub-region",
+  "sub-region-code",
+  "intermediate-region",
+  "intermediate-region-code",
+  "alpha-2",
+  "alpha-3",
+  "iso_3166-2",
+  "id",
+  "combined",
 ];
 
 export const sortTypes: Array<string> = [

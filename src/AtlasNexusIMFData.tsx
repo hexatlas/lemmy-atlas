@@ -256,11 +256,11 @@ const AtlasNexusIMFData = ({
   };
 
   useEffect(() => {
-    if (activeIndicator && activeAdministrativeRegion.country !== "Country") {
+    if (activeIndicator && activeAdministrativeRegion.country !== "country") {
       const apiUrl = `/.netlify/functions/data_imf_api/?indicator=${
         activeIndicator.name
       }&country=${activeAdministrativeRegion["ISO3166-1-Alpha-3"]}/${
-        administrativeRegionClickHistoryArray[0].country !== "Country" &&
+        administrativeRegionClickHistoryArray[0].country !== "country" &&
         administrativeRegionClickHistoryArray[0]["ISO3166-1-Alpha-3"]
       }`;
       fetchData(apiUrl);

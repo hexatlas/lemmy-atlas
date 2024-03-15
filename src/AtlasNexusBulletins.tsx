@@ -176,7 +176,7 @@ export function AtlasNexusReadingList({
   }
 
   useEffect(() => {
-    if (activeAdministrativeRegion.country !== "Country") {
+    if (activeAdministrativeRegion.country !== "country") {
       const apiUrl = `/.netlify/functions/72T_bulletins/?country=${encodeURI(
         activeAdministrativeRegion.country
       )
@@ -202,7 +202,7 @@ export function AtlasNexusReadingList({
         rel="noopener noreferrer"
       >
         📚📕 Hexbear Reading List:
-        {activeAdministrativeRegion.country != "Country" &&
+        {activeAdministrativeRegion.country != "country" &&
           activeAdministrativeRegion.country}
       </a>
 

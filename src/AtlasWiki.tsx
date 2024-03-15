@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import ReactMarkdown from "react-markdown";
 
 export function AtlasProleWiki({
+  wikiURL,
+
   // Util
   isMobile,
   resetAtlas,
@@ -70,10 +72,10 @@ export function AtlasProleWiki({
   };
 
   useEffect(() => {
-    if (activeAdministrativeRegion.country !== "Country") {
-      const apiUrl = `/.netlify/functions/prolewiki/?country=${encodeURI(
+    if (activeAdministrativeRegion.country !== "country") {
+      const apiUrl = `/.netlify/functions/wiki/?country=${encodeURI(
         activeAdministrativeRegion.country
-      )}`;
+      )}&wiki=${wikiURL}`;
       fetchProleWiki(apiUrl);
     }
   }, [activeAdministrativeRegion]);
@@ -82,7 +84,9 @@ export function AtlasProleWiki({
     <div className="prolewiki">
       <a
         href={`https://en.prolewiki.org/?search=${encodeURI(
-          activeAdministrativeRegion.country
+          activeRegionType
+            ? activeAdministrativeRegion.country
+            : activeAdministrativeRegion.name
         )}`}
         target="_blank"
         rel="noopener noreferrer"

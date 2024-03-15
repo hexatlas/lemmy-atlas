@@ -4,17 +4,12 @@ const fetch = require("node-fetch");
 
 exports.handler = async function (event, context) {
   try {
-    const { country } = event.queryStringParameters || {};
+    const { country, wiki } = event.queryStringParameters || {};
 
-    let apiUrl = `https://en.prolewiki.org/api.php?action=parse&page=${country}&format=json&redirects`;
+    let apiUrl = `${wiki}/api.php?action=parse&page=${country}&format=json&redirects`;
 
     let response = await fetch(apiUrl);
     let data = await response.json();
-    if (data?.redirect_target) {
-      apiUrl = data?.redirect_target;
-      response = await fetch(apiUrl);
-      data = await response.json();
-    }
     return {
       statusCode: 200,
       headers: {

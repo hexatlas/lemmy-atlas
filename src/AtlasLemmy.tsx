@@ -83,41 +83,53 @@ export default function AtlasLemmy({
 
   function handleSearchQuery() {
     switch (activeRegionType) {
-      case "Combined":
-        return `${locationQuery} ${
-          activeAdministrativeRegion?.name == "Administrative Region"
-            ? ""
-            : activeAdministrativeRegion?.name
-        } ${
-          activeAdministrativeRegion?.country == "Country"
-            ? ""
-            : activeAdministrativeRegion?.country
-        }`;
+      case "combined":
+        return `${locationQuery} ${activeAdministrativeRegion["name"]} ${activeAdministrativeRegion["country"]}`;
         break;
-      case "Country":
-        return `${locationQuery} ${
-          activeAdministrativeRegion?.country == "Country"
-            ? ""
-            : activeAdministrativeRegion?.country
-        }`;
+      case "country":
+        return `${locationQuery} ${activeAdministrativeRegion["country"]}`;
         break;
-      case "AdministrativeRegion":
-        return `${locationQuery} ${
-          activeAdministrativeRegion?.name == "Administrative Region"
-            ? ""
-            : activeAdministrativeRegion?.name
-        }`;
+      case "name":
+        return `${locationQuery} ${activeAdministrativeRegion["name"]}`;
         break;
+      case "region":
+        return `${locationQuery} ${activeAdministrativeRegion["region"]}`;
+        break;
+
+      case "sub-region":
+        return `${locationQuery} ${activeAdministrativeRegion["sub-region"]}`;
+        break;
+
+      case "sub-region-code":
+        return `${locationQuery} ${activeAdministrativeRegion["sub-region-code"]}`;
+        break;
+
+      case "intermediate-region":
+        return `${locationQuery} ${activeAdministrativeRegion["intermediate-region"]}`;
+        break;
+
+      case "intermediate-region-code":
+        return `${locationQuery} ${activeAdministrativeRegion["intermediate-region-code"]}`;
+        break;
+
+      case "alpha-2":
+        return `${locationQuery} ${activeAdministrativeRegion["alpha-2"]}`;
+        break;
+
+      case "alpha-3":
+        return `${locationQuery} ${activeAdministrativeRegion["alpha-3"]}`;
+        break;
+
+      case "iso_3166-2":
+        return `${locationQuery} ${activeAdministrativeRegion["iso_3166-2"]}`;
+        break;
+
+      case "id":
+        return `${locationQuery} ${activeAdministrativeRegion["id"]}`;
+        break;
+
       default:
-        return `${locationQuery} ${
-          activeAdministrativeRegion?.name == "Administrative Region"
-            ? ""
-            : activeAdministrativeRegion?.name
-        } ${
-          activeAdministrativeRegion?.country == "Country"
-            ? ""
-            : activeAdministrativeRegion?.country
-        }`;
+        return `${locationQuery} ${activeAdministrativeRegion["name"]} ${activeAdministrativeRegion["country"]}`;
     }
   }
 
@@ -130,7 +142,6 @@ export default function AtlasLemmy({
     q: handleSearchQuery(),
     page: currentSearchResultPage,
   };
-
   function handleUpdate() {
     if (locationQuery) {
       setCurrentCommunityPage(1);
@@ -425,9 +436,7 @@ export default function AtlasLemmy({
                   <DropdownMenu.ItemIndicator className="dropdown-menu-itemIndicator">
                     ✔
                   </DropdownMenu.ItemIndicator>
-                  {type === "AdministrativeRegion" && activeAdministrativeRegion.name}
-                  {type === "Country" && activeAdministrativeRegion.country}
-                  {type === "Combined" && "Combined Search"}
+                  {activeAdministrativeRegion[type]}
                 </DropdownMenu.RadioItem>
               ))}
             </DropdownMenu.RadioGroup>

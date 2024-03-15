@@ -190,12 +190,12 @@ export default function AtlasInterface({
         <>
           <h2
             className={`country-administrative-region ${
-              activeRegionType === "AdministrativeRegion" && "active-location-type"
+              activeRegionType === "name" && "active-location-type"
             }`}
             role="button"
             tabIndex={0}
             aria-label={`Select ${activeAdministrativeRegion.name}`}
-            onClick={() => setActiveRegionType(regionTypes[1])}
+            onClick={() => setActiveRegionType(regionTypes[0])}
             onKeyDown={(e) => {
               if (e.key === "Enter" || e.key === "Space") {
                 setActiveRegionType(regionTypes[1]);
@@ -206,12 +206,12 @@ export default function AtlasInterface({
           </h2>
           <h6
             className={`country-name ${
-              activeRegionType === "Country" && "active-location-type"
+              activeRegionType === "country" && "active-location-type"
             }`}
             role="button"
             aria-label={`Select ${activeAdministrativeRegion.country}`}
             tabIndex={0}
-            onClick={() => setActiveRegionType(regionTypes[0])}
+            onClick={() => setActiveRegionType(regionTypes[1])}
             onKeyDown={(e) => {
               if (e.key === "Enter" || e.key === "Space") {
                 setActiveRegionType(regionTypes[0]);
@@ -228,16 +228,16 @@ export default function AtlasInterface({
         </>
       )}
       <Collapsible.Content>
-        {activeAdministrativeRegion.country !== "Country" && (
+        {activeAdministrativeRegion.country !== "country" && (
           <>
             <h1
               className={`country-administrative-region ${
-                activeRegionType === "AdministrativeRegion" && "active-location-type"
+                activeRegionType === "name" && "active-location-type"
               }`}
               role="button"
               aria-label={`Select ${activeAdministrativeRegion.name}`}
               tabIndex={0}
-              onClick={() => setActiveRegionType(regionTypes[1])}
+              onClick={() => setActiveRegionType(regionTypes[0])}
               onKeyDown={(e) => {
                 if (e.key === "Enter" || e.key === "Space") {
                   setActiveRegionType(regionTypes[1]);
@@ -248,12 +248,12 @@ export default function AtlasInterface({
             </h1>
             <h5
               className={`country-name ${
-                activeRegionType === "Country" && "active-location-type"
+                activeRegionType === "country" && "active-location-type"
               }`}
               role="button"
               aria-label={`Select ${activeAdministrativeRegion.country}`}
               tabIndex={0}
-              onClick={() => setActiveRegionType(regionTypes[0])}
+              onClick={() => setActiveRegionType(regionTypes[1])}
               onKeyDown={(e) => {
                 if (e.key === "Enter" || e.key === "Space") {
                   setActiveRegionType(regionTypes[0]);
@@ -279,7 +279,7 @@ export default function AtlasInterface({
         <div className="country-administrative-region-click-history">
           {administrativeRegionClickHistoryArray &&
             administrativeRegionClickHistoryArray.map((adminregion, index) => {
-              if (index === 0 || index > 5 || adminregion.country === "Country") return;
+              if (index === 0 || index > 5 || adminregion.country === "country") return;
               return (
                 <div
                   key={index}

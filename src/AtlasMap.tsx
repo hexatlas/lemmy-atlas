@@ -68,7 +68,7 @@ export default function AtlasMap({
 }) {
   const onClickAdministrativeRegion = (e, isDoubleCLick = false) => {
     const clickedAdministrativeRegion = e.target.feature.properties;
-    if (isDoubleCLick) setActiveRegionType("AdministrativeRegion");
+    if (isDoubleCLick) setActiveRegionType("name");
     setActiveAdministrativeRegion(clickedAdministrativeRegion);
   };
 
@@ -109,9 +109,9 @@ export default function AtlasMap({
 
   useEffect(() => {
     let administrativeRegionArray = latLngBounds(null, null);
-    if (activeAdministrativeRegion.country !== "Country") {
+    if (activeAdministrativeRegion.country !== "country") {
       switch (activeRegionType) {
-        case "AdministrativeRegion":
+        case "name":
           map?.eachLayer((administrativeRegion) => {
             if (
               administrativeRegion.feature?.properties.name ===

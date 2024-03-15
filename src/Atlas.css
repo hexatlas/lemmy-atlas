@@ -1,6 +1,7 @@
-@import "./AtlasNexusBulletins.css";
-@import "./AtlasProleWiki.css";
 @import "./AtlasTheme.css";
+
+@import "./AtlasNexusBulletins.css";
+@import "./AtlasWiki.css";
 
 /* LAYOUT */
 

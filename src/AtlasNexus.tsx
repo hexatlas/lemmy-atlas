@@ -4,7 +4,7 @@ import * as Tabs from "@radix-ui/react-tabs";
 import AtlasNexusClassStructure from "./AtlasNexusClassStructure";
 import AtlasNexusIMFData from "./AtlasNexusIMFData";
 import AtlasNexusBulletins from "./AtlasNexusBulletins";
-import AtlasProleWiki from "./AtlasProleWiki";
+import AtlasWiki from "./AtlasWiki";
 
 function AtlasNexusCard({ interfaceProps }) {
   return (
@@ -23,6 +23,9 @@ function AtlasNexusCard({ interfaceProps }) {
           <Tabs.Trigger className="tabs-trigger" value="ProleWiki">
             ProleWiki
           </Tabs.Trigger>
+          <Tabs.Trigger className="tabs-trigger" value="BougieWiki">
+            BougieWiki
+          </Tabs.Trigger>
         </Tabs.List>
         <Tabs.Content className="tabs-content" value="ClassStructureTab">
           <AtlasNexusClassStructure />
@@ -34,7 +37,10 @@ function AtlasNexusCard({ interfaceProps }) {
           <AtlasNexusBulletins {...interfaceProps} />
         </Tabs.Content>
         <Tabs.Content className="tabs-content" value="ProleWiki">
-          <AtlasProleWiki {...interfaceProps} />
+          <AtlasWiki wikiURL={"https://en.prolewiki.org/"} {...interfaceProps} />
+        </Tabs.Content>
+        <Tabs.Content className="tabs-content" value="BougieWiki">
+          <AtlasWiki wikiURL={"https://en.wikipedia.org/w/"} {...interfaceProps} />
         </Tabs.Content>
       </Tabs.Root>
     </>
