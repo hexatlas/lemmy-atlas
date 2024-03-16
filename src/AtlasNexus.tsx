@@ -24,7 +24,7 @@ function AtlasNexusCard({ interfaceProps }) {
             ProleWiki
           </Tabs.Trigger>
           <Tabs.Trigger className="tabs-trigger" value="BougieWiki">
-            BougieWiki
+            NATOpedia
           </Tabs.Trigger>
         </Tabs.List>
         <Tabs.Content className="tabs-content" value="ClassStructureTab">
