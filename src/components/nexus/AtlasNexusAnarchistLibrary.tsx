@@ -198,9 +198,7 @@ export function AtlasNexusReadingList({
                       👤 {book.author}
                     </p>
                   )}
-                  <h4 className="bulletin-link" href={book.url}>
-                    {book.title}
-                  </h4>
+                  <h4 className="bulletin-link">{book.title}</h4>
                   {book.subtitle && <p>ℹ️ {book.subtitle}</p>}
                   {book.pages_estimated && <p>~{book.pages_estimated} 📄</p>}{" "}
                   {book.feed_teaser && (
