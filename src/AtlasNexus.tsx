@@ -23,7 +23,7 @@ function AtlasNexusCard({ interfaceProps }) {
           <Tabs.Trigger className="tabs-trigger" value="ProleWiki">
             ProleWiki
           </Tabs.Trigger>
-          <Tabs.Trigger className="tabs-trigger" value="BougieWiki">
+          <Tabs.Trigger className="tabs-trigger" value="NatoPedia">
             NATOpedia
           </Tabs.Trigger>
         </Tabs.List>
@@ -43,7 +43,7 @@ function AtlasNexusCard({ interfaceProps }) {
             isProleWiki={true}
           />
         </Tabs.Content>
-        <Tabs.Content className="tabs-content" value="BougieWiki">
+        <Tabs.Content className="tabs-content" value="NatoPedia">
           <AtlasWiki wikiURL={"https://en.wikipedia.org/w/"} {...interfaceProps} />
         </Tabs.Content>
       </Tabs.Root>

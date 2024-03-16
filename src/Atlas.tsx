@@ -42,8 +42,8 @@ export default function Atlas() {
   ] = useState<AdministrativeRegionObject[]>([]);
   const [activeAdministrativeRegion, setActiveAdministrativeRegion] =
     useState<AdministrativeRegionObject>({
-      country: "Country",
-      name: "Administrative Region",
+      country: "country",
+      name: "name",
     });
   const [activeRegionType, setActiveRegionType] = useState(regionTypes[1]); // Default: Country Sort
   const [locationQuery, setLocationQuery] = useState("");
@@ -77,10 +77,10 @@ export default function Atlas() {
     // LOCATION
     setAdministrativeRegionClickHistoryArray([]);
     setActiveAdministrativeRegion({
-      country: "Country",
-      name: "Administrative Region",
+      country: "country",
+      name: "name",
     });
-    setActiveRegionType(regionTypes[0]); // Default: Country Sort
+    setActiveRegionType(regionTypes[1]); // Default: Country Sort
     setLocationQuery("");
 
     // DATA
