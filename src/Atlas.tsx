@@ -116,6 +116,12 @@ export default function Atlas() {
     setActiveSearchType(searchTypes[0]); // Default: Comments
     setActiveListingType(listingTypes[1]); // Default: Local
     setActiveSortType(sortTypes[1]); // Default: New Sort
+
+    if (sideBarRef.current)
+      sideBarRef.current.scrollTo({
+        top: document.getElementById("atlas-tabs").offsetTop,
+        behavior: "smooth",
+      });
   }
 
   /*
@@ -151,6 +157,15 @@ export default function Atlas() {
       ...administrativeRegionClickHistoryArray,
     ]);
   }, [activeAdministrativeRegion]);
+
+  useEffect(() => {
+    // if (sideBarRef.current) sideBarRef.current.scrollTop = 0;
+    if (sideBarRef.current)
+      sideBarRef.current.scrollTo({
+        top: document.getElementById("atlas-tabs").offsetTop,
+        behavior: "smooth",
+      });
+  }, [activeAdministrativeRegion, activeLocationType]);
 
   // Handle Browser Back Button
   //  Start

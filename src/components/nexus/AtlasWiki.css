@@ -1,5 +1,6 @@
 .prolewiki img {
   filter: none;
+  border-radius: var(--atlas-border-radius-1);
 }
 
 .mw-editsection {
@@ -25,8 +26,8 @@
   border-spacing: 0 !important;
 }
 
-.infobox table {
-  /* border-radius: var(--atlas-border-radius-1) !important; */
+.infobox-subheader {
+  background: none !important;
 }
 
 .infobox th,

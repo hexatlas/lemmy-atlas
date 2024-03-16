@@ -184,8 +184,6 @@ export default function AtlasLemmy({
         }
         if (posts && res?.posts) setPosts(res?.posts);
       }
-
-      if (sideBarRef.current) sideBarRef.current.scrollTop = 0;
     });
   }
 
