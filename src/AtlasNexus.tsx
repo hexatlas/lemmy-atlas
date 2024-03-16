@@ -1,16 +1,17 @@
 // https://www.radix-ui.com/primitives/docs/components/tabs
 import * as Tabs from "@radix-ui/react-tabs";
 
-import AtlasNexusClassStructure from "./AtlasNexusClassStructure";
-import AtlasNexusIMFData from "./AtlasNexusIMFData";
-import AtlasNexusBulletins from "./AtlasNexusBulletins";
-import AtlasWiki from "./AtlasWiki";
+import AtlasNexusClassStructure from "./components/nexus/AtlasNexusClassStructure";
+import AtlasNexusIMFData from "./components/nexus/AtlasNexusIMFData";
+import AtlasNexusBulletins from "./components/nexus/AtlasNexusBulletins";
+import AtlasWiki from "./components/nexus/AtlasWiki";
+import AtlasNexusAnarchistLibrary from "./components/nexus/AtlasNexusAnarchistLibrary";
 
 function AtlasNexusCard({ interfaceProps }) {
   return (
     <>
       <Tabs.Root id="atlas-tabs" className="nexus-card" defaultValue="Bulletins">
-        <Tabs.List className="tabs-list" aria-label="Manage your account">
+        <Tabs.List className="tabs-list tabs-nexus" aria-label="Manage your account">
           <Tabs.Trigger className="tabs-trigger" value="ClassStructureTab">
             Class Structure
           </Tabs.Trigger>
@@ -25,6 +26,9 @@ function AtlasNexusCard({ interfaceProps }) {
           </Tabs.Trigger>
           <Tabs.Trigger className="tabs-trigger" value="NatoPedia">
             NATOpedia
+          </Tabs.Trigger>
+          <Tabs.Trigger className="tabs-trigger" value="AnarchistLibrary">
+            Anarchist Library
           </Tabs.Trigger>
         </Tabs.List>
         <Tabs.Content className="tabs-content" value="ClassStructureTab">
@@ -45,6 +49,9 @@ function AtlasNexusCard({ interfaceProps }) {
         </Tabs.Content>
         <Tabs.Content className="tabs-content" value="NatoPedia">
           <AtlasWiki wikiURL={"https://en.wikipedia.org/w/"} {...interfaceProps} />
+        </Tabs.Content>
+        <Tabs.Content className="tabs-content" value="AnarchistLibrary">
+          <AtlasNexusAnarchistLibrary {...interfaceProps} />
         </Tabs.Content>
       </Tabs.Root>
     </>

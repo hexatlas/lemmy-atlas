@@ -1,4 +1,4 @@
-import { userPronouns } from "./hooks/useDataTransform";
+import { userPronouns } from "../../hooks/useDataTransform";
 import LemmyUserInfoCard from "./AtlasLemmyUserInfoCard";
 
 function AtlasLemmyUser({

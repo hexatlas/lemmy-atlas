@@ -1,7 +1,7 @@
 @import "./AtlasTheme.css";
 
-@import "./AtlasNexusBulletins.css";
-@import "./AtlasWiki.css";
+@import "./components/nexus/AtlasNexusBulletins.css";
+@import "./components/nexus/AtlasWiki.css";
 
 /* LAYOUT */
 
@@ -64,7 +64,7 @@
   z-index: 9;
   gap: var(--atlas-size-14);
   align-items: center;
-  margin: var(--atlas-size-10) 0;
+  margin-bottom: var(--atlas-size-10);
 }
 
 .search-icon {
@@ -1158,7 +1158,7 @@ a.post-creator {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  margin-top: var(--atlas-size-10);
+  /* margin-top: var(--atlas-size-10); */
   margin-left: var(--atlas-size-09);
 
   color: hsl(var(--atlas-color-light) / var(--atlas-opacity-3));
@@ -1273,9 +1273,16 @@ a.post-creator {
 }
 
 .nexus-card .tabs-list {
+  flex-shrink: 2;
   top: var(--atlas-size-10);
   padding: 0;
   margin-bottom: var(--atlas-size-08);
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.nexus-card .tabs-list .tabs-trigger {
+  max-width: var(--atlas-size-05);
 }
 
 .tabs-trigger {
@@ -1342,6 +1349,10 @@ a.post-creator {
 }
 .tabs-content:focus {
   box-shadow: var(--atlas-shadow-1);
+}
+
+.tabs-content .banner-image {
+  margin-bottom: var(--atlas-size-10);
 }
 
 /* ATLAS LEAFLET MAP */

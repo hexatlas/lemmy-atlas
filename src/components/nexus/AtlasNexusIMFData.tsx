@@ -10,8 +10,8 @@ import * as Collapsible from "@radix-ui/react-collapsible";
 // https://www.radix-ui.com/primitives/docs/components/dropdown-menu
 import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
 
-import { indicators } from "./data/indicatorsIMF.json";
-import { useIMFDataTransform } from "./hooks/useDataTransform";
+import { indicators } from "../../data/indicatorsIMF.json";
+import { useIMFDataTransform } from "../../hooks/useDataTransform";
 
 const AtlasNexusIMFData = ({
   // Util

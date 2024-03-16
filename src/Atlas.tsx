@@ -6,7 +6,7 @@ import * as Tabs from "@radix-ui/react-tabs";
 // Import Components
 
 import AtlasMap from "./AtlasMap";
-import AtlasLemmy from "./AtlasLemmy";
+import AtlasLemmy from "./components/lemmy/AtlasLemmy";
 import AtlasInterface from "./AtlasMapInterface";
 import AtlasNexusCard from "./AtlasNexus";
 

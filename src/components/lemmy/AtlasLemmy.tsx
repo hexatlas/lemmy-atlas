@@ -10,7 +10,7 @@ import Comment from "./AtlasLemmyComment";
 import Post from "./AtlasLemmyPost";
 import LemmyCommunityInfoCard from "./AtlasLemmyCommunityInfoCard";
 
-import { searchTypes } from "./Atlas_Config";
+import { searchTypes } from "../../Atlas_Config";
 import AtlasLemmyCommunityInfoCard from "./AtlasLemmyCommunityInfoCard";
 
 export default function AtlasLemmy({
@@ -427,18 +427,21 @@ export default function AtlasLemmy({
               value={activeRegionType}
               onValueChange={setActiveRegionType}
             >
-              {regionTypes.map((type, index) => (
-                <DropdownMenu.RadioItem
-                  key={index}
-                  className="dropdown-menu-radio-item"
-                  value={type}
-                >
-                  <DropdownMenu.ItemIndicator className="dropdown-menu-itemIndicator">
-                    ✔
-                  </DropdownMenu.ItemIndicator>
-                  {activeAdministrativeRegion[type]}
-                </DropdownMenu.RadioItem>
-              ))}
+              {regionTypes.map((type, index) => {
+                if (!activeAdministrativeRegion[type]) return;
+                return (
+                  <DropdownMenu.RadioItem
+                    key={index}
+                    className="dropdown-menu-radio-item"
+                    value={type}
+                  >
+                    <DropdownMenu.ItemIndicator className="dropdown-menu-itemIndicator">
+                      ✔
+                    </DropdownMenu.ItemIndicator>
+                    {activeAdministrativeRegion[type]}
+                  </DropdownMenu.RadioItem>
+                );
+              })}
             </DropdownMenu.RadioGroup>
             <DropdownMenu.Separator className="dropdown-menu-separator" />
             <DropdownMenu.Label className="dropdown-menu-label">
