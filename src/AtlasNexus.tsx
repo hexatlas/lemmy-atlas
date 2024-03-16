@@ -1,11 +1,27 @@
 // https://www.radix-ui.com/primitives/docs/components/tabs
 import * as Tabs from "@radix-ui/react-tabs";
 
+import { useRef } from "react";
+
 import AtlasNexusClassStructure from "./components/nexus/AtlasNexusClassStructure";
 import AtlasNexusIMFData from "./components/nexus/AtlasNexusIMFData";
 import AtlasNexusBulletins from "./components/nexus/AtlasNexusBulletins";
 import AtlasWiki from "./components/nexus/AtlasWiki";
 import AtlasNexusAnarchistLibrary from "./components/nexus/AtlasNexusAnarchistLibrary";
+
+/*
+ /$$   /$$                                        
+| $$$ | $$                                        
+| $$$$| $$  /$$$$$$  /$$   /$$ /$$   /$$  /$$$$$$$
+| $$ $$ $$ /$$__  $$|  $$ /$$/| $$  | $$ /$$_____/
+| $$  $$$$| $$$$$$$$ \  $$$$/ | $$  | $$|  $$$$$$ 
+| $$\  $$$| $$_____/  >$$  $$ | $$  | $$ \____  $$
+| $$ \  $$|  $$$$$$$ /$$/\  $$|  $$$$$$/ /$$$$$$$/
+|__/  \__/ \_______/|__/  \__/ \______/ |_______/ 
+                                                  
+                                                  
+                                                                                                                                                                        
+*/
 
 function AtlasNexusCard({ interfaceProps }) {
   return (

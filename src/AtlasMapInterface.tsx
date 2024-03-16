@@ -5,6 +5,20 @@ import administrativeRegionsData from "./data/administrative_regions_extended.js
 import * as Collapsible from "@radix-ui/react-collapsible";
 import { handleRandom } from "./hooks/useAtlasUtils";
 
+/*
+
+ /$$$$$$             /$$                          /$$$$$$                             
+|_  $$_/            | $$                         /$$__  $$                            
+  | $$   /$$$$$$$  /$$$$$$    /$$$$$$   /$$$$$$ | $$  \__//$$$$$$   /$$$$$$$  /$$$$$$ 
+  | $$  | $$__  $$|_  $$_/   /$$__  $$ /$$__  $$| $$$$   |____  $$ /$$_____/ /$$__  $$
+  | $$  | $$  \ $$  | $$    | $$$$$$$$| $$  \__/| $$_/    /$$$$$$$| $$      | $$$$$$$$
+  | $$  | $$  | $$  | $$ /$$| $$_____/| $$      | $$     /$$__  $$| $$      | $$_____/
+ /$$$$$$| $$  | $$  |  $$$$/|  $$$$$$$| $$      | $$    |  $$$$$$$|  $$$$$$$|  $$$$$$$
+|______/|__/  |__/   \___/   \_______/|__/      |__/     \_______/ \_______/ \_______/
+                                                                                      
+                                                                                                                                                                            
+*/
+
 export default function AtlasInterface({
   // Util
   isMobile,

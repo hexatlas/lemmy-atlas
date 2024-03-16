@@ -14,6 +14,20 @@ import administrativeRegionsData from "./data/administrative_regions_extended.js
 import { baseLayers, overlayLayers } from "./Atlas_Config";
 import Minimap from "./AtlasMapMiniMap";
 
+/*
+ /$$      /$$                    
+| $$$    /$$$                    
+| $$$$  /$$$$  /$$$$$$   /$$$$$$ 
+| $$ $$/$$ $$ |____  $$ /$$__  $$
+| $$  $$$| $$  /$$$$$$$| $$  \ $$
+| $$\  $ | $$ /$$__  $$| $$  | $$
+| $$ \/  | $$|  $$$$$$$| $$$$$$$/
+|__/     |__/ \_______/| $$____/ 
+                       | $$      
+                       | $$      
+                       |__/      
+*/
+
 export default function AtlasMap({
   // Util
   isMobile,

@@ -1,6 +1,19 @@
 import { useEffect, useState } from "react";
 import ReactMarkdown from "react-markdown";
 
+/*
+ /$$      /$$ /$$ /$$       /$$
+| $$  /$ | $$|__/| $$      |__/
+| $$ /$$$| $$ /$$| $$   /$$ /$$
+| $$/$$ $$ $$| $$| $$  /$$/| $$
+| $$$$_  $$$$| $$| $$$$$$/ | $$
+| $$$/ \  $$$| $$| $$_  $$ | $$
+| $$/   \  $$| $$| $$ \  $$| $$
+|__/     \__/|__/|__/  \__/|__/
+                               
+                                                              
+*/
+
 export function AtlasProleWiki({
   wikiURL,
   isProleWiki = false,

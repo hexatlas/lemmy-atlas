@@ -13,6 +13,21 @@ import LemmyCommunityInfoCard from "./AtlasLemmyCommunityInfoCard";
 import { searchTypes } from "../../Atlas_Config";
 import AtlasLemmyCommunityInfoCard from "./AtlasLemmyCommunityInfoCard";
 
+/*
+
+ /$$                                                      
+| $$                                                      
+| $$        /$$$$$$  /$$$$$$/$$$$  /$$$$$$/$$$$  /$$   /$$
+| $$       /$$__  $$| $$_  $$_  $$| $$_  $$_  $$| $$  | $$
+| $$      | $$$$$$$$| $$ \ $$ \ $$| $$ \ $$ \ $$| $$  | $$
+| $$      | $$_____/| $$ | $$ | $$| $$ | $$ | $$| $$  | $$
+| $$$$$$$$|  $$$$$$$| $$ | $$ | $$| $$ | $$ | $$|  $$$$$$$
+|________/ \_______/|__/ |__/ |__/|__/ |__/ |__/ \____  $$
+                                                 /$$  | $$
+                                                |  $$$$$$/
+                                                 \______/ 
+*/
+
 export default function AtlasLemmy({
   // Util
   isMobile,

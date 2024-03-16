@@ -1,6 +1,20 @@
 import { userPronouns } from "../../hooks/useDataTransform";
 import LemmyUserInfoCard from "./AtlasLemmyUserInfoCard";
 
+/*
+ /$$   /$$                              
+| $$  | $$                              
+| $$  | $$  /$$$$$$$  /$$$$$$   /$$$$$$ 
+| $$  | $$ /$$_____/ /$$__  $$ /$$__  $$
+| $$  | $$|  $$$$$$ | $$$$$$$$| $$  \__/
+| $$  | $$ \____  $$| $$_____/| $$      
+|  $$$$$$/ /$$$$$$$/|  $$$$$$$| $$      
+ \______/ |_______/  \_______/|__/      
+                                        
+                                        
+                                        
+*/
+
 function AtlasLemmyUser({
   post,
   lemmyInstance,

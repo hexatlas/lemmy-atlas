@@ -14,6 +14,21 @@ import Comment from "./AtlasLemmyComment";
 import LemmyUser from "./AtlasLemmyUser";
 import LemmyCommunity from "./AtlasLemmyCommunity";
 
+/*
+
+ /$$$$$$$                       /$$    
+| $$__  $$                     | $$    
+| $$  \ $$ /$$$$$$   /$$$$$$$ /$$$$$$  
+| $$$$$$$//$$__  $$ /$$_____/|_  $$_/  
+| $$____/| $$  \ $$|  $$$$$$   | $$    
+| $$     | $$  | $$ \____  $$  | $$ /$$
+| $$     |  $$$$$$/ /$$$$$$$/  |  $$$$/
+|__/      \______/ |_______/    \___/  
+                                       
+                                       
+                                       
+*/
+
 function Post({
   post,
   community,

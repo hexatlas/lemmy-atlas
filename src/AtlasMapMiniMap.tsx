@@ -1,11 +1,5 @@
 import { useCallback, useMemo, useState } from "react";
-import {
-  MapContainer,
-  TileLayer,
-  useMap,
-  Rectangle,
-  useMapEvent,
-} from "react-leaflet";
+import { MapContainer, TileLayer, useMap, Rectangle, useMapEvent } from "react-leaflet";
 import { useEventHandlers } from "@react-leaflet/core";
 
 // Leaflet Position Classes4
@@ -28,6 +22,21 @@ const BOUNDS_STYLE: any = {
   weight: 0.161,
   color: "hsl(var(--atlas-color-primary))",
 };
+
+/*
+
+ /$$      /$$ /$$           /$$ /$$      /$$                    
+| $$$    /$$$|__/          |__/| $$$    /$$$                    
+| $$$$  /$$$$ /$$ /$$$$$$$  /$$| $$$$  /$$$$  /$$$$$$   /$$$$$$ 
+| $$ $$/$$ $$| $$| $$__  $$| $$| $$ $$/$$ $$ |____  $$ /$$__  $$
+| $$  $$$| $$| $$| $$  \ $$| $$| $$  $$$| $$  /$$$$$$$| $$  \ $$
+| $$\  $ | $$| $$| $$  | $$| $$| $$\  $ | $$ /$$__  $$| $$  | $$
+| $$ \/  | $$| $$| $$  | $$| $$| $$ \/  | $$|  $$$$$$$| $$$$$$$/
+|__/     |__/|__/|__/  |__/|__/|__/     |__/ \_______/| $$____/ 
+                                                      | $$      
+                                                      | $$      
+                                                      |__/
+ */
 
 function MinimapBounds({ parentMap, zoom }: { parentMap: any; zoom: number }) {
   const minimap = useMap();
@@ -106,8 +115,7 @@ export default function MiniMapControl({
     []
   );
 
-  const positionClass =
-    POSITION_CLASSES[position] || POSITION_CLASSES.bottomleft;
+  const positionClass = POSITION_CLASSES[position] || POSITION_CLASSES.bottomleft;
   return (
     <div className={positionClass}>
       <div className="leaflet-control leaflet-bar">{minimap}</div>
