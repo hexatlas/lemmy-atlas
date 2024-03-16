@@ -117,7 +117,7 @@
   transition: var(--atlas-transition-slow);
 }
 
-.active-country-container-collapse-trigger {
+.map-interface-container-collapse-trigger {
   margin: var(--atlas-size-10);
   position: absolute;
   background-color: transparent;
@@ -140,7 +140,7 @@
 
 .windows-resize-button:hover,
 .random-button:hover,
-.active-country-container-collapse-trigger:hover {
+.map-interface-container-collapse-trigger:hover {
   text-shadow: var(--atlas-shadow-text);
   color: hsl(var(--atlas-color-primary) / var(--atlas-opacity-3));
   transition: var(--atlas-transition-fast);
@@ -163,17 +163,17 @@
   transform: rotate(-90deg);
 }
 
-.active-country-container .reset-button:hover {
+.map-interface-container .reset-button:hover {
   transform: rotate(-90deg) scale(1.61);
 }
 
-.active-country-container .reset-button {
+.map-interface-container .reset-button {
   position: absolute;
   bottom: var(--atlas-size-12);
   right: var(--atlas-size-14);
   width: var(--atlas-size-08);
 }
-.active-country-container .reset-button:hover {
+.map-interface-container .reset-button:hover {
   color: hsl(var(--atlas-color-primary) / var(--atlas-opacity-3));
 }
 /* Active Country Card */
@@ -182,7 +182,7 @@
   color: hsl(var(--atlas-color-tertiary)) !important;
 }
 
-.active-country-container {
+.map-interface-container {
   position: absolute;
   max-width: calc(100% - var(--atlas-size-06));
 
@@ -204,22 +204,22 @@
 }
 
 @media only screen and (min-width: 768px) {
-  .active-country-container {
+  .map-interface-container {
     right: calc(var(--atlas-size-10) * -1);
     max-width: 61.8%;
   }
 }
 
-.country-name:hover,
-.country-administrative-region:hover {
+.map-interface-container .country-name:hover,
+.map-interface-container .country-administrative-region:hover {
   background-color: hsl(var(--atlas-color-primary) / var(--atlas-opacity-3));
   color: hsl(var(--atlas-color-light) / var(--atlas-opacity-3));
   border-radius: var(--atlas-border-radius-1);
   box-shadow: var(--atlas-shadow-inset);
 }
 
-.country-name,
-.country-administrative-region {
+.map-interface-container .country-name,
+.map-interface-container .country-administrative-region {
   color: hsl(var(--atlas-color-dark) / var(--atlas-opacity-3));
   padding: var(--atlas-size-10);
   padding-left: var(--atlas-size-08);

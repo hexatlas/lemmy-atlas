@@ -259,6 +259,11 @@ export default function Atlas() {
     [activeAdministrativeRegion, activeRegionType]
   );
 
+  const DisplayAtlasNexus = useMemo(
+    () => <AtlasNexusCard interfaceProps={interfaceProps} />,
+    [activeAdministrativeRegion, activeRegionType]
+  );
+
   return (
     <div
       className={`atlas ${
@@ -288,7 +293,7 @@ export default function Atlas() {
           </Tabs.Trigger>
         </Tabs.List>
         <Tabs.Content className="tabs-content" value="InfoTab">
-          <AtlasNexusCard interfaceProps={interfaceProps} />
+          {DisplayAtlasNexus}
         </Tabs.Content>
         <Tabs.Content className="tabs-content" value="CommentsTab">
           <AtlasLemmy {...interfaceProps} />

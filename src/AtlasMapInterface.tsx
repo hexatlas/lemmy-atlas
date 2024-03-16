@@ -162,12 +162,12 @@ export default function AtlasInterface({
 
   return (
     <Collapsible.Root
-      className="active-country-container"
+      className="map-interface-container"
       open={open}
       onOpenChange={setOpen}
     >
       <div className="right-slot">
-        <Collapsible.Trigger className="active-country-container-collapse-trigger">
+        <Collapsible.Trigger className="map-interface-container-collapse-trigger">
           <div title="Click to Expand and Collapse">{open ? "⊟" : "⊞"}</div>
         </Collapsible.Trigger>
         {!isMobile && (

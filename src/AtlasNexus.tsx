@@ -1,8 +1,6 @@
 // https://www.radix-ui.com/primitives/docs/components/tabs
 import * as Tabs from "@radix-ui/react-tabs";
 
-import { useRef } from "react";
-
 import AtlasNexusClassStructure from "./components/nexus/AtlasNexusClassStructure";
 import AtlasNexusIMFData from "./components/nexus/AtlasNexusIMFData";
 import AtlasNexusBulletins from "./components/nexus/AtlasNexusBulletins";
