@@ -305,13 +305,7 @@ export default function Atlas() {
                 <span className="prefix"> in</span>
               </small>
             )}
-            <small>
-              {" "}
-              {activeRegionType === "Country"
-                ? activeAdministrativeRegion.country !== "Country" &&
-                  activeAdministrativeRegion.country
-                : activeAdministrativeRegion.name}
-            </small>
+            <small>{activeAdministrativeRegion[activeRegionType]}</small>
             {activeCommunity && (
               <h6>
                 <span className="prefix">c/</span>
