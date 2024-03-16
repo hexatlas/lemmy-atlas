@@ -42,8 +42,8 @@ export default function AtlasLemmy({
   setMap,
 
   regionTypes,
-  activeRegionType,
-  setActiveRegionType,
+  activeLocationType,
+  setActiveLocationType,
 
   activeAdministrativeRegion,
   setActiveAdministrativeRegion,
@@ -97,7 +97,7 @@ export default function AtlasLemmy({
   */
 
   function handleSearchQuery() {
-    switch (activeRegionType) {
+    switch (activeLocationType) {
       case "combined":
         return `${locationQuery} ${activeAdministrativeRegion["name"]} ${activeAdministrativeRegion["country"]}`;
         break;
@@ -284,7 +284,7 @@ export default function AtlasLemmy({
     setPosts([]);
     setCurrentSearchResultPage(1);
     setHasMore(false);
-  }, [activeAdministrativeRegion, activeRegionType, activeSearchType, locationQuery]);
+  }, [activeAdministrativeRegion, activeLocationType, activeSearchType, locationQuery]);
 
   // Reset when Lemmy Instance is changed
   useEffect(() => {
@@ -306,7 +306,7 @@ export default function AtlasLemmy({
     return () => clearTimeout(debounce);
   }, [
     activeAdministrativeRegion,
-    activeRegionType,
+    activeLocationType,
     activeLemmyInstance,
     activeCommunity,
     activeListingType,
@@ -439,8 +439,8 @@ export default function AtlasLemmy({
               Location
             </DropdownMenu.Label>
             <DropdownMenu.RadioGroup
-              value={activeRegionType}
-              onValueChange={setActiveRegionType}
+              value={activeLocationType}
+              onValueChange={setActiveLocationType}
             >
               {regionTypes.map((type, index) => {
                 if (!activeAdministrativeRegion[type]) return;

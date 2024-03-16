@@ -46,8 +46,8 @@ export function AtlasNexusReadingList({
   setMap,
 
   regionTypes,
-  activeRegionType,
-  setActiveRegionType,
+  activeLocationType,
+  setActiveLocationType,
 
   activeAdministrativeRegion,
   setActiveAdministrativeRegion,

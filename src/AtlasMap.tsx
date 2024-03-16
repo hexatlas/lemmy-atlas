@@ -41,8 +41,8 @@ export default function AtlasMap({
   setMap,
 
   regionTypes,
-  activeRegionType,
-  setActiveRegionType,
+  activeLocationType,
+  setActiveLocationType,
 
   activeAdministrativeRegion,
   setActiveAdministrativeRegion,
@@ -82,7 +82,7 @@ export default function AtlasMap({
 }) {
   const onClickAdministrativeRegion = (e, isDoubleCLick = false) => {
     const clickedAdministrativeRegion = e.target.feature.properties;
-    if (isDoubleCLick) setActiveRegionType("name");
+    if (isDoubleCLick) setActiveLocationType("name");
     setActiveAdministrativeRegion(clickedAdministrativeRegion);
   };
 
@@ -124,7 +124,7 @@ export default function AtlasMap({
   useEffect(() => {
     let administrativeRegionArray = latLngBounds(null, null);
     if (activeAdministrativeRegion.country !== "country") {
-      switch (activeRegionType) {
+      switch (activeLocationType) {
         case "name":
           map?.eachLayer((administrativeRegion) => {
             if (
@@ -144,11 +144,18 @@ export default function AtlasMap({
           });
           break;
       }
+      map?.eachLayer((administrativeRegion) => {
+        if (
+          administrativeRegion.feature?.properties[activeLocationType] ===
+          activeAdministrativeRegion[activeLocationType]
+        )
+          administrativeRegionArray.extend(administrativeRegion.getBounds());
+      });
       // Refreshes Map after initial region selection
       setTimeout(() => map.invalidateSize(), 300);
       map?.fitBounds(administrativeRegionArray);
     }
-  }, [activeAdministrativeRegion, activeRegionType]);
+  }, [activeAdministrativeRegion, activeLocationType]);
 
   return (
     <MapContainer

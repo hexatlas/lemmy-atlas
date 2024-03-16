@@ -50,8 +50,8 @@ const AtlasNexusIMFData = ({
   setMap,
 
   regionTypes,
-  activeRegionType,
-  setActiveRegionType,
+  activeLocationType,
+  setActiveLocationType,
 
   activeAdministrativeRegion,
   setActiveAdministrativeRegion,

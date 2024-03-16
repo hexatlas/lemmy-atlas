@@ -54,8 +54,8 @@ export default function AtlasInterface({
   setActiveListingType,
 
   regionTypes,
-  activeRegionType,
-  setActiveRegionType,
+  activeLocationType,
+  setActiveLocationType,
 
   sortTypes,
   activeSortType,
@@ -202,43 +202,36 @@ export default function AtlasInterface({
       </div>
       {!open && (
         <>
-          <h2
-            className={`country-administrative-region ${
-              activeRegionType === "name" && "active-location-type"
-            }`}
-            role="button"
-            tabIndex={0}
-            aria-label={`Select ${activeAdministrativeRegion.name}`}
-            onClick={() => setActiveRegionType(regionTypes[0])}
-            onKeyDown={(e) => {
-              if (e.key === "Enter" || e.key === "Space") {
-                setActiveRegionType(regionTypes[1]);
-              }
-            }}
-          >
-            {activeAdministrativeRegion.name}
-          </h2>
-          <h6
-            className={`country-name ${
-              activeRegionType === "country" && "active-location-type"
-            }`}
-            role="button"
-            aria-label={`Select ${activeAdministrativeRegion.country}`}
-            tabIndex={0}
-            onClick={() => setActiveRegionType(regionTypes[1])}
-            onKeyDown={(e) => {
-              if (e.key === "Enter" || e.key === "Space") {
-                setActiveRegionType(regionTypes[0]);
-              }
-            }}
-          >
-            {activeAdministrativeRegion.country}
-          </h6>{" "}
-          <p className="region-name">
-            {activeAdministrativeRegion["intermediate-region"]}
-          </p>
-          <p className="region-name">{activeAdministrativeRegion["sub-region"]}</p>
-          <p className="region-name">{activeAdministrativeRegion.region}</p>
+          {regionTypes.map((type) => {
+            if (activeAdministrativeRegion[type] === "") return;
+            if (type === "id") return;
+            if (type === "iso_3166-2") return;
+            if (type === "country-code") return;
+            if (type === "sub-region-code") return;
+            if (type === "intermediate-region-code") return;
+            if (type === "combined") return;
+
+            console.log(type);
+
+            return (
+              <p
+                className={`country-name country-${type} ${
+                  activeLocationType === type && "active-location-type"
+                }`}
+                role="button"
+                tabIndex={0}
+                aria-label={`Select ${activeAdministrativeRegion[type]}`}
+                onClick={() => setActiveLocationType(type)}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter" || e.key === "Space") {
+                    setActiveLocationType(regionTypes[type]);
+                  }
+                }}
+              >
+                {activeAdministrativeRegion[type]}
+              </p>
+            );
+          })}
         </>
       )}
       <Collapsible.Content>
@@ -246,15 +239,15 @@ export default function AtlasInterface({
           <>
             <h1
               className={`country-administrative-region ${
-                activeRegionType === "name" && "active-location-type"
+                activeLocationType === "name" && "active-location-type"
               }`}
               role="button"
               aria-label={`Select ${activeAdministrativeRegion.name}`}
               tabIndex={0}
-              onClick={() => setActiveRegionType(regionTypes[0])}
+              onClick={() => setActiveLocationType(regionTypes[0])}
               onKeyDown={(e) => {
                 if (e.key === "Enter" || e.key === "Space") {
-                  setActiveRegionType(regionTypes[1]);
+                  setActiveLocationType(regionTypes[1]);
                 }
               }}
             >
@@ -262,25 +255,52 @@ export default function AtlasInterface({
             </h1>
             <h5
               className={`country-name ${
-                activeRegionType === "country" && "active-location-type"
+                activeLocationType === "country" && "active-location-type"
               }`}
               role="button"
               aria-label={`Select ${activeAdministrativeRegion.country}`}
               tabIndex={0}
-              onClick={() => setActiveRegionType(regionTypes[1])}
+              onClick={() => setActiveLocationType(regionTypes[1])}
               onKeyDown={(e) => {
                 if (e.key === "Enter" || e.key === "Space") {
-                  setActiveRegionType(regionTypes[0]);
+                  setActiveLocationType(regionTypes[0]);
                 }
               }}
             >
               {activeAdministrativeRegion.country}
             </h5>
-            <p className="region-name">
-              {activeAdministrativeRegion["intermediate-region"]}
-            </p>
-            <p className="region-name">{activeAdministrativeRegion["sub-region"]}</p>
-            <p className="region-name">{activeAdministrativeRegion.region}</p>
+            {regionTypes.map((type) => {
+              if (activeAdministrativeRegion[type] === "") return;
+              if (type === "country") return;
+              if (type === "name") return;
+              if (type === "id") return;
+              if (type === "iso_3166-2") return;
+              if (type === "country-code") return;
+              if (type === "sub-region-code") return;
+              if (type === "intermediate-region-code") return;
+              if (type === "combined") return;
+
+              console.log(type);
+
+              return (
+                <p
+                  className={`country-name country-${type} ${
+                    activeLocationType === type && "active-location-type"
+                  }`}
+                  role="button"
+                  tabIndex={0}
+                  aria-label={`Select ${activeAdministrativeRegion[type]}`}
+                  onClick={() => setActiveLocationType(type)}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" || e.key === "Space") {
+                      setActiveLocationType(regionTypes[type]);
+                    }
+                  }}
+                >
+                  {activeAdministrativeRegion[type]}
+                </p>
+              );
+            })}
           </>
         )}
 

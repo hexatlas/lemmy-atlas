@@ -59,7 +59,7 @@ export default function Atlas() {
       country: "country",
       name: "name",
     });
-  const [activeRegionType, setActiveRegionType] = useState(regionTypes[1]); // Default: Country Sort
+  const [activeLocationType, setActiveLocationType] = useState(regionTypes[1]); // Default: Country Sort
   const [locationQuery, setLocationQuery] = useState("");
 
   // DATA
@@ -94,7 +94,7 @@ export default function Atlas() {
       country: "country",
       name: "name",
     });
-    setActiveRegionType(regionTypes[1]); // Default: Country Sort
+    setActiveLocationType(regionTypes[1]); // Default: Country Sort
     setLocationQuery("");
 
     // DATA
@@ -214,8 +214,8 @@ export default function Atlas() {
     setMap,
 
     regionTypes,
-    activeRegionType,
-    setActiveRegionType,
+    activeLocationType,
+    setActiveLocationType,
 
     activeAdministrativeRegion,
     setActiveAdministrativeRegion,
@@ -256,12 +256,12 @@ export default function Atlas() {
 
   const DisplayAtlasMap = useMemo(
     () => <AtlasMap {...interfaceProps} />,
-    [activeAdministrativeRegion, activeRegionType]
+    [activeAdministrativeRegion, activeLocationType]
   );
 
   const DisplayAtlasNexus = useMemo(
     () => <AtlasNexusCard interfaceProps={interfaceProps} />,
-    [activeAdministrativeRegion, activeRegionType]
+    [activeAdministrativeRegion, activeLocationType]
   );
 
   return (
@@ -293,7 +293,7 @@ export default function Atlas() {
           </Tabs.Trigger>
         </Tabs.List>
         <Tabs.Content className="tabs-content" value="InfoTab">
-          {DisplayAtlasNexus}
+          <AtlasNexusCard interfaceProps={interfaceProps} />
         </Tabs.Content>
         <Tabs.Content className="tabs-content" value="CommentsTab">
           <AtlasLemmy {...interfaceProps} />
@@ -324,7 +324,7 @@ export default function Atlas() {
                 <span className="prefix"> in</span>
               </small>
             )}
-            <small>{activeAdministrativeRegion[activeRegionType]}</small>
+            <small>{activeAdministrativeRegion[activeLocationType]}</small>
             {activeCommunity && (
               <h6>
                 <span className="prefix">c/</span>

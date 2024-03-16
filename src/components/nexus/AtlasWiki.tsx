@@ -30,8 +30,8 @@ export function AtlasProleWiki({
   setMap,
 
   regionTypes,
-  activeRegionType,
-  setActiveRegionType,
+  activeLocationType,
+  setActiveLocationType,
 
   activeAdministrativeRegion,
   setActiveAdministrativeRegion,
@@ -86,13 +86,16 @@ export function AtlasProleWiki({
   };
 
   useEffect(() => {
-    if (activeAdministrativeRegion.country !== "country") {
+    if (activeAdministrativeRegion[activeLocationType] !== "") {
       const apiUrl = `/.netlify/functions/wiki/?country=${encodeURI(
-        activeAdministrativeRegion.country
+        activeAdministrativeRegion[activeLocationType]
       )}&wiki=${wikiURL}`;
+
+      console.log(activeSearchType);
+
       fetchProleWiki(apiUrl);
     }
-  }, [activeAdministrativeRegion]);
+  }, [activeAdministrativeRegion, activeLocationType]);
 
   return (
     <div className="prolewiki">
@@ -102,14 +105,12 @@ export function AtlasProleWiki({
             Please consider contributing knowledge on{" "}
             <a
               href={`https://en.prolewiki.org/?search=${encodeURI(
-                activeRegionType
-                  ? activeAdministrativeRegion.country
-                  : activeAdministrativeRegion.name
+                activeAdministrativeRegion[activeLocationType]
               )}`}
               target="_blank"
               rel="noopener noreferrer"
             >
-              {activeAdministrativeRegion.country} on {wikiURL}
+              {activeAdministrativeRegion[activeLocationType]} on {wikiURL}
             </a>
           </p>
         </>
@@ -119,14 +120,12 @@ export function AtlasProleWiki({
             Please consider correcting information on{" "}
             <a
               href={`${wikiURL}?search=${encodeURI(
-                activeRegionType
-                  ? activeAdministrativeRegion.country
-                  : activeAdministrativeRegion.name
+                activeAdministrativeRegion[activeLocationType]
               )}`}
               target="_blank"
               rel="noopener noreferrer"
             >
-              {activeAdministrativeRegion.country} on {wikiURL}
+              {activeAdministrativeRegion[activeLocationType]} on {wikiURL}
             </a>
           </p>
         </>
