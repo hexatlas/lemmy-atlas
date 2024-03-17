@@ -112,13 +112,15 @@ export function AtlasNexusReadingList({
     const [posts, setPosts] = useState([]);
     const [isLoaded, setIsLoaded] = useState(false);
 
-    function getHexbear(anarchistLibraryURL) {
+    function getHexbear(anarchistLibrary) {
       let client: LemmyHttp = new LemmyHttp(activeLemmyInstance?.baseUrl);
       let form: Search = {
+        community_id: activeCommunity?.counts?.community_id,
         type_: "All",
         listing_type: "All",
-        sort: activeSortType,
-        q: anarchistLibraryURL,
+        sort: "TopAll",
+        q: anarchistLibrary.author,
+        page: 1,
       };
 
       client.search(form).then((res) => {
@@ -132,31 +134,31 @@ export function AtlasNexusReadingList({
     }
 
     return (
-      <div className="bulletin-community">
+      <div className="anarchist-library-community">
         {!isLoaded && (
           <p
             className="reply-button"
             role="button"
             tabIndex={0}
             aria-label="Show Replies"
-            onClick={() => getHexbear(bulletin.link)}
+            onClick={() => getHexbear(bulletin)}
             onKeyDown={(e) => {
               if (e.key === "Enter" || e.key === "Space") {
-                () => getHexbear(bulletin.link);
+                () => getHexbear(bulletin);
               }
             }}
           >
-            <span className="post-replycount-icon">💬</span> /c/news
+            <span className="post-replycount-icon">💬</span> Search Author on hexbear.net
           </p>
         )}
-        {posts && (
+        {posts.length > 0 && (
           <div className="post-reply-container">
             {posts.length > 0 &&
               posts.map((post, index) => (
                 <Post
                   key={index}
                   post={post}
-                  community={{ id: 6 }}
+                  community={activeCommunity}
                   lemmyInstance={activeLemmyInstance}
                   activeListingType={activeListingType}
                   sort={activeSortType}
@@ -164,12 +166,12 @@ export function AtlasNexusReadingList({
               ))}
           </div>
         )}
-        {comments &&
+        {comments.length > 0 &&
           comments.map((comment, index) => {
             return (
               <Comment
                 key={index}
-                community={{ id: 6 }}
+                community={activeCommunity}
                 post={comment}
                 lemmyInstance={activeLemmyInstance}
                 sort={activeSortType}
@@ -189,7 +191,7 @@ export function AtlasNexusReadingList({
       )}`;
       fetchAnarchistLibrary(apiUrl);
     } else {
-      const apiUrl = `/.netlify/functions/anarchist_library/?index=true`;
+      const apiUrl = `/.netlify/functions/anarchist_library/`;
       fetchAnarchistLibrary(apiUrl);
     }
   }, [activeAdministrativeRegion, activeLocationType]);
@@ -214,15 +216,15 @@ export function AtlasNexusReadingList({
           {anarchistLibrary &&
             anarchistLibrary.map((book, index) => {
               return (
-                <div className="bulletin-item" key={index}>
+                <div className="anarchist-library-item" key={index}>
+                  <p className="anarchist-library-publish-date ">
+                    🗓️ {new Date(book.pubdate_iso).toDateString()}
+                  </p>
+                  <h4 className="anarchist-library-link">{book.title}</h4>
                   {book.author && (
-                    <p className="bulletin-author  bulletin-publish-date highlight">
-                      👤 {book.author}
-                    </p>
+                    <p className="anarchist-library-author highlight">👤 {book.author}</p>
                   )}
-                  <h4 className="bulletin-link">{book.title}</h4>
                   {book.subtitle && <p>ℹ️ {book.subtitle}</p>}
-                  {book.pages_estimated && <p>~{book.pages_estimated} 📄</p>}{" "}
                   {book.feed_teaser && (
                     <Collapsible.Root>
                       <Collapsible.Trigger>Show More</Collapsible.Trigger>
@@ -231,17 +233,17 @@ export function AtlasNexusReadingList({
                       </Collapsible.Content>
                     </Collapsible.Root>
                   )}{" "}
-                  <p className="bulletin-publish-date ">
-                    🗓️ {new Date(book.pubdate_iso).toDateString()}
-                  </p>
-                  <a
-                    className="bulletin-readmore"
-                    href={book.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    Read {book.text_type}
-                  </a>
+                  <div className="anarchist-library-container">
+                    <a
+                      className="anarchist-library-readmore"
+                      href={book.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Read {book.text_type}
+                    </a>
+                    {book.pages_estimated && <span>~{book.pages_estimated} 📄</span>}
+                  </div>
                   <HexBearNews bulletin={book} />
                 </div>
               );
