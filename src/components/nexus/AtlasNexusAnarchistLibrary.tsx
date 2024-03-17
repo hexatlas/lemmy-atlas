@@ -183,34 +183,30 @@ export function AtlasNexusReadingList({
   }
 
   useEffect(() => {
-    console.log(anarchistLibrary);
-  }, [anarchistLibrary]);
-
-  useEffect(() => {
     if (activeAdministrativeRegion.country !== "country") {
       const apiUrl = `/.netlify/functions/anarchist_library/?country=${encodeURI(
-        activeAdministrativeRegion.country
+        activeAdministrativeRegion[activeLocationType]
       )}`;
       fetchAnarchistLibrary(apiUrl);
     } else {
       const apiUrl = `/.netlify/functions/anarchist_library/?index=true`;
       fetchAnarchistLibrary(apiUrl);
     }
-  }, [activeAdministrativeRegion]);
+  }, [activeAdministrativeRegion, activeLocationType]);
 
   return (
     <div>
       <h3>Anarchist Library</h3>
       <a
         href={`https://theanarchistlibrary.org/search?query=${encodeURI(
-          activeAdministrativeRegion.country
+          activeAdministrativeRegion[activeLocationType]
         )}`}
         target="_blank"
         rel="noopener noreferrer"
       >
         📚📕 Books about{" "}
         {activeAdministrativeRegion.country != "country" &&
-          activeAdministrativeRegion.country}
+          activeAdministrativeRegion[activeLocationType]}
       </a>
 
       {anarchistLibrary?.length > 0 && (
