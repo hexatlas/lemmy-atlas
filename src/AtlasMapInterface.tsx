@@ -211,8 +211,6 @@ export default function AtlasInterface({
             if (type === "intermediate-region-code") return;
             if (type === "combined") return;
 
-            console.log(type);
-
             return (
               <p
                 className={`country-name country-${type} ${
@@ -279,8 +277,6 @@ export default function AtlasInterface({
               if (type === "sub-region-code") return;
               if (type === "intermediate-region-code") return;
               if (type === "combined") return;
-
-              console.log(type);
 
               return (
                 <p

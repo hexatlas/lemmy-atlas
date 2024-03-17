@@ -91,8 +91,6 @@ export function AtlasProleWiki({
         activeAdministrativeRegion[activeLocationType]
       )}&wiki=${wikiURL}`;
 
-      console.log(activeSearchType);
-
       fetchProleWiki(apiUrl);
     }
   }, [activeAdministrativeRegion, activeLocationType]);

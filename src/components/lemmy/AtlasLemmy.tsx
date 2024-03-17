@@ -101,50 +101,8 @@ export default function AtlasLemmy({
       case "combined":
         return `${locationQuery} ${activeAdministrativeRegion["name"]} ${activeAdministrativeRegion["country"]}`;
         break;
-      case "country":
-        return `${locationQuery} ${activeAdministrativeRegion["country"]}`;
-        break;
-      case "name":
-        return `${locationQuery} ${activeAdministrativeRegion["name"]}`;
-        break;
-      case "region":
-        return `${locationQuery} ${activeAdministrativeRegion["region"]}`;
-        break;
-
-      case "sub-region":
-        return `${locationQuery} ${activeAdministrativeRegion["sub-region"]}`;
-        break;
-
-      case "sub-region-code":
-        return `${locationQuery} ${activeAdministrativeRegion["sub-region-code"]}`;
-        break;
-
-      case "intermediate-region":
-        return `${locationQuery} ${activeAdministrativeRegion["intermediate-region"]}`;
-        break;
-
-      case "intermediate-region-code":
-        return `${locationQuery} ${activeAdministrativeRegion["intermediate-region-code"]}`;
-        break;
-
-      case "alpha-2":
-        return `${locationQuery} ${activeAdministrativeRegion["alpha-2"]}`;
-        break;
-
-      case "alpha-3":
-        return `${locationQuery} ${activeAdministrativeRegion["alpha-3"]}`;
-        break;
-
-      case "iso_3166-2":
-        return `${locationQuery} ${activeAdministrativeRegion["iso_3166-2"]}`;
-        break;
-
-      case "id":
-        return `${locationQuery} ${activeAdministrativeRegion["id"]}`;
-        break;
-
       default:
-        return `${locationQuery} ${activeAdministrativeRegion["name"]} ${activeAdministrativeRegion["country"]}`;
+        return `${locationQuery} ${activeAdministrativeRegion[activeLocationType]}`;
     }
   }
 
@@ -166,8 +124,8 @@ export default function AtlasLemmy({
     }
 
     client.search(form).then((res) => {
-      setPosts([]);
-      setComments([]);
+      // setPosts([]);
+      // setComments([]);
 
       if (activeSearchType === "Comments") {
         setPosts([]);
@@ -611,17 +569,16 @@ export default function AtlasLemmy({
             ))}
         </div>
       )}
-      {true && (
-        <button
-          className="view-more"
-          onClick={() => setCurrentSearchResultPage(currentSearchResultPage + 1)}
-        >
-          View More
-        </button>
-      )}
+      <button
+        className="view-more"
+        onClick={() => setCurrentSearchResultPage(currentSearchResultPage + 1)}
+      >
+        View More
+      </button>
       {/* {activeSearchType === "Posts" && regionSearchResult && (
         <p>{regionSearchResult.posts === 0 && "No results."}</p>
       )} */}
+      <br />
       <a
         href={encodeURI(
           `${activeLemmyInstance.baseUrl}search?q=${encodeURIComponent(
