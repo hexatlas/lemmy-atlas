@@ -40,7 +40,7 @@ export default function Atlas() {
     name: string;
   }
 
-  const sideBarRef = useRef();
+  const sideBarRef = useRef<HTMLInputElement>(null);
   /*
     useStates
   */
