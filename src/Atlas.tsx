@@ -3,8 +3,9 @@ import { useEffect, useMemo, useState, useRef } from "react";
 // https://www.radix-ui.com/primitives/docs/components/tabs
 import * as Tabs from "@radix-ui/react-tabs";
 
-// Import Components
+// Imoport SCSS
 
+// Import Components
 import AtlasMap from "./AtlasMap";
 import AtlasLemmy from "./components/lemmy/AtlasLemmy";
 import AtlasInterface from "./AtlasMapInterface";

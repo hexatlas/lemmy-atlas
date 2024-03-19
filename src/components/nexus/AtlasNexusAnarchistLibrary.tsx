@@ -227,7 +227,9 @@ export function AtlasNexusReadingList({
                   {book.subtitle && <p>ℹ️ {book.subtitle}</p>}
                   {book.feed_teaser && (
                     <Collapsible.Root>
-                      <Collapsible.Trigger>Show More</Collapsible.Trigger>
+                      <Collapsible.Trigger className="view-more">
+                        Show More
+                      </Collapsible.Trigger>
                       <Collapsible.Content>
                         <div dangerouslySetInnerHTML={{ __html: book.feed_teaser }}></div>
                       </Collapsible.Content>
