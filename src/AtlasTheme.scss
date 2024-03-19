@@ -180,10 +180,14 @@ code {
   text-shadow: var(--atlas-shadow-text);
 }
 
-@mixin atlas-glass {
-  backdrop-filter: blur(var(--atlas-size-11));
-  -webkit-backdrop-filter: blur(var(--atlas-size-11));
+@mixin atlas-blur($blur_radius) {
+  backdrop-filter: blur($blur_radius);
+  -webkit-backdrop-filter: blur($blur_radius);
 }
+
+/*
+    GLASS
+*/
 
 /* 
     COLORS
@@ -244,59 +248,10 @@ code {
   var(--atlas-opacity-3)
 );
 
-/* GREY */
-@include color_background_setting(
-  "grey",
-  var(--atlas-color-grey),
-  var(--atlas-color-light),
-  var(--atlas-opacity-3)
-);
-
-/* LIGHTGREY */
-@include color_background_setting(
-  "lightgrey",
-  var(--atlas-color-lightgrey),
-  var(--atlas-color-dark),
-  var(--atlas-opacity-3)
-);
-
-/* LIGHT */
+/* Light */
 @include color_background_setting(
   "light",
   var(--atlas-color-light),
-  var(--atlas-color-dark),
-  var(--atlas-opacity-3)
-);
-
-/*  UTILS */
-/* INFO */
-@include color_background_setting(
-  "info",
-  var(--atlas-color-info),
-  var(--atlas-color-light),
-  var(--atlas-opacity-3)
-);
-
-/* SUCCESS */
-@include color_background_setting(
-  "success",
-  var(--atlas-color-success),
-  var(--atlas-color-dark),
-  var(--atlas-opacity-3)
-);
-
-/* WARNING */
-@include color_background_setting(
-  "warning",
-  var(--atlas-color-warning),
-  var(--atlas-color-dark),
-  var(--atlas-opacity-3)
-);
-
-/* ERROR */
-@include color_background_setting(
-  "error",
-  var(--atlas-color-error),
   var(--atlas-color-dark),
   var(--atlas-opacity-3)
 );
