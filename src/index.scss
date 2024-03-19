@@ -72,48 +72,31 @@
 
   --atlas-transition-fast: 50ms var(--atlas-timing-function);
   --atlas-transition-slow: 150ms var(--atlas-timing-function);
-  --atlas-timing-fast: 300ms var(--atlas-timing-function) infinite
-    alternate-reverse;
-  --atlas-timing-slow: 3s var(--atlas-timing-function) infinite
-    alternate-reverse;
-  --atlas-timing-gradient: 18s var(--atlas-timing-function) infinite
-    alternate-reverse;
+  --atlas-timing-fast: 300ms var(--atlas-timing-function) infinite alternate-reverse;
+  --atlas-timing-slow: 3s var(--atlas-timing-function) infinite alternate-reverse;
+  --atlas-timing-gradient: 18s var(--atlas-timing-function) infinite alternate-reverse;
 
   /* shadows */
 
   // https://shadows.brumm.af/
   --atlas-shadow-1: 0 var(--atlas-size-16) var(--atlas-size-16)
       hsl(var(--atlas-color-dark) / 0.08),
-    0 var(--atlas-size-15) var(--atlas-size-15)
-      hsl(var(--atlas-color-dark) / 0.061),
-    0 var(--atlas-size-14) var(--atlas-size-14)
-      hsl(var(--atlas-color-dark) / 0.052),
-    0 var(--atlas-size-13) var(--atlas-size-13)
-      hsl(var(--atlas-color-dark) / 0.046),
-    0 var(--atlas-size-12) var(--atlas-size-12)
-      hsl(var(--atlas-color-dark) / 0.04),
-    0 var(--atlas-size-11) var(--atlas-size-11)
-      hsl(var(--atlas-color-dark) / 0.034),
-    0 var(--atlas-size-10) var(--atlas-size-10)
-      hsl(var(--atlas-color-dark) / 0.028),
-    0 var(--atlas-size-09) var(--atlas-size-09)
-      hsl(var(--atlas-color-dark) / 0.019);
+    0 var(--atlas-size-15) var(--atlas-size-15) hsl(var(--atlas-color-dark) / 0.061),
+    0 var(--atlas-size-14) var(--atlas-size-14) hsl(var(--atlas-color-dark) / 0.052),
+    0 var(--atlas-size-13) var(--atlas-size-13) hsl(var(--atlas-color-dark) / 0.046),
+    0 var(--atlas-size-12) var(--atlas-size-12) hsl(var(--atlas-color-dark) / 0.04),
+    0 var(--atlas-size-11) var(--atlas-size-11) hsl(var(--atlas-color-dark) / 0.034),
+    0 var(--atlas-size-10) var(--atlas-size-10) hsl(var(--atlas-color-dark) / 0.028),
+    0 var(--atlas-size-09) var(--atlas-size-09) hsl(var(--atlas-color-dark) / 0.019);
   --atlas-shadow-text: 0 var(--atlas-size-16) var(--atlas-size-16)
       hsl(var(--atlas-color-dark) / 0.08),
-    0 var(--atlas-size-15) var(--atlas-size-15)
-      hsl(var(--atlas-color-dark) / 0.061),
-    0 var(--atlas-size-14) var(--atlas-size-14)
-      hsl(var(--atlas-color-dark) / 0.052),
-    0 var(--atlas-size-13) var(--atlas-size-13)
-      hsl(var(--atlas-color-dark) / 0.046),
-    0 var(--atlas-size-12) var(--atlas-size-12)
-      hsl(var(--atlas-color-dark) / 0.04),
-    0 var(--atlas-size-11) var(--atlas-size-11)
-      hsl(var(--atlas-color-dark) / 0.034),
-    0 var(--atlas-size-10) var(--atlas-size-10)
-      hsl(var(--atlas-color-dark) / 0.028),
-    0 var(--atlas-size-09) var(--atlas-size-09)
-      hsl(var(--atlas-color-dark) / 0.019);
+    0 var(--atlas-size-15) var(--atlas-size-15) hsl(var(--atlas-color-dark) / 0.061),
+    0 var(--atlas-size-14) var(--atlas-size-14) hsl(var(--atlas-color-dark) / 0.052),
+    0 var(--atlas-size-13) var(--atlas-size-13) hsl(var(--atlas-color-dark) / 0.046),
+    0 var(--atlas-size-12) var(--atlas-size-12) hsl(var(--atlas-color-dark) / 0.04),
+    0 var(--atlas-size-11) var(--atlas-size-11) hsl(var(--atlas-color-dark) / 0.034),
+    0 var(--atlas-size-10) var(--atlas-size-10) hsl(var(--atlas-color-dark) / 0.028),
+    0 var(--atlas-size-09) var(--atlas-size-09) hsl(var(--atlas-color-dark) / 0.019);
 }
 
 /* 
@@ -278,6 +261,7 @@ button,
 textarea,
 select,
 progress {
+  @include atlas-shadow(var(--atlas-shadow-1));
   font: inherit;
   padding: var(--atlas-size-08) var(--atlas-size-10);
   border-width: var(--atlas-size-11);
@@ -285,7 +269,6 @@ progress {
 
   transition: border-radius var(--atlas-transition-fast);
   animation: atlas var(--atlas-timing-slow);
-  @include atlas-shadow(var(--atlas-shadow-1));
 
   &:focus,
   &:hover {
@@ -318,10 +301,10 @@ button,
     animation: atlas var(--atlas-timing-fast);
   }
   &:active {
+    @include atlas-shadow(none);
     border-radius: var(--atlas-border-radius-1);
     transition: border-radius 10ms ease-out;
     animation: none;
-    @include atlas-shadow(none);
   }
 }
 
@@ -341,12 +324,7 @@ progress {
     COLORS
 */
 
-@mixin color_background_setting(
-  $name,
-  $color_identity,
-  $color_greyscale,
-  $opacity
-) {
+@mixin color_background_setting($name, $color_identity, $color_greyscale, $opacity) {
   .#{$name} {
     color: hsl($color_greyscale / $opacity);
     background: hsl($color_identity);
@@ -533,11 +511,11 @@ main > .full-width {
 
 /* Wrapper */
 .wrapper {
+  @include atlas-shadow(var(--atlas-shadow-1));
   position: relative;
   border-radius: var(--atlas-border-radius-1);
 
   animation: atlas var(--atlas-timing-slow);
-  @include atlas-shadow(var(--atlas-shadow-1));
 
   &:hover {
     animation: atlas var(--atlas-timing-fast);
@@ -552,12 +530,10 @@ main > .full-width {
 
 @keyframes atlas {
   0% {
-    border-radius: var(--atlas-size-09) var(--atlas-size-10) 0
-      var(--atlas-size-08);
+    border-radius: var(--atlas-size-09) var(--atlas-size-10) 0 var(--atlas-size-08);
   }
   100% {
-    border-radius: 0 var(--atlas-size-08) var(--atlas-size-09)
-      var(--atlas-size-10);
+    border-radius: 0 var(--atlas-size-08) var(--atlas-size-09) var(--atlas-size-10);
   }
 }
 

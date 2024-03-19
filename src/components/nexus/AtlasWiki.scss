@@ -16,11 +16,11 @@
 }
 
 .infobox {
+  @include atlas-shadow(var(--atlas-shadow-inset));
   width: 100% !important;
   background: hsl(var(--atlas-color-light) / var(--atlas-opacity-1));
   padding: var(--atlas-size-10) !important;
   border: 1px solid hsl(var(--atlas-color-tertiary) / var(--atlas-opacity-2));
-  box-shadow: var(--atlas-shadow-inset);
   border-radius: var(--atlas-border-radius-1) !important;
   margin-bottom: var(--atlas-size-10);
   border-collapse: inherit !important;

@@ -1,10 +1,10 @@
 .anarchist-library-item {
+  @include atlas-shadow(var(--atlas-shadow-inset));
   background: hsl(var(--atlas-color-light) / var(--atlas-opacity-1));
   margin-top: var(--atlas-size-10);
   padding-top: var(--atlas-size-10);
   padding-bottom: var(--atlas-size-12);
   border-radius: var(--atlas-border-radius-1);
-  box-shadow: var(--atlas-shadow-inset);
   gap: var(--atlas-size-12);
 }
 
@@ -13,8 +13,8 @@
 }
 
 p.anarchist-library-author {
+  @include atlas-shadow(var(--atlas-shadow-inset));
   background: hsl(var(--atlas-color-dark) / var(--atlas-opacity-3));
-  box-shadow: var(--atlas-shadow-1);
   padding: var(--atlas-size-12) var(--atlas-size-10);
   justify-self: flex-end;
   grid-column: 2 / -1;
@@ -27,12 +27,12 @@ p.anarchist-library-author {
 }
 
 .anarchist-library-community {
+  @include atlas-shadow(var(--atlas-shadow-inset));
   background: hsl(var(--atlas-color-dark) / var(--atlas-opacity-3));
   margin: var(--atlas-size-12);
   padding: var(--atlas-size-12);
 
   border-radius: var(--atlas-border-radius-1);
-  box-shadow: var(--atlas-shadow-inset);
 }
 
 .anarchist-library-item .reply-button {

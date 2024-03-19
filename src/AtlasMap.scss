@@ -33,12 +33,11 @@
 }
 
 .leaflet-control-layers-toggle {
+  @include atlas-glass();
   width: var(--atlas-size-07) !important;
   height: var(--atlas-size-07) !important;
 
   position: relative;
-  backdrop-filter: blur(var(--atlas-size-11));
-  -webkit-backdrop-filter: blur(var(--atlas-size-11));
   border: 1px solid hsl(var(--atlas-color-light) / var(--atlas-opacity-3));
 }
 
@@ -150,10 +149,10 @@
 }
 
 .leaflet-control:hover.leaflet-control-layers-expanded {
+  @include atlas-shadow(var(--atlas-shadow-inset));
   border: 1px solid hsl(var(--atlas-color-light) / var(--atlas-opacity-3)) !important;
   border-right: var(--atlas-size-14) solid
     hsl(var(--atlas-color-secondary) / var(--atlas-opacity-3)) !important;
-  box-shadow: var(--atlas-shadow-inset);
 }
 
 /* no politics */

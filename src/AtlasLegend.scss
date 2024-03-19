@@ -18,23 +18,21 @@
 }
 
 .search-button {
+  @include atlas-shadow(var(--atlas-shadow-inset));
+  @include atlas-glass();
   background-color: hsl(var(--atlas-color-light) / var(--atlas-opacity-1));
   border: 1px solid hsl(var(--atlas-color-dark) / var(--atlas-opacity-2));
   /* border-left: none; */
   border-radius: var(--atlas-border-radius-1);
 
-  backdrop-filter: blur(var(--atlas-size-11));
-  -webkit-backdrop-filter: blur(var(--atlas-size-11));
-  box-shadow: var(--atlas-shadow-inset);
   position: relative;
   z-index: -1;
   right: var(--atlas-size-10);
 
   &:hover,
   &:focus {
+    @include atlas-shadow(var(--atlas-shadow-inset));
     background-color: hsl(var(--atlas-color-light) / var(--atlas-opacity-2));
-
-    box-shadow: var(--atlas-shadow-inset);
   }
   &:hover .search-icon {
     fill: hsl(var(--atlas-color-primary));
@@ -63,8 +61,8 @@
 }
 
 .search-input {
+  @include atlas-shadow(var(--atlas-shadow-inset));
   width: 100%;
-  box-shadow: var(--atlas-shadow-inset);
 }
 
 #country-search .search-results {
@@ -168,6 +166,8 @@
 }
 
 .map-interface-container {
+  @include atlas-shadow(var(--atlas-shadow-1));
+  @include atlas-glass();
   position: absolute;
   max-width: calc(100% - var(--atlas-size-06));
 
@@ -183,9 +183,6 @@
   border-right: var(--atlas-size-14) solid
     hsl(var(--atlas-color-secondary) / var(--atlas-opacity-3));
   border-radius: var(--atlas-border-radius-1);
-  backdrop-filter: blur(var(--atlas-size-11));
-  -webkit-backdrop-filter: blur(var(--atlas-size-11));
-  box-shadow: var(--atlas-shadow-1);
 }
 
 @media only screen and (min-width: 768px) {
@@ -197,10 +194,10 @@
 
 .map-interface-container .country-name:hover,
 .map-interface-container .country-administrative-region:hover {
+  @include atlas-shadow(var(--atlas-shadow-inset));
   background-color: hsl(var(--atlas-color-primary) / var(--atlas-opacity-3));
   color: hsl(var(--atlas-color-light) / var(--atlas-opacity-3));
   border-radius: var(--atlas-border-radius-1);
-  box-shadow: var(--atlas-shadow-inset);
 }
 
 .map-interface-container .country-name,
@@ -235,11 +232,11 @@
 }
 
 .country-administrative-region-click-history-item:hover {
+  @include atlas-shadow(var(--atlas-shadow-inset));
   background-color: hsl(var(--atlas-color-primary) / var(--atlas-opacity-3));
   color: hsl(var(--atlas-color-light) / var(--atlas-opacity-3));
   cursor: pointer;
   border-radius: var(--atlas-border-radius-1);
-  box-shadow: var(--atlas-shadow-inset);
 }
 
 /* NEXUS */
@@ -249,6 +246,8 @@
 }
 
 .map-mobile-indicator {
+  @include atlas-shadow(var(--atlas-shadow-inset));
+  @include atlas-glass();
   /* font-size: var(--atlas-size-0); */
   position: sticky;
   bottom: var(--atlas-size-08);
@@ -263,10 +262,6 @@
   border: 1px solid hsl(var(--atlas-color-tertiary) / var(--atlas-opacity-3));
 
   border-radius: var(--atlas-border-radius-1);
-  backdrop-filter: blur(var(--atlas-size-11));
-  -webkit-backdrop-filter: blur(var(--atlas-size-11));
-  box-shadow: var(--atlas-shadow-inset);
-  text-shadow: var(--atlas-shadow-text);
   font-weight: 900;
 
   margin: var(--atlas-size-10);
@@ -284,7 +279,7 @@
   background-color: hsl(var(--atlas-color-light) / var(--atlas-opacity-3));
   padding: var(--atlas-size-10);
   text-shadow: var(--atlas-shadow-text);
-  box-shadow: var(--atlas-shadow-1);
+  @include atlas-shadow(var(--atlas-shadow-1));
   min-width: var(--atlas-size-07);
   overflow: hidden;
   margin-right: var(--atlas-size-10);
@@ -351,11 +346,10 @@
 }
 
 .community-button {
+  @include atlas-shadow(var(--atlas-shadow-inset));
   height: var(--atlas-size-08);
   background-color: hsl(var(--atlas-color-light) / var(--atlas-opacity-3));
   color: hsl(var(--atlas-color-dark) / var(--atlas-opacity-3));
-  box-shadow: var(--atlas-shadow-inset);
-  text-shadow: var(--atlas-shadow-text);
 }
 
 .community-button-active {
@@ -457,14 +451,15 @@
 }
 
 .community-post .post-body {
+  @include atlas-shadow(var(--atlas-shadow-inset));
   background-color: hsl(var(--atlas-color-light) / var(--atlas-opacity-1));
   padding: var(--atlas-size-10);
   border-radius: var(--atlas-border-radius-1);
-  box-shadow: var(--atlas-shadow-inset);
 }
 
 .user-pronouns p,
 .community-stats p {
+  @include atlas-shadow(var(--atlas-shadow-inset));
   margin: 0;
   font-size: var(--atlas-size-09);
   font-weight: 900;
@@ -472,8 +467,6 @@
   border-radius: var(--atlas-border-radius-1);
   background-color: hsl(var(--atlas-color-light) / var(--atlas-opacity-1));
   color: hsl(var(--atlas-color-light) / var(--atlas-opacity-2));
-  box-shadow: var(--atlas-shadow-inset);
-  text-shadow: var(--atlas-shadow-text);
 }
 
 .community-stats p {
@@ -520,11 +513,11 @@ p.post-vote {
 }
 
 .post-highlight > div > .comment-body {
+  @include atlas-shadow(var(--atlas-shadow-inset));
   background: hsl(var(--atlas-color-tertiary) / var(--atlas-opacity-3));
   border-radius: var(--atlas-border-radius-1);
   padding: var(--atlas-size-10);
   margin: var(--atlas-size-10);
-  box-shadow: var(--atlas-shadow-inset);
   position: relative;
 }
 .post-highlight > div > .comment-body,
@@ -729,6 +722,7 @@ p.post-vote {
 .user-avatar-container,
 .community-avatar-container,
 .post-thumbnail-container {
+  @include atlas-shadow(var(--atlas-shadow-inset));
   overflow: hidden;
   user-select: none;
 
@@ -739,27 +733,25 @@ p.post-vote {
   cursor: pointer;
   background-color: hsl(var(--atlas-color-light) / var(--atlas-opacity-1));
   color: hsl(var(--atlas-color-light) / var(--atlas-opacity-2));
-  text-shadow: var(--atlas-shadow-text);
   text-align: center;
   font-weight: 900;
-  box-shadow: var(--atlas-shadow-inset);
 }
 
 .post-thumbnail-container {
+  @include atlas-shadow(var(--atlas-shadow-inset));
   background-color: hsl(var(--atlas-color-light) / var(--atlas-opacity-1)) !important;
   color: hsl(var(--atlas-color-light) / var(--atlas-opacity-2));
   width: var(--atlas-size-06);
   height: var(--atlas-size-06);
-  box-shadow: var(--atlas-shadow-inset);
 }
 
 .post-thumbnail-container img {
+  @include atlas-shadow(var(--atlas-shadow-inset));
   height: 100%;
   width: 100%;
   line-height: var(--atlas-size-06);
   object-fit: cover;
   font-size: var(--atlas-size-08);
-  box-shadow: var(--atlas-shadow-inset);
   position: relative;
   transition: var(--atlas-transition-slow);
 }
@@ -772,12 +764,12 @@ p.post-vote {
 .user-avatar-infocard {
   width: var(--atlas-size-04);
   height: var(--atlas-size-04);
-  box-shadow: var(--atlas-shadow-1);
+  @include atlas-shadow(var(--atlas-shadow-1));
 }
 
 .user-avatar-container:focus,
 .community-avatar-container:focus {
-  box-shadow: var(--atlas-shadow-1);
+  @include atlas-shadow(var(--atlas-shadow-1));
 }
 
 .user-avatar-image,
@@ -823,6 +815,8 @@ a.post-creator {
 
 .user-info-card-content,
 .community-info-card-content {
+  @include atlas-glass();
+  @include atlas-shadow(var(--atlas-shadow-1));
   color: hsl(var(--atlas-color-dark) / var(--atlas-opacity-3));
   padding: var(--atlas-size-10);
   max-width: calc(var(--atlas-size-00) * 2);
@@ -834,9 +828,6 @@ a.post-creator {
   border-left: var(--atlas-size-14) solid
     hsl(var(--atlas-color-tertiary) / var(--atlas-opacity-3));
   border-radius: var(--atlas-border-radius-1);
-  backdrop-filter: blur(var(--atlas-size-11));
-  -webkit-backdrop-filter: blur(var(--atlas-size-11));
-  box-shadow: var(--atlas-shadow-1);
 
   animation-duration: var(--atlas-time-1);
   animation-timing-function: var(--atlas-timing-function);
@@ -861,7 +852,7 @@ a.post-creator {
   padding: var(--atlas-size-10);
   display: grid;
   gap: var(--atlas-size-10);
-  box-shadow: var(--atlas-shadow-1);
+  @include atlas-shadow(var(--atlas-shadow-1));
   border-radius: var(--atlas-border-radius-1);
   max-height: var(--atlas-size-00);
   overflow-y: scroll;
@@ -886,13 +877,12 @@ a.post-creator {
 
 .user-info-card-content .user-pronouns p,
 .community-info-card-content .community-stats p {
+  @include atlas-shadow(var(--atlas-shadow-inset));
   padding: var(--atlas-size-12) var(--atlas-size-10);
   margin-bottom: var(--atlas-size-12);
   border-radius: var(--atlas-border-radius-1);
   background-color: hsl(var(--atlas-color-tertiary) / var(--atlas-opacity-3));
   color: hsl(var(--atlas-color-dark) / var(--atlas-opacity-3));
-  box-shadow: var(--atlas-shadow-inset);
-  text-shadow: var(--atlas-shadow-text);
 }
 
 .user-info-card-content .user-posts .user-pronouns p {
@@ -947,7 +937,7 @@ a.post-creator {
   border-radius: var(--atlas-border-radius-1);
   max-height: calc(var(--atlas-size-00) * 2);
   overflow-y: scroll;
-  box-shadow: var(--atlas-shadow-1);
+  @include atlas-shadow(var(--atlas-shadow-1));
 }
 
 /* Collapse */
@@ -1020,10 +1010,11 @@ a.post-creator {
 
 .dropdown-menu-content,
 .dropdown-menu-subcontent {
+  @include atlas-shadow(var(--atlas-shadow-inset));
+  @include atlas-glass();
   min-width: var(--atlas-size-00);
   background-color: hsl(var(--atlas-color-light) / var(--atlas-opacity-2));
   padding: var(--atlas-size-12);
-  box-shadow: var(--atlas-shadow-inset);
   animation-duration: var(--atlas-time-1);
   animation-timing-function: var(--atlas-timing-function);
   will-change: transform, opacity;
@@ -1035,10 +1026,6 @@ a.post-creator {
   border-right: var(--atlas-size-14) solid
     hsl(var(--atlas-color-secondary) / var(--atlas-opacity-3));
   border-radius: var(--atlas-border-radius-1);
-
-  backdrop-filter: blur(var(--atlas-size-11));
-  -webkit-backdrop-filter: blur(var(--atlas-size-11));
-  box-shadow: var(--atlas-shadow-inset);
 }
 .dropdown-menu-subcontent {
   overflow-y: scroll;
@@ -1096,9 +1083,9 @@ a.post-creator {
 .dropdown-menu-checkbox-item[data-highlighted],
 .dropdown-menu-radio-item[data-highlighted],
 .dropdown-menu-subtrigger[data-highlighted] {
+  @include atlas-shadow(var(--atlas-shadow-inset));
   background-color: hsl(var(--atlas-color-primary) / var(--atlas-opacity-3));
   color: hsl(var(--atlas-color-light) / var(--atlas-opacity-3));
-  box-shadow: var(--atlas-shadow-inset);
 }
 
 .dropdown-menu-label {
@@ -1130,6 +1117,8 @@ a.post-creator {
 }
 
 .icon-button {
+  @include atlas-shadow(var(--atlas-shadow-1));
+  @include atlas-glass();
   position: sticky;
   top: var(--atlas-size-10);
   z-index: 9;
@@ -1147,21 +1136,17 @@ a.post-creator {
   color: hsl(var(--atlas-color-light) / var(--atlas-opacity-3));
   background-color: hsl(var(--atlas-color-secondary));
 
-  box-shadow: var(--atlas-shadow-1);
   transition: var(--atlas-transition-fast);
 
   background-color: hsl(var(--atlas-color-secondary) / var(--atlas-opacity-3));
   border: 1px solid hsl(var(--atlas-color-light) / var(--atlas-opacity-1));
   border-radius: var(--atlas-border-radius-1);
-
-  backdrop-filter: blur(var(--atlas-size-11));
-  -webkit-backdrop-filter: blur(var(--atlas-size-11));
 }
 .icon-button:hover {
+  @include atlas-shadow(var(--atlas-shadow-inset));
   background-color: hsl(var(--atlas-color-primary) / var(--atlas-opacity-3));
   color: hsl(var(--atlas-color-light) / var(--atlas-opacity-3));
   transition: var(--atlas-transition-slow);
-  box-shadow: var(--atlas-shadow-inset);
 }
 .icon-button:focus {
   box-shadow: var(--atlas-shadow-text);
@@ -1231,7 +1216,7 @@ a.post-creator {
   height: 100vh;
   height: 100dvh;
   position: relative;
-  box-shadow: var(--atlas-shadow-1);
+  @include atlas-shadow(var(--atlas-shadow-1));
   z-index: 999;
   overflow: hidden;
   overflow-y: scroll;
@@ -1269,6 +1254,8 @@ a.post-creator {
 }
 
 .tabs-trigger {
+  @include atlas-shadow(var(--atlas-shadow-inset));
+  @include atlas-glass();
   font-family: inherit;
   background-color: hsl(var(--atlas-color-dark));
   height: var(--atlas-size-07);
@@ -1291,22 +1278,16 @@ a.post-creator {
   border-right: var(--atlas-size-14) solid
     hsl(var(--atlas-color-secondary) / var(--atlas-opacity-3));
   border-radius: var(--atlas-border-radius-1);
-  backdrop-filter: blur(var(--atlas-size-11));
-  -webkit-backdrop-filter: blur(var(--atlas-size-11));
-  box-shadow: var(--atlas-shadow-inset);
 }
 
 .tabs-trigger:hover {
   color: hsl(var(--atlas-color-light));
   background-color: hsl(var(--atlas-color-primary) / var(--atlas-opacity-3));
-  /* box-shadow: none; */
-  text-shadow: var(--atlas-shadow-text);
 }
 .tabs-trigger[data-state="active"] {
   color: hsl(var(--atlas-color-tertiary) / var(--atlas-opacity-3));
   background-color: hsl(var(--atlas-color-light) / var(--atlas-opacity-2));
-  box-shadow: var(--atlas-shadow-1);
-  text-shadow: var(--atlas-shadow-text);
+  @include atlas-shadow(var(--atlas-shadow-1));
 
   border: 1px solid hsl(var(--atlas-color-light) / var(--atlas-opacity-2));
   border-left: var(--atlas-size-14) solid
@@ -1315,7 +1296,7 @@ a.post-creator {
 }
 .tabs-trigger:focus {
   position: relative;
-  box-shadow: var(--atlas-shadow-1);
+  @include atlas-shadow(var(--atlas-shadow-1));
   border-color: hsl(var(--atlas-color-primary) / var(--atlas-opacity-3));
 }
 
@@ -1326,7 +1307,7 @@ a.post-creator {
   outline: none;
 }
 .tabs-content:focus {
-  box-shadow: var(--atlas-shadow-1);
+  @include atlas-shadow(var(--atlas-shadow-1));
 }
 
 .tabs-content .banner-image {
