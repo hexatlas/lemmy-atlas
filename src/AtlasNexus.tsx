@@ -6,6 +6,7 @@ import AtlasNexusIMFData from "./components/nexus/AtlasNexusIMFData";
 import AtlasNexusBulletins from "./components/nexus/AtlasNexusBulletins";
 import AtlasWiki from "./components/nexus/AtlasWiki";
 import AtlasNexusAnarchistLibrary from "./components/nexus/AtlasNexusAnarchistLibrary";
+import AtlasMisc from "./components/nexus/AtlasMisc";
 
 /*
  /$$   /$$                                        
@@ -44,6 +45,9 @@ function AtlasNexusCard({ interfaceProps }) {
           <Tabs.Trigger className="tabs-trigger" value="AnarchistLibrary">
             Anarchist Library
           </Tabs.Trigger>
+          <Tabs.Trigger className="tabs-trigger" value="Misc">
+            Misc
+          </Tabs.Trigger>
         </Tabs.List>
         <Tabs.Content className="tabs-content" value="ClassStructureTab">
           <AtlasNexusClassStructure />
@@ -66,6 +70,9 @@ function AtlasNexusCard({ interfaceProps }) {
         </Tabs.Content>
         <Tabs.Content className="tabs-content" value="AnarchistLibrary">
           <AtlasNexusAnarchistLibrary {...interfaceProps} />
+        </Tabs.Content>
+        <Tabs.Content className="tabs-content" value="Misc">
+          <AtlasMisc {...interfaceProps} />
         </Tabs.Content>
       </Tabs.Root>
     </>
