@@ -97,13 +97,11 @@ export default function AtlasLemmy({
   */
 
   function handleSearchQuery() {
-    switch (activeLocationType) {
-      case "combined":
-        return `${locationQuery} ${activeAdministrativeRegion["name"]} ${activeAdministrativeRegion["country"]}`;
-        break;
-      default:
-        return `${locationQuery} ${activeAdministrativeRegion[activeLocationType]}`;
-    }
+    return `${locationQuery} ${
+      activeAdministrativeRegion["country"] === "country"
+        ? ""
+        : activeAdministrativeRegion[activeLocationType]
+    }`;
   }
 
   let client: LemmyHttp = new LemmyHttp(activeLemmyInstance?.baseUrl);
