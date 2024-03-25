@@ -92,8 +92,88 @@ export function AtlasBannedThought({
 
   return (
     <div>
-      <h3>BannedThought</h3>
+      <h3>World Inequality Database</h3>
+      <a href="https://wid.world/data/" target="_blank" rel="noopener noreferrer">
+        🔗 Visit https://wid.world/data/
+      </a>
 
+      <h3>UN Comtrade</h3>
+      <a href="https://comtradeplus.un.org/" target="_blank" rel="noopener noreferrer">
+        🔗 Visit UN Comtrade
+      </a>
+
+      <h3>International Labour Organization</h3>
+      <a
+        href="https://ilostat.ilo.org/resources/sdmx-tools/"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        🔗 Visit ILOSTAT
+      </a>
+
+      <h3>International Energy Agency</h3>
+      {activeAdministrativeRegion.country != "country" && (
+        <>
+          <a
+            href={`https://www.iea.org/search/charts?q=${encodeURI(
+              activeAdministrativeRegion[activeLocationType]
+            )
+              .replace(/%20/g, "-")
+              .toLowerCase()}`}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            🔗 View Charts on {activeAdministrativeRegion[activeLocationType]}
+          </a>
+        </>
+      )}
+
+      <h3>World Bank</h3>
+      {activeAdministrativeRegion.country != "country" && (
+        <>
+          <a
+            href={`https://data.worldbank.org/country/${encodeURI(
+              activeAdministrativeRegion["alpha-2"]
+            )}`}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            🔗 View Data on {activeAdministrativeRegion[activeLocationType]}
+          </a>
+        </>
+      )}
+
+      <h3>OECD</h3>
+      {activeAdministrativeRegion.country != "country" && (
+        <>
+          <a
+            href={`https://data.oecd.org/${encodeURI(
+              activeAdministrativeRegion[activeLocationType]
+            )
+              .replace(/%20/g, "-")
+              .toLowerCase()}.htm`}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            🔗 View Data on {activeAdministrativeRegion[activeLocationType]}
+          </a>
+          <br />
+          <a
+            href={`https://data.oecd.org/searchresults/?q=${encodeURI(
+              activeAdministrativeRegion[activeLocationType]
+            )
+              .replace(/%20/g, "-")
+              .toLowerCase()}`}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            🔗 View Search Results on {activeAdministrativeRegion[activeLocationType]} (if
+            previous link is not working)
+          </a>
+        </>
+      )}
+
+      <h3>BannedThought.net</h3>
       <a
         href="http://bannedthought.net/RecentPostings.htm"
         target="_blank"
@@ -112,6 +192,22 @@ export function AtlasBannedThought({
         >
           🔗 Resources on {activeAdministrativeRegion[activeLocationType]}
         </a>
+      )}
+      <h3>WorldAtlas.com</h3>
+      {activeAdministrativeRegion.country != "country" && (
+        <>
+          <a
+            href={`https://www.worldatlas.com/maps/${encodeURI(
+              activeAdministrativeRegion[activeLocationType]
+            )
+              .replace(/%20/g, "-")
+              .toLowerCase()}`}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            🔗 World Atlas on {activeAdministrativeRegion[activeLocationType]}
+          </a>
+        </>
       )}
     </div>
   );
