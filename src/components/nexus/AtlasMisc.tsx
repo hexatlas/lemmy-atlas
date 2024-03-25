@@ -173,6 +173,15 @@ export function AtlasBannedThought({
         </>
       )}
 
+      <h3>Marxian Rates of Profit</h3>
+      <a
+        href="https://dbasu.shinyapps.io/World-Profitability/"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        🔗 World-Profitability Calculator
+      </a>
+
       <h3>BannedThought.net</h3>
       <a
         href="http://bannedthought.net/RecentPostings.htm"
