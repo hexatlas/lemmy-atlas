@@ -1034,6 +1034,9 @@ a.post-creator {
   position: relative;
   right: var(--atlas-size-10);
 
+  max-height: 90vh;
+  overflow-y: scroll;
+
   border: 1px solid hsl(var(--atlas-color-light) / var(--atlas-opacity-3));
   border-right: var(--atlas-size-14) solid
     hsl(var(--atlas-color-secondary) / var(--atlas-opacity-3));
