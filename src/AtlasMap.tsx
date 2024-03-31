@@ -207,7 +207,7 @@ export default function AtlasMap({
         onEachFeature={onEachAdministrativeRegion}
       />
       {!isMobile && (
-        <Minimap position={"topleft"} zoom={3} size={"var(--atlas-size-00)"} />
+        <Minimap position={"topleft"} zoom={2} size={"var(--atlas-size-02)"} />
       )}
     </MapContainer>
   );
