@@ -101,7 +101,7 @@ export default function MiniMapControl({
       >
         <TileLayer
           url={
-            "https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}"
+            "https://{s}.basemaps.cartocdn.com/rastertiles/voyager_nolabels/{z}/{x}/{y}{r}.png'"
           }
           maxZoom={18}
           attribution={
