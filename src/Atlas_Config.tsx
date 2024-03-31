@@ -52,7 +52,8 @@ export const listingTypes: Array<string> = [
 
 export const regionTypes: Array<string> = [
   "name",
-  "country",
+  "country", // add below this line
+  "emoji",
   "country-code",
   "intermediate-region",
   "intermediate-region-code",

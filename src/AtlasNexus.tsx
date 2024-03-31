@@ -39,9 +39,6 @@ function AtlasNexusCard({ interfaceProps }) {
           <Tabs.Trigger className="tabs-trigger" value="ProleWiki">
             ProleWiki
           </Tabs.Trigger>
-          <Tabs.Trigger className="tabs-trigger" value="LeftyPedia">
-            LeftyPedia
-          </Tabs.Trigger>
           <Tabs.Trigger className="tabs-trigger" value="NatoPedia">
             NATOpedia
           </Tabs.Trigger>
@@ -67,9 +64,6 @@ function AtlasNexusCard({ interfaceProps }) {
             {...interfaceProps}
             isProleWiki={true}
           />
-        </Tabs.Content>
-        <Tabs.Content className="tabs-content" value="LeftyPedia">
-          <AtlasWiki wikiURL={"https://wiki.leftypol.org"} {...interfaceProps} />
         </Tabs.Content>
         <Tabs.Content className="tabs-content" value="NatoPedia">
           <AtlasWiki wikiURL={"https://en.wikipedia.org/w"} {...interfaceProps} />

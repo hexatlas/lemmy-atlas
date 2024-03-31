@@ -192,6 +192,18 @@
   }
 }
 
+.administrative-region-flag-container {
+  display: grid;
+  align-content: flex-end;
+  width: 100%;
+}
+
+img.administrative-region-flag {
+  justify-self: flex-end;
+  max-width: var(--atlas-size-02);
+  filter: none !important;
+}
+
 .map-interface-container .country-name:hover,
 .map-interface-container .country-administrative-region:hover {
   @include atlas-shadow(var(--atlas-shadow-inset));
