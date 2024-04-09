@@ -111,6 +111,17 @@ export function AtlasProleWiki({
               {activeAdministrativeRegion[activeLocationType]} on {wikiURL}
             </a>
           </p>
+
+          <a
+            href={`https://en.prolewiki.org/wiki/Category:Library_works_about_${encodeURI(
+              activeAdministrativeRegion.country
+            )}`}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            📚📕 All library works about {activeAdministrativeRegion.country} on
+            ProleWiki.
+          </a>
         </>
       ) : (
         <>
