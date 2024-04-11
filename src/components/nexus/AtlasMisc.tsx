@@ -48,6 +48,9 @@ export function AtlasBannedThought({
   map,
   setMap,
 
+  nominatim,
+  setNominatim,
+
   regionTypes,
   activeLocationType,
   setActiveLocationType,

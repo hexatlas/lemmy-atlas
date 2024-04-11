@@ -29,6 +29,9 @@ export function AtlasProleWiki({
   map,
   setMap,
 
+  nominatim,
+  setNominatim,
+
   regionTypes,
   activeLocationType,
   setActiveLocationType,

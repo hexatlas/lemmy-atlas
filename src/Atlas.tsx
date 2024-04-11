@@ -7,8 +7,8 @@ import * as Tabs from "@radix-ui/react-tabs";
 
 // Import Components
 import AtlasMap from "./AtlasMap";
-import AtlasLemmy from "./components/lemmy/AtlasLemmy";
 import AtlasInterface from "./AtlasMapInterface";
+import AtlasLemmy from "./components/lemmy/AtlasLemmy";
 import AtlasNexusCard from "./AtlasNexus";
 
 import {
@@ -51,6 +51,7 @@ export default function Atlas() {
 
   // LOCATION
   const [map, setMap] = useState(null);
+  const [nominatim, setNominatim] = useState(null);
   const [
     administrativeRegionClickHistoryArray,
     setAdministrativeRegionClickHistoryArray,
@@ -229,6 +230,9 @@ export default function Atlas() {
     map,
     setMap,
 
+    nominatim,
+    setNominatim,
+
     regionTypes,
     activeLocationType,
     setActiveLocationType,
@@ -272,12 +276,7 @@ export default function Atlas() {
 
   const DisplayAtlasMap = useMemo(
     () => <AtlasMap {...interfaceProps} />,
-    [activeAdministrativeRegion, activeLocationType]
-  );
-
-  const DisplayAtlasNexus = useMemo(
-    () => <AtlasNexusCard interfaceProps={interfaceProps} />,
-    [activeAdministrativeRegion, activeLocationType]
+    [activeAdministrativeRegion, activeLocationType, nominatim]
   );
 
   return (

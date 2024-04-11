@@ -41,6 +41,9 @@ export default function AtlasLemmy({
   map,
   setMap,
 
+  nominatim,
+  setNominatim,
+
   regionTypes,
   activeLocationType,
   setActiveLocationType,

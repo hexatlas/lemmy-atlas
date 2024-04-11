@@ -1,9 +1,11 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import administrativeRegionsData from "./data/administrative_regions_extended.json";
 
 // https://www.radix-ui.com/primitives/docs/components/collapsible
 import * as Collapsible from "@radix-ui/react-collapsible";
 import { handleRandom } from "./hooks/useAtlasUtils";
+
+import { latLngBounds } from "leaflet";
 
 /*
 
@@ -30,6 +32,9 @@ export default function AtlasInterface({
   // Location
   map,
   setMap,
+
+  nominatim,
+  setNominatim,
 
   activeAdministrativeRegion,
   setActiveAdministrativeRegion,
@@ -94,6 +99,10 @@ export default function AtlasInterface({
   /*
     Component
   */
+
+  // Search GeoJson
+
+  /*
   const LocationSearch = ({ data, setActiveAdministrativeRegion }) => {
     const [searchTerm, setSearchTerm] = useState("");
     const [searchResults, setSearchResults] = useState([]);
@@ -121,7 +130,7 @@ export default function AtlasInterface({
       setSearchResults([]); // Clear search results after selecting
     };
 
-    const handleChange = (e) => {
+    const handleSearchInputChange = (e) => {
       const query = e.target.value;
       setSearchTerm(query);
       if (query.trim() === "") {
@@ -136,10 +145,10 @@ export default function AtlasInterface({
         <input
           className="search-input"
           type="text"
-          placeholder="Search Country or Administrative Region"
-          aria-label="Search Country or Administrative Region"
+          placeholder="Search Location"
+          aria-label="Search Location"
           value={searchTerm}
-          onChange={handleChange}
+          onChange={handleSearchInputChange}
         />
         {(searchTerm.trim() !== "" || searchResults.length > 0) && (
           <ul className="search-results">
@@ -154,6 +163,130 @@ export default function AtlasInterface({
                 </button>
               </li>
             ))}
+          </ul>
+        )}
+      </>
+    );
+  };
+  */
+
+  const LocationSearch = ({ data }) => {
+    const [searchTerm, setSearchTerm] = useState("");
+    const [searchResults, setSearchResults] = useState([]);
+    const [activeSearchResult, setActiveSearchResult] = useState(null);
+
+    useEffect(() => {
+      const debounce = setTimeout(() => {
+        if (searchTerm.trim() !== "") handleSearch();
+      }, 1312);
+      return () => clearTimeout(debounce);
+    }, [searchTerm]);
+
+    useEffect(() => {
+      const debounce = setTimeout(() => {
+        handleLookUp();
+      }, 1312);
+      return () => clearTimeout(debounce);
+    }, [activeSearchResult]);
+
+    const handleSearch = async () => {
+      try {
+        if (searchTerm.trim() !== "") {
+          const url = `/.netlify/functions/nominatim/?query=${encodeURI(
+            searchTerm
+          )}&endpoint=search&format=json`;
+
+          const response = await fetch(url);
+
+          if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+          }
+          const result = await response.json();
+          setSearchResults(result);
+        }
+      } catch (error) {
+        console.error("Invalid regular expression:", error.message);
+        setSearchResults([]);
+      }
+    };
+
+    const handleLookUp = async () => {
+      try {
+        if (searchTerm.trim() !== "") {
+          const url = `/.netlify/functions/nominatim/?query=${encodeURI(
+            searchTerm
+          )}&endpoint=lookup&osm_ids=${activeSearchResult.osm_type[0]}${
+            activeSearchResult.osm_id
+          }&format=geojson`;
+
+          const response = await fetch(url);
+
+          if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+          }
+          const result = await response.json();
+          console.log(result, "look");
+          console.log(result.features[0].properties.address.country_code.toUpperCase());
+
+          const matchedGeoJSon = data.find(
+            (adminstrativeRegion) =>
+              adminstrativeRegion.properties["alpha-2"] ===
+              result.features[0].properties.address.country_code.toUpperCase()
+          );
+          console.log(data, "data");
+          console.log(matchedGeoJSon, "found");
+          // const regex = new RegExp(query, "i");
+          // const filteredResults = data.filter(
+          //   (item) =>
+          //     item.properties &&
+          //     item.properties.country &&
+          //     item.properties.name &&
+          //     (regex.test(item.properties.country) || regex.test(item.properties.name))
+          // );
+          // setSearchResults(filteredResults.slice(0, 20));
+          setActiveAdministrativeRegion(matchedGeoJSon.properties);
+          setNominatim(result);
+        }
+      } catch (error) {
+        console.error("Invalid regular expression:", error.message);
+        setSearchResults([]);
+      }
+    };
+
+    const handleSearchInputChange = (e) => {
+      const query = e.target.value;
+      setSearchTerm(query);
+    };
+
+    const handleCLickSearchResult = (result) => {
+      console.log(result);
+      setActiveSearchResult(result);
+    };
+
+    return (
+      <>
+        <input
+          className="search-input"
+          type="text"
+          placeholder="Search Location"
+          aria-label="Search Location"
+          value={searchTerm}
+          onChange={handleSearchInputChange}
+        />
+        {(searchTerm.trim() !== "" || searchResults.length > 0) && (
+          <ul className="search-results">
+            {searchResults.map((result, index) => (
+              <li key={result.place_id}>
+                <button
+                  onClick={() => handleCLickSearchResult(result)}
+                  role="button"
+                  aria-label={`Select ${result.display_name}`}
+                >
+                  {result.display_name}
+                </button>
+              </li>
+            ))}
+            <small className="search-licence">{searchResults[0]?.licence}</small>
           </ul>
         )}
       </>
