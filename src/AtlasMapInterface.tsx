@@ -435,10 +435,7 @@ export default function AtlasInterface({
         )}
 
         <div id="country-search">
-          <LocationSearch
-            data={administrativeRegionsData.features}
-            setActiveAdministrativeRegion={setActiveAdministrativeRegion}
-          />{" "}
+          <LocationSearch data={administrativeRegionsData.features} />{" "}
         </div>
         <div className="country-administrative-region-click-history">
           {administrativeRegionClickHistoryArray &&

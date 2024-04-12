@@ -7,7 +7,7 @@ import {
   ScaleControl,
   useMap,
 } from "react-leaflet";
-import { LatLngExpression, latLngBounds } from "leaflet";
+import { LatLngExpression, latLngBounds, rectangle } from "leaflet";
 import { GeoJsonObject } from "geojson";
 import administrativeRegionsData from "./data/administrative_regions_extended.json";
 
@@ -168,8 +168,15 @@ export default function AtlasMap({
       // Refreshes Map after initial region selection
       setTimeout(() => map.invalidateSize(), 300);
 
-      if (Object.keys(administrativeRegionArray).length !== 0)
+      if (Object.keys(administrativeRegionArray).length !== 0) {
         map?.fitBounds(administrativeRegionArray);
+      } else {
+        console.log(
+          nominatim
+
+          // rectangle(nominatim?.features[0]?.bbox, administrativeRegionStyleHovered)
+        );
+      }
     }
   }, [activeAdministrativeRegion, activeLocationType]);
 
@@ -219,17 +226,18 @@ export default function AtlasMap({
 
       {nominatim && (
         <GeoJSON
-          data={nominatim?.features}
+          data={nominatim?.features as GeoJsonObject}
           style={administrativeRegionStyleHovered}
           // onEachFeature={onEachAdministrativeRegion}
         />
       )}
 
       <GeoJSON
-        data={administrativeRegionsData?.features as GeoJsonObject}
+        data={administrativeRegionsData?.features as unknown as GeoJsonObject}
         style={administrativeRegionStyle}
         onEachFeature={onEachAdministrativeRegion}
       />
+
       {!isMobile && (
         <Minimap position={"topleft"} zoom={3} size={"var(--atlas-size-02)"} />
       )}
