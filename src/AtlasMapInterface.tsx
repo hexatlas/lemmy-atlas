@@ -183,10 +183,7 @@ export default function AtlasInterface({
     }, [searchTerm]);
 
     useEffect(() => {
-      const debounce = setTimeout(() => {
-        handleLookUp();
-      }, 1312);
-      return () => clearTimeout(debounce);
+      handleLookUp();
     }, [activeSearchResult]);
 
     const handleSearch = async () => {
@@ -202,6 +199,8 @@ export default function AtlasInterface({
             throw new Error(`HTTP error! Status: ${response.status}`);
           }
           const result = await response.json();
+          console.log(result, "handleSearch");
+
           setSearchResults(result);
         }
       } catch (error) {
@@ -225,7 +224,7 @@ export default function AtlasInterface({
             throw new Error(`HTTP error! Status: ${response.status}`);
           }
           const result = await response.json();
-          console.log(result, "look");
+          console.log(result, "handleLookUp result");
           console.log(result.features[0].properties.address.country_code.toUpperCase());
 
           const matchedGeoJSon = data.find(
@@ -233,17 +232,10 @@ export default function AtlasInterface({
               adminstrativeRegion.properties["alpha-2"] ===
               result.features[0].properties.address.country_code.toUpperCase()
           );
-          console.log(data, "data");
-          console.log(matchedGeoJSon, "found");
-          // const regex = new RegExp(query, "i");
-          // const filteredResults = data.filter(
-          //   (item) =>
-          //     item.properties &&
-          //     item.properties.country &&
-          //     item.properties.name &&
-          //     (regex.test(item.properties.country) || regex.test(item.properties.name))
-          // );
-          // setSearchResults(filteredResults.slice(0, 20));
+          matchedGeoJSon.properties.name = result.features[0].properties.name;
+          console.log(matchedGeoJSon, "handleLookUp matchedGeoJSon");
+
+          setActiveLocationType("name");
           setActiveAdministrativeRegion(matchedGeoJSon.properties);
           setNominatim(result);
         }
@@ -259,7 +251,7 @@ export default function AtlasInterface({
     };
 
     const handleCLickSearchResult = (result) => {
-      console.log(result);
+      console.log(result, "handleCLickSearchResult");
       setActiveSearchResult(result);
     };
 

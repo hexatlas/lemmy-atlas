@@ -126,21 +126,26 @@ export default function AtlasMap({
 
   useEffect(() => {
     let administrativeRegionArray = latLngBounds(null, null);
-    if (activeAdministrativeRegion.country !== "country") {
+
+    if (activeAdministrativeRegion.country !== "country" || nominatim?.features[0]) {
       switch (activeLocationType) {
         case "name":
           map?.eachLayer((administrativeRegion) => {
             if (
-              administrativeRegion.feature?.properties.name ===
-              activeAdministrativeRegion.name
+              administrativeRegion.feature?.properties.name !==
+              nominatim?.features[0].properties.name
             )
-              administrativeRegionArray.extend(administrativeRegion.getBounds());
+              if (
+                administrativeRegion.feature?.properties.name ===
+                activeAdministrativeRegion.name
+              )
+                administrativeRegionArray.extend(administrativeRegion.getBounds());
           });
           break;
         default:
           map?.eachLayer((administrativeRegion) => {
             if (
-              administrativeRegion.feature?.properties.country ===
+              administrativeRegion.feature?.properties.countryf ===
               activeAdministrativeRegion.country
             )
               administrativeRegionArray.extend(administrativeRegion.getBounds());
@@ -149,14 +154,22 @@ export default function AtlasMap({
       }
       map?.eachLayer((administrativeRegion) => {
         if (
-          administrativeRegion.feature?.properties[activeLocationType] ===
-          activeAdministrativeRegion[activeLocationType]
-        )
-          administrativeRegionArray.extend(administrativeRegion.getBounds());
+          administrativeRegion.feature?.properties.name !==
+          nominatim?.features[0].properties.name
+        ) {
+          if (
+            administrativeRegion.feature?.properties[activeLocationType] ===
+            activeAdministrativeRegion[activeLocationType]
+          )
+            administrativeRegionArray.extend(administrativeRegion.getBounds());
+        }
       });
+
       // Refreshes Map after initial region selection
       setTimeout(() => map.invalidateSize(), 300);
-      map?.fitBounds(administrativeRegionArray);
+
+      if (Object.keys(administrativeRegionArray).length !== 0)
+        map?.fitBounds(administrativeRegionArray);
     }
   }, [activeAdministrativeRegion, activeLocationType]);
 
