@@ -181,8 +181,10 @@ export default function AtlasInterface({
     };
 
     const handleCLickSearchResult = (result) => {
-      let coordinates = latLng(result.lat, result.lon);
-      map?.flyTo(coordinates);
+      let corner1 = latLng(result.boundingbox[0], result.boundingbox[2]);
+      let corner2 = latLng(result.boundingbox[1], result.boundingbox[3]);
+      let bounds = latLngBounds(corner1, corner2);
+      map?.fitBounds(bounds);
 
       console.log(result, "handleCLickSearchResult");
       setActiveSearchResult(result);
