@@ -262,7 +262,7 @@ export default function AtlasInterface({
       </div>
       {!open && (
         <>
-          {regionTypes.map((type) => {
+          {regionTypes.map((type, index) => {
             if (activeAdministrativeRegion[type] === "") return;
             if (type === "id") return;
             if (type === "iso_3166-2") return;
@@ -273,6 +273,7 @@ export default function AtlasInterface({
 
             return (
               <p
+                key={index}
                 className={`country-name country-${type} ${
                   activeLocationType === type && "active-location-type"
                 }`}
@@ -336,7 +337,7 @@ export default function AtlasInterface({
             >
               {activeAdministrativeRegion.country}
             </h5>
-            {regionTypes.map((type) => {
+            {regionTypes.map((type, index) => {
               if (activeAdministrativeRegion[type] === "") return;
               if (type === "country") return;
               if (type === "name") return;
@@ -349,6 +350,7 @@ export default function AtlasInterface({
 
               return (
                 <p
+                  key={index}
                   className={`country-name country-${type} ${
                     activeLocationType === type && "active-location-type"
                   }`}
