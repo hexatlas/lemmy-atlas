@@ -226,14 +226,6 @@ export default function AtlasMap({
           ))}
       </LayersControl>
 
-      {/* {nominatim && (
-        <GeoJSON
-          data={nominatim?.features as GeoJsonObject}
-          style={administrativeRegionStyleHovered}
-          // onEachFeature={onEachAdministrativeRegion}
-        />
-      )} */}
-
       <GeoJSON
         data={administrativeRegionsData?.features as unknown as GeoJsonObject}
         style={administrativeRegionStyle}
