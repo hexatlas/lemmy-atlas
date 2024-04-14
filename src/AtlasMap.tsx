@@ -7,7 +7,7 @@ import {
   ScaleControl,
   useMap,
 } from "react-leaflet";
-import { LatLngExpression, latLngBounds, rectangle } from "leaflet";
+import { LatLngExpression, latLng, latLngBounds } from "leaflet";
 import { GeoJsonObject } from "geojson";
 import administrativeRegionsData from "./data/administrative_regions_extended.json";
 
@@ -171,11 +171,12 @@ export default function AtlasMap({
       if (Object.keys(administrativeRegionArray).length !== 0) {
         map?.fitBounds(administrativeRegionArray);
       } else {
-        console.log(
-          nominatim
-
-          // rectangle(nominatim?.features[0]?.bbox, administrativeRegionStyleHovered)
+        let coordinates = latLng(
+          nominatim?.features[0].geometry.coordinates[1],
+          nominatim?.features[0].geometry.coordinates[0]
         );
+
+        map?.flyTo(coordinates);
       }
     }
   }, [activeAdministrativeRegion, activeLocationType]);
