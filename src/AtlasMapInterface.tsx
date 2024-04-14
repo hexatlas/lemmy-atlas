@@ -33,6 +33,9 @@ export default function AtlasInterface({
   map,
   setMap,
 
+  isOpenAtlasMapInterface,
+  setIsOpenAtlasMapInterface,
+
   nominatim,
   setNominatim,
 
@@ -73,8 +76,6 @@ export default function AtlasInterface({
   /*
       useStates 
   */
-
-  const [open, setOpen] = useState(true);
 
   /* 
       Handlers
@@ -121,7 +122,9 @@ export default function AtlasInterface({
         if (searchTerm.trim() !== "") {
           const url = `/.netlify/functions/nominatim/?query=${encodeURI(
             searchTerm
-          )}&endpoint=search&format=json`;
+          )}&endpoint=search&format=json&country=${
+            activeAdministrativeRegion["alpha-2"]
+          }`;
 
           const response = await fetch(url);
 
@@ -168,6 +171,7 @@ export default function AtlasInterface({
           setActiveLocationType("name");
           setActiveAdministrativeRegion(matchedGeoJSon.properties);
           setNominatim(result);
+          setIsOpenAtlasMapInterface(false);
         }
       } catch (error) {
         console.error("Invalid regular expression:", error.message);
@@ -195,8 +199,16 @@ export default function AtlasInterface({
         <input
           className="search-input"
           type="text"
-          placeholder="Search Location"
-          aria-label="Search Location"
+          placeholder={`Search Location ${
+            activeAdministrativeRegion.country !== "country"
+              ? `in ${activeAdministrativeRegion.country}`
+              : ""
+          }`}
+          aria-label={`Search Location ${
+            activeAdministrativeRegion.country !== "country"
+              ? `in ${activeAdministrativeRegion.country}`
+              : ""
+          }`}
           value={searchTerm}
           onChange={handleSearchInputChange}
         />
@@ -213,6 +225,7 @@ export default function AtlasInterface({
                 </button>
               </li>
             ))}
+            {searchResults.length <= 0 && <p>🪹</p>}
             <small className="search-licence">{searchResults[0]?.licence}</small>
           </ul>
         )}
@@ -223,12 +236,14 @@ export default function AtlasInterface({
   return (
     <Collapsible.Root
       className="map-interface-container"
-      open={open}
-      onOpenChange={setOpen}
+      open={isOpenAtlasMapInterface}
+      onOpenChange={setIsOpenAtlasMapInterface}
     >
       <div className="right-slot">
         <Collapsible.Trigger className="map-interface-container-collapse-trigger">
-          <div title="Click to Expand and Collapse">{open ? "⊟" : "⊞"}</div>
+          <div title="Click to Expand and Collapse">
+            {isOpenAtlasMapInterface ? "⊟" : "⊞"}
+          </div>
         </Collapsible.Trigger>
         {!isMobile && (
           <button
@@ -260,7 +275,7 @@ export default function AtlasInterface({
           ⟲
         </button>
       </div>
-      {!open && (
+      {!isOpenAtlasMapInterface && (
         <>
           {regionTypes.map((type, index) => {
             if (activeAdministrativeRegion[type] === "") return;

@@ -51,6 +51,8 @@ export default function Atlas() {
 
   // LOCATION
   const [map, setMap] = useState(null);
+
+  const [isOpenAtlasMapInterface, setIsOpenAtlasMapInterface] = useState(true);
   const [nominatim, setNominatim] = useState(null);
   const [
     administrativeRegionClickHistoryArray,
@@ -98,6 +100,7 @@ export default function Atlas() {
     });
     setActiveLocationType(regionTypes[1]); // Default: Country Sort
     setLocationQuery("");
+    setIsOpenAtlasMapInterface(true);
 
     // DATA
     setActiveIndicator({
@@ -229,6 +232,9 @@ export default function Atlas() {
     // Location
     map,
     setMap,
+
+    isOpenAtlasMapInterface,
+    setIsOpenAtlasMapInterface,
 
     nominatim,
     setNominatim,
