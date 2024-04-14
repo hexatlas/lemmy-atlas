@@ -276,7 +276,7 @@ export default function Atlas() {
 
   const DisplayAtlasMap = useMemo(
     () => <AtlasMap {...interfaceProps} />,
-    [activeAdministrativeRegion, activeLocationType, nominatim, map]
+    [activeAdministrativeRegion, activeLocationType]
   );
 
   return (

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import {
   MapContainer,
   TileLayer,
@@ -83,13 +83,17 @@ export default function AtlasMap({
   administrativeRegionStyle,
   administrativeRegionStyleHovered,
 }) {
-  const onClickAdministrativeRegion = (e, isDoubleCLick = false) => {
+  const onClickAdministrativeRegionCallback = (e, isDoubleCLick = false) => {
     const clickedAdministrativeRegion = e.target.feature.properties;
     if (isDoubleCLick) setActiveLocationType("name");
     setActiveAdministrativeRegion(clickedAdministrativeRegion);
   };
 
-  const onEachAdministrativeRegion = (administrativeRegion: any, layer: any) => {
+  const onClickAdministrativeRegion = useCallback(onClickAdministrativeRegionCallback, [
+    map,
+  ]);
+
+  const onEachAdministrativeRegionCallback = (administrativeRegion: any, layer: any) => {
     layer.bindPopup(
       `<i>${administrativeRegion.properties.name}</i>, ${administrativeRegion.properties.country} | ${administrativeRegion.properties["ISO3166-1-Alpha-3"]}`
     );
@@ -123,6 +127,10 @@ export default function AtlasMap({
       },
     });
   };
+
+  const onEachAdministrativeRegion = useCallback(onEachAdministrativeRegionCallback, [
+    map,
+  ]);
 
   useEffect(() => {
     let administrativeRegionArray = latLngBounds(null, null);
@@ -218,13 +226,13 @@ export default function AtlasMap({
           ))}
       </LayersControl>
 
-      {nominatim && (
+      {/* {nominatim && (
         <GeoJSON
           data={nominatim?.features as GeoJsonObject}
           style={administrativeRegionStyleHovered}
           // onEachFeature={onEachAdministrativeRegion}
         />
-      )}
+      )} */}
 
       <GeoJSON
         data={administrativeRegionsData?.features as unknown as GeoJsonObject}
