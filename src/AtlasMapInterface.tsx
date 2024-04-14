@@ -5,7 +5,7 @@ import administrativeRegionsData from "./data/administrative_regions_extended.js
 import * as Collapsible from "@radix-ui/react-collapsible";
 import { handleRandom } from "./hooks/useAtlasUtils";
 
-import { latLngBounds } from "leaflet";
+import { latLng, latLngBounds } from "leaflet";
 
 /*
 
@@ -100,76 +100,6 @@ export default function AtlasInterface({
     Component
   */
 
-  // Search GeoJson
-
-  /*
-  const LocationSearch = ({ data, setActiveAdministrativeRegion }) => {
-    const [searchTerm, setSearchTerm] = useState("");
-    const [searchResults, setSearchResults] = useState([]);
-
-    const handleSearch = (query) => {
-      try {
-        const regex = new RegExp(query, "i");
-        const filteredResults = data.filter(
-          (item) =>
-            item.properties &&
-            item.properties.country &&
-            item.properties.name &&
-            (regex.test(item.properties.country) || regex.test(item.properties.name))
-        );
-        setSearchResults(filteredResults.slice(0, 20));
-      } catch (error) {
-        console.error("Invalid regular expression:", error.message);
-        setSearchResults([]);
-      }
-    };
-
-    const handleSelectResult = (result) => {
-      setActiveAdministrativeRegion(result.properties);
-      setSearchTerm(`${result.properties.name} - ${result.properties.country}`);
-      setSearchResults([]); // Clear search results after selecting
-    };
-
-    const handleSearchInputChange = (e) => {
-      const query = e.target.value;
-      setSearchTerm(query);
-      if (query.trim() === "") {
-        setSearchResults([]); // Clear results when input is empty
-      } else {
-        handleSearch(query);
-      }
-    };
-
-    return (
-      <>
-        <input
-          className="search-input"
-          type="text"
-          placeholder="Search Location"
-          aria-label="Search Location"
-          value={searchTerm}
-          onChange={handleSearchInputChange}
-        />
-        {(searchTerm.trim() !== "" || searchResults.length > 0) && (
-          <ul className="search-results">
-            {searchResults.map((result, index) => (
-              <li key={`${result.properties.id}${index}`}>
-                <button
-                  onClick={() => handleSelectResult(result)}
-                  role="button"
-                  aria-label={`Select ${result.properties.name} Region in ${result.properties.country}`}
-                >
-                  {result.properties.name} - {result.properties.country}
-                </button>
-              </li>
-            ))}
-          </ul>
-        )}
-      </>
-    );
-  };
-  */
-
   const LocationSearch = ({ data }) => {
     const [searchTerm, setSearchTerm] = useState("");
     const [searchResults, setSearchResults] = useState([]);
@@ -251,6 +181,9 @@ export default function AtlasInterface({
     };
 
     const handleCLickSearchResult = (result) => {
+      let coordinates = latLng(result.lat, result.lon);
+      map?.flyTo(coordinates);
+
       console.log(result, "handleCLickSearchResult");
       setActiveSearchResult(result);
     };

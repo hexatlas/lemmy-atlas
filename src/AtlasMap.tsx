@@ -170,13 +170,6 @@ export default function AtlasMap({
 
       if (Object.keys(administrativeRegionArray).length !== 0) {
         map?.fitBounds(administrativeRegionArray);
-      } else {
-        let coordinates = latLng(
-          nominatim?.features[0].geometry.coordinates[1],
-          nominatim?.features[0].geometry.coordinates[0]
-        );
-
-        map?.flyTo(coordinates);
       }
     }
   }, [activeAdministrativeRegion, activeLocationType]);
