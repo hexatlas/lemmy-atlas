@@ -192,7 +192,7 @@ function AtlasLemmyCommunityInfoCard({ children, lemmyInstance, sort, community 
                     return (
                       <div className="mod-user">
                         <LemmyUser
-                          key={`${index}${moderators.id}`}
+                          key={`${index}${moderators.id}${Math.random()}`}
                           post={moderator}
                           community={community}
                           sort={sort}

@@ -508,7 +508,13 @@ export default function AtlasLemmy({
                 }`}
                 role="button"
                 aria-label={`${community?.community?.name} community filter`}
-                onClick={() => setActiveCommunity(community)}
+                onClick={() => {
+                  if (!activeCommunity) {
+                    setActiveCommunity(community);
+                  } else {
+                    setActiveCommunity(null);
+                  }
+                }}
               >
                 {community?.community?.name}
               </button>
