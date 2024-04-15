@@ -105,6 +105,7 @@ export default function AtlasInterface({
     const [searchTerm, setSearchTerm] = useState("");
     const [searchResults, setSearchResults] = useState([]);
     const [activeSearchResult, setActiveSearchResult] = useState(null);
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
       const debounce = setTimeout(() => {
@@ -133,8 +134,8 @@ export default function AtlasInterface({
           }
           const result = await response.json();
           console.log(result, "handleSearch");
-
           setSearchResults(result);
+          setLoading(false);
         }
       } catch (error) {
         console.error("Invalid regular expression:", error.message);
@@ -181,6 +182,7 @@ export default function AtlasInterface({
 
     const handleSearchInputChange = (e) => {
       const query = e.target.value;
+      setLoading(true);
       setSearchTerm(query);
     };
 
@@ -214,6 +216,7 @@ export default function AtlasInterface({
         />
         {(searchTerm.trim() !== "" || searchResults.length > 0) && (
           <ul className="search-results">
+            {loading && <p className="search-loading-icon">🔍</p>}
             {searchResults.map((result, index) => (
               <li key={result.place_id}>
                 <button
@@ -225,7 +228,7 @@ export default function AtlasInterface({
                 </button>
               </li>
             ))}
-            {searchResults.length <= 0 && <p>🪹</p>}
+            {!loading && searchResults.length <= 0 && <p>🪹</p>}
             <small className="search-licence">{searchResults[0]?.licence}</small>
           </ul>
         )}

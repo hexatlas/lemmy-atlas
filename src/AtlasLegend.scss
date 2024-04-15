@@ -73,6 +73,18 @@
   .search-licence {
     color: hsl(var(--atlas-color-dark) / var(--atlas-opacity-2));
   }
+  .search-loading-icon {
+    animation: searchAnimation var(--atlas-timing-fast) alternate-reverse;
+  }
+}
+
+@keyframes searchAnimation {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(var(--atlas-size-12));
+  }
 }
 
 #country-search .search-results button {
