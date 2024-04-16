@@ -8,8 +8,8 @@ import * as Tabs from "@radix-ui/react-tabs";
 // Import Components
 import AtlasMap from "./AtlasMap";
 import AtlasInterface from "./AtlasMapInterface";
-import AtlasLemmy from "./components/lemmy/AtlasLemmy";
 import AtlasNexusCard from "./AtlasNexus";
+import AtlasFediverse from "./AtlasFediverse";
 
 import {
   lemmyInstances,
@@ -302,22 +302,22 @@ export default function Atlas() {
       <Tabs.Root
         id="atlas-tabs"
         className="atlas-tabs tabs-root"
-        defaultValue="CommentsTab"
+        defaultValue="FediverseTab"
         ref={sideBarRef}
       >
         <Tabs.List className="tabs-list" aria-label="Manage your account">
-          <Tabs.Trigger className="tabs-trigger" value="InfoTab">
+          <Tabs.Trigger className="tabs-trigger" value="NexusTab">
             Nexus
           </Tabs.Trigger>
-          <Tabs.Trigger className="tabs-trigger" value="CommentsTab">
+          <Tabs.Trigger className="tabs-trigger" value="FediverseTab">
             Fediverse
           </Tabs.Trigger>
         </Tabs.List>
-        <Tabs.Content className="tabs-content" value="InfoTab">
+        <Tabs.Content className="tabs-content" value="NexusTab">
           <AtlasNexusCard interfaceProps={interfaceProps} />
         </Tabs.Content>
-        <Tabs.Content className="tabs-content" value="CommentsTab">
-          <AtlasLemmy {...interfaceProps} />
+        <Tabs.Content className="tabs-content" value="FediverseTab">
+          <AtlasFediverse interfaceProps={interfaceProps} />
         </Tabs.Content>
         {isMobile && (
           <div

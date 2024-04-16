@@ -26,7 +26,7 @@ function AtlasNexusCard({ interfaceProps }) {
   return (
     <>
       <Tabs.Root id="atlas-tabs" className="nexus-card" defaultValue="Bulletins">
-        <Tabs.List className="tabs-list tabs-nexus" aria-label="Manage your account">
+        <Tabs.List className="tabs-list tabs-nexus" aria-label="Pick Nexus Item">
           <Tabs.Trigger className="tabs-trigger" value="ClassStructureTab">
             Class Structure
           </Tabs.Trigger>

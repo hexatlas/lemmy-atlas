@@ -454,6 +454,10 @@ progress {
   transition: border-radius var(--atlas-transition-fast);
 }
 
+input[type="text"] {
+  width: 100%;
+}
+
 hr {
   opacity: var(--atlas-opacity-1);
 }

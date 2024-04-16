@@ -46,7 +46,6 @@
   z-index: 9;
   gap: var(--atlas-size-14);
   align-items: center;
-  margin-bottom: var(--atlas-size-10);
 }
 
 .search-icon {
@@ -60,8 +59,22 @@
   fill: hsl(var(--atlas-color-primary));
 }
 
-.search-input {
+.search-input-wrapper {
+  background: white;
+  padding: var(--atlas-size-16);
+  border-radius: var(--atlas-border-radius-1);
   @include atlas-shadow(var(--atlas-shadow-inset));
+  display: flex;
+  gap: var(--atlas-size-16);
+}
+
+.search-reset-button {
+  background: hsl(var(--atlas-color-tertiary) / var(--atlas-opacity-3));
+  white-space: pre;
+}
+
+.search-input {
+  background: transparent;
   width: 100%;
 }
 

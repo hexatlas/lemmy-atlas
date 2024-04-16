@@ -10,7 +10,7 @@ import Comment from "./AtlasLemmyComment";
 import Post from "./AtlasLemmyPost";
 import LemmyCommunityInfoCard from "./AtlasLemmyCommunityInfoCard";
 
-import { searchTypes } from "../../Atlas_Config";
+import { searchTypes } from "../../../Atlas_Config";
 import AtlasLemmyCommunityInfoCard from "./AtlasLemmyCommunityInfoCard";
 
 /*
@@ -482,19 +482,45 @@ export default function AtlasLemmy({
           </button>
         </LemmyCommunityInfoCard>
       )}
-      <div className="search-form">
-        <label htmlFor="search-input" className="sr-only">
-          Query Selected Location
-        </label>
-        <input
-          name="search-input"
-          type="text"
-          className="search-input"
-          aria-label="Query Selected Community about Region"
-          placeholder="Query"
-          value={locationQuery}
-          onChange={handleSearch}
-        />
+      <div className="search-input-wrapper">
+        {activeAdministrativeRegion.country !== "country" && (
+          <button
+            role="button"
+            title="Reset Atlas to default settings"
+            aria-label="Styled Reset Atlas Settings to default settings"
+            className="search-reset-button"
+            onClick={resetAtlas}
+          >
+            {activeAdministrativeRegion[activeLocationType]} ⨯
+          </button>
+        )}
+
+        {activeCommunity && (
+          <button
+            role="button"
+            title="Reset Atlas to default settings"
+            aria-label="Styled Reset Atlas Settings to default settings"
+            className="search-reset-button"
+            onClick={() => setActiveCommunity(null)}
+          >
+            <span className="prefix">c/</span>
+            {activeCommunity && activeCommunity?.community?.name} ⨯
+          </button>
+        )}
+        <div className="search-form">
+          <label htmlFor="search-input" className="sr-only">
+            Query Selected Location
+          </label>
+          <input
+            name="search-input"
+            type="text"
+            className="search-input"
+            aria-label="Query Selected Community about Region"
+            placeholder="Query"
+            value={locationQuery}
+            onChange={handleSearch}
+          />
+        </div>
       </div>
       <div className="community-list">
         {communityList &&
@@ -531,17 +557,6 @@ export default function AtlasLemmy({
           </button>
         )} */}
       </div>
-      {locationQuery && (
-        <div className="community-querylocation">
-          <h3>
-            <i>{locationQuery}</i>
-          </h3>
-          <h5>
-            {activeAdministrativeRegion.name}, <br />
-            {activeAdministrativeRegion.country}
-          </h5>
-        </div>
-      )}
       {comments && activeSearchType === "Comments" && (
         <div className="post-reply-container">
           {comments.length > 0 &&

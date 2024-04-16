@@ -8,7 +8,7 @@ import * as HoverCard from "@radix-ui/react-hover-card";
 // https://join-lemmy.org/api/classes/LemmyHttp.html
 import { LemmyHttp, GetPersonDetails } from "lemmy-js-client";
 
-import { userPronouns } from "../../hooks/useDataTransform";
+import { userPronouns } from "../../../hooks/useDataTransform";
 
 import Comment from "./AtlasLemmyComment";
 import LemmyCommunity from "./AtlasLemmyCommunity";

@@ -198,22 +198,32 @@ export default function AtlasInterface({
 
     return (
       <>
-        <input
-          className="search-input"
-          type="text"
-          placeholder={`Search Location ${
-            activeAdministrativeRegion.country !== "country"
-              ? `in ${activeAdministrativeRegion.country}`
-              : ""
-          }`}
-          aria-label={`Search Location ${
-            activeAdministrativeRegion.country !== "country"
-              ? `in ${activeAdministrativeRegion.country}`
-              : ""
-          }`}
-          value={searchTerm}
-          onChange={handleSearchInputChange}
-        />
+        <div className="search-input-wrapper">
+          {activeAdministrativeRegion.country !== "country" && (
+            <button
+              role="button"
+              title="Reset Atlas to default settings"
+              aria-label="Styled Reset Atlas Settings to default settings"
+              className="search-reset-button"
+              onClick={resetAtlas}
+            >
+              {activeAdministrativeRegion.country} ⨯
+            </button>
+          )}
+          <div className="search-form">
+            <label htmlFor="search-input" className="sr-only">
+              Search Location in {activeAdministrativeRegion.country}
+            </label>
+            <input
+              className="search-input"
+              type="text"
+              placeholder={`Search Location`}
+              aria-label={`Search Location`}
+              value={searchTerm}
+              onChange={handleSearchInputChange}
+            />
+          </div>
+        </div>
         {(searchTerm.trim() !== "" || searchResults.length > 0) && (
           <ul className="search-results">
             {loading && <p className="search-loading-icon">🔍</p>}
@@ -267,15 +277,6 @@ export default function AtlasInterface({
           onClick={() => handleRandom(setActiveAdministrativeRegion)}
         >
           🎲
-        </button>
-        <button
-          role="button"
-          title="Reset Atlas to default settings"
-          aria-label="Reset Atlas Settings to default settings"
-          className="reset-button"
-          onClick={resetAtlas}
-        >
-          ⟲
         </button>
       </div>
       {!isOpenAtlasMapInterface && (
