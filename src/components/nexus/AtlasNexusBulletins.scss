@@ -15,6 +15,11 @@
   grid-column: 1 / -1;
 }
 
+.feed-post-container {
+  display: flex;
+  gap: var(--atlas-size-10);
+}
+
 .feed-link {
   grid-row: 1;
   grid-column: 1 / -2;

@@ -93,32 +93,47 @@ function AtlasMastodon({
       {mastonPosts &&
         mastonPosts.map((post, index) => (
           <div className="feed-item" key={index}>
-            <img
-              className="feed-avatar"
-              src={post.account.avatar}
-              alt={post.account.username}
-            />
-            <p>{post.account.username}</p>
-            <small>{post.account.acct}</small>
-            <p className="feed-publish-date highlight">
-              {post.edited_at && <span>🖊️</span>}
-              {" 🗓️ "}
-              <small className="post-timestamp">
-                <TimeAgo
-                  dateString={post?.edited_at ? post.edited_at : post.created_at}
+            <div className="feed-post-container">
+              <div
+                className="post-thumbnail-container"
+                tabIndex={0}
+                aria-label="Expand Post"
+              >
+                <img
+                  className="post-thumbnail-image"
+                  src={post.account.avatar}
+                  alt={post.account.username}
                 />
-              </small>
-            </p>
-
+              </div>
+              <div>
+                <p className="feed-publish-date highlight">
+                  {post.edited_at && <span>🖊️</span>}
+                  {" 🗓️ "}
+                  <small className="post-timestamp">
+                    <TimeAgo
+                      dateString={post?.edited_at ? post.edited_at : post.created_at}
+                    />
+                  </small>
+                </p>
+                <p>{post.account.username}</p>
+                <small>
+                  {post.account.bot && <span>🤖</span>} {post.account.acct}
+                </small>
+              </div>
+            </div>
+            <div dangerouslySetInnerHTML={{ __html: post?.content }}></div>
+            <div className="feed-post-container">
+              <p>💬 {post.replies_count}</p>
+              <p>🔄 {post.reblogs_count} </p>
+            </div>
             <a
               className="post-link"
               href={post.url}
               target="_blank"
               rel="noopener noreferrer"
             >
-              🔗 {post.title}
+              🔗 <small>{post.url}</small>
             </a>
-            <div dangerouslySetInnerHTML={{ __html: post?.content }}></div>
           </div>
         ))}
       <a
