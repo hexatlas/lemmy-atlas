@@ -6,7 +6,7 @@ exports.handler = async function (event, context) {
   try {
     const { country } = event.queryStringParameters || {};
 
-    let apiUrl = `https://mastodon.social/api/v1/timelines/tag/germany${country}`;
+    let apiUrl = `https://mastodon.social/api/v1/timelines/tag/${country}`;
 
     let response = await fetch(apiUrl);
     let data = await response.json();
