@@ -153,7 +153,7 @@ export function AtlasNexusReadingList({
     }
 
     return (
-      <div className="bulletin-community">
+      <div className="feed-community">
         {!isLoaded && (
           <p
             className="reply-button"
@@ -244,12 +244,12 @@ export function AtlasNexusReadingList({
           {bulletinsData.items &&
             bulletinsData.items.map((bulletin, index) => {
               return (
-                <div className="bulletin-item" key={index}>
-                  <p className="bulletin-publish-date highlight">
+                <div className="feed-item" key={index}>
+                  <p className="feed-publish-date highlight">
                     🗓️ {new Date(bulletin.pubDate).toDateString()}
                   </p>
                   <a
-                    className="bulletin-link"
+                    className="feed-link"
                     href={bulletin.link}
                     target="_blank"
                     rel="noopener noreferrer"

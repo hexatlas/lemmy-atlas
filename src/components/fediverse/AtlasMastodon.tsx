@@ -92,11 +92,15 @@ function AtlasMastodon({
       <h3>Latest Posts on {activeAdministrativeRegion.country}</h3>
       {mastonPosts &&
         mastonPosts.map((post, index) => (
-          <div className="bulletin-item" key={index}>
-            <img src={post.account.avatar} alt={post.account.username} />
+          <div className="feed-item" key={index}>
+            <img
+              className="feed-avatar"
+              src={post.account.avatar}
+              alt={post.account.username}
+            />
             <p>{post.account.username}</p>
-            <p>{post.account.acct}</p>
-            <p className="bulletin-publish-date highlight">
+            <small>{post.account.acct}</small>
+            <p className="feed-publish-date highlight">
               {post.edited_at && <span>🖊️</span>}
               {" 🗓️ "}
               <small className="post-timestamp">
