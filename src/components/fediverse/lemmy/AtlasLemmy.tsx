@@ -162,6 +162,7 @@ export default function AtlasLemmy({
       if (activeSearchType === "Posts") {
         setComments([]);
         if (res?.posts.length < 10) {
+          0;
           setHasMore(false);
         }
         if (posts && res?.posts) setPosts([...posts, ...res?.posts]);
@@ -535,10 +536,10 @@ export default function AtlasLemmy({
                 role="button"
                 aria-label={`${community?.community?.name} community filter`}
                 onClick={() => {
-                  if (!activeCommunity) {
-                    setActiveCommunity(community);
-                  } else {
+                  if (activeCommunity === community) {
                     setActiveCommunity(null);
+                  } else {
+                    setActiveCommunity(community);
                   }
                 }}
               >
