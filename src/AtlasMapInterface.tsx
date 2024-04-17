@@ -310,6 +310,15 @@ export default function AtlasInterface({
               </p>
             );
           })}
+          <button
+            role="button"
+            title="Reset Atlas to default settings"
+            aria-label="Reset Atlas Settings to default settings"
+            className="reset-button"
+            onClick={resetAtlas}
+          >
+            ⟲
+          </button>
         </>
       )}
       <Collapsible.Content>
