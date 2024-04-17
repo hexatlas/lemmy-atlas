@@ -66,11 +66,17 @@
   @include atlas-shadow(var(--atlas-shadow-inset));
   display: flex;
   gap: var(--atlas-size-16);
+  overflow: hidden;
 }
 
 .search-reset-button {
   background: hsl(var(--atlas-color-tertiary) / var(--atlas-opacity-3));
   white-space: pre;
+  @include atlas-shadow(var(--atlas-shadow-1));
+  &:hover {
+    background: hsl(var(--atlas-color-secondary) / var(--atlas-opacity-3));
+    color: hsl(var(--atlas-color-light) / var(--atlas-opacity-3));
+  }
 }
 
 .search-input {
