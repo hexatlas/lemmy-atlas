@@ -115,16 +115,20 @@ function AtlasMastodon({
                     />
                   </small>
                 </p>
-                <p>{post.account.username}</p>
+                <p>{post.account.display_name}</p>
                 <small>
-                  {post.account.bot && <span>🤖</span>} {post.account.acct}
+                  {post.account.bot && <span>🤖</span>}
+                  <a href={post.account.uri} target="_blank" rel="noopener noreferrer">
+                    {post.account.acct}
+                  </a>
                 </small>
               </div>
             </div>
             <div dangerouslySetInnerHTML={{ __html: post?.content }}></div>
             <div className="feed-post-container">
               <p>💬 {post.replies_count}</p>
-              <p>🔄 {post.reblogs_count} </p>
+              <p>🔄 {post.reblogs_count}</p>
+              <p>⭐ {post.favourites_count}</p>
             </div>
             <a
               className="post-link"

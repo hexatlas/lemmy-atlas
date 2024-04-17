@@ -1002,6 +1002,13 @@ a.post-creator {
   animation: slideDown var(--atlas-time-2) var(--atlas-timing-function);
 }
 
+.community-post[data-state="open"] {
+  padding-left: var(--atlas-size-10);
+  border-left: var(--atlas-size-14) solid
+    hsl(var(--atlas-color-tertiary) / var(--atlas-opacity-3));
+  border-radius: var(--atlas-border-radius-1);
+}
+
 .community-post[data-state="open"] > [data-state="open"] {
   animation: slideDown var(--atlas-time-2) var(--atlas-timing-function);
 }
