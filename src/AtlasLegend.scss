@@ -11,7 +11,8 @@
   LEGEND
 */
 
-.legend-content-container {
+.legend-content-container,
+#legend-content {
   overflow: hidden;
   height: 75vh;
   overflow-y: scroll;

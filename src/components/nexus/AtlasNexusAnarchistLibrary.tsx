@@ -200,7 +200,7 @@ export function AtlasNexusReadingList({
   }, [activeAdministrativeRegion, activeLocationType]);
 
   return (
-    <div>
+    <div id="legend-content">
       <h3>Anarchist Library</h3>
       <a
         href={`https://theanarchistlibrary.org/search?query=${encodeURI(

@@ -89,57 +89,59 @@ function AtlasMastodon({
 
   return (
     <>
-      <h3>Latest Posts on {activeAdministrativeRegion.country}</h3>
-      {mastonPosts &&
-        mastonPosts.map((post, index) => (
-          <div className="feed-item" key={index}>
-            <div className="feed-post-container">
-              <div
-                className="post-thumbnail-container"
-                tabIndex={0}
-                aria-label="Expand Post"
-              >
-                <img
-                  className="post-thumbnail-image"
-                  src={post.account.avatar}
-                  alt={post.account.username}
-                />
-              </div>
-              <div>
-                <p className="feed-publish-date highlight">
-                  {post.edited_at && <span>🖊️</span>}
-                  {" 🗓️ "}
-                  <small className="post-timestamp">
-                    <TimeAgo
-                      dateString={post?.edited_at ? post.edited_at : post.created_at}
-                    />
+      <div div id="legend-content">
+        <h3>Latest Posts on {activeAdministrativeRegion.country}</h3>
+        {mastonPosts &&
+          mastonPosts.map((post, index) => (
+            <div className="feed-item" key={index}>
+              <div className="feed-post-container">
+                <div
+                  className="post-thumbnail-container"
+                  tabIndex={0}
+                  aria-label="Expand Post"
+                >
+                  <img
+                    className="post-thumbnail-image"
+                    src={post.account.avatar}
+                    alt={post.account.username}
+                  />
+                </div>
+                <div>
+                  <p className="feed-publish-date highlight">
+                    {post.edited_at && <span>🖊️</span>}
+                    {" 🗓️ "}
+                    <small className="post-timestamp">
+                      <TimeAgo
+                        dateString={post?.edited_at ? post.edited_at : post.created_at}
+                      />
+                    </small>
+                  </p>
+                  <p>{post.account.display_name}</p>
+                  <small>
+                    {post.account.bot && <span>🤖</span>}
+                    <a href={post.account.uri} target="_blank" rel="noopener noreferrer">
+                      {post.account.acct}
+                    </a>
                   </small>
-                </p>
-                <p>{post.account.display_name}</p>
-                <small>
-                  {post.account.bot && <span>🤖</span>}
-                  <a href={post.account.uri} target="_blank" rel="noopener noreferrer">
-                    {post.account.acct}
-                  </a>
-                </small>
+                </div>
               </div>
+              <div dangerouslySetInnerHTML={{ __html: post?.content }}></div>
+              <div className="feed-post-container">
+                <p>💬 {post.replies_count}</p>
+                <p>🔄 {post.reblogs_count}</p>
+                <p>⭐ {post.favourites_count}</p>
+              </div>
+              <a
+                className="post-link"
+                href={post.url}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                🔗 <small>{post.url}</small>
+              </a>
             </div>
-            <div dangerouslySetInnerHTML={{ __html: post?.content }}></div>
-            <div className="feed-post-container">
-              <p>💬 {post.replies_count}</p>
-              <p>🔄 {post.reblogs_count}</p>
-              <p>⭐ {post.favourites_count}</p>
-            </div>
-            <a
-              className="post-link"
-              href={post.url}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              🔗 <small>{post.url}</small>
-            </a>
-          </div>
-        ))}
+          ))}
+      </div>
       <a
         href={`https://mastodon.social/tags/${activeAdministrativeRegion.country}`}
         target="_blank"

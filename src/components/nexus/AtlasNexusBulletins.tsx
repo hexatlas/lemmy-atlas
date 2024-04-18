@@ -218,7 +218,7 @@ export function AtlasNexusReadingList({
   }, [activeAdministrativeRegion]);
 
   return (
-    <div>
+    <div id="legend-content">
       <h3>Reading List</h3>
       <a
         href={`https://bulletins.hexbear.net/posts/readinglist/#${encodeURI(

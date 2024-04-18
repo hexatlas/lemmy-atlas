@@ -322,7 +322,7 @@ const AtlasNexusIMFData = ({
   // };
 
   return (
-    <>
+    <div id="legend-content">
       <DropdownMenu.Root>
         <DropdownMenu.Trigger asChild>
           <button className="button-icon" aria-label="IMF Data Settings Menu">
@@ -431,7 +431,7 @@ const AtlasNexusIMFData = ({
       {loading && <p>Loading...</p>}
       {error && <p>Error: {error}</p>}
       {/* {indicators && <IndicatorDropdown indicators={indicators} />} */}
-    </>
+    </div>
   );
 };
 

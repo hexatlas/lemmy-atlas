@@ -94,7 +94,7 @@ export function AtlasBannedThought({
   const [bannedThought, setBannedThought] = useState(null);
 
   return (
-    <div>
+    <div id="legend-content">
       <h3>World Inequality Database</h3>
       <a href="https://wid.world/data/" target="_blank" rel="noopener noreferrer">
         🔗 Visit https://wid.world/data/

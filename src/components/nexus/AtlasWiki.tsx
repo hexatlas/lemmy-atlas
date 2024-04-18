@@ -99,7 +99,7 @@ export function AtlasProleWiki({
   }, [activeAdministrativeRegion, activeLocationType]);
 
   return (
-    <div className="prolewiki">
+    <div id="legend-content" className="prolewiki">
       {isProleWiki ? (
         <>
           <p>
