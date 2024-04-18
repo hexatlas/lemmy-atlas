@@ -89,7 +89,7 @@ function AtlasMastodon({
 
   return (
     <>
-      <div div id="legend-content">
+      <div id="legend-content">
         <h3>Latest Posts on {activeAdministrativeRegion.country}</h3>
         {mastonPosts &&
           mastonPosts.map((post, index) => (
