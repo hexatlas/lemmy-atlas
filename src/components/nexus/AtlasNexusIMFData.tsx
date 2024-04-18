@@ -229,7 +229,7 @@ const AtlasNexusIMFData = ({
             </span>
             <Collapsible.Trigger asChild>
               <button
-                className="icon-button"
+                className="button-icon"
                 role="button"
                 aria-label={open ? "Hide information" : "Show more Information"}
               >
@@ -325,7 +325,7 @@ const AtlasNexusIMFData = ({
     <>
       <DropdownMenu.Root>
         <DropdownMenu.Trigger asChild>
-          <button className="icon-button" aria-label="IMF Data Settings Menu">
+          <button className="button-icon" aria-label="IMF Data Settings Menu">
             ☰
           </button>
         </DropdownMenu.Trigger>
@@ -395,7 +395,7 @@ const AtlasNexusIMFData = ({
           <h3>{activeIndicator.label}:</h3>
           <Collapsible.Trigger asChild>
             <button
-              className="icon-button"
+              className="button-icon"
               aria-label={open ? "Hide information" : "Show more Information"}
             >
               {open ? "x" : "ⓘ"}

@@ -62,7 +62,7 @@ function AtlasLemmyUserInfoCard({ children, post, lemmyInstance, sort, community
       <HoverCard.Trigger asChild>{children}</HoverCard.Trigger>
       <HoverCard.Portal>
         <HoverCard.Content
-          collisionPadding={1.6180339887498948482 ^ 14}
+          collisionPadding={1.6180339887498948482 ^ 9}
           className={`user-info-card-content ${
             (post?.creator_is_admin || post?.creator_is_moderator) &&
             "user-info-card-content-hightlighted"

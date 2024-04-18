@@ -25,7 +25,7 @@ import AtlasMisc from "./components/nexus/AtlasMisc";
 function AtlasNexusCard({ interfaceProps }) {
   return (
     <>
-      <Tabs.Root id="atlas-tabs" className="nexus-card" defaultValue="Bulletins">
+      <Tabs.Root className="nexus-card" defaultValue="Bulletins">
         <Tabs.List className="tabs-list tabs-nexus" aria-label="Pick Nexus Item">
           <Tabs.Trigger className="tabs-trigger" value="ClassStructureTab">
             Class Structure

@@ -84,6 +84,7 @@ export default function AtlasMap({
   administrativeRegionStyleHovered,
 }) {
   const onClickAdministrativeRegionCallback = (e, isDoubleCLick = false) => {
+    e.originalEvent.view.L.DomEvent.stopPropagation(e);
     const clickedAdministrativeRegion = e.target.feature.properties;
     if (isDoubleCLick) setActiveLocationType("name");
     setActiveAdministrativeRegion(clickedAdministrativeRegion);
@@ -189,11 +190,11 @@ export default function AtlasMap({
       // center={[55.7558, 37.6173]} // Moscow; zoom 5as GeoJsonObject
       center={[31.5017, 34.4668]} // Gaza; zoom 5
       zoom={5}
-      // maxZoom={10}
       maxZoom={18}
       scrollWheelZoom={true}
       placeholder={<noscript>You need to enable JavaScript to see this map.</noscript>}
       ref={setMap}
+      worldCopyJump
     >
       <ScaleControl position="bottomleft" />
       <LayersControl position="bottomright">

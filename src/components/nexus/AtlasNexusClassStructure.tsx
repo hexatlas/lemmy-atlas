@@ -25,7 +25,7 @@
 
 function AtlasNexusClassStructure() {
   return (
-    <div>
+    <div className="legend-content-container class-structure">
       <h3>TO DO: Class Structure </h3>
       <h6>TO DO: LINK DISCUSSION THREAD TO EVENTUALLY FILL WITH REAL DATA</h6>
 

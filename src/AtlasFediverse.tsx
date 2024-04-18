@@ -7,7 +7,7 @@ import AtlasMastodon from "./components/fediverse/AtlasMastodon";
 function AtlasFediverse({ interfaceProps }) {
   return (
     <>
-      <Tabs.Root id="atlas-tabs" className="nexus-card" defaultValue="Lemmy">
+      <Tabs.Root className="nexus-card" defaultValue="Lemmy">
         <Tabs.List className="tabs-list tabs-nexus" aria-label="Pick Fediverse">
           <Tabs.Trigger className="tabs-trigger" value="Lemmy">
             Lemmy
@@ -16,10 +16,10 @@ function AtlasFediverse({ interfaceProps }) {
             Mastodon
           </Tabs.Trigger>
         </Tabs.List>
-        <Tabs.Content className="tabs-content" value="Lemmy">
+        <Tabs.Content value="Lemmy">
           <AtlasLemmy {...interfaceProps} />
         </Tabs.Content>
-        <Tabs.Content className="tabs-content" value="Mastodon">
+        <Tabs.Content value="Mastodon">
           <AtlasMastodon {...interfaceProps} />
         </Tabs.Content>
       </Tabs.Root>

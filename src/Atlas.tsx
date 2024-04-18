@@ -52,7 +52,9 @@ export default function Atlas() {
   // LOCATION
   const [map, setMap] = useState(null);
 
-  const [isOpenAtlasMapInterface, setIsOpenAtlasMapInterface] = useState(true);
+  const [isOpenAtlasMapInterface, setIsOpenAtlasMapInterface] = useState(
+    !(window.innerWidth < 768)
+  );
   const [nominatim, setNominatim] = useState(null);
   const [
     administrativeRegionClickHistoryArray,
@@ -100,7 +102,7 @@ export default function Atlas() {
     });
     setActiveLocationType(regionTypes[1]); // Default: Country Sort
     setLocationQuery("");
-    setIsOpenAtlasMapInterface(true);
+    setIsOpenAtlasMapInterface(!isMobile);
 
     // DATA
     setActiveIndicator({
@@ -133,11 +135,10 @@ export default function Atlas() {
       useEffects
   */
 
+  const handleResize = () => {
+    setIsMobile(window.innerWidth < 768); // You can adjust the threshold as needed
+  };
   useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth < 768); // You can adjust the threshold as needed
-    };
-
     // Initial check
     handleResize();
 
@@ -148,12 +149,18 @@ export default function Atlas() {
     return () => {
       window.removeEventListener("resize", handleResize);
     };
-  }, []);
+  });
 
   useEffect(() => {
-    if (isMobile) {
+    if (isMobile && activeAdministrativeRegion.country === "country") {
       window.scrollTo({
-        top: document.getElementById("atlas-tabs").offsetTop,
+        top: 0,
+        behavior: "smooth",
+      });
+    }
+    if (isMobile && activeAdministrativeRegion.country !== "country") {
+      window.scrollTo({
+        top: document.getElementById("atlas-tabs").offsetTop * 0.1312,
         behavior: "smooth",
       });
     }
@@ -164,6 +171,9 @@ export default function Atlas() {
   }, [activeAdministrativeRegion]);
 
   useEffect(() => {
+    if (isMobile) {
+      setIsOpenAtlasMapInterface(false);
+    }
     // if (sideBarRef.current) sideBarRef.current.scrollTop = 0;
     if (sideBarRef.current)
       sideBarRef.current.scrollTo({
@@ -294,9 +304,10 @@ export default function Atlas() {
         gridTemplateColumns: `1.6180339887498948482fr ${nexusSize}px`,
       }}
     >
+      {isMobile && <AtlasInterface {...interfaceProps} />}
       <div className={`map-container`}>
         {DisplayAtlasMap}
-        <AtlasInterface {...interfaceProps} />
+        {!isMobile && <AtlasInterface {...interfaceProps} />}
       </div>
 
       <Tabs.Root
@@ -319,7 +330,7 @@ export default function Atlas() {
         <Tabs.Content className="tabs-content" value="FediverseTab">
           <AtlasFediverse interfaceProps={interfaceProps} />
         </Tabs.Content>
-        {isMobile && (
+        {/* {isMobile && (
           <div
             className={`map-mobile-indicator ${
               (locationQuery ||
@@ -355,7 +366,7 @@ export default function Atlas() {
               </h6>
             )}
           </div>
-        )}
+        )} */}
       </Tabs.Root>
     </div>
   );

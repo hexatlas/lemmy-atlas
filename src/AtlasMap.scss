@@ -15,12 +15,22 @@
   transition: all var(--atlas-transition-slow);
   height: 100vh;
   height: 100dvh;
-  position: relative;
+  top: 0;
+  position: sticky;
 }
 
 @media only screen and (max-width: 768px) {
+  .minimap,
+  .leaflet-control-zoom {
+    display: none;
+  }
+
   .map-container {
-    max-height: -webkit-fill-available;
+    transition: all var(--atlas-transition-slow);
+    height: calc(100vh - var(--atlas-size-04));
+    height: calc(100dvh - var(--atlas-size-04));
+    top: 0;
+    position: sticky;
   }
 }
 
@@ -53,11 +63,11 @@
   background-repeat: no-repeat;
   height: 100%;
   width: 100%;
-  z-index: 99;
+  // z-index: 99;
 }
 
 /* Zoom Buttons */
-.leaflet-control-zoom.leaflet-bar.leaflet-control {
+.leaflet-control-zoom .leaflet-bar.leaflet-control {
   width: var(--atlas-size-07);
   height: var(--atlas-size-06);
   display: grid;
@@ -98,18 +108,18 @@
 .leaflet-control {
   border: none !important;
   margin-top: var(--atlas-size-10) !important;
-  margin-bottom: var(--atlas-size-11) !important;
+  margin-bottom: var(--atlas-size-10) !important;
   margin-left: var(--atlas-size-10) !important;
   margin-right: var(--atlas-size-10) !important;
   transition: var(--atlas-transition-slow);
 }
 
-.leaflet-control-zoom.leaflet-bar.leaflet-control a {
+.leaflet-control-zoom .leaflet-bar.leaflet-control a {
   color: hsl(var(--atlas-color-dark) / var(--atlas-opacity-3));
   border: none;
 }
 
-.leaflet-control-zoom.leaflet-bar.leaflet-control > * {
+.leaflet-control-zoom .leaflet-bar.leaflet-control > * {
   width: 100% !important;
   height: 100% !important;
   display: grid;

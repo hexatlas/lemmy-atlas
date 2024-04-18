@@ -60,7 +60,7 @@ function AtlasLemmyCommunityInfoCard({ children, lemmyInstance, sort, community 
       <HoverCard.Trigger asChild>{children}</HoverCard.Trigger>
       <HoverCard.Portal>
         <HoverCard.Content
-          collisionPadding={1.6180339887498948482 ^ 14}
+          collisionPadding={1.6180339887498948482 ^ 9}
           className={`community-info-card-content 
           ${community.nsfw && "community-info-card-content-hightlighted"}`}
         >

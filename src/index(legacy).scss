@@ -149,7 +149,6 @@ code {
 
 html {
   font-size: 100%;
-  scroll-snap-type: y proximity;
 } /*16px*/
 
 body {
@@ -159,10 +158,6 @@ body {
   line-height: var(--atlas-line-height);
   color: hsl(var(--atlas-color-dark) / var(--atlas-opacity-3));
   min-height: 100vh;
-}
-
-section {
-  scroll-snap-align: start;
 }
 
 p {

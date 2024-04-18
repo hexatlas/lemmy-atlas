@@ -1,7 +1,10 @@
 @import "./AtlasTheme.scss";
-@import "./AtlasLegend.scss";
 @import "./AtlasMap.scss";
+@import "./AtlasLegend.scss";
 
+@import "./components/fediverse/lemmy/AtlasLemmy.scss";
+
+@import "./AtlasNexus.scss";
 @import "./components/nexus/AtlasWiki.scss";
 @import "./components/nexus/AtlasNexusBulletins.scss";
 @import "./components/nexus/AtlasNexusAnarchistLibrary.scss";

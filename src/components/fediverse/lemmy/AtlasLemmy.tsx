@@ -309,245 +309,229 @@ export default function AtlasLemmy({
 
   return (
     <>
-      <DropdownMenu.Root>
-        <DropdownMenu.Trigger asChild>
-          <button className="icon-button" aria-label="Community Settings Menu">
-            ☰
-          </button>
-        </DropdownMenu.Trigger>
-        <DropdownMenu.Portal>
-          <DropdownMenu.Content className="dropdown-menu-content">
-            <DropdownMenu.Item className="dropdown-menu-item">
-              <div
-                className="reset-container"
-                role="button"
-                aria-label="Reset Community Settings"
-                tabIndex={0}
-                onClick={resetAtlas}
-                onKeyDown={(e) => {
-                  if (e.key === "Enter" || e.key === "Space") {
-                    resetAtlas;
-                  }
-                }}
-              >
-                <p>Reset</p>
-                <div className="right-slot reset-button">⟲</div>
-              </div>
-            </DropdownMenu.Item>
-
-            <DropdownMenu.Sub>
-              <DropdownMenu.SubTrigger className="dropdown-menu-subtrigger">
-                Instance
-                <div className="right-slot">▸</div>
-              </DropdownMenu.SubTrigger>
-              <DropdownMenu.Portal>
-                <DropdownMenu.SubContent className="dropdown-menu-subcontent">
-                  <DropdownMenu.RadioGroup
-                    value={activeLemmyInstance}
-                    onValueChange={setActiveLemmyInstance}
-                  >
-                    {lemmyInstances.map((instance, index) => (
-                      <DropdownMenu.RadioItem
-                        key={index}
-                        className="dropdown-menu-radio-item"
-                        value={instance}
-                      >
-                        <DropdownMenu.ItemIndicator className="dropdown-menu-itemIndicator">
-                          ✔
-                        </DropdownMenu.ItemIndicator>
-                        {instance.label}
-                      </DropdownMenu.RadioItem>
-                    ))}
-                  </DropdownMenu.RadioGroup>
-                </DropdownMenu.SubContent>
-              </DropdownMenu.Portal>
-            </DropdownMenu.Sub>
-            <DropdownMenu.Separator className="dropdown-menu-separator" />
-            <DropdownMenu.Label className="dropdown-menu-label">
-              {activeSearchType} by {activeSortType}
-            </DropdownMenu.Label>
-            <DropdownMenu.Sub>
-              <DropdownMenu.SubTrigger className="dropdown-menu-subtrigger">
-                Sorting
-                <div className="right-slot">▸</div>
-              </DropdownMenu.SubTrigger>
-              <DropdownMenu.Portal>
-                <DropdownMenu.SubContent className="dropdown-menu-subcontent">
-                  <DropdownMenu.RadioGroup
-                    value={activeSortType}
-                    onValueChange={setActiveSortType}
-                  >
-                    {sortTypes.map((sort, index) => (
-                      <DropdownMenu.RadioItem
-                        key={index}
-                        className="dropdown-menu-radio-item"
-                        value={sort}
-                      >
-                        <DropdownMenu.ItemIndicator className="dropdown-menu-itemIndicator">
-                          ✔
-                        </DropdownMenu.ItemIndicator>
-                        {sort}
-                      </DropdownMenu.RadioItem>
-                    ))}
-                  </DropdownMenu.RadioGroup>
-                </DropdownMenu.SubContent>
-              </DropdownMenu.Portal>
-            </DropdownMenu.Sub>
-            <DropdownMenu.Label className="dropdown-menu-label">
-              Location
-            </DropdownMenu.Label>
-            <DropdownMenu.RadioGroup
-              value={activeLocationType}
-              onValueChange={setActiveLocationType}
-            >
-              {regionTypes.map((type, index) => {
-                if (!activeAdministrativeRegion[type]) return;
-                return (
-                  <DropdownMenu.RadioItem
-                    key={index}
-                    className="dropdown-menu-radio-item"
-                    value={type}
-                  >
-                    <DropdownMenu.ItemIndicator className="dropdown-menu-itemIndicator">
-                      ✔
-                    </DropdownMenu.ItemIndicator>
-                    {activeAdministrativeRegion[type]}
-                  </DropdownMenu.RadioItem>
-                );
-              })}
-            </DropdownMenu.RadioGroup>
-            <DropdownMenu.Separator className="dropdown-menu-separator" />
-            <DropdownMenu.Label className="dropdown-menu-label">
-              {activeCommunity?.community?.name
-                ? "c/" + activeCommunity?.community.name
-                : "Type"}
-            </DropdownMenu.Label>
-            <DropdownMenu.RadioGroup
-              value={activeSearchType}
-              onValueChange={setActiveSearchType}
-            >
-              {searchTypes.map((sort, index) => (
-                <DropdownMenu.RadioItem
-                  key={index}
-                  className="dropdown-menu-radio-item"
-                  value={sort}
-                  // disabled={index != 1}
-                >
-                  <DropdownMenu.ItemIndicator className="dropdown-menu-itemIndicator">
-                    ✔
-                  </DropdownMenu.ItemIndicator>
-                  {sort}
-                </DropdownMenu.RadioItem>
-              ))}
-            </DropdownMenu.RadioGroup>
-            <DropdownMenu.Separator className="dropdown-menu-separator" />
-            <DropdownMenu.Label className="dropdown-menu-label">
-              {activeLemmyInstance.label}
-            </DropdownMenu.Label>
-            <DropdownMenu.RadioGroup
-              value={activeListingType}
-              onValueChange={setActiveListingType}
-            >
-              {listingTypes.map((sort, index) => (
-                <DropdownMenu.RadioItem
-                  key={index}
-                  className="dropdown-menu-radio-item"
-                  value={sort}
-                  disabled={index > 1}
-                >
-                  <DropdownMenu.ItemIndicator className="dropdown-menu-itemIndicator">
-                    ✔
-                  </DropdownMenu.ItemIndicator>
-                  {sort}
-                </DropdownMenu.RadioItem>
-              ))}
-            </DropdownMenu.RadioGroup>
-          </DropdownMenu.Content>
-        </DropdownMenu.Portal>
-      </DropdownMenu.Root>
-      {activeCommunity && activeCommunity?.community?.banner && (
-        <img
-          className="banner-image"
-          src={activeCommunity?.community?.banner}
-          alt={`${activeCommunity?.community?.name} Community Banner`}
-        />
-      )}
-      {activeCommunity?.community && (
-        <LemmyCommunityInfoCard
-          lemmyInstance={activeLemmyInstance}
-          community={activeCommunity?.community}
-          sort={activeSortType}
-        >
-          <button className="icon-button" aria-label={"Show Community Information"}>
-            ⓘ
-          </button>
-        </LemmyCommunityInfoCard>
-      )}
-      <div className="search-input-wrapper">
-        {activeAdministrativeRegion.country !== "country" && (
-          <button
-            role="button"
-            title="Reset Atlas to default settings"
-            aria-label="Styled Reset Atlas Settings to default settings"
-            className="search-reset-button"
-            onClick={resetAtlas}
+      <div id="legend-content" className="legend-content-container">
+        {activeCommunity && activeCommunity?.community?.banner && (
+          <LemmyCommunityInfoCard
+            lemmyInstance={activeLemmyInstance}
+            community={activeCommunity?.community}
+            sort={activeSortType}
           >
-            {activeAdministrativeRegion[activeLocationType]} ⨯
-          </button>
+            <img
+              className="banner-image"
+              src={activeCommunity?.community?.banner}
+              alt={`${activeCommunity?.community?.name} Community Banner`}
+            />
+          </LemmyCommunityInfoCard>
         )}
 
-        {activeCommunity && (
-          <button
-            role="button"
-            title="Reset Atlas to default settings"
-            aria-label="Styled Reset Atlas Settings to default settings"
-            className="search-reset-button"
-            onClick={() => setActiveCommunity(null)}
-          >
-            <span className="prefix">c/</span>
-            {activeCommunity && activeCommunity?.community?.name} ⨯
-          </button>
-        )}
-        <div className="search-form">
-          <label htmlFor="search-input" className="sr-only">
-            Query Selected Location
-          </label>
-          <input
-            name="search-input"
-            type="text"
-            className="search-input"
-            aria-label="Query Selected Community about Region"
-            placeholder="Query"
-            value={locationQuery}
-            onChange={handleSearch}
-          />
-        </div>
-      </div>
-      <div className="community-list">
-        {communityList &&
-          communityList.map((community) => {
-            return (
-              <button
-                key={community?.counts?.community_id}
-                className={`community-button ${
-                  community?.counts?.community_id ===
-                    activeCommunity?.counts?.community_id && "community-button-active"
-                }`}
-                role="button"
-                aria-label={`${community?.community?.name} community filter`}
-                onClick={() => {
-                  if (activeCommunity === community) {
-                    setActiveCommunity(null);
-                  } else {
-                    setActiveCommunity(community);
-                  }
-                }}
-              >
-                {community?.community?.name}
+        <div className="search-input-wrapper">
+          <DropdownMenu.Root>
+            <DropdownMenu.Trigger asChild>
+              <button className="button-icon" aria-label="Community Settings Menu">
+                ☰
               </button>
-            );
-          })}
-        {/* {hasMoreCommunities && (
+            </DropdownMenu.Trigger>
+            <DropdownMenu.Portal>
+              <DropdownMenu.Content
+                collisionPadding={1.6180339887498948482 ^ 14}
+                className="dropdown-menu-content"
+              >
+                <DropdownMenu.Item className="dropdown-menu-item">
+                  <div
+                    className="reset-container"
+                    role="button"
+                    aria-label="Reset Community Settings"
+                    tabIndex={0}
+                    onClick={resetAtlas}
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter" || e.key === "Space") {
+                        resetAtlas;
+                      }
+                    }}
+                  >
+                    <p>Reset</p>
+                    <div className="right-slot reset-button">⟲</div>
+                  </div>
+                </DropdownMenu.Item>
+
+                <DropdownMenu.Sub>
+                  <DropdownMenu.SubTrigger className="dropdown-menu-subtrigger">
+                    Instance
+                    <div className="right-slot">▸</div>
+                  </DropdownMenu.SubTrigger>
+                  <DropdownMenu.Portal>
+                    <DropdownMenu.SubContent className="dropdown-menu-subcontent">
+                      <DropdownMenu.RadioGroup
+                        value={activeLemmyInstance}
+                        onValueChange={setActiveLemmyInstance}
+                      >
+                        {lemmyInstances.map((instance, index) => (
+                          <DropdownMenu.RadioItem
+                            key={index}
+                            className="dropdown-menu-radio-item"
+                            value={instance}
+                          >
+                            <DropdownMenu.ItemIndicator className="dropdown-menu-itemIndicator">
+                              ✔
+                            </DropdownMenu.ItemIndicator>
+                            {instance.label}
+                          </DropdownMenu.RadioItem>
+                        ))}
+                      </DropdownMenu.RadioGroup>
+                    </DropdownMenu.SubContent>
+                  </DropdownMenu.Portal>
+                </DropdownMenu.Sub>
+                <DropdownMenu.Separator className="dropdown-menu-separator" />
+                <DropdownMenu.Label className="dropdown-menu-label">
+                  {activeSearchType} by {activeSortType}
+                </DropdownMenu.Label>
+                <DropdownMenu.Sub>
+                  <DropdownMenu.SubTrigger className="dropdown-menu-subtrigger">
+                    Sorting
+                    <div className="right-slot">▸</div>
+                  </DropdownMenu.SubTrigger>
+                  <DropdownMenu.Portal>
+                    <DropdownMenu.SubContent className="dropdown-menu-subcontent">
+                      <DropdownMenu.RadioGroup
+                        value={activeSortType}
+                        onValueChange={setActiveSortType}
+                      >
+                        {sortTypes.map((sort, index) => (
+                          <DropdownMenu.RadioItem
+                            key={index}
+                            className="dropdown-menu-radio-item"
+                            value={sort}
+                          >
+                            <DropdownMenu.ItemIndicator className="dropdown-menu-itemIndicator">
+                              ✔
+                            </DropdownMenu.ItemIndicator>
+                            {sort}
+                          </DropdownMenu.RadioItem>
+                        ))}
+                      </DropdownMenu.RadioGroup>
+                    </DropdownMenu.SubContent>
+                  </DropdownMenu.Portal>
+                </DropdownMenu.Sub>
+
+                <DropdownMenu.Separator className="dropdown-menu-separator" />
+                <DropdownMenu.Label className="dropdown-menu-label">
+                  {activeCommunity?.community?.name
+                    ? "c/" + activeCommunity?.community.name
+                    : "Type"}
+                </DropdownMenu.Label>
+                <DropdownMenu.RadioGroup
+                  value={activeSearchType}
+                  onValueChange={setActiveSearchType}
+                >
+                  {searchTypes.map((sort, index) => (
+                    <DropdownMenu.RadioItem
+                      key={index}
+                      className="dropdown-menu-radio-item"
+                      value={sort}
+                      // disabled={index != 1}
+                    >
+                      <DropdownMenu.ItemIndicator className="dropdown-menu-itemIndicator">
+                        ✔
+                      </DropdownMenu.ItemIndicator>
+                      {sort}
+                    </DropdownMenu.RadioItem>
+                  ))}
+                </DropdownMenu.RadioGroup>
+                <DropdownMenu.Separator className="dropdown-menu-separator" />
+                <DropdownMenu.Label className="dropdown-menu-label">
+                  {activeLemmyInstance.label}
+                </DropdownMenu.Label>
+                <DropdownMenu.RadioGroup
+                  value={activeListingType}
+                  onValueChange={setActiveListingType}
+                >
+                  {listingTypes.map((sort, index) => (
+                    <DropdownMenu.RadioItem
+                      key={index}
+                      className="dropdown-menu-radio-item"
+                      value={sort}
+                      disabled={index > 1}
+                    >
+                      <DropdownMenu.ItemIndicator className="dropdown-menu-itemIndicator">
+                        ✔
+                      </DropdownMenu.ItemIndicator>
+                      {sort}
+                    </DropdownMenu.RadioItem>
+                  ))}
+                </DropdownMenu.RadioGroup>
+              </DropdownMenu.Content>
+            </DropdownMenu.Portal>
+          </DropdownMenu.Root>
+          {activeAdministrativeRegion.country !== "country" && (
+            <button
+              role="button"
+              title="Reset Atlas to default settings"
+              aria-label="Styled Reset Atlas Settings to default settings"
+              className="atlas-reset-button"
+              onClick={resetAtlas}
+            >
+              {activeAdministrativeRegion[activeLocationType]} ⨯
+            </button>
+          )}
+          {activeCommunity?.community && (
+            <LemmyCommunityInfoCard
+              lemmyInstance={activeLemmyInstance}
+              community={activeCommunity?.community}
+              sort={activeSortType}
+            >
+              <button
+                role="button"
+                title="Reset Atlas to default settings"
+                aria-label="Styled Reset Atlas Settings to default settings"
+                className="atlas-reset-button"
+                onClick={() => setActiveCommunity(null)}
+              >
+                <span className="prefix">c/</span>
+                {activeCommunity && activeCommunity?.community?.name} ⨯
+              </button>
+            </LemmyCommunityInfoCard>
+          )}
+          <div className="search-form">
+            <label htmlFor="search-input" className="sr-only">
+              Query Selected Location
+            </label>
+            <input
+              name="search-input"
+              type="text"
+              className="search-input"
+              aria-label="Query Selected Community about Region"
+              placeholder="Query"
+              value={locationQuery}
+              onChange={handleSearch}
+            />
+          </div>{" "}
+        </div>
+
+        <div className="community-list">
+          {communityList &&
+            communityList.map((community) => {
+              return (
+                <button
+                  key={community?.counts?.community_id}
+                  className={`community-button ${
+                    community?.counts?.community_id ===
+                      activeCommunity?.counts?.community_id && "community-button-active"
+                  }`}
+                  role="button"
+                  aria-label={`${community?.community?.name} community filter`}
+                  onClick={() => {
+                    if (activeCommunity === community) {
+                      setActiveCommunity(null);
+                    } else {
+                      setActiveCommunity(community);
+                    }
+                  }}
+                >
+                  {community?.community?.name}
+                </button>
+              );
+            })}
+          {/* {hasMoreCommunities && (
           <button
             role="button"
             className="community-button community-button-more"
@@ -557,50 +541,51 @@ export default function AtlasLemmy({
             +
           </button>
         )} */}
-      </div>
-      {comments && activeSearchType === "Comments" && (
-        <div className="post-reply-container">
-          {comments.length > 0 &&
-            comments.map(
-              (comment, index) =>
-                comment?.comment?.removed ||
-                comment?.comment?.deleted || (
-                  <Comment
-                    key={`${comment?.comment.id}${index * Math.random()}`}
-                    post={comment}
-                    community={activeCommunity}
-                    lemmyInstance={activeLemmyInstance}
-                    sort={activeSortType}
-                    ratioDetector={undefined}
-                  />
-                )
-            )}
         </div>
-      )}
-      {posts && activeSearchType === "Posts" && (
-        <div className="post-reply-container">
-          {posts.length > 0 &&
-            posts.map((post, index) => (
-              <Post
-                key={`${post?.post.id}${index * Math.random()}`}
-                post={post}
-                community={activeCommunity}
-                lemmyInstance={activeLemmyInstance}
-                activeListingType={activeListingType}
-                sort={activeSortType}
-              />
-            ))}
-        </div>
-      )}
-      <button
-        className="view-more"
-        onClick={() => setCurrentSearchResultPage(currentSearchResultPage + 1)}
-      >
-        View More
-      </button>
-      {/* {activeSearchType === "Posts" && regionSearchResult && (
+        {comments && activeSearchType === "Comments" && (
+          <div className="post-reply-container">
+            {comments.length > 0 &&
+              comments.map(
+                (comment, index) =>
+                  comment?.comment?.removed ||
+                  comment?.comment?.deleted || (
+                    <Comment
+                      key={`${comment?.comment.id}${index * Math.random()}`}
+                      post={comment}
+                      community={activeCommunity}
+                      lemmyInstance={activeLemmyInstance}
+                      sort={activeSortType}
+                      ratioDetector={undefined}
+                    />
+                  )
+              )}
+          </div>
+        )}
+        {posts && activeSearchType === "Posts" && (
+          <div className="post-reply-container">
+            {posts.length > 0 &&
+              posts.map((post, index) => (
+                <Post
+                  key={`${post?.post.id}${index * Math.random()}`}
+                  post={post}
+                  community={activeCommunity}
+                  lemmyInstance={activeLemmyInstance}
+                  activeListingType={activeListingType}
+                  sort={activeSortType}
+                />
+              ))}
+          </div>
+        )}
+        <button
+          className="view-more"
+          onClick={() => setCurrentSearchResultPage(currentSearchResultPage + 1)}
+        >
+          View More
+        </button>
+        {/* {activeSearchType === "Posts" && regionSearchResult && (
         <p>{regionSearchResult.posts === 0 && "No results."}</p>
       )} */}
+      </div>
       <br />
       <a
         href={encodeURI(
@@ -613,8 +598,8 @@ export default function AtlasLemmy({
         target="_blank"
         rel="noopener noreferrer"
       >
-        view in {activeLemmyInstance.baseUrl}
-      </a>{" "}
+        🔗 view in {activeLemmyInstance.baseUrl}
+      </a>
       <BasedClientDetector />
     </>
   );

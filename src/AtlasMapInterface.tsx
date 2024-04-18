@@ -101,7 +101,7 @@ export default function AtlasInterface({
     Component
   */
 
-  const LocationSearch = ({ data }) => {
+  const LocationSearch = ({ data, children }) => {
     const [searchTerm, setSearchTerm] = useState("");
     const [searchResults, setSearchResults] = useState([]);
     const [activeSearchResult, setActiveSearchResult] = useState(null);
@@ -197,17 +197,31 @@ export default function AtlasInterface({
     };
 
     return (
-      <>
+      <div id="location-search">
+        {!isMobile && (
+          <div className="right-slot">
+            <button
+              role="button"
+              title="Click and Drag to Resize"
+              aria-label="Resize Button. Click and Drag to Resize"
+              className="legend-resize-button"
+              onMouseDown={handleNexusResize}
+            >
+              ↔
+            </button>
+          </div>
+        )}
         <div className="search-input-wrapper">
+          {children}
           {activeAdministrativeRegion.country !== "country" && (
             <button
               role="button"
               title="Reset Atlas to default settings"
               aria-label="Styled Reset Atlas Settings to default settings"
-              className="search-reset-button"
+              className="atlas-reset-button"
               onClick={resetAtlas}
             >
-              {activeAdministrativeRegion.country} ⨯
+              {activeAdministrativeRegion[activeLocationType]} ⨯
             </button>
           )}
           <div className="search-form">
@@ -217,8 +231,16 @@ export default function AtlasInterface({
             <input
               className="search-input"
               type="text"
-              placeholder={`Search Location`}
-              aria-label={`Search Location`}
+              placeholder={`Search Location ${
+                activeAdministrativeRegion.country !== "country"
+                  ? `in ${activeAdministrativeRegion.country}`
+                  : ""
+              }`}
+              aria-label={`Search Location ${
+                activeAdministrativeRegion.country !== "country"
+                  ? `in ${activeAdministrativeRegion.country}`
+                  : ""
+              }`}
               value={searchTerm}
               onChange={handleSearchInputChange}
             />
@@ -242,7 +264,7 @@ export default function AtlasInterface({
             <small className="search-licence">{searchResults[0]?.licence}</small>
           </ul>
         )}
-      </>
+      </div>
     );
   };
 
@@ -252,78 +274,43 @@ export default function AtlasInterface({
       open={isOpenAtlasMapInterface}
       onOpenChange={setIsOpenAtlasMapInterface}
     >
-      <div className="right-slot">
-        <Collapsible.Trigger className="map-interface-container-collapse-trigger">
-          <div title="Click to Expand and Collapse">
-            {isOpenAtlasMapInterface ? "⊟" : "⊞"}
-          </div>
-        </Collapsible.Trigger>
-        {!isMobile && (
+      <LocationSearch data={administrativeRegionsData.features}>
+        {activeAdministrativeRegion.country === "country" ? (
           <button
             role="button"
-            title="Click and Drag to Resize"
-            aria-label="Resize Button. Click and Drag to Resize"
-            className="windows-resize-button"
-            onMouseDown={handleNexusResize}
+            title="Select Random Administrative Region"
+            aria-label="Random Button - Select Random Administrative Region"
+            className="button-icon atlas-reset-button"
+            onClick={() => handleRandom(setActiveAdministrativeRegion)}
           >
-            ↔
+            🎲
           </button>
-        )}{" "}
-        <button
-          role="button"
-          title="Select Random Administrative Region"
-          aria-label="Random Button - Select Random Administrative Region"
-          className="random-button"
-          onClick={() => handleRandom(setActiveAdministrativeRegion)}
-        >
-          🎲
-        </button>
-      </div>
-      {!isOpenAtlasMapInterface && (
-        <>
-          {regionTypes.map((type, index) => {
-            if (activeAdministrativeRegion[type] === "") return;
-            if (type === "id") return;
-            if (type === "iso_3166-2") return;
-            if (type === "country-code") return;
-            if (type === "sub-region-code") return;
-            if (type === "intermediate-region-code") return;
-            if (type === "combined") return;
+        ) : (
+          <Collapsible.Trigger asChild>
+            <button
+              className="button-icon atlas-reset-button"
+              title="Click to Expand and Collapse"
+            >
+              {isMobile ? "☰" : isOpenAtlasMapInterface ? "⊟" : "⊞"}
+            </button>
+          </Collapsible.Trigger>
+        )}
+      </LocationSearch>
 
-            return (
-              <p
-                key={index}
-                className={`country-name country-${type} ${
-                  activeLocationType === type && "active-location-type"
-                }`}
-                role="button"
-                tabIndex={0}
-                aria-label={`Select ${activeAdministrativeRegion[type]}`}
-                onClick={() => setActiveLocationType(type)}
-                onKeyDown={(e) => {
-                  if (e.key === "Enter" || e.key === "Space") {
-                    setActiveLocationType(regionTypes[type]);
-                  }
-                }}
-              >
-                {activeAdministrativeRegion[type]}
-              </p>
-            );
-          })}
-          <button
-            role="button"
-            title="Reset Atlas to default settings"
-            aria-label="Reset Atlas Settings to default settings"
-            className="reset-button"
-            onClick={resetAtlas}
-          >
-            ⟲
-          </button>
-        </>
-      )}
       <Collapsible.Content>
         {activeAdministrativeRegion.country !== "country" && (
           <>
+            <div className="right-slot">
+              <button
+                role="button"
+                title="Select Random Administrative Region"
+                aria-label="Random Button - Select Random Administrative Region"
+                className="random-button"
+                onClick={() => handleRandom(setActiveAdministrativeRegion)}
+              >
+                🎲
+              </button>
+            </div>
             {!isMobile && (
               <div className="administrative-region-flag-container">
                 <img
@@ -334,7 +321,7 @@ export default function AtlasInterface({
               </div>
             )}
             <h1
-              className={`country-administrative-region ${
+              className={`location-name ${
                 activeLocationType === "name" && "active-location-type"
               }`}
               role="button"
@@ -398,18 +385,14 @@ export default function AtlasInterface({
             })}
           </>
         )}
-
-        <div id="country-search">
-          <LocationSearch data={administrativeRegionsData.features} />{" "}
-        </div>
-        <div className="country-administrative-region-click-history">
-          {administrativeRegionClickHistoryArray &&
-            administrativeRegionClickHistoryArray.map((adminregion, index) => {
+        {administrativeRegionClickHistoryArray.length > 2 && (
+          <div className="location-name-click-history">
+            {administrativeRegionClickHistoryArray.map((adminregion, index) => {
               if (index === 0 || index > 5 || adminregion.country === "country") return;
               return (
                 <div
                   key={index}
-                  className="country-administrative-region-click-history-item"
+                  className="location-name-click-history-item"
                   aria-label={`Select ${activeAdministrativeRegion.name} in ${activeAdministrativeRegion.country}`}
                   role="button"
                   tabIndex={0}
@@ -425,7 +408,8 @@ export default function AtlasInterface({
                 </div>
               );
             })}
-        </div>
+          </div>
+        )}
       </Collapsible.Content>
     </Collapsible.Root>
   );
