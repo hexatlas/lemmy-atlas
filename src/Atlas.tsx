@@ -19,6 +19,10 @@ import {
   sortTypes,
 } from "./Atlas_Config";
 
+// Import customHook
+
+import { useLocalStorage } from "./hooks/useAtlasUtils";
+
 /*
 
  /$$   /$$                      /$$$$$$    /$$     /$$                    
@@ -60,16 +64,21 @@ export default function Atlas() {
     administrativeRegionClickHistoryArray,
     setAdministrativeRegionClickHistoryArray,
   ] = useState<AdministrativeRegionObject[]>([]);
-  const [activeAdministrativeRegion, setActiveAdministrativeRegion] =
-    useState<AdministrativeRegionObject>({
+  const [activeAdministrativeRegion, setActiveAdministrativeRegion] = useLocalStorage(
+    "activeAdministrativeRegion",
+    {
       country: "country",
       name: "name",
-    });
-  const [activeLocationType, setActiveLocationType] = useState(regionTypes[1]); // Default: Country Sort
+    }
+  );
+  const [activeLocationType, setActiveLocationType] = useLocalStorage(
+    "activeLocationType",
+    regionTypes[1]
+  ); // Default: Country Sort
   const [locationQuery, setLocationQuery] = useState("");
 
   // DATA
-  const [activeIndicator, setActiveIndicator] = useState({
+  const [activeIndicator, setActiveIndicator] = useLocalStorage("activeIndicator", {
     name: "PPPGDP",
     label: "GDP, current prices",
     description:
@@ -80,15 +89,26 @@ export default function Atlas() {
   });
 
   // COMMUNITY
-  const [activeLemmyInstance, setActiveLemmyInstance] = useState(
+  const [activeLemmyInstance, setActiveLemmyInstance] = useLocalStorage(
+    "activeLemmyInstance",
     lemmyInstances[0] // Default: hexbear.net
   );
-  const [activeCommunity, setActiveCommunity] = useState<any>(
+  const [activeCommunity, setActiveCommunity] = useLocalStorage(
+    "activeCommunity",
     activeLemmyInstance.community_id
   ); // c/News
-  const [activeSearchType, setActiveSearchType] = useState(searchTypes[0]); // Default: Comments
-  const [activeListingType, setActiveListingType] = useState(listingTypes[1]); // Default: Local
-  const [activeSortType, setActiveSortType] = useState(sortTypes[1]); // Default: New Sort
+  const [activeSearchType, setActiveSearchType] = useLocalStorage(
+    "activeSearchType",
+    searchTypes[0]
+  ); // Default: Comments
+  const [activeListingType, setActiveListingType] = useLocalStorage(
+    "activeListingType",
+    listingTypes[1]
+  ); // Default: Local
+  const [activeSortType, setActiveSortType] = useLocalStorage(
+    "activeSortType",
+    sortTypes[1]
+  ); // Default: New Sort
 
   /*
       RESET ATLAS

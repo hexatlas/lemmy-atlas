@@ -1,6 +1,6 @@
 // import center from "@turf/center";
 import L from "leaflet";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import administrativeRegionsData from "../data/administrative_regions_extended.json";
 
 // export function getColor(d) {
@@ -86,4 +86,22 @@ export function Resizeable({ children }) {
       </button>
     </div>
   );
+}
+
+function getSavedValue(key, initialValue) {
+  const savedValue = JSON.parse(sessionStorage.getItem(key));
+  if (savedValue) return savedValue;
+  if (initialValue instanceof Function) return initialValue();
+  return initialValue;
+}
+
+export function useLocalStorage(key, initialValue) {
+  const [value, setValue] = useState(() => {
+    return getSavedValue(key, initialValue);
+  });
+
+  useEffect(() => {
+    sessionStorage.setItem(key, JSON.stringify(value));
+  }, [value]);
+  return [value, setValue];
 }
