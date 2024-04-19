@@ -75,7 +75,7 @@ export default function Atlas() {
     "activeLocationType",
     regionTypes[1]
   ); // Default: Country Sort
-  const [locationQuery, setLocationQuery] = useState("");
+  const [locationQuery, setLocationQuery] = useSessionStorage("locationQuery", "");
 
   // DATA
   const [activeIndicator, setActiveIndicator] = useSessionStorage("activeIndicator", {
