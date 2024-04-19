@@ -10,6 +10,7 @@ import { Search, LemmyHttp } from "lemmy-js-client";
 
 import Comment from "../fediverse/lemmy/AtlasLemmyComment";
 import Post from "../fediverse/lemmy/AtlasLemmyPost";
+import { useSessionStorage } from "../../hooks/useAtlasUtils";
 
 /*
   /$$$$$$                                          /$$       /$$             /$$    
@@ -92,7 +93,10 @@ export function AtlasNexusReadingList({
   administrativeRegionStyle,
   administrativeRegionStyleHovered,
 }) {
-  const [anarchistLibrary, setAnarchistLibrary] = useState([]);
+  const [anarchistLibrary, setAnarchistLibrary] = useSessionStorage(
+    "anarchistLibrary",
+    []
+  );
 
   const fetchAnarchistLibrary = async (url) => {
     try {
@@ -111,9 +115,9 @@ export function AtlasNexusReadingList({
   };
 
   function HexBearNews({ bulletin }) {
-    const [comments, setComments] = useState([]);
-    const [posts, setPosts] = useState([]);
-    const [isLoaded, setIsLoaded] = useState(false);
+    const [comments, setComments] = useSessionStorage("commentsAL", []);
+    const [posts, setPosts] = useSessionStorage("postsAL", []);
+    const [isLoaded, setIsLoaded] = useSessionStorage("isLoaded", false);
 
     function getHexbear(anarchistLibrary) {
       let client: LemmyHttp = new LemmyHttp(activeLemmyInstance?.baseUrl);

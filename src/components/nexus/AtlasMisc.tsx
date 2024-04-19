@@ -36,7 +36,7 @@ import Post from "../fediverse/lemmy/AtlasLemmyPost";
                                          \______/                     
 */
 
-export function AtlasBannedThought({
+export function AtlasMisc({
   // Util
   isMobile,
   resetAtlas,
@@ -91,8 +91,6 @@ export function AtlasBannedThought({
   administrativeRegionStyle,
   administrativeRegionStyleHovered,
 }) {
-  const [bannedThought, setBannedThought] = useState(null);
-
   return (
     <div id="legend-content">
       <h3>World Inequality Database</h3>
@@ -225,4 +223,4 @@ export function AtlasBannedThought({
   );
 }
 
-export default AtlasBannedThought;
+export default AtlasMisc;

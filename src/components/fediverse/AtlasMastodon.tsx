@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { TimeAgo } from "../../hooks/useDataTransform";
+import { useSessionStorage } from "../../hooks/useAtlasUtils";
 
 function AtlasMastodon({
   // Util
@@ -57,7 +58,7 @@ function AtlasMastodon({
   administrativeRegionStyle,
   administrativeRegionStyleHovered,
 }) {
-  const [mastonPosts, setMastonPosts] = useState([]);
+  const [mastonPosts, setMastonPosts] = useSessionStorage("mastonPosts", []);
 
   const featchMastodon = async (url) => {
     try {
