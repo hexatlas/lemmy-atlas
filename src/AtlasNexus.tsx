@@ -7,6 +7,7 @@ import AtlasNexusBulletins from "./components/nexus/AtlasNexusBulletins";
 import AtlasWiki from "./components/nexus/AtlasWiki";
 import AtlasNexusAnarchistLibrary from "./components/nexus/AtlasNexusAnarchistLibrary";
 import AtlasMisc from "./components/nexus/AtlasMisc";
+import { useLocalStorage } from "./hooks/useAtlasUtils";
 
 /*
  /$$   /$$                                        
@@ -23,9 +24,11 @@ import AtlasMisc from "./components/nexus/AtlasMisc";
 */
 
 function AtlasNexusCard({ interfaceProps }) {
+  const [activeTab, setActiveTab] = useLocalStorage("activeNexusTab", "Bulletins");
+
   return (
     <>
-      <Tabs.Root className="nexus-card" defaultValue="Bulletins">
+      <Tabs.Root className="nexus-card" value={activeTab} onValueChange={setActiveTab}>
         <Tabs.List className="tabs-list tabs-nexus" aria-label="Pick Nexus Item">
           <Tabs.Trigger className="tabs-trigger" value="ClassStructureTab">
             Class Structure

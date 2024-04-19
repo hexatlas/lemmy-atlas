@@ -110,6 +110,8 @@ export default function Atlas() {
     sortTypes[1]
   ); // Default: New Sort
 
+  const [activeTab, setActiveTab] = useLocalStorage("activeTab", "FediverseTab");
+
   /*
       RESET ATLAS
   */
@@ -333,8 +335,9 @@ export default function Atlas() {
       <Tabs.Root
         id="atlas-tabs"
         className="atlas-tabs tabs-root"
-        defaultValue="FediverseTab"
         ref={sideBarRef}
+        value={activeTab}
+        onValueChange={setActiveTab}
       >
         <Tabs.List className="tabs-list" aria-label="Manage your account">
           <Tabs.Trigger className="tabs-trigger" value="NexusTab">

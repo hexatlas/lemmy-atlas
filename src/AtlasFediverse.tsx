@@ -3,11 +3,13 @@ import * as Tabs from "@radix-ui/react-tabs";
 
 import AtlasLemmy from "./components/fediverse/lemmy/AtlasLemmy";
 import AtlasMastodon from "./components/fediverse/AtlasMastodon";
+import { useLocalStorage } from "./hooks/useAtlasUtils";
 
 function AtlasFediverse({ interfaceProps }) {
+  const [activeTab, setActiveTab] = useLocalStorage("activeFediverseTab", "Lemmy");
   return (
     <>
-      <Tabs.Root className="nexus-card" defaultValue="Lemmy">
+      <Tabs.Root className="nexus-card" value={activeTab} onValueChange={setActiveTab}>
         <Tabs.List className="tabs-list tabs-nexus" aria-label="Pick Fediverse">
           <Tabs.Trigger className="tabs-trigger" value="Lemmy">
             Lemmy
