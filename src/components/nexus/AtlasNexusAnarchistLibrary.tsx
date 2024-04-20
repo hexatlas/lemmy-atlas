@@ -115,9 +115,9 @@ export function AtlasNexusReadingList({
   };
 
   function HexBearNews({ bulletin }) {
-    const [comments, setComments] = useSessionStorage("commentsAL", []);
-    const [posts, setPosts] = useSessionStorage("postsAL", []);
-    const [isLoaded, setIsLoaded] = useSessionStorage("isLoaded", false);
+    const [comments, setComments] = useState([]);
+    const [posts, setPosts] = useState([]);
+    const [isLoaded, setIsLoaded] = useState(false);
 
     function getHexbear(anarchistLibrary) {
       let client: LemmyHttp = new LemmyHttp(activeLemmyInstance?.baseUrl);
