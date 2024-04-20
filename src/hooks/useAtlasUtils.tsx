@@ -88,20 +88,25 @@ export function Resizeable({ children }) {
   );
 }
 
-function getSavedValue(key, initialValue) {
-  const savedValue = JSON.parse(sessionStorage.getItem(key));
-  if (savedValue) return savedValue;
-  if (initialValue instanceof Function) return initialValue();
-  return initialValue;
+function getSavedValue(key, initialValue, storage) {
+  try {
+    const savedValue = JSON.parse(storage.getItem(key));
+    if (savedValue) return savedValue;
+    if (initialValue instanceof Function) return initialValue();
+    return initialValue;
+  } catch (error) {
+    console.log(error);
+  }
 }
 
-export function useSessionStorage(key, initialValue) {
+export function useStateStorage(key, initialValue, isLocalStorage = false) {
+  const storage = isLocalStorage ? localStorage : sessionStorage;
   const [value, setValue] = useState(() => {
-    return getSavedValue(key, initialValue);
+    return getSavedValue(key, initialValue, storage);
   });
 
   useEffect(() => {
-    sessionStorage.setItem(key, JSON.stringify(value));
+    storage.setItem(key, JSON.stringify(value));
   }, [value]);
   return [value, setValue];
 }

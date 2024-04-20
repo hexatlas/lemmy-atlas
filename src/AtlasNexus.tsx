@@ -7,7 +7,7 @@ import AtlasNexusBulletins from "./components/nexus/AtlasNexusBulletins";
 import AtlasWiki from "./components/nexus/AtlasWiki";
 import AtlasNexusAnarchistLibrary from "./components/nexus/AtlasNexusAnarchistLibrary";
 import AtlasMisc from "./components/nexus/AtlasMisc";
-import { useSessionStorage } from "./hooks/useAtlasUtils";
+import { useStateStorage } from "./hooks/useAtlasUtils";
 
 /*
  /$$   /$$                                        
@@ -24,7 +24,7 @@ import { useSessionStorage } from "./hooks/useAtlasUtils";
 */
 
 function AtlasNexusCard({ interfaceProps }) {
-  const [activeTab, setActiveTab] = useSessionStorage("activeNexusTab", "Bulletins");
+  const [activeTab, setActiveTab] = useStateStorage("activeNexusTab", "Bulletins");
 
   return (
     <>

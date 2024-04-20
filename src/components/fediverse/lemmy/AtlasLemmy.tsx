@@ -12,7 +12,7 @@ import LemmyCommunityInfoCard from "./AtlasLemmyCommunityInfoCard";
 
 import { searchTypes } from "../../../Atlas_Config";
 import AtlasLemmyCommunityInfoCard from "./AtlasLemmyCommunityInfoCard";
-import { useSessionStorage } from "../../../hooks/useAtlasUtils";
+import { useStateStorage } from "../../../hooks/useAtlasUtils";
 
 /*
 
@@ -85,25 +85,25 @@ export default function AtlasLemmy({
   administrativeRegionStyle,
   administrativeRegionStyleHovered,
 }) {
-  const [communityList, setCommunityList] = useSessionStorage("communityList", null);
-  const [currentCommunityPage, setCurrentCommunityPage] = useSessionStorage(
+  const [communityList, setCommunityList] = useStateStorage("communityList", null);
+  const [currentCommunityPage, setCurrentCommunityPage] = useStateStorage(
     "currentCommunityPage",
     1
   );
-  const [hasMoreCommunities, setHasMoreCommunities] = useSessionStorage(
+  const [hasMoreCommunities, setHasMoreCommunities] = useStateStorage(
     "hasMoreCommunities",
     true
   );
 
   const [regionSearchResult, setRegionSearchResult] = useState(null);
-  const [comments, setComments] = useSessionStorage("comments", []);
-  const [posts, setPosts] = useSessionStorage("posts", []);
+  const [comments, setComments] = useStateStorage("comments", []);
+  const [posts, setPosts] = useStateStorage("posts", []);
   const [loading, setLoading] = useState<boolean>(false);
-  const [currentSearchResultPage, setCurrentSearchResultPage] = useSessionStorage(
+  const [currentSearchResultPage, setCurrentSearchResultPage] = useStateStorage(
     "currentSearchResultPage",
     1
   );
-  const [hasMore, setHasMore] = useSessionStorage("hasMoreLemmy", true);
+  const [hasMore, setHasMore] = useStateStorage("hasMoreLemmy", true);
 
   /*
     Handlers

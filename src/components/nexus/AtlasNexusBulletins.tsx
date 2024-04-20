@@ -7,7 +7,7 @@ import { Search, LemmyHttp } from "lemmy-js-client";
 
 import Comment from "../fediverse/lemmy/AtlasLemmyComment";
 import Post from "../fediverse/lemmy/AtlasLemmyPost";
-import { useSessionStorage } from "../../hooks/useAtlasUtils";
+import { useStateStorage } from "../../hooks/useAtlasUtils";
 
 /*
  /$$$$$$$$ /$$$$$$  /$$$$$$$$                                           
@@ -89,7 +89,7 @@ export function AtlasNexusReadingList({
   administrativeRegionStyle,
   administrativeRegionStyleHovered,
 }) {
-  const [bulletinsData, setBulletinsData] = useSessionStorage("bulletinsData", null);
+  const [bulletinsData, setBulletinsData] = useStateStorage("bulletinsData", null);
 
   const fetchBulletinsRSS = async (url) => {
     try {

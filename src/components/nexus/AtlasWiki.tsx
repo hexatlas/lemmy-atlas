@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import ReactMarkdown from "react-markdown";
-import { useSessionStorage } from "../../hooks/useAtlasUtils";
+import { useStateStorage } from "../../hooks/useAtlasUtils";
 
 /*
  /$$      /$$ /$$ /$$       /$$
@@ -73,7 +73,7 @@ export function AtlasProleWiki({
   administrativeRegionStyle,
   administrativeRegionStyleHovered,
 }) {
-  const [proleWiki, setProleWiki] = useSessionStorage(wikiURL, null);
+  const [proleWiki, setProleWiki] = useStateStorage(wikiURL, null);
 
   const fetchProleWiki = async (url) => {
     try {

@@ -21,7 +21,7 @@ import {
 
 // Import customHook
 
-import { useSessionStorage } from "./hooks/useAtlasUtils";
+import { useStateStorage } from "./hooks/useAtlasUtils";
 
 /*
 
@@ -64,21 +64,21 @@ export default function Atlas() {
     administrativeRegionClickHistoryArray,
     setAdministrativeRegionClickHistoryArray,
   ] = useState<AdministrativeRegionObject[]>([]);
-  const [activeAdministrativeRegion, setActiveAdministrativeRegion] = useSessionStorage(
+  const [activeAdministrativeRegion, setActiveAdministrativeRegion] = useStateStorage(
     "activeAdministrativeRegion",
     {
       country: "country",
       name: "name",
     }
   );
-  const [activeLocationType, setActiveLocationType] = useSessionStorage(
+  const [activeLocationType, setActiveLocationType] = useStateStorage(
     "activeLocationType",
     regionTypes[1]
   ); // Default: Country Sort
-  const [locationQuery, setLocationQuery] = useSessionStorage("locationQuery", "");
+  const [locationQuery, setLocationQuery] = useStateStorage("locationQuery", "");
 
   // DATA
-  const [activeIndicator, setActiveIndicator] = useSessionStorage("activeIndicator", {
+  const [activeIndicator, setActiveIndicator] = useStateStorage("activeIndicator", {
     name: "PPPGDP",
     label: "GDP, current prices",
     description:
@@ -89,28 +89,28 @@ export default function Atlas() {
   });
 
   // COMMUNITY
-  const [activeLemmyInstance, setActiveLemmyInstance] = useSessionStorage(
+  const [activeLemmyInstance, setActiveLemmyInstance] = useStateStorage(
     "activeLemmyInstance",
     lemmyInstances[0] // Default: hexbear.net
   );
-  const [activeCommunity, setActiveCommunity] = useSessionStorage(
+  const [activeCommunity, setActiveCommunity] = useStateStorage(
     "activeCommunity",
     activeLemmyInstance.community_id
   ); // c/News
-  const [activeSearchType, setActiveSearchType] = useSessionStorage(
+  const [activeSearchType, setActiveSearchType] = useStateStorage(
     "activeSearchType",
     searchTypes[0]
   ); // Default: Comments
-  const [activeListingType, setActiveListingType] = useSessionStorage(
+  const [activeListingType, setActiveListingType] = useStateStorage(
     "activeListingType",
     listingTypes[1]
   ); // Default: Local
-  const [activeSortType, setActiveSortType] = useSessionStorage(
+  const [activeSortType, setActiveSortType] = useStateStorage(
     "activeSortType",
     sortTypes[1]
   ); // Default: New Sort
 
-  const [activeTab, setActiveTab] = useSessionStorage("activeTab", "FediverseTab");
+  const [activeTab, setActiveTab] = useStateStorage("activeTab", "FediverseTab");
 
   /*
       RESET ATLAS

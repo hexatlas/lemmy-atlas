@@ -12,7 +12,7 @@ import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
 
 import { indicators } from "../../data/indicatorsIMF.json";
 import { useIMFDataTransform } from "../../hooks/useDataTransform";
-import { useSessionStorage } from "../../hooks/useAtlasUtils";
+import { useStateStorage } from "../../hooks/useAtlasUtils";
 /*
  /$$$$$$ /$$      /$$ /$$$$$$$$         
 |_  $$_/| $$$    /$$$| $$_____/         
@@ -98,9 +98,9 @@ const AtlasNexusIMFData = ({
   /*
     useStates
     */
-  const [data, setData] = useSessionStorage("data", null);
-  const [loading, setLoading] = useSessionStorage("loading", true);
-  const [error, setError] = useSessionStorage("error", null);
+  const [data, setData] = useStateStorage("data", null);
+  const [loading, setLoading] = useStateStorage("loading", true);
+  const [error, setError] = useStateStorage("error", null);
 
   const indicatorsArray = useIMFDataTransform(indicators);
 
