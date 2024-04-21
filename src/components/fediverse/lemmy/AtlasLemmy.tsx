@@ -122,7 +122,7 @@ export default function AtlasLemmy({
     community_id: activeCommunity?.counts?.community_id,
     type_: activeSearchType,
     listing_type: activeListingType,
-    sort: activeSortType,
+    sort: activeSortType.value,
     q: handleSearchQuery(),
     page: currentSearchResultPage,
   };
@@ -394,7 +394,7 @@ export default function AtlasLemmy({
                 </DropdownMenu.Sub>
                 <DropdownMenu.Separator className="dropdown-menu-separator" />
                 <DropdownMenu.Label className="dropdown-menu-label">
-                  {activeSearchType} by {activeSortType}
+                  {activeSearchType} by {activeSortType.label}
                 </DropdownMenu.Label>
                 <DropdownMenu.Sub>
                   <DropdownMenu.SubTrigger className="dropdown-menu-subtrigger">
@@ -416,7 +416,7 @@ export default function AtlasLemmy({
                             <DropdownMenu.ItemIndicator className="dropdown-menu-itemIndicator">
                               ✔
                             </DropdownMenu.ItemIndicator>
-                            {sort}
+                            {sort.label}
                           </DropdownMenu.RadioItem>
                         ))}
                       </DropdownMenu.RadioGroup>

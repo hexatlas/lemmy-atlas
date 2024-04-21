@@ -46,7 +46,7 @@ function Post({
 
     let form: GetComments = {
       post_id: post?.post.id,
-      sort: sort,
+      sort: sort.value,
       max_depth: 1,
       type_: activeListingType,
       limit: 0,

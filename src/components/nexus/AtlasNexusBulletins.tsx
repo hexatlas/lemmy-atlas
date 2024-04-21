@@ -138,7 +138,7 @@ export function AtlasNexusReadingList({
         community_id: activeCommunity?.counts?.community_id,
         type_: "All",
         listing_type: "All",
-        sort: activeSortType,
+        sort: activeSortType.value,
         q: bulletinURL,
         creator_id: 19956, // https://hexbear.net/u/SeventyTwoTrillion
       };

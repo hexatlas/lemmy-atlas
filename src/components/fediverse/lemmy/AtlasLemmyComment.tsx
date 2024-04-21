@@ -46,7 +46,7 @@ function Comment({
     let form: GetComments = {
       parent_id: post?.comment.id,
       max_depth: 1,
-      sort: sort,
+      sort: sort.value,
     };
 
     client.getComments(form).then((res) => {
