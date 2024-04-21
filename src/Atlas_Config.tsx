@@ -34,21 +34,22 @@ export const lemmyInstances: Array<lemmyInstance> = [
   },
 ];
 
-export const searchTypes: Array<string> = [
-  // "All",
-  "Comments",
-  "Posts",
-  // "Communities",
-  // "Users",
-  // "Url",
+export const searchTypes: Array<{ value: string; label: string }> = [
+  // { value: "All", label: "*" },
+  { value: "Comments", label: "💬" },
+  { value: "Posts", label: "🪧" },
+  // { value: "Communities", label: "☭" },
+  // { value: "Users", label: "👥" },
+  // { value: "Url", label: "🌐" },
 ];
 
-export const listingTypes: Array<string> = [
-  "All",
-  "Local",
-  // "Subscribed",
-  // "ModeratorView",
+export const listingTypes: Array<{ value: string; label: string }> = [
+  { value: "All", label: "🌐" },
+  { value: "Local", label: "🏠" },
+  // { value: "Subscribed", label: "📌" },
 ];
+
+// Needs to match geoJSON properties
 
 export const regionTypes: Array<string> = [
   "name",

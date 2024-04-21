@@ -93,10 +93,7 @@ export default function Atlas() {
     "activeLemmyInstance",
     lemmyInstances[0] // Default: hexbear.net
   );
-  const [activeCommunity, setActiveCommunity] = useStateStorage(
-    "activeCommunity",
-    activeLemmyInstance.community_id
-  ); // c/News
+  const [activeCommunity, setActiveCommunity] = useStateStorage("activeCommunity", null); // c/News
   const [activeSearchType, setActiveSearchType] = useStateStorage(
     "activeSearchType",
     searchTypes[0]

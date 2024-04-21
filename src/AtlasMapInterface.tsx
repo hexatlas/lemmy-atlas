@@ -133,7 +133,6 @@ export default function AtlasInterface({
             throw new Error(`HTTP error! Status: ${response.status}`);
           }
           const result = await response.json();
-          console.log(result, "handleSearch");
           setSearchResults(result);
           setLoading(false);
         }
@@ -158,16 +157,12 @@ export default function AtlasInterface({
             throw new Error(`HTTP error! Status: ${response.status}`);
           }
           const result = await response.json();
-          console.log(result, "handleLookUp result");
-          console.log(result.features[0].properties.address.country_code.toUpperCase());
-
           const matchedGeoJSon = data.find(
             (adminstrativeRegion) =>
               adminstrativeRegion.properties["alpha-2"] ===
               result.features[0].properties.address.country_code.toUpperCase()
           );
           matchedGeoJSon.properties.name = result.features[0].properties.name;
-          console.log(matchedGeoJSon, "handleLookUp matchedGeoJSon");
 
           setActiveLocationType("name");
           setActiveAdministrativeRegion(matchedGeoJSon.properties);
@@ -191,8 +186,6 @@ export default function AtlasInterface({
       let corner2 = latLng(result.boundingbox[1], result.boundingbox[3]);
       let bounds = latLngBounds(corner1, corner2);
       map?.fitBounds(bounds);
-
-      console.log(result, "handleCLickSearchResult");
       setActiveSearchResult(result);
     };
 

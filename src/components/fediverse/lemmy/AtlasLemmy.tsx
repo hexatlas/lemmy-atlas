@@ -85,25 +85,16 @@ export default function AtlasLemmy({
   administrativeRegionStyle,
   administrativeRegionStyleHovered,
 }) {
-  const [communityList, setCommunityList] = useStateStorage("communityList", null);
-  const [currentCommunityPage, setCurrentCommunityPage] = useStateStorage(
-    "currentCommunityPage",
-    1
-  );
-  const [hasMoreCommunities, setHasMoreCommunities] = useStateStorage(
-    "hasMoreCommunities",
-    true
-  );
+  const [communityList, setCommunityList] = useState(null);
+  const [currentCommunityPage, setCurrentCommunityPage] = useState(1);
+  const [hasMoreCommunities, setHasMoreCommunities] = useState(true);
 
   const [regionSearchResult, setRegionSearchResult] = useState(null);
-  const [comments, setComments] = useStateStorage("comments", []);
-  const [posts, setPosts] = useStateStorage("posts", []);
+  const [comments, setComments] = useState([]);
+  const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState<boolean>(false);
-  const [currentSearchResultPage, setCurrentSearchResultPage] = useStateStorage(
-    "currentSearchResultPage",
-    1
-  );
-  const [hasMore, setHasMore] = useStateStorage("hasMoreLemmy", true);
+  const [currentSearchResultPage, setCurrentSearchResultPage] = useState(1);
+  const [hasMore, setHasMore] = useState(true);
 
   /*
     Handlers
@@ -120,8 +111,8 @@ export default function AtlasLemmy({
   let client: LemmyHttp = new LemmyHttp(activeLemmyInstance?.baseUrl);
   let form: Search = {
     community_id: activeCommunity?.counts?.community_id,
-    type_: activeSearchType,
-    listing_type: activeListingType,
+    type_: activeSearchType.value,
+    listing_type: activeListingType.value,
     sort: activeSortType.value,
     q: handleSearchQuery(),
     page: currentSearchResultPage,
@@ -139,7 +130,7 @@ export default function AtlasLemmy({
       // setPosts([]);
       // setComments([]);
 
-      if (activeSearchType === "Comments") {
+      if (activeSearchType.value === "Comments") {
         setPosts([]);
         if (res?.comments.length < 10) {
           setHasMore(false);
@@ -147,7 +138,7 @@ export default function AtlasLemmy({
         if (comments && res?.comments) setComments(res?.comments);
       }
 
-      if (activeSearchType === "Posts") {
+      if (activeSearchType.value === "Posts") {
         setComments([]);
         if (res?.posts.length < 10) {
           setHasMore(false);
@@ -162,7 +153,7 @@ export default function AtlasLemmy({
       setPosts([]);
       setComments([]);
 
-      if (activeSearchType === "Comments") {
+      if (activeSearchType.value === "Comments") {
         setPosts([]);
         if (res?.comments.length < 10) {
           setHasMore(false);
@@ -170,7 +161,7 @@ export default function AtlasLemmy({
         if (comments && res?.comments) setComments([...comments, ...res?.comments]);
       }
 
-      if (activeSearchType === "Posts") {
+      if (activeSearchType.value === "Posts") {
         setComments([]);
         if (res?.posts.length < 10) {
           0;
@@ -184,7 +175,7 @@ export default function AtlasLemmy({
   // Gets list of communites from active lemmy instance
   function handleCommunityList() {
     let form: ListCommunities = {
-      type_: activeListingType,
+      type_: activeListingType.value,
       sort: "TopAll",
       page: currentCommunityPage,
     };
@@ -206,7 +197,7 @@ export default function AtlasLemmy({
     let form: Search = {
       q: searchQuery,
       type_: "Communities",
-      listing_type: activeListingType,
+      listing_type: activeListingType.value,
     };
 
     client.search(form).then((res) => {
@@ -394,7 +385,7 @@ export default function AtlasLemmy({
                 </DropdownMenu.Sub>
                 <DropdownMenu.Separator className="dropdown-menu-separator" />
                 <DropdownMenu.Label className="dropdown-menu-label">
-                  {activeSearchType} by {activeSortType.label}
+                  {activeSearchType.label} by {activeSortType.label}
                 </DropdownMenu.Label>
                 <DropdownMenu.Sub>
                   <DropdownMenu.SubTrigger className="dropdown-menu-subtrigger">
@@ -434,17 +425,17 @@ export default function AtlasLemmy({
                   value={activeSearchType}
                   onValueChange={setActiveSearchType}
                 >
-                  {searchTypes.map((sort, index) => (
+                  {searchTypes.map((searchType, index) => (
                     <DropdownMenu.RadioItem
                       key={index}
                       className="dropdown-menu-radio-item"
-                      value={sort}
+                      value={searchType}
                       // disabled={index != 1}
                     >
                       <DropdownMenu.ItemIndicator className="dropdown-menu-itemIndicator">
                         ✔
                       </DropdownMenu.ItemIndicator>
-                      {sort}
+                      {searchType.label}
                     </DropdownMenu.RadioItem>
                   ))}
                 </DropdownMenu.RadioGroup>
@@ -456,17 +447,17 @@ export default function AtlasLemmy({
                   value={activeListingType}
                   onValueChange={setActiveListingType}
                 >
-                  {listingTypes.map((sort, index) => (
+                  {listingTypes.map((listingType, index) => (
                     <DropdownMenu.RadioItem
                       key={index}
                       className="dropdown-menu-radio-item"
-                      value={sort}
+                      value={listingType}
                       disabled={index > 1}
                     >
                       <DropdownMenu.ItemIndicator className="dropdown-menu-itemIndicator">
                         ✔
                       </DropdownMenu.ItemIndicator>
-                      {sort}
+                      {listingType.label}
                     </DropdownMenu.RadioItem>
                   ))}
                 </DropdownMenu.RadioGroup>
@@ -553,7 +544,7 @@ export default function AtlasLemmy({
           </button>
         )} */}
         </div>
-        {comments && activeSearchType === "Comments" && (
+        {comments && activeSearchType.value === "Comments" && (
           <div className="post-reply-container">
             {comments.length > 0 &&
               comments.map(
@@ -572,7 +563,7 @@ export default function AtlasLemmy({
               )}
           </div>
         )}
-        {posts && activeSearchType === "Posts" && (
+        {posts && activeSearchType.value === "Posts" && (
           <div className="post-reply-container">
             {posts.length > 0 &&
               posts.map((post, index) => (
@@ -602,9 +593,11 @@ export default function AtlasLemmy({
         href={encodeURI(
           `${activeLemmyInstance.baseUrl}search?q=${encodeURIComponent(
             handleSearchQuery()
-          )}&type=${activeSearchType}&listingType=${activeListingType}&communityId=${
+          )}&type=${activeSearchType.value}&listingType=${
+            activeListingType.value
+          }&communityId=${
             activeCommunity?.counts?.community_id
-          }&page=${currentSearchResultPage}&sort=${activeSortType}`
+          }&page=${currentSearchResultPage}&sort=${activeSortType.value}`
         )}
         target="_blank"
         rel="noopener noreferrer"
