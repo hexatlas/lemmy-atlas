@@ -429,7 +429,7 @@ export default function AtlasLemmy({
                     <DropdownMenu.RadioItem
                       key={index}
                       className="dropdown-menu-radio-item"
-                      value={searchType}
+                      value={searchType as unknown as string}
                       // disabled={index != 1}
                     >
                       <DropdownMenu.ItemIndicator className="dropdown-menu-itemIndicator">
