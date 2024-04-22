@@ -531,14 +531,15 @@
   flex-direction: column;
 
   position: relative;
-  @include atlas-shadow(var(--atlas-shadow-1));
-  @include atlas-blur(var(--atlas-size-09));
+  @include atlas-blur(var(--atlas-size-00));
 }
 
 #atlas-tabs {
+  @include atlas-shadow(var(--atlas-shadow-1));
+  background-color: hsl(var(--atlas-color-tertiary) / var(--atlas-opacity-1));
+  border-radius: var(--atlas-border-radius-1);
   height: 100vh;
   height: 100dvh;
-  background: hsl(var(--atlas-color-dark) / var(--atlas-opacity-3));
   padding-top: var(--atlas-size-14);
   z-index: 99;
   & > * {
@@ -621,7 +622,7 @@
 }
 .tabs-trigger[data-state="active"] {
   color: hsl(var(--atlas-color-tertiary) / var(--atlas-opacity-3));
-  background-color: hsl(var(--atlas-color-light) / var(--atlas-opacity-2));
+  background-color: hsl(var(--atlas-color-dark) / var(--atlas-opacity-3));
   @include atlas-shadow(var(--atlas-shadow-1));
 
   border: 1px solid hsl(var(--atlas-color-light) / var(--atlas-opacity-2));
@@ -636,6 +637,10 @@
 }
 
 .tabs-content {
+  background: hsl(var(--atlas-color-dark) / var(--atlas-opacity-3));
+  padding: var(--atlas-size-10);
+  border-radius: var(--atlas-border-radius-1);
+  @include atlas-shadow(var(--atlas-shadow-inset));
   flex-grow: 1;
 
   outline: none;
