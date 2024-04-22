@@ -79,7 +79,7 @@ function AtlasMastodon({
   useEffect(() => {
     if (activeAdministrativeRegion.country !== "country") {
       const apiUrl = `/.netlify/functions/mastodon/?country=${encodeURI(
-        activeAdministrativeRegion.country
+        activeAdministrativeRegion[activeLocationType]
       )
         .toLowerCase()
         .replace(/%20/g, "-")}`;
@@ -90,7 +90,7 @@ function AtlasMastodon({
   return (
     <>
       <div id="legend-content">
-        <h3>Latest Posts on {activeAdministrativeRegion.country}</h3>
+        <h3>Latest Posts on {activeAdministrativeRegion[activeLocationType]}</h3>
         {mastonPosts &&
           mastonPosts.map((post, index) => (
             <div className="feed-item" key={index}>
