@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import administrativeRegionsData from "./data/administrative_regions_extended.json";
+import administrativeRegionsData from "./data/administrative_regions_extended_20.json";
 
 // https://www.radix-ui.com/primitives/docs/components/collapsible
 import * as Collapsible from "@radix-ui/react-collapsible";
