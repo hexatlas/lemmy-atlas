@@ -330,7 +330,7 @@ export default function AtlasLemmy({
         )}
 
         <div className="search-input-wrapper">
-          <DropdownMenu.Root>
+          {/* <DropdownMenu.Root>
             <DropdownMenu.Trigger asChild>
               <button className="button-icon" aria-label="Community Settings Menu">
                 ☰
@@ -388,7 +388,7 @@ export default function AtlasLemmy({
                 </DropdownMenu.Sub>
               </DropdownMenu.Content>
             </DropdownMenu.Portal>
-          </DropdownMenu.Root>
+          </DropdownMenu.Root> */}
           {activeAdministrativeRegion.country !== "country" && (
             <button
               role="button"

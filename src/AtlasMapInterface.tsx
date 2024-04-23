@@ -261,6 +261,41 @@ export default function AtlasInterface({
     );
   };
 
+  const ActiveStatesDownloader = () => {
+    const data = {
+      activeLocationType,
+      activeAdministrativeRegion,
+      administrativeRegionClickHistoryArray,
+    };
+
+    const downloadJSON = () => {
+      const jsonData = JSON.stringify(data, null, 2);
+      const blob = new Blob([jsonData], { type: "application/json" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "HexAtlas_ActiveStates.json";
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    };
+
+    return (
+      <>
+        <button
+          onClick={downloadJSON}
+          role="button"
+          title="Select Random Administrative Region"
+          aria-label="Random Button - Select Random Administrative Region"
+          className="button-icon"
+        >
+          💾
+        </button>
+      </>
+    );
+  };
+
   return (
     <Collapsible.Root
       className="map-interface-container"
@@ -273,7 +308,7 @@ export default function AtlasInterface({
             role="button"
             title="Select Random Administrative Region"
             aria-label="Random Button - Select Random Administrative Region"
-            className="button-icon atlas-reset-button"
+            className="button-icon atlas-expand-button"
             onClick={() => handleRandom(setActiveAdministrativeRegion)}
           >
             🎲
@@ -281,7 +316,7 @@ export default function AtlasInterface({
         ) : (
           <Collapsible.Trigger asChild>
             <button
-              className="button-icon atlas-reset-button"
+              className="button-icon atlas-expand-button"
               title="Click to Expand and Collapse"
             >
               {isMobile ? "☰" : isOpenAtlasMapInterface ? "⊟" : "⊞"}
@@ -381,7 +416,12 @@ export default function AtlasInterface({
         {administrativeRegionClickHistoryArray.length > 2 && (
           <div className="location-name-click-history">
             {administrativeRegionClickHistoryArray.map((adminregion, index) => {
-              if (index === 0 || index > 5 || adminregion.country === "country") return;
+              if (
+                index === 0 ||
+                index > 5 ||
+                adminregion.activeAdministrativeRegion.country === "country"
+              )
+                return;
               return (
                 <div
                   key={index}
@@ -389,15 +429,21 @@ export default function AtlasInterface({
                   aria-label={`Select ${activeAdministrativeRegion.name} in ${activeAdministrativeRegion.country}`}
                   role="button"
                   tabIndex={0}
-                  onClick={() => setActiveAdministrativeRegion(adminregion)}
+                  onClick={() => {
+                    setActiveAdministrativeRegion(adminregion.activeAdministrativeRegion);
+                    setActiveLocationType(adminregion.activeLocationType);
+                  }}
                   onKeyDown={(e) => {
                     if (e.key === "Enter" || e.key === "Space") {
-                      setActiveAdministrativeRegion(adminregion);
+                      setActiveAdministrativeRegion(
+                        adminregion.activeAdministrativeRegion
+                      );
+                      setActiveLocationType(adminregion.activeLocationType);
                     }
                   }}
                 >
-                  <h2>{adminregion.name}</h2>
-                  <h6>{adminregion.country}</h6>
+                  <h2>{adminregion.activeSelection}</h2>
+                  <h6>{adminregion.activeAdministrativeRegion.country}</h6>
                 </div>
               );
             })}

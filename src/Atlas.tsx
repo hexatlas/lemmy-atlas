@@ -45,6 +45,12 @@ export default function Atlas() {
     name: string;
   }
 
+  interface LocationSelection {
+    AdministrativeRegionObject: AdministrativeRegionObject;
+    activeLocationType: string;
+    activeLocation: string;
+  }
+
   const sideBarRef = useRef<HTMLInputElement>(null);
   /*
     useStates
@@ -53,17 +59,29 @@ export default function Atlas() {
   const [isMobile, setIsMobile] = useState(null);
   const [nexusSize, setNexusSize] = useState(1.6180339887498948482 ^ 512);
 
-  // LOCATION
-  const [map, setMap] = useState(null);
+  // UI STATES
 
   const [isOpenAtlasMapInterface, setIsOpenAtlasMapInterface] = useState(
     !(window.innerWidth < 768)
   );
+
+  const [isLocationSelectMode, setIsLocationSelectMode] = useStateStorage(
+    "isLocationSelectMode",
+    false
+  );
+  const [activeLocationSelection, setActiveLocationSelection] = useStateStorage(
+    "activeLocationSelection",
+    []
+  );
+
+  // LOCATION
+  const [map, setMap] = useState(null);
+
   const [nominatim, setNominatim] = useState(null);
   const [
     administrativeRegionClickHistoryArray,
     setAdministrativeRegionClickHistoryArray,
-  ] = useState<AdministrativeRegionObject[]>([]);
+  ] = useState([]);
   const [activeAdministrativeRegion, setActiveAdministrativeRegion] = useStateStorage(
     "activeAdministrativeRegion",
     {
@@ -71,6 +89,7 @@ export default function Atlas() {
       name: "name",
     }
   );
+
   const [activeLocationType, setActiveLocationType] = useStateStorage(
     "activeLocationType",
     regionTypes[1]
@@ -183,10 +202,6 @@ export default function Atlas() {
         behavior: "smooth",
       });
     }
-    setAdministrativeRegionClickHistoryArray([
-      activeAdministrativeRegion,
-      ...administrativeRegionClickHistoryArray,
-    ]);
   }, [activeAdministrativeRegion]);
 
   useEffect(() => {
@@ -199,6 +214,20 @@ export default function Atlas() {
         top: document.getElementById("atlas-tabs").offsetTop,
         behavior: "smooth",
       });
+
+    const selection = {
+      activeSelection: activeAdministrativeRegion[activeLocationType],
+      activeLocationType: activeLocationType,
+      activeAdministrativeRegion: activeAdministrativeRegion,
+    };
+    setAdministrativeRegionClickHistoryArray([
+      selection,
+      ...administrativeRegionClickHistoryArray,
+    ]);
+
+    if (isLocationSelectMode) {
+      setActiveLocationSelection([selection, ...activeLocationSelection]);
+    }
   }, [activeAdministrativeRegion, activeLocationType]);
 
   // Handle Browser Back Button

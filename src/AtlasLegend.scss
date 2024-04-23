@@ -449,15 +449,16 @@
   // cursor: pointer;
   font-family: inherit;
 
-  color: hsl(var(--atlas-color-light) / var(--atlas-opacity-3));
-  background-color: hsl(var(--atlas-color-secondary));
-
   transition: var(--atlas-transition-fast);
 
-  background-color: hsl(var(--atlas-color-secondary) / var(--atlas-opacity-3));
   border: 1px solid hsl(var(--atlas-color-light) / var(--atlas-opacity-1));
   border-radius: var(--atlas-border-radius-1);
 }
+.atlas-expand-button {
+  color: hsl(var(--atlas-color-light) / var(--atlas-opacity-3));
+  background-color: hsl(var(--atlas-color-secondary) / var(--atlas-opacity-3));
+}
+
 .button-icon:hover {
   @include atlas-shadow(var(--atlas-shadow-inset));
   background-color: hsl(var(--atlas-color-primary) / var(--atlas-opacity-3));
@@ -628,7 +629,9 @@
   border: 1px solid hsl(var(--atlas-color-light) / var(--atlas-opacity-2));
   border-left: var(--atlas-size-14) solid
     hsl(var(--atlas-color-tertiary) / var(--atlas-opacity-3));
-  // z-index: 1;
+  & > .tabs-trigger button {
+    background-color: hsl(var(--atlas-color-light) / var(--atlas-opacity-3));
+  }
 }
 .tabs-trigger:focus {
   position: relative;
