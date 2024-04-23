@@ -6,6 +6,9 @@ import { useEffect, useState } from "react";
 // https://www.radix-ui.com/primitives/docs/components/dropdown-menu
 import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
 
+// https://www.radix-ui.com/primitives/docs/components/tabs
+import * as Tabs from "@radix-ui/react-tabs";
+
 import Comment from "./AtlasLemmyComment";
 import Post from "./AtlasLemmyPost";
 import LemmyCommunityInfoCard from "./AtlasLemmyCommunityInfoCard";
@@ -383,84 +386,6 @@ export default function AtlasLemmy({
                     </DropdownMenu.SubContent>
                   </DropdownMenu.Portal>
                 </DropdownMenu.Sub>
-                <DropdownMenu.Separator className="dropdown-menu-separator" />
-                <DropdownMenu.Label className="dropdown-menu-label">
-                  {activeSearchType.label} by {activeSortType.label}
-                </DropdownMenu.Label>
-                <DropdownMenu.Sub>
-                  <DropdownMenu.SubTrigger className="dropdown-menu-subtrigger">
-                    Sorting
-                    <div className="right-slot">▸</div>
-                  </DropdownMenu.SubTrigger>
-                  <DropdownMenu.Portal>
-                    <DropdownMenu.SubContent className="dropdown-menu-subcontent">
-                      <DropdownMenu.RadioGroup
-                        value={activeSortType}
-                        onValueChange={setActiveSortType}
-                      >
-                        {sortTypes.map((sort, index) => (
-                          <DropdownMenu.RadioItem
-                            key={index}
-                            className="dropdown-menu-radio-item"
-                            value={sort}
-                          >
-                            <DropdownMenu.ItemIndicator className="dropdown-menu-itemIndicator">
-                              ✔
-                            </DropdownMenu.ItemIndicator>
-                            {sort.label}
-                          </DropdownMenu.RadioItem>
-                        ))}
-                      </DropdownMenu.RadioGroup>
-                    </DropdownMenu.SubContent>
-                  </DropdownMenu.Portal>
-                </DropdownMenu.Sub>
-
-                <DropdownMenu.Separator className="dropdown-menu-separator" />
-                <DropdownMenu.Label className="dropdown-menu-label">
-                  {activeCommunity?.community?.name
-                    ? "c/" + activeCommunity?.community.name
-                    : "Type"}
-                </DropdownMenu.Label>
-                <DropdownMenu.RadioGroup
-                  value={activeSearchType}
-                  onValueChange={setActiveSearchType}
-                >
-                  {searchTypes.map((searchType, index) => (
-                    <DropdownMenu.RadioItem
-                      key={index}
-                      className="dropdown-menu-radio-item"
-                      value={searchType as unknown as string}
-                      // disabled={index != 1}
-                    >
-                      <DropdownMenu.ItemIndicator className="dropdown-menu-itemIndicator">
-                        ✔
-                      </DropdownMenu.ItemIndicator>
-                      {searchType.label}
-                    </DropdownMenu.RadioItem>
-                  ))}
-                </DropdownMenu.RadioGroup>
-                <DropdownMenu.Separator className="dropdown-menu-separator" />
-                <DropdownMenu.Label className="dropdown-menu-label">
-                  {activeLemmyInstance.label}
-                </DropdownMenu.Label>
-                <DropdownMenu.RadioGroup
-                  value={activeListingType}
-                  onValueChange={setActiveListingType}
-                >
-                  {listingTypes.map((listingType, index) => (
-                    <DropdownMenu.RadioItem
-                      key={index}
-                      className="dropdown-menu-radio-item"
-                      value={listingType}
-                      disabled={index > 1}
-                    >
-                      <DropdownMenu.ItemIndicator className="dropdown-menu-itemIndicator">
-                        ✔
-                      </DropdownMenu.ItemIndicator>
-                      {listingType.label}
-                    </DropdownMenu.RadioItem>
-                  ))}
-                </DropdownMenu.RadioGroup>
               </DropdownMenu.Content>
             </DropdownMenu.Portal>
           </DropdownMenu.Root>
@@ -506,7 +431,7 @@ export default function AtlasLemmy({
               value={locationQuery}
               onChange={handleSearch}
             />
-          </div>{" "}
+          </div>
         </div>
 
         <div className="community-list">
@@ -544,6 +469,45 @@ export default function AtlasLemmy({
           </button>
         )} */}
         </div>
+        <div className="lemmy-settings">
+          <Tabs.Root value={activeSearchType} onValueChange={setActiveSearchType}>
+            <Tabs.List className="lemmy-setting-container" aria-label="Select SearchType">
+              {searchTypes.map((searchType, index) => (
+                <Tabs.Trigger
+                  key={index}
+                  value={searchType as unknown as string}
+                  className="lemmy-setting"
+                >
+                  {searchType.label}
+                </Tabs.Trigger>
+              ))}
+            </Tabs.List>
+          </Tabs.Root>
+
+          <Tabs.Root value={activeListingType} onValueChange={setActiveListingType}>
+            <Tabs.List
+              className="lemmy-setting-container"
+              aria-label="Select ListingType"
+            >
+              {listingTypes.map((listingType, index) => (
+                <Tabs.Trigger key={index} value={listingType} className="lemmy-setting">
+                  {listingType.label}
+                </Tabs.Trigger>
+              ))}
+            </Tabs.List>
+          </Tabs.Root>
+
+          <Tabs.Root value={activeSortType} onValueChange={setActiveSortType}>
+            <Tabs.List className="lemmy-setting-container" aria-label="Select SortType">
+              {sortTypes.map((sortType, index) => (
+                <Tabs.Trigger key={index} value={sortType} className="lemmy-setting">
+                  {sortType.label}
+                </Tabs.Trigger>
+              ))}
+            </Tabs.List>
+          </Tabs.Root>
+        </div>
+
         {comments && activeSearchType.value === "Comments" && (
           <div className="post-reply-container">
             {comments.length > 0 &&

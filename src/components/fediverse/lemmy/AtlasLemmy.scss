@@ -58,6 +58,47 @@
     color: hsl(var(--atlas-color-dark) / var(--atlas-opacity-3));
   }
 }
+
+/* Lemmy Settings */
+
+.lemmy-settings {
+  display: grid;
+  grid-auto-flow: column;
+  gap: var(--atlas-size-12);
+
+  // background-color: hsl(var(--atlas-color-light) / var(--atlas-opacity-1));
+  border-radius: var(--atlas-border-radius-1);
+  @include atlas-shadow(var(--atlas-shadow-inset));
+  overflow: hidden;
+  overflow-x: scroll;
+
+  .lemmy-setting-container {
+    display: flex;
+    gap: var(--atlas-size-14);
+    background-color: hsl(var(--atlas-color-primary) / var(--atlas-opacity-3));
+    // padding: var(--atlas-size-16);
+    border-radius: var(--atlas-border-radius-1);
+    @include atlas-shadow(var(--atlas-shadow-1));
+  }
+
+  .lemmy-setting {
+    height: var(--atlas-size-08);
+    width: var(--atlas-size-07);
+    @include atlas-shadow(var(--atlas-shadow-inset));
+
+    &:hover {
+      color: hsl(var(--atlas-color-dark) / var(--atlas-opacity-3));
+      background-color: hsl(var(--atlas-color-primary) / var(--atlas-opacity-3));
+    }
+    &[data-state="active"] {
+      color: hsl(var(--atlas-color-dark) / var(--atlas-opacity-3));
+      background-color: hsl(var(--atlas-color-tertiary) / var(--atlas-opacity-3));
+
+      // z-index: 1;
+    }
+  }
+}
+
 /* Post, Comment */
 
 .post-info-container,
