@@ -228,7 +228,7 @@ export default function Atlas() {
     if (isLocationSelectMode) {
       setActiveLocationSelection([selection, ...activeLocationSelection]);
     }
-  }, [activeAdministrativeRegion, activeLocationType]);
+  }, [activeAdministrativeRegion, activeLocationType, nominatim]);
 
   // Handle Browser Back Button
   //  Start

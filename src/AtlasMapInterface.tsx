@@ -443,7 +443,7 @@ export default function AtlasInterface({
                   }}
                 >
                   <h2>{adminregion.activeSelection}</h2>
-                  <h6>{adminregion.activeAdministrativeRegion.country}</h6>
+                  <h5>{adminregion.activeAdministrativeRegion.emoji}</h5>
                 </div>
               );
             })}
