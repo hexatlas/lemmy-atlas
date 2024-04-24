@@ -85,7 +85,7 @@ function AtlasMastodon({
         .replace(/%20/g, "-")}`;
       featchMastodon(apiUrl);
     }
-  }, [activeAdministrativeRegion]);
+  }, [activeAdministrativeRegion, activeLocationType]);
 
   return (
     <>
