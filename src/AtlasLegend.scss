@@ -13,10 +13,6 @@
 
 .legend-content-container,
 #legend-content {
-  overflow: hidden;
-  height: 75vh;
-  overflow-y: scroll;
-
   .search-input-wrapper {
     position: sticky;
     top: 0;
@@ -215,6 +211,7 @@
 
 @media only screen and (max-width: 768px) {
   .map-interface-container {
+    @include atlas-shadow(none);
     position: fixed;
     top: var(--atlas-size-14);
     left: 0;
@@ -306,10 +303,10 @@
 }
 
 .search-input-wrapper {
+  @include atlas-shadow(var(--atlas-shadow-1));
   background: white;
   padding: var(--atlas-size-16);
   border-radius: var(--atlas-border-radius-1);
-  @include atlas-shadow(var(--atlas-shadow-inset));
   display: flex;
   gap: var(--atlas-size-16);
   overflow: hidden;
@@ -320,6 +317,8 @@
     gap: var(--atlas-size-14);
     align-items: center;
     width: 100%;
+    @include atlas-shadow(var(--atlas-shadow-inset));
+    border-radius: var(--atlas-border-radius-1);
     // z-index: 9;
 
     .search-input {
@@ -543,9 +542,31 @@
   height: 100dvh;
   padding-top: var(--atlas-size-14);
   z-index: 99;
+  overflow: hidden;
   & > * {
     margin: 0 var(--atlas-size-12);
     margin-right: var(--atlas-size-10);
+  }
+  .tabs-content {
+    @include atlas-shadow(var(--atlas-shadow-1));
+    background: hsl(var(--atlas-color-dark) / var(--atlas-opacity-2));
+    border-radius: var(--atlas-border-radius-1);
+    padding: var(--atlas-size-12);
+    .tabs-content {
+      background: hsl(var(--atlas-color-dark) / var(--atlas-opacity-3));
+      @include atlas-shadow(var(--atlas-shadow-inset));
+      flex-grow: 1;
+      overflow: hidden;
+      height: calc(100dvh - var(--atlas-size-04));
+      overflow-y: scroll;
+      outline: none;
+      &:focus {
+        @include atlas-shadow(var(--atlas-shadow-1));
+      }
+      .banner-image {
+        margin-bottom: var(--atlas-size-10);
+      }
+    }
   }
 }
 
@@ -583,7 +604,8 @@
   padding-right: var(--atlas-size-12);
   margin-bottom: var(--atlas-size-12);
   display: flex;
-  flex-wrap: wrap;
+  overflow: hidden;
+  overflow-x: scroll;
 }
 
 .nexus-card .tabs-list .tabs-trigger {
@@ -637,20 +659,4 @@
   position: relative;
   @include atlas-shadow(var(--atlas-shadow-1));
   border-color: hsl(var(--atlas-color-primary) / var(--atlas-opacity-3));
-}
-
-.tabs-content {
-  background: hsl(var(--atlas-color-dark) / var(--atlas-opacity-3));
-  padding: var(--atlas-size-10);
-  border-radius: var(--atlas-border-radius-1);
-  @include atlas-shadow(var(--atlas-shadow-inset));
-  flex-grow: 1;
-
-  outline: none;
-  &:focus {
-    @include atlas-shadow(var(--atlas-shadow-1));
-  }
-  .banner-image {
-    margin-bottom: var(--atlas-size-10);
-  }
 }

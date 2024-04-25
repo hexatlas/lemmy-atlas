@@ -18,10 +18,10 @@ function AtlasFediverse({ interfaceProps }) {
             Mastodon
           </Tabs.Trigger>
         </Tabs.List>
-        <Tabs.Content value="Lemmy">
+        <Tabs.Content value="Lemmy" className="tabs-content">
           <AtlasLemmy {...interfaceProps} />
         </Tabs.Content>
-        <Tabs.Content value="Mastodon">
+        <Tabs.Content value="Mastodon" className="tabs-content">
           <AtlasMastodon {...interfaceProps} />
         </Tabs.Content>
       </Tabs.Root>

@@ -225,52 +225,54 @@ export function AtlasNexusReadingList({
   }, [activeAdministrativeRegion]);
 
   return (
-    <div id="legend-content">
-      <h3>Reading List</h3>
-      <a
-        href={`https://bulletins.hexbear.net/posts/readinglist/#${encodeURI(
-          activeAdministrativeRegion.country
-        )
-          .toLowerCase()
-          .replace(/%20/g, "-")}`}
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        📚📕 Hexbear Reading List:
-        {activeAdministrativeRegion.country != "country" &&
-          activeAdministrativeRegion.country}
-      </a>
+    <>
+      <div id="legend-content" className="legend-content-container">
+        <h3>Reading List</h3>
+        <a
+          href={`https://bulletins.hexbear.net/posts/readinglist/#${encodeURI(
+            activeAdministrativeRegion.country
+          )
+            .toLowerCase()
+            .replace(/%20/g, "-")}`}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          📚📕 Hexbear Reading List:
+          {activeAdministrativeRegion.country != "country" &&
+            activeAdministrativeRegion.country}
+        </a>
 
-      {bulletinsData && (
-        <>
-          <h3>{bulletinsData.title}</h3>
-          <p> {bulletinsData.description}</p>
-          <a href={bulletinsData.link} target="_blank" rel="noopener noreferrer">
-            🔗 {bulletinsData.link}
-          </a>
-          {bulletinsData.items &&
-            bulletinsData.items.map((bulletin, index) => {
-              return (
-                <div className="feed-item" key={index}>
-                  <p className="feed-publish-date highlight">
-                    🗓️ {new Date(bulletin.pubDate).toDateString()}
-                  </p>
-                  <a
-                    className="feed-link"
-                    href={bulletin.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    🔗 {bulletin.title}
-                  </a>
-                  <ReactMarkdown>{`📰 ${bulletin.description}`}</ReactMarkdown>
-                  <HexBearNews bulletin={bulletin} />
-                </div>
-              );
-            })}
-        </>
-      )}
-    </div>
+        {bulletinsData && (
+          <>
+            <h3>{bulletinsData.title}</h3>
+            <p> {bulletinsData.description}</p>
+            <a href={bulletinsData.link} target="_blank" rel="noopener noreferrer">
+              🔗 {bulletinsData.link}
+            </a>
+            {bulletinsData.items &&
+              bulletinsData.items.map((bulletin, index) => {
+                return (
+                  <div className="feed-item" key={index}>
+                    <p className="feed-publish-date highlight">
+                      🗓️ {new Date(bulletin.pubDate).toDateString()}
+                    </p>
+                    <a
+                      className="feed-link"
+                      href={bulletin.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      🔗 {bulletin.title}
+                    </a>
+                    <ReactMarkdown>{`📰 ${bulletin.description}`}</ReactMarkdown>
+                    <HexBearNews bulletin={bulletin} />
+                  </div>
+                );
+              })}
+          </>
+        )}
+      </div>
+    </>
   );
 }
 
