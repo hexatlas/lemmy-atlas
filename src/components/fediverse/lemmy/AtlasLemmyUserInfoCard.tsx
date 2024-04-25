@@ -4,6 +4,9 @@ import ReactMarkdown from "react-markdown";
 // https://www.radix-ui.com/primitives/docs/components/hover-card
 import * as HoverCard from "@radix-ui/react-hover-card";
 
+// https://www.radix-ui.com/primitives/docs/components/tabs
+import * as Tabs from "@radix-ui/react-tabs";
+
 // https://github.com/LemmyNet/lemmy-js-client
 // https://join-lemmy.org/api/classes/LemmyHttp.html
 import { LemmyHttp, GetPersonDetails } from "lemmy-js-client";
@@ -12,6 +15,9 @@ import { userPronouns } from "../../../hooks/useDataTransform";
 
 import Comment from "./AtlasLemmyComment";
 import LemmyCommunity from "./AtlasLemmyCommunity";
+import Post from "./AtlasLemmyPost";
+import { listingTypes } from "../../../Atlas_Config";
+import { useStateStorage } from "../../../hooks/useAtlasUtils";
 
 /*
  /$$   /$$                                                                  
@@ -40,6 +46,7 @@ import LemmyCommunity from "./AtlasLemmyCommunity";
 
 function AtlasLemmyUserInfoCard({ children, post, lemmyInstance, sort, community }) {
   const [user, setUser] = useState(null);
+  const [activeUserTab, setActiveUserTab] = useState(null);
 
   const cakeDay = new Date(post.creator.published).toDateString();
   const updateDay = new Date(post?.creator?.updated).toDateString();
@@ -150,61 +157,100 @@ function AtlasLemmyUserInfoCard({ children, post, lemmyInstance, sort, community
                   </>
                 )}
               </div>
-              {post?.creator?.bio && (
-                <div className="user-bio">
-                  <ReactMarkdown>{post?.creator?.bio}</ReactMarkdown>
-                </div>
-              )}
-              {user?.moderates.length > 0 && (
-                <div className="mod-wrapper">
-                  <small className="community-mod">Mods</small>
-                  <div className="mod-list">
-                    {user?.moderates.map((community, index) => {
-                      return (
-                        <div className="mod-user">
-                          <LemmyCommunity
-                            key={`${index}${community.id}`}
-                            post={community}
-                            lemmyInstance={lemmyInstance}
-                            sort={sort}
-                            community={community}
-                            icon={community?.icon}
-                            display_name={community?.display_name}
-                            name={community?.name}
-                            prefix={null}
-                          />
-                        </div>
-                      );
-                    })}
+
+              <Tabs.Root
+                className="user-card-tabs"
+                value={activeUserTab}
+                onValueChange={setActiveUserTab}
+              >
+                <Tabs.List className="tabs-list" aria-label="Pick User Info">
+                  {post?.creator?.bio && (
+                    <Tabs.Trigger className="tabs-trigger" value="Bio">
+                      Bio
+                    </Tabs.Trigger>
+                  )}
+                  {user?.moderates.length > 0 && (
+                    <Tabs.Trigger className="tabs-trigger" value="Mods">
+                      Mods
+                    </Tabs.Trigger>
+                  )}
+                  {user?.posts.length > 0 && (
+                    <Tabs.Trigger className="tabs-trigger" value="Posts">
+                      {user?.person_view?.counts?.post_count.toLocaleString()} Posts
+                    </Tabs.Trigger>
+                  )}
+
+                  {user?.comments.length > 0 && (
+                    <Tabs.Trigger className="tabs-trigger" value="Comments">
+                      {user?.person_view?.counts?.comment_count.toLocaleString()} Comments
+                    </Tabs.Trigger>
+                  )}
+                </Tabs.List>
+                {post?.creator?.bio && (
+                  <Tabs.Content value="Bio" className="tabs-content">
+                    <div className="user-bio">
+                      <ReactMarkdown>{post?.creator?.bio}</ReactMarkdown>
+                    </div>
+                  </Tabs.Content>
+                )}
+                {user?.moderates.length > 0 && (
+                  <Tabs.Content value="Mods" className="tabs-content">
+                    <div className="mod-wrapper">
+                      <small className="community-mod">Mods</small>
+                      <div className="mod-list">
+                        {user?.moderates.map((community, index) => {
+                          return (
+                            <div className="mod-user">
+                              <LemmyCommunity
+                                key={`${index}${community.id}`}
+                                post={community}
+                                lemmyInstance={lemmyInstance}
+                                sort={sort}
+                                community={community}
+                                icon={community?.icon}
+                                display_name={community?.display_name}
+                                name={community?.name}
+                                prefix={null}
+                              />
+                            </div>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  </Tabs.Content>
+                )}
+                <Tabs.Content value="Posts" className="tabs-content">
+                  <div className="user-posts">
+                    {user?.posts.length > 0 &&
+                      user?.posts.map((post, index) => (
+                        <Post
+                          key={`${post?.id}${index}`}
+                          post={post}
+                          community={community}
+                          lemmyInstance={lemmyInstance}
+                          sort={sort}
+                          activeListingType={listingTypes}
+                        ></Post>
+                      ))}
                   </div>
-                </div>
-              )}
-
-              <div style={{ display: "flex", gap: 15 }}>
-                <div style={{ display: "flex", gap: 5 }}>
-                  <div>{user?.person_view?.counts?.post_count.toLocaleString()}</div>{" "}
-                  <div>Posts</div>
-                </div>
-                <div style={{ display: "flex", gap: 5 }}>
-                  <div>{user?.person_view?.counts?.comment_count.toLocaleString()}</div>
-                  <div>Comments</div>
-                </div>
-              </div>
-
-              <div className="user-posts">
-                {user?.comments.length > 0 &&
-                  user?.comments.map((comment, index) => (
-                    <Comment
-                      key={`${comment?.id}${index}`}
-                      post={comment}
-                      community={community}
-                      lemmyInstance={lemmyInstance}
-                      sort={sort}
-                      ratioDetector={undefined}
-                      showUserAvatar={false}
-                    ></Comment>
-                  ))}
-              </div>
+                </Tabs.Content>
+                <Tabs.Content value="Comments" className="tabs-content">
+                  <div className="user-posts">
+                    {user?.comments.length > 0 &&
+                      user?.comments.map((comment, index) => (
+                        <Comment
+                          key={`${comment?.id}${index}`}
+                          post={comment}
+                          community={community}
+                          lemmyInstance={lemmyInstance}
+                          sort={sort}
+                          ratioDetector={undefined}
+                          showUserAvatar={false}
+                        ></Comment>
+                      ))}
+                  </div>
+                </Tabs.Content>
+              </Tabs.Root>
             </div>
           </div>
 

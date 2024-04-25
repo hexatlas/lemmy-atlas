@@ -28,7 +28,7 @@
 
 .view-more {
   margin: var(--atlas-size-08) 0;
-  background-color: hsl(var(--atlas-color-secondary));
+  background-color: hsl(var(--atlas-color-secondary) / var(--atlas-opacity-3));
   color: hsl(var(--atlas-color-light) / var(--atlas-opacity-3));
   transition: var(--atlas-transition-fast);
 
@@ -405,6 +405,13 @@ p.post-vote {
 }
 
 /* User Info Card */
+
+.user-card-tabs {
+  background-color: hsl(var(--atlas-color-tertiary) / var(--atlas-opacity-1));
+  padding: var(--atlas-size-10);
+  border-radius: var(--atlas-border-radius-1);
+  @include atlas-shadow(var(--atlas-shadow-1));
+}
 
 .user-avatar-container,
 .community-avatar-container,
