@@ -557,23 +557,24 @@ export default function AtlasLemmy({
         <p>{regionSearchResult.posts === 0 && "No results."}</p>
       )} */}
       </div>
-      <br />
-      <a
-        href={encodeURI(
-          `${activeLemmyInstance.baseUrl}search?q=${encodeURIComponent(
-            handleSearchQuery()
-          )}&type=${activeSearchType.value}&listingType=${
-            activeListingType.value
-          }&communityId=${
-            activeCommunity?.counts?.community_id
-          }&page=${currentSearchResultPage}&sort=${activeSortType.value}`
-        )}
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        🔗 view in {activeLemmyInstance.baseUrl}
-      </a>
-      <BasedClientDetector />
+      <div className="legend-footer">
+        <a
+          href={encodeURI(
+            `${activeLemmyInstance.baseUrl}search?q=${encodeURIComponent(
+              handleSearchQuery()
+            )}&type=${activeSearchType.value}&listingType=${
+              activeListingType.value
+            }&communityId=${
+              activeCommunity?.counts?.community_id
+            }&page=${currentSearchResultPage}&sort=${activeSortType.value}`
+          )}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          🔗 view in {activeLemmyInstance.baseUrl}
+        </a>
+        <BasedClientDetector />
+      </div>
     </>
   );
 }

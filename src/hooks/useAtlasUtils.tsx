@@ -1,5 +1,4 @@
 // import center from "@turf/center";
-import L from "leaflet";
 import { useState, useEffect } from "react";
 import administrativeRegionsData from "../data/administrative_regions_extended.json";
 

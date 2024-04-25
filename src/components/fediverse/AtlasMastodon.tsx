@@ -147,13 +147,15 @@ function AtlasMastodon({
             </div>
           ))}
       </div>
-      <a
-        href={`https://mastodon.social/tags/${activeAdministrativeRegion.country}`}
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        View more on Mastodon.Social
-      </a>
+      <div className="legend-footer">
+        <a
+          href={`https://mastodon.social/tags/${activeAdministrativeRegion.country}`}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          View more on Mastodon.Social
+        </a>
+      </div>
     </>
   );
 }
