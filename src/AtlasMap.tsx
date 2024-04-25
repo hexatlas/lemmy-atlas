@@ -128,8 +128,9 @@ export default function AtlasMap({
   ]);
 
   const onEachAdministrativeRegion = (administrativeRegion: any, layer: any) => {
-    layer.bindPopup(
-      `
+    layer
+      .bindPopup(
+        `
       <div style="display: grid; grid-auto-flow: column; gap: var(--atlas-size-11); align-content: center;">
         <h3>${administrativeRegion.properties["emoji"]}</h3>
         <div>
@@ -138,7 +139,11 @@ export default function AtlasMap({
         </div>
       </div>
     `
-    );
+      )
+      .getPopup()
+      .on("remove", function () {
+        resetAtlas();
+      });
 
     layer.on({
       mouseover: (e) => {

@@ -468,8 +468,7 @@ export default function AtlasInterface({
                     }
                   }}
                 >
-                  <h2>{adminregion.activeSelection}</h2>
-                  <h5>{adminregion.activeAdministrativeRegion.emoji}</h5>
+                  <small>{adminregion.activeSelection}</small>
                 </div>
               );
             })}
