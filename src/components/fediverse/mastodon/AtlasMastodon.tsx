@@ -118,11 +118,17 @@ function AtlasMastodon({
                   </Collapsible.Trigger>
 
                   <div>
-                    <p>{post.account.display_name}</p>{" "}
+                    <h2>{post.account.display_name}</h2>{" "}
                     <div className="feed-post-container">
-                      <p>{post.account.statuses_count} Posts</p>
-                      <p>{post.account.following_count} Following</p>
-                      <p>{post.account.followers_count} Followers</p>
+                      <p className="feed-post-stat">
+                        {post.account.statuses_count} Posts
+                      </p>
+                      <p className="feed-post-stat">
+                        {post.account.following_count} Following
+                      </p>
+                      <p className="feed-post-stat">
+                        {post.account.followers_count} Followers
+                      </p>
                     </div>
                     <small>
                       {post.account.bot && <span>🤖</span>}
@@ -137,7 +143,10 @@ function AtlasMastodon({
                   </div>
                 </div>
                 <Collapsible.Content>
-                  <div dangerouslySetInnerHTML={{ __html: post?.account.note }}></div>
+                  <div
+                    className="feed-post-wrapper"
+                    dangerouslySetInnerHTML={{ __html: post?.account.note }}
+                  ></div>
                 </Collapsible.Content>
               </Collapsible.Root>
               <p className="feed-publish-date highlight">

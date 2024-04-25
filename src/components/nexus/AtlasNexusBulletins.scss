@@ -2,7 +2,6 @@
   @include atlas-shadow(var(--atlas-shadow-inset));
   background: hsl(var(--atlas-color-light) / var(--atlas-opacity-1));
   margin-top: var(--atlas-size-10);
-  padding-top: var(--atlas-size-10);
   border-radius: var(--atlas-border-radius-1);
 
   display: grid;
@@ -87,6 +86,20 @@
 .feed-post-container {
   display: flex;
   gap: var(--atlas-size-10);
+  button.post-thumbnail-container {
+    padding: 0;
+  }
+  .feed-post-stat {
+    color: hsl(var(--atlas-color-light) / var(--atlas-opacity-2));
+  }
+}
+
+.feed-post-wrapper {
+  @include atlas-shadow(var(--atlas-shadow-inset));
+  margin: var(--atlas-size-10) 0;
+  background: hsl(var(--atlas-color-light) / var(--atlas-opacity-1));
+  padding: var(--atlas-size-10);
+  border-radius: var(--atlas-border-radius-1);
 }
 
 .feed-link {
