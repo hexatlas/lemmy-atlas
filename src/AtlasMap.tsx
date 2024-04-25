@@ -131,8 +131,8 @@ export default function AtlasMap({
     layer
       .bindPopup(
         `
-      <div style="display: grid; grid-auto-flow: column; gap: var(--atlas-size-11); align-content: center;">
-        <h3>${administrativeRegion.properties["emoji"]}</h3>
+      <div style="display: grid; grid-auto-flow: column; gap: var(--atlas-size-10); align-items: center;">
+        <h3 style="margin: 0;">${administrativeRegion.properties["emoji"]}</h3>
         <div>
           <b><i>${administrativeRegion.properties.name}</i></b><br>
           ${administrativeRegion.properties.country}
