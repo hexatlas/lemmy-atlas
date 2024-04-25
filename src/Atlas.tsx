@@ -180,6 +180,8 @@ export default function Atlas() {
   */
 
   const handleResize = () => {
+    // Refreshes Map after initial region selection
+    setTimeout(() => map.invalidateSize(), 300);
     setIsMobile(window.innerWidth < 768); // You can adjust the threshold as needed
   };
   useEffect(() => {
