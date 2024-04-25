@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import administrativeRegionsData from "./data/administrative_regions_extended_20.json";
+import administrativeRegionsData from "./data/administrative_regions_extended.json";
 
 // https://www.radix-ui.com/primitives/docs/components/collapsible
 import * as Collapsible from "@radix-ui/react-collapsible";
@@ -25,6 +25,7 @@ export default function AtlasInterface({
   // Util
   isMobile,
   resetAtlas,
+  sideBarRef,
 
   nexusSize,
   setNexusSize,
@@ -36,8 +37,18 @@ export default function AtlasInterface({
   isOpenAtlasMapInterface,
   setIsOpenAtlasMapInterface,
 
+  isLocationSelectMode,
+  setIsLocationSelectMode,
+
+  activeLocationSelection,
+  setActiveLocationSelection,
+
   nominatim,
   setNominatim,
+
+  regionTypes,
+  activeLocationType,
+  setActiveLocationType,
 
   activeAdministrativeRegion,
   setActiveAdministrativeRegion,
@@ -48,30 +59,28 @@ export default function AtlasInterface({
   locationQuery,
   setLocationQuery,
 
-  lemmyInstances,
-  activeLemmyInstance,
-  setActiveLemmyInstance,
-
   // Data
   activeIndicator,
   setActiveIndicator,
 
   // Community
+  lemmyInstances,
+  activeLemmyInstance,
+  setActiveLemmyInstance,
+
+  activeCommunity,
+  setActiveCommunity,
+
+  activeSearchType,
+  setActiveSearchType,
+
   listingTypes,
   activeListingType,
   setActiveListingType,
 
-  regionTypes,
-  activeLocationType,
-  setActiveLocationType,
-
   sortTypes,
   activeSortType,
   setActiveSortType,
-
-  // Styles
-  administrativeRegionStyle,
-  administrativeRegionStyleHovered,
 }) {
   /*
       useStates 
@@ -95,6 +104,12 @@ export default function AtlasInterface({
 
     document.body.addEventListener("mousemove", onMouseMove);
     document.body.addEventListener("mouseup", onMouseUp, { once: true });
+  };
+
+  const handleLocationSelection = () => {
+    resetAtlas();
+    setIsOpenAtlasMapInterface(true);
+    setIsLocationSelectMode(!isLocationSelectMode);
   };
 
   /*
@@ -188,7 +203,6 @@ export default function AtlasInterface({
       map?.fitBounds(bounds);
       setActiveSearchResult(result);
     };
-
     return (
       <div id="location-search">
         {!isMobile && (
@@ -202,6 +216,15 @@ export default function AtlasInterface({
             >
               ↔
             </button>
+            {/* <button
+              role="button"
+              title="Select Locations"
+              aria-label="Click to Select Locations"
+              className="legend-resize-button"
+              onMouseDown={handleLocationSelection}
+            >
+              🖊️
+            </button> */}
           </div>
         )}
         <div className="search-input-wrapper">
@@ -326,7 +349,7 @@ export default function AtlasInterface({
       </LocationSearch>
 
       <Collapsible.Content>
-        {activeAdministrativeRegion.country !== "country" && (
+        {(activeAdministrativeRegion.country !== "country" || isLocationSelectMode) && (
           <>
             <div className="right-slot">
               <button
@@ -339,7 +362,7 @@ export default function AtlasInterface({
                 🎲
               </button>
             </div>
-            {!isMobile && (
+            {!isMobile && !isLocationSelectMode && (
               <div className="administrative-region-flag-container">
                 <img
                   className="administrative-region-flag"
@@ -390,6 +413,9 @@ export default function AtlasInterface({
               if (type === "sub-region-code") return;
               if (type === "intermediate-region-code") return;
               if (type === "combined") return;
+              if (isLocationSelectMode && type === "emoji") return;
+              if (isLocationSelectMode && type === "alpha-2") return;
+              if (isLocationSelectMode && type === "alpha-3") return;
 
               return (
                 <p

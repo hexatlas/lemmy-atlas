@@ -15,6 +15,15 @@ function AtlasMastodon({
   map,
   setMap,
 
+  isOpenAtlasMapInterface,
+  setIsOpenAtlasMapInterface,
+
+  isLocationSelectMode,
+  setIsLocationSelectMode,
+
+  activeLocationSelection,
+  setActiveLocationSelection,
+
   nominatim,
   setNominatim,
 
@@ -53,10 +62,6 @@ function AtlasMastodon({
   sortTypes,
   activeSortType,
   setActiveSortType,
-
-  // Styles
-  administrativeRegionStyle,
-  administrativeRegionStyleHovered,
 }) {
   const [mastonPosts, setMastonPosts] = useStateStorage("mastonPosts", []);
 

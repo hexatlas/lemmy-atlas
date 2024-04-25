@@ -42,6 +42,7 @@ export function AtlasNexusReadingList({
   // Util
   isMobile,
   resetAtlas,
+  sideBarRef,
 
   nexusSize,
   setNexusSize,
@@ -49,6 +50,15 @@ export function AtlasNexusReadingList({
   // Location
   map,
   setMap,
+
+  isOpenAtlasMapInterface,
+  setIsOpenAtlasMapInterface,
+
+  isLocationSelectMode,
+  setIsLocationSelectMode,
+
+  activeLocationSelection,
+  setActiveLocationSelection,
 
   nominatim,
   setNominatim,
@@ -88,10 +98,6 @@ export function AtlasNexusReadingList({
   sortTypes,
   activeSortType,
   setActiveSortType,
-
-  // Styles
-  administrativeRegionStyle,
-  administrativeRegionStyleHovered,
 }) {
   const [anarchistLibrary, setAnarchistLibrary] = useStateStorage("anarchistLibrary", []);
 

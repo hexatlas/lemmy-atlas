@@ -45,6 +45,15 @@ export default function AtlasLemmy({
   map,
   setMap,
 
+  isOpenAtlasMapInterface,
+  setIsOpenAtlasMapInterface,
+
+  isLocationSelectMode,
+  setIsLocationSelectMode,
+
+  activeLocationSelection,
+  setActiveLocationSelection,
+
   nominatim,
   setNominatim,
 
@@ -83,10 +92,6 @@ export default function AtlasLemmy({
   sortTypes,
   activeSortType,
   setActiveSortType,
-
-  // Styles
-  administrativeRegionStyle,
-  administrativeRegionStyleHovered,
 }) {
   const [communityList, setCommunityList] = useState(null);
   const [currentCommunityPage, setCurrentCommunityPage] = useState(1);

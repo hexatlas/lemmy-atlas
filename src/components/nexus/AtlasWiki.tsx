@@ -22,6 +22,7 @@ export function AtlasProleWiki({
   // Util
   isMobile,
   resetAtlas,
+  sideBarRef,
 
   nexusSize,
   setNexusSize,
@@ -29,6 +30,15 @@ export function AtlasProleWiki({
   // Location
   map,
   setMap,
+
+  isOpenAtlasMapInterface,
+  setIsOpenAtlasMapInterface,
+
+  isLocationSelectMode,
+  setIsLocationSelectMode,
+
+  activeLocationSelection,
+  setActiveLocationSelection,
 
   nominatim,
   setNominatim,
@@ -68,10 +78,6 @@ export function AtlasProleWiki({
   sortTypes,
   activeSortType,
   setActiveSortType,
-
-  // Styles
-  administrativeRegionStyle,
-  administrativeRegionStyleHovered,
 }) {
   const [proleWiki, setProleWiki] = useStateStorage(wikiURL, null);
 

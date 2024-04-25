@@ -42,6 +42,7 @@ const AtlasNexusIMFData = ({
   // Util
   isMobile,
   resetAtlas,
+  sideBarRef,
 
   nexusSize,
   setNexusSize,
@@ -49,6 +50,15 @@ const AtlasNexusIMFData = ({
   // Location
   map,
   setMap,
+
+  isOpenAtlasMapInterface,
+  setIsOpenAtlasMapInterface,
+
+  isLocationSelectMode,
+  setIsLocationSelectMode,
+
+  activeLocationSelection,
+  setActiveLocationSelection,
 
   nominatim,
   setNominatim,
@@ -88,10 +98,6 @@ const AtlasNexusIMFData = ({
   sortTypes,
   activeSortType,
   setActiveSortType,
-
-  // Styles
-  administrativeRegionStyle,
-  administrativeRegionStyleHovered,
 }) => {
   const [open, setOpen] = useState(false);
 

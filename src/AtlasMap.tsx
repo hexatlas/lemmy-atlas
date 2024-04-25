@@ -5,11 +5,11 @@ import {
   GeoJSON,
   LayersControl,
   ScaleControl,
-  useMap,
+  useMapEvent,
 } from "react-leaflet";
 import { LatLngExpression, latLng, latLngBounds } from "leaflet";
 import { GeoJsonObject } from "geojson";
-import administrativeRegionsData from "./data/administrative_regions_extended_20.json";
+import administrativeRegionsData from "./data/administrative_regions_extended.json";
 
 import { baseLayers, overlayLayers } from "./Atlas_Config";
 import Minimap from "./AtlasMapMiniMap";
@@ -32,6 +32,7 @@ export default function AtlasMap({
   // Util
   isMobile,
   resetAtlas,
+  sideBarRef,
 
   nexusSize,
   setNexusSize,
@@ -39,6 +40,15 @@ export default function AtlasMap({
   // Location
   map,
   setMap,
+
+  isOpenAtlasMapInterface,
+  setIsOpenAtlasMapInterface,
+
+  isLocationSelectMode,
+  setIsLocationSelectMode,
+
+  activeLocationSelection,
+  setActiveLocationSelection,
 
   nominatim,
   setNominatim,
@@ -78,11 +88,34 @@ export default function AtlasMap({
   sortTypes,
   activeSortType,
   setActiveSortType,
-
-  // Styles
-  administrativeRegionStyle,
-  administrativeRegionStyleHovered,
 }) {
+  /*
+      Styles
+  */
+  const style_locationDefault = {
+    color: "hsl(var(--atlas-color-dark) / var(--atlas-opacity-3))",
+    fillOpacity: 0,
+    weight: 0.161,
+  };
+
+  const style_locationMuted = {
+    color: "hsl(var(--atlas-color-primary) / var(--atlas-opacity-2))",
+    fillOpacity: 0.161,
+    weight: 0.161,
+  };
+
+  const style_activeLocationHighlight = {
+    color: "hsl(var(--atlas-color-tertiary))",
+    fillOpacity: 0.161,
+    weight: 0.161,
+  };
+
+  const style_locationNameHighlight = {
+    color: "hsl(var(--atlas-color-tertiary))",
+    fillOpacity: 0.161,
+    weight: 1.161,
+  };
+
   const onClickAdministrativeRegionCallback = (e, isDoubleCLick = false) => {
     e.originalEvent.view.L.DomEvent.stopPropagation(e);
     const clickedAdministrativeRegion = e.target.feature.properties;
@@ -94,19 +127,27 @@ export default function AtlasMap({
     map,
   ]);
 
-  const onEachAdministrativeRegionCallback = (administrativeRegion: any, layer: any) => {
+  const onEachAdministrativeRegion = (administrativeRegion: any, layer: any) => {
     layer.bindPopup(
-      `<i>${administrativeRegion.properties.name}</i>, ${administrativeRegion.properties.country} | ${administrativeRegion.properties["ISO3166-1-Alpha-3"]}`
+      `
+      <div style="display: grid; grid-auto-flow: column; gap: var(--atlas-size-11); align-content: center;">
+        <h3>${administrativeRegion.properties["emoji"]}</h3>
+        <div>
+          <b><i>${administrativeRegion.properties.name}</i></b><br>
+          ${administrativeRegion.properties.country}
+        </div>
+      </div>
+    `
     );
 
     layer.on({
       mouseover: (e) => {
         // Highlight AdministrativeRegions on mouse hover
-        e.target?.setStyle(administrativeRegionStyleHovered);
+        // if (!isLocationSelectMode) e.target?.setStyle(style_activeLocationHighlight);
       },
 
       mouseout: (e) => {
-        e.target?.setStyle(administrativeRegionStyle);
+        // if (!isLocationSelectMode) e.target?.setStyle(style_locationDefault);
       },
       click: (e: {
         target: {
@@ -129,10 +170,6 @@ export default function AtlasMap({
     });
   };
 
-  const onEachAdministrativeRegion = useCallback(onEachAdministrativeRegionCallback, [
-    map,
-  ]);
-
   useEffect(() => {
     let administrativeRegionArray = latLngBounds(null, null);
 
@@ -154,7 +191,7 @@ export default function AtlasMap({
         default:
           map?.eachLayer((administrativeRegion) => {
             if (
-              administrativeRegion.feature?.properties.countryf ===
+              administrativeRegion.feature?.properties.country ===
               activeAdministrativeRegion.country
             )
               administrativeRegionArray.extend(administrativeRegion.getBounds());
@@ -162,6 +199,33 @@ export default function AtlasMap({
           break;
       }
       map?.eachLayer((administrativeRegion) => {
+        // Highlight Locationselection
+        if (typeof administrativeRegion?.setStyle === "function" && !nominatim)
+          administrativeRegion?.setStyle(style_locationMuted);
+
+        // activeLocationType Highlight
+        if (
+          administrativeRegion.feature?.properties[activeLocationType] ===
+          activeAdministrativeRegion[activeLocationType]
+        )
+          administrativeRegion?.setStyle(style_activeLocationHighlight);
+
+        // activeAdministrativeRegion.name Highlight
+        if (
+          administrativeRegion.feature?.properties.country ===
+          activeAdministrativeRegion.country
+        ) {
+          administrativeRegion?.setStyle(style_activeLocationHighlight);
+          if (
+            administrativeRegion.feature?.properties.name ===
+              activeAdministrativeRegion.name &&
+            !nominatim
+          ) {
+            administrativeRegion?.setStyle(style_locationNameHighlight);
+          }
+        }
+
+        // Get Bounds
         if (
           administrativeRegion.feature?.properties.name !==
           nominatim?.features[0].properties.name
@@ -229,7 +293,7 @@ export default function AtlasMap({
 
       <GeoJSON
         data={administrativeRegionsData?.features as unknown as GeoJsonObject}
-        style={administrativeRegionStyle}
+        style={style_locationDefault}
         onEachFeature={onEachAdministrativeRegion}
       />
 

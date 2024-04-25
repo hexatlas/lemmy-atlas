@@ -40,6 +40,7 @@ export function AtlasMisc({
   // Util
   isMobile,
   resetAtlas,
+  sideBarRef,
 
   nexusSize,
   setNexusSize,
@@ -47,6 +48,15 @@ export function AtlasMisc({
   // Location
   map,
   setMap,
+
+  isOpenAtlasMapInterface,
+  setIsOpenAtlasMapInterface,
+
+  isLocationSelectMode,
+  setIsLocationSelectMode,
+
+  activeLocationSelection,
+  setActiveLocationSelection,
 
   nominatim,
   setNominatim,
@@ -86,10 +96,6 @@ export function AtlasMisc({
   sortTypes,
   activeSortType,
   setActiveSortType,
-
-  // Styles
-  administrativeRegionStyle,
-  administrativeRegionStyleHovered,
 }) {
   return (
     <div id="legend-content">

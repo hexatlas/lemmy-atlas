@@ -87,6 +87,9 @@ export default function Atlas() {
     {
       country: "country",
       name: "name",
+      "intermediate-region": "intermediate-region",
+      "sub-region": "sub-region",
+      region: "region",
     }
   );
 
@@ -137,6 +140,9 @@ export default function Atlas() {
     setActiveAdministrativeRegion({
       country: "country",
       name: "name",
+      "intermediate-region": "intermediate-region",
+      "sub-region": "sub-region",
+      region: "region",
     });
     setActiveLocationType(regionTypes[1]); // Default: Country Sort
     setLocationQuery("");
@@ -227,6 +233,7 @@ export default function Atlas() {
 
     if (isLocationSelectMode) {
       setActiveLocationSelection([selection, ...activeLocationSelection]);
+      console.log(activeLocationSelection);
     }
   }, [activeAdministrativeRegion, activeLocationType, nominatim]);
 
@@ -263,21 +270,6 @@ export default function Atlas() {
   // }, [activeAdministrativeRegion]);
   // End
 
-  /*
-      Styles
-  */
-  const administrativeRegionStyle = {
-    color: "hsl(var(--atlas-color-dark) / var(--atlas-opacity-3))",
-    fillOpacity: 0,
-    weight: 0.161,
-  };
-
-  const administrativeRegionStyleHovered = {
-    color: "hsl(var(--atlas-color-primary))",
-    fillOpacity: 0.161,
-    weight: 0.161,
-  };
-
   const interfaceProps = {
     // Util
     isMobile,
@@ -293,6 +285,12 @@ export default function Atlas() {
 
     isOpenAtlasMapInterface,
     setIsOpenAtlasMapInterface,
+
+    isLocationSelectMode,
+    setIsLocationSelectMode,
+
+    activeLocationSelection,
+    setActiveLocationSelection,
 
     nominatim,
     setNominatim,
@@ -332,10 +330,6 @@ export default function Atlas() {
     sortTypes,
     activeSortType,
     setActiveSortType,
-
-    // Styles
-    administrativeRegionStyle,
-    administrativeRegionStyleHovered,
   };
 
   const DisplayAtlasMap = useMemo(
