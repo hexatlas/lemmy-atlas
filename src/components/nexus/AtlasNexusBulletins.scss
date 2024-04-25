@@ -8,13 +8,82 @@
   display: grid;
   grid-template-columns: 1fr auto;
   gap: var(--atlas-size-12);
-}
 
-.feed-item > * {
-  margin: var(--atlas-size-10) var(--atlas-size-09);
-  grid-column: 1 / -1;
+  & > * {
+    margin: var(--atlas-size-14) var(--atlas-size-09);
+    margin-bottom: var(--atlas-size-10);
+    grid-column: 1 / -1;
+  }
 }
+.post-card {
+  @include atlas-shadow(var(--atlas-shadow-1));
+  background: hsl(var(--atlas-color-dark) / var(--atlas-opacity-3)) !important;
+  border-radius: var(--atlas-border-radius-1);
+  overflow: hidden;
+  display: grid;
 
+  &:hover {
+    @include atlas-shadow(none);
+    background: hsl(var(--atlas-color-light) / var(--atlas-opacity-1)) !important;
+    opacity: 1;
+    transition: var(--atlas-transition-fast);
+  }
+
+  > * {
+    padding: var(--atlas-size-10);
+  }
+  .post-card-video {
+    padding: 0;
+  }
+
+  img {
+    object-fit: cover;
+    width: 100%;
+    padding: 0;
+    filter: unset;
+  }
+  &.post-media-gallery {
+    scroll-snap-type: y mandatory;
+    display: flex;
+    flex-direction: column;
+
+    overflow: hidden;
+    overflow-y: scroll;
+    .post-card-image {
+      max-height: calc(var(--atlas-size-00) * 2);
+      scroll-snap-align: start;
+      // flex: 1;
+      object-fit: cover;
+      width: 100%;
+      // max-height: unset !important;
+    }
+  }
+  .post-card-video {
+    max-height: unset !important;
+  }
+  .post-card-image {
+    max-height: none;
+    scroll-snap-align: start;
+    // flex: 1;
+    object-fit: cover;
+    width: 100%;
+    // max-height: unset !important;
+  }
+  .post-card-link {
+    background: hsl(var(--atlas-color-light) / var(--atlas-opacity-1));
+  }
+}
+.post-stats {
+  @include atlas-shadow(var(--atlas-shadow-inset));
+  background: hsl(var(--atlas-color-dark) / var(--atlas-opacity-1)) !important;
+  border-radius: var(--atlas-border-radius-1);
+  display: flex;
+  justify-content: space-between;
+  padding: var(--atlas-size-12) var(--atlas-size-10);
+  p {
+    margin: 0;
+  }
+}
 .feed-post-container {
   display: flex;
   gap: var(--atlas-size-10);
@@ -26,8 +95,8 @@
 }
 
 p.feed-publish-date {
-  background: hsl(var(--atlas-color-dark) / var(--atlas-opacity-3));
   @include atlas-shadow(var(--atlas-shadow-1));
+  background: hsl(var(--atlas-color-dark) / var(--atlas-opacity-3));
   padding: var(--atlas-size-12) var(--atlas-size-10);
   justify-self: flex-end;
   grid-column: 2 / -1;
