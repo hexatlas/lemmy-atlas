@@ -106,58 +106,71 @@ export function AtlasProleWiki({
   }, [activeAdministrativeRegion, activeLocationType]);
 
   return (
-    <div id="legend-content" className="prolewiki">
-      {isProleWiki ? (
-        <>
-          <p>
-            Please consider contributing knowledge on{" "}
-            <a
-              href={`https://en.prolewiki.org/?search=${encodeURI(
-                activeAdministrativeRegion[activeLocationType]
-              )}`}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              {activeAdministrativeRegion[activeLocationType]} on {wikiURL}
-            </a>
-          </p>
+    <>
+      <div id="legend-content" className="prolewiki">
+        {isProleWiki ? (
+          <>
+            <p>
+              Please consider contributing knowledge on{" "}
+              <a
+                href={`https://en.prolewiki.org/?search=${encodeURI(
+                  activeAdministrativeRegion[activeLocationType]
+                )}`}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {activeAdministrativeRegion[activeLocationType]} on {wikiURL}
+              </a>
+            </p>
 
-          <a
-            href={`https://en.prolewiki.org/wiki/Category:Library_works_about_${encodeURI(
-              activeAdministrativeRegion.country
-            )}`}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            📚📕 All library works about {activeAdministrativeRegion.country} on
-            ProleWiki.
-          </a>
-        </>
-      ) : (
-        <>
-          <p>
-            Please consider correcting information on{" "}
             <a
-              href={`${wikiURL}?search=${encodeURI(
-                activeAdministrativeRegion[activeLocationType]
+              href={`https://en.prolewiki.org/wiki/Category:Library_works_about_${encodeURI(
+                activeAdministrativeRegion.country
               )}`}
               target="_blank"
               rel="noopener noreferrer"
             >
-              {activeAdministrativeRegion[activeLocationType]} on {wikiURL}
+              📚📕 All library works about {activeAdministrativeRegion.country} on
+              ProleWiki.
             </a>
-          </p>
-        </>
-      )}
-      <hr />
-      <br />
-      {proleWiki && (
-        <>
-          <h3>{proleWiki.title}</h3>
-          <div dangerouslySetInnerHTML={{ __html: proleWiki?.text["*"] }}></div>
-        </>
-      )}
-    </div>
+          </>
+        ) : (
+          <>
+            <p>
+              Please consider correcting information on{" "}
+              <a
+                href={`${wikiURL}?search=${encodeURI(
+                  activeAdministrativeRegion[activeLocationType]
+                )}`}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {activeAdministrativeRegion[activeLocationType]} on {wikiURL}
+              </a>
+            </p>
+          </>
+        )}
+        <hr />
+        <br />
+        {proleWiki && (
+          <>
+            <h3>{proleWiki.title}</h3>
+            <div dangerouslySetInnerHTML={{ __html: proleWiki?.text["*"] }}></div>
+          </>
+        )}
+      </div>
+      <div className="legend-footer">
+        <a
+          href={`${wikiURL}?search=${encodeURI(
+            activeAdministrativeRegion[activeLocationType]
+          )}`}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          View more on {wikiURL}
+        </a>
+      </div>
+    </>
   );
 }
 
