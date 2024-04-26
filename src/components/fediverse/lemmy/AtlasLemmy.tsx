@@ -320,6 +320,49 @@ export default function AtlasLemmy({
   return (
     <>
       <div id="legend-content" className="legend-content-container">
+        {" "}
+        <div className="search-input-wrapper">
+          <button
+            role="button"
+            title="Reset Lemmy to Hexbear"
+            aria-label="Reset Lemmy to Hexbear"
+            className="atlas-reset-button"
+            onClick={() => setActiveLemmyInstance(lemmyInstances[0])}
+          >
+            {activeLemmyInstance.baseUrl} ⨯
+          </button>
+
+          <div
+            className="search-form"
+            // onSubmit={(e) => {
+            //   e.preventDefault();
+            //   console.log(e.target);
+            // }}
+          >
+            <label htmlFor="search-input" className="sr-only">
+              Paste Lemmy URL
+            </label>
+            <input
+              name="search-input"
+              type="text"
+              className="search-input"
+              aria-label="Paste Lemmy URL"
+              placeholder="Paste Lemmy URL"
+              onPaste={(e) => {
+                e.preventDefault();
+                console.log(e.clipboardData.getData("Text"));
+                setActiveLemmyInstance({
+                  id: 1,
+                  label: "UserDefined",
+                  baseUrl: e.clipboardData.getData("Text") || "https://hexbear.net/",
+                  community_id: null,
+                  default: false,
+                });
+              }}
+            />
+            {/* <button type="submit"></button> */}
+          </div>
+        </div>
         {activeCommunity && activeCommunity?.community?.banner && (
           <LemmyCommunityInfoCard
             lemmyInstance={activeLemmyInstance}
@@ -333,7 +376,6 @@ export default function AtlasLemmy({
             />
           </LemmyCommunityInfoCard>
         )}
-
         <div className="search-input-wrapper">
           {/* <DropdownMenu.Root>
             <DropdownMenu.Trigger asChild>
@@ -438,7 +480,6 @@ export default function AtlasLemmy({
             />
           </div>
         </div>
-
         <div className="community-list">
           {communityList &&
             communityList.map((community) => {
@@ -512,7 +553,6 @@ export default function AtlasLemmy({
             </Tabs.List>
           </Tabs.Root>
         </div>
-
         {comments && activeSearchType.value === "Comments" && (
           <div className="post-reply-container">
             {comments.length > 0 &&

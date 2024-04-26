@@ -135,6 +135,8 @@ export default function Atlas() {
       RESET ATLAS
   */
   function resetAtlas() {
+    setActiveLocationSelection([]);
+
     // LOCATION
     setAdministrativeRegionClickHistoryArray([]);
     setActiveAdministrativeRegion({
@@ -160,9 +162,6 @@ export default function Atlas() {
     });
 
     // COMMUNITY
-    setActiveLemmyInstance(
-      lemmyInstances[0] // Default: hexbear.net
-    );
     setActiveCommunity(null);
     setActiveSearchType(searchTypes[0]); // Default: Comments
     setActiveListingType(listingTypes[1]); // Default: Local
