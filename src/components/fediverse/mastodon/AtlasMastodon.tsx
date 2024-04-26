@@ -77,8 +77,6 @@ function AtlasMastodon({
       }
 
       const mastondonPostsData = await response.json(); // Retrieve response as text
-      console.log(mastondonPostsData, "mastodonposts");
-
       setMastonPosts(mastondonPostsData);
     } catch (error) {
       console.log(error);

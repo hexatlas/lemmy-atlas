@@ -657,23 +657,23 @@ a.post-creator {
   border-radius: var(--atlas-border-radius-1);
 }
 
-.community-post[data-state="open"] > [data-state="open"] {
+[data-state="open"] > [data-state="open"] {
   animation: slideDown var(--atlas-time-2) var(--atlas-timing-function);
 }
 
-.community-post[data-state="closed"] > [data-state="closed"] {
+[data-state="closed"] > [data-state="closed"] {
   animation: slideUp var(--atlas-time-2) var(--atlas-timing-function);
 }
 
-.community-post[data-state="open"] .post-thumbnail-container img {
+[data-state="open"] .post-thumbnail-container img {
   transform: scale(1.312);
 }
 
-.community-post[data-state="closed"] .post-thumbnail-container img {
+[data-state="closed"] .post-thumbnail-container img {
   transform: unset;
 }
 
-.community-post[data-state="closed"] .post-thumbnail-container img:hover {
+[data-state="closed"] .post-thumbnail-container img:hover {
   transform: scale(1.312);
 }
 
