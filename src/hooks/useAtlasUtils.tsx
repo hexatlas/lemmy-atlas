@@ -12,6 +12,36 @@ export function handleRandom(setActiveAdministrativeRegion) {
   );
 }
 
+// JSON to JSX Recursive
+
+export const RecursiveJSONComponent = ({ data }) => {
+  const renderData = (data, nestingIndex = 0) => {
+    if (Array.isArray(data)) {
+      return (
+        <ul className={`nextindex-${nestingIndex}`}>
+          {data.map((item, index) => (
+            <li key={index}>{renderData(item, nestingIndex + 1)}</li>
+          ))}
+        </ul>
+      );
+    } else if (typeof data === "object") {
+      return (
+        <ul className={`nextindex-${nestingIndex}`}>
+          {Object.keys(data).map((key, index) => (
+            <li key={index}>
+              <strong>{key}:</strong> {renderData(data[key], nestingIndex + 1)}
+            </li>
+          ))}
+        </ul>
+      );
+    } else {
+      return String(data);
+    }
+  };
+
+  return <div>{renderData(data)}</div>;
+};
+
 // RESIZE ATLAS LEGEND
 
 export function Resizeable({ children }) {
