@@ -46,7 +46,7 @@ import { useStateStorage } from "../../../hooks/useAtlasUtils";
 
 function AtlasLemmyUserInfoCard({ children, post, lemmyInstance, sort, community }) {
   const [user, setUser] = useState(null);
-  const [activeUserTab, setActiveUserTab] = useState(null);
+  const [activeUserTab, setActiveUserTab] = useState("Comments");
 
   const cakeDay = new Date(post.creator.published).toDateString();
   const updateDay = new Date(post?.creator?.updated).toDateString();
