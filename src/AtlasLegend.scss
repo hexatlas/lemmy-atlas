@@ -135,7 +135,7 @@
 
 .map-interface-container {
   @include atlas-shadow(var(--atlas-shadow-1));
-  z-index: 99999;
+  z-index: 9999;
   position: absolute;
   max-width: calc(100% - var(--atlas-size-06));
 
@@ -227,7 +227,6 @@
     margin: 0 var(--atlas-size-10);
     width: unset;
     max-width: unset;
-    z-index: 99;
 
     & > [data-state="open"] {
       margin-top: var(--atlas-size-10);
@@ -542,7 +541,7 @@
   height: 100vh;
   height: 100dvh;
   padding-top: var(--atlas-size-14);
-  z-index: 99;
+  z-index: 9999;
   overflow: hidden;
   & > * {
     margin: 0 var(--atlas-size-12);
