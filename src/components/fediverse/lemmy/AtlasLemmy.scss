@@ -407,7 +407,7 @@ p.post-vote {
 /* User Info Card */
 
 .user-card-tabs {
-  background-color: hsl(var(--atlas-color-tertiary) / var(--atlas-opacity-1));
+  background-color: hsl(var(--atlas-color-dark) / var(--atlas-opacity-2));
   padding: var(--atlas-size-10);
   border-radius: var(--atlas-border-radius-1);
   @include atlas-shadow(var(--atlas-shadow-1));
@@ -509,7 +509,6 @@ a.post-creator {
 
 .user-info-card-content,
 .community-info-card-content {
-  @include atlas-blur(var(--atlas-size-11));
   @include atlas-shadow(var(--atlas-shadow-1));
   color: hsl(var(--atlas-color-dark) / var(--atlas-opacity-3));
   padding: var(--atlas-size-10);
@@ -517,7 +516,7 @@ a.post-creator {
   /* width: 100%; */
   /* min-width: var(--atlas-size-00); */
 
-  background-color: hsl(var(--atlas-color-light) / var(--atlas-opacity-2));
+  background-color: hsl(var(--atlas-color-light) / var(--atlas-opacity-3));
   border: 1px solid hsl(var(--atlas-color-light) / var(--atlas-opacity-3));
   border-left: var(--atlas-size-14) solid
     hsl(var(--atlas-color-tertiary) / var(--atlas-opacity-3));
@@ -590,7 +589,7 @@ a.post-creator {
 }
 
 .user-info-card-content-hightlighted {
-  background-color: hsl(var(--atlas-color-tertiary) / var(--atlas-opacity-2));
+  background-color: hsl(var(--atlas-color-tertiary) / var(--atlas-opacity-3));
 }
 
 .user-info-card-content-hightlighted .user-pronouns p {

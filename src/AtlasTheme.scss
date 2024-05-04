@@ -180,11 +180,6 @@ code {
   text-shadow: var(--atlas-shadow-text);
 }
 
-@mixin atlas-blur($blur_radius) {
-  backdrop-filter: blur($blur_radius);
-  -webkit-backdrop-filter: blur($blur_radius);
-}
-
 /*
     GLASS
 */
