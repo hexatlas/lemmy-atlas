@@ -93,6 +93,7 @@ export default function AtlasLemmy({
   activeSortType,
   setActiveSortType,
 }) {
+  const [editLemmyInstance, setEditLemmyInstance] = useState(false);
   const [communityList, setCommunityList] = useState(null);
   const [currentCommunityPage, setCurrentCommunityPage] = useState(1);
   const [hasMoreCommunities, setHasMoreCommunities] = useState(true);
@@ -213,6 +214,8 @@ export default function AtlasLemmy({
     });
   }
 
+  // ToDo: Infinite Scroll
+
   const handleScroll = () => {
     // Check if user has scrolled to the bottom
     if (sideBarRef.current.scrollTop > sideBarRef.current.scrollTopMax - 69) {
@@ -233,6 +236,8 @@ export default function AtlasLemmy({
   /*
     useEffects
   */
+
+  // ToDo: Infinite Scroll
 
   // useEffect(() => {
   //   if (sideBarRef && sideBarRef.current)
@@ -320,49 +325,71 @@ export default function AtlasLemmy({
   return (
     <>
       <div id="legend-content" className="legend-content-container">
-        {" "}
-        <div className="search-input-wrapper">
-          <button
-            role="button"
-            title="Reset Lemmy to Hexbear"
-            aria-label="Reset Lemmy to Hexbear"
-            className="atlas-reset-button"
-            onClick={() => setActiveLemmyInstance(lemmyInstances[0])}
-          >
-            {activeLemmyInstance.baseUrl} ⨯
-          </button>
-
-          <div
-            className="search-form"
-            // onSubmit={(e) => {
-            //   e.preventDefault();
-            //   console.log(e.target);
-            // }}
-          >
-            <label htmlFor="search-input" className="sr-only">
-              Paste Lemmy URL
-            </label>
-            <input
-              name="search-input"
-              type="text"
-              className="search-input"
-              aria-label="Paste Lemmy URL"
-              placeholder="Paste Lemmy URL"
-              onPaste={(e) => {
-                e.preventDefault();
-                console.log(e.clipboardData.getData("Text"));
-                setActiveLemmyInstance({
-                  id: 1,
-                  label: "UserDefined",
-                  baseUrl: e.clipboardData.getData("Text") || "https://hexbear.net/",
-                  community_id: null,
-                  default: false,
-                });
+        {editLemmyInstance ? (
+          <div className="search-input-wrapper">
+            <button
+              role="button"
+              title="Reset Lemmy to Hexbear"
+              aria-label="Reset Lemmy to Hexbear"
+              className="atlas-reset-button"
+              onClick={() => {
+                setActiveLemmyInstance(lemmyInstances[0]);
               }}
-            />
-            {/* <button type="submit"></button> */}
+            >
+              {activeLemmyInstance.baseUrl} ⨯
+            </button>
+
+            <div
+              className="search-form"
+              // onSubmit={(e) => {
+              //   e.preventDefault();
+              //   console.log(e.target);
+              // }}
+            >
+              <label htmlFor="search-input" className="sr-only">
+                Paste Lemmy URL
+              </label>
+              <input
+                name="search-input"
+                type="text"
+                className="search-input"
+                aria-label="Paste Lemmy URL"
+                placeholder="Paste Lemmy URL"
+                onPaste={(e) => {
+                  e.preventDefault();
+                  console.log(e.clipboardData.getData("Text"));
+                  setActiveLemmyInstance({
+                    id: 1,
+                    label: "UserDefined",
+                    baseUrl: e.clipboardData.getData("Text") || "https://hexbear.net/",
+                    community_id: null,
+                    default: false,
+                  });
+                  setEditLemmyInstance(!editLemmyInstance);
+                }}
+              />
+              {/* <button type="submit"></button> */}
+            </div>
           </div>
-        </div>
+        ) : (
+          <div className="lemmy-edit-instance">
+            <button
+              role="button"
+              title="Change Lemmy Instance"
+              aria-label="Change Lemmy Instance"
+              onClick={() => setEditLemmyInstance(!editLemmyInstance)}
+            >
+              🔻
+            </button>
+            <a
+              href={activeLemmyInstance.baseUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <span>{activeLemmyInstance.baseUrl}</span>
+            </a>
+          </div>
+        )}
         {activeCommunity && activeCommunity?.community?.banner && (
           <LemmyCommunityInfoCard
             lemmyInstance={activeLemmyInstance}

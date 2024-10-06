@@ -99,6 +99,28 @@
   }
 }
 
+.lemmy-edit-instance {
+  margin-bottom: var(--atlas-size-10);
+  button {
+    height: var(--atlas-size-08);
+    background: none;
+    @include atlas-shadow(var(--atlas-shadow-1));
+  }
+  & button:hover {
+    animation: freePalestine var(--atlas-time-2) var(--atlas-timing-function) infinite;
+  }
+}
+
+@keyframes freePalestine {
+  0% {
+    transform: translateY(calc(var(--atlas-size-09) * -1));
+  }
+
+  100% {
+    transform: translateY(0);
+  }
+}
+
 /* Post, Comment */
 
 .post-info-container,
