@@ -24,20 +24,14 @@ import { useStateStorage } from "./hooks/useAtlasUtils";
 */
 
 function AtlasNexusCard({ interfaceProps }) {
-  const [activeTab, setActiveTab] = useStateStorage("activeNexusTab", "Bulletins");
+  const [activeTab, setActiveTab] = useStateStorage("activeNexusTab", "ProleWiki");
 
   return (
     <>
       <Tabs.Root className="nexus-card" value={activeTab} onValueChange={setActiveTab}>
         <Tabs.List className="tabs-list tabs-nexus" aria-label="Pick Nexus Item">
-          <Tabs.Trigger className="tabs-trigger" value="ClassStructureTab">
-            Class Structure
-          </Tabs.Trigger>
-          <Tabs.Trigger className="tabs-trigger" value="IMFDataTab">
-            IMF Data
-          </Tabs.Trigger>
-          <Tabs.Trigger className="tabs-trigger" value="Bulletins">
-            72T's Bulletins
+          <Tabs.Trigger className="tabs-trigger" value="Misc">
+            Misc
           </Tabs.Trigger>
           <Tabs.Trigger className="tabs-trigger" value="ProleWiki">
             ProleWiki
@@ -45,11 +39,17 @@ function AtlasNexusCard({ interfaceProps }) {
           <Tabs.Trigger className="tabs-trigger" value="NatoPedia">
             NATOpedia
           </Tabs.Trigger>
+          <Tabs.Trigger className="tabs-trigger" value="Bulletins">
+            72T's Bulletins
+          </Tabs.Trigger>
           <Tabs.Trigger className="tabs-trigger" value="AnarchistLibrary">
             Anarchist Library
           </Tabs.Trigger>
-          <Tabs.Trigger className="tabs-trigger" value="Misc">
-            Misc
+          <Tabs.Trigger className="tabs-trigger" value="ClassStructureTab">
+            Class Structure
+          </Tabs.Trigger>
+          <Tabs.Trigger className="tabs-trigger" value="IMFDataTab">
+            IMF Data
           </Tabs.Trigger>
         </Tabs.List>
         <Tabs.Content className="tabs-content" value="ClassStructureTab">
