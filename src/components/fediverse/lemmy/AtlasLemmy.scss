@@ -251,6 +251,10 @@ p.post-vote {
   margin-bottom: var(--atlas-size-10);
 }
 
+.comment-body {
+  margin: var(--atlas-size-12);
+}
+
 .post-body img,
 .comment-body img {
   display: inline;
