@@ -11,13 +11,13 @@ import * as Tabs from "@radix-ui/react-tabs";
 // https://join-lemmy.org/api/classes/LemmyHttp.html
 import { LemmyHttp, GetPersonDetails } from "lemmy-js-client";
 
-import { userPronouns } from "../../../hooks/useDataTransform";
+import { userPronouns } from "../../../../hooks/useDataTransform";
 
 import Comment from "./AtlasLemmyComment";
 import LemmyCommunity from "./AtlasLemmyCommunity";
 import Post from "./AtlasLemmyPost";
-import { listingTypes } from "../../../Atlas_Config";
-import { useStateStorage } from "../../../hooks/useAtlasUtils";
+import { listingTypes } from "../../../../Atlas_Config";
+import { useStateStorage } from "../../../../hooks/useAtlasUtils";
 
 /*
  /$$   /$$                                                                  

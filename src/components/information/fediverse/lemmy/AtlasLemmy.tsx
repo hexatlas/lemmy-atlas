@@ -13,9 +13,9 @@ import Comment from "./AtlasLemmyComment";
 import Post from "./AtlasLemmyPost";
 import LemmyCommunityInfoCard from "./AtlasLemmyCommunityInfoCard";
 
-import { searchTypes } from "../../../Atlas_Config";
+import { searchTypes } from "../../../../Atlas_Config";
 import AtlasLemmyCommunityInfoCard from "./AtlasLemmyCommunityInfoCard";
-import { useStateStorage } from "../../../hooks/useAtlasUtils";
+import { useStateStorage } from "../../../../hooks/useAtlasUtils";
 
 /*
 

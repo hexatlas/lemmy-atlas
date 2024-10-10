@@ -38,7 +38,7 @@ import { useStateStorage } from "../../hooks/useAtlasUtils";
                                         
 */
 
-const AtlasNexusIMFData = ({
+const AtlasIMFData = ({
   // Util
   isMobile,
   resetAtlas,
@@ -445,4 +445,4 @@ const AtlasNexusIMFData = ({
   );
 };
 
-export default AtlasNexusIMFData;
+export default AtlasIMFData;

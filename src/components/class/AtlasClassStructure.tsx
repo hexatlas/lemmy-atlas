@@ -23,7 +23,7 @@
                                                                                          
 */
 
-function AtlasNexusClassStructure() {
+function AtlasClassStructure({ interfaceProps }) {
   return (
     <div className="legend-content-container class-structure">
       <h3>TO DO: Class Structure </h3>
@@ -298,4 +298,4 @@ function AtlasNexusClassStructure() {
   );
 }
 
-export default AtlasNexusClassStructure;
+export default AtlasClassStructure;

@@ -2,9 +2,9 @@
 @import "./AtlasMap.scss";
 @import "./AtlasLegend.scss";
 
-@import "./components/fediverse/lemmy/AtlasLemmy.scss";
+@import "./components/information/fediverse/lemmy/AtlasLemmy.scss";
 
-@import "./AtlasNexus.scss";
-@import "./components/nexus/AtlasWiki.scss";
-@import "./components/nexus/AtlasNexusBulletins.scss";
-@import "./components/nexus/AtlasNexusAnarchistLibrary.scss";
+@import "./components/information/AtlasNexus.scss";
+@import "./components/information/nexus/AtlasWiki.scss";
+@import "./components/information/nexus/AtlasNexusBulletins.scss";
+@import "./components/information/nexus/AtlasNexusAnarchistLibrary.scss";

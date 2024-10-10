@@ -1,13 +1,11 @@
 // https://www.radix-ui.com/primitives/docs/components/tabs
 import * as Tabs from "@radix-ui/react-tabs";
 
-import AtlasNexusClassStructure from "./components/nexus/AtlasNexusClassStructure";
-import AtlasNexusIMFData from "./components/nexus/AtlasNexusIMFData";
-import AtlasNexusBulletins from "./components/nexus/AtlasNexusBulletins";
-import AtlasWiki from "./components/nexus/AtlasWiki";
-import AtlasNexusAnarchistLibrary from "./components/nexus/AtlasNexusAnarchistLibrary";
-import AtlasMisc from "./components/nexus/AtlasMisc";
-import { useStateStorage } from "./hooks/useAtlasUtils";
+import AtlasNexusBulletins from "./nexus/AtlasNexusBulletins";
+import AtlasWiki from "./nexus/AtlasWiki";
+import AtlasNexusAnarchistLibrary from "./nexus/AtlasNexusAnarchistLibrary";
+import AtlasMisc from "./nexus/AtlasMisc";
+import { useStateStorage } from "../../hooks/useAtlasUtils";
 
 /*
  /$$   /$$                                        
@@ -45,19 +43,7 @@ function AtlasNexusCard({ interfaceProps }) {
           <Tabs.Trigger className="tabs-trigger" value="AnarchistLibrary">
             Anarchist Library
           </Tabs.Trigger>
-          <Tabs.Trigger className="tabs-trigger" value="ClassStructureTab">
-            Class Structure
-          </Tabs.Trigger>
-          <Tabs.Trigger className="tabs-trigger" value="IMFDataTab">
-            IMF Data
-          </Tabs.Trigger>
         </Tabs.List>
-        <Tabs.Content className="tabs-content" value="ClassStructureTab">
-          <AtlasNexusClassStructure />
-        </Tabs.Content>
-        <Tabs.Content className="tabs-content" value="IMFDataTab">
-          <AtlasNexusIMFData {...interfaceProps} />
-        </Tabs.Content>
         <Tabs.Content className="tabs-content" value="Bulletins">
           <AtlasNexusBulletins {...interfaceProps} />
         </Tabs.Content>

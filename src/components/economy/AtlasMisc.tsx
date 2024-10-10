@@ -1,40 +1,5 @@
-import { useEffect, useState } from "react";
-import ReactMarkdown from "react-markdown";
-
 // https://www.radix-ui.com/primitives/docs/components/collapsible
 import * as Collapsible from "@radix-ui/react-collapsible";
-
-// https://github.com/LemmyNet/lemmy-js-client
-// https://join-lemmy.org/api/classes/LemmyHttp.html
-import { Search, LemmyHttp } from "lemmy-js-client";
-
-import Comment from "../fediverse/lemmy/AtlasLemmyComment";
-import Post from "../fediverse/lemmy/AtlasLemmyPost";
-
-/*
- /$$$$$$$                                                /$$          
-| $$__  $$                                              | $$          
-| $$  \ $$  /$$$$$$  /$$$$$$$  /$$$$$$$   /$$$$$$   /$$$$$$$          
-| $$$$$$$  |____  $$| $$__  $$| $$__  $$ /$$__  $$ /$$__  $$          
-| $$__  $$  /$$$$$$$| $$  \ $$| $$  \ $$| $$$$$$$$| $$  | $$          
-| $$  \ $$ /$$__  $$| $$  | $$| $$  | $$| $$_____/| $$  | $$          
-| $$$$$$$/|  $$$$$$$| $$  | $$| $$  | $$|  $$$$$$$|  $$$$$$$          
-|_______/  \_______/|__/  |__/|__/  |__/ \_______/ \_______/          
-                                                                      
-                                                                      
-                                                                      
- /$$$$$$$$ /$$                                     /$$         /$$    
-|__  $$__/| $$                                    | $$        | $$    
-   | $$   | $$$$$$$   /$$$$$$  /$$   /$$  /$$$$$$ | $$$$$$$  /$$$$$$  
-   | $$   | $$__  $$ /$$__  $$| $$  | $$ /$$__  $$| $$__  $$|_  $$_/  
-   | $$   | $$  \ $$| $$  \ $$| $$  | $$| $$  \ $$| $$  \ $$  | $$    
-   | $$   | $$  | $$| $$  | $$| $$  | $$| $$  | $$| $$  | $$  | $$ /$$
-   | $$   | $$  | $$|  $$$$$$/|  $$$$$$/|  $$$$$$$| $$  | $$  |  $$$$/
-   |__/   |__/  |__/ \______/  \______/  \____  $$|__/  |__/   \___/  
-                                         /$$  \ $$                    
-                                        |  $$$$$$/                    
-                                         \______/                     
-*/
 
 export function AtlasMisc({
   // Util
@@ -188,43 +153,6 @@ export function AtlasMisc({
       >
         🔗 World-Profitability Calculator
       </a>
-
-      <h3>BannedThought.net</h3>
-      <a
-        href="http://bannedthought.net/RecentPostings.htm"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        🔗 Recent Posts
-      </a>
-      <br />
-      {activeAdministrativeRegion.country != "country" && (
-        <a
-          href={`http://bannedthought.net/${encodeURI(
-            activeAdministrativeRegion[activeLocationType]
-          ).replace(/%20/g, "-")}/index.htm`}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          🔗 Resources on {activeAdministrativeRegion[activeLocationType]}
-        </a>
-      )}
-      <h3>WorldAtlas.com</h3>
-      {activeAdministrativeRegion.country != "country" && (
-        <>
-          <a
-            href={`https://www.worldatlas.com/maps/${encodeURI(
-              activeAdministrativeRegion[activeLocationType]
-            )
-              .replace(/%20/g, "-")
-              .toLowerCase()}`}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            🔗 World Atlas on {activeAdministrativeRegion[activeLocationType]}
-          </a>
-        </>
-      )}
     </div>
   );
 }

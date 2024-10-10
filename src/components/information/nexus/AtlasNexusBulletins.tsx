@@ -7,7 +7,7 @@ import { Search, LemmyHttp } from "lemmy-js-client";
 
 import Comment from "../fediverse/lemmy/AtlasLemmyComment";
 import Post from "../fediverse/lemmy/AtlasLemmyPost";
-import { useStateStorage } from "../../hooks/useAtlasUtils";
+import { useStateStorage } from "../../../hooks/useAtlasUtils";
 
 /*
  /$$$$$$$$ /$$$$$$  /$$$$$$$$                                           

@@ -227,7 +227,7 @@ export default function AtlasInterface({
             </button> */}
           </div>
         )}
-        <div className="search-input-wrapper">
+        <div className="search-input-wrapper search-input-interface">
           {children}
           {activeAdministrativeRegion.country !== "country" && (
             <button

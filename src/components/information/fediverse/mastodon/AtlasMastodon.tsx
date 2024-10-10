@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { TimeAgo } from "../../../hooks/useDataTransform";
-import { useStateStorage } from "../../../hooks/useAtlasUtils";
+import { TimeAgo } from "../../../../hooks/useDataTransform";
+import { useStateStorage } from "../../../../hooks/useAtlasUtils";
 
 // https://www.radix-ui.com/primitives/docs/components/collapsible
 import * as Collapsible from "@radix-ui/react-collapsible";

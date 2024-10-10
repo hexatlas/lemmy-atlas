@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import ReactMarkdown from "react-markdown";
-import { useStateStorage } from "../../hooks/useAtlasUtils";
+import { useStateStorage } from "../../../hooks/useAtlasUtils";
 
 /*
  /$$      /$$ /$$ /$$       /$$

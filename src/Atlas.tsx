@@ -8,8 +8,6 @@ import * as Tabs from "@radix-ui/react-tabs";
 // Import Components
 import AtlasMap from "./AtlasMap";
 import AtlasInterface from "./AtlasMapInterface";
-import AtlasNexusCard from "./AtlasNexus";
-import AtlasFediverse from "./AtlasFediverse";
 
 import {
   lemmyInstances,
@@ -22,6 +20,9 @@ import {
 // Import customHook
 
 import { useStateStorage } from "./hooks/useAtlasUtils";
+import AtlasEconomy from "./AtlasEconomy";
+import AtlasInformation from "./AtlasInformation";
+import AtlasClassStructure from "./components/class/AtlasClassStructure";
 
 /*
 
@@ -129,7 +130,7 @@ export default function Atlas() {
     sortTypes[1]
   ); // Default: New Sort
 
-  const [activeTab, setActiveTab] = useStateStorage("activeTab", "FediverseTab");
+  const [activeTab, setActiveTab] = useStateStorage("activeTab", "Information");
 
   /*
       RESET ATLAS
@@ -361,56 +362,33 @@ export default function Atlas() {
         onValueChange={setActiveTab}
       >
         <Tabs.List className="tabs-list" aria-label="Manage your account">
-          <Tabs.Trigger className="tabs-trigger" value="NexusTab">
-            Nexus
+          <Tabs.Trigger className="tabs-trigger" value="Economy">
+            💵
           </Tabs.Trigger>
-          <Tabs.Trigger className="tabs-trigger" value="FediverseTab">
-            Fediverse
+          <Tabs.Trigger className="tabs-trigger" value="Information">
+            📰
+          </Tabs.Trigger>
+          <Tabs.Trigger className="tabs-trigger" value="Diplomacy" disabled>
+            🤝
+          </Tabs.Trigger>
+          <Tabs.Trigger className="tabs-trigger" value="Defense" disabled>
+            🛡️
+          </Tabs.Trigger>
+          <Tabs.Trigger className="tabs-trigger" value="ClassStructure">
+            🏛️
           </Tabs.Trigger>
         </Tabs.List>
-        <Tabs.Content className="tabs-content" value="NexusTab">
-          <AtlasNexusCard interfaceProps={interfaceProps} />
+        <Tabs.Content className="tabs-content" value="Economy">
+          <AtlasEconomy interfaceProps={interfaceProps}></AtlasEconomy>
         </Tabs.Content>
-        <Tabs.Content className="tabs-content" value="FediverseTab">
-          <AtlasFediverse interfaceProps={interfaceProps} />
+        <Tabs.Content className="tabs-content information-tab" value="Information">
+          <AtlasInformation interfaceProps={interfaceProps}></AtlasInformation>
         </Tabs.Content>
-        {/* {isMobile && (
-          <div
-            className={`map-mobile-indicator ${
-              (locationQuery ||
-                activeAdministrativeRegion.country !== "Country" ||
-                activeCommunity) &&
-              "map-mobile-indicator-active"
-            }`}
-          >
-            <button
-              className="map-button"
-              onClick={() =>
-                window.scrollTo({
-                  top: 0,
-                  behavior: "smooth",
-                })
-              }
-            >
-              🗺️
-            </button>
-            {locationQuery && (
-              <small>
-                <i>{locationQuery}</i>
-                <span className="prefix"> in</span>
-              </small>
-            )}
-            {activeAdministrativeRegion.country !== "country" && (
-              <small>{activeAdministrativeRegion[activeLocationType]}</small>
-            )}
-            {activeCommunity && (
-              <h6>
-                <span className="prefix">c/</span>
-                {activeCommunity && activeCommunity?.community?.name}
-              </h6>
-            )}
-          </div>
-        )} */}
+        <Tabs.Content className="tabs-content" value="Diplomacy"></Tabs.Content>
+        <Tabs.Content className="tabs-content" value="Defense"></Tabs.Content>
+        <Tabs.Content className="tabs-content" value="ClassStructure">
+          <AtlasClassStructure interfaceProps={interfaceProps}></AtlasClassStructure>
+        </Tabs.Content>
       </Tabs.Root>
     </div>
   );

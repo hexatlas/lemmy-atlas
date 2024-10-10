@@ -13,6 +13,7 @@ import administrativeRegionsData from "./data/administrative_regions_extended.js
 
 import { baseLayers, overlayLayers } from "./Atlas_Config";
 import Minimap from "./AtlasMapMiniMap";
+import Overpass from "./components/map/Overpass";
 
 /*
  /$$      /$$                    
@@ -179,6 +180,7 @@ export default function AtlasMap({
     let administrativeRegionArray = latLngBounds(null, null);
 
     if (activeAdministrativeRegion.country !== "country" || nominatim?.features[0]) {
+      /* Updates Map View on Location Type or Region Change */
       switch (activeLocationType) {
         case "name":
           map?.eachLayer((administrativeRegion) => {
@@ -203,6 +205,8 @@ export default function AtlasMap({
           });
           break;
       }
+
+      /* Highlightcs Location on Map by Setting Styles */
       map?.eachLayer((administrativeRegion) => {
         // Highlight Locationselection
         if (typeof administrativeRegion?.setStyle === "function" && !nominatim)
@@ -265,6 +269,10 @@ export default function AtlasMap({
       ref={setMap}
       worldCopyJump
     >
+      <Overpass
+        activeAdministrativeRegion={activeAdministrativeRegion}
+        activeLocationType={activeLocationType}
+      />
       <ScaleControl position="bottomleft" />
       <LayersControl position="bottomright">
         {baseLayers &&
@@ -295,7 +303,6 @@ export default function AtlasMap({
             </LayersControl.Overlay>
           ))}
       </LayersControl>
-
       <GeoJSON
         data={administrativeRegionsData?.features as unknown as GeoJsonObject}
         style={style_locationDefault}
