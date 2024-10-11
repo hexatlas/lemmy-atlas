@@ -1,11 +1,10 @@
 // https://www.radix-ui.com/primitives/docs/components/tabs
 import * as Tabs from "@radix-ui/react-tabs";
 import { useStateStorage } from "./hooks/useAtlasUtils";
-import AtlasIMFData from "./components/economy/AtlasIMFData";
-import AtlasMisc from "./components/economy/AtlasMisc";
+import AtlasMisc from "./components/diplomacy/AtlasMisc";
 
-function AtlasEconomy({ interfaceProps }) {
-  const [activeTab, setActiveTab] = useStateStorage("activeEconomyTab", "IMFData");
+function AtlasDiplomacy({ interfaceProps }) {
+  const [activeTab, setActiveTab] = useStateStorage("activeDiplomacyTab", "IMFData");
 
   return (
     <Tabs.Root
@@ -15,25 +14,19 @@ function AtlasEconomy({ interfaceProps }) {
       onValueChange={setActiveTab}
     >
       <Tabs.List className="tabs-list" aria-label="Manage your account">
-        <Tabs.Trigger className="tabs-trigger" value="Transport">
-          Transport
+        <Tabs.Trigger className="tabs-trigger" value="Embassies">
+          Embassies
         </Tabs.Trigger>
         <Tabs.Trigger className="tabs-trigger" value="Misc">
           Misc
         </Tabs.Trigger>
-        <Tabs.Trigger className="tabs-trigger" value="IMFData">
-          IMF
-        </Tabs.Trigger>
       </Tabs.List>
-      <Tabs.Content className="tabs-content" value="Transport"></Tabs.Content>
+      <Tabs.Content className="tabs-content" value="Embassies"></Tabs.Content>
       <Tabs.Content className="tabs-content" value="Misc">
         <AtlasMisc {...interfaceProps}></AtlasMisc>
-      </Tabs.Content>
-      <Tabs.Content className="tabs-content" value="IMFData">
-        <AtlasIMFData {...interfaceProps}></AtlasIMFData>
       </Tabs.Content>
     </Tabs.Root>
   );
 }
 
-export default AtlasEconomy;
+export default AtlasDiplomacy;

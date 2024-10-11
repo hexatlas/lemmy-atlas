@@ -23,6 +23,8 @@ import { useStateStorage } from "./hooks/useAtlasUtils";
 import AtlasEconomy from "./AtlasEconomy";
 import AtlasInformation from "./AtlasInformation";
 import AtlasClassStructure from "./components/class/AtlasClassStructure";
+import AtlasDiplomacy from "./AtlasDiplomacy";
+import AtlasMilitary from "./AtlasMilitary";
 
 /*
 
@@ -130,7 +132,7 @@ export default function Atlas() {
     sortTypes[1]
   ); // Default: New Sort
 
-  const [activeTab, setActiveTab] = useStateStorage("activeTab", "Information");
+  const [activeTab, setActiveTab] = useStateStorage("activeMainTab", "Information");
 
   /*
       RESET ATLAS
@@ -368,10 +370,10 @@ export default function Atlas() {
           <Tabs.Trigger className="tabs-trigger" value="Information">
             📰
           </Tabs.Trigger>
-          <Tabs.Trigger className="tabs-trigger" value="Diplomacy" disabled>
+          <Tabs.Trigger className="tabs-trigger" value="Diplomacy">
             🤝
           </Tabs.Trigger>
-          <Tabs.Trigger className="tabs-trigger" value="Defense" disabled>
+          <Tabs.Trigger className="tabs-trigger" value="Military">
             🛡️
           </Tabs.Trigger>
           <Tabs.Trigger className="tabs-trigger" value="ClassStructure">
@@ -381,11 +383,15 @@ export default function Atlas() {
         <Tabs.Content className="tabs-content" value="Economy">
           <AtlasEconomy interfaceProps={interfaceProps}></AtlasEconomy>
         </Tabs.Content>
-        <Tabs.Content className="tabs-content information-tab" value="Information">
+        <Tabs.Content className="tabs-content" value="Information">
           <AtlasInformation interfaceProps={interfaceProps}></AtlasInformation>
         </Tabs.Content>
-        <Tabs.Content className="tabs-content" value="Diplomacy"></Tabs.Content>
-        <Tabs.Content className="tabs-content" value="Defense"></Tabs.Content>
+        <Tabs.Content className="tabs-content" value="Diplomacy">
+          <AtlasDiplomacy interfaceProps={interfaceProps}></AtlasDiplomacy>
+        </Tabs.Content>
+        <Tabs.Content className="tabs-content" value="Military">
+          <AtlasMilitary interfaceProps={interfaceProps}></AtlasMilitary>
+        </Tabs.Content>
         <Tabs.Content className="tabs-content" value="ClassStructure">
           <AtlasClassStructure interfaceProps={interfaceProps}></AtlasClassStructure>
         </Tabs.Content>
