@@ -4,7 +4,7 @@ import { useStateStorage } from "./hooks/useAtlasUtils";
 import AtlasMisc from "./components/diplomacy/AtlasMisc";
 
 function AtlasMilitary({ interfaceProps }) {
-  const [activeTab, setActiveTab] = useStateStorage("activeMilitaryTab", "IMFData");
+  const [activeTab, setActiveTab] = useStateStorage("activeMilitaryTab", "Barracks");
 
   return (
     <Tabs.Root
