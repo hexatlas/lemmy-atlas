@@ -1,55 +1,4 @@
-/*
-  LEMMY
-*/
-
-interface lemmyInstance {
-  id: number;
-  label: React.ReactNode;
-  baseUrl: string; // make sure the path Symbol "/" is at the end of the URL
-  community_id: number;
-  default?: boolean;
-}
-
-export const lemmyInstances: Array<lemmyInstance> = [
-  {
-    id: 0,
-    label: "hexbear.net",
-    baseUrl: "https://hexbear.net/",
-    community_id: 6, // !news@hexbear.net
-    default: true,
-  },
-  {
-    id: 1,
-    label: "lemmy.ml",
-    baseUrl: "https://lemmy.ml/",
-    community_id: 14788, // !worldnews@lemmy.ml
-    default: false,
-  },
-  {
-    id: 2,
-    label: "lemmygrad.ml",
-    baseUrl: "https://lemmygrad.ml/",
-    community_id: 109, // !worldnews@lemmygrad.ml
-    default: false,
-  },
-];
-
-export const searchTypes: Array<{ value: string; label: string }> = [
-  // { value: "All", label: "*" },
-  { value: "Comments", label: "💬" },
-  { value: "Posts", label: "🪧" },
-  // { value: "Communities", label: "☭" },
-  // { value: "Users", label: "👥" },
-  // { value: "Url", label: "🌐" },
-];
-
-export const listingTypes: Array<{ value: string; label: string }> = [
-  { value: "All", label: "🌐" },
-  { value: "Local", label: "🏠" },
-  // { value: "Subscribed", label: "📌" },
-];
-
-// Needs to match geoJSON properties
+// Important: Needs to match geoJSON properties imported of administrativeRegionsData in AtlasMap.tsx -
 
 export const regionTypes: Array<string> = [
   "name",
@@ -66,66 +15,6 @@ export const regionTypes: Array<string> = [
   "iso_3166-2",
   "id",
   "combined",
-];
-
-export const sortTypes: Array<{ value: string; label: string }> = [
-  { value: "Active", label: "🚀" },
-  { value: "New", label: "🆕" },
-  { value: "Hot", label: "🔥" },
-  { value: "Controversial", label: "⚔️" },
-  { value: "TopDay", label: "🔝D" },
-  { value: "TopWeek", label: "🔝W" },
-  { value: "TopMonth", label: "🔝M" },
-  { value: "TopYear", label: "🔝Y" },
-  { value: "TopAll", label: "🔝A" },
-  { value: "MostComments", label: "💬🔝" },
-  { value: "NewComments", label: "💬🆕" },
-  { value: "TopHour", label: "🔝🕐1" },
-  { value: "TopSixHour", label: "🔝🕕6" },
-  { value: "TopTwelveHour", label: "🔝🕛12" },
-  { value: "TopThreeMonths", label: "🔝3M" },
-  { value: "TopSixMonths", label: "🔝6M" },
-  { value: "TopNineMonths", label: "🔝9M" },
-  { value: "Old", label: "🕰️" },
-  { value: "Scaled", label: "⚖️" },
-];
-
-/*
-  DATA
-*/
-
-export interface dataSource {
-  id: number;
-  label: React.ReactNode;
-  baseUrl: string; // make sure the path Symbol "/" is at the end of the URL
-  default?: boolean;
-}
-
-export const dataSources: Array<dataSource> = [
-  {
-    id: 0,
-    label: "imf.org",
-    baseUrl: "https://www.imf.org/external/datamapper/api/v1/",
-    default: true,
-  },
-  {
-    id: 1,
-    label: "ilostat.ilo.org",
-    baseUrl: "https://ilostat.ilo.org/resources/sdmx-tools/",
-    default: false,
-  },
-  {
-    id: 2,
-    label: "wto.org",
-    baseUrl: "https://apiportal.wto.org/apis/",
-    default: false,
-  },
-  {
-    id: 3,
-    label: "comtradeplus.un.org",
-    baseUrl: "https://comtradeplus.un.org/",
-    default: false,
-  },
 ];
 
 /*
@@ -258,6 +147,140 @@ export const overlayLayers: Array<mapLayer> = [
     attribution:
       'Map data: &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors | Map style: &copy; <a href="https://blog.safecast.org/about/">SafeCast</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA</a>)',
     opacity: 0.8,
+  },
+];
+
+/*
+  OVERPASS-TURBO - Map Layers
+*/
+
+// Economic
+
+export function airPortQuery(activeAdministrativeRegion) {
+  return `
+  [out:json][timeout:25];
+  area["ISO3166-1"="${activeAdministrativeRegion["alpha-2"]}"]->.name;
+  (
+    nwr["aeroway"="aerodrome"](area.name);
+  );
+  out geom;
+  `;
+}
+
+// INformation
+
+// Diplomatic
+
+// Military
+
+/*
+  LEMMY
+*/
+
+interface lemmyInstance {
+  id: number;
+  label: React.ReactNode;
+  baseUrl: string; // make sure the path Symbol "/" is at the end of the URL
+  community_id: number;
+  default?: boolean;
+}
+
+export const lemmyInstances: Array<lemmyInstance> = [
+  {
+    id: 0,
+    label: "hexbear.net",
+    baseUrl: "https://hexbear.net/",
+    community_id: 6, // !news@hexbear.net
+    default: true,
+  },
+  {
+    id: 1,
+    label: "lemmy.ml",
+    baseUrl: "https://lemmy.ml/",
+    community_id: 14788, // !worldnews@lemmy.ml
+    default: false,
+  },
+  {
+    id: 2,
+    label: "lemmygrad.ml",
+    baseUrl: "https://lemmygrad.ml/",
+    community_id: 109, // !worldnews@lemmygrad.ml
+    default: false,
+  },
+];
+
+export const searchTypes: Array<{ value: string; label: string }> = [
+  // { value: "All", label: "*" },
+  { value: "Comments", label: "💬" },
+  { value: "Posts", label: "🪧" },
+  // { value: "Communities", label: "☭" },
+  // { value: "Users", label: "👥" },
+  // { value: "Url", label: "🌐" },
+];
+
+export const listingTypes: Array<{ value: string; label: string }> = [
+  { value: "All", label: "🌐" },
+  { value: "Local", label: "🏠" },
+  // { value: "Subscribed", label: "📌" },
+];
+
+export const sortTypes: Array<{ value: string; label: string }> = [
+  { value: "Active", label: "🚀" },
+  { value: "New", label: "🆕" },
+  { value: "Hot", label: "🔥" },
+  { value: "Controversial", label: "⚔️" },
+  { value: "TopDay", label: "🔝D" },
+  { value: "TopWeek", label: "🔝W" },
+  { value: "TopMonth", label: "🔝M" },
+  { value: "TopYear", label: "🔝Y" },
+  { value: "TopAll", label: "🔝A" },
+  { value: "MostComments", label: "💬🔝" },
+  { value: "NewComments", label: "💬🆕" },
+  { value: "TopHour", label: "🔝🕐1" },
+  { value: "TopSixHour", label: "🔝🕕6" },
+  { value: "TopTwelveHour", label: "🔝🕛12" },
+  { value: "TopThreeMonths", label: "🔝3M" },
+  { value: "TopSixMonths", label: "🔝6M" },
+  { value: "TopNineMonths", label: "🔝9M" },
+  { value: "Old", label: "🕰️" },
+  { value: "Scaled", label: "⚖️" },
+];
+
+/*
+  VArious APIs, also found in Economic Misc Tab
+*/
+
+export interface dataSource {
+  id: number;
+  label: React.ReactNode;
+  baseUrl: string; // make sure the path Symbol "/" is at the end of the URL
+  default?: boolean;
+}
+
+export const dataSources: Array<dataSource> = [
+  {
+    id: 0,
+    label: "imf.org",
+    baseUrl: "https://www.imf.org/external/datamapper/api/v1/",
+    default: true,
+  },
+  {
+    id: 1,
+    label: "ilostat.ilo.org",
+    baseUrl: "https://ilostat.ilo.org/resources/sdmx-tools/",
+    default: false,
+  },
+  {
+    id: 2,
+    label: "wto.org",
+    baseUrl: "https://apiportal.wto.org/apis/",
+    default: false,
+  },
+  {
+    id: 3,
+    label: "comtradeplus.un.org",
+    baseUrl: "https://comtradeplus.un.org/",
+    default: false,
   },
 ];
 
