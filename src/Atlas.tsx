@@ -25,6 +25,7 @@ import AtlasInformation from "./AtlasInformation";
 import AtlasClassStructure from "./components/class/AtlasClassStructure";
 import AtlasDiplomacy from "./AtlasDiplomacy";
 import AtlasMilitary from "./AtlasMilitary";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 /*
 
@@ -336,66 +337,70 @@ export default function Atlas() {
     setActiveSortType,
   };
 
+  const queryClient = new QueryClient();
+
   const DisplayAtlasMap = useMemo(
     () => <AtlasMap {...interfaceProps} />,
     [activeAdministrativeRegion, activeLocationType]
   );
 
   return (
-    <div
-      className={`atlas ${
-        activeAdministrativeRegion.country !== "Country" && "atlas--active"
-      }`}
-      style={{
-        gridTemplateColumns: `1.6180339887498948482fr ${nexusSize}px`,
-      }}
-    >
-      {isMobile && <AtlasInterface {...interfaceProps} />}
-      <div className={`map-container`}>
-        {DisplayAtlasMap}
-        {!isMobile && <AtlasInterface {...interfaceProps} />}
-      </div>
-
-      <Tabs.Root
-        id="atlas-tabs"
-        className="atlas-tabs tabs-root"
-        ref={sideBarRef}
-        value={activeTab}
-        onValueChange={setActiveTab}
+    <QueryClientProvider client={queryClient}>
+      <div
+        className={`atlas ${
+          activeAdministrativeRegion.country !== "Country" && "atlas--active"
+        }`}
+        style={{
+          gridTemplateColumns: `1.6180339887498948482fr ${nexusSize}px`,
+        }}
       >
-        <Tabs.List className="tabs-list" aria-label="Manage your account">
-          <Tabs.Trigger className="tabs-trigger" value="Economy">
-            💵
-          </Tabs.Trigger>
-          <Tabs.Trigger className="tabs-trigger" value="Information">
-            📰
-          </Tabs.Trigger>
-          <Tabs.Trigger className="tabs-trigger" value="Diplomacy">
-            🤝
-          </Tabs.Trigger>
-          <Tabs.Trigger className="tabs-trigger" value="Military">
-            🛡️
-          </Tabs.Trigger>
-          <Tabs.Trigger className="tabs-trigger" value="ClassStructure">
-            🏛️
-          </Tabs.Trigger>
-        </Tabs.List>
-        <Tabs.Content className="tabs-content" value="Economy">
-          <AtlasEconomy interfaceProps={interfaceProps}></AtlasEconomy>
-        </Tabs.Content>
-        <Tabs.Content className="tabs-content" value="Information">
-          <AtlasInformation interfaceProps={interfaceProps}></AtlasInformation>
-        </Tabs.Content>
-        <Tabs.Content className="tabs-content" value="Diplomacy">
-          <AtlasDiplomacy interfaceProps={interfaceProps}></AtlasDiplomacy>
-        </Tabs.Content>
-        <Tabs.Content className="tabs-content" value="Military">
-          <AtlasMilitary interfaceProps={interfaceProps}></AtlasMilitary>
-        </Tabs.Content>
-        <Tabs.Content className="tabs-content" value="ClassStructure">
-          <AtlasClassStructure interfaceProps={interfaceProps}></AtlasClassStructure>
-        </Tabs.Content>
-      </Tabs.Root>
-    </div>
+        {isMobile && <AtlasInterface {...interfaceProps} />}
+        <div className={`map-container`}>
+          {DisplayAtlasMap}
+          {!isMobile && <AtlasInterface {...interfaceProps} />}
+        </div>
+
+        <Tabs.Root
+          id="atlas-tabs"
+          className="atlas-tabs tabs-root"
+          ref={sideBarRef}
+          value={activeTab}
+          onValueChange={setActiveTab}
+        >
+          <Tabs.List className="tabs-list" aria-label="Manage your account">
+            <Tabs.Trigger className="tabs-trigger" value="Economy">
+              💵
+            </Tabs.Trigger>
+            <Tabs.Trigger className="tabs-trigger" value="Information">
+              📰
+            </Tabs.Trigger>
+            <Tabs.Trigger className="tabs-trigger" value="Diplomacy">
+              🤝
+            </Tabs.Trigger>
+            <Tabs.Trigger className="tabs-trigger" value="Military">
+              🛡️
+            </Tabs.Trigger>
+            <Tabs.Trigger className="tabs-trigger" value="ClassStructure">
+              🏛️
+            </Tabs.Trigger>
+          </Tabs.List>
+          <Tabs.Content className="tabs-content" value="Economy">
+            <AtlasEconomy interfaceProps={interfaceProps}></AtlasEconomy>
+          </Tabs.Content>
+          <Tabs.Content className="tabs-content" value="Information">
+            <AtlasInformation interfaceProps={interfaceProps}></AtlasInformation>
+          </Tabs.Content>
+          <Tabs.Content className="tabs-content" value="Diplomacy">
+            <AtlasDiplomacy interfaceProps={interfaceProps}></AtlasDiplomacy>
+          </Tabs.Content>
+          <Tabs.Content className="tabs-content" value="Military">
+            <AtlasMilitary interfaceProps={interfaceProps}></AtlasMilitary>
+          </Tabs.Content>
+          <Tabs.Content className="tabs-content" value="ClassStructure">
+            <AtlasClassStructure interfaceProps={interfaceProps}></AtlasClassStructure>
+          </Tabs.Content>
+        </Tabs.Root>
+      </div>
+    </QueryClientProvider>
   );
 }
