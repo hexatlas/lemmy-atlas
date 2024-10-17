@@ -107,7 +107,7 @@
     @include atlas-shadow(var(--atlas-shadow-1));
   }
   & button:hover {
-    animation: freePalestine var(--atlas-time-2) var(--atlas-timing-function) infinite;
+    animation: freePalestine var(--atlas-time-3) var(--atlas-timing-function) infinite;
   }
 }
 
