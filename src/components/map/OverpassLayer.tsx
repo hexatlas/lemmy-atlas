@@ -12,7 +12,7 @@ export default function Overpass({
   diplomaticOverpassQueries,
   militaryOverpassQueries,
 }) {
-  // ✈️
+  // ⚡
   const overpassQuery = `
   [out:json][timeout:25];
   
@@ -25,96 +25,96 @@ export default function Overpass({
   
   out geom;
   `;
-  const powerIcon = L.divIcon({
+  const power = L.divIcon({
     html: "⚡",
-    className: "emoji-icon",
+    className: "emoji-icon emoji-category",
   });
 
   // Wind Power Plant
-  const windIcon = L.divIcon({
+  const wind = L.divIcon({
     html: "🌬️",
     className: "emoji-icon",
   });
 
   // Solar Power Plant
-  const solarIcon = L.divIcon({
+  const solar = L.divIcon({
     html: "☀️",
     className: "emoji-icon",
   });
 
   // Biomass Power Plant
-  const biomassIcon = L.divIcon({
+  const biomass = L.divIcon({
     html: "🌿",
     className: "emoji-icon",
   });
 
   // Hydroelectric Power Station
-  const hydroIcon = L.divIcon({
+  const hydro = L.divIcon({
     html: "🌊",
     className: "emoji-icon",
   });
 
   // Coal-fired Power Station
-  const coalIcon = L.divIcon({
-    html: "⬛",
+  const coal = L.divIcon({
+    html: "🌑",
     className: "emoji-icon",
   });
 
   // Gas-fired Power Station
-  const gasIcon = L.divIcon({
+  const gas = L.divIcon({
     html: "💧",
     className: "emoji-icon",
   });
 
   // Oil-fired Power Plant
-  const oilIcon = L.divIcon({
+  const oil = L.divIcon({
     html: "🛢️",
     className: "emoji-icon",
   });
 
   // Geothermal Energy Power Plant
-  const geothermalIcon = L.divIcon({
+  const geothermal = L.divIcon({
     html: "♨️",
     className: "emoji-icon",
   });
 
   // Nuclear Power Plant
-  const nuclearIcon = L.divIcon({
+  const nuclear = L.divIcon({
     html: "☢️",
     className: "emoji-icon",
   });
 
   // Waste Incineration Plants
-  const wasteIcon = L.divIcon({
-    html: "🔥",
+  const waste = L.divIcon({
+    html: "🗑️",
     className: "emoji-icon",
   });
 
   // Battery Storage Plant
-  const batteryIcon = L.divIcon({
+  const battery = L.divIcon({
     html: "🔋",
     className: "emoji-icon",
   });
 
   // Tidal Power Plant
-  const tidalIcon = L.divIcon({
+  const tidal = L.divIcon({
     html: "🌊",
     className: "emoji-icon",
   });
 
   const iconMap = {
-    wind: windIcon,
-    solar: solarIcon,
-    biomass: biomassIcon,
-    hydro: hydroIcon,
-    coal: coalIcon,
-    gas: gasIcon,
-    oil: oilIcon,
-    geothermal: geothermalIcon,
-    nuclear: nuclearIcon,
-    waste: wasteIcon,
-    battery: batteryIcon,
-    tidal: tidalIcon,
+    wind,
+    solar,
+    biomass,
+    hydro,
+    coal,
+    gas,
+    oil,
+    geothermal,
+    nuclear,
+    waste,
+    battery,
+    tidal,
   };
 
   const { data } = useQuery({
@@ -126,7 +126,7 @@ export default function Overpass({
   const renderNode = (node: any) => {
     const { id, lat, lon, tags } = node;
     const name = tags?.name || "Unnamed";
-    const icon = powerIcon || iconMap[tags["plant:source"]];
+    const icon = power || iconMap[tags["plant:source"]];
     return (
       <Marker key={id} position={[lat, lon]} icon={icon}>
         <Popup>
@@ -146,7 +146,7 @@ export default function Overpass({
     const coordinates = geometry.map((point: any) => [point.lat, point.lon]);
 
     const name = tags?.name || "Unnamed Way";
-    const icon = iconMap[tags["plant:source"]] || powerIcon;
+    const icon = iconMap[tags["plant:source"]] || power;
     return (
       <Polyline
         key={id}

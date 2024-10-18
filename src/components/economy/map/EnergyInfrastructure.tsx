@@ -78,9 +78,7 @@ export function EnergyInfrastructure({
   const showOnMap = useCallback(
     (coords) => {
       console.log(coords);
-
       const mapBounds = [coords?.maxlat, coords?.minlon];
-
       map.flyTo(mapBounds, 14);
     },
     [map]
@@ -90,19 +88,21 @@ export function EnergyInfrastructure({
     <div id="legend-content">
       {isLoading && <p className="search-loading-icon">🔍</p>}
       {data && (
-        <h2>
+        <small>
           {data?.elements.length} Power Plants found in{" "}
           {activeAdministrativeRegion["country"]}
-        </h2>
+        </small>
       )}
       {data &&
         data?.elements.map((element, index) => {
           return (
             <div key={index}>
               <AtlasOSMInfoCard element={element} />
-              <button type="button" onClick={() => showOnMap(element?.bounds)}>
-                📍
-              </button>
+              {element?.bounds && (
+                <button type="button" onClick={() => showOnMap(element?.bounds)}>
+                  📍
+                </button>
+              )}
               <br />
             </div>
           );

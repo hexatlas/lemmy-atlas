@@ -13,7 +13,7 @@ import administrativeRegionsData from "./data/administrative_regions_extended.js
 
 import { baseLayers, overlayLayers } from "./Atlas_Config";
 import Minimap from "./AtlasMapMiniMap";
-import Overpass from "./components/map/Overpass";
+import Overpass from "./components/map/OverpassLayer";
 
 /*
  /$$      /$$                    
