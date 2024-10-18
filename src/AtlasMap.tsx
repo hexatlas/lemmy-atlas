@@ -67,28 +67,11 @@ export default function AtlasMap({
   locationQuery,
   setLocationQuery,
 
-  // Data
-  activeIndicator,
-  setActiveIndicator,
-
-  // Community
-  lemmyInstances,
-  activeLemmyInstance,
-  setActiveLemmyInstance,
-
-  activeCommunity,
-  setActiveCommunity,
-
-  activeSearchType,
-  setActiveSearchType,
-
-  listingTypes,
-  activeListingType,
-  setActiveListingType,
-
-  sortTypes,
-  activeSortType,
-  setActiveSortType,
+  // Overpass Querries
+  economicOverpassQueries,
+  informationalOverpassQueries,
+  diplomaticOverpassQueries,
+  militaryOverpassQueries,
 }) {
   /*
       Styles
@@ -272,6 +255,10 @@ export default function AtlasMap({
       <Overpass
         activeAdministrativeRegion={activeAdministrativeRegion}
         activeLocationType={activeLocationType}
+        economicOverpassQueries={economicOverpassQueries}
+        informationalOverpassQueries={informationalOverpassQueries}
+        diplomaticOverpassQueries={diplomaticOverpassQueries}
+        militaryOverpassQueries={militaryOverpassQueries}
       />
       <ScaleControl position="bottomleft" />
       <LayersControl position="bottomright">

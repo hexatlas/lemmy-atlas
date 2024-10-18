@@ -4,7 +4,6 @@ import * as Tabs from "@radix-ui/react-tabs";
 import AtlasNexusBulletins from "./nexus/AtlasNexusBulletins";
 import AtlasWiki from "./nexus/AtlasWiki";
 import AtlasNexusAnarchistLibrary from "./nexus/AtlasNexusAnarchistLibrary";
-import AtlasMisc from "./nexus/AtlasMisc";
 import { useStateStorage } from "../../hooks/useAtlasUtils";
 
 /*
@@ -28,9 +27,6 @@ function AtlasNexusCard({ interfaceProps }) {
     <>
       <Tabs.Root className="nexus-card" value={activeTab} onValueChange={setActiveTab}>
         <Tabs.List className="tabs-list tabs-nexus" aria-label="Pick Nexus Item">
-          <Tabs.Trigger className="tabs-trigger" value="Misc">
-            Misc
-          </Tabs.Trigger>
           <Tabs.Trigger className="tabs-trigger" value="ProleWiki">
             ProleWiki
           </Tabs.Trigger>
@@ -59,9 +55,6 @@ function AtlasNexusCard({ interfaceProps }) {
         </Tabs.Content>
         <Tabs.Content className="tabs-content" value="AnarchistLibrary">
           <AtlasNexusAnarchistLibrary {...interfaceProps} />
-        </Tabs.Content>
-        <Tabs.Content className="tabs-content" value="Misc">
-          <AtlasMisc {...interfaceProps} />
         </Tabs.Content>
       </Tabs.Root>
     </>

@@ -1,11 +1,11 @@
 // https://www.radix-ui.com/primitives/docs/components/tabs
 import * as Tabs from "@radix-ui/react-tabs";
 import { useStateStorage } from "./hooks/useAtlasUtils";
-import AtlasMisc from "./components/military/AtlasMisc";
-import AtlasMapInformation from "./components/military/AtlasMapInformation";
+import AtlasMisc from "./components/government/AtlasMisc";
+import AtlasClassStructure from "./components/government/AtlasClassStructure";
 
-function AtlasMilitary({ interfaceProps }) {
-  const [activeTab, setActiveTab] = useStateStorage("activeMilitaryTab", "Barracks");
+function AtlasGovernment({ interfaceProps }) {
+  const [activeTab, setActiveTab] = useStateStorage("activeGovernmentTab", "Government");
 
   return (
     <Tabs.Root
@@ -18,16 +18,12 @@ function AtlasMilitary({ interfaceProps }) {
         <Tabs.Trigger className="tabs-trigger emoji-label" value="Misc">
           🔗
         </Tabs.Trigger>
-        <Tabs.Trigger
-          className="tabs-trigger emoji-label"
-          value="MapInformation"
-          disabled
-        >
+        <Tabs.Trigger className="tabs-trigger emoji-label" value="MapInformation">
           🌐
         </Tabs.Trigger>
       </Tabs.List>
       <Tabs.Content className="tabs-content" value="MapInformation">
-        <AtlasMapInformation interfaceProps={interfaceProps}></AtlasMapInformation>
+        <AtlasClassStructure interfaceProps={interfaceProps}></AtlasClassStructure>
       </Tabs.Content>
       <Tabs.Content className="tabs-content" value="Misc">
         <AtlasMisc {...interfaceProps}></AtlasMisc>
@@ -36,4 +32,4 @@ function AtlasMilitary({ interfaceProps }) {
   );
 }
 
-export default AtlasMilitary;
+export default AtlasGovernment;

@@ -2,6 +2,7 @@
 import * as Tabs from "@radix-ui/react-tabs";
 import { useStateStorage } from "./hooks/useAtlasUtils";
 import AtlasMisc from "./components/diplomacy/AtlasMisc";
+import AtlasMapInformation from "./components/diplomacy/AtlasMapInformation";
 
 function AtlasDiplomacy({ interfaceProps }) {
   const [activeTab, setActiveTab] = useStateStorage("activeDiplomacyTab", "Embassies");
@@ -14,14 +15,20 @@ function AtlasDiplomacy({ interfaceProps }) {
       onValueChange={setActiveTab}
     >
       <Tabs.List className="tabs-list" aria-label="Manage your account">
-        <Tabs.Trigger className="tabs-trigger" value="Embassies">
-          Embassies
+        <Tabs.Trigger className="tabs-trigger emoji-label" value="Misc">
+          🔗
         </Tabs.Trigger>
-        <Tabs.Trigger className="tabs-trigger" value="Misc">
-          Misc
+        <Tabs.Trigger
+          className="tabs-trigger emoji-label"
+          value="MapInformation"
+          disabled
+        >
+          🌐
         </Tabs.Trigger>
       </Tabs.List>
-      <Tabs.Content className="tabs-content" value="Embassies"></Tabs.Content>
+      <Tabs.Content className="tabs-content" value="MapInformation">
+        <AtlasMapInformation interfaceProps={interfaceProps}></AtlasMapInformation>
+      </Tabs.Content>
       <Tabs.Content className="tabs-content" value="Misc">
         <AtlasMisc {...interfaceProps}></AtlasMisc>
       </Tabs.Content>

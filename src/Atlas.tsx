@@ -15,6 +15,10 @@ import {
   regionTypes,
   searchTypes,
   sortTypes,
+  economicOverpassQueries,
+  informationalOverpassQueries,
+  diplomaticOverpassQueries,
+  militaryOverpassQueries,
 } from "./Atlas_Config";
 
 // Import customHook
@@ -22,10 +26,11 @@ import {
 import { useStateStorage } from "./hooks/useAtlasUtils";
 import AtlasEconomy from "./AtlasEconomy";
 import AtlasInformation from "./AtlasInformation";
-import AtlasClassStructure from "./components/class/AtlasClassStructure";
+import AtlasClassStructure from "./components/government/AtlasClassStructure";
 import AtlasDiplomacy from "./AtlasDiplomacy";
 import AtlasMilitary from "./AtlasMilitary";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import AtlasGovernment from "./AtlasGovernment";
 
 /*
 
@@ -335,6 +340,12 @@ export default function Atlas() {
     sortTypes,
     activeSortType,
     setActiveSortType,
+
+    // Overpass Querries
+    economicOverpassQueries,
+    informationalOverpassQueries,
+    diplomaticOverpassQueries,
+    militaryOverpassQueries,
   };
 
   const queryClient = new QueryClient();
@@ -368,19 +379,19 @@ export default function Atlas() {
           onValueChange={setActiveTab}
         >
           <Tabs.List className="tabs-list" aria-label="Manage your account">
-            <Tabs.Trigger className="tabs-trigger" value="Economy">
-              💵
+            <Tabs.Trigger className="tabs-trigger emoji-label" value="Economy">
+              🪙
             </Tabs.Trigger>
-            <Tabs.Trigger className="tabs-trigger" value="Information">
-              📰
+            <Tabs.Trigger className="tabs-trigger emoji-label" value="Information">
+              ℹ️
             </Tabs.Trigger>
-            <Tabs.Trigger className="tabs-trigger" value="Diplomacy">
-              🤝
+            <Tabs.Trigger className="tabs-trigger emoji-label" value="Diplomacy">
+              🕊️
             </Tabs.Trigger>
-            <Tabs.Trigger className="tabs-trigger" value="Military">
+            <Tabs.Trigger className="tabs-trigger emoji-label" value="Military">
               🛡️
             </Tabs.Trigger>
-            <Tabs.Trigger className="tabs-trigger" value="ClassStructure">
+            <Tabs.Trigger className="tabs-trigger emoji-label" value="ClassStructure">
               🏛️
             </Tabs.Trigger>
           </Tabs.List>
@@ -397,7 +408,7 @@ export default function Atlas() {
             <AtlasMilitary interfaceProps={interfaceProps}></AtlasMilitary>
           </Tabs.Content>
           <Tabs.Content className="tabs-content" value="ClassStructure">
-            <AtlasClassStructure interfaceProps={interfaceProps}></AtlasClassStructure>
+            <AtlasGovernment interfaceProps={interfaceProps}></AtlasGovernment>
           </Tabs.Content>
         </Tabs.Root>
       </div>
