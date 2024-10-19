@@ -1,6 +1,6 @@
 import L from "leaflet";
 
-export function overPassQuery({ activeAdministrativeRegion }) {
+export function overPassQuery(activeAdministrativeRegion) {
   // ⚡
   return `
  [out:json][timeout:25];
@@ -15,6 +15,7 @@ export function overPassQuery({ activeAdministrativeRegion }) {
  out geom;
  `;
 }
+
 const power = L.divIcon({
   html: "⚡",
   className: "emoji-icon emoji-category",
