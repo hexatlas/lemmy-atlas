@@ -8,6 +8,7 @@ import { Search, LemmyHttp } from "lemmy-js-client";
 import Comment from "../fediverse/lemmy/AtlasLemmyComment";
 import Post from "../fediverse/lemmy/AtlasLemmyPost";
 import { useStateStorage } from "../../../hooks/useAtlasUtils";
+import { useQuery } from "@tanstack/react-query";
 
 /*
  /$$$$$$$$ /$$$$$$  /$$$$$$$$                                           
@@ -83,8 +84,6 @@ export function AtlasNexusReadingList({
   activeSortType,
   setActiveSortType,
 }) {
-  const [bulletinsData, setBulletinsData] = useStateStorage("bulletinsData", null);
-
   const fetchBulletinsRSS = async (url) => {
     try {
       const response = await fetch(url);
@@ -115,7 +114,7 @@ export function AtlasNexusReadingList({
         items: items,
       };
 
-      setBulletinsData(parsedData);
+      return parsedData;
     } catch (error) {
       console.log(error);
     }
@@ -198,19 +197,25 @@ export function AtlasNexusReadingList({
     );
   }
 
-  useEffect(() => {
-    if (activeAdministrativeRegion.country !== "country") {
-      const apiUrl = `/.netlify/functions/72T_bulletins/?country=${encodeURI(
-        activeAdministrativeRegion.country
-      )
-        .toLowerCase()
-        .replace(/%20/g, "-")}`;
-      fetchBulletinsRSS(apiUrl);
-    } else {
-      const apiUrl = `/.netlify/functions/72T_bulletins/?index=true`;
-      fetchBulletinsRSS(apiUrl);
-    }
-  }, [activeAdministrativeRegion]);
+  let apiUrl = null;
+
+  if (activeAdministrativeRegion.country !== "country") {
+    apiUrl = `/.netlify/functions/72T_bulletins/?country=${encodeURI(
+      activeAdministrativeRegion.country
+    )
+      .toLowerCase()
+      .replace(/%20/g, "-")}`;
+  } else {
+    apiUrl = `/.netlify/functions/72T_bulletins/?index=true`;
+  }
+
+  const { data, isLoading } = useQuery({
+    queryKey: [`NB-${activeAdministrativeRegion["alpha-2"]}`],
+    queryFn: () => fetchBulletinsRSS(apiUrl),
+    staleTime: Infinity,
+    refetchInterval: false,
+    refetchOnMount: false,
+  });
 
   return (
     <>
@@ -230,15 +235,15 @@ export function AtlasNexusReadingList({
             activeAdministrativeRegion.country}
         </a>
 
-        {bulletinsData && (
+        {data && (
           <>
-            <h3>{bulletinsData.title}</h3>
-            <p> {bulletinsData.description}</p>
-            <a href={bulletinsData.link} target="_blank" rel="noopener noreferrer">
-              🔗 {bulletinsData.link}
+            <h3>{data.title}</h3>
+            <p> {data.description}</p>
+            <a href={data.link} target="_blank" rel="noopener noreferrer">
+              🔗 {data.link}
             </a>
-            {bulletinsData.items &&
-              bulletinsData.items.map((bulletin, index) => {
+            {data.items &&
+              data.items.map((bulletin, index) => {
                 return (
                   <div className="feed-item" key={index}>
                     <p className="feed-publish-date highlight">

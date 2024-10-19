@@ -1,11 +1,9 @@
-// https://www.radix-ui.com/primitives/docs/components/collapsible
-import * as Collapsible from "@radix-ui/react-collapsible";
+import { useCallback, useEffect } from "react";
+import AtlasOSMInfoCard from "../../shared/AtlasOSMInfoCard";
 import { useQuery } from "@tanstack/react-query";
 import useOverpassAPI from "../../../hooks/useOverpassAPI";
-import { useCallback } from "react";
-import AtlasOSMInfoCard from "../../shared/AtlasOSMInfoCard";
 
-export function EnergyInfrastructure({
+function Transport({
   // Location
   map,
   setMap,
@@ -34,6 +32,8 @@ export function EnergyInfrastructure({
 
   locationQuery,
   setLocationQuery,
+
+  // Overpass
 }) {
   const overpassQuery = `
   [out:json][timeout:25];
@@ -42,15 +42,18 @@ export function EnergyInfrastructure({
   area["ISO3166-1"="${activeAdministrativeRegion["alpha-2"]}"]->.name;
   (
     // Fetch features based on the active location type (e.g., aerodromes)
-    nwr["power"="plant"](area.name);
+    nwr["railway"="station"](area.name);
   );
   
   out geom;
   `;
 
   const { data, isLoading } = useQuery({
-    queryKey: [`OverpassData-${activeAdministrativeRegion["alpha-2"]}`],
+    queryKey: [`Transport-${activeAdministrativeRegion["alpha-2"]}`],
     queryFn: () => useOverpassAPI(overpassQuery),
+    staleTime: Infinity,
+    refetchInterval: false,
+    refetchOnMount: false,
   });
 
   // Update Map to Selection
@@ -90,4 +93,4 @@ export function EnergyInfrastructure({
   );
 }
 
-export default EnergyInfrastructure;
+export default Transport;

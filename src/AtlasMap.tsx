@@ -14,6 +14,8 @@ import administrativeRegionsData from "./data/administrative_regions_extended.js
 import { baseLayers, overlayLayers } from "./Atlas_Config";
 import Minimap from "./AtlasMapMiniMap";
 import Overpass from "./components/map/OverpassLayer";
+import { useQuery } from "@tanstack/react-query";
+import useOverpassAPI from "./hooks/useOverpassAPI";
 
 /*
  /$$      /$$                    
@@ -66,12 +68,6 @@ export default function AtlasMap({
 
   locationQuery,
   setLocationQuery,
-
-  // Overpass Querries
-  economicOverpassQueries,
-  informationalOverpassQueries,
-  diplomaticOverpassQueries,
-  militaryOverpassQueries,
 }) {
   /*
       Styles
@@ -239,6 +235,27 @@ export default function AtlasMap({
     }
   }, [activeAdministrativeRegion, activeLocationType]);
 
+  const overpassQuery = `
+  [out:json][timeout:25];
+  
+  // Fetch area for the selected region
+  area["ISO3166-1"="${activeAdministrativeRegion["alpha-2"]}"]->.name;
+  (
+    // Fetch features based on the active location type (e.g., aerodromes)
+    nwr["power"="plant"](area.name);
+  );
+  
+  out geom;
+  `;
+
+  const { data } = useQuery({
+    queryKey: [`Energy-${activeAdministrativeRegion["alpha-2"]}`],
+    queryFn: () => useOverpassAPI(overpassQuery),
+    staleTime: Infinity,
+    refetchInterval: false,
+    refetchOnMount: false,
+  });
+
   return (
     <MapContainer
       // center={[48.2082, 16.3738]} // Vienna; zoom 7
@@ -252,14 +269,7 @@ export default function AtlasMap({
       ref={setMap}
       worldCopyJump
     >
-      <Overpass
-        activeAdministrativeRegion={activeAdministrativeRegion}
-        activeLocationType={activeLocationType}
-        economicOverpassQueries={economicOverpassQueries}
-        informationalOverpassQueries={informationalOverpassQueries}
-        diplomaticOverpassQueries={diplomaticOverpassQueries}
-        militaryOverpassQueries={militaryOverpassQueries}
-      />
+      <Overpass data={data} />
       <ScaleControl position="bottomleft" />
       <LayersControl position="bottomright">
         {baseLayers &&

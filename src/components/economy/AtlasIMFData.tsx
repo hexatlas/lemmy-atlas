@@ -13,6 +13,7 @@ import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
 import { indicators } from "../../data/indicatorsIMF.json";
 import { useIMFDataTransform } from "../../hooks/useDataTransform";
 import { useStateStorage } from "../../hooks/useAtlasUtils";
+import { useQuery } from "@tanstack/react-query";
 /*
  /$$$$$$ /$$      /$$ /$$$$$$$$         
 |_  $$_/| $$$    /$$$| $$_____/         
@@ -85,7 +86,7 @@ const AtlasIMFData = ({
   /*
     useStates
     */
-  const [data, setData] = useStateStorage("data", null);
+
   const [loading, setLoading] = useStateStorage("loading", true);
   const [error, setError] = useStateStorage("error", null);
 
@@ -261,7 +262,7 @@ const AtlasIMFData = ({
       }
 
       const result = await response.json();
-      setData(result.values);
+      return result.values;
     } catch (error) {
       console.log(error);
       setError(error.message);
@@ -270,50 +271,15 @@ const AtlasIMFData = ({
     }
   };
 
-  useEffect(() => {
-    if (activeIndicator && activeAdministrativeRegion.country !== "country") {
-      // Link to Compare two Countries
-      // const apiUrl = `/.netlify/functions/data_imf_api/?indicator=${
-      //   activeIndicator.name
-      // }&country=${activeAdministrativeRegion["ISO3166-1-Alpha-3"]}/${
-      //   administrativeRegionClickHistoryArray[0].activeAdministrativeRegion.country !==
-      //     "country" &&
-      //   administrativeRegionClickHistoryArray[0].activeAdministrativeRegion[
-      //     "ISO3166-1-Alpha-3"
-      //   ]
-      // }`;
+  const apiUrl = `/.netlify/functions/data_imf_api/?indicator=${activeIndicator.name}&country=${activeAdministrativeRegion["ISO3166-1-Alpha-3"]}/`;
 
-      const apiUrl = `/.netlify/functions/data_imf_api/?indicator=${activeIndicator.name}&country=${activeAdministrativeRegion["ISO3166-1-Alpha-3"]}/`;
-      fetchData(apiUrl);
-    }
-  }, [activeAdministrativeRegion, activeIndicator]);
-
-  // const IndicatorDropdown = ({ indicators }) => {
-  //   const [selectedIndicator, setSelectedIndicator] = useState(null);
-
-  //   const handleSelectChange = (event) => {
-  //     const selectedValue = event.target.value;
-  //     setSelectedIndicator(
-  //       indicators.find((indicator) => indicator.name === selectedValue)
-  //     );
-  //   };
-
-  //   return (
-  //     <div>
-  //       <label htmlFor="indicatorDropdown"></label>
-  //       <select id="indicatorDropdown" onChange={handleSelectChange}>
-  //         <option value="" disabled selected>
-  //           Select an indicator
-  //         </option>
-  //         {indicators.map((indicator) => (
-  //           <option key={indicator.name} value={indicator.name}>
-  //             {indicator.label}
-  //           </option>
-  //         ))}
-  //       </select>
-  //     </div>
-  //   );
-  // };
+  const { data, isLoading } = useQuery({
+    queryKey: [`AL-${activeAdministrativeRegion["alpha-2"]}`],
+    queryFn: () => fetchData(apiUrl),
+    staleTime: Infinity,
+    refetchInterval: false,
+    refetchOnMount: false,
+  });
 
   return (
     <div id="legend-content">

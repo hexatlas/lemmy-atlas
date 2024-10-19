@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import ReactMarkdown from "react-markdown";
 import { useStateStorage } from "../../../hooks/useAtlasUtils";
+import { useQuery } from "@tanstack/react-query";
 
 /*
  /$$      /$$ /$$ /$$       /$$
@@ -67,8 +68,6 @@ export function AtlasProleWiki({
   activeSortType,
   setActiveSortType,
 }) {
-  const [proleWiki, setProleWiki] = useStateStorage(wikiURL, null);
-
   const fetchProleWiki = async (url) => {
     try {
       const response = await fetch(url);
@@ -77,21 +76,25 @@ export function AtlasProleWiki({
         throw new Error(`HTTP error! Status: ${response.status}`);
       }
       const result = await response.json();
-      setProleWiki(result?.parse);
+      return result?.parse;
     } catch (error) {
       console.log(error);
     }
   };
 
-  useEffect(() => {
-    if (activeAdministrativeRegion[activeLocationType] !== "") {
-      const apiUrl = `/.netlify/functions/wiki/?country=${encodeURI(
-        activeAdministrativeRegion[activeLocationType]
-      )}&wiki=${wikiURL}`;
+  const apiUrl = `/.netlify/functions/wiki/?country=${encodeURI(
+    activeAdministrativeRegion[activeLocationType]
+  )}&wiki=${wikiURL}`;
 
-      fetchProleWiki(apiUrl);
-    }
-  }, [activeAdministrativeRegion, activeLocationType]);
+  const { data, isLoading } = useQuery({
+    queryKey: [
+      `WIKI-${isProleWiki ? "prole" : "nato"}-${activeAdministrativeRegion["alpha-2"]}`,
+    ],
+    queryFn: () => fetchProleWiki(apiUrl),
+    staleTime: Infinity,
+    refetchInterval: false,
+    refetchOnMount: false,
+  });
 
   return (
     <>
@@ -140,10 +143,10 @@ export function AtlasProleWiki({
         )}
         <hr />
         <br />
-        {proleWiki && (
+        {data && (
           <>
-            <h3>{proleWiki.title}</h3>
-            <div dangerouslySetInnerHTML={{ __html: proleWiki?.text["*"] }}></div>
+            <h3>{data.title}</h3>
+            <div dangerouslySetInnerHTML={{ __html: data?.text["*"] }}></div>
           </>
         )}
       </div>

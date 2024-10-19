@@ -11,6 +11,7 @@ import { Search, LemmyHttp } from "lemmy-js-client";
 import Comment from "../fediverse/lemmy/AtlasLemmyComment";
 import Post from "../fediverse/lemmy/AtlasLemmyPost";
 import { useStateStorage } from "../../../hooks/useAtlasUtils";
+import { useQuery } from "@tanstack/react-query";
 
 /*
   /$$$$$$                                          /$$       /$$             /$$    
@@ -87,8 +88,6 @@ export function AtlasNexusReadingList({
   activeSortType,
   setActiveSortType,
 }) {
-  const [anarchistLibrary, setAnarchistLibrary] = useStateStorage("anarchistLibrary", []);
-
   const fetchAnarchistLibrary = async (url) => {
     try {
       const response = await fetch(url);
@@ -99,7 +98,7 @@ export function AtlasNexusReadingList({
 
       const AnarchistLibraryArray = await response.json(); // Retrieve response as text
 
-      setAnarchistLibrary(AnarchistLibraryArray);
+      return AnarchistLibraryArray;
     } catch (error) {
       console.log(error);
     }
@@ -182,17 +181,23 @@ export function AtlasNexusReadingList({
     );
   }
 
-  useEffect(() => {
-    if (activeAdministrativeRegion.country !== "country") {
-      const apiUrl = `/.netlify/functions/anarchist_library/?country=${encodeURI(
-        activeAdministrativeRegion[activeLocationType]
-      )}`;
-      fetchAnarchistLibrary(apiUrl);
-    } else {
-      const apiUrl = `/.netlify/functions/anarchist_library/`;
-      fetchAnarchistLibrary(apiUrl);
-    }
-  }, [activeAdministrativeRegion, activeLocationType]);
+  let apiUrl = null;
+
+  if (activeAdministrativeRegion.country !== "country") {
+    apiUrl = `/.netlify/functions/anarchist_library/?country=${encodeURI(
+      activeAdministrativeRegion[activeLocationType]
+    )}`;
+  } else {
+    apiUrl = `/.netlify/functions/anarchist_library/`;
+  }
+
+  const { data, isLoading } = useQuery({
+    queryKey: [`AL-${activeAdministrativeRegion["alpha-2"]}`],
+    queryFn: () => fetchAnarchistLibrary(apiUrl),
+    staleTime: Infinity,
+    refetchInterval: false,
+    refetchOnMount: false,
+  });
 
   return (
     <div id="legend-content">
@@ -209,10 +214,10 @@ export function AtlasNexusReadingList({
           activeAdministrativeRegion[activeLocationType]}
       </a>
 
-      {anarchistLibrary?.length > 0 && (
+      {data?.length > 0 && (
         <>
-          {anarchistLibrary &&
-            anarchistLibrary.map((book, index) => {
+          {data &&
+            data.map((book, index) => {
               return (
                 <div className="anarchist-library-item" key={index}>
                   <p className="anarchist-library-publish-date ">
