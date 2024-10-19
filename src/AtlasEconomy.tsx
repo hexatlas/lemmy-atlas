@@ -6,7 +6,7 @@ import AtlasMisc from "./components/economy/AtlasMisc";
 import AtlasMapInformation from "./components/economy/AtlasMapInformation";
 
 function AtlasEconomy({ interfaceProps }) {
-  const [activeTab, setActiveTab] = useStateStorage("activeEconomyTab", "IMFData");
+  const [activeTab, setActiveTab] = useStateStorage("activeEconomyTab", "MapInformation");
 
   return (
     <Tabs.Root

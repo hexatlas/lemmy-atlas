@@ -6,13 +6,13 @@ import EnergyInfrastructure from "./map/EnergyInfrastructure";
 
 function AtlasMapInformation({ interfaceProps }) {
   const [activeTab, setActiveTab] = useStateStorage(
-    "activeFediverseTab",
+    "activeEconomyMapInformationTab",
     "EnergyInfrastructure"
   );
   return (
     <>
       <Tabs.Root className="nexus-card" value={activeTab} onValueChange={setActiveTab}>
-        <Tabs.List className="tabs-list tabs-nexus" aria-label="Pick Fediverse">
+        <Tabs.List className="tabs-list tabs-nexus" aria-label="Pick Economy Type">
           <Tabs.Trigger className="tabs-trigger" value="EnergyInfrastructure">
             ⚡
           </Tabs.Trigger>

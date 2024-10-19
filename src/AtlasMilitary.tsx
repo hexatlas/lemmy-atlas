@@ -5,7 +5,10 @@ import AtlasMisc from "./components/military/AtlasMisc";
 import AtlasMapInformation from "./components/military/AtlasMapInformation";
 
 function AtlasMilitary({ interfaceProps }) {
-  const [activeTab, setActiveTab] = useStateStorage("activeMilitaryTab", "Barracks");
+  const [activeTab, setActiveTab] = useStateStorage(
+    "activeMilitaryTab",
+    "MapInformation"
+  );
 
   return (
     <Tabs.Root

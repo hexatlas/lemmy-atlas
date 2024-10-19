@@ -93,6 +93,7 @@ const tidal = L.divIcon({
 });
 
 export const iconMap = {
+  power,
   wind,
   solar,
   biomass,

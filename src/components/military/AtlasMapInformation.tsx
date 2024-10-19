@@ -5,8 +5,8 @@ import { useStateStorage } from "../../hooks/useAtlasUtils";
 
 function AtlasMapInformation({ interfaceProps }) {
   const [activeTab, setActiveTab] = useStateStorage(
-    "activeFediverseTab",
-    "MapInformation"
+    "activeMilitaryMapInformationTab",
+    "Barracks"
   );
   return (
     <>
