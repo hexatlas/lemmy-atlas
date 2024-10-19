@@ -75,11 +75,17 @@ const AtlasIMFData = ({
 
   locationQuery,
   setLocationQuery,
-
-  // Data
-  activeIndicator,
-  setActiveIndicator,
 }) => {
+  const [activeIndicator, setActiveIndicator] = useStateStorage("activeIndicator", {
+    name: "PPPGDP",
+    label: "GDP, current prices",
+    description:
+      'Gross domestic product is the most commonly used single measure of a country\'s overall economic activity. It represents the total value in PPP terms of final goods and services produced within a country during a specified time period.\n\nPurchasing Power Parity (PPP) is a theory which relates changes in the nominal exchange rate between two countries currencies to changes in the countries\' price levels. More information on PPP methodology can be found on the World Economic Outlook FAQ - <a href="http://www.imf.org/external/pubs/ft/weo/faq.htm#q4d" target="new">click here</a>',
+    source: "World Economic Outlook (October 2023)",
+    unit: "Purchasing power parity; billions of international dollars",
+    dataset: "WEO",
+  });
+
   const [open, setOpen] = useState(false);
 
   /*

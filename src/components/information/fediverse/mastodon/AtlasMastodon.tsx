@@ -42,10 +42,6 @@ function AtlasMastodon({
 
   locationQuery,
   setLocationQuery,
-
-  // Data
-  activeIndicator,
-  setActiveIndicator,
 }) {
   const [mastonPosts, setMastonPosts] = useStateStorage("mastonPosts", []);
 

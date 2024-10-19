@@ -58,10 +58,6 @@ export default function AtlasInterface({
 
   locationQuery,
   setLocationQuery,
-
-  // Data
-  activeIndicator,
-  setActiveIndicator,
 }) {
   /*
       useStates 

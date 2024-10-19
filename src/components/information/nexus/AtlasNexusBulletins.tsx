@@ -72,10 +72,6 @@ export function AtlasNexusReadingList({
   locationQuery,
   setLocationQuery,
 
-  // Data
-  activeIndicator,
-  setActiveIndicator,
-
   // Community
   lemmyInstances,
   activeLemmyInstance,

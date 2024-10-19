@@ -43,10 +43,6 @@ export function EnergyInfrastructure({
   locationQuery,
   setLocationQuery,
 
-  // Data
-  activeIndicator,
-  setActiveIndicator,
-
   // Overpass Querries
   economicOverpassQueries,
   informationalOverpassQueries,

@@ -38,10 +38,6 @@ export function AtlasMisc({
 
   locationQuery,
   setLocationQuery,
-
-  // Data
-  activeIndicator,
-  setActiveIndicator,
 }) {
   return (
     <div id="legend-content">

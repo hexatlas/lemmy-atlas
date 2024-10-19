@@ -56,10 +56,6 @@ export function AtlasProleWiki({
   locationQuery,
   setLocationQuery,
 
-  // Data
-  activeIndicator,
-  setActiveIndicator,
-
   // Community
   lemmyInstances,
   activeLemmyInstance,

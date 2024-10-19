@@ -70,10 +70,6 @@ export default function AtlasLemmy({
   locationQuery,
   setLocationQuery,
 
-  // Data
-  activeIndicator,
-  setActiveIndicator,
-
   // Community
   lemmyInstances,
   activeLemmyInstance,
