@@ -272,15 +272,18 @@ const AtlasIMFData = ({
 
   useEffect(() => {
     if (activeIndicator && activeAdministrativeRegion.country !== "country") {
-      const apiUrl = `/.netlify/functions/data_imf_api/?indicator=${
-        activeIndicator.name
-      }&country=${activeAdministrativeRegion["ISO3166-1-Alpha-3"]}/${
-        administrativeRegionClickHistoryArray[0].activeAdministrativeRegion.country !==
-          "country" &&
-        administrativeRegionClickHistoryArray[0].activeAdministrativeRegion[
-          "ISO3166-1-Alpha-3"
-        ]
-      }`;
+      // Link to Compare two Countries
+      // const apiUrl = `/.netlify/functions/data_imf_api/?indicator=${
+      //   activeIndicator.name
+      // }&country=${activeAdministrativeRegion["ISO3166-1-Alpha-3"]}/${
+      //   administrativeRegionClickHistoryArray[0].activeAdministrativeRegion.country !==
+      //     "country" &&
+      //   administrativeRegionClickHistoryArray[0].activeAdministrativeRegion[
+      //     "ISO3166-1-Alpha-3"
+      //   ]
+      // }`;
+
+      const apiUrl = `/.netlify/functions/data_imf_api/?indicator=${activeIndicator.name}&country=${activeAdministrativeRegion["ISO3166-1-Alpha-3"]}/`;
       fetchData(apiUrl);
     }
   }, [activeAdministrativeRegion, activeIndicator]);
