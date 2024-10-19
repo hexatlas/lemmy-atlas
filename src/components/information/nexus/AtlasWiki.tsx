@@ -19,14 +19,6 @@ export function AtlasProleWiki({
   wikiURL,
   isProleWiki = false,
 
-  // Util
-  isMobile,
-  resetAtlas,
-  sideBarRef,
-
-  nexusSize,
-  setNexusSize,
-
   // Location
   map,
   setMap,

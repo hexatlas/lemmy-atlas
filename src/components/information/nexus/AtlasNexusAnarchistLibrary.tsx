@@ -39,14 +39,6 @@ import { useStateStorage } from "../../../hooks/useAtlasUtils";
                                                       */
 
 export function AtlasNexusReadingList({
-  // Util
-  isMobile,
-  resetAtlas,
-  sideBarRef,
-
-  nexusSize,
-  setNexusSize,
-
   // Location
   map,
   setMap,

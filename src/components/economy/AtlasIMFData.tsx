@@ -39,14 +39,6 @@ import { useStateStorage } from "../../hooks/useAtlasUtils";
 */
 
 const AtlasIMFData = ({
-  // Util
-  isMobile,
-  resetAtlas,
-  sideBarRef,
-
-  nexusSize,
-  setNexusSize,
-
   // Location
   map,
   setMap,

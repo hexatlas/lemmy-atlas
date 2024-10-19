@@ -6,14 +6,6 @@ import { useStateStorage } from "../../../../hooks/useAtlasUtils";
 import * as Collapsible from "@radix-ui/react-collapsible";
 
 function AtlasMastodon({
-  // Util
-  isMobile,
-  resetAtlas,
-  sideBarRef,
-
-  nexusSize,
-  setNexusSize,
-
   // Location
   map,
   setMap,

@@ -2,14 +2,6 @@
 import * as Collapsible from "@radix-ui/react-collapsible";
 
 export function AtlasMisc({
-  // Util
-  isMobile,
-  resetAtlas,
-  sideBarRef,
-
-  nexusSize,
-  setNexusSize,
-
   // Location
   map,
   setMap,

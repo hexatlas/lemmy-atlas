@@ -38,9 +38,6 @@ export default function AtlasLemmy({
   resetAtlas,
   sideBarRef,
 
-  nexusSize,
-  setNexusSize,
-
   // Location
   map,
   setMap,

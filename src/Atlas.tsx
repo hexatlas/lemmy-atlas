@@ -79,6 +79,10 @@ export default function Atlas() {
     []
   );
 
+  /*
+      useStates
+  */
+
   // LOCATION
   const [map, setMap] = useState(null);
 
@@ -107,53 +111,8 @@ export default function Atlas() {
   const [activeTab, setActiveTab] = useStateStorage("activeMainTab", "Information");
 
   /*
-      RESET ATLAS
-  */
-  function resetAtlas() {
-    setActiveLocationSelection([]);
-
-    // LOCATION
-    setAdministrativeRegionClickHistoryArray([]);
-    setActiveAdministrativeRegion({
-      country: "country",
-      name: "name",
-      "intermediate-region": "intermediate-region",
-      "sub-region": "sub-region",
-      region: "region",
-    });
-    setActiveLocationType(regionTypes[1]); // Default: Country Sort
-    setLocationQuery("");
-    setIsOpenAtlasMapInterface(!isMobile);
-
-    if (sideBarRef.current)
-      sideBarRef.current.scrollTo({
-        top: document.getElementById("atlas-tabs").offsetTop,
-        behavior: "smooth",
-      });
-  }
-
-  /*
       useEffects
   */
-
-  const handleResize = () => {
-    // Refreshes Map after initial region selection
-    setTimeout(() => map.invalidateSize(), 300);
-    setIsMobile(window.innerWidth < 768); // You can adjust the threshold as needed
-  };
-  useEffect(() => {
-    // Initial check
-    handleResize();
-
-    // Attach event listener for window resize
-    window.addEventListener("resize", handleResize);
-
-    // Clean up the event listener on component unmount
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  });
-
   useEffect(() => {
     if (isMobile && activeAdministrativeRegion.country === "country") {
       window.scrollTo({
@@ -195,6 +154,46 @@ export default function Atlas() {
       console.log(activeLocationSelection);
     }
   }, [activeAdministrativeRegion, activeLocationType, nominatim]);
+
+  useEffect(() => {
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  });
+
+  /*
+      FUNCTIONS
+  */
+
+  // Handle Resize Legend
+  const handleResize = () => {
+    setTimeout(() => map.invalidateSize(), 300);
+    setIsMobile(window.innerWidth < 768);
+  };
+
+  // Reset Atlas
+  function resetAtlas() {
+    setActiveLocationSelection([]);
+    setAdministrativeRegionClickHistoryArray([]);
+    setActiveAdministrativeRegion({
+      country: "country",
+      name: "name",
+      "intermediate-region": "intermediate-region",
+      "sub-region": "sub-region",
+      region: "region",
+    });
+    setActiveLocationType(regionTypes[1]); // Default: Country Sort
+    setLocationQuery("");
+    setIsOpenAtlasMapInterface(!isMobile);
+
+    if (sideBarRef.current)
+      sideBarRef.current.scrollTo({
+        top: document.getElementById("atlas-tabs").offsetTop,
+        behavior: "smooth",
+      });
+  }
 
   // Handle Browser Back Button
   //  Start

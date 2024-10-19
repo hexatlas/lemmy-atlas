@@ -6,14 +6,6 @@ import { useCallback } from "react";
 import AtlasOSMInfoCard from "../../shared/AtlasOSMInfoCard";
 
 export function EnergyInfrastructure({
-  // Util
-  isMobile,
-  resetAtlas,
-  sideBarRef,
-
-  nexusSize,
-  setNexusSize,
-
   // Location
   map,
   setMap,
