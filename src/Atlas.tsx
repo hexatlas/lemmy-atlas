@@ -10,11 +10,7 @@ import AtlasMap from "./AtlasMap";
 import AtlasInterface from "./AtlasMapInterface";
 
 import {
-  lemmyInstances,
-  listingTypes,
   regionTypes,
-  searchTypes,
-  sortTypes,
   economicOverpassQueries,
   informationalOverpassQueries,
   diplomaticOverpassQueries,
@@ -119,25 +115,6 @@ export default function Atlas() {
     dataset: "WEO",
   });
 
-  // COMMUNITY
-  const [activeLemmyInstance, setActiveLemmyInstance] = useStateStorage(
-    "activeLemmyInstance",
-    lemmyInstances[0] // Default: hexbear.net
-  );
-  const [activeCommunity, setActiveCommunity] = useStateStorage("activeCommunity", null); // c/News
-  const [activeSearchType, setActiveSearchType] = useStateStorage(
-    "activeSearchType",
-    searchTypes[0]
-  ); // Default: Comments
-  const [activeListingType, setActiveListingType] = useStateStorage(
-    "activeListingType",
-    listingTypes[1]
-  ); // Default: Local
-  const [activeSortType, setActiveSortType] = useStateStorage(
-    "activeSortType",
-    sortTypes[1]
-  ); // Default: New Sort
-
   const [activeTab, setActiveTab] = useStateStorage("activeMainTab", "Information");
 
   /*
@@ -169,12 +146,6 @@ export default function Atlas() {
       unit: "Purchasing power parity; billions of international dollars",
       dataset: "WEO",
     });
-
-    // COMMUNITY
-    setActiveCommunity(null);
-    setActiveSearchType(searchTypes[0]); // Default: Comments
-    setActiveListingType(listingTypes[1]); // Default: Local
-    setActiveSortType(sortTypes[1]); // Default: New Sort
 
     if (sideBarRef.current)
       sideBarRef.current.scrollTo({
@@ -321,25 +292,6 @@ export default function Atlas() {
     // Data
     activeIndicator,
     setActiveIndicator,
-
-    // Community
-    lemmyInstances,
-    activeLemmyInstance,
-    setActiveLemmyInstance,
-
-    activeCommunity,
-    setActiveCommunity,
-
-    activeSearchType,
-    setActiveSearchType,
-
-    listingTypes,
-    activeListingType,
-    setActiveListingType,
-
-    sortTypes,
-    activeSortType,
-    setActiveSortType,
 
     // Overpass Querries
     economicOverpassQueries,

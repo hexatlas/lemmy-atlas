@@ -79,25 +79,6 @@ const AtlasIMFData = ({
   // Data
   activeIndicator,
   setActiveIndicator,
-
-  // Community
-  lemmyInstances,
-  activeLemmyInstance,
-  setActiveLemmyInstance,
-
-  activeCommunity,
-  setActiveCommunity,
-
-  activeSearchType,
-  setActiveSearchType,
-
-  listingTypes,
-  activeListingType,
-  setActiveListingType,
-
-  sortTypes,
-  activeSortType,
-  setActiveSortType,
 }) => {
   const [open, setOpen] = useState(false);
 

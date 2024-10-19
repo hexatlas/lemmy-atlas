@@ -62,25 +62,6 @@ export default function AtlasInterface({
   // Data
   activeIndicator,
   setActiveIndicator,
-
-  // Community
-  lemmyInstances,
-  activeLemmyInstance,
-  setActiveLemmyInstance,
-
-  activeCommunity,
-  setActiveCommunity,
-
-  activeSearchType,
-  setActiveSearchType,
-
-  listingTypes,
-  activeListingType,
-  setActiveListingType,
-
-  sortTypes,
-  activeSortType,
-  setActiveSortType,
 }) {
   /*
       useStates 
