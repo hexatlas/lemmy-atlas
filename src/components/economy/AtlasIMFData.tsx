@@ -39,6 +39,8 @@ import { useStateStorage } from "../../hooks/useAtlasUtils";
 */
 
 const AtlasIMFData = ({
+  resetAtlas,
+
   // Location
   map,
   setMap,

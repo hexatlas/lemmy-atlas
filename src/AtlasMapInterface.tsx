@@ -27,8 +27,8 @@ export default function AtlasInterface({
   resetAtlas,
   sideBarRef,
 
-  nexusSize,
-  setNexusSize,
+  legendSize,
+  setLegendSize,
 
   // Location
   map,
@@ -67,11 +67,11 @@ export default function AtlasInterface({
       Handlers
    */
   const handleNexusResize = (mouseDownEvent) => {
-    const startSize = nexusSize;
+    const startSize = legendSize;
     const startPosition = mouseDownEvent.pageX;
 
     function onMouseMove(mouseMoveEvent) {
-      setNexusSize(document.body.clientWidth - mouseMoveEvent.clientX);
+      setLegendSize(document.body.clientWidth - mouseMoveEvent.clientX);
     }
     function onMouseUp() {
       document.body.removeEventListener("mousemove", onMouseMove);

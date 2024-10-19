@@ -35,8 +35,8 @@ export default function AtlasMap({
   resetAtlas,
   sideBarRef,
 
-  nexusSize,
-  setNexusSize,
+  legendSize,
+  setLegendSize,
 
   // Location
   map,

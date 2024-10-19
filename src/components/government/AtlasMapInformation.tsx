@@ -14,12 +14,10 @@ function AtlasMapInformation({ interfaceProps }) {
       <Tabs.Root className="nexus-card" value={activeTab} onValueChange={setActiveTab}>
         <Tabs.List className="tabs-list tabs-nexus" aria-label="Pick Fediverse">
           <Tabs.Trigger className="tabs-trigger" value="MapInformation">
-            🎩
+            🚨
           </Tabs.Trigger>
         </Tabs.List>
-        <Tabs.Content value="MapInformation" className="tabs-content">
-          <AtlasClassStructure interfaceProps={interfaceProps} />
-        </Tabs.Content>
+        <Tabs.Content value="MapInformation" className="tabs-content"></Tabs.Content>
       </Tabs.Root>
     </>
   );

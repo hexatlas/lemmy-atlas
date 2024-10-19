@@ -62,7 +62,7 @@ export default function Atlas() {
   */
   // DEVICE
   const [isMobile, setIsMobile] = useState(null);
-  const [nexusSize, setNexusSize] = useState(1.6180339887498948482 ^ 512);
+  const [legendSize, setLegendSize] = useState(1.6180339887498948482 ^ 512);
 
   // UI STATES
 
@@ -234,8 +234,8 @@ export default function Atlas() {
     resetAtlas,
     sideBarRef,
 
-    nexusSize,
-    setNexusSize,
+    legendSize,
+    setLegendSize,
 
     // Location
     map,
@@ -287,7 +287,7 @@ export default function Atlas() {
           activeAdministrativeRegion.country !== "Country" && "atlas--active"
         }`}
         style={{
-          gridTemplateColumns: `1.6180339887498948482fr ${nexusSize}px`,
+          gridTemplateColumns: `1.6180339887498948482fr ${legendSize}px`,
         }}
       >
         {isMobile && <AtlasInterface {...interfaceProps} />}

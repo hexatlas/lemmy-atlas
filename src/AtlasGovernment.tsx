@@ -22,15 +22,25 @@ function AtlasGovernment({ interfaceProps }) {
         <Tabs.Trigger className="tabs-trigger emoji-label" value="Misc">
           🔗
         </Tabs.Trigger>
-        <Tabs.Trigger className="tabs-trigger emoji-label" value="MapInformation">
+        <Tabs.Trigger
+          className="tabs-trigger emoji-label"
+          value="MapInformation"
+          disabled
+        >
           🌐
         </Tabs.Trigger>
+        <Tabs.Trigger className="tabs-trigger emoji-label" value="ClassStructure">
+          🎩
+        </Tabs.Trigger>
       </Tabs.List>
+      <Tabs.Content className="tabs-content" value="Misc">
+        <AtlasMisc {...interfaceProps}></AtlasMisc>
+      </Tabs.Content>
       <Tabs.Content className="tabs-content" value="MapInformation">
         <AtlasMapInformation interfaceProps={interfaceProps} />
       </Tabs.Content>
-      <Tabs.Content className="tabs-content" value="Misc">
-        <AtlasMisc {...interfaceProps}></AtlasMisc>
+      <Tabs.Content className="tabs-content" value="ClassStructure">
+        <AtlasClassStructure interfaceProps={interfaceProps} />
       </Tabs.Content>
     </Tabs.Root>
   );

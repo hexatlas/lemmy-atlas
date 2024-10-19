@@ -16,6 +16,10 @@ export function overPassQuery(activeAdministrativeRegion) {
  `;
 }
 
+/*
+  POWER PLANTS
+*/
+
 const power = L.divIcon({
   html: "⚡",
   className: "emoji-icon emoji-category",
