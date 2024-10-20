@@ -65,11 +65,7 @@ function AtlasInformation({ interfaceProps }) {
         <Tabs.Trigger className="tabs-trigger emoji-label" value="Misc">
           🔗
         </Tabs.Trigger>
-        <Tabs.Trigger
-          className="tabs-trigger emoji-label"
-          value="MapInformation"
-          disabled
-        >
+        <Tabs.Trigger className="tabs-trigger emoji-label" value="MapInformation">
           🌐
         </Tabs.Trigger>
         <Tabs.Trigger className="tabs-trigger emoji-label" value="NexusTab">

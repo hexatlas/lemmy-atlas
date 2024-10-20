@@ -1,10 +1,13 @@
+// https://www.radix-ui.com/primitives/docs/components/collapsible
+import * as Collapsible from "@radix-ui/react-collapsible";
 import { useCallback, useEffect } from "react";
 import AtlasOSMInfoCard from "../../shared/AtlasOSMInfoCard";
-import useEconomyTransport from "../../../hooks/overpass/useEconomyTransport";
+import useDiplomacyEmbassies from "../../../hooks/overpass/useDiplomacyEmbassies"; // Import the new hook
 import Overpass from "../../map/OverpassLayer";
-import { iconMap } from "../../map/economy/Transport";
 
-function Transport({
+import { iconMap } from "../../map/diplomacy/Diplomacy"; // Assuming you will create an iconMap for embassies
+
+export function Diplomacy({
   // Location
   map,
   setMap,
@@ -33,25 +36,22 @@ function Transport({
 
   locationQuery,
   setLocationQuery,
-
-  // Overpass
 }) {
-  const { data, isLoading } = useEconomyTransport(activeAdministrativeRegion);
+  const { data, isLoading } = useDiplomacyEmbassies(activeAdministrativeRegion);
 
   useEffect(() => {
-    let layerObjects;
+    let diplomaticLayerObjects;
     if (map && data) {
-      layerObjects = Overpass(map, data, iconMap, "railway");
+      diplomaticLayerObjects = Overpass(map, data, iconMap, "diplomatic"); // Adjust the Overpass function accordingly
     }
     return () => {
-      if (layerObjects) {
-        map.removeLayer(layerObjects.overpassLayer);
+      if (diplomaticLayerObjects) {
+        map.removeLayer(diplomaticLayerObjects.overpassLayer);
       }
     };
   }, [map, data]);
 
   // Update Map to Selection
-
   const showOnMap = useCallback(
     (coords) => {
       const mapBounds = [coords?.maxlat, coords?.minlon];
@@ -65,26 +65,24 @@ function Transport({
       {isLoading && <p className="search-loading-icon">🔍</p>}
       {data && (
         <small>
-          {data?.elements.length} Railway Stations found in{" "}
+          {data?.elements.length} Diplomatic Locations found in{" "}
           {activeAdministrativeRegion["country"]}
         </small>
       )}
       {data &&
-        data?.elements.map((element, index) => {
-          return (
-            <div key={index}>
-              <AtlasOSMInfoCard element={element} />
-              {element?.bounds && (
-                <button type="button" onClick={() => showOnMap(element?.bounds)}>
-                  📍
-                </button>
-              )}
-              <br />
-            </div>
-          );
-        })}
+        data?.elements.map((element, index) => (
+          <div key={index}>
+            <AtlasOSMInfoCard element={element} />
+            {element?.bounds && (
+              <button type="button" onClick={() => showOnMap(element?.bounds)}>
+                📍
+              </button>
+            )}
+            <br />
+          </div>
+        ))}
     </div>
   );
 }
 
-export default Transport;
+export default Diplomacy;

@@ -1,122 +1,99 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import L from "leaflet";
-import { Marker, Popup, Polyline } from "react-leaflet";
-import useOverpassAPI from "../../hooks/useOverpassAPI";
-import { useQuery } from "@tanstack/react-query";
-import { iconMap, overPassQuery } from "./economy/EnergyInfrastructure";
 
-export default function Overpass({
-  activeAdministrativeRegion,
-  activeLocationType,
-  economicOverpassQueries,
-  informationalOverpassQueries,
-  diplomaticOverpassQueries,
-  militaryOverpassQueries,
-}) {
-  const { power } = iconMap;
+export default function Overpass(map, data, iconMap, filterKey) {
+  const { defaultIcon } = iconMap;
 
-  const { data } = useQuery({
-    queryKey: [`OverpassData-${activeAdministrativeRegion["alpha-2"]}`],
-    queryFn: () => useOverpassAPI(overPassQuery(activeAdministrativeRegion)),
-  });
+  // Create a layer group to hold the markers and polylines
+  const overpassLayer = L.layerGroup();
+
+  // Add the layer group to the map
+  map.addLayer(overpassLayer);
 
   // Helper function to render nodes (e.g. points of interest like restaurants)
-  const renderNode = (node: any) => {
+  const renderNode = (node) => {
     const { id, lat, lon, tags } = node;
     const name = tags?.name || "Unnamed";
-    const icon = power || iconMap[tags["plant:source"]];
-    return (
-      <Marker key={id} position={[lat, lon]} icon={icon}>
-        <Popup>
-          <p>{tags["plant:output:electricity"]}</p>
-          <h4>{name}</h4>
-          <p>{tags["name:en"]}</p>
-          <pre>{JSON.stringify(tags, null, 2)}</pre>
-        </Popup>
-      </Marker>
-    );
+    const icon = defaultIcon || iconMap[tags[filterKey]];
+    const marker = L.marker([lat, lon], { icon });
+    marker.addTo(overpassLayer);
+    const popup = L.popup().setLatLng([lat, lon]).setContent(`
+      <p>${tags["plant:output:electricity"]}</p>
+      <h4>${name}</h4>
+      <p>${tags["name:en"]}</p>
+      <pre>${JSON.stringify(tags, null, 2)}</pre>
+    `);
+    marker.bindPopup(popup);
   };
 
   // Helper function to render ways (e.g. roads, areas defined by nodes)
-  const renderWay = (way: any) => {
+  const renderWay = (way) => {
     const { id, geometry, tags } = way;
-
-    const coordinates = geometry.map((point: any) => [point.lat, point.lon]);
-
+    const coordinates = geometry.map((point) => [point.lat, point.lon]);
     const name = tags?.name || "Unnamed Way";
-    const icon = iconMap[tags["plant:source"]] || power;
-    return (
-      <Polyline
-        key={id}
-        positions={coordinates}
-        color="hsl(var(--atlas-color-tertiary) / var(--atlas-opacity-3))"
-        weight={8}
-      >
-        <Marker key={id} position={coordinates[0]} icon={icon}>
-          <Popup>
-            <p>{tags["plant:output:electricity"]}</p>
-            <h4>{name}</h4>
-            <p>{tags["name:en"]}</p>
-            <pre>{JSON.stringify(tags, null, 2)}</pre>
-          </Popup>
-        </Marker>
-      </Polyline>
-    );
+    const icon = iconMap[tags[filterKey]] || defaultIcon;
+    const polyline = L.polyline(coordinates, {
+      color: "hsl(var(--atlas-color-tertiary) / var(--atlas-opacity-3))",
+      weight: 8,
+    });
+    polyline.addTo(overpassLayer);
+    const marker = L.marker(coordinates[0], { icon });
+    marker.addTo(overpassLayer);
+    const popup = L.popup().setLatLng(coordinates[0]).setContent(`
+      <p>${tags["plant:output:electricity"]}</p>
+      <h4>${name}</h4>
+      <p>${tags["name:en"]}</p>
+      <pre>${JSON.stringify(tags, null, 2)}</pre>
+    `);
+    marker.bindPopup(popup);
   };
-  // Helper function to render relations (e.g. complex structures involving multiple elements)
-  const renderRelation = (relation: any) => {
-    const { id, members, tags } = relation;
 
-    const wayMembers = members.filter((member: any) => member.type === "way");
+  // Helper function to render relations (e.g. complex structures involving multiple elements)
+  const renderRelation = (relation) => {
+    const { id, members, tags } = relation;
+    const wayMembers = members.filter((member) => member.type === "way");
 
     const coordinates = wayMembers
-      .map((member: any) => {
+      .map((member) => {
         if (member.geometry) {
-          return member.geometry.map((point: any) => [point.lat, point.lon]);
+          return member.geometry.map((point) => [point.lat, point.lon]);
         }
         return [];
       })
       .filter((coords) => coords.length > 0); // Filter out empty coordinate arrays
 
-    if (coordinates.length === 0) return null; // Don't render if no valid coordinates
+    if (coordinates.length === 0) return; // Don't render if no valid coordinates
 
     const name = tags?.name || "Unnamed Relation";
 
-    return (
-      <>
-        {coordinates.map((coords: any, idx: number) => (
-          <Polyline
-            key={idx}
-            positions={coords}
-            color="hsl(var(--atlas-color-tertiary) / var(--atlas-opacity-3))"
-            weight={8}
-          >
-            <Popup>
-              <h4>{name}</h4>
-              <p>{tags["name:en"]}</p>
-              <pre>{JSON.stringify(tags, null, 2)}</pre>
-            </Popup>
-          </Polyline>
-        ))}
-      </>
-    );
+    coordinates.forEach((coords, idx) => {
+      const polyline = L.polyline(coords, {
+        color: "hsl(var(--atlas-color-tertiary) / var(--atlas-opacity-3))",
+        weight: 8,
+      });
+      polyline.addTo(overpassLayer);
+      const popup = L.popup().setLatLng(coords[0]).setContent(`
+        <h4>${name}</h4>
+        <p>${tags["name:en"]}</p>
+        <pre>${JSON.stringify(tags, null, 2)}</pre>
+      `);
+      polyline.bindPopup(popup);
+    });
   };
 
-  return (
-    <>
-      {data &&
-        data.elements.map((element: any) => {
-          if (element.type === "way") {
-            return renderWay(element);
-          }
-          if (element.type === "relation") {
-            return renderRelation(element);
-          }
-          if (element.type === "node") {
-            return renderNode(element);
-          }
-          return null;
-        })}
-    </>
-  );
+  data.elements.forEach((element) => {
+    if (element.type === "way") {
+      renderWay(element);
+    }
+    if (element.type === "relation") {
+      renderRelation(element);
+    }
+    if (element.type === "node") {
+      renderNode(element);
+    }
+  });
+
+  return {
+    overpassLayer,
+  };
 }

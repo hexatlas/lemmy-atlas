@@ -2,21 +2,24 @@
 import * as Tabs from "@radix-ui/react-tabs";
 
 import { useStateStorage } from "../../hooks/useAtlasUtils";
+import Media from "./map/Media";
 
 function AtlasMapInformation({ interfaceProps }) {
   const [activeTab, setActiveTab] = useStateStorage(
     "activeInformationMapInformationTab",
-    "MapInformation"
+    "Media"
   );
   return (
     <>
       <Tabs.Root className="nexus-card" value={activeTab} onValueChange={setActiveTab}>
         <Tabs.List className="tabs-list tabs-nexus" aria-label="Pick Fediverse">
-          <Tabs.Trigger className="tabs-trigger" value="MapInformation">
+          <Tabs.Trigger className="tabs-trigger" value="Media">
             📰
           </Tabs.Trigger>
         </Tabs.List>
-        <Tabs.Content value="MapInformation" className="tabs-content"></Tabs.Content>
+        <Tabs.Content value="Media" className="tabs-content">
+          <Media {...interfaceProps}></Media>
+        </Tabs.Content>
       </Tabs.Root>
     </>
   );

@@ -1,11 +1,13 @@
 // https://www.radix-ui.com/primitives/docs/components/collapsible
 import * as Collapsible from "@radix-ui/react-collapsible";
-import { useQuery } from "@tanstack/react-query";
-import useOverpassAPI from "../../../hooks/useOverpassAPI";
-import { useCallback } from "react";
+import { useCallback, useEffect } from "react";
 import AtlasOSMInfoCard from "../../shared/AtlasOSMInfoCard";
+import useEconomyEnergy from "../../../hooks/overpass/useEconomyEnergy";
+import Overpass from "../../map/OverpassLayer";
+import L from "leaflet";
+import { iconMap } from "../../map/economy/Energy";
 
-export function EnergyInfrastructure({
+export function Energy({
   // Location
   map,
   setMap,
@@ -35,23 +37,19 @@ export function EnergyInfrastructure({
   locationQuery,
   setLocationQuery,
 }) {
-  const overpassQuery = `
-  [out:json][timeout:25];
-  
-  // Fetch area for the selected region
-  area["ISO3166-1"="${activeAdministrativeRegion["alpha-2"]}"]->.name;
-  (
-    // Fetch features based on the active location type (e.g., aerodromes)
-    nwr["power"="plant"](area.name);
-  );
-  
-  out geom;
-  `;
+  const { data, isLoading } = useEconomyEnergy(activeAdministrativeRegion);
 
-  const { data, isLoading } = useQuery({
-    queryKey: [`OverpassData-${activeAdministrativeRegion["alpha-2"]}`],
-    queryFn: () => useOverpassAPI(overpassQuery),
-  });
+  useEffect(() => {
+    let layerObjects;
+    if (map && data) {
+      layerObjects = Overpass(map, data, iconMap, "plant:source");
+    }
+    return () => {
+      if (layerObjects) {
+        map.removeLayer(layerObjects.overpassLayer);
+      }
+    };
+  }, [map, data]);
 
   // Update Map to Selection
 
@@ -90,4 +88,4 @@ export function EnergyInfrastructure({
   );
 }
 
-export default EnergyInfrastructure;
+export default Energy;

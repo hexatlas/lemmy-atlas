@@ -1,8 +1,8 @@
+// Transform IMF Data
 export function useIMFDataTransform(apiResponse) {
   const transformedData = Object.keys(apiResponse)
     .map((indicator) => {
-      const { label, description, source, unit, dataset } =
-        apiResponse[indicator];
+      const { label, description, source, unit, dataset } = apiResponse[indicator];
 
       return {
         name: indicator,
@@ -19,11 +19,11 @@ export function useIMFDataTransform(apiResponse) {
   return transformedData;
 }
 
+// Lemmy
+
 export function userPronouns(usernameString) {
   if (usernameString)
-    return usernameString.match(
-      /((?<=\[)[a-zA-Z\/\s]+)|([a-zA-Z\/\s]+(?=\]))/g
-    );
+    return usernameString.match(/((?<=\[)[a-zA-Z\/\s]+)|([a-zA-Z\/\s]+(?=\]))/g);
 }
 
 export interface TimeAgoProps {
@@ -57,9 +57,7 @@ export function TimeAgo({ dateString }: TimeAgoProps) {
     );
   } else if (days > 0) {
     return (
-      <span title={`${pastDate}`}>
-        {days === 1 ? "a day ago" : `${days} days ago`}
-      </span>
+      <span title={`${pastDate}`}>{days === 1 ? "a day ago" : `${days} days ago`}</span>
     );
   } else if (hours > 0) {
     return (

@@ -63,6 +63,12 @@ Tertiary [Yellow]
 
 Unicode
 
+## Add Overpass Layer
+
+- Create custom hook with Query hooks/overpass/useInstrumentQuery.tsx
+- Add in components/[instrument]/map
+- Add IconMap in components/map/[instrument]
+
 ## Comments
 
 https://patorjk.com/software/taag/#p=display&f=Big%20Money-ne

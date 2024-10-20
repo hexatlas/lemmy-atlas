@@ -2,31 +2,22 @@ import { useEffect, useMemo, useState, useRef } from "react";
 
 // https://www.radix-ui.com/primitives/docs/components/tabs
 import * as Tabs from "@radix-ui/react-tabs";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 // Imoport SCSS
 
 // Import Components
 import AtlasMap from "./AtlasMap";
 import AtlasInterface from "./AtlasMapInterface";
-
-import {
-  regionTypes,
-  economicOverpassQueries,
-  informationalOverpassQueries,
-  diplomaticOverpassQueries,
-  militaryOverpassQueries,
-} from "./Atlas_Config";
-
-// Import customHook
-
-import { useStateStorage } from "./hooks/useAtlasUtils";
 import AtlasEconomy from "./AtlasEconomy";
 import AtlasInformation from "./AtlasInformation";
-import AtlasClassStructure from "./components/government/AtlasClassStructure";
 import AtlasDiplomacy from "./AtlasDiplomacy";
 import AtlasMilitary from "./AtlasMilitary";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import AtlasGovernment from "./AtlasGovernment";
+
+// Import customHook
+import { regionTypes } from "./Atlas_Config";
+import { useStateStorage } from "./hooks/useAtlasUtils";
 
 /*
 
@@ -108,7 +99,10 @@ export default function Atlas() {
   ); // Default: Country Sort
   const [locationQuery, setLocationQuery] = useStateStorage("locationQuery", "");
 
-  const [activeTab, setActiveTab] = useStateStorage("activeMainTab", "Information");
+  const [activeMainTab, setActiveMainTab] = useStateStorage(
+    "activeMainTab",
+    "Information"
+  );
 
   /*
       useEffects
@@ -265,12 +259,6 @@ export default function Atlas() {
 
     locationQuery,
     setLocationQuery,
-
-    // Overpass Querries
-    economicOverpassQueries,
-    informationalOverpassQueries,
-    diplomaticOverpassQueries,
-    militaryOverpassQueries,
   };
 
   const queryClient = new QueryClient();
@@ -300,8 +288,8 @@ export default function Atlas() {
           id="atlas-tabs"
           className="atlas-tabs tabs-root"
           ref={sideBarRef}
-          value={activeTab}
-          onValueChange={setActiveTab}
+          value={activeMainTab}
+          onValueChange={setActiveMainTab}
         >
           <Tabs.List className="tabs-list" aria-label="Manage your account">
             <Tabs.Trigger className="tabs-trigger emoji-label" value="Economy">

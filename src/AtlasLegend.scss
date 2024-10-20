@@ -55,9 +55,9 @@
   .search-licence {
     color: hsl(var(--atlas-color-dark) / var(--atlas-opacity-2));
   }
-  .search-loading-icon {
-    animation: searchAnimation var(--atlas-timing-fast) alternate-reverse;
-  }
+}
+.search-loading-icon {
+  animation: searchAnimation var(--atlas-timing-fast) alternate-reverse;
 }
 
 @keyframes searchAnimation {

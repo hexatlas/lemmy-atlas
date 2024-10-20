@@ -1,28 +1,17 @@
 import L from "leaflet";
 
-export function overPassQuery(activeAdministrativeRegion) {
-  // ⚡
-  return `
- [out:json][timeout:25];
- 
- // Fetch area for the selected region
- area["ISO3166-1"="${activeAdministrativeRegion["alpha-2"]}"]->.name;
- (
-   // Fetch features based on the active location type (e.g., aerodromes)
-   nwr["power"="plant"](area.name);
- );
- 
- out geom;
- `;
-}
-
 /*
   POWER PLANTS
 */
 
-const power = L.divIcon({
+const defaultIcon = L.divIcon({
   html: "⚡",
   className: "emoji-icon emoji-category",
+});
+
+const power = L.divIcon({
+  html: "⚡",
+  className: "emoji-icon",
 });
 
 // Wind Power Plant
@@ -98,6 +87,7 @@ const tidal = L.divIcon({
 });
 
 export const iconMap = {
+  defaultIcon,
   power,
   wind,
   solar,

@@ -1,10 +1,11 @@
+import * as Collapsible from "@radix-ui/react-collapsible";
 import { useCallback, useEffect } from "react";
 import AtlasOSMInfoCard from "../../shared/AtlasOSMInfoCard";
-import useEconomyTransport from "../../../hooks/overpass/useEconomyTransport";
+import useInformationMedia from "../../../hooks/overpass/useInformationMedia"; // Updated hook import
 import Overpass from "../../map/OverpassLayer";
-import { iconMap } from "../../map/economy/Transport";
+import { iconMap } from "../../map/information/Media"; // Ensure you have an iconMap for Information/Media
 
-function Transport({
+export function Media({
   // Location
   map,
   setMap,
@@ -33,15 +34,13 @@ function Transport({
 
   locationQuery,
   setLocationQuery,
-
-  // Overpass
 }) {
-  const { data, isLoading } = useEconomyTransport(activeAdministrativeRegion);
+  const { data, isLoading } = useInformationMedia(activeAdministrativeRegion); // Updated hook
 
   useEffect(() => {
     let layerObjects;
     if (map && data) {
-      layerObjects = Overpass(map, data, iconMap, "railway");
+      layerObjects = Overpass(map, data, iconMap, "communication"); // Updated to "media"
     }
     return () => {
       if (layerObjects) {
@@ -51,7 +50,6 @@ function Transport({
   }, [map, data]);
 
   // Update Map to Selection
-
   const showOnMap = useCallback(
     (coords) => {
       const mapBounds = [coords?.maxlat, coords?.minlon];
@@ -65,7 +63,7 @@ function Transport({
       {isLoading && <p className="search-loading-icon">🔍</p>}
       {data && (
         <small>
-          {data?.elements.length} Railway Stations found in{" "}
+          {data?.elements.length} Media Features found in{" "}
           {activeAdministrativeRegion["country"]}
         </small>
       )}
@@ -87,4 +85,4 @@ function Transport({
   );
 }
 
-export default Transport;
+export default Media;

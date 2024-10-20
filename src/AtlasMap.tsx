@@ -5,7 +5,6 @@ import {
   GeoJSON,
   LayersControl,
   ScaleControl,
-  useMapEvent,
 } from "react-leaflet";
 import { LatLngExpression, latLng, latLngBounds } from "leaflet";
 import { GeoJsonObject } from "geojson";
@@ -13,9 +12,6 @@ import administrativeRegionsData from "./data/administrative_regions_extended.js
 
 import { baseLayers, overlayLayers } from "./Atlas_Config";
 import Minimap from "./AtlasMapMiniMap";
-import Overpass from "./components/map/OverpassLayer";
-import { useQuery } from "@tanstack/react-query";
-import useOverpassAPI from "./hooks/useOverpassAPI";
 
 /*
  /$$      /$$                    
@@ -99,6 +95,7 @@ export default function AtlasMap({
   const onClickAdministrativeRegionCallback = (e, isDoubleCLick = false) => {
     e.originalEvent.view.L.DomEvent.stopPropagation(e);
     const clickedAdministrativeRegion = e.target.feature.properties;
+    if (activeAdministrativeRegion == clickedAdministrativeRegion) return;
     if (isDoubleCLick) setActiveLocationType("name");
     setActiveAdministrativeRegion(clickedAdministrativeRegion);
   };
@@ -108,6 +105,7 @@ export default function AtlasMap({
   ]);
 
   const onEachAdministrativeRegion = (administrativeRegion: any, layer: any) => {
+    let tempStyle;
     layer
       .bindPopup(
         `
@@ -128,11 +126,14 @@ export default function AtlasMap({
     layer.on({
       mouseover: (e) => {
         // Highlight AdministrativeRegions on mouse hover
-        // if (!isLocationSelectMode) e.target?.setStyle(style_activeLocationHighlight);
+        console.log(e.target);
+
+        tempStyle = e.target?.options;
+        if (!isLocationSelectMode) e.target?.setStyle(style_activeLocationHighlight);
       },
 
       mouseout: (e) => {
-        // if (!isLocationSelectMode) e.target?.setStyle(style_locationDefault);
+        if (!isLocationSelectMode) e.target?.setStyle({ color: tempStyle.color });
       },
       click: (e: {
         target: {
@@ -158,71 +159,60 @@ export default function AtlasMap({
   useEffect(() => {
     let administrativeRegionArray = latLngBounds(null, null);
 
+    // Check if region needs an update
     if (activeAdministrativeRegion.country !== "country" || nominatim?.features[0]) {
-      /* Updates Map View on Location Type or Region Change */
-      switch (activeLocationType) {
-        case "name":
-          map?.eachLayer((administrativeRegion) => {
-            if (
-              administrativeRegion.feature?.properties.name !==
-              nominatim?.features[0].properties.name
-            )
-              if (
-                administrativeRegion.feature?.properties.name ===
-                activeAdministrativeRegion.name
-              )
-                administrativeRegionArray.extend(administrativeRegion.getBounds());
-          });
-          break;
-        default:
-          map?.eachLayer((administrativeRegion) => {
-            if (
-              administrativeRegion.feature?.properties.country ===
-              activeAdministrativeRegion.country
-            )
-              administrativeRegionArray.extend(administrativeRegion.getBounds());
-          });
-          break;
-      }
+      const isNameMatch = (region, name) => region.feature?.properties.name === name;
+      const isCountryMatch = (region, country) =>
+        region.feature?.properties.country === country;
+      const isTypeMatch = (region, type, value) =>
+        region.feature?.properties[type] === value;
 
-      /* Highlightcs Location on Map by Setting Styles */
-      map?.eachLayer((administrativeRegion) => {
-        // Highlight Locationselection
-        if (typeof administrativeRegion?.setStyle === "function" && !nominatim)
-          administrativeRegion?.setStyle(style_locationMuted);
-
-        // activeLocationType Highlight
-        if (
-          administrativeRegion.feature?.properties[activeLocationType] ===
-          activeAdministrativeRegion[activeLocationType]
-        )
-          administrativeRegion?.setStyle(style_activeLocationHighlight);
-
-        // activeAdministrativeRegion.name Highlight
-        if (
-          administrativeRegion.feature?.properties.country ===
-          activeAdministrativeRegion.country
-        ) {
-          administrativeRegion?.setStyle(style_activeLocationHighlight);
+      // Updates Map View on Location Type or Region Change
+      map?.eachLayer((region) => {
+        if (activeLocationType === "name") {
           if (
-            administrativeRegion.feature?.properties.name ===
-              activeAdministrativeRegion.name &&
-            !nominatim
+            !isNameMatch(region, nominatim?.features[0]?.properties.name) &&
+            isNameMatch(region, activeAdministrativeRegion.name)
           ) {
-            administrativeRegion?.setStyle(style_locationNameHighlight);
+            administrativeRegionArray.extend(region.getBounds());
+          }
+        } else if (isCountryMatch(region, activeAdministrativeRegion.country)) {
+          administrativeRegionArray.extend(region.getBounds());
+        }
+      });
+
+      // Highlight and Get Bounds
+      map?.eachLayer((region) => {
+        if (typeof region?.setStyle === "function" && !nominatim) {
+          region.setStyle(style_locationMuted); // Mute all regions
+        }
+
+        if (
+          isTypeMatch(
+            region,
+            activeLocationType,
+            activeAdministrativeRegion[activeLocationType]
+          )
+        ) {
+          region.setStyle(style_activeLocationHighlight); // Highlight active location
+        }
+
+        if (isCountryMatch(region, activeAdministrativeRegion.country)) {
+          region.setStyle(style_activeLocationHighlight); // Highlight country match
+          if (isNameMatch(region, activeAdministrativeRegion.name) && !nominatim) {
+            region.setStyle(style_locationNameHighlight); // Highlight name match
           }
         }
 
-        // Get Bounds
         if (
-          administrativeRegion.feature?.properties.name !==
-          nominatim?.features[0].properties.name
-        ) {
-          if (
-            administrativeRegion.feature?.properties[activeLocationType] ===
+          !isNameMatch(region, nominatim?.features[0]?.properties.name) &&
+          isTypeMatch(
+            region,
+            activeLocationType,
             activeAdministrativeRegion[activeLocationType]
           )
-            administrativeRegionArray.extend(administrativeRegion.getBounds());
+        ) {
+          administrativeRegionArray.extend(region.getBounds()); // Extend bounds for matched regions
         }
       });
 
@@ -234,27 +224,6 @@ export default function AtlasMap({
       }
     }
   }, [activeAdministrativeRegion, activeLocationType]);
-
-  const overpassQuery = `
-  [out:json][timeout:25];
-  
-  // Fetch area for the selected region
-  area["ISO3166-1"="${activeAdministrativeRegion["alpha-2"]}"]->.name;
-  (
-    // Fetch features based on the active location type (e.g., aerodromes)
-    nwr["power"="plant"](area.name);
-  );
-  
-  out geom;
-  `;
-
-  const { data } = useQuery({
-    queryKey: [`Energy-${activeAdministrativeRegion["alpha-2"]}`],
-    queryFn: () => useOverpassAPI(overpassQuery),
-    staleTime: Infinity,
-    refetchInterval: false,
-    refetchOnMount: false,
-  });
 
   return (
     <MapContainer
@@ -269,7 +238,6 @@ export default function AtlasMap({
       ref={setMap}
       worldCopyJump
     >
-      <Overpass data={data} />
       <ScaleControl position="bottomleft" />
       <LayersControl position="bottomright">
         {baseLayers &&

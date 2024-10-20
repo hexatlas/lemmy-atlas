@@ -10,6 +10,7 @@ async function useOverpassAPI(query, url?) {
       throw new Error(`Response status: ${response.status}`);
     }
     const json = await response.json();
+    console.log(json, "useOverpassAPI");
 
     return json;
   } catch (error) {
