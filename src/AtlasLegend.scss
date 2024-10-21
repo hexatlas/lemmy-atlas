@@ -536,19 +536,19 @@
 
 #atlas-tabs {
   @include atlas-shadow(var(--atlas-shadow-1));
-  height: 100%;
-  height: 100dvh;
   padding-top: var(--atlas-size-12);
   z-index: 9999;
   overflow: hidden;
+  height: 100%;
+  max-height: 100vh;
+  max-height: 100dvh;
   & > * {
-    margin: 0 var(--atlas-size-16);
+    // margin: 0 var(--atlas-size-16);
   }
   .tabs-content {
     @include atlas-shadow(var(--atlas-shadow-1));
     border-radius: var(--atlas-border-radius-1);
     border: 1px solid hsl(var(--atlas-color-light) / var(--atlas-opacity-2));
-
     padding: 0;
     .tabs-content {
       border-left: var(--atlas-size-14) solid
@@ -558,12 +558,12 @@
       @include atlas-shadow(var(--atlas-shadow-inset));
       flex-grow: 1;
       overflow: hidden;
-      height: calc(100dvh - var(--atlas-size-04));
       overflow-y: scroll;
       outline: none;
       border-top: none;
       border-right: none;
       padding: var(--atlas-size-12);
+      padding-bottom: var(--atlas-size-07);
       .tabs-content {
         border-left: none;
         border-top: 1px solid hsl(var(--atlas-color-tertiary) / var(--atlas-opacity-2));
@@ -581,8 +581,9 @@
 
 @media only screen and (max-width: 768px) {
   #atlas-tabs {
-    height: -webkit-fill-available;
-    height: unset;
+    & > * {
+      margin: 0;
+    }
     &::before {
       content: "_";
       color: hsl(var(--atlas-color-dark) / var(--atlas-opacity-3));
@@ -603,6 +604,7 @@
   flex-shrink: 0;
   display: flex;
   gap: var(--atlas-size-12);
+  margin: 0 var(--atlas-size-12);
 }
 
 .nexus-card .tabs-list {
