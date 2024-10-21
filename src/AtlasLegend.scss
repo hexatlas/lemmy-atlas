@@ -536,31 +536,39 @@
 
 #atlas-tabs {
   @include atlas-shadow(var(--atlas-shadow-1));
-  background-color: hsl(var(--atlas-color-dark) / var(--atlas-opacity-3));
-  border-radius: var(--atlas-border-radius-1);
   height: 100%;
   height: 100dvh;
-  padding-top: var(--atlas-size-14);
+  padding-top: var(--atlas-size-12);
   z-index: 9999;
   overflow: hidden;
   & > * {
-    margin: 0 var(--atlas-size-12);
-    margin-right: var(--atlas-size-10);
+    margin: 0 var(--atlas-size-16);
   }
   .tabs-content {
     @include atlas-shadow(var(--atlas-shadow-1));
-    background: hsl(var(--atlas-color-light) / var(--atlas-opacity-2));
     border-radius: var(--atlas-border-radius-1);
+    border: 1px solid hsl(var(--atlas-color-light) / var(--atlas-opacity-2));
+
     padding: 0;
     .tabs-content {
+      border-left: var(--atlas-size-14) solid
+        hsl(var(--atlas-color-tertiary) / var(--atlas-opacity-3));
       padding: var(--atlas-size-16);
-      background: hsl(var(--atlas-color-dark) / var(--atlas-opacity-3));
+      background-color: hsl(var(--atlas-color-dark));
       @include atlas-shadow(var(--atlas-shadow-inset));
       flex-grow: 1;
       overflow: hidden;
       height: calc(100dvh - var(--atlas-size-04));
       overflow-y: scroll;
       outline: none;
+      border-top: none;
+      border-right: none;
+      padding: var(--atlas-size-12);
+      .tabs-content {
+        border-left: none;
+        border-top: 1px solid hsl(var(--atlas-color-tertiary) / var(--atlas-opacity-2));
+      }
+      border-radius: 0;
       &:focus {
         @include atlas-shadow(var(--atlas-shadow-1));
       }
@@ -594,8 +602,6 @@
 .tabs-list {
   flex-shrink: 0;
   display: flex;
-  padding: var(--atlas-size-12) 0;
-
   gap: var(--atlas-size-12);
 }
 
@@ -604,7 +610,6 @@
   top: var(--atlas-size-10);
   padding: 0;
   padding-right: var(--atlas-size-12);
-  margin-bottom: var(--atlas-size-12);
   display: flex;
   overflow: hidden;
   overflow-x: scroll;
@@ -621,7 +626,6 @@
 
   font-family: inherit;
   line-height: 1;
-  color: hsl(var(--atlas-color-dark) / var(--atlas-opacity-3));
   text-transform: uppercase;
   font-weight: 900;
   user-select: none;
@@ -630,11 +634,14 @@
   flex: 1;
   align-items: center;
   justify-content: center;
-  background-color: hsl(var(--atlas-color-light) / var(--atlas-opacity-2));
+  color: hsl(var(--atlas-color-light) / var(--atlas-opacity-3));
+  background-color: hsl(var(--atlas-color-light) / var(--atlas-opacity-1));
   border: 1px solid hsl(var(--atlas-color-light) / var(--atlas-opacity-1));
   border-right: var(--atlas-size-14) solid
     hsl(var(--atlas-color-secondary) / var(--atlas-opacity-3));
   border-radius: var(--atlas-border-radius-1);
+  border-bottom: none;
+  border-bottom-right-radius: 0;
 }
 .emoji-label {
   font-size: var(--atlas-size-08);
@@ -642,18 +649,19 @@
 
 .tabs-trigger:hover {
   color: hsl(var(--atlas-color-light));
-  background-color: hsl(var(--atlas-color-primary) / var(--atlas-opacity-3));
+  background-color: hsl(var(--atlas-color-dark) / var(--atlas-opacity-1));
 }
 .tabs-trigger[data-state="active"] {
-  color: hsl(var(--atlas-color-tertiary) / var(--atlas-opacity-3));
-  background-color: hsl(var(--atlas-color-dark) / var(--atlas-opacity-3));
   @include atlas-shadow(var(--atlas-shadow-1));
+  color: hsl(var(--atlas-color-tertiary) / var(--atlas-opacity-3));
 
   border: 1px solid hsl(var(--atlas-color-light) / var(--atlas-opacity-2));
   border-left: var(--atlas-size-14) solid
     hsl(var(--atlas-color-tertiary) / var(--atlas-opacity-3));
-  & > .tabs-trigger button {
-    background-color: hsl(var(--atlas-color-light) / var(--atlas-opacity-3));
+  border-bottom: none;
+  background-color: hsl(var(--atlas-color-dark));
+
+  &.tabs-trigger {
   }
 }
 .tabs-trigger:focus {

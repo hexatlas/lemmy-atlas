@@ -104,6 +104,11 @@
     hsl(var(--atlas-color-tertiary) / var(--atlas-opacity-3)) !important;
 }
 
+.tabs-root {
+  border: none !important;
+  background: hsl(var(--atlas-color-light) / var(--atlas-opacity-3));
+}
+
 .leaflet-marker-icon {
   filter: none !important;
 }
