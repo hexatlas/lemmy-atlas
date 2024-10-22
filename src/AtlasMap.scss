@@ -35,8 +35,8 @@
 
   .map-container {
     transition: all var(--atlas-transition-slow);
-    height: calc(100vh - var(--atlas-size-04));
-    height: calc(100dvh - var(--atlas-size-04));
+    height: calc(100vh - var(--atlas-size-07));
+    height: calc(100dvh - var(--atlas-size-07));
     top: 0;
     position: sticky;
   }

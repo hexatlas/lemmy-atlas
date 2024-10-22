@@ -116,7 +116,7 @@ export default function Atlas() {
     }
     if (isMobile && activeAdministrativeRegion.country !== "country") {
       window.scrollTo({
-        top: document.getElementById("atlas-tabs").offsetTop * 0.1312,
+        top: document.getElementById("atlas-tabs").offsetTop * 1.312,
         behavior: "smooth",
       });
     }

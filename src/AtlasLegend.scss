@@ -220,7 +220,6 @@
 
 @media only screen and (max-width: 768px) {
   .map-interface-container {
-    @include atlas-shadow(none);
     position: fixed;
     top: var(--atlas-size-14);
     left: 0;
@@ -310,7 +309,7 @@
 }
 
 .search-input-wrapper {
-  padding: var(--atlas-size-16);
+  padding: var(--atlas-size-12);
   border-radius: var(--atlas-border-radius-1);
   display: flex;
   gap: var(--atlas-size-16);
@@ -548,8 +547,10 @@
   .tabs-content {
     @include atlas-shadow(var(--atlas-shadow-1));
     border-radius: var(--atlas-border-radius-1);
-    border: 1px solid hsl(var(--atlas-color-light) / var(--atlas-opacity-2));
     padding: 0;
+    height: 100%;
+    height: 100vh;
+    height: calc(100vh - var(--atlas-size-07));
     .tabs-content {
       border-left: var(--atlas-size-14) solid
         hsl(var(--atlas-color-tertiary) / var(--atlas-opacity-3));
@@ -583,19 +584,6 @@
   #atlas-tabs {
     & > * {
       margin: 0;
-    }
-    &::before {
-      content: "_";
-      color: hsl(var(--atlas-color-dark) / var(--atlas-opacity-3));
-      width: 100%;
-      max-width: 100vw;
-      margin: 0 auto;
-      position: absolute;
-      top: 0;
-      transform: translateY(calc(var(--atlas-size-05) * -1));
-      font-size: var(--atlas-size-06);
-      display: grid;
-      justify-content: center;
     }
   }
 }
