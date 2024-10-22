@@ -9,7 +9,7 @@ import Industry from "./map/Industry";
 function AtlasMapInformation({ interfaceProps }) {
   const [activeTab, setActiveTab] = useStateStorage(
     "activeEconomyMapInformationTab",
-    "Energy"
+    "Industry"
   );
 
   return (

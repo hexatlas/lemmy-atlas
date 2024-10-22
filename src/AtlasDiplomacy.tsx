@@ -5,7 +5,10 @@ import AtlasMisc from "./components/diplomacy/AtlasMisc";
 import AtlasMapInformation from "./components/diplomacy/AtlasMapInformation";
 
 function AtlasDiplomacy({ interfaceProps }) {
-  const [activeTab, setActiveTab] = useStateStorage("activeDiplomacyTab", "Embassies");
+  const [activeTab, setActiveTab] = useStateStorage(
+    "activeDiplomacyTab",
+    "MapInformation"
+  );
 
   return (
     <Tabs.Root

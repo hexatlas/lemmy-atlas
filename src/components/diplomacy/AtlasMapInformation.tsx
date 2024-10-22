@@ -7,7 +7,7 @@ import Diplomacy from "./map/Diplomacy";
 function AtlasMapInformation({ interfaceProps }) {
   const [activeTab, setActiveTab] = useStateStorage(
     "activeDiplomacyMapInformationTab",
-    "MapInformation"
+    "Embassies"
   );
   return (
     <>
