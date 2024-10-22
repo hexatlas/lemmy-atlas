@@ -74,12 +74,8 @@ export function Energy({
         data?.elements.map((element, index) => {
           return (
             <div key={index}>
-              <AtlasOSMInfoCard element={element} />
-              {element?.bounds && (
-                <button type="button" onClick={() => showOnMap(element?.bounds)}>
-                  📍
-                </button>
-              )}
+              <AtlasOSMInfoCard element={element} map={map} />
+
               <br />
             </div>
           );

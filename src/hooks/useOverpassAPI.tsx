@@ -11,7 +11,6 @@ async function useOverpassAPI(query, url?) {
     }
     const json = await response.json();
     console.log(json, "useOverpassAPI");
-
     return json;
   } catch (error) {
     console.error(error.message);

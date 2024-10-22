@@ -332,13 +332,7 @@ export default function AtlasLemmy({
               {activeLemmyInstance.baseUrl} ⨯
             </button>
 
-            <div
-              className="search-form"
-              // onSubmit={(e) => {
-              //   e.preventDefault();
-              //   console.log(e.target);
-              // }}
-            >
+            <div className="search-form">
               <label htmlFor="search-input" className="sr-only">
                 Paste Lemmy URL
               </label>

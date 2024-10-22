@@ -473,6 +473,12 @@ td {
   border: 0;
 }
 
+.container {
+  padding: var(--atlas-size-09);
+  border-radius: var(--atlas-border-radius-1);
+  @include atlas-shadow(var(--atlas-shadow-1));
+}
+
 .highlight {
   @include atlas-shadow(var(--atlas-shadow-inset));
   background: hsl(var(--atlas-color-light) / var(--atlas-opacity-1));

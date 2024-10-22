@@ -99,10 +99,7 @@ export default function Atlas() {
   ); // Default: Country Sort
   const [locationQuery, setLocationQuery] = useStateStorage("locationQuery", "");
 
-  const [activeMainTab, setActiveMainTab] = useStateStorage(
-    "activeMainTab",
-    "Information"
-  );
+  const [activeMainTab, setActiveMainTab] = useStateStorage("activeMainTab", undefined);
 
   /*
       useEffects
@@ -145,7 +142,6 @@ export default function Atlas() {
 
     if (isLocationSelectMode) {
       setActiveLocationSelection([selection, ...activeLocationSelection]);
-      console.log(activeLocationSelection);
     }
   }, [activeAdministrativeRegion, activeLocationType, nominatim]);
 
@@ -290,6 +286,7 @@ export default function Atlas() {
           ref={sideBarRef}
           value={activeMainTab}
           onValueChange={setActiveMainTab}
+          defaultValue={"Test"}
         >
           <Tabs.List className="tabs-list" aria-label="Manage your account">
             <Tabs.Trigger className="tabs-trigger emoji-label" value="Economy">
@@ -308,6 +305,67 @@ export default function Atlas() {
               🏛️
             </Tabs.Trigger>
           </Tabs.List>
+          <Tabs.Content className="tabs-content" value="Test">
+            <div className="atlas-legend container light">
+              <h1>Atlas</h1>
+              <p>
+                This Atlas uses OpenStreetMaps, Overpass, Nominatim, ProleWiki, Wikipedia,
+                Lemmy, and aims to provide a comprehensive view of various instruments of
+                state power across different countries.
+              </p>
+              <h2>Instructions</h2>
+              <blockquote>
+                <i className="secondary">Attention:</i> Select an{" "}
+                <span className="primary">
+                  <i>option</i>
+                </span>{" "}
+                to reveal{" "}
+                <span className="tertiary">
+                  <i>selected information</i>
+                </span>
+                .
+              </blockquote>
+              <ul className="container dark">
+                <li>
+                  <b>Select Country:</b> Use the search or click on the map, or 🎲 for a
+                  random pick.
+                </li>
+                <li>
+                  <b>State Power Options:</b>
+                  <ul>
+                    <li>
+                      🪙 <b>Economy</b>
+                    </li>
+                    <li>
+                      ℹ️ <b>Information</b>
+                    </li>
+                    <li>
+                      🕊️ <b>Diplomacy</b>
+                    </li>
+                    <li>
+                      🛡️ <b>Security</b>
+                    </li>
+                    <li>
+                      🏛️ <b>Institutions</b>
+                    </li>
+                  </ul>
+                </li>
+                <li>
+                  <b>Map Layers:</b> Switch between satellite, terrain, or boundaries. 🗺️
+                </li>
+                <li>
+                  <b>Show on Map:</b> Look for 📍 to pinpoint locations. 🌐
+                </li>
+                <li>
+                  <b>Extra Resources:</b> Click 🔗 for further reading.
+                </li>
+              </ul>
+
+              <blockquote>
+                <b>Note:</b> Data availability differs by country and topic.
+              </blockquote>
+            </div>
+          </Tabs.Content>
           <Tabs.Content className="tabs-content" value="Economy">
             <AtlasEconomy interfaceProps={interfaceProps}></AtlasEconomy>
           </Tabs.Content>

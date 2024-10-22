@@ -71,7 +71,7 @@ export function Media({
         data?.elements.map((element, index) => {
           return (
             <div key={index}>
-              <AtlasOSMInfoCard element={element} />
+              <AtlasOSMInfoCard element={element} map={map} />
               {element?.bounds && (
                 <button type="button" onClick={() => showOnMap(element?.bounds)}>
                   📍

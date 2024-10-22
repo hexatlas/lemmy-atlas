@@ -1,7 +1,25 @@
-function AtlasOSMInfoCard({ element }) {
+import { useCallback, useEffect } from "react";
+import Overpass from "../map/OverpassLayer";
+
+function AtlasOSMInfoCard({ map, element }) {
   const { name, wikidata } = element?.tags;
+
+  // Update Map to Selection
+  const showOnMap = useCallback(
+    (coords) => {
+      const mapBounds = [coords?.maxlat, coords?.minlon];
+      map.flyTo(mapBounds, 14);
+    },
+    [map]
+  );
+
   return (
     <>
+      {element?.bounds && (
+        <button type="button" onClick={() => showOnMap(element?.bounds)}>
+          📍
+        </button>
+      )}
       <h4>{name || element?.tags["name:en"]}</h4>
       {wikidata ? (
         <a
@@ -14,6 +32,7 @@ function AtlasOSMInfoCard({ element }) {
       ) : (
         <p>{element?.tags["name:en"] || "⚡"}</p>
       )}
+
       <pre>{JSON.stringify(element?.tags, undefined, 2)}</pre>
     </>
   );

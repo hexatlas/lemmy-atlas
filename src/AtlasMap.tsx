@@ -126,8 +126,6 @@ export default function AtlasMap({
     layer.on({
       mouseover: (e) => {
         // Highlight AdministrativeRegions on mouse hover
-        console.log(e.target);
-
         tempStyle = e.target?.options;
         if (!isLocationSelectMode) e.target?.setStyle(style_activeLocationHighlight);
       },
