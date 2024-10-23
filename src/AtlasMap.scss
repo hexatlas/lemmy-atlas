@@ -3,7 +3,6 @@
 .emoji-icon {
   @include atlas-shadow(var(--atlas-shadow-text));
   font-size: var(--atlas-size-08);
-  position: absolute;
 }
 
 /* ATLAS MINIMAP Positioning */
