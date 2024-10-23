@@ -92,17 +92,16 @@ export default function AtlasMap({
     weight: 1.161,
   };
 
-  const onClickAdministrativeRegionCallback = (e, isDoubleCLick = false) => {
-    e.originalEvent.view.L.DomEvent.stopPropagation(e);
-    const clickedAdministrativeRegion = e.target.feature.properties;
-    if (activeAdministrativeRegion == clickedAdministrativeRegion) return;
-    if (isDoubleCLick) setActiveLocationType("name");
-    setActiveAdministrativeRegion(clickedAdministrativeRegion);
-  };
-
-  const onClickAdministrativeRegion = useCallback(onClickAdministrativeRegionCallback, [
-    map,
-  ]);
+  const onClickAdministrativeRegion = useCallback(
+    (e, isDoubleCLick = false) => {
+      const clickedAdministrativeRegion = e.target.feature.properties;
+      if (activeAdministrativeRegion === clickedAdministrativeRegion) return;
+      e.originalEvent.view.L.DomEvent.stopPropagation(e);
+      if (isDoubleCLick) setActiveLocationType("name");
+      setActiveAdministrativeRegion(clickedAdministrativeRegion);
+    },
+    [map]
+  );
 
   const onEachAdministrativeRegion = (administrativeRegion: any, layer: any) => {
     let tempStyle;
@@ -154,7 +153,7 @@ export default function AtlasMap({
     });
   };
 
-  useEffect(() => {
+  function updateMap() {
     let administrativeRegionArray = latLngBounds(null, null);
 
     // Check if region needs an update
@@ -221,6 +220,10 @@ export default function AtlasMap({
         map?.fitBounds(administrativeRegionArray);
       }
     }
+  }
+
+  useEffect(() => {
+    updateMap();
   }, [activeAdministrativeRegion, activeLocationType]);
 
   return (

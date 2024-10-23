@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import L from "leaflet";
 
 export default function Overpass(map, data, iconMap, filterKey) {
