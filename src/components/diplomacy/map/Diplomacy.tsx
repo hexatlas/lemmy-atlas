@@ -72,7 +72,7 @@ export function Diplomacy({
       {data &&
         data?.elements.map((element, index) => (
           <div key={index}>
-            <AtlasOSMInfoCard element={element} />
+            <AtlasOSMInfoCard map={map} element={element} />
             {element?.bounds && (
               <button type="button" onClick={() => showOnMap(element?.bounds)}>
                 📍

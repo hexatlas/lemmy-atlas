@@ -74,11 +74,6 @@ function Transport({
           return (
             <div key={index}>
               <AtlasOSMInfoCard element={element} map={map} />
-              {element?.bounds && (
-                <button type="button" onClick={() => showOnMap(element?.bounds)}>
-                  📍
-                </button>
-              )}
               <br />
             </div>
           );

@@ -49,15 +49,6 @@ export function Industry({
     };
   }, [map, data]);
 
-  // Update Map to Selection
-  const showOnMap = useCallback(
-    (coords) => {
-      const mapBounds = [coords?.maxlat, coords?.minlon];
-      map.flyTo(mapBounds, 14);
-    },
-    [map]
-  );
-
   return (
     <div id="legend-content">
       <div id="legend-content">
@@ -73,11 +64,6 @@ export function Industry({
             return (
               <div key={index}>
                 <AtlasOSMInfoCard element={element} map={map} />
-                {element?.bounds && (
-                  <button type="button" onClick={() => showOnMap(element?.bounds)}>
-                    📍
-                  </button>
-                )}
                 <br />
               </div>
             );

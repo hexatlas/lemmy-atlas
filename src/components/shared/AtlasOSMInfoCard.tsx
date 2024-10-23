@@ -1,25 +1,30 @@
 import { useCallback, useEffect } from "react";
 import Overpass from "../map/OverpassLayer";
+import L from "leaflet";
 
 function AtlasOSMInfoCard({ map, element }) {
   const { name, wikidata } = element?.tags;
 
   // Update Map to Selection
   const showOnMap = useCallback(
-    (coords) => {
-      const mapBounds = [coords?.maxlat, coords?.minlon];
-      map.flyTo(mapBounds, 14);
+    (element) => {
+      if (element.lat && element.lon) map.flyTo([element.lat, element.lon], 15);
+
+      if (element?.bounds)
+        map.flyToBounds([
+          [element.bounds?.minlat, element.bounds?.minlon],
+          [element.bounds?.maxlat, element.bounds?.maxlon],
+        ]);
     },
     [map]
   );
 
   return (
     <>
-      {element?.bounds && (
-        <button type="button" onClick={() => showOnMap(element?.bounds)}>
-          📍
-        </button>
-      )}
+      <button type="button" onClick={() => showOnMap(element)}>
+        📍
+      </button>
+
       <h4>{name || element?.tags["name:en"]}</h4>
       {wikidata ? (
         <a

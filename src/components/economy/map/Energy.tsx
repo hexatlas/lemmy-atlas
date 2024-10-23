@@ -51,16 +51,6 @@ export function Energy({
     };
   }, [map, data]);
 
-  // Update Map to Selection
-
-  const showOnMap = useCallback(
-    (coords) => {
-      const mapBounds = [coords?.maxlat, coords?.minlon];
-      map.flyTo(mapBounds, 14);
-    },
-    [map]
-  );
-
   return (
     <div id="legend-content">
       {isLoading && <p className="search-loading-icon">🔍</p>}
