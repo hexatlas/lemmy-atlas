@@ -40,39 +40,8 @@ import { useQuery } from "@tanstack/react-query";
                                         
 */
 
-const AtlasIMFData = ({
-  resetAtlas,
-
-  // Location
-  map,
-  setMap,
-
-  isOpenAtlasMapInterface,
-  setIsOpenAtlasMapInterface,
-
-  isLocationSelectMode,
-  setIsLocationSelectMode,
-
-  activeLocationSelection,
-  setActiveLocationSelection,
-
-  nominatim,
-  setNominatim,
-
-  regionTypes,
-  activeLocationType,
-  setActiveLocationType,
-
-  activeAdministrativeRegion,
-  setActiveAdministrativeRegion,
-
-  administrativeRegionClickHistoryArray,
-  setAdministrativeRegionClickHistoryArray,
-
-  locationQuery,
-  setLocationQuery,
-}) => {
-  const [activeIndicator, setActiveIndicator] = useStateStorage("activeIndicator", {
+const AtlasIMFData = ({ activeAdministrativeRegion }) => {
+  const defaultIndicator = {
     name: "PPPSH",
     label: "GDP based on PPP, share of world",
     description:
@@ -80,18 +49,12 @@ const AtlasIMFData = ({
     source: "World Economic Outlook (October 2024)",
     unit: "Percent of World",
     dataset: "WEO",
-  });
+  };
 
-  /*
-  {
-      "label": "GDP based on PPP, share of world",
-      "description": "Purchasing Power Parity (PPP) weights are individual countries' share of total World gross domestic product at purchasing power parities.\n\nPurchasing Power Parity (PPP) is a theory which relates changes in the nominal exchange rate between two countries currencies to changes in the countries' price levels. More information on PPP methodology can be found on the World Economic Outlook FAQ - <a href=\"http://www.imf.org/external/pubs/ft/weo/faq.htm#q4d\" target=\"new\">click here</a>",
-      "source": "World Economic Outlook (October 2024)",
-      "unit": "Percent of World",
-      "dataset": "WEO"
-    }
-  
-  */
+  const [activeIndicator, setActiveIndicator] = useStateStorage(
+    "activeIndicator",
+    defaultIndicator
+  );
 
   const [open, setOpen] = useState(false);
 
@@ -118,6 +81,9 @@ const AtlasIMFData = ({
       const width = 600 - margin.left - margin.right;
       const height = 400 - margin.top - margin.bottom;
 
+      // Clear existing SVG content
+      d3.select(svgRef.current).selectAll("*").remove();
+
       const svg = d3
         .select(svgRef.current)
         .attr("width", "100%")
@@ -125,7 +91,7 @@ const AtlasIMFData = ({
         .attr(
           "viewBox",
           `0 0 ${width + margin.left + margin.right} ${
-            height + margin.top + margin.bottom
+            height + margin.top + margin.bottom * 2
           }`
         )
         .attr("preserveAspectRatio", "xMinYMin meet")
@@ -133,8 +99,6 @@ const AtlasIMFData = ({
         .attr("transform", `translate(${margin.left},${margin.top})`);
 
       const x = d3.scaleLinear().domain([1980, 2028]).range([0, width]);
-
-      // Dynamically adjust y-axis scale based on data variance
       const y = d3
         .scaleLinear()
         .domain([0, d3.max(Object.values(data))])
@@ -151,14 +115,122 @@ const AtlasIMFData = ({
         value,
       }));
 
+      // Add X axis with label
+      svg
+        .append("g")
+        .attr("transform", `translate(0,${height})`)
+        .call(d3.axisBottom(x).ticks(10).tickFormat(d3.format("d")))
+        .selectAll("text")
+        .attr("transform", "rotate(-45)")
+        .style("color", "hsl(var(--atlas-color-light) / var(--atlas-opacity-1))")
+        .style("text-anchor", "end");
+
+      // Add X axis label
+      svg
+        .append("text")
+        .attr("class", "x-label")
+        .attr("text-anchor", "middle")
+        .attr("x", width / 2)
+        .attr("y", height + margin.bottom - 5)
+        .text("Year")
+        .style("fill", "hsl(var(--atlas-color-tertiary) / var(--atlas-opacity-3))")
+        .style("font-size", "var(--atlas-size-09)");
+
+      // Add Source
+      svg
+        .append("text")
+        .attr("class", "x-label")
+        .attr("x", 0)
+        .attr("y", height + margin.bottom * 1.312)
+        .text(`${String(activeIndicator.source).toUpperCase()} | data.imf.org`)
+        .style("fill", "hsl(var(--atlas-color-light) / var(--atlas-opacity-2))")
+        .style("font-size", "var(--atlas-size-09)");
+
+      // Add Y axis with label
+      svg.append("g").call(d3.axisLeft(y));
+
+      // Add Y axis label
+      svg
+        .append("text")
+        .attr("class", "y-label")
+        .attr("text-anchor", "middle")
+        .attr("transform", "rotate(-90)")
+        .attr("y", -margin.left + 12)
+        .attr("x", -height / 2)
+        .text(activeIndicator.unit)
+        .style("fill", "hsl(var(--atlas-color-tertiary) / var(--atlas-opacity-3))")
+        .style("font-size", "var(--atlas-size-09)");
+
+      // Add chart title (optional)
+      svg
+        .append("text")
+        .attr("class", "chart-title")
+        .attr("text-anchor", "middle")
+        .attr("x", width / 2)
+        .attr("y", -margin.top / 2)
+        .text(`${activeAdministrativeRegion.country} | ${activeIndicator.label}`)
+        .style("fill", "hsl(var(--atlas-color-light) / var(--atlas-opacity-3))")
+        .style("font-size", "var(--atlas-size-09)")
+        .style("font-weight", "bold");
+
+      // Add horizontal grid lines
+      svg
+        .append("g")
+        .attr("class", "grid")
+        .call(d3.axisLeft(y).tickSize(-width).tickFormat(""))
+        .style("stroke-dasharray", "2,2")
+        .style("stroke-opacity", "var(--atlas-opacity-1)");
+
+      // Add vertical grid lines
+      svg
+        .append("g")
+        .attr("class", "grid")
+        .attr("transform", `translate(0,${height})`)
+        .call(d3.axisBottom(x).tickSize(-height).tickFormat(""))
+        .style("stroke-dasharray", "2,2")
+        .style("stroke-opacity", "var(--atlas-opacity-1)");
+
       svg
         .append("path")
         .datum(chartData)
         .attr("fill", "none")
-        .attr("stroke", "#f2c20c")
+        .attr("stroke", "hsl(var(--atlas-color-tertiary) / var(--atlas-opacity-2))")
         .attr("stroke-width", 1.312)
         .attr("d", line);
 
+      // Create tooltip
+      const tooltip = d3
+        .select("body")
+        .append("div")
+        .attr("class", "tooltip")
+        .style("position", "absolute")
+        .style(
+          "background-color",
+          "hsl(var(--atlas-color-dark) / var(--atlas-opacity-2))"
+        )
+        .style("color", "hsl(var(--atlas-color-tertiary) / var(--atlas-opacity-3))")
+        .style("padding", "var(--atlas-size-09)")
+        .style("border-radius", "var(--atlas-border-radius-1)")
+        .style("font-size", "var(--atlas-size-09)")
+        .style("pointer-events", "none")
+        .style("opacity", 0);
+
+      // Add vertical and horizontal helper lines
+      const verticalLine = svg
+        .append("line")
+        .attr("class", "helper-line")
+        .style("stroke", "hsl(var(--atlas-color-tertiary) / var(--atlas-opacity-2))")
+        .style("stroke-dasharray", "2,2")
+        .style("opacity", 0);
+
+      const horizontalLine = svg
+        .append("line")
+        .attr("class", "helper-line")
+        .style("stroke", "hsl(var(--atlas-color-tertiary) / var(--atlas-opacity-2))")
+        .style("stroke-dasharray", "2,2")
+        .style("opacity", 0);
+
+      // Add points with hover effects
       svg
         .selectAll("circle")
         .data(chartData)
@@ -166,14 +238,52 @@ const AtlasIMFData = ({
         .append("circle")
         .attr("cx", (d) => x(d.year))
         .attr("cy", (d) => y(d.value))
-        .attr("r", 1.61)
-        .attr("fill", "#f2c20c");
+        .attr("r", "var(--atlas-size-14)")
+        .attr("fill", "hsl(var(--atlas-color-tertiary) / var(--atlas-opacity-3))")
+        .on("mouseover", function (event, d) {
+          const [mouseX, mouseY] = d3.pointer(event);
 
-      const tooltip = d3
-        .select("body")
-        .append("div")
-        .attr("class", "tooltip")
-        .style("opacity", 0);
+          // Show tooltip
+          tooltip
+            .style("opacity", 1)
+            .html(`${d.value} ${activeIndicator.unit} in ${d.year}`)
+            .style("left", event.pageX - 10 + "px")
+            .style("top", event.pageY + 10 + "px")
+            .style("z-index", "9999");
+
+          // Show helper lines
+          verticalLine
+            .attr("x1", x(d.year))
+            .attr("y1", 0)
+            .attr("x2", x(d.year))
+            .attr("y2", height)
+            .style("opacity", 1);
+
+          horizontalLine
+            .attr("x1", 0)
+            .attr("y1", y(d.value))
+            .attr("x2", width)
+            .attr("y2", y(d.value))
+            .style("opacity", 1);
+
+          // Highlight point
+          d3.select(this)
+            .attr("r", "var(--atlas-size-09)")
+            .attr("fill", "hsl(var(--atlas-color-tertiary) / var(--atlas-opacity-2))");
+        })
+        .on("mouseout", function () {
+          // Hide tooltip
+          tooltip.style("opacity", 0);
+
+          // Hide helper lines
+          verticalLine.style("opacity", 0);
+          horizontalLine.style("opacity", 0);
+
+          // Reset point
+          d3.select(this)
+            .attr("r", "var(--atlas-size-14)")
+            .attr("fill", "hsl(var(--atlas-color-tertiary) / var(--atlas-opacity-3))");
+        });
 
       svg
         .append("g")
@@ -185,7 +295,7 @@ const AtlasIMFData = ({
 
       svg.append("g").call(d3.axisLeft(y));
 
-      // Cleanup function to remove D3 elements on unmount
+      // Cleanup function
       return () => {
         svg.selectAll("*").remove();
         tooltip.remove();
@@ -196,27 +306,24 @@ const AtlasIMFData = ({
   };
 
   const YearsList = ({ data, indicator, country }) => {
-    // Check if the indicator and country exist in the data
-    if (!data[indicator] || !data[indicator][country] || data === undefined) {
+    // Check if the indicator.name and country exist in the data
+    if (!data[indicator.name] || !data[indicator.name][country] || data === undefined) {
       return (
         <>
           {!loading && (
-            <div>No data available for the specified indicator and country.</div>
+            <div>No data available for the specified indicator.name and country.</div>
           )}
         </>
       );
     }
 
     // Extracting years and values from the object
-    const yearsData = data[indicator][country];
+    const yearsData = data[indicator.name][country];
     const years = Object.keys(yearsData);
     const [open, setOpen] = useState(false);
     return (
       <div>
         <LineChart data={yearsData} />
-        <p>
-          <strong>Unit:</strong> {activeIndicator.unit}
-        </p>
         <Collapsible.Root className="CollapsibleRoot" open={open} onOpenChange={setOpen}>
           <div
             style={{
@@ -226,7 +333,7 @@ const AtlasIMFData = ({
             }}
           >
             <span className="Text">
-              <p>Raw Data</p>
+              <p>Show Table</p>
             </span>
             <Collapsible.Trigger asChild>
               <button
@@ -240,24 +347,34 @@ const AtlasIMFData = ({
           </div>
 
           <Collapsible.Content>
-            <ul>
-              {years.map((year) => (
-                <li
-                  key={year}
-                  className={`${
-                    Number(year) === new Date().getFullYear() ? "highlight" : ""
-                  }`}
-                >
-                  {year}:
-                  <strong>
-                    {yearsData[year].toLocaleString("en-US", {
-                      minimumFractionDigits: 2,
-                      maximumFractionDigits: 2,
-                    })}
-                  </strong>
-                </li>
-              ))}
-            </ul>
+            <table>
+              <thead>
+                <tr>
+                  <th>Year</th>
+                  <th>{activeIndicator.unit}</th>
+                </tr>
+              </thead>
+              <tbody>
+                {years.map((year) => (
+                  <tr
+                    key={year}
+                    className={
+                      Number(year) === new Date().getFullYear() ? "highlight" : ""
+                    }
+                  >
+                    <td>{year}</td>
+                    <td>
+                      <strong>
+                        {yearsData[year].toLocaleString("en-US", {
+                          minimumFractionDigits: 2,
+                          maximumFractionDigits: 2,
+                        })}
+                      </strong>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           </Collapsible.Content>
         </Collapsible.Root>
       </div>
@@ -309,10 +426,10 @@ const AtlasIMFData = ({
                 role="button"
                 aria-label={"Reset Settings"}
                 tabIndex={0}
-                onClick={resetAtlas}
+                onClick={() => setActiveIndicator(defaultIndicator)}
                 onKeyDown={(e) => {
                   if (e.key === "Enter" || e.key === "Space") {
-                    resetAtlas;
+                    () => setActiveIndicator(defaultIndicator);
                   }
                 }}
               >
@@ -357,6 +474,16 @@ const AtlasIMFData = ({
           </DropdownMenu.Content>
         </DropdownMenu.Portal>
       </DropdownMenu.Root>
+      <h3>Where does line go? </h3>
+      {data && (
+        <YearsList
+          data={data}
+          indicator={activeIndicator}
+          country={activeAdministrativeRegion["ISO3166-1-Alpha-3"]}
+        />
+      )}
+      {loading && <p>Loading...</p>}
+      {error && <p>Error: {error}</p>}
       <Collapsible.Root className="CollapsibleRoot" open={open} onOpenChange={setOpen}>
         <div
           style={{
@@ -364,7 +491,6 @@ const AtlasIMFData = ({
             justifyContent: "space-between",
           }}
         >
-          <h3>{activeIndicator.label}:</h3>
           <Collapsible.Trigger asChild>
             <button
               className="button-icon"
@@ -376,7 +502,7 @@ const AtlasIMFData = ({
         </div>
         <div className="indicator-name">
           <span className="Text">
-            <strong>Name:</strong> {activeIndicator.name}
+            <strong>Description of </strong> {activeIndicator.name}
           </span>
         </div>
         <Collapsible.Content>
@@ -393,15 +519,6 @@ const AtlasIMFData = ({
           </p>
         </Collapsible.Content>
       </Collapsible.Root>
-      {data && (
-        <YearsList
-          data={data}
-          indicator={activeIndicator.name}
-          country={activeAdministrativeRegion["ISO3166-1-Alpha-3"]}
-        />
-      )}
-      {loading && <p>Loading...</p>}
-      {error && <p>Error: {error}</p>}
       {/* {indicators && <IndicatorDropdown indicators={indicators} />} */}
     </div>
   );
