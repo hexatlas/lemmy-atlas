@@ -72,14 +72,25 @@ const AtlasIMFData = ({
   setLocationQuery,
 }) => {
   const [activeIndicator, setActiveIndicator] = useStateStorage("activeIndicator", {
-    name: "PPPGDP",
-    label: "GDP, current prices",
+    name: "PPPSH",
+    label: "GDP based on PPP, share of world",
     description:
-      'Gross domestic product is the most commonly used single measure of a country\'s overall economic activity. It represents the total value in PPP terms of final goods and services produced within a country during a specified time period.\n\nPurchasing Power Parity (PPP) is a theory which relates changes in the nominal exchange rate between two countries currencies to changes in the countries\' price levels. More information on PPP methodology can be found on the World Economic Outlook FAQ - <a href="http://www.imf.org/external/pubs/ft/weo/faq.htm#q4d" target="new">click here</a>',
-    source: "World Economic Outlook (October 2023)",
-    unit: "Purchasing power parity; billions of international dollars",
+      'Purchasing Power Parity (PPP) weights are individual countries\' share of total World gross domestic product at purchasing power parities.\n\nPurchasing Power Parity (PPP) is a theory which relates changes in the nominal exchange rate between two countries currencies to changes in the countries\' price levels. More information on PPP methodology can be found on the World Economic Outlook FAQ - <a href="http://www.imf.org/external/pubs/ft/weo/faq.htm#q4d" target="new">click here</a>',
+    source: "World Economic Outlook (October 2024)",
+    unit: "Percent of World",
     dataset: "WEO",
   });
+
+  /*
+  {
+      "label": "GDP based on PPP, share of world",
+      "description": "Purchasing Power Parity (PPP) weights are individual countries' share of total World gross domestic product at purchasing power parities.\n\nPurchasing Power Parity (PPP) is a theory which relates changes in the nominal exchange rate between two countries currencies to changes in the countries' price levels. More information on PPP methodology can be found on the World Economic Outlook FAQ - <a href=\"http://www.imf.org/external/pubs/ft/weo/faq.htm#q4d\" target=\"new\">click here</a>",
+      "source": "World Economic Outlook (October 2024)",
+      "unit": "Percent of World",
+      "dataset": "WEO"
+    }
+  
+  */
 
   const [open, setOpen] = useState(false);
 
