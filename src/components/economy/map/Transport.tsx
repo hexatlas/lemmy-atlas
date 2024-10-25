@@ -34,21 +34,22 @@ function Transport({
   locationQuery,
   setLocationQuery,
 
-  // Overpass
+  isClustered,
+  setIsClustered,
 }) {
   const { data, isLoading } = useEconomyTransport(activeAdministrativeRegion);
 
   useEffect(() => {
     let layerObjects;
     if (map && data) {
-      layerObjects = Overpass(map, data, iconMap, "railway");
+      layerObjects = Overpass(map, data, iconMap, "railway", isClustered);
     }
     return () => {
       if (layerObjects) {
         map.removeLayer(layerObjects.overpassLayer);
       }
     };
-  }, [map, data]);
+  }, [map, data, isClustered]);
 
   // Update Map to Selection
 
@@ -62,6 +63,9 @@ function Transport({
 
   return (
     <div id="legend-content">
+      <button type="button" onClick={() => setIsClustered(!isClustered)}>
+        {isClustered ? "🚀" : "🐢"}
+      </button>
       {isLoading && <p className="search-loading-icon">🔍</p>}
       {data && (
         <small>

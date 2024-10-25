@@ -34,24 +34,30 @@ export function Industry({
 
   locationQuery,
   setLocationQuery,
+
+  isClustered,
+  setIsClustered,
 }) {
   const { data, isLoading } = useEconomyIndustry(activeAdministrativeRegion);
 
   useEffect(() => {
     let layerObjects;
     if (map && data) {
-      layerObjects = Overpass(map, data, iconMap, "industrial");
+      layerObjects = Overpass(map, data, iconMap, "industrial", isClustered);
     }
     return () => {
       if (layerObjects) {
         map.removeLayer(layerObjects.overpassLayer);
       }
     };
-  }, [map, data]);
+  }, [map, data, isClustered]);
 
   return (
     <div id="legend-content">
       <div id="legend-content">
+        <button type="button" onClick={() => setIsClustered(!isClustered)}>
+          {isClustered ? "🚀" : "🐢"}
+        </button>
         {isLoading && <p className="search-loading-icon">🔍</p>}
         {data && (
           <small>

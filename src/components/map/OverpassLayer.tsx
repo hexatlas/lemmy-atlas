@@ -1,10 +1,30 @@
 import L from "leaflet";
+import "leaflet.markercluster";
 
-export default function Overpass(map, data, iconMap, filterKey) {
+export default function Overpass(map, data, iconMap, filterKey, isClustered = true) {
   const { defaultIcon } = iconMap;
 
   // Create a layer group to hold the markers and polylines
-  const overpassLayer = L.layerGroup();
+
+  let overpassLayer;
+  if (isClustered) {
+    overpassLayer = L.markerClusterGroup({
+      spiderLegPolylineOptions: { weight: 1.5, color: "#2ff", opacity: 0.5 },
+    });
+  } else {
+    overpassLayer = L.layerGroup();
+  }
+
+  // let markerClusterGroups = {};
+  // Object.keys(iconMap).forEach((iconKey) => {
+  //   markerClusterGroups[iconKey] = L.markerClusterGroup({
+  //     iconCreateFunction: function (cluster) {
+  //       return L.divIcon({ html: "<b>" + cluster.getChildCount() + "</b>" });
+  //     },
+  //   });
+  // });
+
+  // console.log(markerAll);
 
   // Add the layer group to the map
   map.addLayer(overpassLayer);

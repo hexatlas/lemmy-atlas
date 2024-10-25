@@ -36,20 +36,23 @@ export function Diplomacy({
 
   locationQuery,
   setLocationQuery,
+
+  isClustered,
+  setIsClustered,
 }) {
   const { data, isLoading } = useDiplomacyEmbassies(activeAdministrativeRegion);
 
   useEffect(() => {
     let diplomaticLayerObjects;
     if (map && data) {
-      diplomaticLayerObjects = Overpass(map, data, iconMap, "diplomatic"); // Adjust the Overpass function accordingly
+      diplomaticLayerObjects = Overpass(map, data, iconMap, "diplomatic", isClustered); // Adjust the Overpass function accordingly
     }
     return () => {
       if (diplomaticLayerObjects) {
         map.removeLayer(diplomaticLayerObjects.overpassLayer);
       }
     };
-  }, [map, data]);
+  }, [map, data, isClustered]);
 
   // Update Map to Selection
   const showOnMap = useCallback(
@@ -62,6 +65,9 @@ export function Diplomacy({
 
   return (
     <div id="legend-content">
+      <button type="button" onClick={() => setIsClustered(!isClustered)}>
+        {isClustered ? "🚀" : "🐢"}
+      </button>
       {isLoading && <p className="search-loading-icon">🔍</p>}
       {data && (
         <small>

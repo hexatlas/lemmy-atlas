@@ -34,23 +34,29 @@ export function Media({
 
   locationQuery,
   setLocationQuery,
+
+  isClustered,
+  setIsClustered,
 }) {
   const { data, isLoading } = useInformationMedia(activeAdministrativeRegion); // Updated hook
 
   useEffect(() => {
     let layerObjects;
     if (map && data) {
-      layerObjects = Overpass(map, data, iconMap, "communication"); // Updated to "media"
+      layerObjects = Overpass(map, data, iconMap, "communication", isClustered); // Updated to "media"
     }
     return () => {
       if (layerObjects) {
         map.removeLayer(layerObjects.overpassLayer);
       }
     };
-  }, [map, data]);
+  }, [map, data, isClustered]);
 
   return (
     <div id="legend-content">
+      <button type="button" onClick={() => setIsClustered(!isClustered)}>
+        {isClustered ? "🚀" : "🐢"}
+      </button>
       {isLoading && <p className="search-loading-icon">🔍</p>}
       {data && (
         <small>

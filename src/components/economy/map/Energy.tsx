@@ -36,23 +36,29 @@ export function Energy({
 
   locationQuery,
   setLocationQuery,
+
+  isClustered,
+  setIsClustered,
 }) {
   const { data, isLoading } = useEconomyEnergy(activeAdministrativeRegion);
 
   useEffect(() => {
     let layerObjects;
     if (map && data) {
-      layerObjects = Overpass(map, data, iconMap, "plant:source");
+      layerObjects = Overpass(map, data, iconMap, "plant:source", isClustered);
     }
     return () => {
       if (layerObjects) {
         map.removeLayer(layerObjects.overpassLayer);
       }
     };
-  }, [map, data]);
+  }, [map, data, isClustered]);
 
   return (
     <div id="legend-content">
+      <button type="button" onClick={() => setIsClustered(!isClustered)}>
+        {isClustered ? "🚀" : "🐢"}
+      </button>
       {isLoading && <p className="search-loading-icon">🔍</p>}
       {data && (
         <small>

@@ -70,6 +70,8 @@ export default function Atlas() {
     []
   );
 
+  const [isClustered, setIsClustered] = useStateStorage("isClustered", true);
+
   /*
       useStates
   */
@@ -226,6 +228,9 @@ export default function Atlas() {
 
     legendSize,
     setLegendSize,
+
+    isClustered,
+    setIsClustered,
 
     // Location
     map,

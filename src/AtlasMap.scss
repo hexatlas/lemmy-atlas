@@ -73,6 +73,92 @@
   // z-index: 99;
 }
 
+/* Marker Cluster */
+
+.leaflet-cluster-anim .leaflet-marker-icon,
+.leaflet-cluster-anim .leaflet-marker-shadow {
+  -webkit-transition: -webkit-transform var(--atlas-time-2) var(--atlas-timing-function),
+    opacity var(--atlas-time-2) var(--atlas-timing-function);
+  -moz-transition: -moz-transform var(--atlas-time-2) var(--atlas-timing-function),
+    opacity var(--atlas-time-2) var(--atlas-timing-function);
+  -o-transition: -o-transform var(--atlas-time-2) var(--atlas-timing-function),
+    opacity var(--atlas-time-2) var(--atlas-timing-function);
+  transition: transform var(--atlas-time-2) var(--atlas-timing-function),
+    opacity var(--atlas-time-2) var(--atlas-timing-function);
+}
+
+.leaflet-cluster-spider-leg {
+  /* stroke-dashoffset (duration and function) should match with leaflet-marker-icon transform in order to track it exactly */
+  -webkit-transition: -webkit-stroke-dashoffset var(--atlas-time-2)
+      var(--atlas-timing-function) t,
+    -webkit-stroke-opacity var(--atlas-time-2) var(--atlas-timing-function);
+  -moz-transition: -moz-stroke-dashoffset var(--atlas-time-2) var(--atlas-timing-function)
+      t,
+    -moz-stroke-opacity var(--atlas-time-2) var(--atlas-timing-function);
+  -o-transition: -o-stroke-dashoffset var(--atlas-time-2) var(--atlas-timing-function) t,
+    -o-stroke-opacity var(--atlas-time-2) var(--atlas-timing-function);
+  transition: stroke-dashoffset var(--atlas-time-2) var(--atlas-timing-function) t,
+    stroke-opacity var(--atlas-time-2) var(--atlas-timing-function);
+}
+.marker-cluster-small {
+  background-color: hsl(var(--atlas-color-secondary) / var(--atlas-opacity-1));
+}
+.marker-cluster-small div {
+  background-color: hsl(var(--atlas-color-secondary) / var(--atlas-opacity-2));
+}
+
+.marker-cluster-medium {
+  background-color: hsl(var(--atlas-color-secondary) / var(--atlas-opacity-2));
+}
+.marker-cluster-medium div {
+  background-color: hsl(var(--atlas-color-secondary) / var(--atlas-opacity-2));
+}
+
+.marker-cluster-large {
+  background-color: hsl(var(--atlas-color-secondary));
+}
+.marker-cluster-large div {
+  background-color: hsl(var(--atlas-color-secondary));
+}
+
+/* IE 6-8 fallback colors */
+.leaflet-oldie .marker-cluster-small {
+  background-color: rgb(181, 226, 140);
+}
+.leaflet-oldie .marker-cluster-small div {
+  background-color: rgb(110, 204, 57);
+}
+
+.leaflet-oldie .marker-cluster-medium {
+  background-color: rgb(241, 211, 87);
+}
+.leaflet-oldie .marker-cluster-medium div {
+  background-color: rgb(240, 194, 12);
+}
+
+.leaflet-oldie .marker-cluster-large {
+  background-color: rgb(253, 156, 115);
+}
+.leaflet-oldie .marker-cluster-large div {
+  background-color: rgb(241, 128, 23);
+}
+
+.marker-cluster {
+  background-clip: padding-box;
+  border-radius: var(--atlas-border-radius-1);
+}
+.marker-cluster div {
+  width: var(--atlas-size-08);
+  height: var(--atlas-size-08);
+  margin-left: var(--atlas-size-10);
+  margin-top: var(--atlas-size-10);
+
+  text-align: center;
+  border-radius: var(--atlas-border-radius-1);
+}
+.marker-cluster span {
+  line-height: var(--atlas-size-08);
+}
 /* Zoom Buttons */
 .leaflet-control-zoom .leaflet-bar.leaflet-control {
   width: var(--atlas-size-07);
