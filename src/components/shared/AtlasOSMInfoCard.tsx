@@ -47,7 +47,7 @@ function AtlasOSMInfoCard({ map, element }) {
             let isUrl;
 
             try {
-              isUrl = new URL(url);
+              isUrl = new URL(url.toString());
             } catch (_) {
               return false;
             }
@@ -55,7 +55,7 @@ function AtlasOSMInfoCard({ map, element }) {
               <>
                 {isUrl && (
                   <a key={index} href={isUrl} target="_blank" rel="noopener noreferrer">
-                    🔗 {url}
+                    🔗 {url.toString()}
                   </a>
                 )}
               </>
