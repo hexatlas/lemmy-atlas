@@ -117,10 +117,7 @@ export default function AtlasMap({
       </div>
     `
       )
-      .getPopup()
-      .on("remove", function () {
-        resetAtlas();
-      });
+      .getPopup();
 
     layer.on({
       mouseover: (e) => {
