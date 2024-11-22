@@ -43,11 +43,24 @@ function AtlasOSMInfoCard({ map, element }) {
       </div>
       <div className="overpass-urls">
         {element?.tags?.source &&
-          [...new Set(element.tags.source.split(";"))].map((url, index) => (
-            <a key={index} href={url} target="_blank" rel="noopener noreferrer">
-              🔗 {url}
-            </a>
-          ))}
+          [...new Set(element.tags.source.split(";"))].map((url, index) => {
+            let isUrl;
+
+            try {
+              isUrl = new URL(url);
+            } catch (_) {
+              return false;
+            }
+            return (
+              <>
+                {isUrl && (
+                  <a key={index} href={isUrl} target="_blank" rel="noopener noreferrer">
+                    🔗 {url}
+                  </a>
+                )}
+              </>
+            );
+          })}
 
         {element?.tags?.website && (
           <a href={element?.tags?.website} target="_blank" rel="noopener noreferrer">

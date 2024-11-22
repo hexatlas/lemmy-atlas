@@ -7,7 +7,7 @@
 
   h4,
   h6 {
-    padding: var(--atlas-size-10);
+    padding: var(--atlas-size-09);
   }
 
   h6 {
@@ -20,6 +20,7 @@
   }
 
   .highlight {
+    padding: 0;
     margin: 0;
     margin-bottom: var(--atlas-size-12);
   }
