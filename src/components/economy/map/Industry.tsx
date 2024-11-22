@@ -68,9 +68,8 @@ export function Industry({
         {data &&
           data?.elements.map((element, index) => {
             return (
-              <div key={index}>
+              <div key={index} className="overpass-item">
                 <AtlasOSMInfoCard element={element} map={map} />
-                <br />
               </div>
             );
           })}

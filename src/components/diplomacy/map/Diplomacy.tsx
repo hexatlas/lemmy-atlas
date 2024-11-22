@@ -84,7 +84,6 @@ export function Diplomacy({
                 📍
               </button>
             )}
-            <br />
           </div>
         ))}
     </div>

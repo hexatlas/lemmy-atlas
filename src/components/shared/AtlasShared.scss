@@ -1,0 +1,42 @@
+.overpass-item {
+  @include atlas-shadow(var(--atlas-shadow-inset));
+  background: hsl(var(--atlas-color-light) / var(--atlas-opacity-1));
+  padding: var(--atlas-size-14);
+  margin-bottom: var(--atlas-size-10);
+  border-radius: var(--atlas-border-radius-1);
+
+  h4,
+  h6 {
+    padding: var(--atlas-size-10);
+  }
+
+  h6 {
+    padding-top: 0;
+    text-align: right;
+  }
+  .wrapper {
+    display: flex;
+    margin: var(--atlas-size-12) 0;
+  }
+
+  .highlight {
+    margin: 0;
+    margin-bottom: var(--atlas-size-12);
+  }
+
+  .overpass-urls {
+    display: grid;
+    margin-bottom: var(--atlas-size-12);
+  }
+
+  .wikidata {
+    max-width: var(--atlas-size-06);
+    display: block;
+  }
+  .overpass-json {
+    @include atlas-shadow(var(--atlas-shadow-1));
+    padding: var(--atlas-size-09);
+    border-radius: var(--atlas-border-radius-1);
+    overflow-y: scroll;
+  }
+}
