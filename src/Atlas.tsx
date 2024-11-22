@@ -262,7 +262,7 @@ export default function Atlas() {
     setLocationQuery,
   };
 
-  const queryClient = new QueryClient();
+  const queryClient = new QueryClient({});
 
   const DisplayAtlasMap = useMemo(
     () => <AtlasMap {...interfaceProps} />,
@@ -315,8 +315,8 @@ export default function Atlas() {
               <h1>Atlas</h1>
               <p>
                 This Atlas uses OpenStreetMaps, Overpass, Nominatim, ProleWiki, Wikipedia,
-                Lemmy, and aims to provide a comprehensive view of various instruments of
-                state power across different countries.
+                Lemmy, Mastodon, and aims to provide a comprehensive view of various
+                instruments of state power across different countries.
               </p>
               <h2>Instructions</h2>
               <blockquote>
