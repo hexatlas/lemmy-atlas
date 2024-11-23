@@ -74,9 +74,7 @@ export function Industry({
                 map={map}
                 iconMap={iconMap}
                 filterKeys={["industrial"]}
-              >
-                <p>Test</p>
-              </AtlasOSMInfoCard>
+              ></AtlasOSMInfoCard>
             );
           })}
       </div>

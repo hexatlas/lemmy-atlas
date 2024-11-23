@@ -90,9 +90,7 @@ export function Diplomacy({
               map={map}
               iconMap={iconMap}
               filterKeys={["diplomatic"]}
-            >
-              <p>Test</p>
-            </AtlasOSMInfoCard>
+            ></AtlasOSMInfoCard>
             {element?.bounds && (
               <button type="button" onClick={() => showOnMap(element?.bounds)}>
                 📍

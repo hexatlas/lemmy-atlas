@@ -5,8 +5,9 @@
   margin-bottom: var(--atlas-size-11);
   border-radius: var(--atlas-border-radius-1);
   display: grid;
-  grid-template-columns: auto 1fr;
-
+  grid-template-columns: minmax(var(--atlas-size-08), 1fr) 4fr;
+  align-items: center;
+  gap: 0 var(--atlas-size-10);
   h4,
   h6 {
     padding: var(--atlas-size-09);
@@ -17,18 +18,32 @@
     padding-top: 0;
   }
 
+  small {
+    font-weight: 900;
+    font-size: var(--atlas-size-10);
+  }
+
   .overpass-filterkeys {
     display: flex;
-    gap: var(--atlas-size-10);
+    flex-wrap: wrap;
+    gap: 0 var(--atlas-size-10);
     position: relative;
     color: hsl(var(--atlas-color-light) / var(--atlas-opacity-2));
+    align-items: center;
+    align-content: center;
+    justify-items: center;
+    text-transform: uppercase;
+    margin-bottom: var(--atlas-size-12);
   }
 
   .overpass-filterkey {
     font-size: var(--atlas-size-07);
     text-transform: uppercase;
     display: grid;
-
+    justify-items: center;
+    margin-bottom: var(--atlas-size-12);
+    & span:nth-child(1) {
+    }
     & span:nth-child(2) {
       color: hsl(var(--atlas-color-light) / var(--atlas-opacity-1));
     }
@@ -54,7 +69,7 @@
 
   .overpass-urls {
     display: grid;
-    margin-bottom: var(--atlas-size-12);
+    margin: var(--atlas-size-10) 0;
   }
 
   .wikidata {
@@ -68,5 +83,6 @@
     padding: var(--atlas-size-09);
     border-radius: var(--atlas-border-radius-1);
     overflow-y: scroll;
+    grid-column: 1 / -1;
   }
 }

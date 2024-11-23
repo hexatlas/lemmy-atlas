@@ -82,9 +82,7 @@ function Transport({
               map={map}
               iconMap={iconMap}
               filterKeys={["railway"]}
-            >
-              <p>Test</p>
-            </AtlasOSMInfoCard>
+            ></AtlasOSMInfoCard>
           );
         })}
     </div>

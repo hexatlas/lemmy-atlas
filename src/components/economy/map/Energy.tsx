@@ -76,10 +76,11 @@ export function Energy({
               iconMap={iconMap}
               filterKeys={[
                 "plant:source",
-                "power",
                 "plant:output:electricity",
+                "power",
                 "plant:method",
                 "plant:type",
+                "start_date",
                 "operator",
               ]}
             ></AtlasOSMInfoCard>

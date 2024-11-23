@@ -35,18 +35,15 @@ function AtlasOSMInfoCard({
           {filterKeys.map((filterKey, index) => {
             if (index > 0) return;
             return (
-              <>
-                {element?.tags[filterKey] && (
-                  <span>
-                    {element?.tags[filterKey]}
-                    <br />
-                  </span>
-                )}
-              </>
+              <>{element?.tags[filterKey] && <small>{element?.tags[filterKey]}</small>}</>
             );
           })}
+          <button type="button" onClick={() => showOnMap(element)}>
+            📍
+          </button>
         </div>
       )}
+
       {children}
       <div className="overpass-container">
         <div className="overpass-name highlight">
@@ -69,49 +66,42 @@ function AtlasOSMInfoCard({
               if (index < 1) return;
               return (
                 <>
-                  {element?.tags[filterKey] && (
-                    <span>
-                      {element?.tags[filterKey]}
-                      <br />
-                    </span>
-                  )}
+                  {element?.tags[filterKey] && <small>{element?.tags[filterKey]}</small>}
                 </>
               );
             })}
-            <div className="wrapper">
-              <button type="button" onClick={() => showOnMap(element)}>
-                📍
-              </button>
-            </div>
           </div>
         )}
-        <div className="overpass-urls">
-          {element?.tags?.source &&
-            [...new Set(element.tags.source.split(";"))].map((url, index) => {
-              let isUrl;
+        {element?.tags?.source &&
+          [...new Set(element.tags.source.split(";"))].map((url, index) => {
+            let isUrl;
 
-              try {
-                isUrl = new URL(url.toString());
-              } catch (_) {
-                return false;
-              }
-              return (
+            try {
+              isUrl = new URL(url.toString());
+            } catch (_) {
+              return false;
+            }
+            return (
+              <div className="overpass-urls">
                 <>
                   {isUrl && (
                     <a key={index} href={isUrl} target="_blank" rel="noopener noreferrer">
                       🔗 {url.toString()}
                     </a>
                   )}
+                  {element?.tags?.website && (
+                    <a
+                      href={element?.tags?.website}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      🔗 {element?.tags?.website}
+                    </a>
+                  )}
                 </>
-              );
-            })}
-
-          {element?.tags?.website && (
-            <a href={element?.tags?.website} target="_blank" rel="noopener noreferrer">
-              🔗 {element?.tags?.website}
-            </a>
-          )}
-        </div>
+              </div>
+            );
+          })}
       </div>
       <pre className="overpass-json dark">
         {JSON.stringify(element?.tags, undefined, 2)}

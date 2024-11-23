@@ -73,9 +73,7 @@ export function Media({
               map={map}
               iconMap={iconMap}
               filterKeys={["communication"]}
-            >
-              <p>Test</p>
-            </AtlasOSMInfoCard>
+            ></AtlasOSMInfoCard>
           );
         })}
     </div>
