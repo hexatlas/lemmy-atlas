@@ -1,7 +1,7 @@
 import { useCallback, useEffect } from "react";
 import AtlasOSMInfoCard from "../../shared/AtlasOSMInfoCard";
 import useEconomyTransport from "../../../hooks/overpass/useEconomyTransport";
-import Overpass from "../../map/OverpassLayer";
+import useOverpassLayer from "../../map/useOverpassLayer";
 import { iconMap } from "../../map/economy/Transport";
 
 function Transport({
@@ -42,7 +42,7 @@ function Transport({
   useEffect(() => {
     let layerObjects;
     if (map && data) {
-      layerObjects = Overpass(map, data, iconMap, "railway", isClustered);
+      layerObjects = useOverpassLayer(map, data, iconMap, "railway", isClustered);
     }
     return () => {
       if (layerObjects) {
@@ -76,9 +76,15 @@ function Transport({
       {data &&
         data?.elements.map((element, index) => {
           return (
-            <div key={index} className="overpass-item">
-              <AtlasOSMInfoCard element={element} map={map} />
-            </div>
+            <AtlasOSMInfoCard
+              key={index}
+              element={element}
+              map={map}
+              iconMap={iconMap}
+              filterKeys={["railway"]}
+            >
+              <p>Test</p>
+            </AtlasOSMInfoCard>
           );
         })}
     </div>

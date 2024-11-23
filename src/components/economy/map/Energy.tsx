@@ -3,7 +3,7 @@ import * as Collapsible from "@radix-ui/react-collapsible";
 import { useCallback, useEffect } from "react";
 import AtlasOSMInfoCard from "../../shared/AtlasOSMInfoCard";
 import useEconomyEnergy from "../../../hooks/overpass/useEconomyEnergy";
-import Overpass from "../../map/OverpassLayer";
+import useOverpassLayer from "../../map/useOverpassLayer";
 import L from "leaflet";
 import { iconMap } from "../../map/economy/Energy";
 
@@ -45,7 +45,7 @@ export function Energy({
   useEffect(() => {
     let layerObjects;
     if (map && data) {
-      layerObjects = Overpass(map, data, iconMap, "plant:source", isClustered);
+      layerObjects = useOverpassLayer(map, data, iconMap, "plant:source", isClustered);
     }
     return () => {
       if (layerObjects) {
@@ -69,9 +69,20 @@ export function Energy({
       {data &&
         data?.elements.map((element, index) => {
           return (
-            <div key={index} className="overpass-item">
-              <AtlasOSMInfoCard element={element} map={map} />
-            </div>
+            <AtlasOSMInfoCard
+              key={index}
+              element={element}
+              map={map}
+              iconMap={iconMap}
+              filterKeys={[
+                "plant:source",
+                "power",
+                "plant:output:electricity",
+                "plant:method",
+                "plant:type",
+                "operator",
+              ]}
+            ></AtlasOSMInfoCard>
           );
         })}
     </div>

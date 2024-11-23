@@ -2,7 +2,7 @@ import * as Collapsible from "@radix-ui/react-collapsible";
 import { useCallback, useEffect } from "react";
 import AtlasOSMInfoCard from "../../shared/AtlasOSMInfoCard";
 import useEconomyIndustry from "../../../hooks/overpass/useEconomyIndustry";
-import Overpass from "../../map/OverpassLayer";
+import useOverpassLayer from "../../map/useOverpassLayer";
 import { iconMap } from "../../map/economy/Industry"; // Ensure you have an iconMap for industry
 
 export function Industry({
@@ -43,7 +43,7 @@ export function Industry({
   useEffect(() => {
     let layerObjects;
     if (map && data) {
-      layerObjects = Overpass(map, data, iconMap, "industrial", isClustered);
+      layerObjects = useOverpassLayer(map, data, iconMap, "industrial", isClustered);
     }
     return () => {
       if (layerObjects) {
@@ -68,9 +68,15 @@ export function Industry({
         {data &&
           data?.elements.map((element, index) => {
             return (
-              <div key={index} className="overpass-item">
-                <AtlasOSMInfoCard element={element} map={map} />
-              </div>
+              <AtlasOSMInfoCard
+                key={index}
+                element={element}
+                map={map}
+                iconMap={iconMap}
+                filterKeys={["industrial"]}
+              >
+                <p>Test</p>
+              </AtlasOSMInfoCard>
             );
           })}
       </div>

@@ -3,7 +3,7 @@ import * as Collapsible from "@radix-ui/react-collapsible";
 import { useCallback, useEffect } from "react";
 import AtlasOSMInfoCard from "../../shared/AtlasOSMInfoCard";
 import useDiplomacyEmbassies from "../../../hooks/overpass/useDiplomacyEmbassies"; // Import the new hook
-import Overpass from "../../map/OverpassLayer";
+import useOverpassLayer from "../../map/useOverpassLayer";
 
 import { iconMap } from "../../map/diplomacy/Diplomacy"; // Assuming you will create an iconMap for embassies
 
@@ -45,7 +45,13 @@ export function Diplomacy({
   useEffect(() => {
     let diplomaticLayerObjects;
     if (map && data) {
-      diplomaticLayerObjects = Overpass(map, data, iconMap, "diplomatic", isClustered); // Adjust the Overpass function accordingly
+      diplomaticLayerObjects = useOverpassLayer(
+        map,
+        data,
+        iconMap,
+        "diplomatic",
+        isClustered
+      ); // Adjust the Overpass function accordingly
     }
     return () => {
       if (diplomaticLayerObjects) {
@@ -78,7 +84,15 @@ export function Diplomacy({
       {data &&
         data?.elements.map((element, index) => (
           <div key={index}>
-            <AtlasOSMInfoCard map={map} element={element} />
+            <AtlasOSMInfoCard
+              key={index}
+              element={element}
+              map={map}
+              iconMap={iconMap}
+              filterKeys={["diplomatic"]}
+            >
+              <p>Test</p>
+            </AtlasOSMInfoCard>
             {element?.bounds && (
               <button type="button" onClick={() => showOnMap(element?.bounds)}>
                 📍

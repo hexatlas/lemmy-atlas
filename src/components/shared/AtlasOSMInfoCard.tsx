@@ -1,9 +1,16 @@
 import { useCallback, useEffect } from "react";
-import Overpass from "../map/OverpassLayer";
+import Overpass from "../map/useOverpassLayer";
 import L from "leaflet";
 import Wikidata from "../../../public/wikidata.svg";
 
-function AtlasOSMInfoCard({ map, element }) {
+function AtlasOSMInfoCard({
+  map,
+  element,
+  key,
+  iconMap = {},
+  filterKeys = [],
+  children = <></>,
+}) {
   const { name, wikidata } = element?.tags;
 
   // Update Map to Selection
@@ -20,58 +27,96 @@ function AtlasOSMInfoCard({ map, element }) {
     [map]
   );
   return (
-    <>
-      <div className="highlight">
-        {name && <h4>{name}</h4>}
-        {element?.tags["name:en"] && <h6>{element?.tags["name:en"]}</h6>}
-      </div>
-      <div className="wrapper">
-        <button type="button" onClick={() => showOnMap(element)}>
-          📍
-        </button>
+    <div key={key} className="overpass-item">
+      {iconMap && filterKeys && (
+        <div className="overpass-filterkey">
+          <span>{iconMap[element?.tags[filterKeys[0]]]?.options?.html}</span>
 
-        {wikidata && (
-          <a
-            href={`https://www.wikidata.org/wiki/${wikidata}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="wikidata"
-          >
-            <WikiData></WikiData>
-          </a>
-        )}
-      </div>
-      <div className="overpass-urls">
-        {element?.tags?.source &&
-          [...new Set(element.tags.source.split(";"))].map((url, index) => {
-            let isUrl;
-
-            try {
-              isUrl = new URL(url.toString());
-            } catch (_) {
-              return false;
-            }
+          {filterKeys.map((filterKey, index) => {
+            if (index > 0) return;
             return (
               <>
-                {isUrl && (
-                  <a key={index} href={isUrl} target="_blank" rel="noopener noreferrer">
-                    🔗 {url.toString()}
-                  </a>
+                {element?.tags[filterKey] && (
+                  <span>
+                    {element?.tags[filterKey]}
+                    <br />
+                  </span>
                 )}
               </>
             );
           })}
-
-        {element?.tags?.website && (
-          <a href={element?.tags?.website} target="_blank" rel="noopener noreferrer">
-            🔗 {element?.tags?.website}
-          </a>
+        </div>
+      )}
+      {children}
+      <div className="overpass-container">
+        <div className="overpass-name highlight">
+          {wikidata && (
+            <a
+              href={`https://www.wikidata.org/wiki/${wikidata}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="wikidata"
+            >
+              <WikiData></WikiData>
+            </a>
+          )}
+          {name && <h4>{name}</h4>}
+          {element?.tags["name:en"] && <h6>{element?.tags["name:en"]}</h6>}
+        </div>
+        {iconMap && filterKeys && (
+          <div className="overpass-filterkeys">
+            {filterKeys.map((filterKey, index) => {
+              if (index < 1) return;
+              return (
+                <>
+                  {element?.tags[filterKey] && (
+                    <span>
+                      {element?.tags[filterKey]}
+                      <br />
+                    </span>
+                  )}
+                </>
+              );
+            })}
+            <div className="wrapper">
+              <button type="button" onClick={() => showOnMap(element)}>
+                📍
+              </button>
+            </div>
+          </div>
         )}
+        <div className="overpass-urls">
+          {element?.tags?.source &&
+            [...new Set(element.tags.source.split(";"))].map((url, index) => {
+              let isUrl;
+
+              try {
+                isUrl = new URL(url.toString());
+              } catch (_) {
+                return false;
+              }
+              return (
+                <>
+                  {isUrl && (
+                    <a key={index} href={isUrl} target="_blank" rel="noopener noreferrer">
+                      🔗 {url.toString()}
+                    </a>
+                  )}
+                </>
+              );
+            })}
+
+          {element?.tags?.website && (
+            <a href={element?.tags?.website} target="_blank" rel="noopener noreferrer">
+              🔗 {element?.tags?.website}
+            </a>
+          )}
+        </div>
       </div>
       <pre className="overpass-json dark">
         {JSON.stringify(element?.tags, undefined, 2)}
       </pre>
-    </>
+    </div>
   );
 }
 

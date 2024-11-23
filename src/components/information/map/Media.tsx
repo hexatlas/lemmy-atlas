@@ -2,7 +2,7 @@ import * as Collapsible from "@radix-ui/react-collapsible";
 import { useCallback, useEffect } from "react";
 import AtlasOSMInfoCard from "../../shared/AtlasOSMInfoCard";
 import useInformationMedia from "../../../hooks/overpass/useInformationMedia"; // Updated hook import
-import Overpass from "../../map/OverpassLayer";
+import useOverpassLayer from "../../map/useOverpassLayer";
 import { iconMap } from "../../map/information/Media"; // Ensure you have an iconMap for Information/Media
 
 export function Media({
@@ -43,7 +43,7 @@ export function Media({
   useEffect(() => {
     let layerObjects;
     if (map && data) {
-      layerObjects = Overpass(map, data, iconMap, "communication", isClustered); // Updated to "media"
+      layerObjects = useOverpassLayer(map, data, iconMap, "communication", isClustered); // Updated to "media"
     }
     return () => {
       if (layerObjects) {
@@ -67,9 +67,15 @@ export function Media({
       {data &&
         data?.elements.map((element, index) => {
           return (
-            <div key={index} className="overpass-item">
-              <AtlasOSMInfoCard element={element} map={map} />
-            </div>
+            <AtlasOSMInfoCard
+              key={index}
+              element={element}
+              map={map}
+              iconMap={iconMap}
+              filterKeys={["communication"]}
+            >
+              <p>Test</p>
+            </AtlasOSMInfoCard>
           );
         })}
     </div>
