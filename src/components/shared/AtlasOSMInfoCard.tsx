@@ -38,7 +38,7 @@ function AtlasOSMInfoCard({
               <>{element?.tags[filterKey] && <small>{element?.tags[filterKey]}</small>}</>
             );
           })}
-          <button type="button" onClick={() => showOnMap(element)}>
+          <button type="button" className="dark" onClick={() => showOnMap(element)}>
             📍
           </button>
         </div>
