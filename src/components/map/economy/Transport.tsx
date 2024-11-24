@@ -9,7 +9,7 @@ const defaultIcon = L.divIcon({
   className: "emoji-icon emoji-category",
 });
 
-const lightRail = L.divIcon({
+const light_rail = L.divIcon({
   html: "🚊", // Light Rail
   className: "emoji-icon",
 });
@@ -19,7 +19,7 @@ const subway = L.divIcon({
   className: "emoji-icon",
 });
 
-const narrowGauge = L.divIcon({
+const narrow_gauge = L.divIcon({
   html: "🚂", // Narrow Gauge
   className: "emoji-icon",
 });
@@ -29,7 +29,7 @@ const monorail = L.divIcon({
   className: "emoji-icon",
 });
 
-const preservedRailway = L.divIcon({
+const preserved_railway = L.divIcon({
   html: "🛤️", // Preserved Railway
   className: "emoji-icon",
 });
@@ -41,10 +41,10 @@ const funicular = L.divIcon({
 
 export const iconMap = {
   defaultIcon,
-  lightRail,
+  light_rail,
   subway,
-  narrowGauge,
+  narrow_gauge,
   monorail,
-  preservedRailway,
+  preserved_railway,
   funicular,
 };

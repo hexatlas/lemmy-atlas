@@ -6,6 +6,65 @@
   z-index: 9999;
 }
 
+.cluster-info {
+  display: flex;
+  .cluster-container {
+    @include atlas-shadow(var(--atlas-shadow-1));
+    display: flex;
+    position: relative;
+    height: var(--atlas-size-07);
+    padding: var(--atlas-size-10);
+    background-color: hsl(var(--atlas-color-light) / var(--atlas-opacity-3));
+    border-radius: var(--atlas-border-radius-1);
+  }
+  .cluster-icon {
+    font-size: var(--atlas-size-08);
+  }
+  .cluster-text {
+    text-transform: uppercase;
+    font-weight: bold;
+    color: hsl(var(--atlas-color-dark) / var(--atlas-opacity-3));
+  }
+  .cluster-count {
+    @include atlas-shadow(var(--atlas-shadow-1));
+    transform: translate(calc(var(--atlas-size-08) * 1), calc(var(--atlas-size-08) * -1));
+    position: absolute;
+    padding: var(--atlas-size-10);
+    font-weight: bold;
+    font-size: var(--atlas-size-09);
+    color: hsl(var(--atlas-color-tertiary) / var(--atlas-opacity-3));
+    background-color: hsl(var(--atlas-color-dark) / var(--atlas-opacity-3));
+    border-radius: var(--atlas-border-radius-1);
+  }
+}
+
+.cluster-info {
+  display: flex;
+  .cluster-container {
+    @include atlas-shadow(var(--atlas-shadow-1));
+    display: flex;
+    position: relative;
+    height: var(--atlas-size-07);
+    padding: var(--atlas-size-10);
+    background-color: hsl(var(--atlas-color-light) / var(--atlas-opacity-3));
+    border-radius: var(--atlas-border-radius-1);
+  }
+  .cluster-icon {
+    font-size: var(--atlas-size-08);
+  }
+  .cluster-count {
+    @include atlas-shadow(var(--atlas-shadow-1));
+    transform: translate(calc(var(--atlas-size-08) * 1), calc(var(--atlas-size-08) * -1));
+    position: absolute;
+    padding: var(--atlas-size-10);
+    font-weight: bold;
+    font-size: var(--atlas-size-09);
+    color: hsl(var(--atlas-color-tertiary) / var(--atlas-opacity-3));
+    background-color: hsl(var(--atlas-color-dark) / var(--atlas-opacity-3));
+    border-radius: var(--atlas-border-radius-1);
+  }
+}
+
 /* ATLAS MINIMAP Positioning */
 
 .minimap {

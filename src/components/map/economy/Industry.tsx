@@ -15,7 +15,7 @@ const oil = L.divIcon({
 });
 
 // Grinding Mill
-const grindingMill = L.divIcon({
+const grinding_mill = L.divIcon({
   html: "⚙️",
   className: "emoji-icon",
 });
@@ -45,7 +45,7 @@ const depot = L.divIcon({
 });
 
 // Scrap Yard
-const scrapYard = L.divIcon({
+const scrap_yard = L.divIcon({
   html: "🗑️",
   className: "emoji-icon",
 });
@@ -110,6 +110,12 @@ const distributor = L.divIcon({
   className: "emoji-icon",
 });
 
+// Distributor
+const distribution = L.divIcon({
+  html: "📦",
+  className: "emoji-icon",
+});
+
 // Agriculture
 const agriculture = L.divIcon({
   html: "🌾",
@@ -123,7 +129,7 @@ const timber = L.divIcon({
 });
 
 // Heating Station
-const heatingStation = L.divIcon({
+const heating_station = L.divIcon({
   html: "🔥",
   className: "emoji-icon",
 });
@@ -135,13 +141,19 @@ const shipyard = L.divIcon({
 });
 
 // Concrete Plant
-const concretePlant = L.divIcon({
+const concrete_plant = L.divIcon({
   html: "🏗️",
   className: "emoji-icon",
 });
 
 // Machine Shop
-const machineShop = L.divIcon({
+const machine_shop = L.divIcon({
+  html: "🔧",
+  className: "emoji-icon",
+});
+
+// Machinery
+const machinery = L.divIcon({
   html: "🔧",
   className: "emoji-icon",
 });
@@ -153,7 +165,7 @@ const storage = L.divIcon({
 });
 
 // Auto Wrecker
-const autoWrecker = L.divIcon({
+const auto_wrecker = L.divIcon({
   html: "🚗",
   className: "emoji-icon",
 });
@@ -177,7 +189,7 @@ const brickworks = L.divIcon({
 });
 
 // Metal Processing
-const metalProcessing = L.divIcon({
+const metal_processing = L.divIcon({
   html: "🔩",
   className: "emoji-icon",
 });
@@ -213,7 +225,7 @@ const chemical = L.divIcon({
 });
 
 // Natural Gas
-const naturalGas = L.divIcon({
+const natural_gas = L.divIcon({
   html: "🔥",
   className: "emoji-icon",
 });
@@ -230,15 +242,236 @@ const logistics = L.divIcon({
   className: "emoji-icon",
 });
 
+const steelmaking = L.divIcon({
+  html: "🔥",
+  className: "emoji-icon",
+});
+
+// Terminal
+const terminal = L.divIcon({
+  html: "🚢",
+  className: "emoji-icon",
+});
+
+// Consumer Goods
+const consumer_goods = L.divIcon({
+  html: "🛍️",
+  className: "emoji-icon",
+});
+
+// Intermodal Freight Terminal
+const intermodal_freight_terminal = L.divIcon({
+  html: "🚛",
+  className: "emoji-icon",
+});
+
+// Automotive Industry
+const automotive_industry = L.divIcon({
+  html: "🚗",
+  className: "emoji-icon",
+});
+
+// Automotive
+const automotive = L.divIcon({
+  html: "🚗",
+  className: "emoji-icon",
+});
+
+// Paper Mill
+const paper_mill = L.divIcon({
+  html: "📄",
+  className: "emoji-icon",
+});
+
+// Telecommunication
+const telecommunication = L.divIcon({
+  html: "📡",
+  className: "emoji-icon",
+});
+
+// gas_storage
+const gas_storage = L.divIcon({
+  html: "⛽️",
+  className: "emoji-icon",
+});
+
+// furniture
+const furniture = L.divIcon({
+  html: "🛋️",
+  className: "emoji-icon",
+});
+
+// mill
+const mill = L.divIcon({
+  html: "🌾",
+  className: "emoji-icon",
+});
+
+// petroleum_terminal
+const petroleum_terminal = L.divIcon({
+  html: "🚢",
+  className: "emoji-icon",
+});
+
+// Sand Pit
+const sand_pit = L.divIcon({
+  html: "🏖️",
+  className: "emoji-icon",
+});
+
+// Aerospace
+const aerospace = L.divIcon({
+  html: "🚀",
+  className: "emoji-icon",
+});
+
+// Water Works
+const water_works = L.divIcon({
+  html: "💧",
+  className: "emoji-icon",
+});
+
+// Wastewater Plant
+const wastewater_plant = L.divIcon({
+  html: "🏭",
+  className: "emoji-icon",
+});
+
+// Agricultural
+const agricultural = L.divIcon({
+  html: "🌾",
+  className: "emoji-icon",
+});
+
+// Oil Depot
+const oil_depot = L.divIcon({
+  html: "🛢️",
+  className: "emoji-icon",
+});
+
+// Construction
+const construction = L.divIcon({
+  html: "🚧",
+  className: "emoji-icon",
+});
+
+// Woodworking
+const woodworking = L.divIcon({
+  html: "🪵",
+  className: "emoji-icon",
+});
+
+// Fuel Depot
+const fuel_depot = L.divIcon({
+  html: "⛽",
+  className: "emoji-icon",
+});
+
+// Transport
+const transport = L.divIcon({
+  html: "🚚",
+  className: "emoji-icon",
+});
+
+// Mineral Processing
+const mineral_processing = L.divIcon({
+  html: "⛏️",
+  className: "emoji-icon",
+});
+
+// Agrifood
+const agrifood = L.divIcon({
+  html: "🥦",
+  className: "emoji-icon",
+});
+
+// Pharmaceuticals
+const pharmaceuticals = L.divIcon({
+  html: "💊",
+  className: "emoji-icon",
+});
+
+// Cement Plant
+const cement_plant = L.divIcon({
+  html: "🏭",
+  className: "emoji-icon",
+});
+
+// Storage Centre
+const storage_centre = L.divIcon({
+  html: "📦",
+  className: "emoji-icon",
+});
+
+// Grain Storage Centre
+const grain_storage_centre = L.divIcon({
+  html: "🌾",
+  className: "emoji-icon",
+});
+
+// Quarry
+const quarry = L.divIcon({
+  html: "⛏️",
+  className: "emoji-icon",
+});
+
+// Construction Company
+const construction_company = L.divIcon({
+  html: "🏗️",
+  className: "emoji-icon",
+});
+
+// Power
+const power = L.divIcon({
+  html: "⚡",
+  className: "emoji-icon",
+});
+
+// Water Management
+const water_management = L.divIcon({
+  html: "💧",
+  className: "emoji-icon",
+});
+
 export const iconMap = {
+  cement_plant,
+  storage_centre,
+  grain_storage_centre,
+  quarry,
+  construction_company,
+  power,
+  water_management,
+  woodworking,
+  fuel_depot,
+  transport,
+  mineral_processing,
+  agrifood,
+  pharmaceuticals,
+  sand_pit,
+  aerospace,
+  water_works,
+  wastewater_plant,
+  agricultural,
+  oil_depot,
+  construction,
+  gas_storage,
+  furniture,
+  mill,
+  petroleum_terminal,
+  consumer_goods,
+  intermodal_freight_terminal,
+  automotive_industry,
+  automotive,
+  paper_mill,
+  telecommunication,
   defaultIcon,
   oil,
-  grindingMill,
+  grinding_mill,
   factory,
   wellsite,
   gas,
   depot,
-  scrapYard,
+  scrap_yard,
   warehouse,
   brickyard,
   wellCluster,
@@ -249,24 +482,28 @@ export const iconMap = {
   slaughterhouse,
   communication,
   distributor,
+  distribution,
   agriculture,
   timber,
-  heatingStation,
+  heating_station,
   shipyard,
-  concretePlant,
-  machineShop,
+  concrete_plant,
+  machinery,
+  machine_shop,
   storage,
-  autoWrecker,
+  auto_wrecker,
   water,
   fracking,
   brickworks,
-  metalProcessing,
+  metal_processing,
   refinery,
   brewery,
   manufacturing,
   bakery,
   chemical,
-  naturalGas,
+  natural_gas,
   electrical,
   logistics,
+  steelmaking,
+  terminal,
 };

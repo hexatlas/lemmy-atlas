@@ -1,7 +1,7 @@
 function AtlasOSMInfoCard({
   map,
   element,
-  key,
+  index,
   iconMap = {},
   filterKeys = [],
   children = <></>,
@@ -14,7 +14,7 @@ function AtlasOSMInfoCard({
 
   return (
     <div
-      key={key}
+      key={index}
       className={`overpass-item ${element == activeElement && "active"}`}
       onMouseEnter={() => handleMouseEnter(element)} // Trigger zoom on hover
       onMouseLeave={() => handleMouseLeave(element)} // Revert zoom on leave
@@ -34,7 +34,11 @@ function AtlasOSMInfoCard({
           {filterKeys.map((filterKey, index) => {
             if (index > 0) return;
             return (
-              <>{element?.tags[filterKey] && <small>{element?.tags[filterKey]}</small>}</>
+              <>
+                {element?.tags[filterKey] && (
+                  <small key={index}>{element?.tags[filterKey]}</small>
+                )}
+              </>
             );
           })}
         </div>
@@ -61,7 +65,9 @@ function AtlasOSMInfoCard({
               if (index < 1) return;
               return (
                 <>
-                  {element?.tags[filterKey] && <small>{element?.tags[filterKey]}</small>}
+                  {element?.tags[filterKey] && (
+                    <small key={index}>{element?.tags[filterKey]}</small>
+                  )}
                 </>
               );
             })}
@@ -77,7 +83,7 @@ function AtlasOSMInfoCard({
               return false;
             }
             return (
-              <div className="overpass-urls">
+              <div className="overpass-urls" key={index}>
                 <>
                   {isUrl && (
                     <a key={index} href={isUrl} target="_blank" rel="noopener noreferrer">

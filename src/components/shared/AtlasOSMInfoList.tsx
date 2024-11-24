@@ -71,6 +71,7 @@ function AtlasOSMInfoList({
             return (
               <AtlasOSMInfoCard
                 key={index}
+                index={index}
                 element={element}
                 map={map}
                 iconMap={iconMap}
