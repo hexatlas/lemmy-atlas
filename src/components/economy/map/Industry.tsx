@@ -1,9 +1,9 @@
-import * as Collapsible from "@radix-ui/react-collapsible";
-import { useCallback, useEffect } from "react";
-import AtlasOSMInfoCard from "../../shared/AtlasOSMInfoCard";
-import useEconomyIndustry from "../../../hooks/overpass/useEconomyIndustry";
+import { useEffect } from "react";
 import useOverpassLayer from "../../map/useOverpassLayer";
-import { iconMap } from "../../map/economy/Industry"; // Ensure you have an iconMap for industry
+import useEconomyIndustry from "../../../hooks/overpass/useEconomyIndustry";
+
+import { iconMap } from "../../map/economy/Industry";
+import AtlasOSMInfoList from "../../shared/AtlasOSMInfoList";
 
 export function Industry({
   // Location
@@ -65,18 +65,16 @@ export function Industry({
             {activeAdministrativeRegion["country"]}
           </small>
         )}
-        {data &&
-          data?.elements.map((element, index) => {
-            return (
-              <AtlasOSMInfoCard
-                key={index}
-                element={element}
-                map={map}
-                iconMap={iconMap}
-                filterKeys={["industrial"]}
-              ></AtlasOSMInfoCard>
-            );
-          })}
+        {data && (
+          <AtlasOSMInfoList
+            listName={"Industrial Features"}
+            map={map}
+            data={data}
+            iconMap={iconMap}
+            activeAdministrativeRegion={activeAdministrativeRegion}
+            filterKeys={["industrial"]}
+          ></AtlasOSMInfoList>
+        )}
       </div>
     </div>
   );

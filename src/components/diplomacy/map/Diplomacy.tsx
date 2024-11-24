@@ -1,11 +1,8 @@
-// https://www.radix-ui.com/primitives/docs/components/collapsible
-import * as Collapsible from "@radix-ui/react-collapsible";
 import { useCallback, useEffect } from "react";
-import AtlasOSMInfoCard from "../../shared/AtlasOSMInfoCard";
 import useDiplomacyEmbassies from "../../../hooks/overpass/useDiplomacyEmbassies"; // Import the new hook
 import useOverpassLayer from "../../map/useOverpassLayer";
-
 import { iconMap } from "../../map/diplomacy/Diplomacy"; // Assuming you will create an iconMap for embassies
+import AtlasOSMInfoList from "../../shared/AtlasOSMInfoList";
 
 export function Diplomacy({
   // Location
@@ -81,23 +78,16 @@ export function Diplomacy({
           {activeAdministrativeRegion["country"]}
         </small>
       )}
-      {data &&
-        data?.elements.map((element, index) => (
-          <div key={index}>
-            <AtlasOSMInfoCard
-              key={index}
-              element={element}
-              map={map}
-              iconMap={iconMap}
-              filterKeys={["diplomatic"]}
-            ></AtlasOSMInfoCard>
-            {element?.bounds && (
-              <button type="button" onClick={() => showOnMap(element?.bounds)}>
-                📍
-              </button>
-            )}
-          </div>
-        ))}
+      {data && (
+        <AtlasOSMInfoList
+          listName={"Diplomatic Locations"}
+          map={map}
+          data={data}
+          iconMap={iconMap}
+          activeAdministrativeRegion={activeAdministrativeRegion}
+          filterKeys={["diplomatic"]}
+        ></AtlasOSMInfoList>
+      )}
     </div>
   );
 }

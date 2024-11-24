@@ -1,8 +1,8 @@
 import { useCallback, useEffect } from "react";
-import AtlasOSMInfoCard from "../../shared/AtlasOSMInfoCard";
 import useEconomyTransport from "../../../hooks/overpass/useEconomyTransport";
 import useOverpassLayer from "../../map/useOverpassLayer";
 import { iconMap } from "../../map/economy/Transport";
+import AtlasOSMInfoList from "../../shared/AtlasOSMInfoList";
 
 function Transport({
   // Location
@@ -73,18 +73,16 @@ function Transport({
           {activeAdministrativeRegion["country"]}
         </small>
       )}
-      {data &&
-        data?.elements.map((element, index) => {
-          return (
-            <AtlasOSMInfoCard
-              key={index}
-              element={element}
-              map={map}
-              iconMap={iconMap}
-              filterKeys={["railway"]}
-            ></AtlasOSMInfoCard>
-          );
-        })}
+      {data && (
+        <AtlasOSMInfoList
+          listName={"Railway Stations"}
+          map={map}
+          data={data}
+          iconMap={iconMap}
+          activeAdministrativeRegion={activeAdministrativeRegion}
+          filterKeys={["railway"]}
+        ></AtlasOSMInfoList>
+      )}
     </div>
   );
 }

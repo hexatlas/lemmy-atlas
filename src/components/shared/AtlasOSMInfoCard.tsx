@@ -1,8 +1,3 @@
-import { useCallback, useEffect, useState } from "react";
-import Overpass from "../map/useOverpassLayer";
-import L from "leaflet";
-import Wikidata from "../../../public/wikidata.svg";
-
 function AtlasOSMInfoCard({
   map,
   element,
@@ -10,33 +5,24 @@ function AtlasOSMInfoCard({
   iconMap = {},
   filterKeys = [],
   children = <></>,
+  handleMouseEnter,
+  handleMouseLeave,
+  handleClick,
+  activeElement,
 }) {
-  const [lastMapBounds, setLastMapBounds] = useState(() => map.getBounds());
-
   const { name, wikidata } = element?.tags;
 
-  // Update Map to Selection
-  const showOnMap = useCallback(
-    (element) => {
-      if (element.lat && element.lon) map.flyTo([element.lat, element.lon], 14);
-
-      if (element?.bounds)
-        map.flyToBounds([
-          [(element.bounds?.minlat, element.bounds?.minlon)],
-          [element.bounds?.maxlat, element.bounds?.maxlon],
-        ]);
-    },
-    [map]
-  );
   return (
     <div
       key={key}
-      className="overpass-item"
-      onClick={() => showOnMap(element)}
+      className={`overpass-item ${element == activeElement && "active"}`}
+      onMouseEnter={() => handleMouseEnter(element)} // Trigger zoom on hover
+      onMouseLeave={() => handleMouseLeave(element)} // Revert zoom on leave
+      onClick={() => handleClick(element)} // Fly to on click
       onKeyDown={(e) => {
         if (e.key === "Enter" || e.key === " ") {
           e.preventDefault(); // Prevent default scrolling behavior on Space
-          showOnMap(element);
+          handleClick(element);
         }
       }}
       aria-label={name}
@@ -45,7 +31,6 @@ function AtlasOSMInfoCard({
       {iconMap && filterKeys && (
         <div className="overpass-filterkey">
           <span>{iconMap[element?.tags[filterKeys[0]]]?.options?.html}</span>
-
           {filterKeys.map((filterKey, index) => {
             if (index > 0) return;
             return (
@@ -54,7 +39,6 @@ function AtlasOSMInfoCard({
           })}
         </div>
       )}
-
       {children}
       <div className="overpass-container">
         <div className="overpass-name">
@@ -65,7 +49,7 @@ function AtlasOSMInfoCard({
               rel="noopener noreferrer"
               className="wikidata"
             >
-              <WikiData></WikiData>
+              <WikiData />
             </a>
           )}
           {name && <h4>{name}</h4>}

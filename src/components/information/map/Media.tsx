@@ -1,9 +1,9 @@
-import * as Collapsible from "@radix-ui/react-collapsible";
-import { useCallback, useEffect } from "react";
-import AtlasOSMInfoCard from "../../shared/AtlasOSMInfoCard";
-import useInformationMedia from "../../../hooks/overpass/useInformationMedia"; // Updated hook import
+import { useEffect } from "react";
 import useOverpassLayer from "../../map/useOverpassLayer";
-import { iconMap } from "../../map/information/Media"; // Ensure you have an iconMap for Information/Media
+import useInformationMedia from "../../../hooks/overpass/useInformationMedia";
+
+import { iconMap } from "../../map/information/Media";
+import AtlasOSMInfoList from "../../shared/AtlasOSMInfoList";
 
 export function Media({
   // Location
@@ -59,23 +59,15 @@ export function Media({
       </button>
       {isLoading && <p className="search-loading-icon">🔍</p>}
       {data && (
-        <small>
-          {data?.elements.length} Media Features found in{" "}
-          {activeAdministrativeRegion["country"]}
-        </small>
+        <AtlasOSMInfoList
+          listName={"Media Features"}
+          map={map}
+          data={data}
+          iconMap={iconMap}
+          activeAdministrativeRegion={activeAdministrativeRegion}
+          filterKeys={["communication"]}
+        ></AtlasOSMInfoList>
       )}
-      {data &&
-        data?.elements.map((element, index) => {
-          return (
-            <AtlasOSMInfoCard
-              key={index}
-              element={element}
-              map={map}
-              iconMap={iconMap}
-              filterKeys={["communication"]}
-            ></AtlasOSMInfoCard>
-          );
-        })}
     </div>
   );
 }

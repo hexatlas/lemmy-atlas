@@ -1,7 +1,7 @@
 // https://www.radix-ui.com/primitives/docs/components/collapsible
 import * as Collapsible from "@radix-ui/react-collapsible";
 import { useCallback, useEffect } from "react";
-import AtlasOSMInfoCard from "../../shared/AtlasOSMInfoCard";
+import AtlasOSMInfoList from "../../shared/AtlasOSMInfoList";
 import useEconomyEnergy from "../../../hooks/overpass/useEconomyEnergy";
 import useOverpassLayer from "../../map/useOverpassLayer";
 import L from "leaflet";
@@ -61,31 +61,23 @@ export function Energy({
       </button>
       {isLoading && <p className="search-loading-icon">🔍</p>}
       {data && (
-        <small>
-          {data?.elements.length} Power Plants found in{" "}
-          {activeAdministrativeRegion["country"]}
-        </small>
+        <AtlasOSMInfoList
+          listName={"Power Plants"}
+          map={map}
+          data={data}
+          iconMap={iconMap}
+          activeAdministrativeRegion={activeAdministrativeRegion}
+          filterKeys={[
+            "plant:source",
+            "plant:output:electricity",
+            "power",
+            "plant:method",
+            "plant:type",
+            "start_date",
+            "operator",
+          ]}
+        ></AtlasOSMInfoList>
       )}
-      {data &&
-        data?.elements.map((element, index) => {
-          return (
-            <AtlasOSMInfoCard
-              key={index}
-              element={element}
-              map={map}
-              iconMap={iconMap}
-              filterKeys={[
-                "plant:source",
-                "plant:output:electricity",
-                "power",
-                "plant:method",
-                "plant:type",
-                "start_date",
-                "operator",
-              ]}
-            ></AtlasOSMInfoCard>
-          );
-        })}
     </div>
   );
 }

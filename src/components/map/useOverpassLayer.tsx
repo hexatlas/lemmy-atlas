@@ -15,7 +15,7 @@ export default function useOverpassLayer(
   let overpassLayer;
   if (isClustered) {
     overpassLayer = L.markerClusterGroup({
-      spiderLegPolylineOptions: { weight: 1.5, color: "#fff", opacity: 0.5 },
+      polygonOptions: { weight: 1.5, color: "#FFCC0D", opacity: 0.5 },
       // iconCreateFunction: function (cluster) {
       //   // console.log(cluster.getAllChildMarkers(), "cluster");
 
@@ -50,7 +50,7 @@ export default function useOverpassLayer(
     const marker = L.marker([lat, lon], { icon });
     marker.addTo(overpassLayer);
     const popup = L.popup().setLatLng([lat, lon]).setContent(`
-      <p>${tags["plant:output:electricity"]}</p>
+      <p>${tags[filterKey]}</p>
       <h4>${name}</h4>
       <p>${tags["name:en"]}</p>
       <pre>${JSON.stringify(tags, null, 2)}</pre>
@@ -63,7 +63,7 @@ export default function useOverpassLayer(
     const { id, geometry, tags } = way;
     const coordinates = geometry.map((point) => [point.lat, point.lon]);
     const name = tags?.name || "Unnamed Way";
-    const icon = iconMap[tags[filterKey]] || defaultIcon;
+    const icon = defaultIcon || iconMap[tags[filterKey]];
     const polyline = L.polyline(coordinates, {
       color: "hsl(var(--atlas-color-tertiary) / var(--atlas-opacity-3))",
       weight: 8,
@@ -72,7 +72,7 @@ export default function useOverpassLayer(
     const marker = L.marker(coordinates[0], { icon });
     marker.addTo(overpassLayer);
     const popup = L.popup().setLatLng(coordinates[0]).setContent(`
-      <p>${tags["plant:output:electricity"]}</p>
+      <p>${tags[filterKey]}</p>
       <h4>${name}</h4>
       <p>${tags["name:en"]}</p>
       <pre>${JSON.stringify(tags, null, 2)}</pre>
@@ -84,7 +84,7 @@ export default function useOverpassLayer(
   const renderRelation = (relation) => {
     const { id, members, tags } = relation;
     const wayMembers = members.filter((member) => member.type === "way");
-
+    const icon = defaultIcon || iconMap[tags[filterKey]];
     const coordinates = wayMembers
       .map((member) => {
         if (member.geometry) {
@@ -104,12 +104,16 @@ export default function useOverpassLayer(
         weight: 8,
       });
       polyline.addTo(overpassLayer);
+      const marker = L.marker(coords[0], { icon });
+      marker.addTo(overpassLayer);
       const popup = L.popup().setLatLng(coords[0]).setContent(`
+        <p>${tags[filterKey]}</p>
         <h4>${name}</h4>
         <p>${tags["name:en"]}</p>
         <pre>${JSON.stringify(tags, null, 2)}</pre>
       `);
       polyline.bindPopup(popup);
+      marker.bindPopup(popup);
     });
   };
 
