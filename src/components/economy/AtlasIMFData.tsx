@@ -41,7 +41,7 @@ import { useQuery } from "@tanstack/react-query";
 */
 
 const AtlasIMFData = ({ activeAdministrativeRegion }) => {
-  const defaultIconIndicator = {
+  const defaultIndicator = {
     name: "PPPSH",
     label: "GDP based on PPP, share of world",
     description:
