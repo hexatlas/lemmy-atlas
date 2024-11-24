@@ -40,19 +40,13 @@ export function Diplomacy({
   const { data, isLoading } = useDiplomacyEmbassies(activeAdministrativeRegion);
 
   useEffect(() => {
-    let diplomaticLayerObjects;
+    let layerObjects;
     if (map && data) {
-      diplomaticLayerObjects = useOverpassLayer(
-        map,
-        data,
-        iconMap,
-        "diplomatic",
-        isClustered
-      ); // Adjust the Overpass function accordingly
+      layerObjects = useOverpassLayer(map, data, iconMap, "diplomatic", isClustered); // Adjust the Overpass function accordingly
     }
     return () => {
-      if (diplomaticLayerObjects) {
-        map.removeLayer(diplomaticLayerObjects.overpassLayer);
+      if (layerObjects) {
+        map.removeLayer(layerObjects.overpassLayer);
       }
     };
   }, [map, data, isClustered]);
