@@ -46,7 +46,7 @@ export default function useOverpassLayer(
   const renderNode = (node) => {
     const { id, lat, lon, tags } = node;
     const name = tags?.name || "Unnamed";
-    const icon = defaultIcon || iconMap[tags[filterKey]];
+    const icon = iconMap[tags[filterKey]] || defaultIcon;
     const marker = L.marker([lat, lon], { icon });
     marker.addTo(overpassLayer);
     const popup = L.popup().setLatLng([lat, lon]).setContent(`
@@ -63,7 +63,7 @@ export default function useOverpassLayer(
     const { id, geometry, tags } = way;
     const coordinates = geometry.map((point) => [point.lat, point.lon]);
     const name = tags?.name || "Unnamed Way";
-    const icon = defaultIcon || iconMap[tags[filterKey]];
+    const icon = iconMap[tags[filterKey]] || defaultIcon;
     const polyline = L.polyline(coordinates, {
       color: "hsl(var(--atlas-color-tertiary) / var(--atlas-opacity-3))",
       weight: 8,
@@ -72,7 +72,7 @@ export default function useOverpassLayer(
     const marker = L.marker(coordinates[0], { icon });
     marker.addTo(overpassLayer);
     const popup = L.popup().setLatLng(coordinates[0]).setContent(`
-      <p>${tags[filterKey]}</p>
+      <p>${iconMap[tags[filterKey]]}</p>
       <h4>${name}</h4>
       <p>${tags["name:en"]}</p>
       <pre>${JSON.stringify(tags, null, 2)}</pre>
