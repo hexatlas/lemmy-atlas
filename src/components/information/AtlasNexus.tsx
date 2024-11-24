@@ -40,20 +40,20 @@ function AtlasNexusCard({ interfaceProps }) {
             Anarchist Library
           </Tabs.Trigger>
         </Tabs.List>
-        <Tabs.Content className="tabs-content" value="Bulletins">
+        <Tabs.Content className="tabs-content dark" value="Bulletins">
           <AtlasNexusBulletins {...interfaceProps} />
         </Tabs.Content>
-        <Tabs.Content className="tabs-content" value="ProleWiki">
+        <Tabs.Content className="tabs-content dark" value="ProleWiki">
           <AtlasWiki
             wikiURL={"https://en.prolewiki.org"}
             {...interfaceProps}
             isProleWiki={true}
           />
         </Tabs.Content>
-        <Tabs.Content className="tabs-content" value="NatoPedia">
+        <Tabs.Content className="tabs-content dark" value="NatoPedia">
           <AtlasWiki wikiURL={"https://en.wikipedia.org/w"} {...interfaceProps} />
         </Tabs.Content>
-        <Tabs.Content className="tabs-content" value="AnarchistLibrary">
+        <Tabs.Content className="tabs-content dark" value="AnarchistLibrary">
           <AtlasNexusAnarchistLibrary {...interfaceProps} />
         </Tabs.Content>
       </Tabs.Root>

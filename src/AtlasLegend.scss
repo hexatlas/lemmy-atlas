@@ -555,17 +555,16 @@
       border-left: var(--atlas-size-14) solid
         hsl(var(--atlas-color-tertiary) / var(--atlas-opacity-3));
       padding: var(--atlas-size-16);
-      background-color: hsl(var(--atlas-color-dark));
       @include atlas-shadow(var(--atlas-shadow-inset));
       flex-grow: 1;
-      overflow: hidden;
-      overflow-y: scroll;
       outline: none;
       border-top: none;
       border-right: none;
-      padding: var(--atlas-size-12);
       padding-bottom: var(--atlas-size-07);
       .tabs-content {
+        overflow: hidden;
+        overflow-y: scroll;
+        border-radius: var(--atlas-border-radius-1);
         border-left: none;
         border-top: 1px solid hsl(var(--atlas-color-tertiary) / var(--atlas-opacity-2));
       }
@@ -629,7 +628,7 @@
   flex: 1;
   align-items: center;
   justify-content: center;
-  color: hsl(var(--atlas-color-light) / var(--atlas-opacity-3));
+  color: hsl(var(--atlas-color-dark) / var(--atlas-opacity-3));
   background-color: hsl(var(--atlas-color-light) / var(--atlas-opacity-1));
   border: 1px solid hsl(var(--atlas-color-light) / var(--atlas-opacity-1));
   border-right: var(--atlas-size-14) solid

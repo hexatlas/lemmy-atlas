@@ -75,7 +75,7 @@ function AtlasInformation({ interfaceProps }) {
           👥
         </Tabs.Trigger>
       </Tabs.List>
-      <Tabs.Content className="tabs-content" value="Misc">
+      <Tabs.Content className="tabs-content dark" value="Misc">
         <AtlasMisc {...interfacePropsWithLemmy} />
       </Tabs.Content>
       <Tabs.Content className="tabs-content" value="MapInformation">

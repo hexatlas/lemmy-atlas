@@ -1,4 +1,4 @@
-import { useCallback, useEffect } from "react";
+import { useCallback, useEffect, useState } from "react";
 import Overpass from "../map/useOverpassLayer";
 import L from "leaflet";
 import Wikidata from "../../../public/wikidata.svg";
@@ -11,12 +11,14 @@ function AtlasOSMInfoCard({
   filterKeys = [],
   children = <></>,
 }) {
+  const [lastMapBounds, setLastMapBounds] = useState(() => map.getBounds());
+
   const { name, wikidata } = element?.tags;
 
   // Update Map to Selection
   const showOnMap = useCallback(
     (element) => {
-      if (element.lat && element.lon) map.flyTo([element.lat, element.lon], 15);
+      if (element.lat && element.lon) map.flyTo([element.lat, element.lon], 14);
 
       if (element?.bounds)
         map.flyToBounds([
@@ -27,7 +29,19 @@ function AtlasOSMInfoCard({
     [map]
   );
   return (
-    <div key={key} className="overpass-item">
+    <div
+      key={key}
+      className="overpass-item"
+      onClick={() => showOnMap(element)}
+      onKeyDown={(e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault(); // Prevent default scrolling behavior on Space
+          showOnMap(element);
+        }
+      }}
+      aria-label={name}
+      role="button"
+    >
       {iconMap && filterKeys && (
         <div className="overpass-filterkey">
           <span>{iconMap[element?.tags[filterKeys[0]]]?.options?.html}</span>
@@ -38,15 +52,12 @@ function AtlasOSMInfoCard({
               <>{element?.tags[filterKey] && <small>{element?.tags[filterKey]}</small>}</>
             );
           })}
-          <button type="button" className="dark" onClick={() => showOnMap(element)}>
-            📍
-          </button>
         </div>
       )}
 
       {children}
       <div className="overpass-container">
-        <div className="overpass-name highlight">
+        <div className="overpass-name">
           {wikidata && (
             <a
               href={`https://www.wikidata.org/wiki/${wikidata}`}

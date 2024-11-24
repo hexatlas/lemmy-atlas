@@ -32,7 +32,7 @@ function AtlasMilitary({ interfaceProps }) {
       <Tabs.Content className="tabs-content" value="MapInformation">
         <AtlasMapInformation interfaceProps={interfaceProps}></AtlasMapInformation>
       </Tabs.Content>
-      <Tabs.Content className="tabs-content" value="Misc">
+      <Tabs.Content className="tabs-content dark" value="Misc">
         <AtlasMisc {...interfaceProps}></AtlasMisc>
       </Tabs.Content>
     </Tabs.Root>

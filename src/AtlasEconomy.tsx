@@ -26,13 +26,13 @@ function AtlasEconomy({ interfaceProps }) {
           📈
         </Tabs.Trigger>
       </Tabs.List>
-      <Tabs.Content className="tabs-content" value="Misc">
+      <Tabs.Content className="tabs-content dark" value="Misc">
         <AtlasMisc {...interfaceProps}></AtlasMisc>
       </Tabs.Content>
       <Tabs.Content className="tabs-content" value="MapInformation">
         <AtlasMapInformation interfaceProps={interfaceProps}></AtlasMapInformation>
       </Tabs.Content>
-      <Tabs.Content className="tabs-content" value="Charts">
+      <Tabs.Content className="tabs-content dark" value="Charts">
         <AtlasIMFData {...interfaceProps}></AtlasIMFData>
       </Tabs.Content>
     </Tabs.Root>

@@ -33,13 +33,13 @@ function AtlasGovernment({ interfaceProps }) {
           🎩
         </Tabs.Trigger>
       </Tabs.List>
-      <Tabs.Content className="tabs-content" value="Misc">
+      <Tabs.Content className="tabs-content dark" value="Misc">
         <AtlasMisc {...interfaceProps}></AtlasMisc>
       </Tabs.Content>
       <Tabs.Content className="tabs-content" value="MapInformation">
         <AtlasMapInformation interfaceProps={interfaceProps} />
       </Tabs.Content>
-      <Tabs.Content className="tabs-content" value="ClassStructure">
+      <Tabs.Content className="tabs-content dark" value="ClassStructure">
         <AtlasClassStructure interfaceProps={interfaceProps} />
       </Tabs.Content>
     </Tabs.Root>
