@@ -59,12 +59,7 @@ export function Industry({
           {isClustered ? "🚀" : "🐢"}
         </button>
         {isLoading && <p className="search-loading-icon">🔍</p>}
-        {data && (
-          <small>
-            {data?.elements.length} Industrial Features found in{" "}
-            {activeAdministrativeRegion["country"]}
-          </small>
-        )}
+
         {data && (
           <AtlasOSMInfoList
             listName={"Industrial Features"}

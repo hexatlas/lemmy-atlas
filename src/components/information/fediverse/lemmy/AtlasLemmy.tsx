@@ -344,7 +344,6 @@ export default function AtlasLemmy({
                 placeholder="Paste Lemmy URL"
                 onPaste={(e) => {
                   e.preventDefault();
-                  console.log(e.clipboardData.getData("Text"));
                   setActiveLemmyInstance({
                     id: 1,
                     label: "UserDefined",

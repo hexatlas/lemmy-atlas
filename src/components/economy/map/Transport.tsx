@@ -67,12 +67,7 @@ function Transport({
         {isClustered ? "🚀" : "🐢"}
       </button>
       {isLoading && <p className="search-loading-icon">🔍</p>}
-      {data && (
-        <small>
-          {data?.elements.length} Railway Stations found in{" "}
-          {activeAdministrativeRegion["country"]}
-        </small>
-      )}
+
       {data && (
         <AtlasOSMInfoList
           listName={"Railway Stations"}

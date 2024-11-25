@@ -1,4 +1,4 @@
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import AtlasOSMInfoCard from "./AtlasOSMInfoCard";
 
 function AtlasOSMInfoList({
@@ -9,14 +9,14 @@ function AtlasOSMInfoList({
   data,
   activeAdministrativeRegion,
 }) {
-  const [lastMapBounds, setLastMapBounds] = useState(map.getBounds()); // Store the last map bounds
+  const [lastMapBounds, setLastMapBounds] = useState(map.getBounds());
   const [activeElement, setActiveElement] = useState(null);
+  const [selectedFilters, setSelectedFilters] = useState({}); // Store selected values for each filterKey
 
-  // Function to zoom to a specific element
   const showOnMap = useCallback(
     (element) => {
       if (element.lat && element.lon) {
-        map.flyTo([element.lat, element.lon], 15), { duration: 2.7 };
+        map.flyTo([element.lat, element.lon], 15, { duration: 2.7 });
       } else if (element?.bounds) {
         map.flyToBounds(
           [
@@ -47,27 +47,82 @@ function AtlasOSMInfoList({
     showOnMap(element);
   };
 
-  // Hover handlers
   const handleMouseEnter = (element) => {
-    setLastMapBounds(map.getBounds()); // Save the current map bounds
-    showOnMap(element); // Fly to the hovered element
+    setLastMapBounds(map.getBounds());
+    showOnMap(element);
   };
 
   const handleMouseLeave = () => {
-    map.flyToBounds(lastMapBounds, { duration: 1.35 }); // Revert to the last saved bounds
+    map.flyToBounds(lastMapBounds, { duration: 1.35 });
   };
+
+  // Extract unique options for each filterKey from data
+  const getFilterOptions = (key) => {
+    const options = new Set();
+    data?.elements.forEach((element) => {
+      if (element?.tags[key]) {
+        options.add(element?.tags[key]);
+      }
+    });
+    return Array.from(options); // Convert Set to Array for dropdown
+  };
+
+  // Update selected filter for a specific key
+  const handleFilterChange = (key, value) => {
+    setSelectedFilters((prev) => ({
+      ...prev,
+      [key]: value,
+    }));
+  };
+
+  const filteredData = data?.elements?.filter((element) => {
+    return Object.entries(selectedFilters).every(([key, value]) => {
+      if (!value) return true; // No filter applied for this key
+      return element?.tags[key] === value; // Element must match the filter
+    });
+  });
 
   return (
     <div className="light">
-      {data && (
+      <div style={{ marginBottom: "1rem" }}>
+        <h6>Filters for {listName}:</h6>
+        <div style={{ display: "flex", flexWrap: "wrap", gap: "1rem" }}>
+          {filterKeys.map((key) => (
+            <div key={key} style={{ display: "flex", flexDirection: "column" }}>
+              <label htmlFor={key} style={{ fontWeight: "bold" }}>
+                {key}
+              </label>
+              <select
+                id={key}
+                value={selectedFilters[key] || ""}
+                onChange={(e) => handleFilterChange(key, e.target.value)}
+                style={{
+                  padding: "0.5rem",
+                  border: "1px solid #ccc",
+                  borderRadius: "4px",
+                }}
+              >
+                <option value="">All</option>
+                {getFilterOptions(key).map((option, index) => (
+                  <option key={index} value={option.toString()}>
+                    {option.toString()}
+                  </option>
+                ))}
+              </select>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {filteredData && (
         <h6>
-          {data?.elements.length} {listName} found in{" "}
+          {filteredData.length} {listName} found in{" "}
           {activeAdministrativeRegion["country"]}
         </h6>
       )}
       <div className="overpass-list">
-        {data &&
-          data?.elements.map((element, index) => {
+        {filteredData &&
+          filteredData.map((element, index) => {
             return (
               <AtlasOSMInfoCard
                 key={index}

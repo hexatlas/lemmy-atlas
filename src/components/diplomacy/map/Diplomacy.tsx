@@ -67,12 +67,6 @@ export function Diplomacy({
       </button>
       {isLoading && <p className="search-loading-icon">🔍</p>}
       {data && (
-        <small>
-          {data?.elements.length} Diplomatic Locations found in{" "}
-          {activeAdministrativeRegion["country"]}
-        </small>
-      )}
-      {data && (
         <AtlasOSMInfoList
           listName={"Diplomatic Locations"}
           map={map}
