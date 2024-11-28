@@ -337,7 +337,7 @@ export default function Atlas() {
                 </li>
                 <li>
                   <b>State Power Options:</b>
-                  <ul>
+                  <ul className="container">
                     <li>
                       🪙 <b>Economy</b>
                     </li>

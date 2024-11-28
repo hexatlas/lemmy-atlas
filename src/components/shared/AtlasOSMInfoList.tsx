@@ -118,9 +118,7 @@ function AtlasOSMInfoList({
                       value={selectedFilters[key] || ""}
                       onChange={(e) => handleFilterChange(key, e.target.value)}
                     >
-                      <option value="" className="filter-field--default">
-                        {key}
-                      </option>
+                      <option value="">{key}</option>
                       {getFilterOptions(key).map((option, index) => (
                         <option key={index} value={option.toString()}>
                           {option.toString()}

@@ -28,6 +28,7 @@
     align-items: center;
     padding: var(--atlas-size-10);
     background-color: hsl(var(--atlas-color-light) / var(--atlas-opacity-2));
+
     span {
       @include atlas-shadow(var(--atlas-shadow-1));
       border-radius: var(--atlas-border-radius-1);
