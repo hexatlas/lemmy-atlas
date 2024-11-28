@@ -474,9 +474,17 @@ td {
 }
 
 .container {
+  @include atlas-shadow(var(--atlas-shadow-1));
   padding: var(--atlas-size-09);
   border-radius: var(--atlas-border-radius-1);
+}
+
+.container-info {
   @include atlas-shadow(var(--atlas-shadow-1));
+  position: absolute;
+  border-radius: var(--atlas-border-radius-1);
+  padding: var(--atlas-size-10);
+  transform: translate(calc(var(--atlas-size-08) * 1), calc(var(--atlas-size-08) * -1));
 }
 
 .highlight {

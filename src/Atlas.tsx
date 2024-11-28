@@ -291,7 +291,7 @@ export default function Atlas() {
           ref={sideBarRef}
           value={activeMainTab}
           onValueChange={setActiveMainTab}
-          defaultValue={"Test"}
+          defaultValue={"Introduction"}
         >
           <Tabs.List className="tabs-list" aria-label="Manage your account">
             <Tabs.Trigger className="tabs-trigger emoji-label" value="Economy">
@@ -310,7 +310,7 @@ export default function Atlas() {
               🏛️
             </Tabs.Trigger>
           </Tabs.List>
-          <Tabs.Content className="tabs-content" value="Test">
+          <Tabs.Content className="tabs-content" value="Introduction">
             <div className="atlas-legend container light">
               <h1>Atlas</h1>
               <p>

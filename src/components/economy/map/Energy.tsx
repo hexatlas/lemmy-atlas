@@ -2,6 +2,7 @@
 import * as Collapsible from "@radix-ui/react-collapsible";
 import { useCallback, useEffect } from "react";
 import AtlasOSMInfoList from "../../shared/AtlasOSMInfoList";
+import AtlasOSMSettings from "../../shared/AtlasOSMSettings";
 import useEconomyEnergy from "../../../hooks/overpass/useEconomyEnergy";
 import useOverpassLayer from "../../map/useOverpassLayer";
 import L from "leaflet";
@@ -54,11 +55,14 @@ export function Energy({
     };
   }, [map, data, isClustered]);
 
+  const clusterSettings = {
+    isClustered,
+    setIsClustered,
+  };
+
   return (
     <div id="legend-content">
-      <button type="button" onClick={() => setIsClustered(!isClustered)}>
-        {isClustered ? "🚀" : "🐢"}
-      </button>
+      <AtlasOSMSettings {...clusterSettings} />
       {isLoading && <p className="search-loading-icon">🔍</p>}
       {data && (
         <AtlasOSMInfoList

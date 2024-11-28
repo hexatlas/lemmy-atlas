@@ -3,6 +3,7 @@ import useDiplomacyEmbassies from "../../../hooks/overpass/useDiplomacyEmbassies
 import useOverpassLayer from "../../map/useOverpassLayer";
 import { iconMap } from "../../map/diplomacy/Diplomacy"; // Assuming you will create an iconMap for embassies
 import AtlasOSMInfoList from "../../shared/AtlasOSMInfoList";
+import AtlasOSMSettings from "../../shared/AtlasOSMSettings";
 
 export function Diplomacy({
   // Location
@@ -60,11 +61,14 @@ export function Diplomacy({
     [map]
   );
 
+  const clusterSettings = {
+    isClustered,
+    setIsClustered,
+  };
+
   return (
     <div id="legend-content">
-      <button type="button" onClick={() => setIsClustered(!isClustered)}>
-        {isClustered ? "🚀" : "🐢"}
-      </button>
+      <AtlasOSMSettings {...clusterSettings} />
       {isLoading && <p className="search-loading-icon">🔍</p>}
       {data && (
         <AtlasOSMInfoList

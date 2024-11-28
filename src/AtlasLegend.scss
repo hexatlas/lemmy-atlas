@@ -20,6 +20,44 @@
     z-index: 9999;
     background: white;
   }
+  .overpass-settings-container {
+    @include atlas-shadow(var(--atlas-shadow-1));
+    margin: var(--atlas-size-10);
+    background-color: hsl(var(--atlas-color-light) / var(--atlas-opacity-2));
+    border: 1px solid hsl(var(--atlas-color-light) / var(--atlas-opacity-3));
+    border: none;
+    border-right: var(--atlas-size-14) solid
+      hsl(var(--atlas-color-secondary) / var(--atlas-opacity-3));
+    border-radius: var(--atlas-border-radius-1);
+    padding-top: var(--atlas-size-08);
+    .container-info {
+      left: 0;
+    }
+    display: grid;
+    button {
+      margin: 0;
+      background-color: hsl(var(--atlas-color-light) / var(--atlas-opacity-2));
+      border-bottom: 1px solid hsl(var(--atlas-color-dark) / var(--atlas-opacity-1));
+      &:hover {
+        background: hsl(var(--atlas-color-primary) / var(--atlas-opacity-3)) !important;
+        color: hsl(var(--atlas-color-light) / var(--atlas-opacity-3)) !important;
+        border-radius: var(--atlas-size-14);
+        opacity: 1;
+      }
+    }
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  #legend-content {
+    .overpass-settings-container {
+      position: fixed;
+      left: 0;
+      button {
+        // background: none;
+      }
+    }
+  }
 }
 
 .legend-footer {

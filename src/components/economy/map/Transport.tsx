@@ -3,6 +3,7 @@ import useEconomyTransport from "../../../hooks/overpass/useEconomyTransport";
 import useOverpassLayer from "../../map/useOverpassLayer";
 import { iconMap } from "../../map/economy/Transport";
 import AtlasOSMInfoList from "../../shared/AtlasOSMInfoList";
+import AtlasOSMSettings from "../../shared/AtlasOSMSettings";
 
 function Transport({
   // Location
@@ -61,11 +62,14 @@ function Transport({
     [map]
   );
 
+  const clusterSettings = {
+    isClustered,
+    setIsClustered,
+  };
+
   return (
     <div id="legend-content">
-      <button type="button" onClick={() => setIsClustered(!isClustered)}>
-        {isClustered ? "🚀" : "🐢"}
-      </button>
+      <AtlasOSMSettings {...clusterSettings} />
       {isLoading && <p className="search-loading-icon">🔍</p>}
 
       {data && (

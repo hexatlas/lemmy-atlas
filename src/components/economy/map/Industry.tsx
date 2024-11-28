@@ -4,6 +4,7 @@ import useEconomyIndustry from "../../../hooks/overpass/useEconomyIndustry";
 
 import { iconMap } from "../../map/economy/Industry";
 import AtlasOSMInfoList from "../../shared/AtlasOSMInfoList";
+import AtlasOSMSettings from "../../shared/AtlasOSMSettings";
 
 export function Industry({
   // Location
@@ -52,25 +53,26 @@ export function Industry({
     };
   }, [map, data, isClustered]);
 
+  const clusterSettings = {
+    isClustered,
+    setIsClustered,
+  };
+
   return (
     <div id="legend-content">
-      <div id="legend-content">
-        <button type="button" onClick={() => setIsClustered(!isClustered)}>
-          {isClustered ? "🚀" : "🐢"}
-        </button>
-        {isLoading && <p className="search-loading-icon">🔍</p>}
+      <AtlasOSMSettings {...clusterSettings} />
+      {isLoading && <p className="search-loading-icon">🔍</p>}
 
-        {data && (
-          <AtlasOSMInfoList
-            listName={"Industrial Features"}
-            map={map}
-            data={data}
-            iconMap={iconMap}
-            activeAdministrativeRegion={activeAdministrativeRegion}
-            filterKeys={["industrial"]}
-          ></AtlasOSMInfoList>
-        )}
-      </div>
+      {data && (
+        <AtlasOSMInfoList
+          listName={"Industrial Features"}
+          map={map}
+          data={data}
+          iconMap={iconMap}
+          activeAdministrativeRegion={activeAdministrativeRegion}
+          filterKeys={["industrial"]}
+        ></AtlasOSMInfoList>
+      )}
     </div>
   );
 }

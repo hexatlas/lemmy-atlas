@@ -4,6 +4,7 @@ import useInformationMedia from "../../../hooks/overpass/useInformationMedia";
 
 import { iconMap } from "../../map/information/Media";
 import AtlasOSMInfoList from "../../shared/AtlasOSMInfoList";
+import AtlasOSMSettings from "../../shared/AtlasOSMSettings";
 
 export function Media({
   // Location
@@ -52,11 +53,14 @@ export function Media({
     };
   }, [map, data, isClustered]);
 
+  const clusterSettings = {
+    isClustered,
+    setIsClustered,
+  };
+
   return (
     <div id="legend-content">
-      <button type="button" onClick={() => setIsClustered(!isClustered)}>
-        {isClustered ? "🚀" : "🐢"}
-      </button>
+      <AtlasOSMSettings {...clusterSettings} />
       {isLoading && <p className="search-loading-icon">🔍</p>}
       {data && (
         <AtlasOSMInfoList

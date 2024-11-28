@@ -64,7 +64,7 @@ function AtlasOSMInfoList({
         options.add(element?.tags[key]);
       }
     });
-    return Array.from(options); // Convert Set to Array for dropdown
+    return Array.from(options).sort(); // Convert Set to Array for dropdown
   };
 
   // Update selected filter for a specific key
@@ -84,42 +84,44 @@ function AtlasOSMInfoList({
 
   return (
     <div className="light">
-      <div style={{ marginBottom: "1rem" }}>
-        <h6>Filters for {listName}:</h6>
-        <div style={{ display: "flex", flexWrap: "wrap", gap: "1rem" }}>
-          {filterKeys.map((key) => (
-            <div key={key} style={{ display: "flex", flexDirection: "column" }}>
-              <label htmlFor={key} style={{ fontWeight: "bold" }}>
-                {key}
-              </label>
-              <select
-                id={key}
-                value={selectedFilters[key] || ""}
-                onChange={(e) => handleFilterChange(key, e.target.value)}
-                style={{
-                  padding: "0.5rem",
-                  border: "1px solid #ccc",
-                  borderRadius: "4px",
-                }}
-              >
-                <option value="">All</option>
-                {getFilterOptions(key).map((option, index) => (
-                  <option key={index} value={option.toString()}>
-                    {option.toString()}
-                  </option>
-                ))}
-              </select>
-            </div>
-          ))}
-        </div>
+      <div className="container">
+        {filteredData && (
+          <>
+            <h5>
+              {filteredData.length} {listName} found in{" "}
+              {activeAdministrativeRegion["country"]}
+            </h5>
+            <h6>Filters for {listName}:</h6>
+            <div style={{ display: "flex", flexWrap: "wrap", gap: "1rem" }}>
+              {filterKeys.map((key) => (
+                <div key={key} style={{ display: "flex", flexDirection: "column" }}>
+                  <label htmlFor={key} style={{ fontWeight: "bold" }}>
+                    {key}
+                  </label>
+                  <select
+                    id={key}
+                    value={selectedFilters[key] || ""}
+                    onChange={(e) => handleFilterChange(key, e.target.value)}
+                    style={{
+                      padding: "0.5rem",
+                      border: "1px solid #ccc",
+                      borderRadius: "4px",
+                    }}
+                  >
+                    <option value="">All</option>
+                    {getFilterOptions(key).map((option, index) => (
+                      <option key={index} value={option.toString()}>
+                        {option.toString()}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              ))}
+            </div>{" "}
+          </>
+        )}
       </div>
 
-      {filteredData && (
-        <h6>
-          {filteredData.length} {listName} found in{" "}
-          {activeAdministrativeRegion["country"]}
-        </h6>
-      )}
       <div className="overpass-list">
         {filteredData &&
           filteredData.map((element, index) => {
