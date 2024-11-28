@@ -68,8 +68,8 @@ export function Diplomacy({
 
   return (
     <div id="legend-content">
-      <AtlasOSMSettings {...clusterSettings} />
       {isLoading && <p className="search-loading-icon">🔍</p>}
+      <AtlasOSMSettings {...clusterSettings} />
       {data && (
         <AtlasOSMInfoList
           listName={"Diplomatic Locations"}

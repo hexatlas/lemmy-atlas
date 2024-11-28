@@ -171,7 +171,7 @@ export const economicOverpassQueries: Array<overpassQuery> = [
     power: "Economic",
     category: "Economic",
     query: (iso3166: string) => `
-    [out:json][timeout:25];
+    [out:json][timeout:90];
     area["ISO3166-1"="${iso3166}"]->.name;
     (
       nwr["highway"](area.name);
@@ -197,7 +197,7 @@ export const informationalOverpassQueries: Array<overpassQuery> = [
     power: "Informational",
     category: "Informational",
     query: (iso3166: string) => `
-    [out:json][timeout:25];
+    [out:json][timeout:90];
     area["ISO3166-1"="${iso3166}"]->.name;
     (
       nwr["man_made"="communications_tower"](area.name);
@@ -221,7 +221,7 @@ export const diplomaticOverpassQueries: Array<overpassQuery> = [
     power: "Diplomatic",
     category: "Diplomatic",
     query: (iso3166: string) => `
-    [out:json][timeout:25];
+    [out:json][timeout:90];
     area["ISO3166-1"="${iso3166}"]->.name;
     (
       nwr["amenity"="embassy"](area.name);
@@ -243,7 +243,7 @@ export const militaryOverpassQueries: Array<overpassQuery> = [
     power: "Military",
     category: "Military",
     query: (iso3166: string) => `
-    [out:json][timeout:25];
+    [out:json][timeout:90];
     area["ISO3166-1"="${iso3166}"]->.name;
     (
       nwr["military"="base"](area.name);

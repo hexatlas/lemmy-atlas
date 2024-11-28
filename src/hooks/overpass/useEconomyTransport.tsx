@@ -3,7 +3,7 @@ import useOverpassAPI from "../useOverpassAPI";
 
 function useEconomyTransport(activeAdministrativeRegion) {
   const overpassQuery = `
-    [out:json][timeout:25];
+    [out:json][timeout:90];
     
     // Fetch area for the selected region
     area["ISO3166-1"="${activeAdministrativeRegion["alpha-2"]}"]->.name;

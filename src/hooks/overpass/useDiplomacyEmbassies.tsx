@@ -3,7 +3,7 @@ import useOverpassAPI from "../useOverpassAPI";
 
 function useDiplomacyEmbassies(activeAdministrativeRegion) {
   const overpassQuery = `
-    [out:json][timeout:25];
+    [out:json][timeout:90];
 
 
       nwr["office"="diplomatic"]["country"="${activeAdministrativeRegion["alpha-2"]}"];

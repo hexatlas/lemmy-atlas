@@ -42,6 +42,10 @@
     }
   }
 
+  .overpass-container {
+    overflow-y: scroll;
+  }
+
   .overpass-name {
     @include atlas-shadow(var(--atlas-shadow-inset));
     border-radius: var(--atlas-border-radius-1);
