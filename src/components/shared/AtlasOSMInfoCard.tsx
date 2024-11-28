@@ -1,3 +1,6 @@
+// https://www.radix-ui.com/primitives/docs/components/collapsible
+import * as Collapsible from "@radix-ui/react-collapsible";
+
 function AtlasOSMInfoCard({
   map,
   element,
@@ -13,7 +16,7 @@ function AtlasOSMInfoCard({
   const { name, wikidata } = element?.tags;
 
   return (
-    <div
+    <Collapsible.Root
       key={index}
       className={`overpass-item ${element == activeElement && "active"}`}
       onMouseEnter={() => handleMouseEnter(element)} // Trigger zoom on hover
@@ -45,6 +48,7 @@ function AtlasOSMInfoCard({
               </>
             );
           })}
+          <Collapsible.Trigger className="overpass-expand">🗃️</Collapsible.Trigger>
         </div>
       )}
       {children}
@@ -108,10 +112,10 @@ function AtlasOSMInfoCard({
             );
           })}
       </div>
-      <pre className="overpass-json dark">
-        {JSON.stringify(element?.tags, undefined, 2)}
-      </pre>
-    </div>
+      <Collapsible.Content className="overpass-json dark">
+        <pre>{JSON.stringify(element?.tags, undefined, 2)}</pre>
+      </Collapsible.Content>
+    </Collapsible.Root>
   );
 }
 

@@ -1,6 +1,9 @@
 import { useCallback, useEffect, useState } from "react";
 import AtlasOSMInfoCard from "./AtlasOSMInfoCard";
 
+// https://www.radix-ui.com/primitives/docs/components/collapsible
+import * as Collapsible from "@radix-ui/react-collapsible";
+
 function AtlasOSMInfoList({
   listName,
   map,
@@ -12,6 +15,7 @@ function AtlasOSMInfoList({
   const [lastMapBounds, setLastMapBounds] = useState(map.getBounds());
   const [activeElement, setActiveElement] = useState(null);
   const [selectedFilters, setSelectedFilters] = useState({}); // Store selected values for each filterKey
+  const [isOpenFilter, setOpenFilter] = useState(false);
 
   const showOnMap = useCallback(
     (element) => {
@@ -83,44 +87,52 @@ function AtlasOSMInfoList({
   });
 
   return (
-    <div className="light">
-      <div className="container">
+    <>
+      <Collapsible.Root
+        className="overpass-filter light"
+        open={isOpenFilter}
+        onOpenChange={setOpenFilter}
+      >
         {filteredData && (
           <>
-            <h5>
-              {filteredData.length} {listName} found in{" "}
-              {activeAdministrativeRegion["country"]}
-            </h5>
-            <h6>Filters for {listName}:</h6>
-            <div style={{ display: "flex", flexWrap: "wrap", gap: "1rem" }}>
-              {filterKeys.map((key) => (
-                <div key={key} style={{ display: "flex", flexDirection: "column" }}>
-                  <label htmlFor={key} style={{ fontWeight: "bold" }}>
-                    {key}
-                  </label>
-                  <select
-                    id={key}
-                    value={selectedFilters[key] || ""}
-                    onChange={(e) => handleFilterChange(key, e.target.value)}
-                    style={{
-                      padding: "0.5rem",
-                      border: "1px solid #ccc",
-                      borderRadius: "4px",
-                    }}
-                  >
-                    <option value="">All</option>
-                    {getFilterOptions(key).map((option, index) => (
-                      <option key={index} value={option.toString()}>
-                        {option.toString()}
+            <div className="filter-title">
+              <Collapsible.Trigger className="filter-expand">
+                {isOpenFilter ? "🔻" : "🔍"}
+              </Collapsible.Trigger>
+              <h5>
+                <span>
+                  {filteredData.length} {listName}
+                </span>{" "}
+                found in {activeAdministrativeRegion["country"]}
+              </h5>
+            </div>
+            <div className="filter-menu">
+              {isOpenFilter &&
+                filterKeys.map((key) => (
+                  <Collapsible.Content key={key} className="filter-field">
+                    <label htmlFor={key} className="sr-only">
+                      {key}
+                    </label>
+                    <select
+                      id={key}
+                      value={selectedFilters[key] || ""}
+                      onChange={(e) => handleFilterChange(key, e.target.value)}
+                    >
+                      <option value="" className="filter-field--default">
+                        {key}
                       </option>
-                    ))}
-                  </select>
-                </div>
-              ))}
+                      {getFilterOptions(key).map((option, index) => (
+                        <option key={index} value={option.toString()}>
+                          {option.toString()}
+                        </option>
+                      ))}
+                    </select>
+                  </Collapsible.Content>
+                ))}
             </div>{" "}
           </>
         )}
-      </div>
+      </Collapsible.Root>
 
       <div className="overpass-list">
         {filteredData &&
@@ -141,7 +153,7 @@ function AtlasOSMInfoList({
             );
           })}
       </div>
-    </div>
+    </>
   );
 }
 

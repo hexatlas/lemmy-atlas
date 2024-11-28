@@ -7,6 +7,9 @@ function AtlasOSMSettings({ isClustered, setIsClustered, Children = <></> }) {
       <button type="button" onClick={() => setIsClustered(!isClustered)}>
         {isClustered ? "🗂️" : "📍"}
       </button>
+      <button type="button" onClick={() => setIsClustered(!isClustered)}>
+        {isClustered ? "🗺️" : "🔲"}
+      </button>
       {Children}
     </div>
   );
