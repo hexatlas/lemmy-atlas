@@ -43,6 +43,19 @@ export function AtlasMisc({
         🔗 Visit UN Comtrade
       </a>
 
+      <h3>Tradingeconomics </h3>
+      <a
+        href={`https://tradingeconomics.com/${encodeURI(
+          activeAdministrativeRegion["country"]
+        )
+          .replace(/%20/g, "-")
+          .toLowerCase()}/imports-by-country`}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        🔗 Visit Tradingeconomics
+      </a>
+
       <h3>International Labour Organization</h3>
       <a
         href="https://ilostat.ilo.org/resources/sdmx-tools/"
