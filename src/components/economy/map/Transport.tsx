@@ -1,7 +1,7 @@
 import { useCallback, useEffect } from "react";
-import useEconomyTransport from "../../../hooks/overpass/useEconomyTransport";
-import useOverpassLayer from "../../map/useOverpassLayer";
-import { iconMap } from "../../map/economy/Transport";
+import useEconomyTransport from "../../../data/overpass/economy/useEconomyTransport";
+import useOverpassLayer from "../../../emoji/useOverpassLayer";
+import { iconMap } from "../../../emoji/economy/Transport";
 import AtlasOSMInfoList from "../../shared/AtlasOSMInfoList";
 import AtlasOSMSettings from "../../shared/AtlasOSMSettings";
 

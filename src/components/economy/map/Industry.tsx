@@ -1,8 +1,8 @@
 import { useEffect } from "react";
-import useOverpassLayer from "../../map/useOverpassLayer";
-import useEconomyIndustry from "../../../hooks/overpass/useEconomyIndustry";
+import useOverpassLayer from "../../../emoji/useOverpassLayer";
+import useEconomyIndustry from "../../../data/overpass/economy/useEconomyIndustry";
 
-import { iconMap } from "../../map/economy/Industry";
+import { iconMap } from "../../../emoji/economy/Industry";
 import AtlasOSMInfoList from "../../shared/AtlasOSMInfoList";
 import AtlasOSMSettings from "../../shared/AtlasOSMSettings";
 

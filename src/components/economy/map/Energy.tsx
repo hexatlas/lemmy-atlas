@@ -3,10 +3,10 @@ import * as Collapsible from "@radix-ui/react-collapsible";
 import { useCallback, useEffect } from "react";
 import AtlasOSMInfoList from "../../shared/AtlasOSMInfoList";
 import AtlasOSMSettings from "../../shared/AtlasOSMSettings";
-import useEconomyEnergy from "../../../hooks/overpass/useEconomyEnergy";
-import useOverpassLayer from "../../map/useOverpassLayer";
+import useEconomyEnergy from "../../../data/overpass/economy/useEconomyEnergy";
+import useOverpassLayer from "../../../emoji/useOverpassLayer";
 import L from "leaflet";
-import { iconMap } from "../../map/economy/Energy";
+import { iconMap } from "../../../emoji/economy/Energy";
 
 export function Energy({
   // Location

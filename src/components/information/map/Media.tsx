@@ -1,8 +1,8 @@
 import { useEffect } from "react";
-import useOverpassLayer from "../../map/useOverpassLayer";
-import useInformationMedia from "../../../hooks/overpass/useInformationMedia";
+import useOverpassLayer from "../../../emoji/useOverpassLayer";
+import useInformationMedia from "../../../data/overpass/information/useInformationMedia";
 
-import { iconMap } from "../../map/information/Media";
+import { iconMap } from "../../../emoji/information/Media";
 import AtlasOSMInfoList from "../../shared/AtlasOSMInfoList";
 import AtlasOSMSettings from "../../shared/AtlasOSMSettings";
 
