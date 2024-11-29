@@ -1,6 +1,6 @@
 // import center from "@turf/center";
 import { useState, useEffect } from "react";
-import administrativeRegionsData from "../data/administrative_regions_extended.json";
+import administrativeRegionsData from "../data/geojson/administrative_regions_extended.json";
 
 // HANDLE RANDOM
 
