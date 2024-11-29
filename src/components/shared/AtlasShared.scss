@@ -27,7 +27,7 @@
     gap: var(--atlas-size-10);
     align-items: center;
     padding: var(--atlas-size-10);
-    background-color: hsl(var(--atlas-color-light) / var(--atlas-opacity-2));
+    background-color: hsl(var(--atlas-color-light) / var(--atlas-opacity-3));
 
     span {
       @include atlas-shadow(var(--atlas-shadow-1));
