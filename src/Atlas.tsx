@@ -1,23 +1,23 @@
-import { useEffect, useMemo, useState, useRef } from "react";
+import { useEffect, useMemo, useState, useRef } from 'react';
 
 // https://www.radix-ui.com/primitives/docs/components/tabs
-import * as Tabs from "@radix-ui/react-tabs";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import * as Tabs from '@radix-ui/react-tabs';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 // Imoport SCSS
 
 // Import Components
-import AtlasMap from "./AtlasMap";
-import AtlasInterface from "./AtlasMapInterface";
-import AtlasEconomy from "./AtlasEconomy";
-import AtlasInformation from "./AtlasInformation";
-import AtlasDiplomacy from "./AtlasDiplomacy";
-import AtlasMilitary from "./AtlasMilitary";
-import AtlasGovernment from "./AtlasGovernment";
+import AtlasMap from './components/map/Index';
+import AtlasInterface from './AtlasInterface';
+import AtlasEconomy from './components/legend/economy/Index';
+import AtlasInformation from './components/legend/information/Index';
+import AtlasDiplomacy from './components/legend/diplomacy/Index';
+import AtlasMilitary from './components/legend/military/Index';
+import AtlasGovernment from './components/legend/government/Index';
 
 // Import customHook
-import { regionTypes } from "./Atlas_Config";
-import { useStateStorage } from "./hooks/useAtlasUtils";
+import { regionTypes } from './Atlas_Config';
+import { useStateStorage } from './hooks/useAtlasUtils';
 
 /*
 
@@ -58,19 +58,19 @@ export default function Atlas() {
   // UI STATES
 
   const [isOpenAtlasMapInterface, setIsOpenAtlasMapInterface] = useState(
-    !(window.innerWidth < 768)
+    !(window.innerWidth < 768),
   );
 
   const [isLocationSelectMode, setIsLocationSelectMode] = useStateStorage(
-    "isLocationSelectMode",
-    false
+    'isLocationSelectMode',
+    false,
   );
   const [activeLocationSelection, setActiveLocationSelection] = useStateStorage(
-    "activeLocationSelection",
-    []
+    'activeLocationSelection',
+    [],
   );
 
-  const [isClustered, setIsClustered] = useStateStorage("isClustered", true);
+  const [isClustered, setIsClustered] = useStateStorage('isClustered', true);
 
   /*
       useStates
@@ -84,39 +84,43 @@ export default function Atlas() {
     administrativeRegionClickHistoryArray,
     setAdministrativeRegionClickHistoryArray,
   ] = useState([]);
-  const [activeAdministrativeRegion, setActiveAdministrativeRegion] = useStateStorage(
-    "activeAdministrativeRegion",
-    {
-      country: "country",
-      name: "name",
-      "intermediate-region": "intermediate-region",
-      "sub-region": "sub-region",
-      region: "region",
-    }
-  );
+  const [activeAdministrativeRegion, setActiveAdministrativeRegion] =
+    useStateStorage('activeAdministrativeRegion', {
+      country: 'country',
+      name: 'name',
+      'intermediate-region': 'intermediate-region',
+      'sub-region': 'sub-region',
+      region: 'region',
+    });
 
   const [activeLocationType, setActiveLocationType] = useStateStorage(
-    "activeLocationType",
-    regionTypes[1]
+    'activeLocationType',
+    regionTypes[1],
   ); // Default: Country Sort
-  const [locationQuery, setLocationQuery] = useStateStorage("locationQuery", "");
+  const [locationQuery, setLocationQuery] = useStateStorage(
+    'locationQuery',
+    '',
+  );
 
-  const [activeMainTab, setActiveMainTab] = useStateStorage("activeMainTab", undefined);
+  const [activeMainTab, setActiveMainTab] = useStateStorage(
+    'activeMainTab',
+    undefined,
+  );
 
   /*
       useEffects
   */
   useEffect(() => {
-    if (isMobile && activeAdministrativeRegion.country === "country") {
+    if (isMobile && activeAdministrativeRegion.country === 'country') {
       window.scrollTo({
         top: 0,
-        behavior: "smooth",
+        behavior: 'smooth',
       });
     }
-    if (isMobile && activeAdministrativeRegion.country !== "country") {
+    if (isMobile && activeAdministrativeRegion.country !== 'country') {
       window.scrollTo({
-        top: document.getElementById("atlas-tabs").offsetTop * 1.312,
-        behavior: "smooth",
+        top: document.getElementById('atlas-tabs').offsetTop * 1.312,
+        behavior: 'smooth',
       });
     }
   }, [activeAdministrativeRegion]);
@@ -128,8 +132,8 @@ export default function Atlas() {
     // if (sideBarRef.current) sideBarRef.current.scrollTop = 0;
     if (sideBarRef.current)
       sideBarRef.current.scrollTo({
-        top: document.getElementById("atlas-tabs").offsetTop,
-        behavior: "smooth",
+        top: document.getElementById('atlas-tabs').offsetTop,
+        behavior: 'smooth',
       });
 
     const selection = {
@@ -149,9 +153,9 @@ export default function Atlas() {
 
   useEffect(() => {
     handleResize();
-    window.addEventListener("resize", handleResize);
+    window.addEventListener('resize', handleResize);
     return () => {
-      window.removeEventListener("resize", handleResize);
+      window.removeEventListener('resize', handleResize);
     };
   });
 
@@ -170,20 +174,20 @@ export default function Atlas() {
     setActiveLocationSelection([]);
     setAdministrativeRegionClickHistoryArray([]);
     setActiveAdministrativeRegion({
-      country: "country",
-      name: "name",
-      "intermediate-region": "intermediate-region",
-      "sub-region": "sub-region",
-      region: "region",
+      country: 'country',
+      name: 'name',
+      'intermediate-region': 'intermediate-region',
+      'sub-region': 'sub-region',
+      region: 'region',
     });
     setActiveLocationType(regionTypes[1]); // Default: Country Sort
-    setLocationQuery("");
+    setLocationQuery('');
     setIsOpenAtlasMapInterface(!isMobile);
 
     if (sideBarRef.current)
       sideBarRef.current.scrollTo({
-        top: document.getElementById("atlas-tabs").offsetTop,
-        behavior: "smooth",
+        top: document.getElementById('atlas-tabs').offsetTop,
+        behavior: 'smooth',
       });
   }
 
@@ -266,14 +270,14 @@ export default function Atlas() {
 
   const DisplayAtlasMap = useMemo(
     () => <AtlasMap {...interfaceProps} />,
-    [activeAdministrativeRegion, activeLocationType]
+    [activeAdministrativeRegion, activeLocationType],
   );
 
   return (
     <QueryClientProvider client={queryClient}>
       <div
         className={`atlas ${
-          activeAdministrativeRegion.country !== "Country" && "atlas--active"
+          activeAdministrativeRegion.country !== 'Country' && 'atlas--active'
         }`}
         style={{
           gridTemplateColumns: `1.6180339887498948482fr ${legendSize}px`,
@@ -291,22 +295,31 @@ export default function Atlas() {
           ref={sideBarRef}
           value={activeMainTab}
           onValueChange={setActiveMainTab}
-          defaultValue={"Introduction"}
+          defaultValue={'Introduction'}
         >
           <Tabs.List className="tabs-list" aria-label="Manage your account">
             <Tabs.Trigger className="tabs-trigger emoji-label" value="Economy">
               🪙
             </Tabs.Trigger>
-            <Tabs.Trigger className="tabs-trigger emoji-label" value="Information">
+            <Tabs.Trigger
+              className="tabs-trigger emoji-label"
+              value="Information"
+            >
               ℹ️
             </Tabs.Trigger>
-            <Tabs.Trigger className="tabs-trigger emoji-label" value="Diplomacy">
+            <Tabs.Trigger
+              className="tabs-trigger emoji-label"
+              value="Diplomacy"
+            >
               🕊️
             </Tabs.Trigger>
             <Tabs.Trigger className="tabs-trigger emoji-label" value="Military">
               🛡️
             </Tabs.Trigger>
-            <Tabs.Trigger className="tabs-trigger emoji-label" value="ClassStructure">
+            <Tabs.Trigger
+              className="tabs-trigger emoji-label"
+              value="ClassStructure"
+            >
               🏛️
             </Tabs.Trigger>
           </Tabs.List>
@@ -314,17 +327,18 @@ export default function Atlas() {
             <div className="atlas-legend container light">
               <h1>Atlas</h1>
               <p>
-                This Atlas uses OpenStreetMaps, Overpass, Nominatim, ProleWiki, Wikipedia,
-                Lemmy, Mastodon, and aims to provide a comprehensive view of various
-                instruments of state power across different countries.
+                This Atlas uses OpenStreetMaps, Overpass, Nominatim, ProleWiki,
+                Wikipedia, Lemmy, Mastodon, and aims to provide a comprehensive
+                view of various instruments of state power across different
+                countries.
               </p>
               <h2>Instructions</h2>
               <blockquote>
-                <i className="secondary">Attention:</i> Select an{" "}
+                <i className="secondary">Attention:</i> Select an{' '}
                 <span className="primary">
                   <i>option</i>
-                </span>{" "}
-                to reveal{" "}
+                </span>{' '}
+                to reveal{' '}
                 <span className="tertiary">
                   <i>selected information</i>
                 </span>
@@ -332,8 +346,8 @@ export default function Atlas() {
               </blockquote>
               <ul className="container dark">
                 <li>
-                  <b>Select Country:</b> Use the search or click on the map, or 🎲 for a
-                  random pick.
+                  <b>Select Country:</b> Use the search or click on the map, or
+                  🎲 for a random pick.
                 </li>
                 <li>
                   <b>State Power Options:</b>
@@ -356,7 +370,8 @@ export default function Atlas() {
                   </ul>
                 </li>
                 <li>
-                  <b>Map Layers:</b> Switch between satellite, terrain, or boundaries. 🗺️
+                  <b>Map Layers:</b> Switch between satellite, terrain, or
+                  boundaries. 🗺️
                 </li>
                 <li>
                   <b>Show on Map:</b> Look for 📍 to pinpoint locations. 🌐
@@ -375,7 +390,9 @@ export default function Atlas() {
             <AtlasEconomy interfaceProps={interfaceProps}></AtlasEconomy>
           </Tabs.Content>
           <Tabs.Content className="tabs-content" value="Information">
-            <AtlasInformation interfaceProps={interfaceProps}></AtlasInformation>
+            <AtlasInformation
+              interfaceProps={interfaceProps}
+            ></AtlasInformation>
           </Tabs.Content>
           <Tabs.Content className="tabs-content" value="Diplomacy">
             <AtlasDiplomacy interfaceProps={interfaceProps}></AtlasDiplomacy>

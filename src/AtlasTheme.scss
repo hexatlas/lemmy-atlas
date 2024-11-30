@@ -1,6 +1,6 @@
 /* Imports */
 
-@use "leaflet/dist/leaflet.css";
+@use 'leaflet/dist/leaflet.css';
 
 :root {
   /* colors */
@@ -87,30 +87,44 @@
   --atlas-transition-slow: var(--atlas-time-2) var(--atlas-timing-function);
   --atlas-timing-fast: var(--atlas-time-3) var(--atlas-timing-function) infinite;
   --atlas-timing-slow: var(--atlas-time-4) var(--atlas-timing-function) infinite;
-  --atlas-timing-gradient: var(--atlas-time-5) var(--atlas-timing-function) infinite
-    alternate-reverse;
+  --atlas-timing-gradient: var(--atlas-time-5) var(--atlas-timing-function)
+    infinite alternate-reverse;
 
   /* shadows */
 
   --atlas-shadow-1: 0 var(--atlas-size-16) var(--atlas-size-16)
       hsl(var(--atlas-color-dark) / 0.08),
-    0 var(--atlas-size-15) var(--atlas-size-15) hsl(var(--atlas-color-dark) / 0.061),
-    0 var(--atlas-size-14) var(--atlas-size-14) hsl(var(--atlas-color-dark) / 0.052),
-    0 var(--atlas-size-13) var(--atlas-size-13) hsl(var(--atlas-color-dark) / 0.046),
-    0 var(--atlas-size-12) var(--atlas-size-12) hsl(var(--atlas-color-dark) / 0.04),
-    0 var(--atlas-size-11) var(--atlas-size-11) hsl(var(--atlas-color-dark) / 0.034),
-    0 var(--atlas-size-10) var(--atlas-size-10) hsl(var(--atlas-color-dark) / 0.028),
-    0 var(--atlas-size-09) var(--atlas-size-09) hsl(var(--atlas-color-dark) / 0.019);
+    0 var(--atlas-size-15) var(--atlas-size-15)
+      hsl(var(--atlas-color-dark) / 0.061),
+    0 var(--atlas-size-14) var(--atlas-size-14)
+      hsl(var(--atlas-color-dark) / 0.052),
+    0 var(--atlas-size-13) var(--atlas-size-13)
+      hsl(var(--atlas-color-dark) / 0.046),
+    0 var(--atlas-size-12) var(--atlas-size-12)
+      hsl(var(--atlas-color-dark) / 0.04),
+    0 var(--atlas-size-11) var(--atlas-size-11)
+      hsl(var(--atlas-color-dark) / 0.034),
+    0 var(--atlas-size-10) var(--atlas-size-10)
+      hsl(var(--atlas-color-dark) / 0.028),
+    0 var(--atlas-size-09) var(--atlas-size-09)
+      hsl(var(--atlas-color-dark) / 0.019);
 
   --atlas-shadow-inset: inset 0 var(--atlas-size-16) var(--atlas-size-16)
       hsl(var(--atlas-color-dark) / 0.08),
-    inset 0 var(--atlas-size-15) var(--atlas-size-15) hsl(var(--atlas-color-dark) / 0.061),
-    inset 0 var(--atlas-size-14) var(--atlas-size-14) hsl(var(--atlas-color-dark) / 0.052),
-    inset 0 var(--atlas-size-13) var(--atlas-size-13) hsl(var(--atlas-color-dark) / 0.046),
-    inset 0 var(--atlas-size-12) var(--atlas-size-12) hsl(var(--atlas-color-dark) / 0.04),
-    inset 0 var(--atlas-size-11) var(--atlas-size-11) hsl(var(--atlas-color-dark) / 0.034),
-    inset 0 var(--atlas-size-10) var(--atlas-size-10) hsl(var(--atlas-color-dark) / 0.028),
-    inset 0 var(--atlas-size-09) var(--atlas-size-09) hsl(var(--atlas-color-dark) / 0.019);
+    inset 0 var(--atlas-size-15) var(--atlas-size-15)
+      hsl(var(--atlas-color-dark) / 0.061),
+    inset 0 var(--atlas-size-14) var(--atlas-size-14)
+      hsl(var(--atlas-color-dark) / 0.052),
+    inset 0 var(--atlas-size-13) var(--atlas-size-13)
+      hsl(var(--atlas-color-dark) / 0.046),
+    inset 0 var(--atlas-size-12) var(--atlas-size-12)
+      hsl(var(--atlas-color-dark) / 0.04),
+    inset 0 var(--atlas-size-11) var(--atlas-size-11)
+      hsl(var(--atlas-color-dark) / 0.034),
+    inset 0 var(--atlas-size-10) var(--atlas-size-10)
+      hsl(var(--atlas-color-dark) / 0.028),
+    inset 0 var(--atlas-size-09) var(--atlas-size-09)
+      hsl(var(--atlas-color-dark) / 0.019);
 
   --intensity: 0.69;
   --atlas-shadow-text: 0 var(--atlas-size-16) var(--atlas-size-16)
@@ -143,6 +157,13 @@
   list-style: none;
   text-decoration: none;
   text-indent: 0;
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+::-webkit-scrollbar {
+  display: none;
 }
 
 body,
@@ -188,7 +209,12 @@ code {
     COLORS
 */
 
-@mixin color_background_setting($name, $color_identity, $color_greyscale, $opacity) {
+@mixin color_background_setting(
+  $name,
+  $color_identity,
+  $color_greyscale,
+  $opacity
+) {
   .#{$name} {
     color: hsl($color_greyscale / $opacity);
     background: hsl($color_identity);
@@ -204,7 +230,7 @@ code {
 /*  IDENTITY */
 /* PRIMARY */
 @include color_background_setting(
-  "primary",
+  'primary',
   var(--atlas-color-primary),
   var(--atlas-color-light),
   var(--atlas-opacity-3)
@@ -212,7 +238,7 @@ code {
 
 /* SECONDARY */
 @include color_background_setting(
-  "secondary",
+  'secondary',
   var(--atlas-color-secondary),
   var(--atlas-color-light),
   var(--atlas-opacity-3)
@@ -220,7 +246,7 @@ code {
 
 /* TERTIARY */
 @include color_background_setting(
-  "tertiary",
+  'tertiary',
   var(--atlas-color-tertiary),
   var(--atlas-color-dark),
   var(--atlas-opacity-3)
@@ -228,7 +254,7 @@ code {
 
 /* ACCENT */
 @include color_background_setting(
-  "accent",
+  'accent',
   var(--atlas-color-accent),
   var(--atlas-color-light),
   var(--atlas-opacity-3)
@@ -237,7 +263,7 @@ code {
 /*  GREYSCALE */
 /* DARK */
 @include color_background_setting(
-  "dark",
+  'dark',
   var(--atlas-color-dark),
   var(--atlas-color-light),
   var(--atlas-opacity-3)
@@ -245,7 +271,7 @@ code {
 
 /* Light */
 @include color_background_setting(
-  "light",
+  'light',
   var(--atlas-color-light),
   var(--atlas-color-dark),
   var(--atlas-opacity-3)
@@ -314,7 +340,13 @@ body {
       hsl(var(--atlas-color-dark))
     );
   background-size: 46px 81px;
-  background-position: 0 0, 0 0, 23px 40px, 23px 40px, 0 0, 23px 40px;
+  background-position:
+    0 0,
+    0 0,
+    23px 40px,
+    23px 40px,
+    0 0,
+    23px 40px;
   background-attachment: fixed;
   font-family: var(--atlas-font-sans);
   font-weight: 400;
@@ -409,6 +441,7 @@ picture {
   display: block;
   filter: blur(var(--atlas-size-08));
   transition: var(--atlas-transition-slow);
+  user-select: none;
   -webkit-user-select: none;
   -webkit-touch-callout: none;
 }
@@ -430,7 +463,7 @@ picture:target,
   filter: none;
 }
 
-input[type="text"],
+input[type='text'],
 textarea,
 select,
 button,
@@ -444,7 +477,7 @@ progress {
   transition: border-radius var(--atlas-transition-fast);
 }
 
-input[type="text"] {
+input[type='text'] {
   width: 100%;
 }
 
@@ -484,7 +517,10 @@ td {
   position: absolute;
   border-radius: var(--atlas-border-radius-1);
   padding: var(--atlas-size-10);
-  transform: translate(calc(var(--atlas-size-08) * 1), calc(var(--atlas-size-08) * -1));
+  transform: translate(
+    calc(var(--atlas-size-08) * 1),
+    calc(var(--atlas-size-08) * -1)
+  );
 }
 
 .highlight {

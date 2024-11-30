@@ -1,12 +1,12 @@
-@import "./AtlasTheme.scss";
-@import "./AtlasMap.scss";
-@import "./AtlasLegend.scss";
+@import './AtlasTheme.scss';
+@import './components/map/AtlasMap.scss';
+@import './components/legend/AtlasLegend.scss';
 
-@import "./components/information/fediverse/lemmy/AtlasLemmy.scss";
+@import './components/legend/information/fediverse/lemmy/AtlasLemmy.scss';
 
-@import "./components/information/AtlasNexus.scss";
-@import "./components/information/nexus/AtlasWiki.scss";
-@import "./components/information/nexus/AtlasNexusBulletins.scss";
-@import "./components/information/nexus/AtlasNexusAnarchistLibrary.scss";
+@import './components/legend/information/AtlasNexus.scss';
+@import './components/legend/information/nexus/AtlasWiki.scss';
+@import './components/legend/information/nexus/AtlasNexusBulletins.scss';
+@import './components/legend/information/nexus/AtlasNexusAnarchistLibrary.scss';
 
-@import "./components/shared/AtlasShared.scss";
+@import './components/shared/AtlasShared.scss';
