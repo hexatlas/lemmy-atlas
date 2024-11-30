@@ -1,5 +1,5 @@
 // https://www.radix-ui.com/primitives/docs/components/collapsible
-import * as Collapsible from "@radix-ui/react-collapsible";
+import * as Collapsible from '@radix-ui/react-collapsible';
 
 function AtlasOSMInfoCard({
   map,
@@ -18,12 +18,12 @@ function AtlasOSMInfoCard({
   return (
     <Collapsible.Root
       key={index}
-      className={`overpass-item ${element == activeElement && "active"}`}
+      className={`overpass-item ${element == activeElement && 'active'}`}
       onMouseEnter={() => handleMouseEnter(element)} // Trigger zoom on hover
       onMouseLeave={() => handleMouseLeave(element)} // Revert zoom on leave
       onClick={() => handleClick(element)} // Fly to on click
       onKeyDown={(e) => {
-        if (e.key === "Enter" || e.key === " ") {
+        if (e.key === 'Enter' || e.key === ' ') {
           e.preventDefault(); // Prevent default scrolling behavior on Space
           handleClick(element);
         }
@@ -36,7 +36,7 @@ function AtlasOSMInfoCard({
           {iconMap[element?.tags[filterKeys[0]]]?.options?.html ? (
             <span>{iconMap[element?.tags[filterKeys[0]]]?.options?.html}</span>
           ) : (
-            <span>{iconMap["defaultIcon"]?.options?.html}</span>
+            <span>{iconMap['defaultIcon']?.options?.html}</span>
           )}
           {filterKeys.map((filterKey, index) => {
             if (index > 0) return;
@@ -48,7 +48,9 @@ function AtlasOSMInfoCard({
               </>
             );
           })}
-          <Collapsible.Trigger className="overpass-expand">🗃️</Collapsible.Trigger>
+          <Collapsible.Trigger className="overpass-expand">
+            🗃️
+          </Collapsible.Trigger>
         </div>
       )}
       {children}
@@ -65,7 +67,7 @@ function AtlasOSMInfoCard({
             </a>
           )}
           {name && <h4>{name}</h4>}
-          {element?.tags["name:en"] && <h6>{element?.tags["name:en"]}</h6>}
+          {element?.tags['name:en'] && <h6>{element?.tags['name:en']}</h6>}
         </div>
         {iconMap && filterKeys && (
           <div className="overpass-filterkeys">
@@ -82,7 +84,7 @@ function AtlasOSMInfoCard({
           </div>
         )}
         {element?.tags?.source &&
-          [...new Set(element.tags.source.split(";"))].map((url, index) => {
+          [...new Set(element.tags.source.split(';'))].map((url, index) => {
             let isUrl;
 
             try {
@@ -94,7 +96,12 @@ function AtlasOSMInfoCard({
               <div className="overpass-urls" key={index}>
                 <>
                   {isUrl && (
-                    <a key={index} href={isUrl} target="_blank" rel="noopener noreferrer">
+                    <a
+                      key={index}
+                      href={isUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
                       🔗 {url.toString()}
                     </a>
                   )}

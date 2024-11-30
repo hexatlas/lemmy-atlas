@@ -115,8 +115,8 @@ export default function AtlasLemmy({
     }`;
   }
 
-  let client: LemmyHttp = new LemmyHttp(activeLemmyInstance?.baseUrl);
-  let form: Search = {
+  const client: LemmyHttp = new LemmyHttp(activeLemmyInstance?.baseUrl);
+  const form: Search = {
     community_id: activeCommunity?.counts?.community_id,
     type_: activeSearchType.value,
     listing_type: activeListingType.value,
@@ -182,7 +182,7 @@ export default function AtlasLemmy({
 
   // Gets list of communites from active lemmy instance
   function handleCommunityList() {
-    let form: ListCommunities = {
+    const form: ListCommunities = {
       type_: activeListingType.value,
       sort: 'TopAll',
       page: currentCommunityPage,
@@ -202,7 +202,7 @@ export default function AtlasLemmy({
 
   // Searches for Communites, used in Query Field
   function handleSearchCommunities(searchQuery) {
-    let form: Search = {
+    const form: Search = {
       q: searchQuery,
       type_: 'Communities',
       listing_type: activeListingType.value,

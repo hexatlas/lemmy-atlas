@@ -110,8 +110,8 @@ export function AtlasNexusReadingList({
     const [isLoaded, setIsLoaded] = useState(false);
 
     function getHexbear(anarchistLibrary) {
-      let client: LemmyHttp = new LemmyHttp(activeLemmyInstance?.baseUrl);
-      let form: Search = {
+      const client: LemmyHttp = new LemmyHttp(activeLemmyInstance?.baseUrl);
+      const form: Search = {
         community_id: activeCommunity?.counts?.community_id,
         type_: "All",
         listing_type: "All",

@@ -45,9 +45,9 @@ function AtlasLemmyCommunityInfoCard({ children, lemmyInstance, sort, community 
   const updateDay = new Date(community?.updated).toDateString();
 
   function loadCommunityDetails() {
-    let client: LemmyHttp = new LemmyHttp(lemmyInstance?.baseUrl);
+    const client: LemmyHttp = new LemmyHttp(lemmyInstance?.baseUrl);
 
-    let form: GetCommunity = {
+    const form: GetCommunity = {
       id: community?.id,
     };
     client.getCommunity(form).then((res) => {

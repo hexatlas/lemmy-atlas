@@ -156,7 +156,7 @@ export default function AtlasMap({
   };
 
   function updateMap() {
-    let administrativeRegionArray = latLngBounds(null, null);
+    const administrativeRegionArray = latLngBounds(null, null);
 
     // Check if region needs an update
     if (

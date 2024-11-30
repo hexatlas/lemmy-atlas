@@ -59,9 +59,9 @@ function AtlasLemmyUserInfoCard({
   const pronounsArray = userPronouns(post?.creator?.display_name);
 
   function loadUserDetails() {
-    let client: LemmyHttp = new LemmyHttp(lemmyInstance?.baseUrl);
+    const client: LemmyHttp = new LemmyHttp(lemmyInstance?.baseUrl);
 
-    let form: GetPersonDetails = {
+    const form: GetPersonDetails = {
       person_id: post?.creator.id,
     };
 

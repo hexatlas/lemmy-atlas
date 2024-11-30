@@ -42,9 +42,9 @@ function Post({
   const [replies, setReplies] = useState(null);
 
   function handleReplies() {
-    let client: LemmyHttp = new LemmyHttp(lemmyInstance?.baseUrl);
+    const client: LemmyHttp = new LemmyHttp(lemmyInstance?.baseUrl);
 
-    let form: GetComments = {
+    const form: GetComments = {
       post_id: post?.post.id,
       sort: sort.value,
       max_depth: 1,
