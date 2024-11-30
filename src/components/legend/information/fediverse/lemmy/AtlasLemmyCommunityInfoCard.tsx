@@ -1,17 +1,17 @@
-import { useEffect, useState } from "react";
-import ReactMarkdown from "react-markdown";
+import { useEffect, useState } from 'react';
+import ReactMarkdown from 'react-markdown';
 
 // https://www.radix-ui.com/primitives/docs/components/hover-card
-import * as HoverCard from "@radix-ui/react-hover-card";
+import * as HoverCard from '@radix-ui/react-hover-card';
 
 // https://github.com/LemmyNet/lemmy-js-client
 // https://join-lemmy.org/api/classes/LemmyHttp.html
-import { LemmyHttp, GetCommunity } from "lemmy-js-client";
+import { LemmyHttp, GetCommunity } from 'lemmy-js-client';
 
-import { userPronouns } from "../../../../hooks/useDataTransform";
+import { userPronouns } from '../../../../../hooks/useDataTransform';
 
-import LemmyUser from "./AtlasLemmyUser";
-import Post from "./AtlasLemmyPost";
+import LemmyUser from './AtlasLemmyUser';
+import Post from './AtlasLemmyPost';
 
 /*
   /$$$$$$                                                            /$$   /$$              
@@ -38,7 +38,12 @@ import Post from "./AtlasLemmyPost";
                                                                                             
 */
 
-function AtlasLemmyCommunityInfoCard({ children, lemmyInstance, sort, community }) {
+function AtlasLemmyCommunityInfoCard({
+  children,
+  lemmyInstance,
+  sort,
+  community,
+}) {
   const [communityDetails, setCommunityDetails] = useState(null);
 
   const cakeDay = new Date(community?.published).toDateString();
@@ -56,18 +61,22 @@ function AtlasLemmyCommunityInfoCard({ children, lemmyInstance, sort, community 
   }
 
   return (
-    <HoverCard.Root openDelay={150} closeDelay={450} onOpenChange={loadCommunityDetails}>
+    <HoverCard.Root
+      openDelay={150}
+      closeDelay={450}
+      onOpenChange={loadCommunityDetails}
+    >
       <HoverCard.Trigger asChild>{children}</HoverCard.Trigger>
       <HoverCard.Portal>
         <HoverCard.Content
           collisionPadding={1.6180339887498948482 ^ 9}
           className={`community-info-card-content 
-          ${community.nsfw && "community-info-card-content-hightlighted"}`}
+          ${community.nsfw && 'community-info-card-content-hightlighted'}`}
         >
           <div
             style={{
-              display: "flex",
-              flexDirection: "column",
+              display: 'flex',
+              flexDirection: 'column',
               gap: 7,
             }}
           >
@@ -81,7 +90,7 @@ function AtlasLemmyCommunityInfoCard({ children, lemmyInstance, sort, community 
             {community?.icon && (
               <a
                 className={`user-avatar-container user-avatar-infocard ${
-                  community?.banner && "user-avatar-banner-offset"
+                  community?.banner && 'user-avatar-banner-offset'
                 }`}
                 href={community?.actor_id}
                 target="_blank"
@@ -90,15 +99,15 @@ function AtlasLemmyCommunityInfoCard({ children, lemmyInstance, sort, community 
                 <img
                   className="user-avatar-image"
                   src={community?.icon}
-                  alt={"Community Icon"}
+                  alt={'Community Icon'}
                 />
               </a>
             )}
 
             <div
               style={{
-                display: "flex",
-                flexDirection: "column",
+                display: 'flex',
+                flexDirection: 'column',
                 gap: 15,
               }}
             >
@@ -112,7 +121,11 @@ function AtlasLemmyCommunityInfoCard({ children, lemmyInstance, sort, community 
                   </small>
                 )}
                 <h5 className="community-name">
-                  <a href={community?.actor_id} target="_blank" rel="noopener noreferrer">
+                  <a
+                    href={community?.actor_id}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
                     <span className="prefix">c/</span>
                     {community?.name}
                   </a>
@@ -121,36 +134,36 @@ function AtlasLemmyCommunityInfoCard({ children, lemmyInstance, sort, community 
                 <div className="community-stats">
                   <p>
                     <b>
-                      {communityDetails?.community_view.counts.subscribers.toLocaleString()}{" "}
-                    </b>{" "}
+                      {communityDetails?.community_view.counts.subscribers.toLocaleString()}{' '}
+                    </b>{' '}
                     <br />
                     <i>Subs</i>
-                  </p>{" "}
+                  </p>{' '}
                   <p>
                     <b>
-                      {communityDetails?.community_view.counts.users_active_day.toLocaleString()}{" "}
-                    </b>{" "}
+                      {communityDetails?.community_view.counts.users_active_day.toLocaleString()}{' '}
+                    </b>{' '}
                     <br />
                     <i>Daily</i>
-                  </p>{" "}
+                  </p>{' '}
                   <p>
                     <b>
-                      {communityDetails?.community_view.counts.users_active_week.toLocaleString()}{" "}
-                    </b>{" "}
+                      {communityDetails?.community_view.counts.users_active_week.toLocaleString()}{' '}
+                    </b>{' '}
                     <br />
                     <i>Weekly</i>
-                  </p>{" "}
+                  </p>{' '}
                   <p>
                     <b>
-                      {communityDetails?.community_view.counts.users_active_month.toLocaleString()}{" "}
-                    </b>{" "}
+                      {communityDetails?.community_view.counts.users_active_month.toLocaleString()}{' '}
+                    </b>{' '}
                     <br />
                     <i>Monthly</i>
-                  </p>{" "}
+                  </p>{' '}
                   <p>
                     <b>
-                      {communityDetails?.community_view.counts.users_active_half_year.toLocaleString()}{" "}
-                    </b>{" "}
+                      {communityDetails?.community_view.counts.users_active_half_year.toLocaleString()}{' '}
+                    </b>{' '}
                     <br />
                     <i>Half Year</i>
                   </p>
@@ -170,14 +183,14 @@ function AtlasLemmyCommunityInfoCard({ children, lemmyInstance, sort, community 
                 </div>
               )}
 
-              <div style={{ display: "flex", gap: 15 }}>
-                <div style={{ display: "flex", gap: 5 }}>
+              <div style={{ display: 'flex', gap: 15 }}>
+                <div style={{ display: 'flex', gap: 5 }}>
                   <div>
                     {communityDetails?.community_view.counts.posts.toLocaleString()}
                   </div>
                   <div>Posts</div>
                 </div>
-                <div style={{ display: "flex", gap: 5 }}>
+                <div style={{ display: 'flex', gap: 5 }}>
                   <div>
                     {communityDetails?.community_view.counts.comments.toLocaleString()}
                   </div>

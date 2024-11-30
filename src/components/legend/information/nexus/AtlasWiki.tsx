@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
-import ReactMarkdown from "react-markdown";
-import { useStateStorage } from "../../../hooks/useAtlasUtils";
-import { useQuery } from "@tanstack/react-query";
+import { useEffect, useState } from 'react';
+import ReactMarkdown from 'react-markdown';
+import { useStateStorage } from '../../../../hooks/useAtlasUtils';
+import { useQuery } from '@tanstack/react-query';
 
 /*
  /$$      /$$ /$$ /$$       /$$
@@ -83,12 +83,12 @@ export function AtlasProleWiki({
   };
 
   const apiUrl = `/.netlify/functions/wiki/?country=${encodeURI(
-    activeAdministrativeRegion[activeLocationType]
+    activeAdministrativeRegion[activeLocationType],
   )}&wiki=${wikiURL}`;
 
   const { data, isLoading } = useQuery({
     queryKey: [
-      `WIKI-${isProleWiki ? "prole" : "nato"}-${activeAdministrativeRegion["alpha-2"]}`,
+      `WIKI-${isProleWiki ? 'prole' : 'nato'}-${activeAdministrativeRegion['alpha-2']}`,
     ],
     queryFn: () => fetchProleWiki(apiUrl),
     staleTime: Infinity,
@@ -102,10 +102,10 @@ export function AtlasProleWiki({
         {isProleWiki ? (
           <>
             <p>
-              Please consider contributing knowledge on{" "}
+              Please consider contributing knowledge on{' '}
               <a
                 href={`https://en.prolewiki.org/?search=${encodeURI(
-                  activeAdministrativeRegion[activeLocationType]
+                  activeAdministrativeRegion[activeLocationType],
                 )}`}
                 target="_blank"
                 rel="noopener noreferrer"
@@ -116,22 +116,22 @@ export function AtlasProleWiki({
 
             <a
               href={`https://en.prolewiki.org/wiki/Category:Library_works_about_${encodeURI(
-                activeAdministrativeRegion.country
+                activeAdministrativeRegion.country,
               )}`}
               target="_blank"
               rel="noopener noreferrer"
             >
-              📚📕 All library works about {activeAdministrativeRegion.country} on
-              ProleWiki.
+              📚📕 All library works about {activeAdministrativeRegion.country}{' '}
+              on ProleWiki.
             </a>
           </>
         ) : (
           <>
             <p>
-              Please consider correcting information on{" "}
+              Please consider correcting information on{' '}
               <a
                 href={`${wikiURL}?search=${encodeURI(
-                  activeAdministrativeRegion[activeLocationType]
+                  activeAdministrativeRegion[activeLocationType],
                 )}`}
                 target="_blank"
                 rel="noopener noreferrer"
@@ -146,14 +146,14 @@ export function AtlasProleWiki({
         {data && (
           <>
             <h3>{data.title}</h3>
-            <div dangerouslySetInnerHTML={{ __html: data?.text["*"] }}></div>
+            <div dangerouslySetInnerHTML={{ __html: data?.text['*'] }}></div>
           </>
         )}
       </div>
       <div className="legend-footer">
         <a
           href={`${wikiURL}?search=${encodeURI(
-            activeAdministrativeRegion[activeLocationType]
+            activeAdministrativeRegion[activeLocationType],
           )}`}
           target="_blank"
           rel="noopener noreferrer"

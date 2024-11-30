@@ -1,14 +1,14 @@
-import { useEffect, useState } from "react";
-import ReactMarkdown from "react-markdown";
+import { useEffect, useState } from 'react';
+import ReactMarkdown from 'react-markdown';
 
 // https://github.com/LemmyNet/lemmy-js-client
 // https://join-lemmy.org/api/classes/LemmyHttp.html
-import { Search, LemmyHttp } from "lemmy-js-client";
+import { Search, LemmyHttp } from 'lemmy-js-client';
 
-import Comment from "../fediverse/lemmy/AtlasLemmyComment";
-import Post from "../fediverse/lemmy/AtlasLemmyPost";
-import { useStateStorage } from "../../../hooks/useAtlasUtils";
-import { useQuery } from "@tanstack/react-query";
+import Comment from '../fediverse/lemmy/AtlasLemmyComment';
+import Post from '../fediverse/lemmy/AtlasLemmyPost';
+import { useStateStorage } from '../../../../hooks/useAtlasUtils';
+import { useQuery } from '@tanstack/react-query';
 
 /*
  /$$$$$$$$ /$$$$$$  /$$$$$$$$                                           
@@ -95,22 +95,24 @@ export function AtlasNexusReadingList({
       const xmlString = await response.text(); // Retrieve response as text
 
       const parser = new DOMParser();
-      const xmlData = parser.parseFromString(xmlString, "text/xml");
+      const xmlData = parser.parseFromString(xmlString, 'text/xml');
 
-      const items = Array.from(xmlData.getElementsByTagName("item")).map((item) => ({
-        title: item.querySelector("title").textContent,
-        link: item.querySelector("link").textContent,
-        pubDate: item.querySelector("pubDate").textContent,
-        description: item.querySelector("description").textContent,
-      }));
+      const items = Array.from(xmlData.getElementsByTagName('item')).map(
+        (item) => ({
+          title: item.querySelector('title').textContent,
+          link: item.querySelector('link').textContent,
+          pubDate: item.querySelector('pubDate').textContent,
+          description: item.querySelector('description').textContent,
+        }),
+      );
 
       const parsedData = {
-        title: xmlData.querySelector("title").textContent,
-        link: xmlData.querySelector("link").textContent,
-        description: xmlData.querySelector("description").textContent,
-        generator: xmlData.querySelector("generator").textContent,
-        language: xmlData.querySelector("language").textContent,
-        lastBuildDate: xmlData.querySelector("lastBuildDate").textContent,
+        title: xmlData.querySelector('title').textContent,
+        link: xmlData.querySelector('link').textContent,
+        description: xmlData.querySelector('description').textContent,
+        generator: xmlData.querySelector('generator').textContent,
+        language: xmlData.querySelector('language').textContent,
+        lastBuildDate: xmlData.querySelector('lastBuildDate').textContent,
         items: items,
       };
 
@@ -129,8 +131,8 @@ export function AtlasNexusReadingList({
       const client: LemmyHttp = new LemmyHttp(activeLemmyInstance?.baseUrl);
       const form: Search = {
         community_id: activeCommunity?.counts?.community_id,
-        type_: "All",
-        listing_type: "All",
+        type_: 'All',
+        listing_type: 'All',
         sort: activeSortType.value,
         q: bulletinURL,
         creator_id: 19956, // https://hexbear.net/u/SeventyTwoTrillion
@@ -156,7 +158,7 @@ export function AtlasNexusReadingList({
             aria-label="Show Replies"
             onClick={() => getHexbear(bulletin.link)}
             onKeyDown={(e) => {
-              if (e.key === "Enter" || e.key === "Space") {
+              if (e.key === 'Enter' || e.key === 'Space') {
                 () => getHexbear(bulletin.link);
               }
             }}
@@ -199,18 +201,18 @@ export function AtlasNexusReadingList({
 
   let apiUrl = null;
 
-  if (activeAdministrativeRegion.country !== "country") {
+  if (activeAdministrativeRegion.country !== 'country') {
     apiUrl = `/.netlify/functions/72T_bulletins/?country=${encodeURI(
-      activeAdministrativeRegion.country
+      activeAdministrativeRegion.country,
     )
       .toLowerCase()
-      .replace(/%20/g, "-")}`;
+      .replace(/%20/g, '-')}`;
   } else {
     apiUrl = `/.netlify/functions/72T_bulletins/?index=true`;
   }
 
   const { data, isLoading } = useQuery({
-    queryKey: [`NB-${activeAdministrativeRegion["alpha-2"]}`],
+    queryKey: [`NB-${activeAdministrativeRegion['alpha-2']}`],
     queryFn: () => fetchBulletinsRSS(apiUrl),
     staleTime: Infinity,
     refetchInterval: false,
@@ -223,15 +225,15 @@ export function AtlasNexusReadingList({
         <h3>Reading List</h3>
         <a
           href={`https://bulletins.hexbear.net/posts/readinglist/#${encodeURI(
-            activeAdministrativeRegion.country
+            activeAdministrativeRegion.country,
           )
             .toLowerCase()
-            .replace(/%20/g, "-")}`}
+            .replace(/%20/g, '-')}`}
           target="_blank"
           rel="noopener noreferrer"
         >
           📚📕 Hexbear Reading List:
-          {activeAdministrativeRegion.country != "country" &&
+          {activeAdministrativeRegion.country != 'country' &&
             activeAdministrativeRegion.country}
         </a>
 

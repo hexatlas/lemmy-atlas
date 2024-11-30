@@ -1,17 +1,17 @@
-import { useEffect, useState } from "react";
-import ReactMarkdown from "react-markdown";
+import { useEffect, useState } from 'react';
+import ReactMarkdown from 'react-markdown';
 
 // https://www.radix-ui.com/primitives/docs/components/collapsible
-import * as Collapsible from "@radix-ui/react-collapsible";
+import * as Collapsible from '@radix-ui/react-collapsible';
 
 // https://github.com/LemmyNet/lemmy-js-client
 // https://join-lemmy.org/api/classes/LemmyHttp.html
-import { Search, LemmyHttp } from "lemmy-js-client";
+import { Search, LemmyHttp } from 'lemmy-js-client';
 
-import Comment from "../fediverse/lemmy/AtlasLemmyComment";
-import Post from "../fediverse/lemmy/AtlasLemmyPost";
-import { useStateStorage } from "../../../hooks/useAtlasUtils";
-import { useQuery } from "@tanstack/react-query";
+import Comment from '../fediverse/lemmy/AtlasLemmyComment';
+import Post from '../fediverse/lemmy/AtlasLemmyPost';
+import { useStateStorage } from '../../../../hooks/useAtlasUtils';
+import { useQuery } from '@tanstack/react-query';
 
 /*
   /$$$$$$                                          /$$       /$$             /$$    
@@ -113,9 +113,9 @@ export function AtlasNexusReadingList({
       const client: LemmyHttp = new LemmyHttp(activeLemmyInstance?.baseUrl);
       const form: Search = {
         community_id: activeCommunity?.counts?.community_id,
-        type_: "All",
-        listing_type: "All",
-        sort: "TopAll",
+        type_: 'All',
+        listing_type: 'All',
+        sort: 'TopAll',
         q: anarchistLibrary.author,
         page: 1,
       };
@@ -140,12 +140,13 @@ export function AtlasNexusReadingList({
             aria-label="Show Replies"
             onClick={() => getHexbear(bulletin)}
             onKeyDown={(e) => {
-              if (e.key === "Enter" || e.key === "Space") {
+              if (e.key === 'Enter' || e.key === 'Space') {
                 () => getHexbear(bulletin);
               }
             }}
           >
-            <span className="post-replycount-icon">💬</span> Search Author on hexbear.net
+            <span className="post-replycount-icon">💬</span> Search Author on
+            hexbear.net
           </p>
         )}
         {posts.length > 0 && (
@@ -183,16 +184,16 @@ export function AtlasNexusReadingList({
 
   let apiUrl = null;
 
-  if (activeAdministrativeRegion.country !== "country") {
+  if (activeAdministrativeRegion.country !== 'country') {
     apiUrl = `/.netlify/functions/anarchist_library/?country=${encodeURI(
-      activeAdministrativeRegion[activeLocationType]
+      activeAdministrativeRegion[activeLocationType],
     )}`;
   } else {
     apiUrl = `/.netlify/functions/anarchist_library/`;
   }
 
   const { data, isLoading } = useQuery({
-    queryKey: [`AL-${activeAdministrativeRegion["alpha-2"]}`],
+    queryKey: [`AL-${activeAdministrativeRegion['alpha-2']}`],
     queryFn: () => fetchAnarchistLibrary(apiUrl),
     staleTime: Infinity,
     refetchInterval: false,
@@ -204,13 +205,13 @@ export function AtlasNexusReadingList({
       <h3>Anarchist Library</h3>
       <a
         href={`https://theanarchistlibrary.org/search?query=${encodeURI(
-          activeAdministrativeRegion[activeLocationType]
+          activeAdministrativeRegion[activeLocationType],
         )}`}
         target="_blank"
         rel="noopener noreferrer"
       >
-        📚📕 Books about{" "}
-        {activeAdministrativeRegion.country != "country" &&
+        📚📕 Books about{' '}
+        {activeAdministrativeRegion.country != 'country' &&
           activeAdministrativeRegion[activeLocationType]}
       </a>
 
@@ -225,7 +226,9 @@ export function AtlasNexusReadingList({
                   </p>
                   <h4 className="anarchist-library-link">{book.title}</h4>
                   {book.author && (
-                    <p className="anarchist-library-author highlight">👤 {book.author}</p>
+                    <p className="anarchist-library-author highlight">
+                      👤 {book.author}
+                    </p>
                   )}
                   {book.subtitle && <p>ℹ️ {book.subtitle}</p>}
                   {book.feed_teaser && (
@@ -234,10 +237,12 @@ export function AtlasNexusReadingList({
                         Show More
                       </Collapsible.Trigger>
                       <Collapsible.Content>
-                        <div dangerouslySetInnerHTML={{ __html: book.feed_teaser }}></div>
+                        <div
+                          dangerouslySetInnerHTML={{ __html: book.feed_teaser }}
+                        ></div>
                       </Collapsible.Content>
                     </Collapsible.Root>
-                  )}{" "}
+                  )}{' '}
                   <div className="anarchist-library-container">
                     <a
                       className="anarchist-library-readmore"
@@ -247,7 +252,9 @@ export function AtlasNexusReadingList({
                     >
                       Read {book.text_type}
                     </a>
-                    {book.pages_estimated && <span>~{book.pages_estimated} 📄</span>}
+                    {book.pages_estimated && (
+                      <span>~{book.pages_estimated} 📄</span>
+                    )}
                   </div>
                   <HexBearNews bulletin={book} />
                 </div>
