@@ -8,7 +8,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 // Import Components
 import AtlasMap from './components/map/Index';
-import AtlasInterface from './AtlasInterface';
+import AtlasInterface from './components/shared/AtlasInterface';
 import AtlasEconomy from './components/legend/economy/Index';
 import AtlasInformation from './components/legend/information/Index';
 import AtlasDiplomacy from './components/legend/diplomacy/Index';

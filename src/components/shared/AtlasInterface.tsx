@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
-import administrativeRegionsData from './data/geojson/administrative_regions_extended.json';
+import administrativeRegionsData from '../../data/geojson/administrative_regions_extended.json';
 
 // https://www.radix-ui.com/primitives/docs/components/collapsible
 import * as Collapsible from '@radix-ui/react-collapsible';
-import { handleRandom } from './hooks/useAtlasUtils';
+import { handleRandom } from '../../hooks/useAtlasUtils';
 
 import { latLng, latLngBounds } from 'leaflet';
 
