@@ -1,6 +1,9 @@
-.prolewiki img {
-  filter: none;
-  border-radius: var(--atlas-border-radius-1);
+.prolewiki {
+  pointer-events: none;
+  img {
+    filter: none;
+    border-radius: var(--atlas-border-radius-1);
+  }
 }
 
 .mw-editsection {
@@ -33,6 +36,8 @@
 
 .infobox th,
 .infobox td {
-  border-color: hsl(var(--atlas-color-light) / var(--atlas-opacity-1)) !important;
+  border-color: hsl(
+    var(--atlas-color-light) / var(--atlas-opacity-1)
+  ) !important;
   /* border: none !important; */
 }

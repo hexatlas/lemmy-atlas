@@ -17,7 +17,7 @@ export function Wiki({
 
   return (
     <>
-      <div id="legend-content" className="prolewiki">
+      <div id="legend-content">
         {isProleWiki ? (
           <>
             <p>
@@ -67,6 +67,7 @@ export function Wiki({
           <>
             <h3>{wikiData.title}</h3>
             <div
+              className="prolewiki"
               dangerouslySetInnerHTML={{ __html: wikiData?.text['*'] }}
             ></div>
           </>
