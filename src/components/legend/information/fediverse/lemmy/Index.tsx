@@ -1,15 +1,4 @@
-// https://github.com/LemmyNet/lemmy-js-client
-// https://join-lemmy.org/api/classes/LemmyHttp.html
-import {
-  ListCommunities,
-  GetCommunity,
-  LemmyHttp,
-  Search,
-} from 'lemmy-js-client';
-import { useEffect, useState } from 'react';
-
-// https://www.radix-ui.com/primitives/docs/components/dropdown-menu
-import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
+import React, { useState } from 'react';
 
 // https://www.radix-ui.com/primitives/docs/components/tabs
 import * as Tabs from '@radix-ui/react-tabs';
@@ -19,23 +8,7 @@ import Post from './Post';
 import LemmyCommunityInfoCard from './CommunityInfoCard';
 
 import { searchTypes } from '../../../../../AtlasConfig';
-import AtlasLemmyCommunityInfoCard from './CommunityInfoCard';
-import { useStateStorage } from '../../../../../hooks/useAtlasUtils';
-
-/*
-
- /$$                                                      
-| $$                                                      
-| $$        /$$$$$$  /$$$$$$/$$$$  /$$$$$$/$$$$  /$$   /$$
-| $$       /$$__  $$| $$_  $$_  $$| $$_  $$_  $$| $$  | $$
-| $$      | $$$$$$$$| $$ \ $$ \ $$| $$ \ $$ \ $$| $$  | $$
-| $$      | $$_____/| $$ | $$ | $$| $$ | $$ | $$| $$  | $$
-| $$$$$$$$|  $$$$$$$| $$ | $$ | $$| $$ | $$ | $$|  $$$$$$$
-|________/ \_______/|__/ |__/ |__/|__/ |__/ |__/ \____  $$
-                                                 /$$  | $$
-                                                |  $$$$$$/
-                                                 \______/ 
-*/
+import useLemmy from '../../../../../data/information/fediverse/useLemmy';
 
 export default function AtlasLemmy({
   // Util
@@ -44,31 +17,8 @@ export default function AtlasLemmy({
   sideBarRef,
 
   // Location
-  map,
-  setMap,
-
-  isOpenAtlasMapInterface,
-  setIsOpenAtlasMapInterface,
-
-  isLocationSelectMode,
-  setIsLocationSelectMode,
-
-  activeLocationSelection,
-  setActiveLocationSelection,
-
-  nominatim,
-  setNominatim,
-
-  regionTypes,
   activeLocationType,
-  setActiveLocationType,
-
   activeAdministrativeRegion,
-  setActiveAdministrativeRegion,
-
-  administrativeRegionClickHistoryArray,
-  setAdministrativeRegionClickHistoryArray,
-
   locationQuery,
   setLocationQuery,
 
@@ -92,242 +42,36 @@ export default function AtlasLemmy({
   setActiveSortType,
 }) {
   const [editLemmyInstance, setEditLemmyInstance] = useState(false);
-  const [communityList, setCommunityList] = useState(null);
-  const [currentCommunityPage, setCurrentCommunityPage] = useState(1);
-  const [hasMoreCommunities, setHasMoreCommunities] = useState(true);
 
-  const [regionSearchResult, setRegionSearchResult] = useState(null);
-  const [comments, setComments] = useState([]);
-  const [posts, setPosts] = useState([]);
-  const [loading, setLoading] = useState<boolean>(false);
-  const [currentSearchResultPage, setCurrentSearchResultPage] = useState(1);
-  const [hasMore, setHasMore] = useState(true);
+  const {
+    posts,
+    comments,
+    communityList,
+    setCurrentSearchResultPage,
+    currentSearchResultPage,
+    handleSearch,
+    handleSearchQuery,
+  } = useLemmy(
+    // Util
+    sideBarRef,
 
-  /*
-    Handlers
-  */
-
-  function handleSearchQuery() {
-    return `${locationQuery} ${
-      activeAdministrativeRegion['country'] === 'country'
-        ? ''
-        : activeAdministrativeRegion[activeLocationType]
-    }`;
-  }
-
-  const client: LemmyHttp = new LemmyHttp(activeLemmyInstance?.baseUrl);
-  const form: Search = {
-    community_id: activeCommunity?.counts?.community_id,
-    type_: activeSearchType.value,
-    listing_type: activeListingType.value,
-    sort: activeSortType.value,
-    q: handleSearchQuery(),
-    page: currentSearchResultPage,
-  };
-
-  function handleUpdate() {
-    if (locationQuery) {
-      setCurrentCommunityPage(1);
-      handleSearchCommunities(locationQuery);
-    } else {
-      handleCommunityList();
-    }
-
-    client.search(form).then((res) => {
-      // setPosts([]);
-      // setComments([]);
-
-      if (activeSearchType.value === 'Comments') {
-        setPosts([]);
-        if (res?.comments.length < 10) {
-          setHasMore(false);
-        }
-        if (comments && res?.comments) setComments(res?.comments);
-      }
-
-      if (activeSearchType.value === 'Posts') {
-        setComments([]);
-        if (res?.posts.length < 10) {
-          setHasMore(false);
-        }
-        if (posts && res?.posts) setPosts(res?.posts);
-      }
-    });
-  }
-
-  function handleShowMore() {
-    client.search(form).then((res) => {
-      setPosts([]);
-      setComments([]);
-
-      if (activeSearchType.value === 'Comments') {
-        setPosts([]);
-        if (res?.comments.length < 10) {
-          setHasMore(false);
-        }
-        if (comments && res?.comments)
-          setComments([...comments, ...res?.comments]);
-      }
-
-      if (activeSearchType.value === 'Posts') {
-        setComments([]);
-        if (res?.posts.length < 10) {
-          0;
-          setHasMore(false);
-        }
-        if (posts && res?.posts) setPosts([...posts, ...res?.posts]);
-      }
-    });
-  }
-
-  // Gets list of communites from active lemmy instance
-  function handleCommunityList() {
-    const form: ListCommunities = {
-      type_: activeListingType.value,
-      sort: 'TopAll',
-      page: currentCommunityPage,
-    };
-
-    client.listCommunities(form).then((res) => {
-      if (res?.communities.length < 10) {
-        setHasMoreCommunities(false);
-      }
-      setCommunityList(() =>
-        currentCommunityPage === 1
-          ? res?.communities
-          : [...communityList, ...res?.communities],
-      );
-    });
-  }
-
-  // Searches for Communites, used in Query Field
-  function handleSearchCommunities(searchQuery) {
-    const form: Search = {
-      q: searchQuery,
-      type_: 'Communities',
-      listing_type: activeListingType.value,
-    };
-
-    client.search(form).then((res) => {
-      setCommunityList(res?.communities);
-    });
-  }
-
-  // ToDo: Infinite Scroll
-
-  const handleScroll = () => {
-    // Check if user has scrolled to the bottom
-    if (sideBarRef.current.scrollTop > sideBarRef.current.scrollTopMax - 69) {
-      // Fetch more comments if there are more to fetch
-      if (hasMore) {
-        console.log('SCROLL');
-
-        setCurrentSearchResultPage(currentSearchResultPage + 1);
-      }
-    }
-  };
-
-  const handleSearch = (e) => {
-    e.preventDefault();
-    setLocationQuery(e.target.value);
-  };
-
-  /*
-    useEffects
-  */
-
-  // ToDo: Infinite Scroll
-
-  // useEffect(() => {
-  //   if (sideBarRef && sideBarRef.current)
-  //     sideBarRef.current.addEventListener("scroll", handleScroll, false);
-
-  //   return () => {
-  //     if (sideBarRef && sideBarRef.current)
-  //       sideBarRef.current.addEventListener("scroll", handleScroll, false);
-  //   };
-  // }, []);
-
-  //  init
-
-  // Reset Query when location or location query is changed
-  useEffect(() => {
-    setComments([]);
-    setPosts([]);
-    setCurrentSearchResultPage(1);
-    setHasMore(false);
-  }, [
-    activeAdministrativeRegion,
+    // Location
     activeLocationType,
-    activeSearchType,
+    activeAdministrativeRegion,
     locationQuery,
-  ]);
+    setLocationQuery,
 
-  // Reset when Lemmy Instance is changed
-  useEffect(() => {
-    setCommunityList(null);
-    setActiveCommunity(null);
-    setCurrentCommunityPage(1);
-    setHasMoreCommunities(true);
-    handleCommunityList();
-  }, [activeLemmyInstance]);
-
-  useEffect(() => {
-    handleCommunityList();
-  }, [currentCommunityPage]);
-
-  useEffect(() => {
-    const debounce = setTimeout(() => {
-      handleUpdate();
-    }, 1312);
-    return () => clearTimeout(debounce);
-  }, [
-    activeAdministrativeRegion,
-    activeLocationType,
+    // Community
     activeLemmyInstance,
+
     activeCommunity,
-    activeListingType,
-    activeSortType,
+    setActiveCommunity,
+
     activeSearchType,
-    locationQuery,
-  ]);
+    activeListingType,
 
-  useEffect(() => {
-    const debounce = setTimeout(() => {
-      handleShowMore();
-    }, 1312);
-    return () => clearTimeout(debounce);
-  }, [currentSearchResultPage]);
-
-  const BasedClientDetector = () => {
-    const isFirefox = navigator.userAgent.toLowerCase().indexOf('firefox') > -1;
-    const isLinux = navigator.platform.toLowerCase().indexOf('linux') > -1;
-
-    // ToDo: Add Adblock detection
-
-    return (
-      <div className="based-client-detector">
-        {isFirefox && isLinux && <p>Based Check Passed 🫡</p>}
-        {!isFirefox && (
-          <p>
-            ⚠️ ⚠️ ⚠️ Switch to{' '}
-            <a
-              href="https://www.mozilla.org/en-US/firefox/browsers/"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Firefox
-            </a>
-            .
-          </p>
-        )}
-        {!isLinux && !isMobile && (
-          <p>⚠️ ⚠️ ⚠️ Why are you not using linux 😡</p>
-        )}
-      </div>
-    );
-  };
-
+    activeSortType,
+  );
   return (
     <>
       <div id="legend-content" className="legend-content-container">
@@ -404,65 +148,6 @@ export default function AtlasLemmy({
           </LemmyCommunityInfoCard>
         )}
         <div className="search-input-wrapper">
-          {/* <DropdownMenu.Root>
-            <DropdownMenu.Trigger asChild>
-              <button className="button-icon" aria-label="Community Settings Menu">
-                ☰
-              </button>
-            </DropdownMenu.Trigger>
-            <DropdownMenu.Portal>
-              <DropdownMenu.Content
-                collisionPadding={1.6180339887498948482 ^ 14}
-                className="dropdown-menu-content"
-              >
-                <DropdownMenu.Item className="dropdown-menu-item">
-                  <div
-                    className="reset-container"
-                    role="button"
-                    aria-label="Reset Community Settings"
-                    tabIndex={0}
-                    onClick={resetAtlas}
-                    onKeyDown={(e) => {
-                      if (e.key === "Enter" || e.key === "Space") {
-                        resetAtlas;
-                      }
-                    }}
-                  >
-                    <p>Reset</p>
-                    <div className="right-slot reset-button">⟲</div>
-                  </div>
-                </DropdownMenu.Item>
-
-                <DropdownMenu.Sub>
-                  <DropdownMenu.SubTrigger className="dropdown-menu-subtrigger">
-                    Instance
-                    <div className="right-slot">▸</div>
-                  </DropdownMenu.SubTrigger>
-                  <DropdownMenu.Portal>
-                    <DropdownMenu.SubContent className="dropdown-menu-subcontent">
-                      <DropdownMenu.RadioGroup
-                        value={activeLemmyInstance}
-                        onValueChange={setActiveLemmyInstance}
-                      >
-                        {lemmyInstances.map((instance, index) => (
-                          <DropdownMenu.RadioItem
-                            key={index}
-                            className="dropdown-menu-radio-item"
-                            value={instance}
-                          >
-                            <DropdownMenu.ItemIndicator className="dropdown-menu-itemIndicator">
-                              ✔
-                            </DropdownMenu.ItemIndicator>
-                            {instance.label}
-                          </DropdownMenu.RadioItem>
-                        ))}
-                      </DropdownMenu.RadioGroup>
-                    </DropdownMenu.SubContent>
-                  </DropdownMenu.Portal>
-                </DropdownMenu.Sub>
-              </DropdownMenu.Content>
-            </DropdownMenu.Portal>
-          </DropdownMenu.Root> */}
           {activeAdministrativeRegion.country !== 'country' && (
             <button
               role="button"
@@ -533,16 +218,6 @@ export default function AtlasLemmy({
                 </button>
               );
             })}
-          {/* {hasMoreCommunities && (
-          <button
-            role="button"
-            className="community-button community-button-more"
-            onClick={() => setCurrentCommunityPage(currentCommunityPage + 1)}
-            aria-label="View More Communites"
-          >
-            +
-          </button>
-        )} */}
         </div>
         <div className="lemmy-settings">
           <Tabs.Root
@@ -644,9 +319,6 @@ export default function AtlasLemmy({
         >
           View More
         </button>
-        {/* {activeSearchType === "Posts" && regionSearchResult && (
-        <p>{regionSearchResult.posts === 0 && "No results."}</p>
-      )} */}
       </div>
       <div className="legend-footer">
         <a
@@ -664,7 +336,6 @@ export default function AtlasLemmy({
         >
           🔗 view in {activeLemmyInstance.baseUrl}
         </a>
-        <BasedClientDetector />
       </div>
     </>
   );
