@@ -385,7 +385,7 @@ export default function Atlas() {
               <blockquote>
                 <b>Note:</b> Data availability differs by country and topic.
               </blockquote>
-              <BasedClientDetector />
+              <BasedClientDetector isMobile={isMobile} />
             </div>
           </Tabs.Content>
           <Tabs.Content className="tabs-content" value="Economy">

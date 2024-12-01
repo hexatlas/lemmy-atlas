@@ -1,6 +1,6 @@
 import React from 'react';
 
-function BasedClientDetector() {
+function BasedClientDetector(isMobile) {
   const isFirefox = navigator.userAgent.toLowerCase().indexOf('firefox') > -1;
   const isLinux = navigator.platform.toLowerCase().indexOf('linux') > -1;
 
