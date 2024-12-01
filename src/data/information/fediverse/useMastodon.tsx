@@ -31,7 +31,7 @@ function useMastodon(activeAdministrativeRegion, activeLocationType) {
       console.log(error);
     }
   };
-  return mastodonPosts;
+  return { mastodonPosts, isLoading };
 }
 
 export default useMastodon;

@@ -11,7 +11,7 @@ function AtlasMastodon({
   activeAdministrativeRegion,
   setActiveAdministrativeRegion,
 }) {
-  const mastodonPosts = useMastodon(
+  const { mastodonPosts, isLoading } = useMastodon(
     activeAdministrativeRegion,
     activeLocationType,
   );
@@ -22,6 +22,8 @@ function AtlasMastodon({
         <h3>
           Latest Posts on {activeAdministrativeRegion[activeLocationType]}
         </h3>
+
+        {isLoading && <p className="search-loading-icon">🔍</p>}
         {mastodonPosts &&
           mastodonPosts.map((post, index) => (
             <div className="feed-item" key={index}>
