@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import ReactMarkdown from 'react-markdown';
 
 // https://www.radix-ui.com/primitives/docs/components/hover-card
@@ -203,17 +203,19 @@ function AtlasLemmyCommunityInfoCard({
                   {communityDetails?.moderators.map((moderators, index) => {
                     const { moderator } = moderators;
                     return (
-                      <div className="mod-user">
+                      <div
+                        className="mod-user"
+                        key={`${index}${moderators.id}${Math.random()}`}
+                      >
                         <LemmyUser
-                          key={`${index}${moderators.id}${Math.random()}`}
                           post={moderator}
                           community={community}
                           sort={sort}
-                          id={moderator?.id}
+                          // id={moderator?.id}
                           actor_id={moderator?.actor_id}
                           avatar={moderator?.avatar}
                           display_name={moderator?.display_name}
-                          banned={moderator?.banned}
+                          // banned={moderator?.banned}
                           name={moderator?.name}
                           lemmyInstance={lemmyInstance}
                           showInfoCard={false}

@@ -1,3 +1,5 @@
+import React from 'react';
+
 // https://www.radix-ui.com/primitives/docs/components/tabs
 import * as Tabs from '@radix-ui/react-tabs';
 import { useStateStorage } from '../../../hooks/useAtlasUtils';
@@ -40,10 +42,10 @@ function AtlasGovernment({ interfaceProps }) {
         <AtlasMisc {...interfaceProps}></AtlasMisc>
       </Tabs.Content>
       <Tabs.Content className="tabs-content" value="MapInformation">
-        <AtlasMapInformation interfaceProps={interfaceProps} />
+        <AtlasMapInformation {...interfaceProps} />
       </Tabs.Content>
       <Tabs.Content className="tabs-content dark" value="ClassStructure">
-        <AtlasClassStructure interfaceProps={interfaceProps} />
+        <AtlasClassStructure {...interfaceProps} />
       </Tabs.Content>
     </Tabs.Root>
   );

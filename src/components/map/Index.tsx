@@ -32,40 +32,20 @@ import Minimap from './MiniMap';
 export default function AtlasMap({
   // Util
   isMobile,
-  resetAtlas,
-  sideBarRef,
-
-  legendSize,
-  setLegendSize,
 
   // Location
   map,
   setMap,
 
-  isOpenAtlasMapInterface,
-  setIsOpenAtlasMapInterface,
-
   isLocationSelectMode,
-  setIsLocationSelectMode,
-
-  activeLocationSelection,
-  setActiveLocationSelection,
 
   nominatim,
-  setNominatim,
 
-  regionTypes,
   activeLocationType,
   setActiveLocationType,
 
   activeAdministrativeRegion,
   setActiveAdministrativeRegion,
-
-  administrativeRegionClickHistoryArray,
-  setAdministrativeRegionClickHistoryArray,
-
-  locationQuery,
-  setLocationQuery,
 }) {
   /*
       Styles

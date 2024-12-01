@@ -1,30 +1,18 @@
+import React from 'react';
+
 import { userPronouns } from '../../../../../hooks/useDataTransform';
 import LemmyUserInfoCard from './UserInfoCard';
-
-/*
- /$$   /$$                              
-| $$  | $$                              
-| $$  | $$  /$$$$$$$  /$$$$$$   /$$$$$$ 
-| $$  | $$ /$$_____/ /$$__  $$ /$$__  $$
-| $$  | $$|  $$$$$$ | $$$$$$$$| $$  \__/
-| $$  | $$ \____  $$| $$_____/| $$      
-|  $$$$$$/ /$$$$$$$/|  $$$$$$$| $$      
- \______/ |_______/  \_______/|__/      
-                                        
-                                        
-                                        
-*/
 
 function AtlasLemmyUser({
   post,
   lemmyInstance,
   community,
   sort,
-  id = post?.creator?.id,
+  // id = post?.creator?.id,
   actor_id = post?.creator?.actor_id,
   avatar = post?.creator?.avatar,
   display_name = post?.creator?.display_name,
-  banned = post?.creator?.banned,
+  // banned = post?.creator?.banned,
   name = post?.creator?.name,
   showInfoCard = true,
 }) {

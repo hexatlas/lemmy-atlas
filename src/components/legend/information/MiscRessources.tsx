@@ -1,36 +1,6 @@
-// https://www.radix-ui.com/primitives/docs/components/collapsible
-import * as Collapsible from "@radix-ui/react-collapsible";
+import React from 'react';
 
-export function AtlasMisc({
-  // Location
-  map,
-  setMap,
-
-  isOpenAtlasMapInterface,
-  setIsOpenAtlasMapInterface,
-
-  isLocationSelectMode,
-  setIsLocationSelectMode,
-
-  activeLocationSelection,
-  setActiveLocationSelection,
-
-  nominatim,
-  setNominatim,
-
-  regionTypes,
-  activeLocationType,
-  setActiveLocationType,
-
-  activeAdministrativeRegion,
-  setActiveAdministrativeRegion,
-
-  administrativeRegionClickHistoryArray,
-  setAdministrativeRegionClickHistoryArray,
-
-  locationQuery,
-  setLocationQuery,
-}) {
+export function AtlasMisc({ activeLocationType, activeAdministrativeRegion }) {
   return (
     <div id="legend-content">
       <h3>BannedThought.net</h3>
@@ -42,11 +12,11 @@ export function AtlasMisc({
         🔗 Recent Posts
       </a>
       <br />
-      {activeAdministrativeRegion.country != "country" && (
+      {activeAdministrativeRegion.country != 'country' && (
         <a
           href={`http://bannedthought.net/${encodeURI(
-            activeAdministrativeRegion[activeLocationType]
-          ).replace(/%20/g, "-")}/index.htm`}
+            activeAdministrativeRegion[activeLocationType],
+          ).replace(/%20/g, '-')}/index.htm`}
           target="_blank"
           rel="noopener noreferrer"
         >
@@ -54,13 +24,13 @@ export function AtlasMisc({
         </a>
       )}
       <h3>WorldAtlas.com</h3>
-      {activeAdministrativeRegion.country != "country" && (
+      {activeAdministrativeRegion.country != 'country' && (
         <>
           <a
             href={`https://www.worldatlas.com/maps/${encodeURI(
-              activeAdministrativeRegion[activeLocationType]
+              activeAdministrativeRegion[activeLocationType],
             )
-              .replace(/%20/g, "-")
+              .replace(/%20/g, '-')
               .toLowerCase()}`}
             target="_blank"
             rel="noopener noreferrer"

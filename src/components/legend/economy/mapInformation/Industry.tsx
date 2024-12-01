@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 import useOverpassLayer from '../../../../data/shared/useOverpassLayer';
 import useEconomyIndustry from '../../../../data/economy/overpass/useIndustry';
 
@@ -9,33 +9,7 @@ import AtlasOSMSettings from '../../../shared/OSMSettings';
 export function Industry({
   // Location
   map,
-  setMap,
-
-  isOpenAtlasMapInterface,
-  setIsOpenAtlasMapInterface,
-
-  isLocationSelectMode,
-  setIsLocationSelectMode,
-
-  activeLocationSelection,
-  setActiveLocationSelection,
-
-  nominatim,
-  setNominatim,
-
-  regionTypes,
-  activeLocationType,
-  setActiveLocationType,
-
   activeAdministrativeRegion,
-  setActiveAdministrativeRegion,
-
-  administrativeRegionClickHistoryArray,
-  setAdministrativeRegionClickHistoryArray,
-
-  locationQuery,
-  setLocationQuery,
-
   isClustered,
   setIsClustered,
 }) {

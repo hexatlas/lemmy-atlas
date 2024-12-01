@@ -1,17 +1,12 @@
 // https://www.imf.org/external/datamapper/api/help
 
-import { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
 import * as d3 from 'd3';
 
 // https://www.radix-ui.com/primitives/docs/components/collapsible
 import * as Collapsible from '@radix-ui/react-collapsible';
 
-// https://www.radix-ui.com/primitives/docs/components/dropdown-menu
-import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
-
-import { useStateStorage } from '../../../hooks/useAtlasUtils';
-import { useQuery } from '@tanstack/react-query';
 import useIMF from '../../../data/economy/charts/useIMF';
 
 const EconomicData = ({ activeAdministrativeRegion }) => {
@@ -20,7 +15,6 @@ const EconomicData = ({ activeAdministrativeRegion }) => {
   /*
     useStates
     */
-  const [error, setError] = useStateStorage('error', null);
 
   const {
     IMFData,
@@ -233,7 +227,7 @@ const EconomicData = ({ activeAdministrativeRegion }) => {
           'hsl(var(--atlas-color-tertiary) / var(--atlas-opacity-3))',
         )
         .on('mouseover', function (event, d) {
-          const [mouseX, mouseY] = d3.pointer(event);
+          // const [mouseX, mouseY] = d3.pointer(event);
 
           // Show tooltip
           tooltip

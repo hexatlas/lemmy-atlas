@@ -1,16 +1,12 @@
+import React from 'react';
+
 import useMastodon from '../../../../../data/information/fediverse/useMastodon';
 import { TimeAgo } from '../../../../../hooks/useDataTransform';
 
 // https://www.radix-ui.com/primitives/docs/components/collapsible
 import * as Collapsible from '@radix-ui/react-collapsible';
 
-function AtlasMastodon({
-  activeLocationType,
-  setActiveLocationType,
-
-  activeAdministrativeRegion,
-  setActiveAdministrativeRegion,
-}) {
+function AtlasMastodon({ activeLocationType, activeAdministrativeRegion }) {
   const { mastodonPosts, isLoading } = useMastodon(
     activeAdministrativeRegion,
     activeLocationType,
@@ -161,8 +157,8 @@ function AtlasMastodon({
 
               {post?.tags.length > 0 && (
                 <div className="post-tags">
-                  {post?.tags.map((item) => (
-                    <h6>
+                  {post?.tags.map((item, index) => (
+                    <h6 key={index}>
                       <a
                         href={item.url}
                         target="_blank"

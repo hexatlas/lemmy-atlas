@@ -1,24 +1,12 @@
-import LemmyCommunityInfoCard from './CommunityInfoCard';
+import React from 'react';
 
-/*
-  /$$$$$$                                                            /$$   /$$              
- /$$__  $$                                                          |__/  | $$              
-| $$  \__/  /$$$$$$  /$$$$$$/$$$$  /$$$$$$/$$$$  /$$   /$$ /$$$$$$$  /$$ /$$$$$$   /$$   /$$
-| $$       /$$__  $$| $$_  $$_  $$| $$_  $$_  $$| $$  | $$| $$__  $$| $$|_  $$_/  | $$  | $$
-| $$      | $$  \ $$| $$ \ $$ \ $$| $$ \ $$ \ $$| $$  | $$| $$  \ $$| $$  | $$    | $$  | $$
-| $$    $$| $$  | $$| $$ | $$ | $$| $$ | $$ | $$| $$  | $$| $$  | $$| $$  | $$ /$$| $$  | $$
-|  $$$$$$/|  $$$$$$/| $$ | $$ | $$| $$ | $$ | $$|  $$$$$$/| $$  | $$| $$  |  $$$$/|  $$$$$$$
- \______/  \______/ |__/ |__/ |__/|__/ |__/ |__/ \______/ |__/  |__/|__/   \___/   \____  $$
-                                                                                   /$$  | $$
-                                                                                  |  $$$$$$/
-                                                                                   \______/ 
-*/
+import LemmyCommunityInfoCard from './CommunityInfoCard';
 
 function AtlasLemmyCommunity({
   post,
   lemmyInstance,
   sort,
-  community,
+  // community,
   showCommunityIcon = true,
   icon = post?.community?.icon,
   display_name = post?.community?.display_name,

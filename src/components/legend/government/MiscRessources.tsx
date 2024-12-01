@@ -1,36 +1,6 @@
-// https://www.radix-ui.com/primitives/docs/components/collapsible
-import * as Collapsible from "@radix-ui/react-collapsible";
+import React from 'react';
 
-export function AtlasMisc({
-  // Location
-  map,
-  setMap,
-
-  isOpenAtlasMapInterface,
-  setIsOpenAtlasMapInterface,
-
-  isLocationSelectMode,
-  setIsLocationSelectMode,
-
-  activeLocationSelection,
-  setActiveLocationSelection,
-
-  nominatim,
-  setNominatim,
-
-  regionTypes,
-  activeLocationType,
-  setActiveLocationType,
-
-  activeAdministrativeRegion,
-  setActiveAdministrativeRegion,
-
-  administrativeRegionClickHistoryArray,
-  setAdministrativeRegionClickHistoryArray,
-
-  locationQuery,
-  setLocationQuery,
-}) {
+export function AtlasMisc() {
   return (
     <div id="legend-content">
       <h3>Government Links</h3>

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import administrativeRegionsData from './assets/geojson/administrative_regions_extended.json';
 
 // https://www.radix-ui.com/primitives/docs/components/collapsible
@@ -25,25 +25,18 @@ export default function AtlasInterface({
   // Util
   isMobile,
   resetAtlas,
-  sideBarRef,
 
   legendSize,
   setLegendSize,
 
   // Location
   map,
-  setMap,
 
   isOpenAtlasMapInterface,
   setIsOpenAtlasMapInterface,
 
   isLocationSelectMode,
   setIsLocationSelectMode,
-
-  activeLocationSelection,
-  setActiveLocationSelection,
-
-  nominatim,
   setNominatim,
 
   regionTypes,
@@ -54,10 +47,6 @@ export default function AtlasInterface({
   setActiveAdministrativeRegion,
 
   administrativeRegionClickHistoryArray,
-  setAdministrativeRegionClickHistoryArray,
-
-  locationQuery,
-  setLocationQuery,
 }) {
   /*
       useStates 
@@ -304,7 +293,7 @@ export default function AtlasInterface({
       open={isOpenAtlasMapInterface}
       onOpenChange={setIsOpenAtlasMapInterface}
     >
-      <LocationSearch data={administrativeRegionsData.features}>
+      <LocationSearch data={administrativeRegionsData?.features}>
         {activeAdministrativeRegion.country === 'country' ? (
           <button
             role="button"

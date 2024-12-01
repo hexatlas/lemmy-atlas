@@ -1,5 +1,3 @@
-import React from 'react';
-
 // https://www.imf.org/external/datamapper/api/v1/indicators
 import { indicators } from '../../../data/economy/charts/indicatorsIMF.json';
 import { useStateStorage } from '../../../hooks/useAtlasUtils';

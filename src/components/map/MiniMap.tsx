@@ -9,6 +9,7 @@ import {
   useMapEvent,
 } from 'react-leaflet';
 import { useEventHandlers } from '@react-leaflet/core';
+import { PathOptions } from 'leaflet';
 
 // Leaflet Position Classes4
 
@@ -26,25 +27,10 @@ const POSITION_CLASSES: PositionClasses = {
   topright: 'minimap leaflet-top leaflet-right',
 };
 
-const BOUNDS_STYLE: any = {
+const BOUNDS_STYLE: PathOptions = {
   weight: 0.161,
   color: 'hsl(var(--atlas-color-primary))',
 };
-
-/*
-
- /$$      /$$ /$$           /$$ /$$      /$$                    
-| $$$    /$$$|__/          |__/| $$$    /$$$                    
-| $$$$  /$$$$ /$$ /$$$$$$$  /$$| $$$$  /$$$$  /$$$$$$   /$$$$$$ 
-| $$ $$/$$ $$| $$| $$__  $$| $$| $$ $$/$$ $$ |____  $$ /$$__  $$
-| $$  $$$| $$| $$| $$  \ $$| $$| $$  $$$| $$  /$$$$$$$| $$  \ $$
-| $$\  $ | $$| $$| $$  | $$| $$| $$\  $ | $$ /$$__  $$| $$  | $$
-| $$ \/  | $$| $$| $$  | $$| $$| $$ \/  | $$|  $$$$$$$| $$$$$$$/
-|__/     |__/|__/|__/  |__/|__/|__/     |__/ \_______/| $$____/ 
-                                                      | $$      
-                                                      | $$      
-                                                      |__/
- */
 
 function MinimapBounds({ parentMap, zoom }: { parentMap: any; zoom: number }) {
   const minimap = useMap();

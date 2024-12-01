@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import ReactMarkdown from 'react-markdown';
 
 // https://www.radix-ui.com/primitives/docs/components/collapsible
@@ -127,7 +127,7 @@ function Comment({
               <LemmyCommunity
                 post={post}
                 sort={sort}
-                community={community}
+                // community={community}
                 lemmyInstance={lemmyInstance}
                 showCommunityIcon={community?.id != post?.community?.id}
               />

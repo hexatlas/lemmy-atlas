@@ -1,5 +1,4 @@
-import React from 'react';
-import { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import AtlasOSMInfoCard from './OSMInfoCard';
 
 // https://www.radix-ui.com/primitives/docs/components/collapsible
@@ -141,7 +140,7 @@ function AtlasOSMInfoList({
                 key={index}
                 index={index}
                 element={element}
-                map={map}
+                // map={map}
                 iconMap={iconMap}
                 filterKeys={filterKeys}
                 handleMouseEnter={handleMouseEnter}

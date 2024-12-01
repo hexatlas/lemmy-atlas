@@ -4,7 +4,6 @@ import React from 'react';
 import * as Collapsible from '@radix-ui/react-collapsible';
 
 function AtlasOSMInfoCard({
-  map,
   element,
   index,
   iconMap = {},

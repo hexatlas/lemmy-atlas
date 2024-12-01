@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import ReactMarkdown from 'react-markdown';
 
 // https://www.radix-ui.com/primitives/docs/components/hover-card
@@ -10,39 +10,11 @@ import * as Tabs from '@radix-ui/react-tabs';
 // https://github.com/LemmyNet/lemmy-js-client
 // https://join-lemmy.org/api/classes/LemmyHttp.html
 import { LemmyHttp, GetPersonDetails } from 'lemmy-js-client';
-
-import { userPronouns } from '../../../../../hooks/useDataTransform';
-
-import Comment from './Comment';
 import LemmyCommunity from './Community';
 import Post from './Post';
+import Comment from './Comment';
 import { listingTypes } from '../../../../../AtlasConfig';
-import { useStateStorage } from '../../../../../hooks/useAtlasUtils';
-
-/*
- /$$   /$$                                                                  
-| $$  | $$                                                                  
-| $$  | $$  /$$$$$$$  /$$$$$$   /$$$$$$                                     
-| $$  | $$ /$$_____/ /$$__  $$ /$$__  $$                                    
-| $$  | $$|  $$$$$$ | $$$$$$$$| $$  \__/                                    
-| $$  | $$ \____  $$| $$_____/| $$                                          
-|  $$$$$$/ /$$$$$$$/|  $$$$$$$| $$                                          
- \______/ |_______/  \_______/|__/                                          
-                                                                            
-                                                                            
-                                                                            
- /$$$$$$            /$$$$$$           /$$$$$$                            /$$
-|_  $$_/           /$$__  $$         /$$__  $$                          | $$
-  | $$   /$$$$$$$ | $$  \__//$$$$$$ | $$  \__/  /$$$$$$   /$$$$$$   /$$$$$$$
-  | $$  | $$__  $$| $$$$   /$$__  $$| $$       |____  $$ /$$__  $$ /$$__  $$
-  | $$  | $$  \ $$| $$_/  | $$  \ $$| $$        /$$$$$$$| $$  \__/| $$  | $$
-  | $$  | $$  | $$| $$    | $$  | $$| $$    $$ /$$__  $$| $$      | $$  | $$
- /$$$$$$| $$  | $$| $$    |  $$$$$$/|  $$$$$$/|  $$$$$$$| $$      |  $$$$$$$
-|______/|__/  |__/|__/     \______/  \______/  \_______/|__/       \_______/
-                                                                            
-                                                                            
-                                                                            
-*/
+import { userPronouns } from '../../../../../hooks/useDataTransform';
 
 function AtlasLemmyUserInfoCard({
   children,
@@ -218,13 +190,15 @@ function AtlasLemmyUserInfoCard({
                       <div className="mod-list">
                         {user?.moderates.map((community, index) => {
                           return (
-                            <div className="mod-user">
+                            <div
+                              className="mod-user"
+                              key={`${index}${community.id}`}
+                            >
                               <LemmyCommunity
-                                key={`${index}${community.id}`}
                                 post={community}
                                 lemmyInstance={lemmyInstance}
                                 sort={sort}
-                                community={community}
+                                // community={community}
                                 icon={community?.icon}
                                 display_name={community?.display_name}
                                 name={community?.name}

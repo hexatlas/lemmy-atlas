@@ -1,3 +1,5 @@
+import React from 'react';
+
 import { useCallback, useEffect } from 'react';
 import useEconomyTransport from '../../../../data/economy/overpass/useTransport';
 import useOverpassLayer from '../../../../data/shared/useOverpassLayer';
@@ -8,33 +10,7 @@ import AtlasOSMSettings from '../../../shared/OSMSettings';
 function Transport({
   // Location
   map,
-  setMap,
-
-  isOpenAtlasMapInterface,
-  setIsOpenAtlasMapInterface,
-
-  isLocationSelectMode,
-  setIsLocationSelectMode,
-
-  activeLocationSelection,
-  setActiveLocationSelection,
-
-  nominatim,
-  setNominatim,
-
-  regionTypes,
-  activeLocationType,
-  setActiveLocationType,
-
   activeAdministrativeRegion,
-  setActiveAdministrativeRegion,
-
-  administrativeRegionClickHistoryArray,
-  setAdministrativeRegionClickHistoryArray,
-
-  locationQuery,
-  setLocationQuery,
-
   isClustered,
   setIsClustered,
 }) {
@@ -60,13 +36,13 @@ function Transport({
 
   // Update Map to Selection
 
-  const showOnMap = useCallback(
-    (coords) => {
-      const mapBounds = [coords?.maxlat, coords?.minlon];
-      map.flyTo(mapBounds, 14);
-    },
-    [map],
-  );
+  // const showOnMap = useCallback(
+  //   (coords) => {
+  //     const mapBounds = [coords?.maxlat, coords?.minlon];
+  //     map.flyTo(mapBounds, 14);
+  //   },
+  //   [map],
+  // );
 
   const clusterSettings = {
     isClustered,

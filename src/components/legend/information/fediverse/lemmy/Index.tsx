@@ -12,7 +12,6 @@ import useLemmy from '../../../../../data/information/fediverse/useLemmy';
 
 export default function AtlasLemmy({
   // Util
-  isMobile,
   resetAtlas,
   sideBarRef,
 

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import ReactMarkdown from 'react-markdown';
 
 // https://www.radix-ui.com/primitives/docs/components/collapsible
@@ -135,7 +135,7 @@ function Post({
                 <LemmyCommunity
                   post={post}
                   sort={sort}
-                  community={community}
+                  // community={community}
                   lemmyInstance={lemmyInstance}
                 />
               )}
@@ -206,7 +206,7 @@ function Post({
                 onClick={handleReplies}
                 onKeyDown={(e) => {
                   if (e.key === 'Enter' || e.key === 'Space') {
-                    handleReplies;
+                    handleReplies();
                   }
                 }}
               >

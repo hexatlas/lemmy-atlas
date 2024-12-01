@@ -8,20 +8,6 @@ import AtlasWiki from './nexus/Wiki';
 import AtlasNexusAnarchistLibrary from './nexus/AnarchistLibrary';
 import { useStateStorage } from '../../../hooks/useAtlasUtils';
 
-/*
- /$$   /$$                                        
-| $$$ | $$                                        
-| $$$$| $$  /$$$$$$  /$$   /$$ /$$   /$$  /$$$$$$$
-| $$ $$ $$ /$$__  $$|  $$ /$$/| $$  | $$ /$$_____/
-| $$  $$$$| $$$$$$$$ \  $$$$/ | $$  | $$|  $$$$$$ 
-| $$\  $$$| $$_____/  >$$  $$ | $$  | $$ \____  $$
-| $$ \  $$|  $$$$$$$ /$$/\  $$|  $$$$$$/ /$$$$$$$/
-|__/  \__/ \_______/|__/  \__/ \______/ |_______/ 
-                                                  
-                                                  
-                                                                                                                                                                        
-*/
-
 function AtlasNexusCard({ interfaceProps }) {
   const [activeTab, setActiveTab] = useStateStorage(
     'activeNexusTab',
@@ -46,7 +32,7 @@ function AtlasNexusCard({ interfaceProps }) {
             NATOpedia
           </Tabs.Trigger>
           <Tabs.Trigger className="tabs-trigger" value="Bulletins">
-            72T's Bulletins
+            72T&#39;s Bulletins
           </Tabs.Trigger>
           <Tabs.Trigger className="tabs-trigger" value="AnarchistLibrary">
             Anarchist Library

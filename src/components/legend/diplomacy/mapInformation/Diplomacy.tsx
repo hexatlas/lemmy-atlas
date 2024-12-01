@@ -1,4 +1,4 @@
-import { useCallback, useEffect } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import useDiplomacyEmbassies from '../../../../data/diplomacy/overpass/useDiplomatic';
 import useOverpassLayer from '../../../../data/shared/useOverpassLayer';
 import { iconMap } from '../../../../data/diplomacy/overpass/emoji/Diplomatic';
@@ -8,33 +8,7 @@ import AtlasOSMSettings from '../../../shared/OSMSettings';
 export function Diplomacy({
   // Location
   map,
-  setMap,
-
-  isOpenAtlasMapInterface,
-  setIsOpenAtlasMapInterface,
-
-  isLocationSelectMode,
-  setIsLocationSelectMode,
-
-  activeLocationSelection,
-  setActiveLocationSelection,
-
-  nominatim,
-  setNominatim,
-
-  regionTypes,
-  activeLocationType,
-  setActiveLocationType,
-
   activeAdministrativeRegion,
-  setActiveAdministrativeRegion,
-
-  administrativeRegionClickHistoryArray,
-  setAdministrativeRegionClickHistoryArray,
-
-  locationQuery,
-  setLocationQuery,
-
   isClustered,
   setIsClustered,
 }) {
@@ -59,13 +33,13 @@ export function Diplomacy({
   }, [map, data, isClustered]);
 
   // Update Map to Selection
-  const showOnMap = useCallback(
-    (coords) => {
-      const mapBounds = [coords?.maxlat, coords?.minlon];
-      map.flyTo(mapBounds, 14);
-    },
-    [map],
-  );
+  // const showOnMap = useCallback(
+  //   (coords) => {
+  //     const mapBounds = [coords?.maxlat, coords?.minlon];
+  //     map.flyTo(mapBounds, 14);
+  //   },
+  //   [map],
+  // );
 
   const clusterSettings = {
     isClustered,

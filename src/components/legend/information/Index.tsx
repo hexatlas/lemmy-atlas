@@ -1,3 +1,5 @@
+import React from 'react';
+
 // https://www.radix-ui.com/primitives/docs/components/tabs
 import * as Tabs from '@radix-ui/react-tabs';
 import { useStateStorage } from '../../../hooks/useAtlasUtils';
@@ -114,8 +116,8 @@ function AtlasInformation({ interfaceProps }) {
               </ul>
             </li>
             <li>
-              <b>📚 Library:</b> ProleWiki, Wikipedia, u/seventytwotrillion's
-              bulletins, and the anarchist library
+              <b>📚 Library:</b> ProleWiki, Wikipedia,
+              u/seventytwotrillion&#39;s bulletins, and the anarchist library
             </li>
             <li>
               <b>👥 Social Media:</b> Hexbear, Lemmy, and Mastodon

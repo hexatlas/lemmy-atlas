@@ -1,29 +1,6 @@
-/*
-  /$$$$$$  /$$                                                                           
- /$$__  $$| $$                                                                           
-| $$  \__/| $$  /$$$$$$   /$$$$$$$ /$$$$$$$                                              
-| $$      | $$ |____  $$ /$$_____//$$_____/                                              
-| $$      | $$  /$$$$$$$|  $$$$$$|  $$$$$$                                               
-| $$    $$| $$ /$$__  $$ \____  $$\____  $$                                              
-|  $$$$$$/| $$|  $$$$$$$ /$$$$$$$//$$$$$$$/                                              
- \______/ |__/ \_______/|_______/|_______/                                               
-                                                                                         
-                                                                                         
-                                                                                         
-  /$$$$$$   /$$                                     /$$                                  
- /$$__  $$ | $$                                    | $$                                  
-| $$  \__//$$$$$$    /$$$$$$  /$$   /$$  /$$$$$$$ /$$$$$$   /$$   /$$  /$$$$$$   /$$$$$$ 
-|  $$$$$$|_  $$_/   /$$__  $$| $$  | $$ /$$_____/|_  $$_/  | $$  | $$ /$$__  $$ /$$__  $$
- \____  $$ | $$    | $$  \__/| $$  | $$| $$        | $$    | $$  | $$| $$  \__/| $$$$$$$$
- /$$  \ $$ | $$ /$$| $$      | $$  | $$| $$        | $$ /$$| $$  | $$| $$      | $$_____/
-|  $$$$$$/ |  $$$$/| $$      |  $$$$$$/|  $$$$$$$  |  $$$$/|  $$$$$$/| $$      |  $$$$$$$
- \______/   \___/  |__/       \______/  \_______/   \___/   \______/ |__/       \_______/
-                                                                                         
-                                                                                         
-                                                                                         
-*/
+import React from 'react';
 
-function AtlasClassStructure({ interfaceProps }) {
+function AtlasClassStructure() {
   return (
     <div className="legend-content-container class-structure">
       <h3>TO DO: Class Structure </h3>
@@ -44,7 +21,8 @@ function AtlasClassStructure({ interfaceProps }) {
             <td>Owners and controllers of large-scale industries</td>
             <td>
               <span className="highlight">{100 * Math.random()}%</span>
-              of total population, holding significant political power and influence
+              of total population, holding significant political power and
+              influence
             </td>
           </tr>
           <tr>
@@ -70,18 +48,20 @@ function AtlasClassStructure({ interfaceProps }) {
           <tr>
             <td>Investment Bankers</td>
             <td>
-              Individuals and institutions involved in financial investment and capital
-              allocation
+              Individuals and institutions involved in financial investment and
+              capital allocation
             </td>
             <td>
               <span className="highlight">{100 * Math.random()}%</span>
-              of total population, wielding significant influence in global finance and
-              markets
+              of total population, wielding significant influence in global
+              finance and markets
             </td>
           </tr>
           <tr>
             <td>Stock Traders</td>
-            <td>Professionals trading stocks and securities in financial markets</td>
+            <td>
+              Professionals trading stocks and securities in financial markets
+            </td>
             <td>
               <span className="highlight">{100 * Math.random()}%</span>
               of total population, participating actively in stock exchanges and
@@ -106,8 +86,8 @@ function AtlasClassStructure({ interfaceProps }) {
             <td>Traditional aristocratic families with vast land</td>
             <td>
               <span className="highlight">{100 * Math.random()}%</span>
-              of total population, wielding considerable influence in political and social
-              circles
+              of total population, wielding considerable influence in political
+              and social circles
             </td>
           </tr>
           <tr>
@@ -115,8 +95,8 @@ function AtlasClassStructure({ interfaceProps }) {
             <td>Wealthy landowners from commerce or investment</td>
             <td>
               <span className="highlight">{100 * Math.random()}%</span>
-              of total population, controlling extensive land holdings and participating
-              in elite societies
+              of total population, controlling extensive land holdings and
+              participating in elite societies
             </td>
           </tr>
           <tr>
@@ -124,8 +104,8 @@ function AtlasClassStructure({ interfaceProps }) {
             <td>Farmers and tenants leasing land for agriculture</td>
             <td>
               <span className="highlight">{100 * Math.random()}%</span>
-              of total population, contributing to agricultural production under the
-              patronage of landowners
+              of total population, contributing to agricultural production under
+              the patronage of landowners
             </td>
           </tr>
         </tbody>
@@ -145,8 +125,8 @@ function AtlasClassStructure({ interfaceProps }) {
             <td>Educated individuals in medicine, law, academia</td>
             <td>
               <span className="highlight">{100 * Math.random()}%</span>
-              of total population, shaping intellectual discourse and driving advancements
-              in various fields
+              of total population, shaping intellectual discourse and driving
+              advancements in various fields
             </td>
           </tr>
           <tr>
@@ -154,7 +134,8 @@ function AtlasClassStructure({ interfaceProps }) {
             <td>Creative professionals contributing to culture</td>
             <td>
               <span className="highlight">{100 * Math.random()}%</span>
-              of total population, influencing artistic movements and cultural trends
+              of total population, influencing artistic movements and cultural
+              trends
             </td>
           </tr>
           <tr>
@@ -183,7 +164,8 @@ function AtlasClassStructure({ interfaceProps }) {
             <td>Commissioned military personnel and commanders</td>
             <td>
               <span className="highlight">{100 * Math.random()}%</span>
-              of total population, holding key positions in national defense and security
+              of total population, holding key positions in national defense and
+              security
             </td>
           </tr>
           <tr>
@@ -191,8 +173,8 @@ function AtlasClassStructure({ interfaceProps }) {
             <td>Non-commissioned soldiers serving in military</td>
             <td>
               <span className="highlight">{100 * Math.random()}%</span>
-              of total population, comprising the backbone of the armed forces and
-              maintaining peace and order
+              of total population, comprising the backbone of the armed forces
+              and maintaining peace and order
             </td>
           </tr>
           <tr>
@@ -200,8 +182,8 @@ function AtlasClassStructure({ interfaceProps }) {
             <td>Civilians providing logistical support to forces</td>
             <td>
               <span className="highlight">{100 * Math.random()}.5%</span>
-              of total population, facilitating military operations and infrastructure
-              maintenance
+              of total population, facilitating military operations and
+              infrastructure maintenance
             </td>
           </tr>
         </tbody>
@@ -222,8 +204,8 @@ function AtlasClassStructure({ interfaceProps }) {
             <td>Small business owners and self-employed</td>
             <td>
               <span className="highlight">{100 * Math.random()}%</span>
-              of total population, driving innovation and entrepreneurship in various
-              sectors
+              of total population, driving innovation and entrepreneurship in
+              various sectors
             </td>
           </tr>
           <tr>
@@ -231,8 +213,8 @@ function AtlasClassStructure({ interfaceProps }) {
             <td>Middle-class professionals such as doctors, etc</td>
             <td>
               <span className="highlight">{100 * Math.random()}%</span>
-              of total population, contributing expertise to critical sectors such as
-              healthcare and law
+              of total population, contributing expertise to critical sectors
+              such as healthcare and law
             </td>
           </tr>
           <tr>
@@ -240,8 +222,8 @@ function AtlasClassStructure({ interfaceProps }) {
             <td>Tradespeople and craftsmen with specialized skills</td>
             <td>
               <span className="highlight">{100 * Math.random()}%</span>
-              of total population, playing essential roles in construction, manufacturing,
-              and trade
+              of total population, playing essential roles in construction,
+              manufacturing, and trade
             </td>
           </tr>
         </tbody>
@@ -261,8 +243,8 @@ function AtlasClassStructure({ interfaceProps }) {
             <td>Laborers in factories performing manual tasks</td>
             <td>
               <span className="highlight">{100 * Math.random()}%</span>
-              of total population, forming the working class and advocating for labor
-              rights
+              of total population, forming the working class and advocating for
+              labor rights
             </td>
           </tr>
           <tr>
@@ -279,8 +261,8 @@ function AtlasClassStructure({ interfaceProps }) {
             <td>Urban residents facing economic hardship</td>
             <td>
               <span className="highlight">{100 * Math.random()}%</span>
-              of total population, struggling with poverty and socio-economic challenges
-              in urban areas
+              of total population, struggling with poverty and socio-economic
+              challenges in urban areas
             </td>
           </tr>
           <tr>
@@ -288,8 +270,8 @@ function AtlasClassStructure({ interfaceProps }) {
             <td>Workers without specialized skills or training</td>
             <td>
               <span className="highlight">{100 * Math.random()}%</span>
-              of total population, employed in low-wage jobs and facing precarious
-              employment conditions
+              of total population, employed in low-wage jobs and facing
+              precarious employment conditions
             </td>
           </tr>
         </tbody>
