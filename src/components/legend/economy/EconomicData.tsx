@@ -11,7 +11,7 @@ import * as Collapsible from '@radix-ui/react-collapsible';
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 
 // https://www.imf.org/external/datamapper/api/v1/indicators
-import { indicators } from '../../../data/indicatorsIMF.json';
+import { indicators } from '../../../data/economy/charts/indicatorsIMF.json';
 import { useIMFDataTransform } from '../../../hooks/useDataTransform';
 import { useStateStorage } from '../../../hooks/useAtlasUtils';
 import { useQuery } from '@tanstack/react-query';
@@ -40,7 +40,7 @@ import { useQuery } from '@tanstack/react-query';
                                         
 */
 
-const AtlasIMFData = ({ activeAdministrativeRegion }) => {
+const EconomicData = ({ activeAdministrativeRegion }) => {
   const defaultIndicator = {
     name: 'PPPSH',
     label: 'GDP based on PPP, share of world',
@@ -574,4 +574,4 @@ const AtlasIMFData = ({ activeAdministrativeRegion }) => {
   );
 };
 
-export default AtlasIMFData;
+export default EconomicData;

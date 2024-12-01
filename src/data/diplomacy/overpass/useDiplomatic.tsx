@@ -1,19 +1,19 @@
-import { useQuery } from "@tanstack/react-query";
-import useOverpassAPI from "../useOverpassAPI";
+import { useQuery } from '@tanstack/react-query';
+import useOverpassAPI from '../../shared/useOverpassAPI';
 
 function useDiplomacyEmbassies(activeAdministrativeRegion) {
   const overpassQuery = `
     [out:json][timeout:90];
 
 
-      nwr["office"="diplomatic"]["country"="${activeAdministrativeRegion["alpha-2"]}"];
+      nwr["office"="diplomatic"]["country"="${activeAdministrativeRegion['alpha-2']}"];
 
     
     out geom;
     `;
 
   const embassies = useQuery({
-    queryKey: [`Embassies-${activeAdministrativeRegion["alpha-2"]}`],
+    queryKey: [`Embassies-${activeAdministrativeRegion['alpha-2']}`],
     queryFn: () => useOverpassAPI(overpassQuery),
     staleTime: Infinity,
     refetchInterval: false,

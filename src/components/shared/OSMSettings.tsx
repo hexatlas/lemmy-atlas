@@ -1,14 +1,15 @@
-import { Children } from "react";
+import React from 'react';
+import { Children } from 'react';
 
 function AtlasOSMSettings({ isClustered, setIsClustered, Children = <></> }) {
   return (
     <div className="overpass-settings-container light">
       <div className="container-info secondary">⚙️</div>
       <button type="button" onClick={() => setIsClustered(!isClustered)}>
-        {isClustered ? "🗂️" : "📍"}
+        {isClustered ? '🗂️' : '📍'}
       </button>
       <button type="button" onClick={() => setIsClustered(!isClustered)}>
-        {isClustered ? "🗺️" : "🔲"}
+        {isClustered ? '🗺️' : '🔲'}
       </button>
       {Children}
     </div>

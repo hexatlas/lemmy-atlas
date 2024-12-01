@@ -1,12 +1,12 @@
-import { useQuery } from "@tanstack/react-query";
-import useOverpassAPI from "../useOverpassAPI";
+import { useQuery } from '@tanstack/react-query';
+import useOverpassAPI from '../../shared/useOverpassAPI';
 
 function useEconomyTransport(activeAdministrativeRegion) {
   const overpassQuery = `
     [out:json][timeout:90];
     
     // Fetch area for the selected region
-    area["ISO3166-1"="${activeAdministrativeRegion["alpha-2"]}"]->.name;
+    area["ISO3166-1"="${activeAdministrativeRegion['alpha-2']}"]->.name;
     (
       // Fetch light rail
       nwr["railway"="light_rail"](area.name);
@@ -25,7 +25,7 @@ function useEconomyTransport(activeAdministrativeRegion) {
     out geom;
     `;
   const transport = useQuery({
-    queryKey: [`Transport-${activeAdministrativeRegion["alpha-2"]}`],
+    queryKey: [`Transport-${activeAdministrativeRegion['alpha-2']}`],
     queryFn: () => useOverpassAPI(overpassQuery),
     staleTime: Infinity,
     refetchInterval: false,

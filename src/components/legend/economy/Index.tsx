@@ -1,7 +1,7 @@
 // https://www.radix-ui.com/primitives/docs/components/tabs
 import * as Tabs from '@radix-ui/react-tabs';
 import { useStateStorage } from '../../../hooks/useAtlasUtils';
-import AtlasIMFData from './Charts';
+import EconomicData from './EconomicData';
 import AtlasMisc from './MiscRessources';
 import AtlasMapInformation from './MapInformation';
 
@@ -85,7 +85,7 @@ function AtlasEconomy({ interfaceProps }) {
         ></AtlasMapInformation>
       </Tabs.Content>
       <Tabs.Content className="tabs-content dark" value="Charts">
-        <AtlasIMFData {...interfaceProps}></AtlasIMFData>
+        <EconomicData {...interfaceProps}></EconomicData>
       </Tabs.Content>
     </Tabs.Root>
   );

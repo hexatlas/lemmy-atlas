@@ -1,3 +1,5 @@
+import React from 'react';
+
 // https://www.radix-ui.com/primitives/docs/components/tabs
 import * as Tabs from '@radix-ui/react-tabs';
 

@@ -1,3 +1,4 @@
+import React from 'react';
 import { useCallback, useEffect, useState } from 'react';
 import AtlasOSMInfoCard from './OSMInfoCard';
 

@@ -1,3 +1,5 @@
+import React from 'react';
+
 import { useCallback, useEffect, useState } from 'react';
 import {
   MapContainer,
@@ -8,7 +10,7 @@ import {
 } from 'react-leaflet';
 import { LatLngExpression, latLng, latLngBounds } from 'leaflet';
 import { GeoJsonObject } from 'geojson';
-import administrativeRegionsData from '../../data/geojson/administrative_regions_extended.json';
+import administrativeRegionsData from '../../assets/geojson/administrative_regions_extended.json';
 
 import { baseLayers, overlayLayers } from '../../AtlasConfig';
 import Minimap from './MiniMap';

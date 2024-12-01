@@ -1,6 +1,8 @@
+import React from 'react';
+
 // import center from "@turf/center";
-import { useState, useEffect } from "react";
-import administrativeRegionsData from "../data/geojson/administrative_regions_extended.json";
+import { useState, useEffect } from 'react';
+import administrativeRegionsData from '../assets/geojson/administrative_regions_extended.json';
 
 // HANDLE RANDOM
 
@@ -8,7 +10,7 @@ export function handleRandom(setActiveAdministrativeRegion) {
   setActiveAdministrativeRegion(
     administrativeRegionsData?.features[
       Math.floor(administrativeRegionsData?.features.length * Math.random())
-    ].properties
+    ].properties,
   );
 }
 
@@ -24,7 +26,7 @@ export const RecursiveJSONComponent = ({ data }) => {
           ))}
         </ul>
       );
-    } else if (typeof data === "object") {
+    } else if (typeof data === 'object') {
       return (
         <ul className={`nextindex-${nestingIndex}`}>
           {Object.keys(data).map((key, index) => (
@@ -58,13 +60,13 @@ export function Resizeable({ children }) {
       }));
     }
     function onMouseUp() {
-      document.body.removeEventListener("mousemove", onMouseMove);
+      document.body.removeEventListener('mousemove', onMouseMove);
       // uncomment the following line if not using `{ once: true }`
       // document.body.removeEventListener("mouseup", onMouseUp);
     }
 
-    document.body.addEventListener("mousemove", onMouseMove);
-    document.body.addEventListener("mouseup", onMouseUp, { once: true });
+    document.body.addEventListener('mousemove', onMouseMove);
+    document.body.addEventListener('mouseup', onMouseUp, { once: true });
   };
 
   return (

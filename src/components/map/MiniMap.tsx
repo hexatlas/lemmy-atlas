@@ -1,6 +1,14 @@
-import { useCallback, useMemo, useState } from "react";
-import { MapContainer, TileLayer, useMap, Rectangle, useMapEvent } from "react-leaflet";
-import { useEventHandlers } from "@react-leaflet/core";
+import React from 'react';
+
+import { useCallback, useMemo, useState } from 'react';
+import {
+  MapContainer,
+  TileLayer,
+  useMap,
+  Rectangle,
+  useMapEvent,
+} from 'react-leaflet';
+import { useEventHandlers } from '@react-leaflet/core';
 
 // Leaflet Position Classes4
 
@@ -12,15 +20,15 @@ interface PositionClasses {
 }
 
 const POSITION_CLASSES: PositionClasses = {
-  bottomleft: "minimap leaflet-bottom leaflet-left",
-  bottomright: "minimap leaflet-bottom leaflet-right",
-  topleft: "minimap leaflet-top leaflet-left",
-  topright: "minimap leaflet-top leaflet-right",
+  bottomleft: 'minimap leaflet-bottom leaflet-left',
+  bottomright: 'minimap leaflet-bottom leaflet-right',
+  topleft: 'minimap leaflet-top leaflet-left',
+  topright: 'minimap leaflet-top leaflet-right',
 };
 
 const BOUNDS_STYLE: any = {
   weight: 0.161,
-  color: "hsl(var(--atlas-color-primary))",
+  color: 'hsl(var(--atlas-color-primary))',
 };
 
 /*
@@ -46,9 +54,9 @@ function MinimapBounds({ parentMap, zoom }: { parentMap: any; zoom: number }) {
     (e: { latlng: any }) => {
       parentMap.setView(e.latlng, parentMap.getZoom());
     },
-    [parentMap]
+    [parentMap],
   );
-  useMapEvent("click", onClick);
+  useMapEvent('click', onClick);
 
   // Keep track of bounds in state to trigger renders
   const [bounds, setBounds] = useState(parentMap.getBounds());
@@ -65,7 +73,7 @@ function MinimapBounds({ parentMap, zoom }: { parentMap: any; zoom: number }) {
       instance: parentMap,
       context: parentMap,
     },
-    handlers
+    handlers,
   );
 
   return <Rectangle bounds={bounds} pathOptions={BOUNDS_STYLE} />;
@@ -105,17 +113,18 @@ export default function MiniMapControl({
           }
           maxZoom={18}
           attribution={
-            "Tiles &copy; Esri &mdash; Esri, DeLorme, NAVTEQ, TomTom, Intermap, iPC, USGS, FAO, NPS, NRCAN, GeoBase, Kadaster NL, Ordnance Survey, Esri Japan, METI, Esri China (Hong Kong), and the GIS User Community"
+            'Tiles &copy; Esri &mdash; Esri, DeLorme, NAVTEQ, TomTom, Intermap, iPC, USGS, FAO, NPS, NRCAN, GeoBase, Kadaster NL, Ordnance Survey, Esri Japan, METI, Esri China (Hong Kong), and the GIS User Community'
           }
           opacity={1}
         />
         <MinimapBounds parentMap={parentMap} zoom={mapZoom} />
       </MapContainer>
     ),
-    []
+    [],
   );
 
-  const positionClass = POSITION_CLASSES[position] || POSITION_CLASSES.bottomleft;
+  const positionClass =
+    POSITION_CLASSES[position] || POSITION_CLASSES.bottomleft;
   return (
     <div className={positionClass}>
       <div className="leaflet-control leaflet-bar">{minimap}</div>

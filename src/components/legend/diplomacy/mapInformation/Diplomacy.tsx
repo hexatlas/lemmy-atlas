@@ -1,7 +1,7 @@
 import { useCallback, useEffect } from 'react';
-import useDiplomacyEmbassies from '../../../../data/overpass/diplomacy/useDiplomacyEmbassies'; // Import the new hook
-import useOverpassLayer from '../../../../emoji/useOverpassLayer';
-import { iconMap } from '../../../../emoji/diplomacy/Diplomacy'; // Assuming you will create an iconMap for embassies
+import useDiplomacyEmbassies from '../../../../data/diplomacy/overpass/useDiplomatic';
+import useOverpassLayer from '../../../../data/shared/useOverpassLayer';
+import { iconMap } from '../../../../data/diplomacy/overpass/emoji/Diplomatic';
 import AtlasOSMInfoList from '../../../shared/OSMInfoList';
 import AtlasOSMSettings from '../../../shared/OSMSettings';
 

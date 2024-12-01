@@ -1,8 +1,10 @@
+import React from 'react';
 // Transform IMF Data
 export function useIMFDataTransform(apiResponse) {
   const transformedData = Object.keys(apiResponse)
     .map((indicator) => {
-      const { label, description, source, unit, dataset } = apiResponse[indicator];
+      const { label, description, source, unit, dataset } =
+        apiResponse[indicator];
 
       return {
         name: indicator,
@@ -23,7 +25,9 @@ export function useIMFDataTransform(apiResponse) {
 
 export function userPronouns(usernameString) {
   if (usernameString)
-    return usernameString.match(/((?<=\[)[a-zA-Z\/\s]+)|([a-zA-Z\/\s]+(?=\]))/g);
+    return usernameString.match(
+      /((?<=\[)[a-zA-Z\/\s]+)|([a-zA-Z\/\s]+(?=\]))/g,
+    );
 }
 
 export interface TimeAgoProps {
@@ -46,35 +50,37 @@ export function TimeAgo({ dateString }: TimeAgoProps) {
   if (years > 0) {
     return (
       <span title={`${pastDate}`}>
-        {years === 1 ? "a year ago" : `${years} years ago`}
+        {years === 1 ? 'a year ago' : `${years} years ago`}
       </span>
     );
   } else if (months > 0) {
     return (
       <span title={`${pastDate}`}>
-        {months === 1 ? "a month ago" : `${months} months ago`}
+        {months === 1 ? 'a month ago' : `${months} months ago`}
       </span>
     );
   } else if (days > 0) {
     return (
-      <span title={`${pastDate}`}>{days === 1 ? "a day ago" : `${days} days ago`}</span>
+      <span title={`${pastDate}`}>
+        {days === 1 ? 'a day ago' : `${days} days ago`}
+      </span>
     );
   } else if (hours > 0) {
     return (
       <span title={`${pastDate}`}>
-        {hours === 1 ? "an hour ago" : `${hours} hours ago`}
+        {hours === 1 ? 'an hour ago' : `${hours} hours ago`}
       </span>
     );
   } else if (minutes > 0) {
     return (
       <span title={`${pastDate}`}>
-        {minutes === 1 ? "a minute ago" : `${minutes} minutes ago`}
+        {minutes === 1 ? 'a minute ago' : `${minutes} minutes ago`}
       </span>
     );
   } else {
     return (
       <span title={`${pastDate}`}>
-        {seconds <= 1 ? "just now" : `${seconds} seconds ago`}
+        {seconds <= 1 ? 'just now' : `${seconds} seconds ago`}
       </span>
     );
   }

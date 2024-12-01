@@ -1,5 +1,7 @@
+import React from 'react';
+
 // https://www.radix-ui.com/primitives/docs/components/collapsible
-import * as Collapsible from "@radix-ui/react-collapsible";
+import * as Collapsible from '@radix-ui/react-collapsible';
 
 export function AtlasMisc({
   // Location

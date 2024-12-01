@@ -21,7 +21,7 @@ function AtlasMapInformation({ interfaceProps }) {
             📰
           </Tabs.Trigger>
         </Tabs.List>
-        <Tabs.Content value="Media" className="tabs-content dark">
+        <Tabs.Content value="Media" className="tabs-content">
           <Media {...interfaceProps}></Media>
         </Tabs.Content>
       </Tabs.Root>

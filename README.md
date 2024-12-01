@@ -65,9 +65,9 @@ Unicode
 
 ## Add Overpass Layer
 
-- Create custom hook with Query hooks/overpass/useInstrumentQuery.tsx
-- Add in components/[instrument]/map
-- Add IconMap in components/map/[instrument]
+- Create custom hook with Query data/overpass/[instrument]/useInstrumentQuery.tsx
+- Add in components/legend/[instrument]/mapInformation
+- Add IconMap in emoji/[instrument]
 
 ## Comments
 
