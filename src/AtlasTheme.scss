@@ -473,7 +473,7 @@ progress {
   height: var(--atlas-size-07);
   border-width: 0;
   border-radius: var(--atlas-border-radius-1);
-
+  max-width: var(--atlas-size-00);
   transition: border-radius var(--atlas-transition-fast);
 }
 

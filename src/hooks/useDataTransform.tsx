@@ -1,25 +1,4 @@
 import React from 'react';
-// Transform IMF Data
-export function useIMFDataTransform(apiResponse) {
-  const transformedData = Object.keys(apiResponse)
-    .map((indicator) => {
-      const { label, description, source, unit, dataset } =
-        apiResponse[indicator];
-
-      return {
-        name: indicator,
-        label,
-        description,
-        source,
-        unit,
-        dataset,
-      };
-    })
-    .filter((indicator) => indicator.label !== null) // Remove objects with label=null
-    .sort((a, b) => a.label.localeCompare(b.label)); // Sort alphabetically by label
-
-  return transformedData;
-}
 
 // Lemmy
 

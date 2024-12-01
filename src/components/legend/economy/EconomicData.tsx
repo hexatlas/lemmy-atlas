@@ -10,62 +10,25 @@ import * as Collapsible from '@radix-ui/react-collapsible';
 // https://www.radix-ui.com/primitives/docs/components/dropdown-menu
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 
-// https://www.imf.org/external/datamapper/api/v1/indicators
-import { indicators } from '../../../data/economy/charts/indicatorsIMF.json';
-import { useIMFDataTransform } from '../../../hooks/useDataTransform';
 import { useStateStorage } from '../../../hooks/useAtlasUtils';
 import { useQuery } from '@tanstack/react-query';
-/*
- /$$$$$$ /$$      /$$ /$$$$$$$$         
-|_  $$_/| $$$    /$$$| $$_____/         
-  | $$  | $$$$  /$$$$| $$               
-  | $$  | $$ $$/$$ $$| $$$$$            
-  | $$  | $$  $$$| $$| $$__/            
-  | $$  | $$\  $ | $$| $$               
- /$$$$$$| $$ \/  | $$| $$               
-|______/|__/     |__/|__/               
-                                        
-                                        
-                                        
- /$$$$$$$              /$$              
-| $$__  $$            | $$              
-| $$  \ $$  /$$$$$$  /$$$$$$    /$$$$$$ 
-| $$  | $$ |____  $$|_  $$_/   |____  $$
-| $$  | $$  /$$$$$$$  | $$      /$$$$$$$
-| $$  | $$ /$$__  $$  | $$ /$$ /$$__  $$
-| $$$$$$$/|  $$$$$$$  |  $$$$/|  $$$$$$$
-|_______/  \_______/   \___/   \_______/
-                                        
-                                        
-                                        
-*/
+import useIMF from '../../../data/economy/charts/useIMF';
 
 const EconomicData = ({ activeAdministrativeRegion }) => {
-  const defaultIndicator = {
-    name: 'PPPSH',
-    label: 'GDP based on PPP, share of world',
-    description:
-      'Purchasing Power Parity (PPP) weights are individual countries\' share of total World gross domestic product at purchasing power parities.\n\nPurchasing Power Parity (PPP) is a theory which relates changes in the nominal exchange rate between two countries currencies to changes in the countries\' price levels. More information on PPP methodology can be found on the World Economic Outlook FAQ - <a href="http://www.imf.org/external/pubs/ft/weo/faq.htm#q4d" target="new">click here</a>',
-    source: 'World Economic Outlook (October 2024)',
-    unit: 'Percent of World',
-    dataset: 'WEO',
-  };
-
-  const [activeIndicator, setActiveIndicator] = useStateStorage(
-    'activeIndicator',
-    defaultIndicator,
-  );
-
   const [open, setOpen] = useState(false);
 
   /*
     useStates
     */
-
-  const [loading, setLoading] = useStateStorage('loading', true);
   const [error, setError] = useStateStorage('error', null);
 
-  const indicatorsArray = useIMFDataTransform(indicators);
+  const {
+    IMFData,
+    isLoading,
+    indicatorsArray,
+    activeIndicator,
+    setActiveIndicator,
+  } = useIMF(activeAdministrativeRegion);
 
   /*
       useEffects
@@ -178,9 +141,12 @@ const EconomicData = ({ activeAdministrativeRegion }) => {
         .attr('x', width / 2)
         .attr('y', -margin.top / 2)
         .text(
-          `${activeAdministrativeRegion.country} | ${activeIndicator.label}`,
+          `${activeAdministrativeRegion.country.toUpperCase()} | ${activeIndicator.label}`,
         )
-        .style('fill', 'hsl(var(--atlas-color-light) / var(--atlas-opacity-3))')
+        .style(
+          'fill',
+          'hsl(var(--atlas-color-tertiary) / var(--atlas-opacity-3))',
+        )
         .style('font-size', 'var(--atlas-size-09)')
         .style('font-weight', 'bold');
 
@@ -346,7 +312,7 @@ const EconomicData = ({ activeAdministrativeRegion }) => {
     ) {
       return (
         <>
-          {!loading && (
+          {!isLoading && (
             <div>
               No data available for the specified indicator.name and country.
             </div>
@@ -374,9 +340,6 @@ const EconomicData = ({ activeAdministrativeRegion }) => {
               // justifyContent: "space-between",
             }}
           >
-            <span className="Text">
-              <p>Show Table</p>
-            </span>
             <Collapsible.Trigger asChild>
               <button
                 className="button-icon"
@@ -386,6 +349,9 @@ const EconomicData = ({ activeAdministrativeRegion }) => {
                 {open ? 'x' : 'ⓘ'}
               </button>
             </Collapsible.Trigger>
+            <span className="Text">
+              <p>Show Table</p>
+            </span>
           </div>
 
           <Collapsible.Content>
@@ -425,111 +391,42 @@ const EconomicData = ({ activeAdministrativeRegion }) => {
     );
   };
 
-  const fetchData = async (url) => {
-    setLoading(true);
-    try {
-      const response = await fetch(url);
-
-      if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
-      }
-
-      const result = await response.json();
-      return result.values;
-    } catch (error) {
-      console.log(error);
-      setError(error.message);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const apiUrl = `/.netlify/functions/data_imf_api/?indicator=${activeIndicator.name}&country=${activeAdministrativeRegion['ISO3166-1-Alpha-3']}/`;
-
-  const { data, isLoading } = useQuery({
-    queryKey: [`AL-${activeAdministrativeRegion['alpha-2']}`],
-    queryFn: () => fetchData(apiUrl),
-    staleTime: Infinity,
-    refetchInterval: false,
-    refetchOnMount: false,
-  });
-
   return (
-    <div id="legend-content">
-      <DropdownMenu.Root>
-        <DropdownMenu.Trigger asChild>
-          <button className="button-icon" aria-label="IMF Data Settings Menu">
-            ☰
-          </button>
-        </DropdownMenu.Trigger>
-        <DropdownMenu.Portal>
-          <DropdownMenu.Content className="dropdown-menu-content">
-            <DropdownMenu.Item className="dropdown-menu-item">
-              <div
-                className="reset-container"
-                role="button"
-                aria-label={'Reset Settings'}
-                tabIndex={0}
-                onClick={() => setActiveIndicator(defaultIndicator)}
-                onKeyDown={(e) => {
-                  if (e.key === 'Enter' || e.key === 'Space') {
-                    () => setActiveIndicator(defaultIndicator);
-                  }
-                }}
-              >
-                <p>Reset</p>
-                <div className="right-slot reset-button">⟲</div>
-              </div>
-            </DropdownMenu.Item>
-            <DropdownMenu.Separator className="dropdown-menu-separator" />
-            <DropdownMenu.Label className="dropdown-menu-label">
-              Data
-            </DropdownMenu.Label>
-            <DropdownMenu.Sub>
-              <DropdownMenu.SubTrigger className="dropdown-menu-subtrigger">
-                data.imf.org
-                <div className="right-slot">▸</div>
-              </DropdownMenu.SubTrigger>
-              <DropdownMenu.Portal>
-                <DropdownMenu.SubContent
-                  className="dropdown-menu-subcontent"
-                  // sideOffset={2}
-                  // alignOffset={-5}
-                >
-                  <DropdownMenu.RadioGroup
-                    value={activeIndicator}
-                    onValueChange={setActiveIndicator}
-                  >
-                    {indicatorsArray.map((indicator, index) => (
-                      <DropdownMenu.RadioItem
-                        key={index}
-                        className="dropdown-menu-radio-item"
-                        value={indicator as any}
-                      >
-                        <DropdownMenu.ItemIndicator className="dropdown-menu-itemIndicator">
-                          ✔
-                        </DropdownMenu.ItemIndicator>
-                        {indicator.label}
-                      </DropdownMenu.RadioItem>
-                    ))}
-                  </DropdownMenu.RadioGroup>
-                </DropdownMenu.SubContent>
-              </DropdownMenu.Portal>
-            </DropdownMenu.Sub>
-            <DropdownMenu.Separator className="dropdown-menu-separator" />
-          </DropdownMenu.Content>
-        </DropdownMenu.Portal>
-      </DropdownMenu.Root>
-      <h3>Where does line go? </h3>
-      {data && (
+    <div id="legend-content" className="container">
+      <div className="container">
+        <h3>Where does line go? </h3>
+        <select
+          className="secondary"
+          value={activeIndicator?.name}
+          onChange={(e) =>
+            setActiveIndicator(
+              indicatorsArray.find(
+                (indicator) => indicator.name === e.target.value,
+              ),
+            )
+          }
+        >
+          {indicatorsArray.map((indicator, index) => (
+            <option
+              key={index}
+              className="dropdown-menu-radio-item"
+              value={indicator.name}
+            >
+              {indicator.label}
+            </option>
+          ))}
+        </select>
+      </div>
+      {isLoading && <p className="search-loading-icon">🔍</p>}
+
+      {IMFData && (
         <YearsList
-          data={data}
+          data={IMFData}
           indicator={activeIndicator}
           country={activeAdministrativeRegion['ISO3166-1-Alpha-3']}
         />
       )}
-      {loading && <p>Loading...</p>}
-      {error && <p>Error: {error}</p>}
+
       <Collapsible.Root
         className="CollapsibleRoot"
         open={open}
@@ -569,7 +466,6 @@ const EconomicData = ({ activeAdministrativeRegion }) => {
           </p>
         </Collapsible.Content>
       </Collapsible.Root>
-      {/* {indicators && <IndicatorDropdown indicators={indicators} />} */}
     </div>
   );
 };
