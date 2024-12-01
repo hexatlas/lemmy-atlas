@@ -1,67 +1,20 @@
-import { useEffect, useState } from 'react';
+import useMastodon from '../../../../../data/information/fediverse/useMastodon';
 import { TimeAgo } from '../../../../../hooks/useDataTransform';
-import { useStateStorage } from '../../../../../hooks/useAtlasUtils';
 
 // https://www.radix-ui.com/primitives/docs/components/collapsible
 import * as Collapsible from '@radix-ui/react-collapsible';
 
 function AtlasMastodon({
-  // Location
-  map,
-  setMap,
-
-  isOpenAtlasMapInterface,
-  setIsOpenAtlasMapInterface,
-
-  isLocationSelectMode,
-  setIsLocationSelectMode,
-
-  activeLocationSelection,
-  setActiveLocationSelection,
-
-  nominatim,
-  setNominatim,
-
-  regionTypes,
   activeLocationType,
   setActiveLocationType,
 
   activeAdministrativeRegion,
   setActiveAdministrativeRegion,
-
-  administrativeRegionClickHistoryArray,
-  setAdministrativeRegionClickHistoryArray,
-
-  locationQuery,
-  setLocationQuery,
 }) {
-  const [mastonPosts, setMastonPosts] = useStateStorage('mastonPosts', []);
-
-  const featchMastodon = async (url) => {
-    try {
-      const response = await fetch(url);
-
-      if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
-      }
-
-      const mastondonPostsData = await response.json(); // Retrieve response as text
-      setMastonPosts(mastondonPostsData);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  useEffect(() => {
-    if (activeAdministrativeRegion.country !== 'country') {
-      const apiUrl = `/.netlify/functions/mastodon/?country=${encodeURI(
-        activeAdministrativeRegion[activeLocationType],
-      )
-        .toLowerCase()
-        .replace(/%20/g, '-')}`;
-      featchMastodon(apiUrl);
-    }
-  }, [activeAdministrativeRegion, activeLocationType]);
+  const mastodonPosts = useMastodon(
+    activeAdministrativeRegion,
+    activeLocationType,
+  );
 
   return (
     <>
@@ -69,8 +22,8 @@ function AtlasMastodon({
         <h3>
           Latest Posts on {activeAdministrativeRegion[activeLocationType]}
         </h3>
-        {mastonPosts &&
-          mastonPosts.map((post, index) => (
+        {mastodonPosts &&
+          mastodonPosts.map((post, index) => (
             <div className="feed-item" key={index}>
               <Collapsible.Root className="feed-community">
                 <div className="feed-post-container">
