@@ -14,12 +14,12 @@ import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 // https://www.radix-ui.com/primitives/docs/components/tabs
 import * as Tabs from '@radix-ui/react-tabs';
 
-import Comment from './AtlasLemmyComment';
-import Post from './AtlasLemmyPost';
-import LemmyCommunityInfoCard from './AtlasLemmyCommunityInfoCard';
+import Comment from './Comment';
+import Post from './Post';
+import LemmyCommunityInfoCard from './CommunityInfoCard';
 
-import { searchTypes } from '../../../../../Atlas_Config';
-import AtlasLemmyCommunityInfoCard from './AtlasLemmyCommunityInfoCard';
+import { searchTypes } from '../../../../../AtlasConfig';
+import AtlasLemmyCommunityInfoCard from './CommunityInfoCard';
 import { useStateStorage } from '../../../../../hooks/useAtlasUtils';
 
 /*

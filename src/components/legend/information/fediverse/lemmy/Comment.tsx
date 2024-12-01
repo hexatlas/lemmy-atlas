@@ -9,8 +9,8 @@ import * as Collapsible from '@radix-ui/react-collapsible';
 import { GetComments, LemmyHttp } from 'lemmy-js-client';
 
 import { TimeAgo } from '../../../../../hooks/useDataTransform';
-import LemmyUser from './AtlasLemmyUser';
-import LemmyCommunity from './AtlasLemmyCommunity';
+import LemmyUser from './User';
+import LemmyCommunity from './Community';
 
 /*
 

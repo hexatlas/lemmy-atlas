@@ -10,9 +10,9 @@ import { GetComments, LemmyHttp } from 'lemmy-js-client';
 
 import { TimeAgo } from '../../../../../hooks/useDataTransform';
 
-import Comment from './AtlasLemmyComment';
-import LemmyUser from './AtlasLemmyUser';
-import LemmyCommunity from './AtlasLemmyCommunity';
+import Comment from './Comment';
+import LemmyUser from './User';
+import LemmyCommunity from './Community';
 
 /*
 

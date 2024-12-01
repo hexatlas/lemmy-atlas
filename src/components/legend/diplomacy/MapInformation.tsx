@@ -2,7 +2,7 @@
 import * as Tabs from '@radix-ui/react-tabs';
 
 import { useStateStorage } from '../../../hooks/useAtlasUtils';
-import Diplomacy from './map/Diplomacy';
+import Diplomacy from './mapInformation/Diplomacy';
 
 function AtlasMapInformation({ interfaceProps }) {
   const [activeTab, setActiveTab] = useStateStorage(

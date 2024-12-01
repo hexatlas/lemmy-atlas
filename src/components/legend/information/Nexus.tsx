@@ -1,9 +1,9 @@
 // https://www.radix-ui.com/primitives/docs/components/tabs
 import * as Tabs from '@radix-ui/react-tabs';
 
-import AtlasNexusBulletins from './nexus/AtlasNexusBulletins';
-import AtlasWiki from './nexus/AtlasWiki';
-import AtlasNexusAnarchistLibrary from './nexus/AtlasNexusAnarchistLibrary';
+import AtlasNexusBulletins from './nexus/NewsBulletins';
+import AtlasWiki from './nexus/Wiki';
+import AtlasNexusAnarchistLibrary from './nexus/AnarchistLibrary';
 import { useStateStorage } from '../../../hooks/useAtlasUtils';
 
 /*

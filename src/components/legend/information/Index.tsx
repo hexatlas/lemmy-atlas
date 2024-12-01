@@ -2,17 +2,17 @@
 import * as Tabs from '@radix-ui/react-tabs';
 import { useStateStorage } from '../../../hooks/useAtlasUtils';
 
-import AtlasNexusCard from './AtlasNexus';
-import AtlasFediverse from './AtlasFediverse';
-import AtlasMisc from './nexus/AtlasMisc';
-import AtlasMapInformation from './AtlasMapInformation';
+import AtlasNexusCard from './Nexus';
+import AtlasFediverse from './Fediverse';
+import AtlasMisc from './MiscRessources';
+import AtlasMapInformation from './MapInformation';
 
 import {
   lemmyInstances,
   listingTypes,
   searchTypes,
   sortTypes,
-} from '../../../Atlas_Config';
+} from '../../../AtlasConfig';
 
 function AtlasInformation({ interfaceProps }) {
   const [activeTab, setActiveTab] = useStateStorage(

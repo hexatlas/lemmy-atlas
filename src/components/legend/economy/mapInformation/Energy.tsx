@@ -1,8 +1,8 @@
 // https://www.radix-ui.com/primitives/docs/components/collapsible
 import * as Collapsible from '@radix-ui/react-collapsible';
 import { useCallback, useEffect } from 'react';
-import AtlasOSMInfoList from '../../../shared/AtlasOSMInfoList';
-import AtlasOSMSettings from '../../../shared/AtlasOSMSettings';
+import AtlasOSMInfoList from '../../../shared/OSMInfoList';
+import AtlasOSMSettings from '../../../shared/OSMSettings';
 import useEconomyEnergy from '../../../../data/overpass/economy/useEconomyEnergy';
 import useOverpassLayer from '../../../../emoji/useOverpassLayer';
 import L from 'leaflet';

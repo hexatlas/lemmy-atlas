@@ -2,9 +2,9 @@
 import * as Tabs from '@radix-ui/react-tabs';
 
 import { useStateStorage } from '../../../hooks/useAtlasUtils';
-import Energy from './map/Energy';
-import Transport from './map/Transport';
-import Industry from './map/Industry';
+import Energy from './mapInformation/Energy';
+import Transport from './mapInformation/Transport';
+import Industry from './mapInformation/Industry';
 
 function AtlasMapInformation({ interfaceProps }) {
   const [activeTab, setActiveTab] = useStateStorage(

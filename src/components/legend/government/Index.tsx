@@ -1,9 +1,9 @@
 // https://www.radix-ui.com/primitives/docs/components/tabs
 import * as Tabs from '@radix-ui/react-tabs';
 import { useStateStorage } from '../../../hooks/useAtlasUtils';
-import AtlasMisc from './AtlasMisc';
-import AtlasClassStructure from './AtlasClassStructure';
-import AtlasMapInformation from './AtlasMapInformation';
+import AtlasMisc from './MiscRessources';
+import AtlasClassStructure from './ClassStructure';
+import AtlasMapInformation from './MapInformation';
 
 function AtlasGovernment({ interfaceProps }) {
   const [activeTab, setActiveTab] = useStateStorage(

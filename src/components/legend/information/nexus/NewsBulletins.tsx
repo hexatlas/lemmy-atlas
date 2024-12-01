@@ -5,8 +5,8 @@ import ReactMarkdown from 'react-markdown';
 // https://join-lemmy.org/api/classes/LemmyHttp.html
 import { Search, LemmyHttp } from 'lemmy-js-client';
 
-import Comment from '../fediverse/lemmy/AtlasLemmyComment';
-import Post from '../fediverse/lemmy/AtlasLemmyPost';
+import Comment from '../fediverse/lemmy/Comment';
+import Post from '../fediverse/lemmy/Post';
 import { useStateStorage } from '../../../../hooks/useAtlasUtils';
 import { useQuery } from '@tanstack/react-query';
 

@@ -3,8 +3,8 @@ import useOverpassLayer from '../../../../emoji/useOverpassLayer';
 import useInformationMedia from '../../../../data/overpass/information/useInformationMedia';
 
 import { iconMap } from '../../../../emoji/information/Media';
-import AtlasOSMInfoList from '../../../shared/AtlasOSMInfoList';
-import AtlasOSMSettings from '../../../shared/AtlasOSMSettings';
+import AtlasOSMInfoList from '../../../shared/OSMInfoList';
+import AtlasOSMSettings from '../../../shared/OSMSettings';
 
 export function Media({
   // Location

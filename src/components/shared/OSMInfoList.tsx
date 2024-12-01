@@ -1,8 +1,8 @@
-import { useCallback, useEffect, useState } from "react";
-import AtlasOSMInfoCard from "./AtlasOSMInfoCard";
+import { useCallback, useEffect, useState } from 'react';
+import AtlasOSMInfoCard from './OSMInfoCard';
 
 // https://www.radix-ui.com/primitives/docs/components/collapsible
-import * as Collapsible from "@radix-ui/react-collapsible";
+import * as Collapsible from '@radix-ui/react-collapsible';
 
 function AtlasOSMInfoList({
   listName,
@@ -27,11 +27,11 @@ function AtlasOSMInfoList({
             [element.bounds.minlat, element.bounds.minlon],
             [element.bounds.maxlat, element.bounds.maxlon],
           ],
-          { duration: 2.7 }
+          { duration: 2.7 },
         );
       }
     },
-    [map]
+    [map],
   );
 
   const handleClick = (element) => {
@@ -97,13 +97,13 @@ function AtlasOSMInfoList({
           <>
             <div className="filter-title">
               <Collapsible.Trigger className="filter-expand">
-                {isOpenFilter ? "🔻" : "🔍"}
+                {isOpenFilter ? '🔻' : '🔍'}
               </Collapsible.Trigger>
               <h5>
                 <span>
                   {filteredData.length} {listName}
-                </span>{" "}
-                found in {activeAdministrativeRegion["country"]}
+                </span>{' '}
+                found in {activeAdministrativeRegion['country']}
               </h5>
             </div>
             <div className="filter-menu">
@@ -115,7 +115,7 @@ function AtlasOSMInfoList({
                     </label>
                     <select
                       id={key}
-                      value={selectedFilters[key] || ""}
+                      value={selectedFilters[key] || ''}
                       onChange={(e) => handleFilterChange(key, e.target.value)}
                     >
                       <option value="">{key}</option>
@@ -127,7 +127,7 @@ function AtlasOSMInfoList({
                     </select>
                   </Collapsible.Content>
                 ))}
-            </div>{" "}
+            </div>{' '}
           </>
         )}
       </Collapsible.Root>

@@ -1,8 +1,8 @@
 // https://www.radix-ui.com/primitives/docs/components/tabs
 import * as Tabs from '@radix-ui/react-tabs';
 
-import AtlasLemmy from './fediverse/lemmy/AtlasLemmy';
-import AtlasMastodon from './fediverse/mastodon/AtlasMastodon';
+import AtlasLemmy from './fediverse/lemmy/Index';
+import AtlasMastodon from './fediverse/mastodon/Index';
 import { useStateStorage } from '../../../hooks/useAtlasUtils';
 
 function AtlasFediverse({ interfaceProps }) {

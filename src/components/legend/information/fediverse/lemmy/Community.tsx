@@ -1,4 +1,4 @@
-import LemmyCommunityInfoCard from "./AtlasLemmyCommunityInfoCard";
+import LemmyCommunityInfoCard from './CommunityInfoCard';
 
 /*
   /$$$$$$                                                            /$$   /$$              
@@ -23,7 +23,7 @@ function AtlasLemmyCommunity({
   icon = post?.community?.icon,
   display_name = post?.community?.display_name,
   name = post?.community?.name,
-  prefix = "to",
+  prefix = 'to',
 }) {
   return (
     <div className="community-wrapper">

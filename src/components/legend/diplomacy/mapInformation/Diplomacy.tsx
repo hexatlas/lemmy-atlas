@@ -1,12 +1,11 @@
-import { useEffect } from 'react';
+import { useCallback, useEffect } from 'react';
+import useDiplomacyEmbassies from '../../../../data/overpass/diplomacy/useDiplomacyEmbassies'; // Import the new hook
 import useOverpassLayer from '../../../../emoji/useOverpassLayer';
-import useEconomyIndustry from '../../../../data/overpass/economy/useEconomyIndustry';
+import { iconMap } from '../../../../emoji/diplomacy/Diplomacy'; // Assuming you will create an iconMap for embassies
+import AtlasOSMInfoList from '../../../shared/OSMInfoList';
+import AtlasOSMSettings from '../../../shared/OSMSettings';
 
-import { iconMap } from '../../../../emoji/economy/Industry';
-import AtlasOSMInfoList from '../../../shared/AtlasOSMInfoList';
-import AtlasOSMSettings from '../../../shared/AtlasOSMSettings';
-
-export function Industry({
+export function Diplomacy({
   // Location
   map,
   setMap,
@@ -39,7 +38,7 @@ export function Industry({
   isClustered,
   setIsClustered,
 }) {
-  const { data, isLoading } = useEconomyIndustry(activeAdministrativeRegion);
+  const { data, isLoading } = useDiplomacyEmbassies(activeAdministrativeRegion);
 
   useEffect(() => {
     let layerObjects;
@@ -48,9 +47,9 @@ export function Industry({
         map,
         data,
         iconMap,
-        'industrial',
+        'diplomatic',
         isClustered,
-      );
+      ); // Adjust the Overpass function accordingly
     }
     return () => {
       if (layerObjects) {
@@ -59,6 +58,15 @@ export function Industry({
     };
   }, [map, data, isClustered]);
 
+  // Update Map to Selection
+  const showOnMap = useCallback(
+    (coords) => {
+      const mapBounds = [coords?.maxlat, coords?.minlon];
+      map.flyTo(mapBounds, 14);
+    },
+    [map],
+  );
+
   const clusterSettings = {
     isClustered,
     setIsClustered,
@@ -66,21 +74,20 @@ export function Industry({
 
   return (
     <div id="legend-content">
-      <AtlasOSMSettings {...clusterSettings} />
       {isLoading && <p className="search-loading-icon">🔍</p>}
-
+      <AtlasOSMSettings {...clusterSettings} />
       {data && (
         <AtlasOSMInfoList
-          listName={'Industrial Features'}
+          listName={'Diplomatic Locations'}
           map={map}
           data={data}
           iconMap={iconMap}
           activeAdministrativeRegion={activeAdministrativeRegion}
-          filterKeys={['industrial']}
+          filterKeys={['diplomatic']}
         ></AtlasOSMInfoList>
       )}
     </div>
   );
 }
 
-export default Industry;
+export default Diplomacy;

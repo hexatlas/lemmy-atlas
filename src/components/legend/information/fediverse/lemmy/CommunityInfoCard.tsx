@@ -10,8 +10,8 @@ import { LemmyHttp, GetCommunity } from 'lemmy-js-client';
 
 import { userPronouns } from '../../../../../hooks/useDataTransform';
 
-import LemmyUser from './AtlasLemmyUser';
-import Post from './AtlasLemmyPost';
+import LemmyUser from './User';
+import Post from './Post';
 
 /*
   /$$$$$$                                                            /$$   /$$              

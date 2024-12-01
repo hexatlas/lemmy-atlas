@@ -1,5 +1,5 @@
 import { userPronouns } from '../../../../../hooks/useDataTransform';
-import LemmyUserInfoCard from './AtlasLemmyUserInfoCard';
+import LemmyUserInfoCard from './UserInfoCard';
 
 /*
  /$$   /$$                              

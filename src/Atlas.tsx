@@ -16,7 +16,7 @@ import AtlasMilitary from './components/legend/military/Index';
 import AtlasGovernment from './components/legend/government/Index';
 
 // Import customHook
-import { regionTypes } from './Atlas_Config';
+import { regionTypes } from './AtlasConfig';
 import { useStateStorage } from './hooks/useAtlasUtils';
 
 /*

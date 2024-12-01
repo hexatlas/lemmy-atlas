@@ -10,7 +10,7 @@ import { LatLngExpression, latLng, latLngBounds } from 'leaflet';
 import { GeoJsonObject } from 'geojson';
 import administrativeRegionsData from '../../data/geojson/administrative_regions_extended.json';
 
-import { baseLayers, overlayLayers } from '../../Atlas_Config';
+import { baseLayers, overlayLayers } from '../../AtlasConfig';
 import Minimap from './AtlasMapMiniMap';
 
 /*
