@@ -23,28 +23,28 @@
     },
     "PPPGDP": {
       "label": "GDP, current prices",
-      "description": "Gross domestic product is the most commonly used single measure of a country's overall economic activity. It represents the total value in PPP terms of final goods and services produced within a country during a specified time period.\n\nPurchasing Power Parity (PPP) is a theory which relates changes in the nominal exchange rate between two countries currencies to changes in the countries' price levels. More information on PPP methodology can be found on the World Economic Outlook FAQ - <a href=\"http://www.imf.org/external/pubs/ft/weo/faq.htm#q4d\" target=\"new\">click here</a>",
+      "description": "Gross domestic product is the most commonly used single measure of a country's overall economic activity. It represents the total value in PPP terms of final goods and services produced within a country during a specified time period.\n\nPurchasing Power Parity (PPP) is a theory which relates changes in the nominal exchange rate between two countries currencies to changes in the countries' price levels. More information on PPP methodology can be found on the World Economic Outlook FAQ - <a href=\"http:\/\/www.imf.org\/external\/pubs\/ft\/weo\/faq.htm#q4d\" target=\"new\">click here<\/a>",
       "source": "World Economic Outlook (October 2024)",
       "unit": "Purchasing power parity; billions of international dollars",
       "dataset": "WEO"
     },
     "PPPPC": {
       "label": "GDP per capita, current prices",
-      "description": "Gross domestic product (GDP) is the most commonly used single measure of a country's overall economic activity. Per capita GDP represents the total value in PPP terms of final goods and services produced within a country during a specified time period divided by the average population for the same one year.\n\nPurchasing Power Parity (PPP) is a theory which relates changes in the nominal exchange rate between two countries currencies to changes in the countries' price levels. More information on PPP methodology can be found on the World Economic Outlook FAQ - <a href=\"http://www.imf.org/external/pubs/ft/weo/faq.htm#q4d\" target=\"new\">click here</a>",
+      "description": "Gross domestic product (GDP) is the most commonly used single measure of a country's overall economic activity. Per capita GDP represents the total value in PPP terms of final goods and services produced within a country during a specified time period divided by the average population for the same one year.\n\nPurchasing Power Parity (PPP) is a theory which relates changes in the nominal exchange rate between two countries currencies to changes in the countries' price levels. More information on PPP methodology can be found on the World Economic Outlook FAQ - <a href=\"http:\/\/www.imf.org\/external\/pubs\/ft\/weo\/faq.htm#q4d\" target=\"new\">click here<\/a>",
       "source": "World Economic Outlook (October 2024)",
       "unit": "Purchasing power parity; international dollars per capita",
       "dataset": "WEO"
     },
     "PPPSH": {
       "label": "GDP based on PPP, share of world",
-      "description": "Purchasing Power Parity (PPP) weights are individual countries' share of total World gross domestic product at purchasing power parities.\n\nPurchasing Power Parity (PPP) is a theory which relates changes in the nominal exchange rate between two countries currencies to changes in the countries' price levels. More information on PPP methodology can be found on the World Economic Outlook FAQ - <a href=\"http://www.imf.org/external/pubs/ft/weo/faq.htm#q4d\" target=\"new\">click here</a>",
+      "description": "Purchasing Power Parity (PPP) weights are individual countries' share of total World gross domestic product at purchasing power parities.\n\nPurchasing Power Parity (PPP) is a theory which relates changes in the nominal exchange rate between two countries currencies to changes in the countries' price levels. More information on PPP methodology can be found on the World Economic Outlook FAQ - <a href=\"http:\/\/www.imf.org\/external\/pubs\/ft\/weo\/faq.htm#q4d\" target=\"new\">click here<\/a>",
       "source": "World Economic Outlook (October 2024)",
       "unit": "Percent of World",
       "dataset": "WEO"
     },
     "PPPEX": {
       "label": "Implied PPP conversion rate",
-      "description": "Purchasing Power Parity (PPP) is a theory which relates changes in the nominal exchange rate between two countries currencies to changes in the countries' price levels. More information on PPP methodology can be found on the World Economic Outlook FAQ - <a href=\"http://www.imf.org/external/pubs/ft/weo/faq.htm#q4d\" target=\"new\">click here</a>",
+      "description": "Purchasing Power Parity (PPP) is a theory which relates changes in the nominal exchange rate between two countries currencies to changes in the countries' price levels. More information on PPP methodology can be found on the World Economic Outlook FAQ - <a href=\"http:\/\/www.imf.org\/external\/pubs\/ft\/weo\/faq.htm#q4d\" target=\"new\">click here<\/a>",
       "source": "World Economic Outlook (October 2024)",
       "unit": "National currency per international dollar",
       "dataset": "WEO"
@@ -99,15 +99,15 @@
       "dataset": "WEO"
     },
     "GGXCNL_NGDP": {
-      "label": "General government net lending/borrowing",
-      "description": "Net lending (+)/ borrowing (\u0096) is calculated as revenue minus total expenditure. This is a core GFS balance that measures the extent to which general government is either putting financial resources at the disposal of other sectors in the economy and nonresidents (net lending), or utilizing the financial resources generated by other sectors and nonresidents (net borrowing). This balance may be viewed as an indicator of the financial impact of general government activity on the rest of the economy and nonresidents (GFSM 2001, paragraph 4.17). Note: Net lending (+)/borrowing (\u0096) is also equal to net acquisition of financial assets minus net incurrence of liabilities.",
+      "label": "General government net lending\/borrowing",
+      "description": "Net lending (+)\/ borrowing (\u0096) is calculated as revenue minus total expenditure. This is a core GFS balance that measures the extent to which general government is either putting financial resources at the disposal of other sectors in the economy and nonresidents (net lending), or utilizing the financial resources generated by other sectors and nonresidents (net borrowing). This balance may be viewed as an indicator of the financial impact of general government activity on the rest of the economy and nonresidents (GFSM 2001, paragraph 4.17). Note: Net lending (+)\/borrowing (\u0096) is also equal to net acquisition of financial assets minus net incurrence of liabilities.",
       "source": "World Economic Outlook (October 2024)",
       "unit": "Percent of GDP",
       "dataset": "WEO"
     },
     "GGXWDG_NGDP": {
       "label": "General government gross debt",
-      "description": "Gross debt consists of all liabilities that require payment or payments of interest and/or principal by the debtor to the creditor at a date or dates in the future. This includes debt liabilities in the form of SDRs, currency and deposits, debt securities, loans, insurance, pensions and standardized guarantee schemes, and other accounts payable. Thus, all liabilities in the GFSM 2001 system are debt, except for equity and investment fund shares and financial derivatives and employee stock options. Debt can be valued at current market, nominal, or face values (GFSM 2001, paragraph 7.110).",
+      "description": "Gross debt consists of all liabilities that require payment or payments of interest and\/or principal by the debtor to the creditor at a date or dates in the future. This includes debt liabilities in the form of SDRs, currency and deposits, debt securities, loans, insurance, pensions and standardized guarantee schemes, and other accounts payable. Thus, all liabilities in the GFSM 2001 system are debt, except for equity and investment fund shares and financial derivatives and employee stock options. Debt can be valued at current market, nominal, or face values (GFSM 2001, paragraph 7.110).",
       "source": "World Economic Outlook (October 2024)",
       "unit": "Percent of GDP",
       "dataset": "WEO"
@@ -519,28 +519,28 @@
       "dataset": "CL"
     },
     "Reserves_ARA": {
-      "label": "Ratio of reserve/ARA metric ",
-      "description": "\uf0d8 Ratio of reserves/ARA metric \u2013 a ratio between 1 and 1.5 is consider adequate",
+      "label": "Ratio of reserve\/ARA metric ",
+      "description": "\uf0d8 Ratio of reserves\/ARA metric \u2013 a ratio between 1 and 1.5 is consider adequate",
       "source": "Assessing Reserve Adequacy - ARA",
       "unit": "Unit",
       "dataset": "ARA"
     },
     "Reserves_M2": {
-      "label": "Reserves/Broad Money",
-      "description": "Reserves/Broad money \u2013 typically M2",
+      "label": "Reserves\/Broad Money",
+      "description": "Reserves\/Broad money \u2013 typically M2",
       "source": "Assessing Reserve Adequacy - ARA",
       "unit": "Unit",
       "dataset": "ARA"
     },
     "Reserves_STD": {
-      "label": "Reserves/Short-term Debt (STD)",
-      "description": "Reserves/Short-term Debt (STD) \u2013 \u201cGreenspan-Guidotti\u201d rule of 100% cover of STD is a widely-used standard of adequacy for EMs",
+      "label": "Reserves\/Short-term Debt (STD)",
+      "description": "Reserves\/Short-term Debt (STD) \u2013 \u201cGreenspan-Guidotti\u201d rule of 100% cover of STD is a widely-used standard of adequacy for EMs",
       "source": "Assessing Reserve Adequacy - ARA",
       "unit": "Unit",
       "dataset": "ARA"
     },
     "Reserves_M": {
-      "label": "Reserve/(Import/12) ",
+      "label": "Reserve\/(Import\/12) ",
       "description": "Import cover \u2013 A measure of the number of months imports can be sustained should all inflows cease",
       "source": "Assessing Reserve Adequacy - ARA",
       "unit": "Unit",
@@ -548,28 +548,28 @@
     },
     "GRB_dummy": {
       "label": "Gender Budgeting Indicator",
-      "description": "GB: Gender budgeting\n3 - Prominent GB countries covered in the surveys\n2 - Other GB countries covered in the surveys\n1 - Other countries\n<b>Note</b>: Line charts below indicate number of countries in each GB group",
+      "description": "GB: Gender budgeting\n3 - Prominent GB countries covered in the surveys\n2 - Other GB countries covered in the surveys\n1 - Other countries\n<b>Note<\/b>: Line charts below indicate number of countries in each GB group",
       "source": "Stotsky (2016)",
       "unit": "Index",
       "dataset": "GD"
     },
     "GDI_TC": {
       "label": "Gender Development Index (GDI) Time Consistent",
-      "description": "The GDI generally ranges from 0-1, with higher numbers signifying more equality\n<b>Note</b>: Line charts below indicate average index value in each group",
+      "description": "The GDI generally ranges from 0-1, with higher numbers signifying more equality\n<b>Note<\/b>: Line charts below indicate average index value in each group",
       "source": "Stotsky, Shibuya, Kolovich, and Kebhaj (2016)",
       "unit": "Index",
       "dataset": "GD"
     },
     "GII_TC": {
       "label": "Gender Inequality Index (GII) Time Consistent",
-      "description": "The GII generally ranges from 0-1, with higher numbers signifying more inequality\n<b>Note</b>: Line charts below indicate average index value in each group+B4",
+      "description": "The GII generally ranges from 0-1, with higher numbers signifying more inequality\n<b>Note<\/b>: Line charts below indicate average index value in each group+B4",
       "source": "Stotsky, Shibuya, Kolovich, and Kebhaj (2016)",
       "unit": "Index",
       "dataset": "GD"
     },
     "DEBT1": {
       "label": "DEBT",
-      "description": "DEBT\r\n<br/> Note: Median value reported for country groupings",
+      "description": "DEBT\r\n<br\/> Note: Median value reported for country groupings",
       "source": "Fiscal Affairs Departmental Data",
       "unit": "% of GDP",
       "dataset": "DEBT"
@@ -645,14 +645,14 @@
       "dataset": "GDD"
     },
     "GGXCNL_G01_GDP_PT": {
-      "label": "Net lending/borrowing (also referred as overall balance)",
+      "label": "Net lending\/borrowing (also referred as overall balance)",
       "description": "Defined as the difference between revenue and total expenditure, using the 2014 edition of the IMF\u0092s Government Finance Statistics Manual (GFSM 2014). Does not include policy lending. For some countries, the overall balance continues to be based on GFSM 1986, which is defined as total revenue and grants minus total expenditure and net lending.",
       "source": "Fiscal Monitor (October 2024)",
       "unit": "% of GDP",
       "dataset": "FM"
     },
     "GGXONLB_G01_GDP_PT": {
-      "label": "Primary net lending/borrowing (also referred as primary balance)",
+      "label": "Primary net lending\/borrowing (also referred as primary balance)",
       "description": "Overall balance excluding net interest payment (interest expenditure minus interest revenue).",
       "source": "Fiscal Monitor (October 2024)",
       "unit": "% of GDP",
@@ -688,7 +688,7 @@
     },
     "G_XWDG_G01_GDP_PT": {
       "label": "Gross debt position",
-      "description": "All liabilities that require future payment of interest and/or principal by the debtor to the creditor. This includes debt liabilities in the form of special drawing rights, currency, and deposits; debt securities; loans; insurance, pension, and standardized guarantee schemes; and other accounts payable. (See the 2014 edition of the IMF\u0092s Government Finance Statistics Manual and Public Sector Debt Statistics Manual). The term \u0093public debt\u0094 is used in the Fiscal Monitor, for simplicity, as synonymous with gross debt of the general government, unless otherwise specified. (Strictly speaking, the term \u0093public debt\u0094 refers to the debt of the public sector as a whole, which includes financial and nonfinancial public enterprises and the central bank.)",
+      "description": "All liabilities that require future payment of interest and\/or principal by the debtor to the creditor. This includes debt liabilities in the form of special drawing rights, currency, and deposits; debt securities; loans; insurance, pension, and standardized guarantee schemes; and other accounts payable. (See the 2014 edition of the IMF\u0092s Government Finance Statistics Manual and Public Sector Debt Statistics Manual). The term \u0093public debt\u0094 is used in the Fiscal Monitor, for simplicity, as synonymous with gross debt of the general government, unless otherwise specified. (Strictly speaking, the term \u0093public debt\u0094 refers to the debt of the public sector as a whole, which includes financial and nonfinancial public enterprises and the central bank.)",
       "source": "Fiscal Monitor (October 2024)",
       "unit": "% of GDP",
       "dataset": "FM"
@@ -703,195 +703,195 @@
     "NGDP_R_PCH": {
       "label": "Real GDP Growth",
       "description": "Gross domestic product is the most commonly used single measure of a country's overall economic activity. It represents the total value at constant prices of final goods and services produced within a country during a specified time period, such as one year.",
-      "source": "AFR Regional Economic Outlook (April 2024)",
+      "source": "AFR Regional Economic Outlook (October 2024)",
       "unit": "Annual percent change",
       "dataset": "AFRREO"
     },
     "NGDPXO_RPCH": {
       "label": "Real Non-Oil GDP Growth",
       "description": "     ",
-      "source": "AFR Regional Economic Outlook (April 2024)",
+      "source": "AFR Regional Economic Outlook (October 2024)",
       "unit": "Annual percent change",
       "dataset": "AFRREO"
     },
     "NGDPRPC_PCH": {
       "label": "Real Per Capita GDP Growth",
       "description": "      ",
-      "source": "AFR Regional Economic Outlook (April 2024)",
+      "source": "AFR Regional Economic Outlook (October 2024)",
       "unit": "Annual percent change",
       "dataset": "AFRREO"
     },
     "NI_GDP": {
       "label": "Total Investment (% of GDP)",
       "description": "    ",
-      "source": "AFR Regional Economic Outlook (April 2024)",
+      "source": "AFR Regional Economic Outlook (October 2024)",
       "unit": "Percent of GDP",
       "dataset": "AFRREO"
     },
     "NGS_GDP": {
       "label": "Gross National Savings (% of GDP)",
       "description": "    ",
-      "source": "AFR Regional Economic Outlook (April 2024)",
+      "source": "AFR Regional Economic Outlook (October 2024)",
       "unit": "Percent of GDP",
       "dataset": "AFRREO"
     },
     "GGXCNL_GDP": {
       "label": "Overall Fiscal Balance, Including Grants (% of GDP)",
       "description": "Overall Fiscal Balance, Including Grants (Percent of GDP)",
-      "source": "AFR Regional Economic Outlook (April 2024)",
+      "source": "AFR Regional Economic Outlook (October 2024)",
       "unit": "Percent of GDP",
       "dataset": "AFRREO"
     },
     "GGXCNLXG_GDP": {
       "label": "Overall Fiscal Balance, Excluding Grants (% of GDP)",
       "description": "Overall Fiscal Balance, Excluding Grants (Percent of GDP)",
-      "source": "AFR Regional Economic Outlook (April 2024)",
+      "source": "AFR Regional Economic Outlook (October 2024)",
       "unit": "Percent of GDP",
       "dataset": "AFRREO"
     },
     "GGRXG_GDP": {
       "label": "Government Revenue, Excluding Grants (% of GDP)",
       "description": "Government Revenue, Excluding Grants (Percent of GDP)",
-      "source": "AFR Regional Economic Outlook (April 2024)",
+      "source": "AFR Regional Economic Outlook (October 2024)",
       "unit": "Percent of GDP",
       "dataset": "AFRREO"
     },
     "GGX_GDP": {
       "label": "Government Expenditure (% of GDP)",
       "description": "Government Expenditure (Percent of GDP)",
-      "source": "AFR Regional Economic Outlook (April 2024)",
+      "source": "AFR Regional Economic Outlook (October 2024)",
       "unit": "Percent of GDP",
       "dataset": "AFRREO"
     },
     "GGXWDG_GDP": {
       "label": "Government Debt (% of GDP)",
       "description": "Government Debt (Percent of GDP)",
-      "source": "AFR Regional Economic Outlook (April 2024)",
+      "source": "AFR Regional Economic Outlook (October 2024)",
       "unit": "Percent of GDP",
       "dataset": "AFRREO"
     },
     "FMB_GDP": {
       "label": "Broad Money (% of GDP)",
       "description": "   ",
-      "source": "AFR Regional Economic Outlook (April 2024)",
+      "source": "AFR Regional Economic Outlook (October 2024)",
       "unit": "Percent of GDP",
       "dataset": "AFRREO"
     },
     "FDSAOP_PCH": {
       "label": "Claims on Nonfinancial Private Sector (%)",
       "description": "    ",
-      "source": "AFR Regional Economic Outlook (April 2024)",
+      "source": "AFR Regional Economic Outlook (October 2024)",
       "unit": "Annual percent change",
       "dataset": "AFRREO"
     },
     "FDSAOP_GDP": {
       "label": "Claims on Nonfinancial Private Sector (% of GDP)",
       "description": "    ",
-      "source": "AFR Regional Economic Outlook (April 2024)",
+      "source": "AFR Regional Economic Outlook (October 2024)",
       "unit": "Percent of GDP",
       "dataset": "AFRREO"
     },
     "FMB_PCH": {
       "label": "Broad Money Growth",
       "description": "   ",
-      "source": "AFR Regional Economic Outlook (April 2024)",
+      "source": "AFR Regional Economic Outlook (October 2024)",
       "unit": "Annual percent change",
       "dataset": "AFRREO"
     },
     "BX_GDP": {
       "label": "Exports of Goods and Services (% of GDP)",
       "description": "     ",
-      "source": "AFR Regional Economic Outlook (April 2024)",
+      "source": "AFR Regional Economic Outlook (October 2024)",
       "unit": "Percent of GDP",
       "dataset": "AFRREO"
     },
     "BCA_GDP": {
       "label": "External Current Account, Incl.Grants (% of GDP)",
       "description": "  ",
-      "source": "AFR Regional Economic Outlook (April 2024)",
+      "source": "AFR Regional Economic Outlook (October 2024)",
       "unit": "Percent of GDP",
       "dataset": "AFRREO"
     },
     "BM_GDP": {
       "label": "Imports of Goods and Services (% of GDP)",
       "description": "     ",
-      "source": "AFR Regional Economic Outlook (April 2024)",
+      "source": "AFR Regional Economic Outlook (October 2024)",
       "unit": "Percent of GDP",
       "dataset": "AFRREO"
     },
     "BT_GDP": {
       "label": "Trade Balance (% of GDP)",
       "description": "    ",
-      "source": "AFR Regional Economic Outlook (April 2024)",
+      "source": "AFR Regional Economic Outlook (October 2024)",
       "unit": "Percent of GDP",
       "dataset": "AFRREO"
     },
     "BFD_GDP": {
       "label": "Net Foreign Direct Investment (% of GDP)",
       "description": "    ",
-      "source": "AFR Regional Economic Outlook (April 2024)",
+      "source": "AFR Regional Economic Outlook (October 2024)",
       "unit": "Percent of GDP",
       "dataset": "AFRREO"
     },
     "BRASS_MI": {
       "label": "Reserves (Months of Imports) ",
       "description": "Reserves (Months of imports of goods and services)",
-      "source": "AFR Regional Economic Outlook (April 2024)",
+      "source": "AFR Regional Economic Outlook (October 2024)",
       "unit": "Months of imports of goods and services",
       "dataset": "AFRREO"
     },
     "EREER": {
       "label": "Real Effective Exchange Rates (2010=100)",
       "description": "   ",
-      "source": "AFR Regional Economic Outlook (April 2024)",
+      "source": "AFR Regional Economic Outlook (October 2024)",
       "unit": "Annual Average Index, 2010 = 100",
       "dataset": "AFRREO"
     },
     "ENEER": {
       "label": "Nominal Effective Exchange Rates (2010=100)",
       "description": "  ",
-      "source": "AFR Regional Economic Outlook (April 2024)",
+      "source": "AFR Regional Economic Outlook (October 2024)",
       "unit": "Annual Average Index, 2010 = 100",
       "dataset": "AFRREO"
     },
     "DG_GDP": {
       "label": "External Debt, Official Debt, Debtor Based (% of GDP)",
       "description": "   ",
-      "source": "AFR Regional Economic Outlook (April 2024)",
+      "source": "AFR Regional Economic Outlook (October 2024)",
       "unit": "Percent of GDP",
       "dataset": "AFRREO"
     },
     "PCPI_PCH": {
       "label": "Consumer Prices, Average (Annual % Change)",
       "description": "    ",
-      "source": "AFR Regional Economic Outlook (April 2024)",
+      "source": "AFR Regional Economic Outlook (October 2024)",
       "unit": "Annual average percent change",
       "dataset": "AFRREO"
     },
     "PCPIE_PCH": {
       "label": "Consumer Prices, End of Period (Annual % Change)",
       "description": "    ",
-      "source": "AFR Regional Economic Outlook (April 2024)",
+      "source": "AFR Regional Economic Outlook (October 2024)",
       "unit": "Annual average percent change",
       "dataset": "AFRREO"
     },
     "TTT": {
       "label": "Terms of Trade (Index, 2010 = 100)",
       "description": "     ",
-      "source": "AFR Regional Economic Outlook (April 2024)",
+      "source": "AFR Regional Economic Outlook (October 2024)",
       "unit": "Index, 2010 = 100",
       "dataset": "AFRREO"
     },
     "FR_ind": {
       "label": "Fiscal Rule Indicator",
-      "description": "Indicates whether the country has a national or supranational fiscal rule, both or neither. \n<b>Note</b>: Line charts below indicate number of countries with fiscal rule in each group",
+      "description": "Indicates whether the country has a national or supranational fiscal rule, both or neither. \n<b>Note<\/b>: Line charts below indicate number of countries with fiscal rule in each group",
       "source": "Davoodi, Elger, Fotiou, Garcia-Macia, Lagerborg, Lam, and Pillai (2022)",
       "unit": "Index",
       "dataset": "FR_FC"
     },
     "FC_dummy": {
       "label": "Fiscal Council Indicator",
-      "description": "FC: Fiscal councils\n<b>Note</b>: Line charts below indicate number of countries with fiscal council in each group",
+      "description": "FC: Fiscal councils\n<b>Note<\/b>: Line charts below indicate number of countries with fiscal council in each group",
       "source": "Davoodi, Elger, Fotiou, Garcia-Macia, Lagerborg, Lam, and Pillai (2022)",
       "unit": "Index",
       "dataset": "FR_FC"
