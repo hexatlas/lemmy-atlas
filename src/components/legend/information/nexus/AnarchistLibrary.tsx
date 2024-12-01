@@ -1,10 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-import { useEffect, useState } from 'react';
-import ReactMarkdown from 'react-markdown';
-
-// https://www.radix-ui.com/primitives/docs/components/collapsible
-import * as Collapsible from '@radix-ui/react-collapsible';
+import useAnarachistLibrary from '../../../../data/information/nexus/useAnarachistLibrary';
 
 // https://github.com/LemmyNet/lemmy-js-client
 // https://join-lemmy.org/api/classes/LemmyHttp.html
@@ -12,99 +8,19 @@ import { Search, LemmyHttp } from 'lemmy-js-client';
 
 import Comment from '../fediverse/lemmy/Comment';
 import Post from '../fediverse/lemmy/Post';
-import { useStateStorage } from '../../../../hooks/useAtlasUtils';
-import { useQuery } from '@tanstack/react-query';
-
-/*
-  /$$$$$$                                          /$$       /$$             /$$    
- /$$__  $$                                        | $$      |__/            | $$    
-| $$  \ $$ /$$$$$$$   /$$$$$$   /$$$$$$   /$$$$$$$| $$$$$$$  /$$  /$$$$$$$ /$$$$$$  
-| $$$$$$$$| $$__  $$ |____  $$ /$$__  $$ /$$_____/| $$__  $$| $$ /$$_____/|_  $$_/  
-| $$__  $$| $$  \ $$  /$$$$$$$| $$  \__/| $$      | $$  \ $$| $$|  $$$$$$   | $$    
-| $$  | $$| $$  | $$ /$$__  $$| $$      | $$      | $$  | $$| $$ \____  $$  | $$ /$$
-| $$  | $$| $$  | $$|  $$$$$$$| $$      |  $$$$$$$| $$  | $$| $$ /$$$$$$$/  |  $$$$/
-|__/  |__/|__/  |__/ \_______/|__/       \_______/|__/  |__/|__/|_______/    \___/  
-                                                                                    
-                                                                                    
-                                                                                    
- /$$       /$$ /$$                                                                  
-| $$      |__/| $$                                                                  
-| $$       /$$| $$$$$$$   /$$$$$$  /$$$$$$   /$$$$$$  /$$   /$$                     
-| $$      | $$| $$__  $$ /$$__  $$|____  $$ /$$__  $$| $$  | $$                     
-| $$      | $$| $$  \ $$| $$  \__/ /$$$$$$$| $$  \__/| $$  | $$                     
-| $$      | $$| $$  | $$| $$      /$$__  $$| $$      | $$  | $$                     
-| $$$$$$$$| $$| $$$$$$$/| $$     |  $$$$$$$| $$      |  $$$$$$$                     
-|________/|__/|_______/ |__/      \_______/|__/       \____  $$                     
-                                                      /$$  | $$                     
-                                                     |  $$$$$$/                     
-                                                      \______/                      
-                                                      
-                                                      */
 
 export function AtlasNexusReadingList({
-  // Location
-  map,
-  setMap,
-
-  isOpenAtlasMapInterface,
-  setIsOpenAtlasMapInterface,
-
-  isLocationSelectMode,
-  setIsLocationSelectMode,
-
-  activeLocationSelection,
-  setActiveLocationSelection,
-
-  nominatim,
-  setNominatim,
-
-  regionTypes,
   activeLocationType,
-  setActiveLocationType,
-
   activeAdministrativeRegion,
-  setActiveAdministrativeRegion,
-
-  administrativeRegionClickHistoryArray,
-  setAdministrativeRegionClickHistoryArray,
-
-  locationQuery,
-  setLocationQuery,
-
-  // Community
-  lemmyInstances,
   activeLemmyInstance,
-  setActiveLemmyInstance,
-
   activeCommunity,
-  setActiveCommunity,
-
-  activeSearchType,
-  setActiveSearchType,
-
-  listingTypes,
   activeListingType,
-  setActiveListingType,
-
-  sortTypes,
   activeSortType,
-  setActiveSortType,
 }) {
-  const fetchAnarchistLibrary = async (url) => {
-    try {
-      const response = await fetch(url);
-
-      if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
-      }
-
-      const AnarchistLibraryArray = await response.json(); // Retrieve response as text
-
-      return AnarchistLibraryArray;
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  const { anarchistLibraryPosts, isLoading } = useAnarachistLibrary(
+    activeAdministrativeRegion,
+    activeLocationType,
+  );
 
   function HexBearNews({ bulletin }) {
     const [comments, setComments] = useState([]);
@@ -184,24 +100,6 @@ export function AtlasNexusReadingList({
     );
   }
 
-  let apiUrl = null;
-
-  if (activeAdministrativeRegion.country !== 'country') {
-    apiUrl = `/.netlify/functions/anarchist_library/?country=${encodeURI(
-      activeAdministrativeRegion[activeLocationType],
-    )}`;
-  } else {
-    apiUrl = `/.netlify/functions/anarchist_library/`;
-  }
-
-  const { data, isLoading } = useQuery({
-    queryKey: [`AL-${activeAdministrativeRegion['alpha-2']}`],
-    queryFn: () => fetchAnarchistLibrary(apiUrl),
-    staleTime: Infinity,
-    refetchInterval: false,
-    refetchOnMount: false,
-  });
-
   return (
     <div id="legend-content">
       <h3>Anarchist Library</h3>
@@ -217,10 +115,12 @@ export function AtlasNexusReadingList({
           activeAdministrativeRegion[activeLocationType]}
       </a>
 
-      {data?.length > 0 && (
+      {isLoading && <p className="search-loading-icon">🔍</p>}
+
+      {anarchistLibraryPosts?.length > 0 && (
         <>
-          {data &&
-            data.map((book, index) => {
+          {anarchistLibraryPosts &&
+            anarchistLibraryPosts.map((book, index) => {
               return (
                 <div className="anarchist-library-item" key={index}>
                   <p className="anarchist-library-publish-date ">
@@ -234,17 +134,13 @@ export function AtlasNexusReadingList({
                   )}
                   {book.subtitle && <p>ℹ️ {book.subtitle}</p>}
                   {book.feed_teaser && (
-                    <Collapsible.Root>
-                      <Collapsible.Trigger className="view-more">
-                        Show More
-                      </Collapsible.Trigger>
-                      <Collapsible.Content>
-                        <div
-                          dangerouslySetInnerHTML={{ __html: book.feed_teaser }}
-                        ></div>
-                      </Collapsible.Content>
-                    </Collapsible.Root>
-                  )}{' '}
+                    <details>
+                      <summary className="view-more">Show More</summary>
+                      <div
+                        dangerouslySetInnerHTML={{ __html: book.feed_teaser }}
+                      ></div>
+                    </details>
+                  )}
                   <div className="anarchist-library-container">
                     <a
                       className="anarchist-library-readmore"
