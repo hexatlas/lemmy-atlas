@@ -1,13 +1,13 @@
 // File: useOverpassLayer.js
-import L, { icon } from "leaflet";
-import "leaflet.markercluster";
+import L from 'leaflet';
+import 'leaflet.markercluster';
 
 export default function useOverpassLayer(
   map,
   data,
   iconMap,
   filterKey,
-  isClustered = true
+  isClustered = true,
 ) {
   const { defaultIcon } = iconMap;
 
@@ -17,7 +17,7 @@ export default function useOverpassLayer(
   const getClusterGroup = (clusters, clusterKey) => {
     if (!clusters[clusterKey]) {
       clusters[clusterKey] = L.markerClusterGroup({
-        polygonOptions: { weight: 1.5, color: "#FFCC0D", opacity: 0.5 },
+        polygonOptions: { weight: 1.5, color: '#FFCC0D', opacity: 0.5 },
         iconCreateFunction: (cluster) => {
           const count = cluster.getChildCount();
           return L.divIcon({
@@ -29,7 +29,7 @@ export default function useOverpassLayer(
                 `<small class="cluster-text">${clusterKey}</small>`
               }</span>
             </div>`,
-            className: "cluster-info",
+            className: 'cluster-info',
           });
         },
       });
@@ -40,15 +40,15 @@ export default function useOverpassLayer(
 
   // Helper function: Add marker to appropriate cluster
   const addMarkerToCluster = (clusters, lat, lon, tags) => {
-    const clusterKey = tags[filterKey] || "defaultIcon";
+    const clusterKey = tags[filterKey] || 'defaultIcon';
     const icon = iconMap[tags[filterKey]] || defaultIcon;
     const clusterGroup = getClusterGroup(clusters, clusterKey);
 
     const marker = L.marker([lat, lon], { icon });
     const popup = L.popup().setContent(`
-      <h1>${iconMap[clusterKey]?.options?.html || "N/A"}</h1>
-      <h4>${tags?.name || "Unnamed"}</h4>
-      <p>${tags["name:en"] || ""}</p>
+      <h1>${iconMap[clusterKey]?.options?.html || 'N/A'}</h1>
+      <h4>${tags?.name || 'Unnamed'}</h4>
+      <p>${tags['name:en'] || ''}</p>
       <pre>${JSON.stringify(tags, null, 2)}</pre>
     `);
     marker.bindPopup(popup);
@@ -60,7 +60,7 @@ export default function useOverpassLayer(
     if (coordinates.length === 0) return;
 
     const polyline = L.polyline(coordinates, {
-      color: "hsl(var(--atlas-color-tertiary) / var(--atlas-opacity-3))",
+      color: 'hsl(var(--atlas-color-tertiary) / var(--atlas-opacity-3))',
       weight: 8,
     });
     overpassLayer.addLayer(polyline);
@@ -76,20 +76,23 @@ export default function useOverpassLayer(
 
     // Process elements
     data.elements.forEach((element) => {
-      if (element.type === "node") {
+      if (element.type === 'node') {
         const { lat, lon, tags } = element;
         addMarkerToCluster(clusters, lat, lon, tags);
-      } else if (element.type === "way") {
+      } else if (element.type === 'way') {
         const { geometry, tags } = element;
         const coordinates = geometry.map((point) => [point.lat, point.lon]);
         addPolylineWithMarker(clusters, coordinates, tags);
-      } else if (element.type === "relation") {
+      } else if (element.type === 'relation') {
         const { members, tags } = element;
-        const wayMembers = members.filter((member) => member.type === "way");
+        const wayMembers = members.filter((member) => member.type === 'way');
 
         wayMembers.forEach((member) => {
           if (member.geometry) {
-            const coordinates = member.geometry.map((point) => [point.lat, point.lon]);
+            const coordinates = member.geometry.map((point) => [
+              point.lat,
+              point.lon,
+            ]);
             addPolylineWithMarker(clusters, coordinates, tags);
           }
         });
@@ -100,24 +103,24 @@ export default function useOverpassLayer(
     overpassLayer = L.layerGroup();
 
     data.elements.forEach((element) => {
-      if (element.type === "node") {
+      if (element.type === 'node') {
         const { lat, lon, tags } = element;
         const icon = iconMap[tags[filterKey]] || defaultIcon;
         const marker = L.marker([lat, lon], { icon });
         const popup = L.popup().setContent(`
-          <h1>${iconMap[filterKey]?.options?.html || "N/A"}</h1>
-          <h4>${tags?.name || "Unnamed"}</h4>
-          <p>${tags["name:en"] || ""}</p>
+          <h1>${iconMap[filterKey]?.options?.html || 'N/A'}</h1>
+          <h4>${tags?.name || 'Unnamed'}</h4>
+          <p>${tags['name:en'] || ''}</p>
           <pre>${JSON.stringify(tags, null, 2)}</pre>
         `);
         marker.bindPopup(popup);
         overpassLayer.addLayer(marker);
-      } else if (element.type === "way") {
+      } else if (element.type === 'way') {
         const { geometry, tags } = element;
         const coordinates = geometry.map((point) => [point.lat, point.lon]);
 
         const polyline = L.polyline(coordinates, {
-          color: "hsl(var(--atlas-color-tertiary) / var(--atlas-opacity-3))",
+          color: 'hsl(var(--atlas-color-tertiary) / var(--atlas-opacity-3))',
           weight: 8,
         });
         overpassLayer.addLayer(polyline);
@@ -126,9 +129,9 @@ export default function useOverpassLayer(
           const icon = iconMap[tags[filterKey]] || defaultIcon;
           const marker = L.marker(coordinates[0], { icon });
           const popup = L.popup().setContent(`
-            <h1>${iconMap[filterKey]?.options?.html || "N/A"}</h1>
-            <h4>${tags?.name || "Unnamed"}</h4>
-            <p>${tags["name:en"] || ""}</p>
+            <h1>${iconMap[filterKey]?.options?.html || 'N/A'}</h1>
+            <h4>${tags?.name || 'Unnamed'}</h4>
+            <p>${tags['name:en'] || ''}</p>
             <pre>${JSON.stringify(tags, null, 2)}</pre>
           `);
           marker.bindPopup(popup);

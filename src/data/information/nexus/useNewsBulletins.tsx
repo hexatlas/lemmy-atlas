@@ -1,5 +1,4 @@
 import { useQuery } from '@tanstack/react-query';
-import React from 'react';
 
 function useNewsBulletins(activeAdministrativeRegion) {
   const fetchBulletinsRSS = async (url) => {

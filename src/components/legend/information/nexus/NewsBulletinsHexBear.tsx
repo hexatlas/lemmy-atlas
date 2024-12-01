@@ -20,11 +20,11 @@ function NewsBulletinsHexBear({ bulletin }) {
     default: true,
   };
 
-  const sortType: { value: SortType; label: String } = {
+  const sortType: { value: SortType; label: string } = {
     value: 'New',
     label: '🆕',
   };
-  const listingType: { value: ListingType; label: String } = {
+  const listingType: { value: ListingType; label: string } = {
     value: 'Local',
     label: '🏠',
   };
