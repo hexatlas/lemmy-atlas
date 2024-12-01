@@ -18,6 +18,7 @@ import AtlasGovernment from './components/legend/government/Index';
 // Import customHook
 import { regionTypes } from './AtlasConfig';
 import { useStateStorage } from './hooks/useAtlasUtils';
+import BasedClientDetector from './components/shared/BasedClientDetector';
 
 /*
 
@@ -384,6 +385,7 @@ export default function Atlas() {
               <blockquote>
                 <b>Note:</b> Data availability differs by country and topic.
               </blockquote>
+              <BasedClientDetector />
             </div>
           </Tabs.Content>
           <Tabs.Content className="tabs-content" value="Economy">
