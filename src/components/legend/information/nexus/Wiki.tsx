@@ -1,102 +1,19 @@
 import React from 'react';
 
-import { useEffect, useState } from 'react';
-import ReactMarkdown from 'react-markdown';
-import { useStateStorage } from '../../../../hooks/useAtlasUtils';
-import { useQuery } from '@tanstack/react-query';
+import useWiki from '../../../../data/information/nexus/useWiki';
 
-/*
- /$$      /$$ /$$ /$$       /$$
-| $$  /$ | $$|__/| $$      |__/
-| $$ /$$$| $$ /$$| $$   /$$ /$$
-| $$/$$ $$ $$| $$| $$  /$$/| $$
-| $$$$_  $$$$| $$| $$$$$$/ | $$
-| $$$/ \  $$$| $$| $$_  $$ | $$
-| $$/   \  $$| $$| $$ \  $$| $$
-|__/     \__/|__/|__/  \__/|__/
-                               
-                                                              
-*/
-
-export function AtlasProleWiki({
+export function Wiki({
   wikiURL,
   isProleWiki = false,
-
-  // Location
-  map,
-  setMap,
-
-  isOpenAtlasMapInterface,
-  setIsOpenAtlasMapInterface,
-
-  isLocationSelectMode,
-  setIsLocationSelectMode,
-
-  activeLocationSelection,
-  setActiveLocationSelection,
-
-  nominatim,
-  setNominatim,
-
-  regionTypes,
   activeLocationType,
-  setActiveLocationType,
-
   activeAdministrativeRegion,
-  setActiveAdministrativeRegion,
-
-  administrativeRegionClickHistoryArray,
-  setAdministrativeRegionClickHistoryArray,
-
-  locationQuery,
-  setLocationQuery,
-
-  // Community
-  lemmyInstances,
-  activeLemmyInstance,
-  setActiveLemmyInstance,
-
-  activeCommunity,
-  setActiveCommunity,
-
-  activeSearchType,
-  setActiveSearchType,
-
-  listingTypes,
-  activeListingType,
-  setActiveListingType,
-
-  sortTypes,
-  activeSortType,
-  setActiveSortType,
 }) {
-  const fetchProleWiki = async (url) => {
-    try {
-      const response = await fetch(url);
-
-      if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
-      }
-      const result = await response.json();
-      return result?.parse;
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const apiUrl = `/.netlify/functions/wiki/?country=${encodeURI(
-    activeAdministrativeRegion[activeLocationType],
-  )}&wiki=${wikiURL}`;
-
-  const { data, isLoading } = useQuery({
-    queryKey: [
-      `WIKI-${isProleWiki ? 'prole' : 'nato'}-${activeAdministrativeRegion['alpha-2']}`,
-    ],
-    queryFn: () => fetchProleWiki(apiUrl),
-    staleTime: Infinity,
-    refetchInterval: false,
-    refetchOnMount: false,
-  });
+  const { wikiData, isLoading } = useWiki(
+    activeAdministrativeRegion,
+    activeLocationType,
+    wikiURL,
+    isProleWiki,
+  );
 
   return (
     <>
@@ -145,10 +62,13 @@ export function AtlasProleWiki({
         )}
         <hr />
         <br />
-        {data && (
+        {isLoading && <p className="search-loading-icon">🔍</p>}
+        {wikiData && (
           <>
-            <h3>{data.title}</h3>
-            <div dangerouslySetInnerHTML={{ __html: data?.text['*'] }}></div>
+            <h3>{wikiData.title}</h3>
+            <div
+              dangerouslySetInnerHTML={{ __html: wikiData?.text['*'] }}
+            ></div>
           </>
         )}
       </div>
@@ -167,4 +87,4 @@ export function AtlasProleWiki({
   );
 }
 
-export default AtlasProleWiki;
+export default Wiki;
