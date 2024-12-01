@@ -9,7 +9,7 @@ import { Search, LemmyHttp } from 'lemmy-js-client';
 import Comment from '../fediverse/lemmy/Comment';
 import Post from '../fediverse/lemmy/Post';
 
-export function AtlasNexusReadingList({
+export function AnarchistLibrary({
   activeLocationType,
   activeAdministrativeRegion,
   activeLemmyInstance,
@@ -164,4 +164,4 @@ export function AtlasNexusReadingList({
   );
 }
 
-export default AtlasNexusReadingList;
+export default AnarchistLibrary;
