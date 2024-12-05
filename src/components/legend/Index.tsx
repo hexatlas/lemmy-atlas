@@ -50,8 +50,10 @@ function AtlasLegend({ interfaceProps }) {
       </Tabs.List>
       <Tabs.Content className="tabs-content" value="Introduction">
         <div className="atlas-legend container light">
-          <h1>Atlas</h1>
+          <h2 className="emoji">🇪 🇲⠀🇴⠀🇯⠀🇮</h2>
+          <h1 className="emoji">🅰️⠀🇹⠀🇱⠀🇦⠀🇸</h1>
           <p>
+            <span> </span>
             This Atlas uses OpenStreetMaps, Overpass, Nominatim, ProleWiki,
             Wikipedia, Lemmy, Mastodon, and aims to provide a comprehensive view
             of various instruments of state power across different countries.
@@ -94,14 +96,14 @@ function AtlasLegend({ interfaceProps }) {
               </ul>
             </li>
             <li>
-              <b>Map Layers:</b> Switch between satellite, terrain, or
-              boundaries. 🗺️
+              🗺️ <b>Map Layers:</b> Switch between satellite, terrain, or
+              boundaries.
             </li>
             <li>
-              <b>Show on Map:</b> Look for 📍 to pinpoint locations. 🌐
+              🌐 <b>Show on Map:</b> Look for 📍 to pinpoint locations.
             </li>
             <li>
-              <b>Extra Resources:</b> Click 🔗 for further reading.
+              🔗 <b>Extra Resources:</b> Click for further reading.
             </li>
           </ul>
 

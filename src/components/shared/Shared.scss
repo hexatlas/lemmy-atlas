@@ -33,16 +33,22 @@
       @include atlas-shadow(var(--atlas-shadow-1));
       border-radius: var(--atlas-border-radius-1);
       color: hsl(var(--atlas-color-dark) / var(--atlas-opacity-3));
-      background-color: hsl(var(--atlas-color-tertiary) / var(--atlas-opacity-3));
+      background-color: hsl(
+        var(--atlas-color-tertiary) / var(--atlas-opacity-3)
+      );
     }
   }
 
   .filter-expand {
     @include atlas-shadow(var(--atlas-shadow-1));
-    background-color: hsl(var(--atlas-color-secondary) / var(--atlas-opacity-3));
+    background-color: hsl(
+      var(--atlas-color-secondary) / var(--atlas-opacity-3)
+    );
     margin-bottom: var(--atlas-size-12);
-    &[data-state="open"] {
-      background-color: hsl(var(--atlas-color-primary) / var(--atlas-opacity-3));
+    &[data-state='open'] {
+      background-color: hsl(
+        var(--atlas-color-primary) / var(--atlas-opacity-3)
+      );
       color: hsl(var(--atlas-color-light) / var(--atlas-opacity-3));
     }
   }
@@ -123,6 +129,7 @@
 
   .overpass-filterkey {
     font-size: var(--atlas-size-07);
+    font-family: var(--atlas-font-emoji);
     text-transform: uppercase;
     display: grid;
     justify-items: center;
@@ -168,7 +175,7 @@
     @include atlas-shadow(var(--atlas-shadow-1));
     background: hsl(var(--atlas-color-dark) / var(--atlas-opacity-3));
     &:hover,
-    &[data-state="open"] {
+    &[data-state='open'] {
       background: hsl(var(--atlas-color-tertiary) / var(--atlas-opacity-2));
     }
   }

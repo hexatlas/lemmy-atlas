@@ -3,6 +3,7 @@
 .emoji-icon {
   @include atlas-shadow(var(--atlas-shadow-text));
   font-size: var(--atlas-size-08);
+  font-family: var(--atlas-font-emoji);
   z-index: 9999;
 }
 
@@ -17,8 +18,9 @@
     background-color: hsl(var(--atlas-color-light) / var(--atlas-opacity-3));
     border-radius: var(--atlas-border-radius-1);
   }
-  .cluster-icon {
+  .cluster-emoji {
     font-size: var(--atlas-size-08);
+    font-family: var(--atlas-font-emoji);
   }
   .cluster-text {
     text-transform: uppercase;
@@ -27,34 +29,10 @@
   }
   .cluster-count {
     @include atlas-shadow(var(--atlas-shadow-1));
-    transform: translate(calc(var(--atlas-size-08) * 1), calc(var(--atlas-size-08) * -1));
-    position: absolute;
-    padding: var(--atlas-size-10);
-    font-weight: bold;
-    font-size: var(--atlas-size-09);
-    color: hsl(var(--atlas-color-tertiary) / var(--atlas-opacity-3));
-    background-color: hsl(var(--atlas-color-dark) / var(--atlas-opacity-3));
-    border-radius: var(--atlas-border-radius-1);
-  }
-}
-
-.cluster-info {
-  display: flex;
-  .cluster-container {
-    @include atlas-shadow(var(--atlas-shadow-1));
-    display: flex;
-    position: relative;
-    height: var(--atlas-size-07);
-    padding: var(--atlas-size-10);
-    background-color: hsl(var(--atlas-color-light) / var(--atlas-opacity-3));
-    border-radius: var(--atlas-border-radius-1);
-  }
-  .cluster-icon {
-    font-size: var(--atlas-size-08);
-  }
-  .cluster-count {
-    @include atlas-shadow(var(--atlas-shadow-1));
-    transform: translate(calc(var(--atlas-size-08) * 1), calc(var(--atlas-size-08) * -1));
+    transform: translate(
+      calc(var(--atlas-size-08) * 1),
+      calc(var(--atlas-size-08) * -1)
+    );
     position: absolute;
     padding: var(--atlas-size-10);
     font-weight: bold;
@@ -115,10 +93,11 @@
 
   position: relative;
   border: 1px solid hsl(var(--atlas-color-light) / var(--atlas-opacity-3));
+  font-family: var(--atlas-font-emoji);
 }
 
 .leaflet-control-layers-toggle:after {
-  content: "🗺️";
+  content: '🗺️';
   line-height: var(--atlas-size-07);
   font-size: var(--atlas-size-08);
   text-align: center;
@@ -136,27 +115,33 @@
 
 .leaflet-cluster-anim .leaflet-marker-icon,
 .leaflet-cluster-anim .leaflet-marker-shadow {
-  -webkit-transition: -webkit-transform var(--atlas-time-2) var(--atlas-timing-function),
+  -webkit-transition:
+    -webkit-transform var(--atlas-time-2) var(--atlas-timing-function),
     opacity var(--atlas-time-2) var(--atlas-timing-function);
-  -moz-transition: -moz-transform var(--atlas-time-2) var(--atlas-timing-function),
+  -moz-transition:
+    -moz-transform var(--atlas-time-2) var(--atlas-timing-function),
     opacity var(--atlas-time-2) var(--atlas-timing-function);
-  -o-transition: -o-transform var(--atlas-time-2) var(--atlas-timing-function),
+  -o-transition:
+    -o-transform var(--atlas-time-2) var(--atlas-timing-function),
     opacity var(--atlas-time-2) var(--atlas-timing-function);
-  transition: transform var(--atlas-time-2) var(--atlas-timing-function),
+  transition:
+    transform var(--atlas-time-2) var(--atlas-timing-function),
     opacity var(--atlas-time-2) var(--atlas-timing-function);
 }
 
 .leaflet-cluster-spider-leg {
   /* stroke-dashoffset (duration and function) should match with leaflet-marker-icon transform in order to track it exactly */
-  -webkit-transition: -webkit-stroke-dashoffset var(--atlas-time-2)
-      var(--atlas-timing-function) t,
+  -webkit-transition:
+    -webkit-stroke-dashoffset var(--atlas-time-2) var(--atlas-timing-function) t,
     -webkit-stroke-opacity var(--atlas-time-2) var(--atlas-timing-function);
-  -moz-transition: -moz-stroke-dashoffset var(--atlas-time-2) var(--atlas-timing-function)
-      t,
+  -moz-transition:
+    -moz-stroke-dashoffset var(--atlas-time-2) var(--atlas-timing-function) t,
     -moz-stroke-opacity var(--atlas-time-2) var(--atlas-timing-function);
-  -o-transition: -o-stroke-dashoffset var(--atlas-time-2) var(--atlas-timing-function) t,
+  -o-transition:
+    -o-stroke-dashoffset var(--atlas-time-2) var(--atlas-timing-function) t,
     -o-stroke-opacity var(--atlas-time-2) var(--atlas-timing-function);
-  transition: stroke-dashoffset var(--atlas-time-2) var(--atlas-timing-function) t,
+  transition:
+    stroke-dashoffset var(--atlas-time-2) var(--atlas-timing-function) t,
     stroke-opacity var(--atlas-time-2) var(--atlas-timing-function);
 }
 .marker-cluster-small {
@@ -305,7 +290,9 @@
 }
 
 .leaflet-control-zoom > a:hover {
-  background: hsl(var(--atlas-color-primary) / var(--atlas-opacity-3)) !important;
+  background: hsl(
+    var(--atlas-color-primary) / var(--atlas-opacity-3)
+  ) !important;
   color: hsl(var(--atlas-color-light) / var(--atlas-opacity-3)) !important;
   border-radius: var(--atlas-size-14);
 

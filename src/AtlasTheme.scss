@@ -2,6 +2,62 @@
 
 @use 'leaflet/dist/leaflet.css';
 
+/* 
+    RESETS
+*/
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  text-decoration: none;
+  text-indent: 0;
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+::-webkit-scrollbar {
+  display: none;
+}
+
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+p,
+a,
+figure,
+picture {
+  margin: 0;
+  text-decoration: inherit;
+  color: inherit;
+}
+
+code {
+  display: block;
+  text-transform: lowercase;
+}
+
+/* 
+    FONT
+*/
+
+@font-face {
+  font-family: 'Noto Color Emoji';
+  src: url('../src/assets/fonts/NotoColorEmoji-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* 
+    VARIABLES
+*/
+
 :root {
   /* colors */
   /* https://colordesigner.io/#FFCC0D-FF7326-FF194D-BF2669-702A8C */
@@ -34,6 +90,7 @@
   --atlas-font-serif: serif;
   --atlas-font-cursive: Impact, fantasy;
   --atlas-font-mono: mono;
+  --atlas-font-emoji: 'Noto Color Emoji', Segoe UI Emoji, Helvetica, sans-serif;
 
   --atlas-line-height: 1.2;
 
@@ -143,47 +200,6 @@
       hsl(var(--atlas-color-dark) / calc(0.028 * var(--intensity))),
     0 var(--atlas-size-09) var(--atlas-size-09)
       hsl(var(--atlas-color-dark) / calc(0.019 * var(--intensity)));
-}
-
-/* 
-    RESETS
-*/
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  text-decoration: none;
-  text-indent: 0;
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
-}
-
-/* Hide scrollbar for Chrome, Safari and Opera */
-::-webkit-scrollbar {
-  display: none;
-}
-
-body,
-h1,
-h2,
-h3,
-h4,
-h5,
-p,
-a,
-figure,
-picture {
-  margin: 0;
-  text-decoration: inherit;
-  color: inherit;
-}
-
-code {
-  display: block;
-  text-transform: lowercase;
 }
 
 /* 
@@ -420,6 +436,10 @@ h5 {
   /* font-size: var(--atlas-size-09); */
   font-size: clamp(var(--atlas-size-09), 1.618vw + 1rem, var(--atlas-size-08));
   text-transform: uppercase;
+}
+
+.emoji {
+  font-family: var(--atlas-font-emoji) !important;
 }
 
 blockquote {

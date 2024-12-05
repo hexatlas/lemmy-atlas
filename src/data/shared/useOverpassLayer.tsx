@@ -24,7 +24,7 @@ export default function useOverpassLayer(
             html: `
             <div class="cluster-container">
               <span class="cluster-count">${count}</span>
-              <span class="cluster-icon">${
+              <span class="cluster-emoji">${
                 iconMap[clusterKey]?.options?.html ||
                 `<small class="cluster-text">${clusterKey}</small>`
               }</span>
@@ -46,7 +46,7 @@ export default function useOverpassLayer(
 
     const marker = L.marker([lat, lon], { icon });
     const popup = L.popup().setContent(`
-      <h1>${iconMap[clusterKey]?.options?.html || 'N/A'}</h1>
+      <h1 class="emoji">${iconMap[clusterKey]?.options?.html || 'N/A'}</h1>
       <h4>${tags?.name || 'Unnamed'}</h4>
       <p>${tags['name:en'] || ''}</p>
       <pre>${JSON.stringify(tags, null, 2)}</pre>
@@ -108,7 +108,7 @@ export default function useOverpassLayer(
         const icon = iconMap[tags[filterKey]] || defaultIcon;
         const marker = L.marker([lat, lon], { icon });
         const popup = L.popup().setContent(`
-          <h1>${iconMap[filterKey]?.options?.html || 'N/A'}</h1>
+          <h1 class="emoji">${iconMap[filterKey]?.options?.html || 'N/A'}</h1>
           <h4>${tags?.name || 'Unnamed'}</h4>
           <p>${tags['name:en'] || ''}</p>
           <pre>${JSON.stringify(tags, null, 2)}</pre>
@@ -129,7 +129,7 @@ export default function useOverpassLayer(
           const icon = iconMap[tags[filterKey]] || defaultIcon;
           const marker = L.marker(coordinates[0], { icon });
           const popup = L.popup().setContent(`
-            <h1>${iconMap[filterKey]?.options?.html || 'N/A'}</h1>
+            <h1 class="emoji">${iconMap[filterKey]?.options?.html || 'N/A'}</h1>
             <h4>${tags?.name || 'Unnamed'}</h4>
             <p>${tags['name:en'] || ''}</p>
             <pre>${JSON.stringify(tags, null, 2)}</pre>
