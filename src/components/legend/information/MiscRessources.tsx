@@ -1,6 +1,9 @@
 import React from 'react';
 
-export function AtlasMisc({ activeLocationType, activeAdministrativeRegion }) {
+export function AtlasMisc({
+  activeGeographicIdentifier,
+  activeAdministrativeRegion,
+}) {
   return (
     <div id="legend-content">
       <h3>BannedThought.net</h3>
@@ -15,12 +18,13 @@ export function AtlasMisc({ activeLocationType, activeAdministrativeRegion }) {
       {activeAdministrativeRegion.country != 'country' && (
         <a
           href={`http://bannedthought.net/${encodeURI(
-            activeAdministrativeRegion[activeLocationType],
+            activeAdministrativeRegion[activeGeographicIdentifier],
           ).replace(/%20/g, '-')}/index.htm`}
           target="_blank"
           rel="noopener noreferrer"
         >
-          🔗 Resources on {activeAdministrativeRegion[activeLocationType]}
+          🔗 Resources on{' '}
+          {activeAdministrativeRegion[activeGeographicIdentifier]}
         </a>
       )}
       <h3>WorldAtlas.com</h3>
@@ -28,14 +32,15 @@ export function AtlasMisc({ activeLocationType, activeAdministrativeRegion }) {
         <>
           <a
             href={`https://www.worldatlas.com/maps/${encodeURI(
-              activeAdministrativeRegion[activeLocationType],
+              activeAdministrativeRegion[activeGeographicIdentifier],
             )
               .replace(/%20/g, '-')
               .toLowerCase()}`}
             target="_blank"
             rel="noopener noreferrer"
           >
-            🔗 World Atlas on {activeAdministrativeRegion[activeLocationType]}
+            🔗 World Atlas on{' '}
+            {activeAdministrativeRegion[activeGeographicIdentifier]}
           </a>
         </>
       )}

@@ -10,7 +10,7 @@ import Comment from '../fediverse/lemmy/Comment';
 import Post from '../fediverse/lemmy/Post';
 
 export function AnarchistLibrary({
-  activeLocationType,
+  activeGeographicIdentifier,
   activeAdministrativeRegion,
   activeLemmyInstance,
   activeCommunity,
@@ -19,7 +19,7 @@ export function AnarchistLibrary({
 }) {
   const { anarchistLibraryPosts, isLoading } = useAnarachistLibrary(
     activeAdministrativeRegion,
-    activeLocationType,
+    activeGeographicIdentifier,
   );
 
   function HexBearNews({ bulletin }) {
@@ -63,7 +63,7 @@ export function AnarchistLibrary({
               }
             }}
           >
-            <span className="post-replycount-icon">💬</span> Search Author on
+            <span className="post-replycount-emoji">💬</span> Search Author on
             hexbear.net
           </p>
         )}
@@ -105,17 +105,17 @@ export function AnarchistLibrary({
       <h3>Anarchist Library</h3>
       <a
         href={`https://theanarchistlibrary.org/search?query=${encodeURI(
-          activeAdministrativeRegion[activeLocationType],
+          activeAdministrativeRegion[activeGeographicIdentifier],
         )}`}
         target="_blank"
         rel="noopener noreferrer"
       >
         📚📕 Books about{' '}
         {activeAdministrativeRegion.country != 'country' &&
-          activeAdministrativeRegion[activeLocationType]}
+          activeAdministrativeRegion[activeGeographicIdentifier]}
       </a>
 
-      {isLoading && <p className="search-loading-icon">🔍</p>}
+      {isLoading && <p className="search-loading-emoji">🔍</p>}
 
       {anarchistLibraryPosts?.length > 0 && (
         <>

@@ -336,7 +336,7 @@ const EconomicData = ({ activeAdministrativeRegion }) => {
           >
             <Collapsible.Trigger asChild>
               <button
-                className="button-icon"
+                className="button-emoji"
                 role="button"
                 aria-label={open ? 'Hide information' : 'Show more Information'}
               >
@@ -411,7 +411,7 @@ const EconomicData = ({ activeAdministrativeRegion }) => {
           ))}
         </select>
       </div>
-      {isLoading && <p className="search-loading-icon">🔍</p>}
+      {isLoading && <p className="search-loading-emoji">🔍</p>}
 
       {IMFData && (
         <YearsList
@@ -434,7 +434,7 @@ const EconomicData = ({ activeAdministrativeRegion }) => {
         >
           <Collapsible.Trigger asChild>
             <button
-              className="button-icon"
+              className="button-emoji"
               aria-label={open ? 'Hide information' : 'Show more Information'}
             >
               {open ? 'x' : 'ⓘ'}

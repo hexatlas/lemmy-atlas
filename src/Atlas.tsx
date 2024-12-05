@@ -240,7 +240,6 @@ export default function Atlas() {
     nominatim,
     setNominatim,
 
-    geographicIdentifiers,
     activeGeographicIdentifier,
     setActiveGeographicIdentifier,
 

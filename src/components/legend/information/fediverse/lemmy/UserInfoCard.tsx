@@ -13,7 +13,7 @@ import { LemmyHttp, GetPersonDetails } from 'lemmy-js-client';
 import LemmyCommunity from './Community';
 import Post from './Post';
 import Comment from './Comment';
-import { listingTypes } from '../../../../../AtlasConfig';
+import { listingTypes } from '../../../../../types/api.types';
 import { userPronouns } from '../../../../../hooks/useDataTransform';
 
 function AtlasLemmyUserInfoCard({

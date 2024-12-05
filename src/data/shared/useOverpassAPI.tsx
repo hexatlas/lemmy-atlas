@@ -1,7 +1,7 @@
 async function useOverpassAPI(query, url?) {
   const encodedQuery = encodeURIComponent(query);
   const overpassApiUrl = `${
-    url || "https://overpass-api.de/api/interpreter"
+    url || 'https://overpass-api.de/api/interpreter'
   }?data=${encodedQuery}`;
 
   try {

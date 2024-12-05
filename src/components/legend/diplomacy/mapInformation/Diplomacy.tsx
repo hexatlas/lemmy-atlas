@@ -48,7 +48,7 @@ export function Diplomacy({
 
   return (
     <div id="legend-content">
-      {isLoading && <p className="search-loading-icon">🔍</p>}
+      {isLoading && <p className="search-loading-emoji">🔍</p>}
       <AtlasOSMSettings {...clusterSettings} />
       {data && (
         <AtlasOSMInfoList

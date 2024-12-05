@@ -7,7 +7,11 @@ import Comment from './Comment';
 import Post from './Post';
 import LemmyCommunityInfoCard from './CommunityInfoCard';
 
-import { searchTypes } from '../../../../../AtlasConfig';
+import {
+  searchTypes,
+  listingTypes,
+  sortTypes,
+} from '../../../../../types/api.types';
 import useLemmy from '../../../../../data/information/fediverse/useLemmy';
 
 export default function AtlasLemmy({
@@ -16,7 +20,7 @@ export default function AtlasLemmy({
   sideBarRef,
 
   // Location
-  activeLocationType,
+  activeGeographicIdentifier,
   activeAdministrativeRegion,
   locationQuery,
   setLocationQuery,
@@ -32,11 +36,9 @@ export default function AtlasLemmy({
   activeSearchType,
   setActiveSearchType,
 
-  listingTypes,
   activeListingType,
   setActiveListingType,
 
-  sortTypes,
   activeSortType,
   setActiveSortType,
 }) {
@@ -55,7 +57,7 @@ export default function AtlasLemmy({
     sideBarRef,
 
     // Location
-    activeLocationType,
+    activeGeographicIdentifier,
     activeAdministrativeRegion,
     locationQuery,
     setLocationQuery,
@@ -155,7 +157,7 @@ export default function AtlasLemmy({
               className="atlas-reset-button"
               onClick={resetAtlas}
             >
-              {activeAdministrativeRegion[activeLocationType]} ⨯
+              {activeAdministrativeRegion[activeGeographicIdentifier]} ⨯
             </button>
           )}
           {activeCommunity?.community && (
@@ -250,7 +252,7 @@ export default function AtlasLemmy({
               {listingTypes.map((listingType, index) => (
                 <Tabs.Trigger
                   key={index}
-                  value={listingType}
+                  value={listingType as unknown as string}
                   className="lemmy-setting"
                 >
                   {listingType.label}
@@ -267,7 +269,7 @@ export default function AtlasLemmy({
               {sortTypes.map((sortType, index) => (
                 <Tabs.Trigger
                   key={index}
-                  value={sortType}
+                  value={sortType as unknown as string}
                   className="lemmy-setting"
                 >
                   {sortType.label}

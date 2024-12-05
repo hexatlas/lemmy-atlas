@@ -12,22 +12,8 @@ import { LatLngExpression, latLng, latLngBounds } from 'leaflet';
 import { GeoJsonObject } from 'geojson';
 import administrativeRegionsData from '../../assets/geojson/administrative_regions_extended.json';
 
-import { baseLayers, overlayLayers } from '../../AtlasConfig';
+import { baseLayers, overlayLayers } from './MapLayers';
 import Minimap from './MiniMap';
-
-/*
- /$$      /$$                    
-| $$$    /$$$                    
-| $$$$  /$$$$  /$$$$$$   /$$$$$$ 
-| $$ $$/$$ $$ |____  $$ /$$__  $$
-| $$  $$$| $$  /$$$$$$$| $$  \ $$
-| $$\  $ | $$ /$$__  $$| $$  | $$
-| $$ \/  | $$|  $$$$$$$| $$$$$$$/
-|__/     |__/ \_______/| $$____/ 
-                       | $$      
-                       | $$      
-                       |__/      
-*/
 
 export default function AtlasMap({
   // Util
@@ -41,8 +27,8 @@ export default function AtlasMap({
 
   nominatim,
 
-  activeLocationType,
-  setActiveLocationType,
+  activeGeographicIdentifier,
+  setActiveGeographicIdentifier,
 
   activeAdministrativeRegion,
   setActiveAdministrativeRegion,
@@ -79,7 +65,7 @@ export default function AtlasMap({
       const clickedAdministrativeRegion = e.target.feature.properties;
       if (activeAdministrativeRegion === clickedAdministrativeRegion) return;
       e.originalEvent.view.L.DomEvent.stopPropagation(e);
-      if (isDoubleCLick) setActiveLocationType('name');
+      if (isDoubleCLick) setActiveGeographicIdentifier('name');
       setActiveAdministrativeRegion(clickedAdministrativeRegion);
     },
     [map],
@@ -94,7 +80,7 @@ export default function AtlasMap({
       .bindPopup(
         `
       <div style="display: grid; grid-auto-flow: column; gap: var(--atlas-size-10); align-items: center;">
-        <h3 style="margin: 0;">${administrativeRegion.properties['emoji']}</h3>
+        <h3 style="margin: 0;" class="emoji">${administrativeRegion.properties['emoji']}</h3>
         <div>
           <b><i>${administrativeRegion.properties.name}</i></b><br>
           ${administrativeRegion.properties.country}
@@ -154,7 +140,7 @@ export default function AtlasMap({
 
       // Updates Map View on Location Type or Region Change
       map?.eachLayer((region) => {
-        if (activeLocationType === 'name') {
+        if (activeGeographicIdentifier === 'name') {
           if (
             !isNameMatch(region, nominatim?.features[0]?.properties.name) &&
             isNameMatch(region, activeAdministrativeRegion.name)
@@ -175,8 +161,8 @@ export default function AtlasMap({
         if (
           isTypeMatch(
             region,
-            activeLocationType,
-            activeAdministrativeRegion[activeLocationType],
+            activeGeographicIdentifier,
+            activeAdministrativeRegion[activeGeographicIdentifier],
           )
         ) {
           region.setStyle(style_activeLocationHighlight); // Highlight active location
@@ -196,8 +182,8 @@ export default function AtlasMap({
           !isNameMatch(region, nominatim?.features[0]?.properties.name) &&
           isTypeMatch(
             region,
-            activeLocationType,
-            activeAdministrativeRegion[activeLocationType],
+            activeGeographicIdentifier,
+            activeAdministrativeRegion[activeGeographicIdentifier],
           )
         ) {
           administrativeRegionArray.extend(region.getBounds()); // Extend bounds for matched regions
@@ -215,7 +201,7 @@ export default function AtlasMap({
 
   useEffect(() => {
     updateMap();
-  }, [activeAdministrativeRegion, activeLocationType]);
+  }, [activeAdministrativeRegion, activeGeographicIdentifier]);
 
   return (
     <MapContainer

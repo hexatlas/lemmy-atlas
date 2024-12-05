@@ -96,7 +96,7 @@ function AtlasOSMInfoList({
         {filteredData && (
           <>
             <div className="filter-title">
-              <Collapsible.Trigger className="filter-expand">
+              <Collapsible.Trigger className="filter-expand emoji">
                 {isOpenFilter ? '🔻' : '🔍'}
               </Collapsible.Trigger>
               <h5>

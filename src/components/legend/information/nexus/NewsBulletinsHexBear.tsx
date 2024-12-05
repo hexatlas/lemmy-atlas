@@ -65,7 +65,7 @@ function NewsBulletinsHexBear({ bulletin }) {
             }
           }}
         >
-          <span className="post-replycount-icon">💬</span> /c/news
+          <span className="post-replycount-emoji">💬</span> /c/news
         </p>
       )}
       {posts && (

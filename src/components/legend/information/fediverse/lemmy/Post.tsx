@@ -210,7 +210,7 @@ function Post({
                   }
                 }}
               >
-                <span className="post-replycount-icon">💬</span>
+                <span className="post-replycount-emoji">💬</span>
                 {`${post?.counts.comments} comment${
                   post?.counts.comments > 1 ? 's' : ''
                 }`}

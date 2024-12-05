@@ -4,13 +4,7 @@ import ReactMarkdown from 'react-markdown';
 import useNewsBulletins from '../../../../data/information/nexus/useNewsBulletins';
 import NewsBulletinsHexBear from './NewsBulletinsHexBear';
 
-export function NewsBulletins({
-  activeAdministrativeRegion,
-  activeLemmyInstance,
-  activeCommunity,
-  activeListingType,
-  activeSortType,
-}) {
+export function NewsBulletins({ activeAdministrativeRegion }) {
   const { newsBulletinsPosts, isLoading } = useNewsBulletins(
     activeAdministrativeRegion,
   );
@@ -32,7 +26,7 @@ export function NewsBulletins({
           activeAdministrativeRegion.country}
       </a>
 
-      {isLoading && <p className="search-loading-icon">🔍</p>}
+      {isLoading && <p className="search-loading-emoji">🔍</p>}
 
       {newsBulletinsPosts && (
         <>

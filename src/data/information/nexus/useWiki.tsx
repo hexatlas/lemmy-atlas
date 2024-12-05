@@ -2,7 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 
 function useWiki(
   activeAdministrativeRegion,
-  activeLocationType,
+  activeGeographicIdentifier,
   wikiURL,
   isProleWiki,
 ) {
@@ -21,12 +21,12 @@ function useWiki(
   };
 
   const apiUrl = `/.netlify/functions/wiki/?country=${encodeURI(
-    activeAdministrativeRegion[activeLocationType],
+    activeAdministrativeRegion[activeGeographicIdentifier],
   )}&wiki=${wikiURL}`;
 
   const { data: wikiData, isLoading } = useQuery({
     queryKey: [
-      `wiki-${isProleWiki ? 'prole' : 'nato'}-${activeAdministrativeRegion[activeLocationType]}`,
+      `wiki-${isProleWiki ? 'prole' : 'nato'}-${activeAdministrativeRegion[activeGeographicIdentifier]}`,
     ],
     queryFn: () => fetchProleWiki(apiUrl),
     staleTime: Infinity,

@@ -1,6 +1,9 @@
 import React from 'react';
 
-export function AtlasMisc({ activeLocationType, activeAdministrativeRegion }) {
+export function AtlasMisc({
+  activeGeographicIdentifier,
+  activeAdministrativeRegion,
+}) {
   return (
     <div id="legend-content">
       <h3>World Inequality Database</h3>
@@ -48,14 +51,15 @@ export function AtlasMisc({ activeLocationType, activeAdministrativeRegion }) {
         <>
           <a
             href={`https://www.iea.org/search/charts?q=${encodeURI(
-              activeAdministrativeRegion[activeLocationType],
+              activeAdministrativeRegion[activeGeographicIdentifier],
             )
               .replace(/%20/g, '-')
               .toLowerCase()}`}
             target="_blank"
             rel="noopener noreferrer"
           >
-            🔗 View Charts on {activeAdministrativeRegion[activeLocationType]}
+            🔗 View Charts on{' '}
+            {activeAdministrativeRegion[activeGeographicIdentifier]}
           </a>
         </>
       )}
@@ -70,7 +74,8 @@ export function AtlasMisc({ activeLocationType, activeAdministrativeRegion }) {
             target="_blank"
             rel="noopener noreferrer"
           >
-            🔗 View Data on {activeAdministrativeRegion[activeLocationType]}
+            🔗 View Data on{' '}
+            {activeAdministrativeRegion[activeGeographicIdentifier]}
           </a>
         </>
       )}
@@ -80,19 +85,20 @@ export function AtlasMisc({ activeLocationType, activeAdministrativeRegion }) {
         <>
           <a
             href={`https://data.oecd.org/${encodeURI(
-              activeAdministrativeRegion[activeLocationType],
+              activeAdministrativeRegion[activeGeographicIdentifier],
             )
               .replace(/%20/g, '-')
               .toLowerCase()}.htm`}
             target="_blank"
             rel="noopener noreferrer"
           >
-            🔗 View Data on {activeAdministrativeRegion[activeLocationType]}
+            🔗 View Data on{' '}
+            {activeAdministrativeRegion[activeGeographicIdentifier]}
           </a>
           <br />
           <a
             href={`https://data.oecd.org/searchresults/?q=${encodeURI(
-              activeAdministrativeRegion[activeLocationType],
+              activeAdministrativeRegion[activeGeographicIdentifier],
             )
               .replace(/%20/g, '-')
               .toLowerCase()}`}
@@ -100,8 +106,8 @@ export function AtlasMisc({ activeLocationType, activeAdministrativeRegion }) {
             rel="noopener noreferrer"
           >
             🔗 View Search Results on{' '}
-            {activeAdministrativeRegion[activeLocationType]} (if previous link
-            is not working)
+            {activeAdministrativeRegion[activeGeographicIdentifier]} (if
+            previous link is not working)
           </a>
         </>
       )}

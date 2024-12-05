@@ -35,9 +35,13 @@ function AtlasOSMInfoCard({
       {iconMap && filterKeys && (
         <div className="overpass-filterkey">
           {iconMap[element?.tags[filterKeys[0]]]?.options?.html ? (
-            <span>{iconMap[element?.tags[filterKeys[0]]]?.options?.html}</span>
+            <span className="emoji">
+              {iconMap[element?.tags[filterKeys[0]]]?.options?.html}
+            </span>
           ) : (
-            <span>{iconMap['defaultIcon']?.options?.html}</span>
+            <span className="emoji">
+              {iconMap['defaultIcon']?.options?.html}
+            </span>
           )}
           {filterKeys.map((filterKey, index) => {
             if (index > 0) return;

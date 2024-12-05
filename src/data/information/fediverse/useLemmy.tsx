@@ -10,7 +10,7 @@ function useLemmy(
   sideBarRef,
 
   // Location
-  activeLocationType,
+  activeGeographicIdentifier,
   activeAdministrativeRegion,
   locationQuery,
   setLocationQuery,
@@ -58,7 +58,7 @@ function useLemmy(
     return `${locationQuery} ${
       activeAdministrativeRegion['country'] === 'country'
         ? ''
-        : activeAdministrativeRegion[activeLocationType]
+        : activeAdministrativeRegion[activeGeographicIdentifier]
     }`;
   }
 
@@ -179,7 +179,7 @@ function useLemmy(
     setHasMore(false);
   }, [
     activeAdministrativeRegion,
-    activeLocationType,
+    activeGeographicIdentifier,
     activeSearchType,
     locationQuery,
   ]);
@@ -204,7 +204,7 @@ function useLemmy(
     return () => clearTimeout(debounce);
   }, [
     activeAdministrativeRegion,
-    activeLocationType,
+    activeGeographicIdentifier,
     activeLemmyInstance,
     activeCommunity,
     activeListingType,

@@ -14,7 +14,8 @@ import {
   listingTypes,
   searchTypes,
   sortTypes,
-} from '../../../AtlasConfig';
+} from '../../../types/api.types';
+import { ListingType, SearchType, SortType } from 'lemmy-js-client';
 
 function AtlasInformation({ interfaceProps }) {
   const [activeTab, setActiveTab] = useStateStorage(
@@ -23,26 +24,31 @@ function AtlasInformation({ interfaceProps }) {
   );
 
   // LEMMY
+
   const [activeLemmyInstance, setActiveLemmyInstance] = useStateStorage(
     'activeLemmyInstance',
     lemmyInstances[0], // Default: hexbear.net
   );
+
   const [activeCommunity, setActiveCommunity] = useStateStorage(
     'activeCommunity',
     null,
   ); // c/News
-  const [activeSearchType, setActiveSearchType] = useStateStorage(
-    'activeSearchType',
-    searchTypes[0],
-  ); // Default: Comments
-  const [activeListingType, setActiveListingType] = useStateStorage(
-    'activeListingType',
-    listingTypes[1],
-  ); // Default: Local
-  const [activeSortType, setActiveSortType] = useStateStorage(
-    'activeSortType',
-    sortTypes[1],
-  ); // Default: New Sort
+
+  const [activeSearchType, setActiveSearchType] = useStateStorage<{
+    value: SearchType;
+    label: string;
+  }>('activeSearchType', searchTypes[0]); // Default: Comments
+
+  const [activeListingType, setActiveListingType] = useStateStorage<{
+    value: ListingType;
+    label: string;
+  }>('activeListingType', listingTypes[1]); // Default: Local
+
+  const [activeSortType, setActiveSortType] = useStateStorage<{
+    value: SortType;
+    label: string;
+  }>('activeSortType', sortTypes[1]); // Default: New Sort
 
   const interfacePropsWithLemmy = {
     ...interfaceProps,

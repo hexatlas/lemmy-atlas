@@ -216,6 +216,9 @@
     max-width: var(--atlas-size-03);
     filter: none !important;
   }
+  .country-emoji {
+    font-family: var(--atlas-font-emoji);
+  }
 
   .location-name,
   .country-name {

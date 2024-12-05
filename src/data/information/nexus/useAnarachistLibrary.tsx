@@ -1,6 +1,9 @@
 import { useQuery } from '@tanstack/react-query';
 
-function useAnarachistLibrary(activeAdministrativeRegion, activeLocationType) {
+function useAnarachistLibrary(
+  activeAdministrativeRegion,
+  activeGeographicIdentifier,
+) {
   const fetchAnarchistLibrary = async (url) => {
     try {
       const response = await fetch(url);
@@ -21,7 +24,7 @@ function useAnarachistLibrary(activeAdministrativeRegion, activeLocationType) {
 
   if (activeAdministrativeRegion.country !== 'country') {
     apiUrl = `/.netlify/functions/anarchist_library/?country=${encodeURI(
-      activeAdministrativeRegion[activeLocationType],
+      activeAdministrativeRegion[activeGeographicIdentifier],
     )}`;
   } else {
     apiUrl = `/.netlify/functions/anarchist_library/`;

@@ -41,7 +41,7 @@ export function Industry({
   return (
     <div id="legend-content">
       <AtlasOSMSettings {...clusterSettings} />
-      {isLoading && <p className="search-loading-icon">🔍</p>}
+      {isLoading && <p className="search-loading-emoji">🔍</p>}
 
       {data && (
         <AtlasOSMInfoList

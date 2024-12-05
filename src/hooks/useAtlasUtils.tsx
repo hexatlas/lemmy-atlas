@@ -91,7 +91,7 @@ function getSavedValue(key, initialValue, storage) {
   }
 }
 
-export function useStateStorage(key, initialValue, isLocalStorage = false) {
+export function useStateStorage<T>(key, initialValue, isLocalStorage = false) {
   const storage = isLocalStorage ? localStorage : sessionStorage;
   const [value, setValue] = useState(() => {
     return getSavedValue(key, initialValue, storage);

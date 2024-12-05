@@ -1,18 +1,20 @@
 import { useQuery } from '@tanstack/react-query';
 
-function useMastodon(activeAdministrativeRegion, activeLocationType) {
+function useMastodon(activeAdministrativeRegion, activeGeographicIdentifier) {
   let apiUrl;
 
   if (activeAdministrativeRegion.country !== 'country') {
     apiUrl = `/.netlify/functions/mastodon/?country=${encodeURI(
-      activeAdministrativeRegion[activeLocationType],
+      activeAdministrativeRegion[activeGeographicIdentifier],
     )
       .toLowerCase()
       .replace(/%20/g, '-')}`;
   }
 
   const { data: mastodonPosts, isLoading } = useQuery({
-    queryKey: [`mastodon-${activeAdministrativeRegion[activeLocationType]}`],
+    queryKey: [
+      `mastodon-${activeAdministrativeRegion[activeGeographicIdentifier]}`,
+    ],
     queryFn: () => featchMastodon(apiUrl),
   });
 

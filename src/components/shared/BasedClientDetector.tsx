@@ -11,7 +11,7 @@ function BasedClientDetector(isMobile) {
       {isFirefox && isLinux && <p>Based Check Passed 🫡</p>}
       {!isFirefox && (
         <p>
-          ⚠️ ⚠️ ⚠️ Switch to{' '}
+          You're not running{' '}
           <a
             href="https://www.mozilla.org/en-US/firefox/browsers/"
             target="_blank"

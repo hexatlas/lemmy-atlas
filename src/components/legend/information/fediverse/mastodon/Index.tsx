@@ -6,20 +6,24 @@ import { TimeAgo } from '../../../../../hooks/useDataTransform';
 // https://www.radix-ui.com/primitives/docs/components/collapsible
 import * as Collapsible from '@radix-ui/react-collapsible';
 
-function AtlasMastodon({ activeLocationType, activeAdministrativeRegion }) {
+function AtlasMastodon({
+  activeGeographicIdentifier,
+  activeAdministrativeRegion,
+}) {
   const { mastodonPosts, isLoading } = useMastodon(
     activeAdministrativeRegion,
-    activeLocationType,
+    activeGeographicIdentifier,
   );
 
   return (
     <>
       <div id="legend-content">
         <h3>
-          Latest Posts on {activeAdministrativeRegion[activeLocationType]}
+          Latest Posts on{' '}
+          {activeAdministrativeRegion[activeGeographicIdentifier]}
         </h3>
 
-        {isLoading && <p className="search-loading-icon">🔍</p>}
+        {isLoading && <p className="search-loading-emoji">🔍</p>}
         {mastodonPosts &&
           mastodonPosts.map((post, index) => (
             <div className="feed-item" key={index}>

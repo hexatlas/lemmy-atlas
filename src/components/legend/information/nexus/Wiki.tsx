@@ -5,12 +5,12 @@ import useWiki from '../../../../data/information/nexus/useWiki';
 export function Wiki({
   wikiURL,
   isProleWiki = false,
-  activeLocationType,
+  activeGeographicIdentifier,
   activeAdministrativeRegion,
 }) {
   const { wikiData, isLoading } = useWiki(
     activeAdministrativeRegion,
-    activeLocationType,
+    activeGeographicIdentifier,
     wikiURL,
     isProleWiki,
   );
@@ -24,12 +24,13 @@ export function Wiki({
               Please consider contributing knowledge on{' '}
               <a
                 href={`https://en.prolewiki.org/?search=${encodeURI(
-                  activeAdministrativeRegion[activeLocationType],
+                  activeAdministrativeRegion[activeGeographicIdentifier],
                 )}`}
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                {activeAdministrativeRegion[activeLocationType]} on {wikiURL}
+                {activeAdministrativeRegion[activeGeographicIdentifier]} on{' '}
+                {wikiURL}
               </a>
             </p>
 
@@ -50,19 +51,20 @@ export function Wiki({
               Please consider correcting information on{' '}
               <a
                 href={`${wikiURL}?search=${encodeURI(
-                  activeAdministrativeRegion[activeLocationType],
+                  activeAdministrativeRegion[activeGeographicIdentifier],
                 )}`}
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                {activeAdministrativeRegion[activeLocationType]} on {wikiURL}
+                {activeAdministrativeRegion[activeGeographicIdentifier]} on{' '}
+                {wikiURL}
               </a>
             </p>
           </>
         )}
         <hr />
         <br />
-        {isLoading && <p className="search-loading-icon">🔍</p>}
+        {isLoading && <p className="search-loading-emoji">🔍</p>}
         {wikiData && (
           <>
             <h3>{wikiData.title}</h3>
@@ -76,7 +78,7 @@ export function Wiki({
       <div className="legend-footer">
         <a
           href={`${wikiURL}?search=${encodeURI(
-            activeAdministrativeRegion[activeLocationType],
+            activeAdministrativeRegion[activeGeographicIdentifier],
           )}`}
           target="_blank"
           rel="noopener noreferrer"

@@ -5,6 +5,7 @@ import administrativeRegionsData from './assets/geojson/administrative_regions_e
 import * as Collapsible from '@radix-ui/react-collapsible';
 import { handleRandom } from './hooks/useAtlasUtils';
 
+import { geographicIdentifiers } from '../src/types/atlas.types';
 import { latLng, latLngBounds } from 'leaflet';
 
 /*
@@ -39,9 +40,8 @@ export default function AtlasInterface({
   setIsLocationSelectMode,
   setNominatim,
 
-  regionTypes,
-  activeLocationType,
-  setActiveLocationType,
+  activeGeographicIdentifier,
+  setActiveGeographicIdentifier,
 
   activeAdministrativeRegion,
   setActiveAdministrativeRegion,
@@ -82,7 +82,7 @@ export default function AtlasInterface({
     Component
   */
 
-  const LocationSearch = ({ data, children }) => {
+  const LocationSearch = ({ children }) => {
     const [searchTerm, setSearchTerm] = useState('');
     const [searchResults, setSearchResults] = useState([]);
     const [activeSearchResult, setActiveSearchResult] = useState(null);
@@ -138,14 +138,14 @@ export default function AtlasInterface({
             throw new Error(`HTTP error! Status: ${response.status}`);
           }
           const result = await response.json();
-          const matchedGeoJSon = data.find(
+          const matchedGeoJSon = administrativeRegionsData?.features.find(
             (adminstrativeRegion) =>
               adminstrativeRegion.properties['alpha-2'] ===
               result.features[0].properties.address.country_code.toUpperCase(),
           );
           matchedGeoJSon.properties.name = result.features[0].properties.name;
 
-          setActiveLocationType('name');
+          setActiveGeographicIdentifier('name');
           setActiveAdministrativeRegion(matchedGeoJSon.properties);
           setNominatim(result);
           setIsOpenAtlasMapInterface(false);
@@ -203,7 +203,7 @@ export default function AtlasInterface({
               className="atlas-reset-button"
               onClick={resetAtlas}
             >
-              {activeAdministrativeRegion[activeLocationType]} ⨯
+              {activeAdministrativeRegion[activeGeographicIdentifier]} ⨯
             </button>
           )}
           <div className="search-form">
@@ -230,7 +230,7 @@ export default function AtlasInterface({
         </div>
         {(searchTerm.trim() !== '' || searchResults.length > 0) && (
           <ul className="search-results">
-            {loading && <p className="search-loading-icon">🔍</p>}
+            {loading && <p className="search-loading-emoji">🔍</p>}
             {searchResults.map((result, index) => (
               <li key={result.place_id}>
                 <button
@@ -254,7 +254,7 @@ export default function AtlasInterface({
 
   const ActiveStatesDownloader = () => {
     const data = {
-      activeLocationType,
+      activeGeographicIdentifier,
       activeAdministrativeRegion,
       administrativeRegionClickHistoryArray,
     };
@@ -279,7 +279,7 @@ export default function AtlasInterface({
           role="button"
           title="Select Random Administrative Region"
           aria-label="Random Button - Select Random Administrative Region"
-          className="button-icon"
+          className="button-emoji"
         >
           💾
         </button>
@@ -293,13 +293,13 @@ export default function AtlasInterface({
       open={isOpenAtlasMapInterface}
       onOpenChange={setIsOpenAtlasMapInterface}
     >
-      <LocationSearch data={administrativeRegionsData?.features}>
+      <LocationSearch>
         {activeAdministrativeRegion.country === 'country' ? (
           <button
             role="button"
             title="Select Random Administrative Region"
             aria-label="Random Button - Select Random Administrative Region"
-            className="button-icon atlas-expand-button"
+            className="button-emoji atlas-expand-button"
             onClick={() => handleRandom(setActiveAdministrativeRegion)}
           >
             🎲
@@ -307,7 +307,7 @@ export default function AtlasInterface({
         ) : (
           <Collapsible.Trigger asChild>
             <button
-              className="button-icon atlas-expand-button"
+              className="button-emoji atlas-expand-button"
               title="Click to Expand and Collapse"
             >
               {isMobile ? '☰' : isOpenAtlasMapInterface ? '⊟' : '⊞'}
@@ -325,7 +325,7 @@ export default function AtlasInterface({
                 role="button"
                 title="Select Random Administrative Region"
                 aria-label="Random Button - Select Random Administrative Region"
-                className="random-button"
+                className="random-button emoji"
                 onClick={() => handleRandom(setActiveAdministrativeRegion)}
               >
                 🎲
@@ -342,15 +342,18 @@ export default function AtlasInterface({
             )}
             <h1
               className={`location-name ${
-                activeLocationType === 'name' && 'active-location-type'
+                activeGeographicIdentifier === 'name' &&
+                'active-geographic-identifier'
               }`}
               role="button"
               aria-label={`Select ${activeAdministrativeRegion.name}`}
               tabIndex={0}
-              onClick={() => setActiveLocationType(regionTypes[0])}
+              onClick={() =>
+                setActiveGeographicIdentifier(geographicIdentifiers[0])
+              }
               onKeyDown={(e) => {
                 if (e.key === 'Enter' || e.key === 'Space') {
-                  setActiveLocationType(regionTypes[1]);
+                  setActiveGeographicIdentifier(geographicIdentifiers[1]);
                 }
               }}
             >
@@ -358,30 +361,37 @@ export default function AtlasInterface({
             </h1>
             <h5
               className={`country-name ${
-                activeLocationType === 'country' && 'active-location-type'
+                activeGeographicIdentifier === 'country' &&
+                'active-geographic-identifier'
               }`}
               role="button"
               aria-label={`Select ${activeAdministrativeRegion.country}`}
               tabIndex={0}
-              onClick={() => setActiveLocationType(regionTypes[1])}
+              onClick={() =>
+                setActiveGeographicIdentifier(geographicIdentifiers[1])
+              }
               onKeyDown={(e) => {
                 if (e.key === 'Enter' || e.key === 'Space') {
-                  setActiveLocationType(regionTypes[0]);
+                  setActiveGeographicIdentifier(geographicIdentifiers[0]);
                 }
               }}
             >
               {activeAdministrativeRegion.country}
             </h5>
-            {regionTypes.map((type, index) => {
+            {geographicIdentifiers.map((type, index) => {
               if (activeAdministrativeRegion[type] === '') return;
-              if (type === 'country') return;
               if (type === 'name') return;
+              if (type === 'country') return;
+              if (type === 'unicode') return;
+              if (type === 'image') return;
+              if (type === 'code') return;
               if (type === 'id') return;
               if (type === 'iso_3166-2') return;
+              if (type === 'ISO3166-1-Alpha-3') return;
               if (type === 'country-code') return;
+              if (type === 'region-code') return;
               if (type === 'sub-region-code') return;
               if (type === 'intermediate-region-code') return;
-              if (type === 'combined') return;
               if (isLocationSelectMode && type === 'emoji') return;
               if (isLocationSelectMode && type === 'alpha-2') return;
               if (isLocationSelectMode && type === 'alpha-3') return;
@@ -390,15 +400,18 @@ export default function AtlasInterface({
                 <p
                   key={index}
                   className={`country-name country-${type} ${
-                    activeLocationType === type && 'active-location-type'
+                    activeGeographicIdentifier === type &&
+                    'active-geographic-identifier'
                   }`}
                   role="button"
                   tabIndex={0}
                   aria-label={`Select ${activeAdministrativeRegion[type]}`}
-                  onClick={() => setActiveLocationType(type)}
+                  onClick={() => setActiveGeographicIdentifier(type)}
                   onKeyDown={(e) => {
                     if (e.key === 'Enter' || e.key === 'Space') {
-                      setActiveLocationType(regionTypes[type]);
+                      setActiveGeographicIdentifier(
+                        geographicIdentifiers[type],
+                      );
                     }
                   }}
                 >
@@ -428,14 +441,18 @@ export default function AtlasInterface({
                     setActiveAdministrativeRegion(
                       adminregion.activeAdministrativeRegion,
                     );
-                    setActiveLocationType(adminregion.activeLocationType);
+                    setActiveGeographicIdentifier(
+                      adminregion.activeGeographicIdentifier,
+                    );
                   }}
                   onKeyDown={(e) => {
                     if (e.key === 'Enter' || e.key === 'Space') {
                       setActiveAdministrativeRegion(
                         adminregion.activeAdministrativeRegion,
                       );
-                      setActiveLocationType(adminregion.activeLocationType);
+                      setActiveGeographicIdentifier(
+                        adminregion.activeGeographicIdentifier,
+                      );
                     }
                   }}
                 >
