@@ -4,9 +4,7 @@ import React from 'react';
 
 export function userPronouns(usernameString) {
   if (usernameString)
-    return usernameString.match(
-      /((?<=\[)[a-zA-Z\/\s]+)|([a-zA-Z\/\s]+(?=\]))/g,
-    );
+    return usernameString.match(/((?<=\[)[a-zA-Z/\s]+)|([a-zA-Z/\s]+(?=\]))/g);
 }
 
 export interface TimeAgoProps {
