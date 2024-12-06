@@ -180,7 +180,7 @@ export default function AtlasInterface({
               className="legend-resize-button emoji"
               onMouseDown={handleNexusResize}
             >
-              ↔
+              ↔️
             </button>
             {/* <button
               role="button"
