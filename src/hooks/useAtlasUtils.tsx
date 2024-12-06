@@ -2,11 +2,13 @@ import React from 'react';
 
 // import center from "@turf/center";
 import { useState, useEffect } from 'react';
-import administrativeRegionsData from '../assets/geojson/administrative_regions_extended.json';
+import { FeatureCollection } from 'geojson';
+import geojsonData from '../assets/geojson/administrative_regions_extended.json';
 
 // HANDLE RANDOM
 
 export function handleRandom(setActiveAdministrativeRegion) {
+  const administrativeRegionsData = geojsonData as FeatureCollection;
   setActiveAdministrativeRegion(
     administrativeRegionsData?.features[
       Math.floor(administrativeRegionsData?.features.length * Math.random())

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import administrativeRegionsData from './assets/geojson/administrative_regions_extended.json';
+import { FeatureCollection } from 'geojson';
+import geojsonData from './assets/geojson/administrative_regions_extended.json';
 
 // https://www.radix-ui.com/primitives/docs/components/collapsible
 import * as Collapsible from '@radix-ui/react-collapsible';
@@ -10,16 +11,16 @@ import { latLng, latLngBounds } from 'leaflet';
 
 /*
 
- /$$$$$$             /$$                          /$$$$$$                             
+/$$$$$$             /$$                          /$$$$$$                             
 |_  $$_/            | $$                         /$$__  $$                            
-  | $$   /$$$$$$$  /$$$$$$    /$$$$$$   /$$$$$$ | $$  \__//$$$$$$   /$$$$$$$  /$$$$$$ 
-  | $$  | $$__  $$|_  $$_/   /$$__  $$ /$$__  $$| $$$$   |____  $$ /$$_____/ /$$__  $$
-  | $$  | $$  \ $$  | $$    | $$$$$$$$| $$  \__/| $$_/    /$$$$$$$| $$      | $$$$$$$$
-  | $$  | $$  | $$  | $$ /$$| $$_____/| $$      | $$     /$$__  $$| $$      | $$_____/
- /$$$$$$| $$  | $$  |  $$$$/|  $$$$$$$| $$      | $$    |  $$$$$$$|  $$$$$$$|  $$$$$$$
+| $$   /$$$$$$$  /$$$$$$    /$$$$$$   /$$$$$$ | $$  \__//$$$$$$   /$$$$$$$  /$$$$$$ 
+| $$  | $$__  $$|_  $$_/   /$$__  $$ /$$__  $$| $$$$   |____  $$ /$$_____/ /$$__  $$
+| $$  | $$  \ $$  | $$    | $$$$$$$$| $$  \__/| $$_/    /$$$$$$$| $$      | $$$$$$$$
+| $$  | $$  | $$  | $$ /$$| $$_____/| $$      | $$     /$$__  $$| $$      | $$_____/
+/$$$$$$| $$  | $$  |  $$$$/|  $$$$$$$| $$      | $$    |  $$$$$$$|  $$$$$$$|  $$$$$$$
 |______/|__/  |__/   \___/   \_______/|__/      |__/     \_______/ \_______/ \_______/
-                                                                                      
-                                                                                                                                                                            
+
+
 */
 
 export default function AtlasInterface({
@@ -48,13 +49,11 @@ export default function AtlasInterface({
 
   administrativeRegionClickHistoryArray,
 }) {
-  /*
-      useStates 
-  */
+  const administrativeRegionsData = geojsonData as FeatureCollection;
 
   /* 
-      Handlers
-   */
+ Handlers
+ */
   const handleNexusResize = (mouseDownEvent) => {
     const startSize = legendSize;
     const startPosition = mouseDownEvent.pageX;

@@ -9,8 +9,8 @@ import {
   ScaleControl,
 } from 'react-leaflet';
 import { LatLngExpression, latLng, latLngBounds } from 'leaflet';
-import { GeoJsonObject } from 'geojson';
-import administrativeRegionsData from '../../assets/geojson/administrative_regions_extended.json';
+import { FeatureCollection } from 'geojson';
+import geojsonData from '../../assets/geojson/administrative_regions_extended.json';
 
 import { baseLayers, overlayLayers } from './MapLayers';
 import Minimap from './MiniMap';
@@ -33,6 +33,8 @@ export default function AtlasMap({
   activeAdministrativeRegion,
   setActiveAdministrativeRegion,
 }) {
+  const administrativeRegionsData = geojsonData as FeatureCollection;
+
   /*
       Styles
   */
@@ -253,7 +255,7 @@ export default function AtlasMap({
           ))}
       </LayersControl>
       <GeoJSON
-        data={administrativeRegionsData?.features as unknown as GeoJsonObject}
+        data={administrativeRegionsData}
         style={style_locationDefault}
         onEachFeature={onEachAdministrativeRegion}
       />
