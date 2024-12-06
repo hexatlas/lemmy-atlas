@@ -50,8 +50,12 @@ function AtlasLegend({ interfaceProps }) {
       </Tabs.List>
       <Tabs.Content className="tabs-content" value="Introduction">
         <div className="atlas-legend container light">
-          <h2 className="emoji">🇪 🇲⠀🇴⠀🇯⠀🇮</h2>
-          <h1 className="emoji">🅰️⠀🇹⠀🇱⠀🇦⠀🇸</h1>
+          <h2 className="emoji" title="emoji" aria-label="emoji">
+            🇪⠀🇲⠀🇴⠀🇯⠀🇮
+          </h2>
+          <h1 className="emoji" title="atlas" aria-label="atlas">
+            🅰️⠀🇹⠀🇱⠀🇦⠀🇸
+          </h1>
           <p>
             <span> </span>
             This Atlas uses OpenStreetMaps, Overpass, Nominatim, ProleWiki,
