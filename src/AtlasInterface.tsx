@@ -177,7 +177,7 @@ export default function AtlasInterface({
               role="button"
               title="Click and Drag to Resize"
               aria-label="Resize Button. Click and Drag to Resize"
-              className="legend-resize-button"
+              className="legend-resize-button emoji"
               onMouseDown={handleNexusResize}
             >
               ↔
