@@ -9,20 +9,6 @@ import { handleRandom } from './hooks/useAtlasUtils';
 import { geographicIdentifiers } from '../src/types/atlas.types';
 import { latLng, latLngBounds } from 'leaflet';
 
-/*
-
-/$$$$$$             /$$                          /$$$$$$                             
-|_  $$_/            | $$                         /$$__  $$                            
-| $$   /$$$$$$$  /$$$$$$    /$$$$$$   /$$$$$$ | $$  \__//$$$$$$   /$$$$$$$  /$$$$$$ 
-| $$  | $$__  $$|_  $$_/   /$$__  $$ /$$__  $$| $$$$   |____  $$ /$$_____/ /$$__  $$
-| $$  | $$  \ $$  | $$    | $$$$$$$$| $$  \__/| $$_/    /$$$$$$$| $$      | $$$$$$$$
-| $$  | $$  | $$  | $$ /$$| $$_____/| $$      | $$     /$$__  $$| $$      | $$_____/
-/$$$$$$| $$  | $$  |  $$$$/|  $$$$$$$| $$      | $$    |  $$$$$$$|  $$$$$$$|  $$$$$$$
-|______/|__/  |__/   \___/   \_______/|__/      |__/     \_______/ \_______/ \_______/
-
-
-*/
-
 export default function AtlasInterface({
   // Util
   isMobile,
@@ -54,6 +40,7 @@ export default function AtlasInterface({
   /* 
  Handlers
  */
+
   const handleNexusResize = (mouseDownEvent) => {
     const startSize = legendSize;
     const startPosition = mouseDownEvent.pageX;

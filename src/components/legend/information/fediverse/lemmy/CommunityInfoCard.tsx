@@ -69,6 +69,7 @@ function AtlasLemmyCommunityInfoCard({
       <HoverCard.Trigger asChild>{children}</HoverCard.Trigger>
       <HoverCard.Portal>
         <HoverCard.Content
+          // eslint-disable-next-line no-loss-of-precision
           collisionPadding={1.6180339887498948482 ^ 9}
           className={`community-info-card-content 
           ${community.nsfw && 'community-info-card-content-hightlighted'}`}

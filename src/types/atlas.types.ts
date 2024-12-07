@@ -68,6 +68,7 @@ export interface AtlasInterfaceProps {
   resetAtlas: () => void;
   legendSize: number;
   setLegendSize: (size: number) => void;
+  sideBarRef: any;
 
   // Map related
   map: L.Map | null;
@@ -117,7 +118,7 @@ export interface OSMElement {
 export interface OSMInfoCardProps {
   element: OSMElement;
   index: number;
-  iconMap?: Record<string, any>;
+  iconMap?: Record<string, string>;
   filterKeys?: string[];
   handleMouseEnter: (element: OSMElement) => void;
   handleMouseLeave: (element: OSMElement) => void;

@@ -51,6 +51,7 @@ function AtlasLemmyUserInfoCard({
       <HoverCard.Trigger asChild>{children}</HoverCard.Trigger>
       <HoverCard.Portal>
         <HoverCard.Content
+          // eslint-disable-next-line no-loss-of-precision
           collisionPadding={1.6180339887498948482 ^ 9}
           className={`user-info-card-content ${
             (post?.creator_is_admin || post?.creator_is_moderator) &&

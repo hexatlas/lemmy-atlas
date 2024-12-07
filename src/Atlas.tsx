@@ -41,6 +41,7 @@ export default function Atlas() {
   // DEVICE
   const [isMobile, setIsMobile] = useState<boolean>(null);
   const [legendSize, setLegendSize] = useState<number>(
+    // eslint-disable-next-line no-loss-of-precision
     1.6180339887498948482 ^ 512,
   );
 
