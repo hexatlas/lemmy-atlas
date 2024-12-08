@@ -135,13 +135,6 @@
 
 // Buttons and Forms, Map
 
-.legend-resize-button {
-  position: relative;
-  left: var(--atlas-size-08);
-  bottom: var(--atlas-size-10);
-  font-family: var(--atlas-font-emoji);
-}
-
 .random-button {
   position: absolute;
   left: var(--atlas-size-09);
@@ -154,6 +147,7 @@
 .random-button {
   background-color: transparent;
   height: unset;
+  font-family: var(--atlas-font-emoji);
   // color: unset;
   font: unset;
   padding: unset;
@@ -515,8 +509,11 @@
   border-radius: var(--atlas-border-radius-1);
 }
 .atlas-expand-button {
+  font-family: var(--atlas-font-emoji);
   color: hsl(var(--atlas-color-light) / var(--atlas-opacity-3));
-  background-color: hsl(var(--atlas-color-secondary) / var(--atlas-opacity-3));
+  background-color: transparent;
+  max-width: var(--atlas-size-07);
+  justify-self: flex-end;
 }
 
 .button-emoji:hover {

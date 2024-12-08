@@ -157,28 +157,38 @@ export default function AtlasInterface({
     };
     return (
       <div id="location-search">
-        {!isMobile && (
-          <div className="right-slot">
-            <button
-              role="button"
-              title="Click and Drag to Resize"
-              aria-label="Resize Button. Click and Drag to Resize"
-              className="legend-resize-button emoji"
-              onMouseDown={handleNexusResize}
-            >
-              ↔️
-            </button>
-            {/* <button
+        <div className="right-slot">
+          {!isMobile && (
+            <>
+              <button
+                role="button"
+                title="Click and Drag to Resize"
+                aria-label="Resize Button. Click and Drag to Resize"
+                className="legend-resize-button"
+                onMouseDown={handleNexusResize}
+              >
+                ↔️
+              </button>
+              {/* <button
               role="button"
               title="Select Locations"
               aria-label="Click to Select Locations"
               className="legend-resize-button"
               onMouseDown={handleLocationSelection}
-            >
+              >
               🖊️
-            </button> */}
-          </div>
-        )}
+              </button> */}
+            </>
+          )}
+          <Collapsible.Trigger asChild>
+            <button
+              className="atlas-expand-button"
+              title="Click to Expand and Collapse"
+            >
+              {isMobile ? '☰' : isOpenAtlasMapInterface ? '➕' : '➖'}
+            </button>
+          </Collapsible.Trigger>
+        </div>
         <div className="search-input-wrapper search-input-interface">
           {children}
           {activeAdministrativeRegion.country !== 'country' && (
@@ -280,7 +290,7 @@ export default function AtlasInterface({
       onOpenChange={setIsOpenAtlasMapInterface}
     >
       <LocationSearch>
-        {activeAdministrativeRegion.country === 'country' ? (
+        {activeAdministrativeRegion.country === 'country' && (
           <button
             role="button"
             title="Select Random Administrative Region"
@@ -290,15 +300,6 @@ export default function AtlasInterface({
           >
             🎲
           </button>
-        ) : (
-          <Collapsible.Trigger asChild>
-            <button
-              className="button-emoji atlas-expand-button"
-              title="Click to Expand and Collapse"
-            >
-              {isMobile ? '☰' : isOpenAtlasMapInterface ? '⊟' : '⊞'}
-            </button>
-          </Collapsible.Trigger>
         )}
       </LocationSearch>
 
