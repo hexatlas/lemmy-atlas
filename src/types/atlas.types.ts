@@ -1,5 +1,7 @@
 // Important: Needs to match geoJSON properties with the imported administrativeRegionsData in src/geojson that get's imported in Atlas.tsx
 
+import { ReactNode } from '@tanstack/react-router';
+
 export type GeographicIdentifier =
   | 'name'
   | 'country'
@@ -63,25 +65,73 @@ export interface AdministrativeRegionObject {
 }
 
 export interface AtlasInterfaceProps {
-  // Util props
+  // Util
   isMobile: boolean;
   resetAtlas: () => void;
+  sideBarRef: React.RefObject<HTMLInputElement>;
+
   legendSize: number;
-  setLegendSize: (size: number) => void;
-  sideBarRef: any;
+  setLegendSize: (legendSize: number) => void;
 
-  // Map related
+  isClustered: boolean;
+  setIsClustered: (isClustered: boolean) => void;
+
+  // Location
   map: L.Map | null;
-  isOpenAtlasMapInterface: boolean;
-  setIsOpenAtlasMapInterface: (isOpen: boolean) => void;
+  setMap: (map: L.Map | null) => void;
 
-  // Location related
+  isOpenAtlasMapInterface: boolean;
+  setIsOpenAtlasMapInterface: (isOpenAtlasMapInterface: boolean) => void;
+
   isLocationSelectMode: boolean;
-  setIsLocationSelectMode: (mode: boolean) => void;
+  setIsLocationSelectMode: (isLocationSelectMode: boolean) => void;
+
+  activeLocationSelection: AdministrativeRegionObject[];
+  setActiveLocationSelection: (
+    activeLocationSelection: AdministrativeRegionObject[],
+  ) => void;
+
+  nominatim: unknown;
+  setNominatim: (nominatim: unknown) => void;
+
   activeGeographicIdentifier: GeographicIdentifier;
-  setActiveGeographicIdentifier: (type: GeographicIdentifier) => void;
+  setActiveGeographicIdentifier: (
+    activeGeographicIdentifier: GeographicIdentifier,
+  ) => void;
+
   activeAdministrativeRegion: AdministrativeRegionObject;
-  setActiveAdministrativeRegion: (region: AdministrativeRegionObject) => void;
+  setActiveAdministrativeRegion: (
+    activeAdministrativeRegion: AdministrativeRegionObject,
+  ) => void;
+
+  administrativeRegionClickHistoryArray: AdministrativeRegionObject[];
+  setAdministrativeRegionClickHistoryArray: (
+    administrativeRegionClickHistoryArray: AdministrativeRegionObject[],
+  ) => void;
+
+  locationQuery: string;
+  setLocationQuery: (locationQuery: string) => void;
+}
+
+export interface InformationLemmyProps {
+  // Community
+  defaultInstance;
+  activeLemmyInstance;
+  setActiveLemmyInstance;
+
+  activeCommunity;
+  setActiveCommunity;
+
+  activeSearchType;
+  setActiveSearchType;
+
+  listingTypes;
+  activeListingType;
+  setActiveListingType;
+
+  sortTypes;
+  activeSortType;
+  setActiveSortType;
 }
 
 export interface LocationSelection {
@@ -117,11 +167,25 @@ export interface OSMElement {
 
 export interface OSMInfoCardProps {
   element: OSMElement;
+  children?: ReactNode;
   index: number;
-  iconMap?: Record<string, string>;
+  iconMap?: {
+    [key: string]: L.DivIconOptions;
+  };
   filterKeys?: string[];
   handleMouseEnter: (element: OSMElement) => void;
   handleMouseLeave: (element: OSMElement) => void;
   handleClick: (element: OSMElement) => void;
   activeElement: OSMElement | null;
+}
+
+export interface OSMInfoListProps {
+  listName: string;
+  map: L.Map | null;
+  iconMap?: {
+    [key: string]: L.DivIconOptions;
+  };
+  filterKeys: string[];
+  data: unknown;
+  activeAdministrativeRegion: AdministrativeRegionObject;
 }

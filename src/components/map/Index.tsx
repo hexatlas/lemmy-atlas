@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect } from 'react';
 import {
   MapContainer,
   TileLayer,
@@ -8,12 +8,16 @@ import {
   LayersControl,
   ScaleControl,
 } from 'react-leaflet';
-import { LatLngExpression, latLng, latLngBounds } from 'leaflet';
+import { LatLngExpression, Layer, latLngBounds } from 'leaflet';
 import { FeatureCollection } from 'geojson';
 import geojsonData from '../../assets/geojson/administrative_regions_extended.json';
 
 import { baseLayers, overlayLayers } from './MapLayers';
 import Minimap from './MiniMap';
+import {
+  AdministrativeRegionObject,
+  AtlasInterfaceProps,
+} from '../../types/atlas.types';
 
 export default function AtlasMap({
   // Util
@@ -32,7 +36,7 @@ export default function AtlasMap({
 
   activeAdministrativeRegion,
   setActiveAdministrativeRegion,
-}) {
+}: AtlasInterfaceProps) {
   const administrativeRegionsData = geojsonData as FeatureCollection;
 
   /*
@@ -74,8 +78,8 @@ export default function AtlasMap({
   );
 
   const onEachAdministrativeRegion = (
-    administrativeRegion: any,
-    layer: any,
+    administrativeRegion: { properties: AdministrativeRegionObject },
+    layer: L.Layer,
   ) => {
     let tempStyle;
     layer
@@ -106,8 +110,7 @@ export default function AtlasMap({
       },
       click: (e: {
         target: {
-          options: any;
-          feature: { properties: { [x: string]: any } };
+          feature: { properties: AdministrativeRegionObject };
           getCenter: () => LatLngExpression;
         };
       }) => {
@@ -115,8 +118,7 @@ export default function AtlasMap({
       },
       dblclick: (e: {
         target: {
-          options: any;
-          feature: { properties: { [x: string]: any } };
+          feature: { properties: AdministrativeRegionObject };
           getCenter: () => LatLngExpression;
         };
       }) => {
@@ -155,7 +157,7 @@ export default function AtlasMap({
       });
 
       // Highlight and Get Bounds
-      map?.eachLayer((region) => {
+      map?.eachLayer((region: Layer) => {
         if (typeof region?.setStyle === 'function' && !nominatim) {
           region.setStyle(style_locationMuted); // Mute all regions
         }
@@ -193,7 +195,7 @@ export default function AtlasMap({
       });
 
       // Refreshes Map after initial region selection
-      setTimeout(() => map.invalidateSize(), 300);
+      setTimeout(() => map?.invalidateSize(), 300);
 
       if (Object.keys(administrativeRegionArray).length !== 0) {
         map?.fitBounds(administrativeRegionArray);

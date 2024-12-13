@@ -1,8 +1,8 @@
 // https://nominatim.org/release-docs/develop/api/Search/
 
-const fetch = require('node-fetch');
+import fetch from 'node-fetch';
 
-exports.handler = async function (event) {
+export const handler = async function (event) {
   try {
     const { query, endpoint, osm_ids, format, country } =
       event.queryStringParameters || {};

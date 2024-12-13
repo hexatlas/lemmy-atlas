@@ -5,44 +5,82 @@ Atlas
    Map
       Interface
       Minimap
-   Lemmy
-      Community
-         CommunityInfoCard
-      User
-         UserInfoCard
-      Posts
-      Comments
-   Nexus
-      IMFData
 
-      // Todo
-      Class Structure
-         Industrialists
-         Finance Capitalists
-         Landowners
-         Intelligentsia
-         Bourgeoise
-         Proletariat
-         Armed Forces
+   Legend
       Economy
-         Industrial Centers
-         Commodities
-         Energy
-         Ports
-         etc.
-      Trade
-         Imports
-         Exports
+         Links
+         Map
+            Industrial Centers
+            Commodities
+            Energy
+            Ports
+            etc.
+
+            Trade
+               Imports
+               Exports
+         Charts // Todo
+            GDP based on PPP, share of world
+
       Information
-         Media Landscape
-         Think Tanks
-         Diplomats
+         Links
+         Map // Todo
+            Media Landscape
+            Think Tanks
+            Diplomats
+            etc.
+
+         Fediverse
+            Lemmy
+               Community
+                  CommunityInfoCard
+               User
+                  UserInfoCard
+               Posts
+               Comments
+            Mastodon
+
+         Nexus
+            ProleWiki
+            NATOPedia
+            72Ts News Bulletins
+            Anarchist Library
+            etc.
+
+
       Dipolomacy
-         Embassies, Consulates
-         Ambassadors
+         Links // Todo
+         Map // Todo
+            Embassies, Consulates
+            Ambassadors
+            etc.
+
       Military
-         Bases
-         Forces
+         Links // Todo
+         Map // Todo
+            Bases
+            Forces
+            Industry
+            etc.
+
+      Government
+         Links
+         Map // Todo
+            Hospitals
+            Firedepartmens
+            Policedepartments
+            Parks
+            Abandoned
+            etc.
+
+         Class Structure // Todo
+            Industrialists
+            Finance Capitalists
+            Landowners
+            Intelligentsia
+            Bourgeoise
+            Proletariat
+            Armed Forces
 ```
 
 # Atlas Visual Language
@@ -63,17 +101,16 @@ Tertiary [Yellow]
 
 Unicode
 
-## Add Overpass Layer
+iso3166-region-codes.json
+https://github.com/lukes/ISO-3166-Countries-with-Regional-Codes/blob/master/all/all.json
 
-- Create custom hook with Query data/overpass/[instrument]/useInstrumentQuery.tsx
-- Add in components/legend/[instrument]/mapInformation
-- Add IconMap in emoji/[instrument]
+## Add 🌐 Layer
+
+- [ ] Create Overpass Query Hook data/[instrument]/overpass/use[Layer]Query.tsx
+- [ ] Create Emoji IconMap in data/[instrument]/overpass/emoji/[layer].tsx
+- [ ] Create Map Layer in routes/[instrument]/map/[layer].tsx
+- [ ] Add Link in routes/[instrument]/map.tsx
 
 ## Comments
 
 https://patorjk.com/software/taag/#p=display&f=Big%20Money-ne
-
-# Sources:
-
-iso3166-region-codes.json
-https://github.com/lukes/ISO-3166-Countries-with-Regional-Codes/blob/master/all/all.json

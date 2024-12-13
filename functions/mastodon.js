@@ -1,8 +1,8 @@
 // https://mastodon.social/api/v1/timelines/tag/germany
 
-const fetch = require('node-fetch');
+import fetch from 'node-fetch';
 
-exports.handler = async function (event) {
+export const handler = async function (event) {
   try {
     const { country } = event.queryStringParameters || {};
 

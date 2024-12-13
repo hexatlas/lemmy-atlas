@@ -2,6 +2,7 @@ import React from 'react';
 
 // https://www.radix-ui.com/primitives/docs/components/collapsible
 import * as Collapsible from '@radix-ui/react-collapsible';
+import { OSMInfoCardProps } from '../../types/atlas.types';
 
 function AtlasOSMInfoCard({
   element,
@@ -13,7 +14,7 @@ function AtlasOSMInfoCard({
   handleMouseLeave,
   handleClick,
   activeElement,
-}) {
+}: OSMInfoCardProps) {
   const { name, wikidata } = element?.tags;
 
   return (

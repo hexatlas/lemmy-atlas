@@ -6,7 +6,10 @@ import geojsonData from './assets/geojson/administrative_regions_extended.json';
 import * as Collapsible from '@radix-ui/react-collapsible';
 import { handleRandom } from './hooks/useAtlasUtils';
 
-import { geographicIdentifiers } from '../src/types/atlas.types';
+import {
+  AtlasInterfaceProps,
+  geographicIdentifiers,
+} from '../src/types/atlas.types';
 import { latLng, latLngBounds } from 'leaflet';
 
 export default function AtlasInterface({
@@ -34,7 +37,7 @@ export default function AtlasInterface({
   setActiveAdministrativeRegion,
 
   administrativeRegionClickHistoryArray,
-}) {
+}: AtlasInterfaceProps) {
   const administrativeRegionsData = geojsonData as FeatureCollection;
 
   /* 
@@ -185,7 +188,7 @@ export default function AtlasInterface({
               className="atlas-expand-button"
               title="Click to Expand and Collapse"
             >
-              {isMobile ? '☰' : isOpenAtlasMapInterface ? '➕' : '➖'}
+              {isMobile ? '☰' : isOpenAtlasMapInterface ? '➖' : '➕'}
             </button>
           </Collapsible.Trigger>
         </div>

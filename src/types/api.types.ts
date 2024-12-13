@@ -19,30 +19,6 @@ export interface LemmyInstance {
   default?: boolean;
 }
 
-export const lemmyInstances: Array<LemmyInstance> = [
-  {
-    id: 0,
-    label: 'hexbear.net',
-    baseUrl: 'https://hexbear.net/',
-    community_id: 6, // !news@hexbear.net
-    default: true,
-  },
-  {
-    id: 1,
-    label: 'lemmy.ml',
-    baseUrl: 'https://lemmy.ml/',
-    community_id: 14788, // !worldnews@lemmy.ml
-    default: false,
-  },
-  {
-    id: 2,
-    label: 'lemmygrad.ml',
-    baseUrl: 'https://lemmygrad.ml/',
-    community_id: 109, // !worldnews@lemmygrad.ml
-    default: false,
-  },
-];
-
 export const searchTypes: Array<{ value: SearchType; label: string }> = [
   // { value: "All", label: "*" },
   { value: 'Comments', label: '💬' },

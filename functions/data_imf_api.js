@@ -1,7 +1,7 @@
 // https://www.imf.org/external/datamapper/api/help
-const fetch = require('node-fetch');
+import fetch from 'node-fetch';
 
-exports.handler = async function (event) {
+export const handler = async function (event) {
   try {
     const { indicator, country } = event.queryStringParameters || {};
     if (!indicator) {

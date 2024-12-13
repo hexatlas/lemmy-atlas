@@ -1,8 +1,7 @@
 import React, { useCallback, useState } from 'react';
 import AtlasOSMInfoCard from './OSMInfoCard';
 
-// https://www.radix-ui.com/primitives/docs/components/collapsible
-import * as Collapsible from '@radix-ui/react-collapsible';
+import { OSMInfoListProps } from '../../types/atlas.types';
 
 function AtlasOSMInfoList({
   listName,
@@ -11,18 +10,17 @@ function AtlasOSMInfoList({
   filterKeys,
   data,
   activeAdministrativeRegion,
-}) {
-  const [lastMapBounds, setLastMapBounds] = useState(map.getBounds());
+}: OSMInfoListProps) {
+  const [lastMapBounds, setLastMapBounds] = useState(map?.getBounds());
   const [activeElement, setActiveElement] = useState(null);
   const [selectedFilters, setSelectedFilters] = useState({}); // Store selected values for each filterKey
-  const [isOpenFilter, setOpenFilter] = useState(false);
 
   const showOnMap = useCallback(
     (element) => {
       if (element.lat && element.lon) {
-        map.flyTo([element.lat, element.lon], 15, { duration: 2.7 });
+        map?.flyTo([element.lat, element.lon], 15, { duration: 2.7 });
       } else if (element?.bounds) {
-        map.flyToBounds(
+        map?.flyToBounds(
           [
             [element.bounds.minlat, element.bounds.minlon],
             [element.bounds.maxlat, element.bounds.maxlon],
@@ -52,12 +50,12 @@ function AtlasOSMInfoList({
   };
 
   const handleMouseEnter = (element) => {
-    setLastMapBounds(map.getBounds());
+    setLastMapBounds(map?.getBounds());
     showOnMap(element);
   };
 
   const handleMouseLeave = () => {
-    map.flyToBounds(lastMapBounds, { duration: 1.35 });
+    map?.flyToBounds(lastMapBounds, { duration: 1.35 });
   };
 
   // Extract unique options for each filterKey from data
@@ -88,49 +86,40 @@ function AtlasOSMInfoList({
 
   return (
     <>
-      <Collapsible.Root
-        className="overpass-filter light"
-        open={isOpenFilter}
-        onOpenChange={setOpenFilter}
-      >
-        {filteredData && (
-          <>
-            <div className="filter-title">
-              <Collapsible.Trigger className="filter-expand emoji">
-                {isOpenFilter ? '🔻' : '🔍'}
-              </Collapsible.Trigger>
-              <h5>
-                <span>
-                  {filteredData.length} {listName}
-                </span>{' '}
-                found in {activeAdministrativeRegion['country']}
-              </h5>
-            </div>
-            <div className="filter-menu">
-              {isOpenFilter &&
-                filterKeys.map((key) => (
-                  <Collapsible.Content key={key} className="filter-field">
-                    <label htmlFor={key} className="sr-only">
-                      {key}
-                    </label>
-                    <select
-                      id={key}
-                      value={selectedFilters[key] || ''}
-                      onChange={(e) => handleFilterChange(key, e.target.value)}
-                    >
-                      <option value="">{key}</option>
-                      {getFilterOptions(key).map((option, index) => (
-                        <option key={index} value={option.toString()}>
-                          {option.toString()}
-                        </option>
-                      ))}
-                    </select>
-                  </Collapsible.Content>
-                ))}
-            </div>{' '}
-          </>
-        )}
-      </Collapsible.Root>
+      {filteredData && (
+        <>
+          <div className="filter-title">
+            <h5>
+              <span>
+                {filteredData.length} {listName}
+              </span>{' '}
+              found in {activeAdministrativeRegion['country']}
+            </h5>
+          </div>
+          <div className="filter-menu">
+            {filterKeys &&
+              filterKeys.map((key) => (
+                <div key={key} className="filter-field">
+                  <label htmlFor={key} className="sr-only">
+                    {key}
+                  </label>
+                  <select
+                    id={key}
+                    value={selectedFilters[key] || ''}
+                    onChange={(e) => handleFilterChange(key, e.target.value)}
+                  >
+                    <option value="">{key}</option>
+                    {getFilterOptions(key).map((option, index) => (
+                      <option key={index} value={option.toString()}>
+                        {option.toString()}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              ))}
+          </div>{' '}
+        </>
+      )}
 
       <div className="overpass-list">
         {filteredData &&

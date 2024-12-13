@@ -1,6 +1,9 @@
 import { useQuery } from '@tanstack/react-query';
+import { AdministrativeRegionObject } from '../../../types/atlas.types';
 
-function useNewsBulletins(activeAdministrativeRegion) {
+function useNewsBulletins(
+  activeAdministrativeRegion: AdministrativeRegionObject,
+) {
   const fetchBulletinsRSS = async (url) => {
     try {
       const response = await fetch(url);
@@ -16,20 +19,20 @@ function useNewsBulletins(activeAdministrativeRegion) {
 
       const items = Array.from(xmlData.getElementsByTagName('item')).map(
         (item) => ({
-          title: item.querySelector('title').textContent,
-          link: item.querySelector('link').textContent,
-          pubDate: item.querySelector('pubDate').textContent,
-          description: item.querySelector('description').textContent,
+          title: item.querySelector('title')?.textContent,
+          link: item.querySelector('link')?.textContent,
+          pubDate: item.querySelector('pubDate')?.textContent,
+          description: item.querySelector('description')?.textContent,
         }),
       );
 
       const parsedData = {
-        title: xmlData.querySelector('title').textContent,
-        link: xmlData.querySelector('link').textContent,
-        description: xmlData.querySelector('description').textContent,
-        generator: xmlData.querySelector('generator').textContent,
-        language: xmlData.querySelector('language').textContent,
-        lastBuildDate: xmlData.querySelector('lastBuildDate').textContent,
+        title: xmlData.querySelector('title')?.textContent,
+        link: xmlData.querySelector('link')?.textContent,
+        description: xmlData.querySelector('description')?.textContent,
+        generator: xmlData.querySelector('generator')?.textContent,
+        language: xmlData.querySelector('language')?.textContent,
+        lastBuildDate: xmlData.querySelector('lastBuildDate')?.textContent,
         items: items,
       };
 
@@ -39,7 +42,7 @@ function useNewsBulletins(activeAdministrativeRegion) {
     }
   };
 
-  let apiUrl = null;
+  let apiUrl;
 
   if (activeAdministrativeRegion.country !== 'country') {
     apiUrl = `/.netlify/functions/72T_bulletins/?country=${encodeURI(
