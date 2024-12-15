@@ -1,17 +1,14 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import { createFileRoute } from '@tanstack/react-router';
 
 // Context
 import { AtlasContext } from '../../__root';
-import { InformationContext } from '../../information';
 
 // Data
 import useAnarachistLibrary from '../../../data/information/nexus/useAnarachistLibrary';
 
 // Lemmy
-import { CommentView, LemmyHttp, PostView, Search } from 'lemmy-js-client';
-import Comment from '../../../components/lemmy/Comment';
-import Post from '../../../components/lemmy/Post';
+import HexBear from '../../../components/shared/HexBear';
 
 export const Route = createFileRoute('/information/nexus/anarchistlibrary')({
   component: RouteComponent,
@@ -21,94 +18,10 @@ function RouteComponent() {
   const { activeAdministrativeRegion, activeGeographicIdentifier } =
     useContext(AtlasContext);
 
-  const {
-    activeLemmyInstance,
-    activeCommunity,
-    activeListingType,
-    activeSortType,
-  } = useContext(InformationContext);
   const { anarchistLibraryPosts, isLoading } = useAnarachistLibrary(
     activeAdministrativeRegion,
     activeGeographicIdentifier,
   );
-
-  function HexBearNews({ bulletin }) {
-    const [comments, setComments] = useState([]);
-    const [posts, setPosts] = useState([]);
-    const [isLoaded, setIsLoaded] = useState(false);
-
-    function getHexbear(anarchistLibrary) {
-      const client: LemmyHttp = new LemmyHttp(activeLemmyInstance?.baseUrl);
-      const form: Search = {
-        community_id: activeCommunity?.counts?.community_id,
-        type_: 'All',
-        listing_type: 'All',
-        sort: 'TopAll',
-        q: anarchistLibrary.author,
-        page: 1,
-      };
-
-      client.search(form).then((res) => {
-        setComments([]);
-        setPosts([]);
-
-        if (comments && res?.comments) setComments(res?.comments);
-        if (posts && res?.posts) setPosts(res?.posts);
-        setIsLoaded(true);
-      });
-    }
-
-    return (
-      <div className="anarchist-library-community">
-        {!isLoaded && (
-          <p
-            className="reply-button"
-            role="button"
-            tabIndex={0}
-            aria-label="Show Replies"
-            onClick={() => getHexbear(bulletin)}
-            onKeyDown={(e) => {
-              if (e.key === 'Enter' || e.key === 'Space') {
-                () => getHexbear(bulletin);
-              }
-            }}
-          >
-            <span className="post-replycount-emoji">💬</span> Search Author on
-            hexbear.net
-          </p>
-        )}
-        {posts.length > 0 && (
-          <div className="post-reply-container">
-            {posts.length > 0 &&
-              posts.map((post, index) => (
-                <Post
-                  key={index}
-                  post={post}
-                  community={activeCommunity}
-                  lemmyInstance={activeLemmyInstance}
-                  activeListingType={activeListingType}
-                  sort={activeSortType}
-                />
-              ))}
-          </div>
-        )}
-        {comments.length > 0 &&
-          comments.map((comment, index) => {
-            return (
-              <Comment
-                key={index}
-                community={activeCommunity}
-                post={comment}
-                lemmyInstance={activeLemmyInstance}
-                sort={activeSortType}
-                ratioDetector={comment?.counts.score}
-                isOpen={false}
-              />
-            );
-          })}
-      </div>
-    );
-  }
 
   return (
     <div id="legend-content">
@@ -164,7 +77,9 @@ function RouteComponent() {
                       <span>~{book.pages_estimated} 📄</span>
                     )}
                   </div>
-                  <HexBearNews bulletin={book} />
+                  <HexBear query={book.author}>
+                    Search Author on hexbear.net
+                  </HexBear>
                 </div>
               );
             })}

@@ -46,7 +46,7 @@ import { Route as DiplomacyMapIndexImport } from './routes/diplomacy/map/index'
 import { Route as InformationNexusProlewikiImport } from './routes/information/nexus/prolewiki'
 import { Route as InformationNexusNatopediaImport } from './routes/information/nexus/natopedia'
 import { Route as InformationNexusAnarchistlibraryImport } from './routes/information/nexus/anarchistlibrary'
-import { Route as InformationNexus72TbulletinImport } from './routes/information/nexus/72Tbulletin'
+import { Route as InformationNexus72TbulletinsImport } from './routes/information/nexus/72Tbulletins'
 import { Route as InformationFediverseMastodonImport } from './routes/information/fediverse/mastodon'
 import { Route as InformationFediverseLemmyImport } from './routes/information/fediverse/lemmy'
 import { Route as EconomyMapIndustryImport } from './routes/economy/map/industry'
@@ -266,10 +266,10 @@ const InformationNexusAnarchistlibraryRoute =
     getParentRoute: () => InformationNexusRoute,
   } as any)
 
-const InformationNexus72TbulletinRoute =
-  InformationNexus72TbulletinImport.update({
-    id: '/72Tbulletin',
-    path: '/72Tbulletin',
+const InformationNexus72TbulletinsRoute =
+  InformationNexus72TbulletinsImport.update({
+    id: '/72Tbulletins',
+    path: '/72Tbulletins',
     getParentRoute: () => InformationNexusRoute,
   } as any)
 
@@ -518,11 +518,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof InformationFediverseMastodonImport
       parentRoute: typeof InformationFediverseImport
     }
-    '/information/nexus/72Tbulletin': {
-      id: '/information/nexus/72Tbulletin'
-      path: '/72Tbulletin'
-      fullPath: '/information/nexus/72Tbulletin'
-      preLoaderRoute: typeof InformationNexus72TbulletinImport
+    '/information/nexus/72Tbulletins': {
+      id: '/information/nexus/72Tbulletins'
+      path: '/72Tbulletins'
+      fullPath: '/information/nexus/72Tbulletins'
+      preLoaderRoute: typeof InformationNexus72TbulletinsImport
       parentRoute: typeof InformationNexusImport
     }
     '/information/nexus/anarchistlibrary': {
@@ -721,7 +721,7 @@ const InformationMapRouteWithChildren = InformationMapRoute._addFileChildren(
 )
 
 interface InformationNexusRouteChildren {
-  InformationNexus72TbulletinRoute: typeof InformationNexus72TbulletinRoute
+  InformationNexus72TbulletinsRoute: typeof InformationNexus72TbulletinsRoute
   InformationNexusAnarchistlibraryRoute: typeof InformationNexusAnarchistlibraryRoute
   InformationNexusNatopediaRoute: typeof InformationNexusNatopediaRoute
   InformationNexusProlewikiRoute: typeof InformationNexusProlewikiRoute
@@ -729,7 +729,7 @@ interface InformationNexusRouteChildren {
 }
 
 const InformationNexusRouteChildren: InformationNexusRouteChildren = {
-  InformationNexus72TbulletinRoute: InformationNexus72TbulletinRoute,
+  InformationNexus72TbulletinsRoute: InformationNexus72TbulletinsRoute,
   InformationNexusAnarchistlibraryRoute: InformationNexusAnarchistlibraryRoute,
   InformationNexusNatopediaRoute: InformationNexusNatopediaRoute,
   InformationNexusProlewikiRoute: InformationNexusProlewikiRoute,
@@ -818,7 +818,7 @@ export interface FileRoutesByFullPath {
   '/economy/map/industry': typeof EconomyMapIndustryRoute
   '/information/fediverse/lemmy': typeof InformationFediverseLemmyRoute
   '/information/fediverse/mastodon': typeof InformationFediverseMastodonRoute
-  '/information/nexus/72Tbulletin': typeof InformationNexus72TbulletinRoute
+  '/information/nexus/72Tbulletins': typeof InformationNexus72TbulletinsRoute
   '/information/nexus/anarchistlibrary': typeof InformationNexusAnarchistlibraryRoute
   '/information/nexus/natopedia': typeof InformationNexusNatopediaRoute
   '/information/nexus/prolewiki': typeof InformationNexusProlewikiRoute
@@ -850,7 +850,7 @@ export interface FileRoutesByTo {
   '/economy/map/industry': typeof EconomyMapIndustryRoute
   '/information/fediverse/lemmy': typeof InformationFediverseLemmyRoute
   '/information/fediverse/mastodon': typeof InformationFediverseMastodonRoute
-  '/information/nexus/72Tbulletin': typeof InformationNexus72TbulletinRoute
+  '/information/nexus/72Tbulletins': typeof InformationNexus72TbulletinsRoute
   '/information/nexus/anarchistlibrary': typeof InformationNexusAnarchistlibraryRoute
   '/information/nexus/natopedia': typeof InformationNexusNatopediaRoute
   '/information/nexus/prolewiki': typeof InformationNexusProlewikiRoute
@@ -895,7 +895,7 @@ export interface FileRoutesById {
   '/economy/map/industry': typeof EconomyMapIndustryRoute
   '/information/fediverse/lemmy': typeof InformationFediverseLemmyRoute
   '/information/fediverse/mastodon': typeof InformationFediverseMastodonRoute
-  '/information/nexus/72Tbulletin': typeof InformationNexus72TbulletinRoute
+  '/information/nexus/72Tbulletins': typeof InformationNexus72TbulletinsRoute
   '/information/nexus/anarchistlibrary': typeof InformationNexusAnarchistlibraryRoute
   '/information/nexus/natopedia': typeof InformationNexusNatopediaRoute
   '/information/nexus/prolewiki': typeof InformationNexusProlewikiRoute
@@ -941,7 +941,7 @@ export interface FileRouteTypes {
     | '/economy/map/industry'
     | '/information/fediverse/lemmy'
     | '/information/fediverse/mastodon'
-    | '/information/nexus/72Tbulletin'
+    | '/information/nexus/72Tbulletins'
     | '/information/nexus/anarchistlibrary'
     | '/information/nexus/natopedia'
     | '/information/nexus/prolewiki'
@@ -972,7 +972,7 @@ export interface FileRouteTypes {
     | '/economy/map/industry'
     | '/information/fediverse/lemmy'
     | '/information/fediverse/mastodon'
-    | '/information/nexus/72Tbulletin'
+    | '/information/nexus/72Tbulletins'
     | '/information/nexus/anarchistlibrary'
     | '/information/nexus/natopedia'
     | '/information/nexus/prolewiki'
@@ -1015,7 +1015,7 @@ export interface FileRouteTypes {
     | '/economy/map/industry'
     | '/information/fediverse/lemmy'
     | '/information/fediverse/mastodon'
-    | '/information/nexus/72Tbulletin'
+    | '/information/nexus/72Tbulletins'
     | '/information/nexus/anarchistlibrary'
     | '/information/nexus/natopedia'
     | '/information/nexus/prolewiki'
@@ -1180,7 +1180,7 @@ export const routeTree = rootRoute
       "filePath": "information/nexus.tsx",
       "parent": "/information",
       "children": [
-        "/information/nexus/72Tbulletin",
+        "/information/nexus/72Tbulletins",
         "/information/nexus/anarchistlibrary",
         "/information/nexus/natopedia",
         "/information/nexus/prolewiki",
@@ -1238,8 +1238,8 @@ export const routeTree = rootRoute
       "filePath": "information/fediverse/mastodon.tsx",
       "parent": "/information/fediverse"
     },
-    "/information/nexus/72Tbulletin": {
-      "filePath": "information/nexus/72Tbulletin.tsx",
+    "/information/nexus/72Tbulletins": {
+      "filePath": "information/nexus/72Tbulletins.tsx",
       "parent": "/information/nexus"
     },
     "/information/nexus/anarchistlibrary": {

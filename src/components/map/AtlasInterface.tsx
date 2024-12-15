@@ -1,15 +1,16 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, ReactNode } from 'react';
 import { FeatureCollection } from 'geojson';
-import geojsonData from './assets/geojson/administrative_regions_extended.json';
+import geojsonData from '../../assets/geojson/administrative_regions_extended.json';
 
 // https://www.radix-ui.com/primitives/docs/components/collapsible
 import * as Collapsible from '@radix-ui/react-collapsible';
-import { handleRandom } from './hooks/useAtlasUtils';
+import { handleRandom } from '../../hooks/useAtlasUtils';
 
 import {
   AtlasInterfaceProps,
   geographicIdentifiers,
-} from '../src/types/atlas.types';
+  LocationSelection,
+} from '../../types/atlas.types';
 import { latLng, latLngBounds } from 'leaflet';
 
 export default function AtlasInterface({
@@ -17,7 +18,7 @@ export default function AtlasInterface({
   isMobile,
   resetAtlas,
 
-  legendSize,
+  // legendSize,
   setLegendSize,
 
   // Location
@@ -27,7 +28,7 @@ export default function AtlasInterface({
   setIsOpenAtlasMapInterface,
 
   isLocationSelectMode,
-  setIsLocationSelectMode,
+  // setIsLocationSelectMode,
   setNominatim,
 
   activeGeographicIdentifier,
@@ -39,43 +40,49 @@ export default function AtlasInterface({
   administrativeRegionClickHistoryArray,
 }: AtlasInterfaceProps) {
   const administrativeRegionsData = geojsonData as FeatureCollection;
-
   /* 
- Handlers
+    Handlers
  */
-
-  const handleNexusResize = (mouseDownEvent) => {
-    const startSize = legendSize;
-    const startPosition = mouseDownEvent.pageX;
-
+  const handleNexusResize = () => {
     function onMouseMove(mouseMoveEvent) {
       setLegendSize(document.body.clientWidth - mouseMoveEvent.clientX);
     }
     function onMouseUp() {
       document.body.removeEventListener('mousemove', onMouseMove);
-      // uncomment the following line if not using `{ once: true }`
-      // document.body.removeEventListener("mouseup", onMouseUp);
     }
-
     document.body.addEventListener('mousemove', onMouseMove);
     document.body.addEventListener('mouseup', onMouseUp, { once: true });
   };
 
-  const handleLocationSelection = () => {
-    resetAtlas();
-    setIsOpenAtlasMapInterface(true);
-    setIsLocationSelectMode(!isLocationSelectMode);
-  };
+  // const handleLocationSelection = () => {
+  //   resetAtlas();
+  //   setIsOpenAtlasMapInterface(true);
+  //   setIsLocationSelectMode(!isLocationSelectMode);
+  // };
 
   /*
     Component
   */
 
-  const LocationSearch = ({ children }) => {
-    const [searchTerm, setSearchTerm] = useState('');
-    const [searchResults, setSearchResults] = useState([]);
-    const [activeSearchResult, setActiveSearchResult] = useState(null);
-    const [loading, setLoading] = useState(false);
+  const LocationSearch = ({ children }: { children: ReactNode }) => {
+    const [searchTerm, setSearchTerm] = useState<string>('');
+    const [searchResults, setSearchResults] = useState<
+      {
+        osm_type;
+        osm_id;
+        place_id;
+        display_name;
+        licence;
+      }[]
+    >([]);
+    const [activeSearchResult, setActiveSearchResult] = useState<{
+      osm_type;
+      osm_id;
+      place_id;
+      display_name;
+      licence;
+    } | null>(null);
+    const [loading, setLoading] = useState<boolean>(false);
 
     useEffect(() => {
       const debounce = setTimeout(() => {
@@ -117,8 +124,8 @@ export default function AtlasInterface({
         if (searchTerm.trim() !== '') {
           const url = `/.netlify/functions/nominatim/?query=${encodeURI(
             searchTerm,
-          )}&endpoint=lookup&osm_ids=${activeSearchResult.osm_type[0]}${
-            activeSearchResult.osm_id
+          )}&endpoint=lookup&osm_ids=${activeSearchResult?.osm_type[0]}${
+            activeSearchResult?.osm_id
           }&format=geojson`;
 
           const response = await fetch(url);
@@ -230,7 +237,7 @@ export default function AtlasInterface({
         {(searchTerm.trim() !== '' || searchResults.length > 0) && (
           <ul className="search-results">
             {loading && <p className="search-loading-emoji">🔍</p>}
-            {searchResults.map((result, index) => (
+            {searchResults.map((result) => (
               <li key={result.place_id}>
                 <button
                   onClick={() => handleCLickSearchResult(result)}
@@ -248,41 +255,6 @@ export default function AtlasInterface({
           </ul>
         )}
       </div>
-    );
-  };
-
-  const ActiveStatesDownloader = () => {
-    const data = {
-      activeGeographicIdentifier,
-      activeAdministrativeRegion,
-      administrativeRegionClickHistoryArray,
-    };
-
-    const downloadJSON = () => {
-      const jsonData = JSON.stringify(data, null, 2);
-      const blob = new Blob([jsonData], { type: 'application/json' });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = 'HexAtlas_ActiveStates.json';
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-      URL.revokeObjectURL(url);
-    };
-
-    return (
-      <>
-        <button
-          onClick={downloadJSON}
-          role="button"
-          title="Select Random Administrative Region"
-          aria-label="Random Button - Select Random Administrative Region"
-          className="button-emoji"
-        >
-          💾
-        </button>
-      </>
     );
   };
 
@@ -413,43 +385,45 @@ export default function AtlasInterface({
         )}
         {administrativeRegionClickHistoryArray.length > 2 && (
           <div className="location-name-click-history">
-            {administrativeRegionClickHistoryArray.map((adminregion, index) => {
-              if (
-                index === 0 ||
-                index > 5 ||
-                adminregion.activeAdministrativeRegion.country === 'country'
-              )
-                return;
-              return (
-                <div
-                  key={index}
-                  className="location-name-click-history-item"
-                  aria-label={`Select ${activeAdministrativeRegion.name} in ${activeAdministrativeRegion.country}`}
-                  role="button"
-                  tabIndex={0}
-                  onClick={() => {
-                    setActiveAdministrativeRegion(
-                      adminregion.activeAdministrativeRegion,
-                    );
-                    setActiveGeographicIdentifier(
-                      adminregion.activeGeographicIdentifier,
-                    );
-                  }}
-                  onKeyDown={(e) => {
-                    if (e.key === 'Enter' || e.key === 'Space') {
+            {administrativeRegionClickHistoryArray.map(
+              (adminregion: LocationSelection, index) => {
+                if (
+                  index === 0 ||
+                  index > 5 ||
+                  adminregion.activeAdministrativeRegion.country === 'country'
+                )
+                  return;
+                return (
+                  <div
+                    key={index}
+                    className="location-name-click-history-item"
+                    aria-label={`Select ${activeAdministrativeRegion.name} in ${activeAdministrativeRegion.country}`}
+                    role="button"
+                    tabIndex={0}
+                    onClick={() => {
                       setActiveAdministrativeRegion(
                         adminregion.activeAdministrativeRegion,
                       );
                       setActiveGeographicIdentifier(
                         adminregion.activeGeographicIdentifier,
                       );
-                    }
-                  }}
-                >
-                  <small>{adminregion.activeSelection}</small>
-                </div>
-              );
-            })}
+                    }}
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter' || e.key === 'Space') {
+                        setActiveAdministrativeRegion(
+                          adminregion.activeAdministrativeRegion,
+                        );
+                        setActiveGeographicIdentifier(
+                          adminregion.activeGeographicIdentifier,
+                        );
+                      }
+                    }}
+                  >
+                    <small>{adminregion.activeSelection}</small>
+                  </div>
+                );
+              },
+            )}
           </div>
         )}
       </Collapsible.Content>

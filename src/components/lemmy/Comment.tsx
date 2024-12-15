@@ -6,39 +6,41 @@ import * as Collapsible from '@radix-ui/react-collapsible';
 
 // https://github.com/LemmyNet/lemmy-js-client
 // https://join-lemmy.org/api/classes/LemmyHttp.html
-import { GetComments, LemmyHttp } from 'lemmy-js-client';
+import {
+  CommentSortType,
+  CommentView,
+  CommunityView,
+  GetComments,
+  LemmyHttp,
+} from 'lemmy-js-client';
 
 import { TimeAgo } from '../../hooks/useDataTransform';
 import LemmyUser from './User';
 import LemmyCommunity from './Community';
 
-/*
-
-  /$$$$$$                                                              /$$    
- /$$__  $$                                                            | $$    
-| $$  \__/  /$$$$$$  /$$$$$$/$$$$  /$$$$$$/$$$$   /$$$$$$  /$$$$$$$  /$$$$$$  
-| $$       /$$__  $$| $$_  $$_  $$| $$_  $$_  $$ /$$__  $$| $$__  $$|_  $$_/  
-| $$      | $$  \ $$| $$ \ $$ \ $$| $$ \ $$ \ $$| $$$$$$$$| $$  \ $$  | $$    
-| $$    $$| $$  | $$| $$ | $$ | $$| $$ | $$ | $$| $$_____/| $$  | $$  | $$ /$$
-|  $$$$$$/|  $$$$$$/| $$ | $$ | $$| $$ | $$ | $$|  $$$$$$$| $$  | $$  |  $$$$/
- \______/  \______/ |__/ |__/ |__/|__/ |__/ |__/ \_______/|__/  |__/   \___/  
-                                                                              
-                                                                              
-                                                                              
-*/
+interface CommentProps {
+  post;
+  community: CommunityView; // You should replace 'any' with the actual type of the community object
+  lemmyInstance: { baseUrl: string };
+  sort: { value: CommentSortType; label: string };
+  ratioDetector: number;
+  commentDepth?: number;
+  showUserAvatar?: boolean;
+  isOpen?: boolean;
+}
 
 function Comment({
   post,
   community,
   lemmyInstance,
   sort,
-  ratioDetector,
-  commentDepth = 0,
+  ratioDetector, // takes votecount of parent comment
+  commentDepth = 0, // 0 = rootlevel / toplevel comment
   showUserAvatar = true,
   isOpen = true,
-}) {
+}: CommentProps) {
   const [open, setOpen] = useState(isOpen);
-  const [replies, setReplies] = useState(null);
+  const [replies, setReplies] = useState<CommentView[]>();
 
   function handleReplies() {
     const client: LemmyHttp = new LemmyHttp(lemmyInstance?.baseUrl);
@@ -164,7 +166,7 @@ function Comment({
                 onClick={handleReplies}
                 onKeyDown={(e) => {
                   if (e.key === 'Enter' || e.key === 'Space') {
-                    handleReplies;
+                    handleReplies();
                   }
                 }}
               >

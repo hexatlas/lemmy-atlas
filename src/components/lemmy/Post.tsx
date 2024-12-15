@@ -6,7 +6,13 @@ import * as Collapsible from '@radix-ui/react-collapsible';
 
 // https://github.com/LemmyNet/lemmy-js-client
 // https://join-lemmy.org/api/classes/LemmyHttp.html
-import { GetComments, LemmyHttp } from 'lemmy-js-client';
+import {
+  CommentSortType,
+  CommentView,
+  GetComments,
+  LemmyHttp,
+  ListingType,
+} from 'lemmy-js-client';
 
 import { TimeAgo } from '../../hooks/useDataTransform';
 
@@ -14,20 +20,15 @@ import Comment from './Comment';
 import LemmyUser from './User';
 import LemmyCommunity from './Community';
 
-/*
-
- /$$$$$$$                       /$$    
-| $$__  $$                     | $$    
-| $$  \ $$ /$$$$$$   /$$$$$$$ /$$$$$$  
-| $$$$$$$//$$__  $$ /$$_____/|_  $$_/  
-| $$____/| $$  \ $$|  $$$$$$   | $$    
-| $$     | $$  | $$ \____  $$  | $$ /$$
-| $$     |  $$$$$$/ /$$$$$$$/  |  $$$$/
-|__/      \______/ |_______/    \___/  
-                                       
-                                       
-                                       
-*/
+interface PostProps {
+  post;
+  community;
+  lemmyInstance: { baseUrl: string };
+  sort: { value: CommentSortType; label: string };
+  activeListingType: ListingType;
+  commentDepth?: number;
+  isOpen?: boolean;
+}
 
 function Post({
   post,
@@ -37,9 +38,9 @@ function Post({
   activeListingType,
   commentDepth = 0,
   isOpen = false,
-}) {
+}: PostProps) {
   const [openPost, setOpenPost] = useState(isOpen);
-  const [replies, setReplies] = useState(null);
+  const [replies, setReplies] = useState<CommentView[]>([]);
 
   function handleReplies() {
     const client: LemmyHttp = new LemmyHttp(lemmyInstance?.baseUrl);

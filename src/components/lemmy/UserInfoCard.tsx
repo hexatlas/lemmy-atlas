@@ -9,12 +9,24 @@ import * as Tabs from '@radix-ui/react-tabs';
 
 // https://github.com/LemmyNet/lemmy-js-client
 // https://join-lemmy.org/api/classes/LemmyHttp.html
-import { LemmyHttp, GetPersonDetails } from 'lemmy-js-client';
+import {
+  LemmyHttp,
+  GetPersonDetails,
+  GetPersonDetailsResponse,
+} from 'lemmy-js-client';
 import LemmyCommunity from './Community';
 import Post from './Post';
 import Comment from './Comment';
 import { listingTypes } from '../../types/api.types';
 import { userPronouns } from '../../hooks/useDataTransform';
+
+interface AtlasLemmyUserInfoCardProps {
+  children: React.ReactNode;
+  post;
+  lemmyInstance;
+  sort: string;
+  community?;
+}
 
 function AtlasLemmyUserInfoCard({
   children,
@@ -22,8 +34,8 @@ function AtlasLemmyUserInfoCard({
   lemmyInstance,
   sort,
   community,
-}) {
-  const [user, setUser] = useState(null);
+}: AtlasLemmyUserInfoCardProps) {
+  const [user, setUser] = useState<GetPersonDetailsResponse>();
   const [activeUserTab, setActiveUserTab] = useState('Comments');
 
   const cakeDay = new Date(post.creator.published).toDateString();
@@ -158,19 +170,19 @@ function AtlasLemmyUserInfoCard({
                       Bio
                     </Tabs.Trigger>
                   )}
-                  {user?.moderates.length > 0 && (
+                  {user?.moderates && user?.moderates.length > 0 && (
                     <Tabs.Trigger className="tabs-trigger" value="Mods">
                       Mods
                     </Tabs.Trigger>
                   )}
-                  {user?.posts.length > 0 && (
+                  {user?.posts && user?.posts.length > 0 && (
                     <Tabs.Trigger className="tabs-trigger" value="Posts">
                       {user?.person_view?.counts?.post_count.toLocaleString()}{' '}
                       Posts
                     </Tabs.Trigger>
                   )}
 
-                  {user?.comments.length > 0 && (
+                  {user?.comments && user?.comments.length > 0 && (
                     <Tabs.Trigger className="tabs-trigger" value="Comments">
                       {user?.person_view?.counts?.comment_count.toLocaleString()}{' '}
                       Comments
@@ -184,7 +196,7 @@ function AtlasLemmyUserInfoCard({
                     </div>
                   </Tabs.Content>
                 )}
-                {user?.moderates.length > 0 && (
+                {user?.moderates && user?.moderates.length > 0 && (
                   <Tabs.Content value="Mods" className="tabs-content">
                     <div className="mod-wrapper">
                       <small className="community-mod">Mods</small>
@@ -203,7 +215,7 @@ function AtlasLemmyUserInfoCard({
                                 icon={community?.icon}
                                 display_name={community?.display_name}
                                 name={community?.name}
-                                prefix={null}
+                                prefix={undefined}
                               />
                             </div>
                           );
@@ -214,7 +226,8 @@ function AtlasLemmyUserInfoCard({
                 )}
                 <Tabs.Content value="Posts" className="tabs-content">
                   <div className="user-posts">
-                    {user?.posts.length > 0 &&
+                    {user?.posts &&
+                      user?.posts.length > 0 &&
                       user?.posts.map((post, index) => (
                         <Post
                           key={`${post?.id}${index}`}
@@ -229,7 +242,8 @@ function AtlasLemmyUserInfoCard({
                 </Tabs.Content>
                 <Tabs.Content value="Comments" className="tabs-content">
                   <div className="user-posts">
-                    {user?.comments.length > 0 &&
+                    {user?.comments &&
+                      user?.comments.length > 0 &&
                       user?.comments.map((comment, index) => (
                         <Comment
                           key={`${comment?.id}${index}`}

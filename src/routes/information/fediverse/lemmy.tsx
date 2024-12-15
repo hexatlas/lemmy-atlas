@@ -284,7 +284,7 @@ function RouteComponent() {
                       community={activeCommunity}
                       lemmyInstance={activeLemmyInstance}
                       sort={activeSortType}
-                      ratioDetector={undefined}
+                      ratioDetector={99} // init value for top level comment - highlights all comment with more than 99 upvotes; <Comment /> calls itself recursively
                     />
                   ),
               )}

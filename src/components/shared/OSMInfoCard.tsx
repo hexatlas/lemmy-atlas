@@ -15,7 +15,7 @@ function AtlasOSMInfoCard({
   handleClick,
   activeElement,
 }: OSMInfoCardProps) {
-  const { name, wikidata } = element?.tags;
+  const { name, wikidata } = element?.tags || {};
 
   return (
     <Collapsible.Root
@@ -95,8 +95,8 @@ function AtlasOSMInfoCard({
 
             try {
               isUrl = new URL(url.toString());
-            } catch (_) {
-              return false;
+            } catch (error) {
+              if (error) return false;
             }
             return (
               <div className="overpass-urls" key={index}>

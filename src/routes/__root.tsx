@@ -13,7 +13,7 @@ import '../css/Atlas.scss';
 
 // Import Components
 import AtlasMap from '../components/map/Index';
-import AtlasInterface from '../AtlasInterface';
+import AtlasInterface from '../components/map/AtlasInterface';
 
 // Import customHook
 import { useStateStorage } from '../hooks/useAtlasUtils';
@@ -24,6 +24,7 @@ import {
   AdministrativeRegionObject,
   GeographicIdentifier,
   AtlasInterfaceProps,
+  LocationSelection,
 } from '../types/atlas.types';
 
 import L from 'leaflet';
@@ -75,7 +76,7 @@ function AtlasRootComponent() {
   const [
     administrativeRegionClickHistoryArray,
     setAdministrativeRegionClickHistoryArray,
-  ] = useState<AdministrativeRegionObject[]>([]);
+  ] = useState<LocationSelection[]>([]);
 
   const [activeAdministrativeRegion, setActiveAdministrativeRegion] =
     useStateStorage<AdministrativeRegionObject>('activeAdministrativeRegion', {
@@ -109,7 +110,7 @@ function AtlasRootComponent() {
     }
     if (isMobile && activeAdministrativeRegion.country !== 'country') {
       window.scrollTo({
-        top: document.getElementById('atlas-tabs')?.offsetTop * 1.312,
+        top: (document.getElementById('atlas-tabs')?.offsetTop ?? 0) * 1.312,
         behavior: 'smooth',
       });
     }

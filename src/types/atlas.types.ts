@@ -104,9 +104,9 @@ export interface AtlasInterfaceProps {
     activeAdministrativeRegion: AdministrativeRegionObject,
   ) => void;
 
-  administrativeRegionClickHistoryArray: AdministrativeRegionObject[];
+  administrativeRegionClickHistoryArray: LocationSelection[];
   setAdministrativeRegionClickHistoryArray: (
-    administrativeRegionClickHistoryArray: AdministrativeRegionObject[],
+    administrativeRegionClickHistoryArray: LocationSelection[],
   ) => void;
 
   locationQuery: string;

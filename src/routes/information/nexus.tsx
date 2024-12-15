@@ -16,7 +16,7 @@ function NexusRouteComponent() {
           <Link className="tabs-trigger" to="/information/nexus/natopedia">
             NATOPedia
           </Link>
-          <Link className="tabs-trigger" to="/information/nexus/72Tbulletin">
+          <Link className="tabs-trigger" to="/information/nexus/72Tbulletins">
             72Ts Bulletins
           </Link>
           <Link

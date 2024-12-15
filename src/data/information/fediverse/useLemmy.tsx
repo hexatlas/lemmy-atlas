@@ -1,6 +1,13 @@
 // https://github.com/LemmyNet/lemmy-js-client
 // https://join-lemmy.org/api/classes/LemmyHttp.html
-import { ListCommunities, LemmyHttp, Search } from 'lemmy-js-client';
+import {
+  ListCommunities,
+  LemmyHttp,
+  Search,
+  CommentView,
+  PostView,
+  CommunityView,
+} from 'lemmy-js-client';
 import { useEffect, useState } from 'react';
 
 // ToDo: Implement React Query
@@ -26,29 +33,29 @@ function useLemmy(
 
   activeSortType,
 ) {
-  const [communityList, setCommunityList] = useState(null);
+  const [communityList, setCommunityList] = useState<CommunityView[]>([]);
   const [currentCommunityPage, setCurrentCommunityPage] = useState(1);
-  const [hasMoreCommunities, setHasMoreCommunities] = useState(true);
+  // const [hasMoreCommunities, setHasMoreCommunities] = useState(true);
 
-  const [comments, setComments] = useState([]);
-  const [posts, setPosts] = useState([]);
+  const [comments, setComments] = useState<CommentView[]>([]);
+  const [posts, setPosts] = useState<PostView[]>([]);
   const [currentSearchResultPage, setCurrentSearchResultPage] = useState(1);
 
-  const [hasMore, setHasMore] = useState(true);
+  // const [hasMore, setHasMore] = useState(true);
 
   // ToDo: Infinite Scroll
 
-  const handleScroll = () => {
-    // Check if user has scrolled to the bottom
-    if (sideBarRef.current.scrollTop > sideBarRef.current.scrollTopMax - 69) {
-      // Fetch more comments if there are more to fetch
-      if (hasMore) {
-        console.log('SCROLL');
+  // const handleScroll = () => {
+  //   // Check if user has scrolled to the bottom
+  //   if (sideBarRef.current.scrollTop > sideBarRef.current.scrollTopMax - 69) {
+  //     // Fetch more comments if there are more to fetch
+  //     if (hasMore) {
+  //       console.log('SCROLL');
 
-        setCurrentSearchResultPage(currentSearchResultPage + 1);
-      }
-    }
-  };
+  //       setCurrentSearchResultPage(currentSearchResultPage + 1);
+  //     }
+  //   }
+  // };
 
   /*
     Handlers
@@ -89,7 +96,7 @@ function useLemmy(
       if (activeSearchType.value === 'Comments') {
         setPosts([]);
         if (res?.comments.length < 10) {
-          setHasMore(false);
+          // setHasMore(false);
         }
         if (comments && res?.comments) setComments(res?.comments);
       }
@@ -97,7 +104,7 @@ function useLemmy(
       if (activeSearchType.value === 'Posts') {
         setComments([]);
         if (res?.posts.length < 10) {
-          setHasMore(false);
+          // setHasMore(false);
         }
         if (posts && res?.posts) setPosts(res?.posts);
       }
@@ -112,19 +119,18 @@ function useLemmy(
       if (activeSearchType.value === 'Comments') {
         setPosts([]);
         if (res?.comments.length < 10) {
-          setHasMore(false);
+          // setHasMore(false);
         }
-        if (comments && res?.comments)
-          setComments([...comments, ...res?.comments]);
+        if (comments && res.comments)
+          setComments([...comments, ...res.comments]);
       }
 
       if (activeSearchType.value === 'Posts') {
         setComments([]);
         if (res?.posts.length < 10) {
-          0;
-          setHasMore(false);
+          // setHasMore(false);
         }
-        if (posts && res?.posts) setPosts([...posts, ...res?.posts]);
+        if (posts && res.posts) setPosts([...posts, ...res.posts]);
       }
     });
   }
@@ -139,12 +145,12 @@ function useLemmy(
 
     client.listCommunities(form).then((res) => {
       if (res?.communities.length < 10) {
-        setHasMoreCommunities(false);
+        // setHasMoreCommunities(false);
       }
       setCommunityList(() =>
         currentCommunityPage === 1
-          ? res?.communities
-          : [...communityList, ...res?.communities],
+          ? res.communities
+          : [...communityList, ...res.communities],
       );
     });
   }
@@ -176,7 +182,7 @@ function useLemmy(
     setComments([]);
     setPosts([]);
     setCurrentSearchResultPage(1);
-    setHasMore(false);
+    // setHasMore(false);
   }, [
     activeAdministrativeRegion,
     activeGeographicIdentifier,
@@ -186,10 +192,10 @@ function useLemmy(
 
   // Reset when Lemmy Instance is changed
   useEffect(() => {
-    setCommunityList(null);
+    setCommunityList([]);
     setActiveCommunity(null);
     setCurrentCommunityPage(1);
-    setHasMoreCommunities(true);
+    // setHasMoreCommunities(true);
     handleCommunityList();
   }, [activeLemmyInstance]);
 

@@ -3,9 +3,9 @@ import { createFileRoute } from '@tanstack/react-router';
 import { AtlasContext } from '../../__root';
 import useNewsBulletins from '../../../data/information/nexus/useNewsBulletins';
 import ReactMarkdown from 'react-markdown';
-import NewsBulletinsHexBear from '../../../components/shared/NewsBulletinsHexBear';
+import HexBear from '../../../components/shared/HexBear';
 
-export const Route = createFileRoute('/information/nexus/72Tbulletin')({
+export const Route = createFileRoute('/information/nexus/72Tbulletins')({
   component: RouteComponent,
 });
 
@@ -40,7 +40,7 @@ function RouteComponent() {
           <h3>{newsBulletinsPosts.title}</h3>
           <p> {newsBulletinsPosts.description}</p>
           <a
-            href={newsBulletinsPosts.link}
+            href={newsBulletinsPosts.link as string}
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -51,18 +51,18 @@ function RouteComponent() {
               return (
                 <div className="feed-item" key={index}>
                   <p className="feed-publish-date highlight">
-                    🗓️ {new Date(bulletin.pubDate).toDateString()}
+                    🗓️ {new Date(bulletin.pubDate as string).toDateString()}
                   </p>
                   <a
                     className="feed-link"
-                    href={bulletin.link}
+                    href={bulletin.link as string}
                     target="_blank"
                     rel="noopener noreferrer"
                   >
                     🔗 {bulletin.title}
                   </a>
                   <ReactMarkdown>{`📰 ${bulletin.description}`}</ReactMarkdown>
-                  <NewsBulletinsHexBear bulletin={bulletin} />
+                  <HexBear query={bulletin.link as string}>c/news</HexBear>
                 </div>
               );
             })}

@@ -32,12 +32,18 @@ const BOUNDS_STYLE: PathOptions = {
   color: 'hsl(var(--atlas-color-primary))',
 };
 
-function MinimapBounds({ parentMap, zoom }: { parentMap: any; zoom: number }) {
+function MinimapBounds({
+  parentMap,
+  zoom,
+}: {
+  parentMap: L.Map;
+  zoom: number;
+}) {
   const minimap = useMap();
 
   // Clicking a point on the minimap sets the parent's map center
   const onClick = useCallback(
-    (e: { latlng: any }) => {
+    (e: { latlng: L.LatLng }) => {
       parentMap.setView(e.latlng, parentMap.getZoom());
     },
     [parentMap],
@@ -70,7 +76,7 @@ export default function MiniMapControl({
   zoom,
   size,
 }: {
-  position?: string;
+  position?: PositionClasses;
   zoom?: number;
   size?: string;
 }) {
