@@ -1,25 +1,25 @@
-import React, { useContext } from 'react'
-import { createFileRoute } from '@tanstack/react-router'
-import { AtlasContext } from '../../__root'
-import useWiki from '../../../data/information/nexus/useWiki'
+import React, { useContext } from 'react';
+import { createFileRoute } from '@tanstack/react-router';
+import { AtlasContext } from '../../__root';
+import useWiki from '../../../data/information/nexus/useWiki';
 
 export const Route = createFileRoute('/information/nexus/prolewiki')({
   component: RouteComponent,
-})
+});
 
 function RouteComponent() {
   const { activeGeographicIdentifier, activeAdministrativeRegion } =
-    useContext(AtlasContext)
+    useContext(AtlasContext)!;
 
-  const wikiURL = 'https://en.prolewiki.org'
-  const isProleWiki = true
+  const wikiURL = 'https://en.prolewiki.org';
+  const isProleWiki = true;
 
   const { wikiData, isLoading } = useWiki(
     activeAdministrativeRegion,
     activeGeographicIdentifier,
     wikiURL,
     isProleWiki,
-  )
+  );
 
   return (
     <>
@@ -30,7 +30,9 @@ function RouteComponent() {
               Please consider contributing knowledge on{' '}
               <a
                 href={`https://en.prolewiki.org/?search=${encodeURI(
-                  activeAdministrativeRegion[activeGeographicIdentifier],
+                  activeAdministrativeRegion[
+                    activeGeographicIdentifier
+                  ] as string,
                 )}`}
                 target="_blank"
                 rel="noopener noreferrer"
@@ -57,7 +59,9 @@ function RouteComponent() {
               Please consider correcting information on{' '}
               <a
                 href={`${wikiURL}?search=${encodeURI(
-                  activeAdministrativeRegion[activeGeographicIdentifier],
+                  activeAdministrativeRegion[
+                    activeGeographicIdentifier
+                  ] as string,
                 )}`}
                 target="_blank"
                 rel="noopener noreferrer"
@@ -84,7 +88,7 @@ function RouteComponent() {
       <div className="legend-footer">
         <a
           href={`${wikiURL}?search=${encodeURI(
-            activeAdministrativeRegion[activeGeographicIdentifier],
+            activeAdministrativeRegion[activeGeographicIdentifier] as string,
           )}`}
           target="_blank"
           rel="noopener noreferrer"
@@ -93,5 +97,5 @@ function RouteComponent() {
         </a>
       </div>
     </>
-  )
+  );
 }

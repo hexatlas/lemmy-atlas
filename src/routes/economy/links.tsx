@@ -8,7 +8,7 @@ export const Route = createFileRoute('/economy/links')({
 
 function LinksRouteComponent() {
   const { activeGeographicIdentifier, activeAdministrativeRegion } =
-    useContext(AtlasContext);
+    useContext(AtlasContext)!;
 
   return (
     <div id="legend-content">
@@ -57,7 +57,7 @@ function LinksRouteComponent() {
         <>
           <a
             href={`https://www.iea.org/search/charts?q=${encodeURI(
-              activeAdministrativeRegion[activeGeographicIdentifier],
+              activeAdministrativeRegion[activeGeographicIdentifier] as string,
             )
               .replace(/%20/g, '-')
               .toLowerCase()}`}
@@ -91,7 +91,7 @@ function LinksRouteComponent() {
         <>
           <a
             href={`https://data.oecd.org/${encodeURI(
-              activeAdministrativeRegion[activeGeographicIdentifier],
+              activeAdministrativeRegion[activeGeographicIdentifier] as string,
             )
               .replace(/%20/g, '-')
               .toLowerCase()}.htm`}
@@ -104,7 +104,7 @@ function LinksRouteComponent() {
           <br />
           <a
             href={`https://data.oecd.org/searchresults/?q=${encodeURI(
-              activeAdministrativeRegion[activeGeographicIdentifier],
+              activeAdministrativeRegion[activeGeographicIdentifier] as string,
             )
               .replace(/%20/g, '-')
               .toLowerCase()}`}

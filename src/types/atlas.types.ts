@@ -170,7 +170,7 @@ export interface OSMInfoCardProps {
   children?: ReactNode;
   index: number;
   iconMap?: {
-    [key: string]: L.DivIconOptions;
+    [key: string]: L.DivIcon;
   };
   filterKeys?: string[];
   handleMouseEnter: (element: OSMElement) => void;
@@ -183,7 +183,7 @@ export interface OSMInfoListProps {
   listName: string;
   map: L.Map | null;
   iconMap?: {
-    [key: string]: L.DivIconOptions;
+    [key: string]: L.DivIcon;
   };
   filterKeys: string[];
   data: unknown;

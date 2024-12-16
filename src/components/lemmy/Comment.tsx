@@ -12,16 +12,18 @@ import {
   CommunityView,
   GetComments,
   LemmyHttp,
+  SortType,
 } from 'lemmy-js-client';
 
 import { TimeAgo } from '../../hooks/useDataTransform';
 import LemmyUser from './User';
 import LemmyCommunity from './Community';
+import { AtlasLemmyInstanceType } from '../../types/api.types';
 
 interface CommentProps {
   post;
-  community: CommunityView; // You should replace 'any' with the actual type of the community object
-  lemmyInstance: { baseUrl: string };
+  community: CommunityView;
+  lemmyInstance: AtlasLemmyInstanceType;
   sort: { value: CommentSortType; label: string };
   ratioDetector: number;
   commentDepth?: number;
@@ -128,7 +130,7 @@ function Comment({
             post?.community?.id != community?.counts?.community_id && (
               <LemmyCommunity
                 post={post}
-                sort={sort}
+                sort={sort as { value: SortType; label: string }}
                 // community={community}
                 lemmyInstance={lemmyInstance}
                 showCommunityIcon={community?.id != post?.community?.id}

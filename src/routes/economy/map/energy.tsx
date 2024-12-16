@@ -18,7 +18,7 @@ function EnergyRouteComponent() {
     activeAdministrativeRegion,
     isClustered,
     setIsClustered,
-  } = useContext(AtlasContext);
+  } = useContext(AtlasContext)!;
   const { data, isLoading } = useEconomyEnergy(activeAdministrativeRegion);
 
   useEffect(() => {
@@ -34,7 +34,7 @@ function EnergyRouteComponent() {
     }
     return () => {
       if (layerObjects) {
-        map.removeLayer(layerObjects.overpassLayer);
+        map?.removeLayer(layerObjects.overpassLayer);
       }
     };
   }, [map, data, isClustered]);

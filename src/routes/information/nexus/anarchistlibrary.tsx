@@ -16,7 +16,7 @@ export const Route = createFileRoute('/information/nexus/anarchistlibrary')({
 
 function RouteComponent() {
   const { activeAdministrativeRegion, activeGeographicIdentifier } =
-    useContext(AtlasContext);
+    useContext(AtlasContext)!;
 
   const { anarchistLibraryPosts, isLoading } = useAnarachistLibrary(
     activeAdministrativeRegion,
@@ -28,7 +28,7 @@ function RouteComponent() {
       <h3>Anarchist Library</h3>
       <a
         href={`https://theanarchistlibrary.org/search?query=${encodeURI(
-          activeAdministrativeRegion[activeGeographicIdentifier],
+          activeAdministrativeRegion[activeGeographicIdentifier] as string,
         )}`}
         target="_blank"
         rel="noopener noreferrer"

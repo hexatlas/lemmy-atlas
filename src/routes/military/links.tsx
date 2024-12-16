@@ -8,7 +8,7 @@ export const Route = createFileRoute('/military/links')({
 
 function LinksRouteComponent() {
   const { activeGeographicIdentifier, activeAdministrativeRegion } =
-    useContext(AtlasContext);
+    useContext(AtlasContext)!;
 
   return (
     <div id="legend-content">

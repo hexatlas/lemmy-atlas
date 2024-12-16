@@ -1,8 +1,16 @@
 import React, { createContext } from 'react';
 import { createFileRoute, Link, Outlet } from '@tanstack/react-router';
-import { ListingType, SearchType, SortType } from 'lemmy-js-client';
+import { CommunityView } from 'lemmy-js-client';
 
-import { listingTypes, searchTypes, sortTypes } from '../types/api.types';
+import {
+  AtlasLemmyListingType,
+  AtlasLemmySearchType,
+  AtlasLemmySortType,
+  AtlasLemmyInstanceType,
+  listingTypes,
+  searchTypes,
+  sortTypes,
+} from '../types/api.types';
 import { useStateStorage } from '../hooks/useAtlasUtils';
 import { InformationLemmyProps } from '../types/atlas.types';
 
@@ -24,30 +32,28 @@ function InformationRouteComponent() {
   };
 
   // LEMMY
-  const [activeLemmyInstance, setActiveLemmyInstance] = useStateStorage(
-    'activeLemmyInstance',
-    defaultInstance, // Default: hexbear.net
-  );
+  const [activeLemmyInstance, setActiveLemmyInstance] =
+    useStateStorage<AtlasLemmyInstanceType>(
+      'activeLemmyInstance',
+      defaultInstance, // Default: hexbear.net
+    );
 
-  const [activeCommunity, setActiveCommunity] = useStateStorage(
+  const [activeCommunity, setActiveCommunity] = useStateStorage<CommunityView>(
     'activeCommunity',
     null,
-  ); // c/News
+  );
 
-  const [activeSearchType, setActiveSearchType] = useStateStorage<{
-    value: SearchType;
-    label: string;
-  }>('activeSearchType', searchTypes[0]); // Default: Comments
+  const [activeSearchType, setActiveSearchType] =
+    useStateStorage<AtlasLemmySearchType>('activeSearchType', searchTypes[0]); // Default: Comments
 
-  const [activeListingType, setActiveListingType] = useStateStorage<{
-    value: ListingType;
-    label: string;
-  }>('activeListingType', listingTypes[1]); // Default: Local
+  const [activeListingType, setActiveListingType] =
+    useStateStorage<AtlasLemmyListingType>(
+      'activeListingType',
+      listingTypes[1],
+    ); // Default: Local
 
-  const [activeSortType, setActiveSortType] = useStateStorage<{
-    value: SortType;
-    label: string;
-  }>('activeSortType', sortTypes[1]); // Default: New Sort
+  const [activeSortType, setActiveSortType] =
+    useStateStorage<AtlasLemmySortType>('activeSortType', sortTypes[1]); // Default: New Sort
 
   const informationLemmyProps: InformationLemmyProps = {
     // Community

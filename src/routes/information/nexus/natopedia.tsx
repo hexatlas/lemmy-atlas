@@ -9,7 +9,7 @@ export const Route = createFileRoute('/information/nexus/natopedia')({
 
 function RouteComponent() {
   const { activeGeographicIdentifier, activeAdministrativeRegion } =
-    useContext(AtlasContext);
+    useContext(AtlasContext)!;
 
   const wikiURL = 'https://en.wikipedia.org/w';
   const isProleWiki = false;
@@ -30,7 +30,9 @@ function RouteComponent() {
               Please consider contributing knowledge on{' '}
               <a
                 href={`https://en.prolewiki.org/?search=${encodeURI(
-                  activeAdministrativeRegion[activeGeographicIdentifier],
+                  activeAdministrativeRegion[
+                    activeGeographicIdentifier
+                  ] as string,
                 )}`}
                 target="_blank"
                 rel="noopener noreferrer"
@@ -57,7 +59,9 @@ function RouteComponent() {
               Please consider correcting information on{' '}
               <a
                 href={`${wikiURL}?search=${encodeURI(
-                  activeAdministrativeRegion[activeGeographicIdentifier],
+                  activeAdministrativeRegion[
+                    activeGeographicIdentifier
+                  ] as string,
                 )}`}
                 target="_blank"
                 rel="noopener noreferrer"
@@ -84,7 +88,7 @@ function RouteComponent() {
       <div className="legend-footer">
         <a
           href={`${wikiURL}?search=${encodeURI(
-            activeAdministrativeRegion[activeGeographicIdentifier],
+            activeAdministrativeRegion[activeGeographicIdentifier] as string,
           )}`}
           target="_blank"
           rel="noopener noreferrer"

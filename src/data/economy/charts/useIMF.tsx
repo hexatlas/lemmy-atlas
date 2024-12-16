@@ -25,6 +25,15 @@ function IMFDataTransform(apiResponse) {
   return transformedData;
 }
 
+interface IMFIndicatorType {
+  name: string;
+  label: string;
+  description: string;
+  source: string;
+  unit: string;
+  dataset: string;
+}
+
 function useIMF(activeAdministrativeRegion) {
   const defaultIndicator = {
     name: 'PPPSH',
@@ -36,10 +45,8 @@ function useIMF(activeAdministrativeRegion) {
     dataset: 'WEO',
   };
 
-  const [activeIndicator, setActiveIndicator] = useStateStorage(
-    'activeIndicator',
-    defaultIndicator,
-  );
+  const [activeIndicator, setActiveIndicator] =
+    useStateStorage<IMFIndicatorType>('activeIndicator', defaultIndicator);
 
   const indicatorsArray = IMFDataTransform(indicators);
 

@@ -3,6 +3,7 @@ import React from 'react';
 // https://www.radix-ui.com/primitives/docs/components/collapsible
 import * as Collapsible from '@radix-ui/react-collapsible';
 import { OSMInfoCardProps } from '../../types/atlas.types';
+import { ReactNode } from '@tanstack/react-router';
 
 function AtlasOSMInfoCard({
   element,
@@ -37,11 +38,14 @@ function AtlasOSMInfoCard({
         <div className="overpass-filterkey">
           {iconMap[element?.tags[filterKeys[0]]]?.options?.html ? (
             <span className="emoji">
-              {iconMap[element?.tags[filterKeys[0]]]?.options?.html}
+              {
+                iconMap[element?.tags[filterKeys[0]]]?.options
+                  ?.html as ReactNode
+              }
             </span>
           ) : (
             <span className="emoji">
-              {iconMap['defaultIcon']?.options?.html}
+              {iconMap['defaultIcon']?.options?.html as ReactNode}
             </span>
           )}
           {filterKeys.map((filterKey, index) => {

@@ -2,6 +2,20 @@ import React from 'react';
 
 import { userPronouns } from '../../hooks/useDataTransform';
 import LemmyUserInfoCard from './UserInfoCard';
+import { Community, PostView } from 'lemmy-js-client';
+import { AtlasLemmySortType } from '../../types/api.types';
+
+interface AtlasLemmyUserProps {
+  post: PostView;
+  lemmyInstance: string; // Replace with the actual type if different
+  community: Community; // Assuming it's required; mark as optional (?) if not
+  sort: AtlasLemmySortType;
+  actor_id?: string;
+  avatar?: string;
+  display_name?: string;
+  name?: string;
+  showInfoCard?: boolean;
+}
 
 function AtlasLemmyUser({
   post,
@@ -15,7 +29,7 @@ function AtlasLemmyUser({
   // banned = post?.creator?.banned,
   name = post?.creator?.name,
   showInfoCard = true,
-}) {
+}: AtlasLemmyUserProps) {
   const pronounsArray = userPronouns(display_name);
   return (
     <div className="user-wrapper">

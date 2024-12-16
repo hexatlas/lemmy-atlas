@@ -11,7 +11,7 @@ import {
   LEMMY
 */
 
-export interface LemmyInstance {
+export interface AtlasLemmyInstanceType {
   id: number;
   label: React.ReactNode;
   baseUrl: string;
@@ -19,7 +19,12 @@ export interface LemmyInstance {
   default?: boolean;
 }
 
-export const searchTypes: Array<{ value: SearchType; label: string }> = [
+export interface AtlasLemmySearchType {
+  value: SearchType;
+  label: string;
+}
+
+export const searchTypes: Array<AtlasLemmySearchType> = [
   // { value: "All", label: "*" },
   { value: 'Comments', label: '💬' },
   { value: 'Posts', label: '🪧' },
@@ -28,13 +33,23 @@ export const searchTypes: Array<{ value: SearchType; label: string }> = [
   // { value: "Url", label: "🌐" },
 ];
 
-export const listingTypes: Array<{ value: ListingType; label: string }> = [
+export interface AtlasLemmyListingType {
+  value: ListingType;
+  label: string;
+}
+
+export const listingTypes: Array<AtlasLemmyListingType> = [
   { value: 'All', label: '🌐' },
   { value: 'Local', label: '🏠' },
   // { value: "Subscribed", label: "📌" },
 ];
 
-export const sortTypes: Array<{ value: SortType; label: string }> = [
+export interface AtlasLemmySortType {
+  value: SortType;
+  label: string;
+}
+
+export const sortTypes: Array<AtlasLemmySortType> = [
   { value: 'Active', label: '🚀' },
   { value: 'New', label: '🆕' },
   { value: 'Hot', label: '🔥' },

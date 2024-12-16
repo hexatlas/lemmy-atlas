@@ -13,19 +13,26 @@ import {
   LemmyHttp,
   GetPersonDetails,
   GetPersonDetailsResponse,
+  PostView,
+  CommunityView,
+  CommentSortType,
 } from 'lemmy-js-client';
 import LemmyCommunity from './Community';
 import Post from './Post';
 import Comment from './Comment';
-import { listingTypes } from '../../types/api.types';
+import {
+  AtlasLemmyInstanceType,
+  AtlasLemmySortType,
+  listingTypes,
+} from '../../types/api.types';
 import { userPronouns } from '../../hooks/useDataTransform';
 
 interface AtlasLemmyUserInfoCardProps {
   children: React.ReactNode;
-  post;
-  lemmyInstance;
-  sort: string;
-  community?;
+  post: PostView;
+  lemmyInstance: AtlasLemmyInstanceType;
+  sort: { value: CommentSortType; label: string };
+  community?: CommunityView;
 }
 
 function AtlasLemmyUserInfoCard({
@@ -210,7 +217,7 @@ function AtlasLemmyUserInfoCard({
                               <LemmyCommunity
                                 post={community}
                                 lemmyInstance={lemmyInstance}
-                                sort={sort}
+                                sort={sort as AtlasLemmySortType}
                                 // community={community}
                                 icon={community?.icon}
                                 display_name={community?.display_name}
@@ -248,10 +255,10 @@ function AtlasLemmyUserInfoCard({
                         <Comment
                           key={`${comment?.id}${index}`}
                           post={comment}
-                          community={community}
+                          community={community as CommunityView}
                           lemmyInstance={lemmyInstance}
                           sort={sort}
-                          ratioDetector={undefined}
+                          ratioDetector={99}
                           showUserAvatar={false}
                         ></Comment>
                       ))}

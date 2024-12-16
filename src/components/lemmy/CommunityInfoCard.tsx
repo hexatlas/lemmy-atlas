@@ -6,20 +6,37 @@ import * as HoverCard from '@radix-ui/react-hover-card';
 
 // https://github.com/LemmyNet/lemmy-js-client
 // https://join-lemmy.org/api/classes/LemmyHttp.html
-import { LemmyHttp, GetCommunity } from 'lemmy-js-client';
+import {
+  LemmyHttp,
+  GetCommunity,
+  GetCommunityResponse,
+  Community,
+} from 'lemmy-js-client';
 
 import LemmyUser from './User';
+import {
+  AtlasLemmySortType,
+  AtlasLemmyInstanceType,
+} from '../../types/api.types';
 
-function AtlasLemmyCommunityInfoCard({
+interface CommunityInfoCardProps {
+  children;
+  lemmyInstance: AtlasLemmyInstanceType;
+  sort: AtlasLemmySortType;
+  community: Community;
+}
+
+function LemmyCommunityInfoCard({
   children,
   lemmyInstance,
   sort,
   community,
-}) {
-  const [communityDetails, setCommunityDetails] = useState(null);
+}: CommunityInfoCardProps) {
+  const [communityDetails, setCommunityDetails] =
+    useState<GetCommunityResponse>();
 
   const cakeDay = new Date(community?.published).toDateString();
-  const updateDay = new Date(community?.updated).toDateString();
+  const updateDay = new Date(community?.updated ?? '1970-01-01').toDateString();
 
   function loadCommunityDetails() {
     const client: LemmyHttp = new LemmyHttp(lemmyInstance?.baseUrl);
@@ -207,4 +224,4 @@ function AtlasLemmyCommunityInfoCard({
   );
 }
 
-export default AtlasLemmyCommunityInfoCard;
+export default LemmyCommunityInfoCard;

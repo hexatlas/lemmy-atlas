@@ -14,7 +14,7 @@ export const Route = createFileRoute('/economy/charts')({
 });
 
 function ChartsRouteComponent() {
-  const { activeAdministrativeRegion } = useContext(AtlasContext);
+  const { activeAdministrativeRegion } = useContext(AtlasContext)!;
   const [open, setOpen] = useState(false);
 
   /*

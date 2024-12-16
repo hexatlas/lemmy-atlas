@@ -18,7 +18,7 @@ function IndustryRouteComponent() {
     activeAdministrativeRegion,
     isClustered,
     setIsClustered,
-  } = useContext(AtlasContext);
+  } = useContext(AtlasContext)!;
   const { data, isLoading } = useEconomyIndustry(activeAdministrativeRegion);
 
   useEffect(() => {
@@ -34,7 +34,7 @@ function IndustryRouteComponent() {
     }
     return () => {
       if (layerObjects) {
-        map.removeLayer(layerObjects.overpassLayer);
+        map?.removeLayer(layerObjects.overpassLayer);
       }
     };
   }, [map, data, isClustered]);

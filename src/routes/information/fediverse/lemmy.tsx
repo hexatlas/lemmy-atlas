@@ -5,7 +5,7 @@ import { AtlasContext } from '../../__root';
 import useLemmy from '../../../data/information/fediverse/useLemmy';
 import Comment from '../../../components/lemmy/Comment';
 import Post from '../../../components/lemmy/Post';
-import LemmyCommunityInfoCard from '../../../components/lemmy/CommunityInfoCard';
+import CommunityInfoCard from '../../../components/lemmy/CommunityInfoCard';
 
 // https://www.radix-ui.com/primitives/docs/components/tabs
 import * as Tabs from '@radix-ui/react-tabs';
@@ -13,19 +13,18 @@ import * as Tabs from '@radix-ui/react-tabs';
 import { searchTypes } from '../../../types/api.types';
 
 export const Route = createFileRoute('/information/fediverse/lemmy')({
-  component: RouteComponent,
+  component: LemmyRouteComponent,
 });
 
-function RouteComponent() {
+function LemmyRouteComponent() {
   const {
-    sideBarRef,
-
     // Location
     activeGeographicIdentifier,
     activeAdministrativeRegion,
     locationQuery,
     setLocationQuery,
-  } = useContext(AtlasContext);
+  } = useContext(AtlasContext)!;
+
   const {
     // Community
     defaultInstance,
@@ -45,8 +44,7 @@ function RouteComponent() {
     sortTypes,
     activeSortType,
     setActiveSortType,
-  } = useContext(InformationContext);
-  const [editLemmyInstance, setEditLemmyInstance] = useState(false);
+  } = useContext(InformationContext)!;
 
   const {
     posts,
@@ -57,9 +55,6 @@ function RouteComponent() {
     handleSearch,
     handleSearchQuery,
   } = useLemmy(
-    // Util
-    sideBarRef,
-
     // Location
     activeGeographicIdentifier,
     activeAdministrativeRegion,
@@ -68,15 +63,14 @@ function RouteComponent() {
 
     // Community
     activeLemmyInstance,
-
     activeCommunity,
     setActiveCommunity,
-
     activeSearchType,
     activeListingType,
-
     activeSortType,
   );
+
+  const [editLemmyInstance, setEditLemmyInstance] = useState(false);
   return (
     <>
       <div id="legend-content" className="legend-content-container">
@@ -140,7 +134,7 @@ function RouteComponent() {
           </div>
         )}
         {activeCommunity && activeCommunity?.community?.banner && (
-          <LemmyCommunityInfoCard
+          <CommunityInfoCard
             lemmyInstance={activeLemmyInstance}
             community={activeCommunity?.community}
             sort={activeSortType}
@@ -150,11 +144,11 @@ function RouteComponent() {
               src={activeCommunity?.community?.banner}
               alt={`${activeCommunity?.community?.name} Community Banner`}
             />
-          </LemmyCommunityInfoCard>
+          </CommunityInfoCard>
         )}
         <div className="search-input-wrapper">
           {activeCommunity?.community && (
-            <LemmyCommunityInfoCard
+            <CommunityInfoCard
               lemmyInstance={activeLemmyInstance}
               community={activeCommunity?.community}
               sort={activeSortType}
@@ -170,7 +164,7 @@ function RouteComponent() {
                 {activeCommunity &&
                   activeCommunity?.community?.name} ⨯
               </button>
-            </LemmyCommunityInfoCard>
+            </CommunityInfoCard>
           )}
           <div className="search-form">
             <label htmlFor="search-input" className="sr-only">
@@ -181,7 +175,7 @@ function RouteComponent() {
               type="text"
               className="search-input"
               aria-label="Query Selected Community about Region"
-              placeholder={`Query ${activeAdministrativeRegion.country !== 'country' ? activeAdministrativeRegion[activeGeographicIdentifier] : ''}`}
+              placeholder={`Query ${activeAdministrativeRegion?.country !== 'country' ? activeAdministrativeRegion[activeGeographicIdentifier] : ''}`}
               value={locationQuery}
               onChange={handleSearch}
             />

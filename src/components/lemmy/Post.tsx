@@ -19,6 +19,10 @@ import { TimeAgo } from '../../hooks/useDataTransform';
 import Comment from './Comment';
 import LemmyUser from './User';
 import LemmyCommunity from './Community';
+import {
+  AtlasLemmyInstanceType,
+  AtlasLemmySortType,
+} from '../../types/api.types';
 
 interface PostProps {
   post;
@@ -135,9 +139,9 @@ function Post({
               post?.community?.id != community?.counts?.community_id && (
                 <LemmyCommunity
                   post={post}
-                  sort={sort}
+                  sort={sort as AtlasLemmySortType}
                   // community={community}
-                  lemmyInstance={lemmyInstance}
+                  lemmyInstance={lemmyInstance as AtlasLemmyInstanceType}
                 />
               )}
             {/* Timestamp */}
@@ -226,7 +230,7 @@ function Post({
                     key={`${reply.creator.id}${index}`}
                     community={community}
                     post={reply}
-                    lemmyInstance={lemmyInstance}
+                    lemmyInstance={lemmyInstance as AtlasLemmyInstanceType}
                     commentDepth={commentDepth + 1}
                     sort={sort}
                     ratioDetector={reply?.counts.score}

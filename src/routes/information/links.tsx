@@ -8,7 +8,7 @@ export const Route = createFileRoute('/information/links')({
 
 function LinksRouteComponent() {
   const { activeGeographicIdentifier, activeAdministrativeRegion } =
-    useContext(AtlasContext);
+    useContext(AtlasContext)!;
 
   return (
     <div id="legend-content">
@@ -24,7 +24,7 @@ function LinksRouteComponent() {
       {activeAdministrativeRegion.country != 'country' && (
         <a
           href={`http://bannedthought.net/${encodeURI(
-            activeAdministrativeRegion[activeGeographicIdentifier],
+            activeAdministrativeRegion[activeGeographicIdentifier] as string,
           ).replace(/%20/g, '-')}/index.htm`}
           target="_blank"
           rel="noopener noreferrer"
@@ -38,7 +38,7 @@ function LinksRouteComponent() {
         <>
           <a
             href={`https://www.worldatlas.com/maps/${encodeURI(
-              activeAdministrativeRegion[activeGeographicIdentifier],
+              activeAdministrativeRegion[activeGeographicIdentifier] as string,
             )
               .replace(/%20/g, '-')
               .toLowerCase()}`}

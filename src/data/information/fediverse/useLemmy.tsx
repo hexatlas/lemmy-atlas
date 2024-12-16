@@ -13,9 +13,6 @@ import { useEffect, useState } from 'react';
 // ToDo: Implement React Query
 
 function useLemmy(
-  // Util
-  sideBarRef,
-
   // Location
   activeGeographicIdentifier,
   activeAdministrativeRegion,

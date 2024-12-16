@@ -20,7 +20,7 @@ function useAnarachistLibrary(
     }
   };
 
-  let apiUrl = null;
+  let apiUrl;
 
   if (activeAdministrativeRegion.country !== 'country') {
     apiUrl = `/.netlify/functions/anarchist_library/?country=${encodeURI(

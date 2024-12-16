@@ -1,6 +1,22 @@
 import React from 'react';
 
 import LemmyCommunityInfoCard from './CommunityInfoCard';
+import {
+  AtlasLemmyInstanceType,
+  AtlasLemmySortType,
+} from '../../types/api.types';
+import { PostView } from 'lemmy-js-client';
+
+interface AtlasLemmyCommunityProps {
+  post: PostView;
+  lemmyInstance: AtlasLemmyInstanceType; // Replace with the actual type if different
+  sort: AtlasLemmySortType;
+  showCommunityIcon?: boolean;
+  icon?: string;
+  display_name?: string;
+  name?: string;
+  prefix?: string;
+}
 
 function AtlasLemmyCommunity({
   post,
@@ -12,7 +28,7 @@ function AtlasLemmyCommunity({
   display_name = post?.community?.display_name,
   name = post?.community?.name,
   prefix = 'to',
-}) {
+}: AtlasLemmyCommunityProps) {
   return (
     <div className="community-wrapper">
       {prefix && <small className="post-to">{prefix}</small>}

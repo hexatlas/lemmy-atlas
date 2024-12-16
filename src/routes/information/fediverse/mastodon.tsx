@@ -9,12 +9,12 @@ import useMastodon from '../../../data/information/fediverse/useMastodon';
 import { TimeAgo } from '../../../hooks/useDataTransform';
 
 export const Route = createFileRoute('/information/fediverse/mastodon')({
-  component: RouteComponent,
+  component: MastodonRouteComponent,
 });
 
-function RouteComponent() {
+function MastodonRouteComponent() {
   const { activeGeographicIdentifier, activeAdministrativeRegion } =
-    useContext(AtlasContext);
+    useContext(AtlasContext)!;
 
   const { mastodonPosts, isLoading } = useMastodon(
     activeAdministrativeRegion,

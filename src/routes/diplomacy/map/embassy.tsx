@@ -13,7 +13,7 @@ export const Route = createFileRoute('/diplomacy/map/embassy')({
 
 function EmbassyRouteComponent() {
   const { map, activeAdministrativeRegion, isClustered, setIsClustered } =
-    useContext(AtlasContext);
+    useContext(AtlasContext)!;
 
   const { data, isLoading } = useDiplomacyEmbassies(activeAdministrativeRegion);
 
@@ -30,7 +30,7 @@ function EmbassyRouteComponent() {
     }
     return () => {
       if (layerObjects) {
-        map.removeLayer(layerObjects.overpassLayer);
+        map?.removeLayer(layerObjects.overpassLayer);
       }
     };
   }, [map, data, isClustered]);

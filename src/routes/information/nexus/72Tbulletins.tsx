@@ -10,7 +10,7 @@ export const Route = createFileRoute('/information/nexus/72Tbulletins')({
 });
 
 function RouteComponent() {
-  const { activeAdministrativeRegion } = useContext(AtlasContext);
+  const { activeAdministrativeRegion } = useContext(AtlasContext)!;
 
   const { newsBulletinsPosts, isLoading } = useNewsBulletins(
     activeAdministrativeRegion,

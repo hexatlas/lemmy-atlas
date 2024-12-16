@@ -16,7 +16,7 @@ function HexBear({
     activeCommunity,
     activeListingType,
     activeSortType,
-  } = useContext(InformationContext);
+  } = useContext(InformationContext)!;
 
   const { comments, posts, isLoaded, fetchHexBear } = useHexbear(
     query,
