@@ -2,6 +2,7 @@
 import { indicators } from '../../../data/economy/charts/indicatorsIMF.json';
 import { useStateStorage } from '../../../hooks/useAtlasUtils';
 import { useQuery } from '@tanstack/react-query';
+import { IMFIndicatorType } from '../../../types/data';
 
 // Transform IMF Data
 function IMFDataTransform(apiResponse) {
@@ -23,15 +24,6 @@ function IMFDataTransform(apiResponse) {
     .sort((a, b) => a.label.localeCompare(b.label)); // Sort alphabetically by label
 
   return transformedData;
-}
-
-interface IMFIndicatorType {
-  name: string;
-  label: string;
-  description: string;
-  source: string;
-  unit: string;
-  dataset: string;
 }
 
 function useIMF(activeAdministrativeRegion) {

@@ -8,6 +8,7 @@ import * as Collapsible from '@radix-ui/react-collapsible';
 
 import { AtlasContext } from '../__root';
 import useIMF from '../../data/economy/charts/useIMF';
+import { IMFIndicatorType } from '../../types/data';
 
 export const Route = createFileRoute('/economy/charts')({
   component: ChartsRouteComponent,
@@ -29,14 +30,16 @@ function ChartsRouteComponent() {
     setActiveIndicator,
   } = useIMF(activeAdministrativeRegion);
 
+  const { name, label, description, source, unit, dataset } = activeIndicator;
+
   /*
       useEffects
       */
 
   // Transfroms, filters and sorts IMF Indicators JSON
 
-  const LineChart = ({ data }) => {
-    const svgRef = useRef();
+  const LineChart = ({ data }: { data }) => {
+    const svgRef = useRef<SVGSVGElement>(null);
 
     useEffect(() => {
       const margin = { top: 20, right: 30, bottom: 50, left: 50 };
@@ -110,7 +113,7 @@ function ChartsRouteComponent() {
         .attr('class', 'x-label')
         .attr('x', 0)
         .attr('y', height + margin.bottom * 1.312)
-        .text(`${String(activeIndicator.source).toUpperCase()} | data.imf.org`)
+        .text(`${String(source).toUpperCase()} | data.imf.org`)
         .style('fill', 'hsl(var(--atlas-color-light) / var(--atlas-opacity-2))')
         .style('font-size', 'var(--atlas-size-09)');
 
@@ -125,7 +128,7 @@ function ChartsRouteComponent() {
         .attr('transform', 'rotate(-90)')
         .attr('y', -margin.left + 12)
         .attr('x', -height / 2)
-        .text(activeIndicator.unit)
+        .text(unit)
         .style(
           'fill',
           'hsl(var(--atlas-color-tertiary) / var(--atlas-opacity-3))',
@@ -139,9 +142,7 @@ function ChartsRouteComponent() {
         .attr('text-anchor', 'middle')
         .attr('x', width / 2)
         .attr('y', -margin.top / 2)
-        .text(
-          `${activeAdministrativeRegion.country.toUpperCase()} | ${activeIndicator.label}`,
-        )
+        .text(`${activeAdministrativeRegion.country.toUpperCase()} | ${label}`)
         .style(
           'fill',
           'hsl(var(--atlas-color-tertiary) / var(--atlas-opacity-3))',
@@ -237,7 +238,7 @@ function ChartsRouteComponent() {
           // Show tooltip
           tooltip
             .style('opacity', 1)
-            .html(`${d.value} ${activeIndicator.unit} in ${d.year}`)
+            .html(`${d.value} ${unit} in ${d.year}`)
             .style('left', event.pageX - 10 + 'px')
             .style('top', event.pageY + 10 + 'px')
             .style('z-index', '9999');
@@ -302,26 +303,30 @@ function ChartsRouteComponent() {
     return <svg ref={svgRef}></svg>;
   };
 
-  const YearsList = ({ data, indicator, country }) => {
+  const YearsList = ({
+    data,
+    indicator,
+    country,
+  }: {
+    data;
+    indicator: { name };
+    country;
+  }) => {
+    const { name } = indicator;
+
     // Check if the indicator.name and country exist in the data
-    if (
-      !data[indicator.name] ||
-      !data[indicator.name][country] ||
-      data === undefined
-    ) {
+    if (!data[name] || !data[name][country] || data === undefined) {
       return (
         <>
           {!isLoading && (
-            <div>
-              No data available for the specified indicator.name and country.
-            </div>
+            <div>No data available for the specified name and country.</div>
           )}
         </>
       );
     }
 
     // Extracting years and values from the object
-    const yearsData = data[indicator.name][country];
+    const yearsData = data[name][country];
     const years = Object.keys(yearsData);
     const [open, setOpen] = useState(false);
     return (
@@ -358,7 +363,7 @@ function ChartsRouteComponent() {
               <thead>
                 <tr>
                   <th>Year</th>
-                  <th>{activeIndicator.unit}</th>
+                  <th>{unit}</th>
                 </tr>
               </thead>
               <tbody>
@@ -397,13 +402,13 @@ function ChartsRouteComponent() {
         <select
           className="secondary"
           value={activeIndicator?.name}
-          onChange={(e) =>
-            setActiveIndicator(
+          onChange={(e) => {
+            return setActiveIndicator(
               indicatorsArray.find(
                 (indicator) => indicator.name === e.target.value,
-              ),
-            )
-          }
+              ) as IMFIndicatorType,
+            );
+          }}
         >
           {indicatorsArray.map((indicator, index) => (
             <option
@@ -448,20 +453,20 @@ function ChartsRouteComponent() {
         </div>
         <div className="indicator-name">
           <span className="Text">
-            <strong>Description of </strong> {activeIndicator.name}
+            <strong>Description of </strong> {name}
           </span>
         </div>
         <Collapsible.Content>
-          {activeIndicator.description && (
+          {description && (
             <p>
-              <strong>Description:</strong> {activeIndicator.description}
+              <strong>Description:</strong> {description}
             </p>
           )}
           <p>
-            <strong>Source:</strong> {activeIndicator.source}
+            <strong>Source:</strong> {source}
           </p>
           <p>
-            <strong>Dataset:</strong> {activeIndicator.dataset}
+            <strong>Dataset:</strong> {dataset}
           </p>
         </Collapsible.Content>
       </Collapsible.Root>

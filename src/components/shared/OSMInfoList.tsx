@@ -2,6 +2,7 @@ import React, { useCallback, useState } from 'react';
 import AtlasOSMInfoCard from './OSMInfoCard';
 
 import { OSMInfoListProps } from '../../types/atlas.types';
+import { LatLngBoundsExpression } from 'leaflet';
 
 function AtlasOSMInfoList({
   listName,
@@ -11,7 +12,9 @@ function AtlasOSMInfoList({
   data,
   activeAdministrativeRegion,
 }: OSMInfoListProps) {
-  const [lastMapBounds, setLastMapBounds] = useState(map?.getBounds());
+  const [lastMapBounds, setLastMapBounds] = useState<
+    LatLngBoundsExpression | undefined
+  >(map?.getBounds());
   const [activeElement, setActiveElement] = useState(null);
   const [selectedFilters, setSelectedFilters] = useState({}); // Store selected values for each filterKey
 
@@ -37,12 +40,12 @@ function AtlasOSMInfoList({
       setLastMapBounds([
         [element.lat, element.lon],
         [element.lat, element.lon],
-      ]);
+      ] as LatLngBoundsExpression);
     } else if (element?.bounds) {
       setLastMapBounds([
         [element.bounds.minlat, element.bounds.minlon],
         [element.bounds.maxlat, element.bounds.maxlon],
-      ]);
+      ] as LatLngBoundsExpression);
     }
     if (element) setActiveElement(element);
     if (element === activeElement) setActiveElement(null);
@@ -55,7 +58,9 @@ function AtlasOSMInfoList({
   };
 
   const handleMouseLeave = () => {
-    map?.flyToBounds(lastMapBounds, { duration: 1.35 });
+    map?.flyToBounds(lastMapBounds as LatLngBoundsExpression, {
+      duration: 1.35,
+    });
   };
 
   // Extract unique options for each filterKey from data
@@ -109,7 +114,7 @@ function AtlasOSMInfoList({
                     onChange={(e) => handleFilterChange(key, e.target.value)}
                   >
                     <option value="">{key}</option>
-                    {getFilterOptions(key).map((option, index) => (
+                    {getFilterOptions(key).map((option: string, index) => (
                       <option key={index} value={option.toString()}>
                         {option.toString()}
                       </option>

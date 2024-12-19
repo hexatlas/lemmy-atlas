@@ -10,7 +10,7 @@ import {
   listingTypes,
   searchTypes,
   sortTypes,
-} from '../types/api.types';
+} from '../types/data';
 import { useStateStorage } from '../hooks/useAtlasUtils';
 import { InformationLemmyProps } from '../types/atlas.types';
 

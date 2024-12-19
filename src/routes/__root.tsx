@@ -35,6 +35,29 @@ export const Route = createRootRoute({
   component: AtlasRootComponent,
 });
 
+const defaultAdministrativeRegionObject: AdministrativeRegionObject = {
+  // START - Do not change as theres a lot of If(activeAdministrativeRegion.country === "country") that depends on this
+  country: 'country',
+  name: 'name',
+  'intermediate-region': 'intermediate-region',
+  'sub-region': 'sub-region',
+  region: 'region',
+  // END
+  emoji: '',
+  image: '',
+  'alpha-2': '',
+  'alpha-3': '',
+  unicode: '',
+  'country-code': '',
+  'sub-region-code': '',
+  'intermediate-region-code': '',
+  'region-code': '',
+  'iso_3166-2': '',
+  'ISO3166-1-Alpha-3': '',
+  code: '',
+  id: '',
+};
+
 function AtlasRootComponent() {
   const sideBarRef = useRef<HTMLInputElement>(null);
   /*
@@ -55,11 +78,6 @@ function AtlasRootComponent() {
   const [isLocationSelectMode, setIsLocationSelectMode] =
     useStateStorage<boolean>('isLocationSelectMode', false);
 
-  const [activeLocationSelection, setActiveLocationSelection] = useStateStorage(
-    'activeLocationSelection',
-    [],
-  );
-
   const [isClustered, setIsClustered] = useStateStorage<boolean>(
     'isClustered',
     true,
@@ -79,13 +97,10 @@ function AtlasRootComponent() {
   ] = useState<LocationSelection[]>([]);
 
   const [activeAdministrativeRegion, setActiveAdministrativeRegion] =
-    useStateStorage<AdministrativeRegionObject>('activeAdministrativeRegion', {
-      country: 'country',
-      name: 'name',
-      'intermediate-region': 'intermediate-region',
-      'sub-region': 'sub-region',
-      region: 'region',
-    });
+    useStateStorage<AdministrativeRegionObject>(
+      'activeAdministrativeRegion',
+      defaultAdministrativeRegionObject,
+    );
 
   const [activeGeographicIdentifier, setActiveGeographicIdentifier] =
     useStateStorage<GeographicIdentifier>(
@@ -97,6 +112,10 @@ function AtlasRootComponent() {
     'locationQuery',
     '',
   );
+
+  const [activeLocationSelection, setActiveLocationSelection] = useStateStorage<
+    LocationSelection[]
+  >('activeLocationSelection', []);
 
   /*
       useEffects
@@ -127,10 +146,10 @@ function AtlasRootComponent() {
         behavior: 'smooth',
       });
 
-    const selection = {
+    const selection: LocationSelection = {
       activeSelection: activeAdministrativeRegion[activeGeographicIdentifier],
-      activeGeographicIdentifier: activeGeographicIdentifier,
-      activeAdministrativeRegion: activeAdministrativeRegion,
+      activeGeographicIdentifier,
+      activeAdministrativeRegion,
     };
     setAdministrativeRegionClickHistoryArray([
       selection,
@@ -164,13 +183,7 @@ function AtlasRootComponent() {
   function resetAtlas() {
     setActiveLocationSelection([]);
     setAdministrativeRegionClickHistoryArray([]);
-    setActiveAdministrativeRegion({
-      country: 'country',
-      name: 'name',
-      'intermediate-region': 'intermediate-region',
-      'sub-region': 'sub-region',
-      region: 'region',
-    });
+    setActiveAdministrativeRegion(defaultAdministrativeRegionObject);
     setActiveGeographicIdentifier(geographicIdentifiers[1]); // Default: Country Sort
     setLocationQuery('');
     setIsOpenAtlasMapInterface(!isMobile);

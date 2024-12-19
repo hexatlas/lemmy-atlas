@@ -24,7 +24,7 @@ import {
   AtlasLemmyInstanceType,
   AtlasLemmySortType,
   listingTypes,
-} from '../../types/api.types';
+} from '../../types/data';
 import { userPronouns } from '../../hooks/useDataTransform';
 
 interface AtlasLemmyUserInfoCardProps {

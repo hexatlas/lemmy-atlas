@@ -106,3 +106,16 @@ export const dataSources: Array<DataSource> = [
     default: false,
   },
 ];
+
+/*
+  IMF
+*/
+
+export interface IMFIndicatorType {
+  name: string;
+  label: string;
+  description: string;
+  source: string;
+  unit: string;
+  dataset: string;
+}

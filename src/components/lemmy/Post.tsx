@@ -19,10 +19,7 @@ import { TimeAgo } from '../../hooks/useDataTransform';
 import Comment from './Comment';
 import LemmyUser from './User';
 import LemmyCommunity from './Community';
-import {
-  AtlasLemmyInstanceType,
-  AtlasLemmySortType,
-} from '../../types/api.types';
+import { AtlasLemmyInstanceType, AtlasLemmySortType } from '../../types/data';
 
 interface PostProps {
   post;

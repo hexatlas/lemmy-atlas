@@ -7,6 +7,7 @@ import * as Collapsible from '@radix-ui/react-collapsible';
 import { handleRandom } from '../../hooks/useAtlasUtils';
 
 import {
+  AdministrativeRegionObject,
   AtlasInterfaceProps,
   geographicIdentifiers,
   LocationSelection,
@@ -40,6 +41,9 @@ export default function AtlasInterface({
   administrativeRegionClickHistoryArray,
 }: AtlasInterfaceProps) {
   const administrativeRegionsData = geojsonData as FeatureCollection;
+
+  const { 'alpha-2': alpha2, country } = activeAdministrativeRegion;
+
   /* 
     Handlers
  */
@@ -100,9 +104,7 @@ export default function AtlasInterface({
         if (searchTerm.trim() !== '') {
           const url = `/.netlify/functions/nominatim/?query=${encodeURI(
             searchTerm,
-          )}&endpoint=search&format=json&country=${
-            activeAdministrativeRegion['alpha-2']
-          }`;
+          )}&endpoint=search&format=json&country=${alpha2}`;
 
           const response = await fetch(url);
 
@@ -136,13 +138,17 @@ export default function AtlasInterface({
           const result = await response.json();
           const matchedGeoJSon = administrativeRegionsData?.features.find(
             (adminstrativeRegion) =>
+              adminstrativeRegion.properties &&
               adminstrativeRegion.properties['alpha-2'] ===
-              result.features[0].properties.address.country_code.toUpperCase(),
+                result.features[0].properties.address.country_code.toUpperCase(),
           );
-          matchedGeoJSon.properties.name = result.features[0].properties.name;
+          if (matchedGeoJSon?.properties?.name)
+            matchedGeoJSon.properties.name = result.features[0].properties.name;
 
           setActiveGeographicIdentifier('name');
-          setActiveAdministrativeRegion(matchedGeoJSon.properties);
+          setActiveAdministrativeRegion(
+            matchedGeoJSon?.properties as AdministrativeRegionObject,
+          );
           setNominatim(result);
           setIsOpenAtlasMapInterface(false);
         }
@@ -201,7 +207,7 @@ export default function AtlasInterface({
         </div>
         <div className="search-input-wrapper search-input-interface">
           {children}
-          {activeAdministrativeRegion.country !== 'country' && (
+          {country !== 'country' && (
             <button
               role="button"
               title="Reset Atlas to default settings"
@@ -214,20 +220,16 @@ export default function AtlasInterface({
           )}
           <div className="search-form">
             <label htmlFor="search-input" className="sr-only">
-              Search Location in {activeAdministrativeRegion.country}
+              Search Location in {country}
             </label>
             <input
               className="search-input"
               type="text"
               placeholder={`Search Location ${
-                activeAdministrativeRegion.country !== 'country'
-                  ? `in ${activeAdministrativeRegion.country}`
-                  : ''
+                country !== 'country' ? `in ${country}` : ''
               }`}
               aria-label={`Search Location ${
-                activeAdministrativeRegion.country !== 'country'
-                  ? `in ${activeAdministrativeRegion.country}`
-                  : ''
+                country !== 'country' ? `in ${country}` : ''
               }`}
               value={searchTerm}
               onChange={handleSearchInputChange}

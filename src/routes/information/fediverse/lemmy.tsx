@@ -10,7 +10,7 @@ import CommunityInfoCard from '../../../components/lemmy/CommunityInfoCard';
 // https://www.radix-ui.com/primitives/docs/components/tabs
 import * as Tabs from '@radix-ui/react-tabs';
 
-import { searchTypes } from '../../../types/api.types';
+import { searchTypes } from '../../../types/data';
 
 export const Route = createFileRoute('/information/fediverse/lemmy')({
   component: LemmyRouteComponent,

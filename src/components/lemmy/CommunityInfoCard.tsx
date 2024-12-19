@@ -14,10 +14,7 @@ import {
 } from 'lemmy-js-client';
 
 import LemmyUser from './User';
-import {
-  AtlasLemmySortType,
-  AtlasLemmyInstanceType,
-} from '../../types/api.types';
+import { AtlasLemmySortType, AtlasLemmyInstanceType } from '../../types/data';
 
 interface CommunityInfoCardProps {
   children;

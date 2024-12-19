@@ -86,11 +86,6 @@ export interface AtlasInterfaceProps {
   isLocationSelectMode: boolean;
   setIsLocationSelectMode: (isLocationSelectMode: boolean) => void;
 
-  activeLocationSelection: AdministrativeRegionObject[];
-  setActiveLocationSelection: (
-    activeLocationSelection: AdministrativeRegionObject[],
-  ) => void;
-
   nominatim: unknown;
   setNominatim: (nominatim: unknown) => void;
 
@@ -107,6 +102,11 @@ export interface AtlasInterfaceProps {
   administrativeRegionClickHistoryArray: LocationSelection[];
   setAdministrativeRegionClickHistoryArray: (
     administrativeRegionClickHistoryArray: LocationSelection[],
+  ) => void;
+
+  activeLocationSelection: LocationSelection[];
+  setActiveLocationSelection: (
+    activeLocationSelection: LocationSelection[],
   ) => void;
 
   locationQuery: string;
@@ -135,7 +135,7 @@ export interface InformationLemmyProps {
 }
 
 export interface LocationSelection {
-  activeSelection: string;
+  activeSelection: string | undefined;
   activeGeographicIdentifier: GeographicIdentifier;
   activeAdministrativeRegion: AdministrativeRegionObject;
 }
@@ -186,6 +186,6 @@ export interface OSMInfoListProps {
     [key: string]: L.DivIcon;
   };
   filterKeys: string[];
-  data: unknown;
+  data;
   activeAdministrativeRegion: AdministrativeRegionObject;
 }

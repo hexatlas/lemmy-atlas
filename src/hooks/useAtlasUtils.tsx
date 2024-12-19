@@ -1,16 +1,21 @@
 // import center from "@turf/center";
-import { useState, useEffect } from 'react';
+import { useState, useEffect, SetStateAction, Dispatch } from 'react';
 import { FeatureCollection } from 'geojson';
 import geojsonData from '../assets/geojson/administrative_regions_extended.json';
+import { AdministrativeRegionObject } from '../types/atlas.types';
 
 // HANDLE RANDOM
 
-export function handleRandom(setActiveAdministrativeRegion: Function) {
+export function handleRandom(
+  setActiveAdministrativeRegion: Dispatch<
+    SetStateAction<AdministrativeRegionObject>
+  >,
+) {
   const administrativeRegionsData = geojsonData as FeatureCollection;
   setActiveAdministrativeRegion(
     administrativeRegionsData?.features[
       Math.floor(administrativeRegionsData?.features.length * Math.random())
-    ].properties,
+    ].properties as AdministrativeRegionObject,
   );
 }
 
@@ -27,7 +32,11 @@ function getSavedValue(key, initialValue, storage) {
   }
 }
 
-export function useStateStorage<T>(key, initialValue, isLocalStorage = false) {
+export function useStateStorage<T>(
+  key,
+  initialValue,
+  isLocalStorage = false,
+): [T, Dispatch<SetStateAction<T>>] {
   const storage = isLocalStorage ? localStorage : sessionStorage;
   const [value, setValue] = useState<T>(() => {
     return getSavedValue(key, initialValue, storage);

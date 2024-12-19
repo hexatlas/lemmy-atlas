@@ -1,10 +1,7 @@
 import React from 'react';
 
 import LemmyCommunityInfoCard from './CommunityInfoCard';
-import {
-  AtlasLemmyInstanceType,
-  AtlasLemmySortType,
-} from '../../types/api.types';
+import { AtlasLemmyInstanceType, AtlasLemmySortType } from '../../types/data';
 import { PostView } from 'lemmy-js-client';
 
 interface AtlasLemmyCommunityProps {
