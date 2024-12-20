@@ -1,0 +1,17 @@
+[dev]
+  targetPort = 5173
+  port = 8888
+  functions = "functions"
+
+[build]
+  functions = "functions"
+
+[[redirects]]
+  from = "/.netlify/functions/:splat"
+  to = "/.netlify/functions/:splat"
+  status = 200
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
