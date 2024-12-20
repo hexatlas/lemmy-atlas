@@ -8,7 +8,7 @@ import {
   LayersControl,
   ScaleControl,
 } from 'react-leaflet';
-import { LatLngExpression, Layer, latLngBounds } from 'leaflet';
+import { Layer, LatLngExpression, latLngBounds, Path, Polyline } from 'leaflet';
 import { FeatureCollection } from 'geojson';
 import geojsonData from '../../assets/geojson/administrative_regions_extended.json';
 
@@ -128,7 +128,11 @@ export default function AtlasMap({
   };
 
   function updateMap() {
-    const administrativeRegionArray = latLngBounds(null, null);
+    // Initialize Empty LatLngBounds to keep extending
+    const administrativeRegionArray = latLngBounds(
+      null as unknown as LatLngExpression,
+      null as unknown as LatLngExpression,
+    );
 
     // Check if region needs an update
     if (
@@ -143,23 +147,23 @@ export default function AtlasMap({
         region.feature?.properties[type] === value;
 
       // Updates Map View on Location Type or Region Change
-      map?.eachLayer((region) => {
+      map?.eachLayer((region: Layer) => {
         if (activeGeographicIdentifier === 'name') {
           if (
             !isNameMatch(region, nominatim?.features[0]?.properties.name) &&
             isNameMatch(region, activeAdministrativeRegion.name)
           ) {
-            administrativeRegionArray.extend(region.getBounds());
+            administrativeRegionArray.extend((region as Polyline).getBounds());
           }
         } else if (isCountryMatch(region, activeAdministrativeRegion.country)) {
-          administrativeRegionArray.extend(region.getBounds());
+          administrativeRegionArray.extend((region as Polyline).getBounds());
         }
       });
 
       // Highlight and Get Bounds
       map?.eachLayer((region: Layer) => {
-        if (typeof region?.setStyle === 'function' && !nominatim) {
-          region.setStyle(style_locationMuted); // Mute all regions
+        if (typeof (region as Path).setStyle === 'function' && !nominatim) {
+          (region as Path).setStyle(style_locationMuted); // Mute all regions
         }
 
         if (
@@ -169,16 +173,16 @@ export default function AtlasMap({
             activeAdministrativeRegion[activeGeographicIdentifier],
           )
         ) {
-          region.setStyle(style_activeLocationHighlight); // Highlight active location
+          (region as Path).setStyle(style_activeLocationHighlight); // Highlight active location
         }
 
         if (isCountryMatch(region, activeAdministrativeRegion.country)) {
-          region.setStyle(style_activeLocationHighlight); // Highlight country match
+          (region as Path).setStyle(style_activeLocationHighlight); // Highlight country match
           if (
             isNameMatch(region, activeAdministrativeRegion.name) &&
             !nominatim
           ) {
-            region.setStyle(style_locationNameHighlight); // Highlight name match
+            (region as Path).setStyle(style_locationNameHighlight); // Highlight name match
           }
         }
 
@@ -190,7 +194,7 @@ export default function AtlasMap({
             activeAdministrativeRegion[activeGeographicIdentifier],
           )
         ) {
-          administrativeRegionArray.extend(region.getBounds()); // Extend bounds for matched regions
+          administrativeRegionArray.extend((region as Polyline).getBounds()); // Extend bounds for matched regions
         }
       });
 

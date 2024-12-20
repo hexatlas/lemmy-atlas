@@ -2,7 +2,7 @@
 import { indicators } from '../../../data/economy/charts/indicatorsIMF.json';
 import { useStateStorage } from '../../../hooks/useAtlasUtils';
 import { useQuery } from '@tanstack/react-query';
-import { IMFIndicatorType } from '../../../types/data';
+import { IMFIndicatorType } from '../../../types/api.types';
 
 // Transform IMF Data
 function IMFDataTransform(apiResponse) {

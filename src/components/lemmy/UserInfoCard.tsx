@@ -24,7 +24,7 @@ import {
   AtlasLemmyInstanceType,
   AtlasLemmySortType,
   listingTypes,
-} from '../../types/data';
+} from '../../types/api.types';
 import { userPronouns } from '../../hooks/useDataTransform';
 
 interface AtlasLemmyUserInfoCardProps {
@@ -46,7 +46,7 @@ function AtlasLemmyUserInfoCard({
   const [activeUserTab, setActiveUserTab] = useState('Comments');
 
   const cakeDay = new Date(post.creator.published).toDateString();
-  const updateDay = new Date(post?.creator?.updated).toDateString();
+  const updateDay = new Date(post?.creator?.updated as string).toDateString();
   const pronounsArray = userPronouns(post?.creator?.display_name);
 
   function loadUserDetails() {

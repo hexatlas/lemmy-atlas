@@ -18,7 +18,7 @@ import {
 import { TimeAgo } from '../../hooks/useDataTransform';
 import LemmyUser from './User';
 import LemmyCommunity from './Community';
-import { AtlasLemmyInstanceType } from '../../types/data';
+import { AtlasLemmyInstanceType } from '../../types/api.types';
 
 interface CommentProps {
   post;

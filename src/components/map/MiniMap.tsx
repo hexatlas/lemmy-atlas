@@ -8,7 +8,7 @@ import {
   Rectangle,
   useMapEvent,
 } from 'react-leaflet';
-import { useEventHandlers } from '@react-leaflet/core';
+import { LeafletContextInterface, useEventHandlers } from '@react-leaflet/core';
 import { PathOptions } from 'leaflet';
 
 // Leaflet Position Classes4
@@ -63,7 +63,7 @@ function MinimapBounds({
   useEventHandlers(
     {
       instance: parentMap,
-      context: parentMap,
+      context: parentMap as unknown as LeafletContextInterface,
     },
     handlers,
   );
@@ -76,7 +76,7 @@ export default function MiniMapControl({
   zoom,
   size,
 }: {
-  position?: PositionClasses;
+  position?: keyof PositionClasses;
   zoom?: number;
   size?: string;
 }) {
@@ -115,8 +115,7 @@ export default function MiniMapControl({
     [],
   );
 
-  const positionClass =
-    POSITION_CLASSES[position] || POSITION_CLASSES.bottomleft;
+  const positionClass = POSITION_CLASSES[position ?? 'bottomleft'];
   return (
     <div className={positionClass}>
       <div className="leaflet-control leaflet-bar">{minimap}</div>

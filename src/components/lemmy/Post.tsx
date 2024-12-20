@@ -19,14 +19,18 @@ import { TimeAgo } from '../../hooks/useDataTransform';
 import Comment from './Comment';
 import LemmyUser from './User';
 import LemmyCommunity from './Community';
-import { AtlasLemmyInstanceType, AtlasLemmySortType } from '../../types/data';
+import {
+  AtlasLemmyInstanceType,
+  AtlasLemmyListingType,
+  AtlasLemmySortType,
+} from '../../types/api.types';
 
 interface PostProps {
   post;
   community;
   lemmyInstance: { baseUrl: string };
   sort: { value: CommentSortType; label: string };
-  activeListingType: ListingType;
+  activeListingType: AtlasLemmyListingType[];
   commentDepth?: number;
   isOpen?: boolean;
 }

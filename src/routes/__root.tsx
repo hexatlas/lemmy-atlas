@@ -25,6 +25,7 @@ import {
   GeographicIdentifier,
   AtlasInterfaceProps,
   LocationSelection,
+  NominatimResponse,
 } from '../types/atlas.types';
 
 import L from 'leaflet';
@@ -90,7 +91,7 @@ function AtlasRootComponent() {
   // LOCATION
   const [map, setMap] = useState<L.Map | null>(null);
 
-  const [nominatim, setNominatim] = useState(null);
+  const [nominatim, setNominatim] = useState<NominatimResponse>();
   const [
     administrativeRegionClickHistoryArray,
     setAdministrativeRegionClickHistoryArray,

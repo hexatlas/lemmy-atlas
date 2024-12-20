@@ -3,7 +3,7 @@ import React from 'react';
 import { userPronouns } from '../../hooks/useDataTransform';
 import LemmyUserInfoCard from './UserInfoCard';
 import { Community, PostView } from 'lemmy-js-client';
-import { AtlasLemmySortType } from '../../types/data';
+import { AtlasLemmySortType } from '../../types/api.types';
 
 interface AtlasLemmyUserProps {
   post: PostView;

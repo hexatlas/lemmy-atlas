@@ -86,8 +86,8 @@ export interface AtlasInterfaceProps {
   isLocationSelectMode: boolean;
   setIsLocationSelectMode: (isLocationSelectMode: boolean) => void;
 
-  nominatim: unknown;
-  setNominatim: (nominatim: unknown) => void;
+  nominatim: NominatimResponse | undefined;
+  setNominatim: (nominatim: NominatimResponse) => void;
 
   activeGeographicIdentifier: GeographicIdentifier;
   setActiveGeographicIdentifier: (
@@ -113,6 +113,29 @@ export interface AtlasInterfaceProps {
   setLocationQuery: (locationQuery: string) => void;
 }
 
+export interface LocationSelection {
+  activeSelection: string | undefined;
+  activeGeographicIdentifier: GeographicIdentifier;
+  activeAdministrativeRegion: AdministrativeRegionObject;
+}
+
+export interface MapState {
+  activeAdministrativeRegion: AdministrativeRegionObject;
+  activeGeographicIdentifier: GeographicIdentifier;
+  isClustered: boolean;
+  setActiveAdministrativeRegion: (region: AdministrativeRegionObject) => void;
+  setActiveGeographicIdentifier: (type: GeographicIdentifier) => void;
+  setIsClustered: (clustered: boolean) => void;
+}
+
+export interface NominatimResponse {
+  features: NominatimFeature[];
+}
+
+export interface NominatimFeature {
+  properties: { name: string };
+}
+
 export interface InformationLemmyProps {
   // Community
   defaultInstance;
@@ -132,21 +155,6 @@ export interface InformationLemmyProps {
   sortTypes;
   activeSortType;
   setActiveSortType;
-}
-
-export interface LocationSelection {
-  activeSelection: string | undefined;
-  activeGeographicIdentifier: GeographicIdentifier;
-  activeAdministrativeRegion: AdministrativeRegionObject;
-}
-
-export interface MapState {
-  activeAdministrativeRegion: AdministrativeRegionObject;
-  activeGeographicIdentifier: GeographicIdentifier;
-  isClustered: boolean;
-  setActiveAdministrativeRegion: (region: AdministrativeRegionObject) => void;
-  setActiveGeographicIdentifier: (type: GeographicIdentifier) => void;
-  setIsClustered: (clustered: boolean) => void;
 }
 
 export interface OSMElement {
