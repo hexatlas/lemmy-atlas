@@ -18,7 +18,7 @@ export const Route = createFileRoute('/information/fediverse/lemmy')({
 
 function LemmyRouteComponent() {
   const {
-    // Location
+    // AtlasContext
     activeGeographicIdentifier,
     activeAdministrativeRegion,
     locationQuery,
@@ -26,7 +26,7 @@ function LemmyRouteComponent() {
   } = useContext(AtlasContext)!;
 
   const {
-    // Community
+    // InformationContext
     defaultInstance,
     activeLemmyInstance,
     setActiveLemmyInstance,
@@ -47,6 +47,7 @@ function LemmyRouteComponent() {
   } = useContext(InformationContext)!;
 
   const {
+    // Get Lemmy Data
     posts,
     comments,
     communityList,
@@ -55,13 +56,13 @@ function LemmyRouteComponent() {
     handleSearch,
     handleSearchQuery,
   } = useLemmy(
-    // Location
+    // Location - AtlasContext
     activeGeographicIdentifier,
     activeAdministrativeRegion,
     locationQuery,
     setLocationQuery,
 
-    // Community
+    // Lemmy - InformationContextf
     activeLemmyInstance,
     activeCommunity,
     setActiveCommunity,
@@ -69,8 +70,14 @@ function LemmyRouteComponent() {
     activeListingType,
     activeSortType,
   );
+  console.log(posts, 'posts');
 
-  const [editLemmyInstance, setEditLemmyInstance] = useState(false);
+  console.log(comments, 'comments');
+
+  console.log(communityList, 'communityList');
+
+  const [editLemmyInstance, setEditLemmyInstance] = useState<boolean>(false);
+
   return (
     <>
       <div id="legend-content" className="legend-content-container">

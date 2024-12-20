@@ -24,7 +24,7 @@ function InformationHomeComponent() {
           from sources like Comtrade, ILOSTAT, and World Bank.
         </li>
         <li>
-          <b>🌐 Economic Locations:</b> Use to explore Energy, Industrial, or
+          <b>🌐 Information Locations:</b> Use to explore Energy, Industrial, or
           Transport locations on the map.
           <ul className="container">
             <li>

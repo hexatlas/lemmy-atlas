@@ -11,7 +11,6 @@ import {
   CommentView,
   GetComments,
   LemmyHttp,
-  ListingType,
 } from 'lemmy-js-client';
 
 import { TimeAgo } from '../../hooks/useDataTransform';
