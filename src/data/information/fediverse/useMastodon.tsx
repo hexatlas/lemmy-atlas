@@ -4,7 +4,7 @@ function useMastodon(activeAdministrativeRegion, activeGeographicIdentifier) {
   let apiUrl;
 
   if (activeAdministrativeRegion.country !== 'country') {
-    apiUrl = `/.netlify/functions/mastodon/?country=${encodeURI(
+    apiUrl = `https://mastodon.social/api/v1/timelines/tag/${encodeURI(
       activeAdministrativeRegion[activeGeographicIdentifier],
     )
       .toLowerCase()
@@ -15,10 +15,10 @@ function useMastodon(activeAdministrativeRegion, activeGeographicIdentifier) {
     queryKey: [
       `mastodon-${activeAdministrativeRegion[activeGeographicIdentifier]}`,
     ],
-    queryFn: () => featchMastodon(apiUrl),
+    queryFn: () => fetchMastodon(apiUrl),
   });
 
-  const featchMastodon = async (url) => {
+  const fetchMastodon = async (url) => {
     try {
       const response = await fetch(url);
 
