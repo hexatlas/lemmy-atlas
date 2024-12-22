@@ -83,6 +83,18 @@ export const overlayLayers: Array<MapLayer> = [
     opacity: 0.8,
   },
   {
+    name: 'Precipitation',
+    checked: true,
+    url: `http://{s}.tile.openweathermap.org/map/precipitation_new/{z}/{x}/{y}.png?appid=${
+      import.meta.env.VITE_OPENWEATHER_API_KEY
+    }`,
+    minZoom: 0,
+    maxZoom: 6,
+    attribution:
+      'Cloud data &copy; <a href="http://openweathermap.org">OpenWeatherMap</a>',
+    opacity: 0.8,
+  },
+  {
     name: 'OpenRailWayMap',
     checked: false,
     url: 'https://{s}.tiles.openrailwaymap.org/standard/{z}/{x}/{y}.png',
