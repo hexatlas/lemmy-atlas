@@ -11,12 +11,8 @@ function HexBear({
   children;
   query: string;
 }) {
-  const {
-    activeLemmyInstance,
-    activeCommunity,
-    activeListingType,
-    activeSortType,
-  } = useContext(InformationContext)!;
+  const { activeLemmyInstance, activeCommunity, activeSortType } =
+    useContext(InformationContext)!;
 
   const { comments, posts, isLoaded, fetchHexBear } = useHexbear(
     query,

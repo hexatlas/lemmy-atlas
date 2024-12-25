@@ -20,7 +20,7 @@ import {
 import LemmyCommunity from './Community';
 import Post from './Post';
 import Comment from './Comment';
-import { AtlasLemmyInstanceType, listingTypes } from '../../types/api.types';
+import { AtlasLemmyInstanceType } from '../../types/api.types';
 import { userPronouns } from '../../hooks/useDataTransform';
 
 interface AtlasLemmyUserInfoCardProps {
