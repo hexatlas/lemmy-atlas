@@ -14,46 +14,55 @@ import {
   GetPersonDetails,
   GetPersonDetailsResponse,
   PostView,
-  CommunityView,
-  CommentSortType,
+  Person,
+  CommentView,
 } from 'lemmy-js-client';
 import LemmyCommunity from './Community';
 import Post from './Post';
 import Comment from './Comment';
-import {
-  AtlasLemmyInstanceType,
-  AtlasLemmySortType,
-  listingTypes,
-} from '../../types/api.types';
+import { AtlasLemmyInstanceType, listingTypes } from '../../types/api.types';
 import { userPronouns } from '../../hooks/useDataTransform';
 
 interface AtlasLemmyUserInfoCardProps {
   children: React.ReactNode;
-  post: PostView;
+  person: Person;
+  view: PostView | CommentView;
   lemmyInstance: AtlasLemmyInstanceType;
-  sort: { value: CommentSortType; label: string };
-  community?: CommunityView;
 }
 
 function AtlasLemmyUserInfoCard({
   children,
-  post,
+  person,
+  view,
   lemmyInstance,
-  sort,
-  community,
 }: AtlasLemmyUserInfoCardProps) {
+  const {
+    id,
+    actor_id,
+    display_name,
+    name,
+    banner,
+    avatar,
+    bio,
+    published,
+    updated,
+    banned,
+  } = person;
+
+  const { creator_is_admin, creator_is_moderator } = view;
+
   const [user, setUser] = useState<GetPersonDetailsResponse>();
   const [activeUserTab, setActiveUserTab] = useState('Comments');
 
-  const cakeDay = new Date(post.creator.published).toDateString();
-  const updateDay = new Date(post?.creator?.updated as string).toDateString();
-  const pronounsArray = userPronouns(post?.creator?.display_name);
+  const cakeDay = new Date(published).toDateString();
+  const updateDay = new Date(updated as string).toDateString();
+  const pronounsArray = userPronouns(display_name);
 
   function loadUserDetails() {
     const client: LemmyHttp = new LemmyHttp(lemmyInstance?.baseUrl);
 
     const form: GetPersonDetails = {
-      person_id: post?.creator.id,
+      person_id: id,
     };
 
     client.getPersonDetails(form).then((res) => {
@@ -73,7 +82,7 @@ function AtlasLemmyUserInfoCard({
           // eslint-disable-next-line no-loss-of-precision
           collisionPadding={1.6180339887498948482 ^ 9}
           className={`user-info-card-content ${
-            (post?.creator_is_admin || post?.creator_is_moderator) &&
+            (creator_is_admin || creator_is_moderator) &&
             'user-info-card-content-hightlighted'
           }`}
         >
@@ -84,26 +93,26 @@ function AtlasLemmyUserInfoCard({
               gap: 7,
             }}
           >
-            {post?.creator?.banner && (
+            {banner && (
               <img
                 className="banner-image"
-                src={post?.creator?.banner}
-                alt={post?.creator?.display_name || post?.creator?.name}
+                src={banner}
+                alt={display_name || name}
               />
             )}
-            {post?.creator?.avatar && (
+            {avatar && (
               <a
                 className={`user-avatar-container user-avatar-infocard ${
-                  post?.creator?.banner && 'user-avatar-banner-offset'
+                  banner && 'user-avatar-banner-offset'
                 }`}
-                href={post?.creator?.actor_id}
+                href={actor_id}
                 target="_blank"
                 rel="noopener noreferrer"
               >
                 <img
                   className="user-avatar-image"
-                  src={post?.creator?.avatar}
-                  alt={post?.creator?.display_name || post?.creator?.name}
+                  src={avatar}
+                  alt={display_name || name}
                 />
               </a>
             )}
@@ -116,16 +125,14 @@ function AtlasLemmyUserInfoCard({
               }}
             >
               <div>
-                {post?.creator_is_admin && (
-                  <small className="user-mod">Admin</small>
-                )}
-                {post?.creator_is_moderator && (
+                {creator_is_admin && <small className="user-mod">Admin</small>}
+                {creator_is_moderator && (
                   <small className="user-mod">Mod</small>
                 )}
-                {post?.creator?.banned && (
+                {banned && (
                   <small>
                     <a
-                      href={`${lemmyInstance.baseUrl}modlog?page=1&userId=${post?.creator?.id}`}
+                      href={`${lemmyInstance.baseUrl}modlog?page=1&userId=${id}`}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="post-alert"
@@ -135,19 +142,19 @@ function AtlasLemmyUserInfoCard({
                   </small>
                 )}
 
-                {post?.creator?.banned ? (
+                {banned ? (
                   <h5
                     style={{
                       textDecoration: 'line-through',
                     }}
                   >
                     <span className="prefix">u/</span>
-                    {post?.creator?.name}
+                    {name}
                   </h5>
                 ) : (
                   <h5>
                     <span className="prefix">u/</span>
-                    {post?.creator?.name}
+                    {name}
                   </h5>
                 )}
 
@@ -158,7 +165,7 @@ function AtlasLemmyUserInfoCard({
                     ))}
                 </div>
                 <small>🎂 {cakeDay}</small>
-                {post?.creator?.updated && (
+                {updated && (
                   <>
                     <br />
                     <small>🖊️ {updateDay}</small>
@@ -172,7 +179,7 @@ function AtlasLemmyUserInfoCard({
                 onValueChange={setActiveUserTab}
               >
                 <Tabs.List className="tabs-list" aria-label="Pick User Info">
-                  {post?.creator?.bio && (
+                  {bio && (
                     <Tabs.Trigger className="tabs-trigger" value="Bio">
                       Bio
                     </Tabs.Trigger>
@@ -196,10 +203,10 @@ function AtlasLemmyUserInfoCard({
                     </Tabs.Trigger>
                   )}
                 </Tabs.List>
-                {post?.creator?.bio && (
+                {bio && (
                   <Tabs.Content value="Bio" className="tabs-content">
                     <div className="user-bio">
-                      <ReactMarkdown>{post?.creator?.bio}</ReactMarkdown>
+                      <ReactMarkdown>{bio}</ReactMarkdown>
                     </div>
                   </Tabs.Content>
                 )}
@@ -208,25 +215,23 @@ function AtlasLemmyUserInfoCard({
                     <div className="mod-wrapper">
                       <small className="community-mod">Mods</small>
                       <div className="mod-list">
-                        {user?.moderates.map((community, index) => {
-                          return (
-                            <div
-                              className="mod-user"
-                              key={`${index}${community.id}`}
-                            >
-                              <LemmyCommunity
-                                post={community}
-                                lemmyInstance={lemmyInstance}
-                                sort={sort as AtlasLemmySortType}
-                                // community={community}
-                                icon={community?.icon}
-                                display_name={community?.display_name}
-                                name={community?.name}
-                                prefix={undefined}
-                              />
-                            </div>
-                          );
-                        })}
+                        {user?.moderates.map(
+                          (communityModeratorView, index) => {
+                            const { community } = communityModeratorView;
+                            return (
+                              <div
+                                className="mod-user"
+                                key={`${index}${community.id}`}
+                              >
+                                <LemmyCommunity
+                                  community={community}
+                                  lemmyInstance={lemmyInstance}
+                                  prefix={''}
+                                />
+                              </div>
+                            );
+                          },
+                        )}
                       </div>
                     </div>
                   </Tabs.Content>
@@ -235,33 +240,34 @@ function AtlasLemmyUserInfoCard({
                   <div className="user-posts">
                     {user?.posts &&
                       user?.posts.length > 0 &&
-                      user?.posts.map((post, index) => (
-                        <Post
-                          key={`${post?.id}${index}`}
-                          post={post}
-                          community={community}
-                          lemmyInstance={lemmyInstance}
-                          sort={sort}
-                          activeListingType={listingTypes}
-                        ></Post>
-                      ))}
+                      user?.posts.map((postView, index) => {
+                        const { post } = postView;
+                        return (
+                          <Post
+                            key={`${post?.id}${index}`}
+                            postView={postView}
+                            lemmyInstance={lemmyInstance}
+                          ></Post>
+                        );
+                      })}
                   </div>
                 </Tabs.Content>
                 <Tabs.Content value="Comments" className="tabs-content">
                   <div className="user-posts">
                     {user?.comments &&
                       user?.comments.length > 0 &&
-                      user?.comments.map((comment, index) => (
-                        <Comment
-                          key={`${comment?.id}${index}`}
-                          post={comment}
-                          community={community as CommunityView}
-                          lemmyInstance={lemmyInstance}
-                          sort={sort}
-                          ratioDetector={99}
-                          showUserAvatar={false}
-                        ></Comment>
-                      ))}
+                      user?.comments.map((commentView, index) => {
+                        const { comment } = commentView;
+                        return (
+                          <Comment
+                            key={`${comment?.id}${index}`}
+                            commentView={commentView}
+                            lemmyInstance={lemmyInstance}
+                            ratioDetector={99}
+                            showUserAvatar={false}
+                          ></Comment>
+                        );
+                      })}
                   </div>
                 </Tabs.Content>
               </Tabs.Root>

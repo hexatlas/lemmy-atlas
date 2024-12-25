@@ -121,10 +121,12 @@ export interface LocationSelection {
 
 export interface MapState {
   activeAdministrativeRegion: AdministrativeRegionObject;
-  activeGeographicIdentifier: GeographicIdentifier;
-  isClustered: boolean;
   setActiveAdministrativeRegion: (region: AdministrativeRegionObject) => void;
+
+  activeGeographicIdentifier: GeographicIdentifier;
   setActiveGeographicIdentifier: (type: GeographicIdentifier) => void;
+
+  isClustered: boolean;
   setIsClustered: (clustered: boolean) => void;
 }
 

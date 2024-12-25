@@ -144,7 +144,6 @@ function LemmyRouteComponent() {
           <CommunityInfoCard
             lemmyInstance={activeLemmyInstance}
             community={activeCommunity?.community}
-            sort={activeSortType}
           >
             <img
               className="banner-image"
@@ -158,7 +157,6 @@ function LemmyRouteComponent() {
             <CommunityInfoCard
               lemmyInstance={activeLemmyInstance}
               community={activeCommunity?.community}
-              sort={activeSortType}
             >
               <button
                 role="button"
@@ -190,26 +188,27 @@ function LemmyRouteComponent() {
         </div>
         <div className="community-list">
           {communityList &&
-            communityList.map((community) => {
+            communityList.map((communityView) => {
+              const { community, counts } = communityView;
               return (
                 <button
-                  key={community?.counts?.community_id}
+                  key={counts?.community_id}
                   className={`community-button ${
-                    community?.counts?.community_id ===
+                    counts?.community_id ===
                       activeCommunity?.counts?.community_id &&
                     'community-button-active'
                   }`}
                   role="button"
-                  aria-label={`${community?.community?.name} community filter`}
+                  aria-label={`${community?.name} community filter`}
                   onClick={() => {
                     if (activeCommunity === community) {
                       setActiveCommunity(null);
                     } else {
-                      setActiveCommunity(community);
+                      setActiveCommunity(communityView);
                     }
                   }}
                 >
-                  {community?.community?.name}
+                  {community?.name}
                 </button>
               );
             })}
@@ -275,35 +274,39 @@ function LemmyRouteComponent() {
         {comments && activeSearchType.value === 'Comments' && (
           <div className="post-reply-container">
             {comments.length > 0 &&
-              comments.map(
-                (comment, index) =>
-                  comment?.comment?.removed ||
-                  comment?.comment?.deleted || (
+              comments.map((commentView, index) => {
+                const { comment } = commentView;
+                return (
+                  comment?.removed ||
+                  comment?.deleted || (
                     <Comment
-                      key={`${comment?.comment.id}${index * Math.random()}`}
-                      post={comment}
-                      community={activeCommunity}
+                      key={`${comment.id}${index * Math.random()}`}
+                      commentView={commentView}
+                      // community={activeCommunity}
                       lemmyInstance={activeLemmyInstance}
-                      sort={activeSortType}
+                      commentSort={activeSortType}
                       ratioDetector={99} // init value for top level comment - highlights all comment with more than 99 upvotes; <Comment /> calls itself recursively
                     />
-                  ),
-              )}
+                  )
+                );
+              })}
           </div>
         )}
         {posts && activeSearchType.value === 'Posts' && (
           <div className="post-reply-container">
             {posts.length > 0 &&
-              posts.map((post, index) => (
-                <Post
-                  key={`${post?.post.id}${index * Math.random()}`}
-                  post={post}
-                  community={activeCommunity}
-                  lemmyInstance={activeLemmyInstance}
-                  activeListingType={activeListingType}
-                  sort={activeSortType}
-                />
-              ))}
+              posts.map((postView, index) => {
+                const { post } = postView;
+                return (
+                  <Post
+                    key={`${post.id}${index * Math.random()}`}
+                    postView={postView}
+                    // community={activeCommunity}
+                    lemmyInstance={activeLemmyInstance}
+                    commentSort={activeSortType}
+                  />
+                );
+              })}
           </div>
         )}
         <button

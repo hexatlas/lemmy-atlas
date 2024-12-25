@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import ReactMarkdown from 'react-markdown';
 
 // https://www.radix-ui.com/primitives/docs/components/collapsible
@@ -6,25 +6,21 @@ import * as Collapsible from '@radix-ui/react-collapsible';
 
 // https://github.com/LemmyNet/lemmy-js-client
 // https://join-lemmy.org/api/classes/LemmyHttp.html
-import {
-  CommentSortType,
-  CommentView,
-  CommunityView,
-  GetComments,
-  LemmyHttp,
-  SortType,
-} from 'lemmy-js-client';
+import { CommentView, GetComments, LemmyHttp } from 'lemmy-js-client';
 
 import { TimeAgo } from '../../hooks/useDataTransform';
 import LemmyUser from './User';
 import LemmyCommunity from './Community';
-import { AtlasLemmyInstanceType } from '../../types/api.types';
+import {
+  AtlasLemmyCommentSortType,
+  AtlasLemmyInstanceType,
+} from '../../types/api.types';
+import { InformationContext } from '../../routes/information';
 
 interface CommentProps {
-  post;
-  community: CommunityView;
+  commentView: CommentView;
   lemmyInstance: AtlasLemmyInstanceType;
-  sort: { value: CommentSortType; label: string };
+  commentSort?: AtlasLemmyCommentSortType;
   ratioDetector: number;
   commentDepth?: number;
   showUserAvatar?: boolean;
@@ -32,10 +28,9 @@ interface CommentProps {
 }
 
 function Comment({
-  post,
-  community,
+  commentView,
   lemmyInstance,
-  sort,
+  commentSort = { value: 'New', label: '🆕' },
   ratioDetector, // takes votecount of parent comment
   commentDepth = 0, // 0 = rootlevel / toplevel comment
   showUserAvatar = true,
@@ -44,13 +39,15 @@ function Comment({
   const [open, setOpen] = useState(isOpen);
   const [replies, setReplies] = useState<CommentView[]>();
 
+  const { activeCommunity } = useContext(InformationContext)!;
+
   function handleReplies() {
     const client: LemmyHttp = new LemmyHttp(lemmyInstance?.baseUrl);
 
     const form: GetComments = {
-      parent_id: post?.comment.id,
+      parent_id: commentView?.comment.id,
       max_depth: 1,
-      sort: sort.value,
+      sort: commentSort.value,
     };
 
     client.getComments(form).then((res) => {
@@ -59,13 +56,13 @@ function Comment({
   }
 
   useEffect(() => {
-    if (post?.comment?.deleted) setOpen(false);
-  }, [post?.comment?.deleted]);
+    if (commentView?.comment?.deleted) setOpen(false);
+  }, [commentView?.comment?.deleted]);
 
   return (
     <Collapsible.Root
       className={`community-reply post-collapse-root ${
-        post?.counts.score > ratioDetector && 'post-highlight'
+        commentView?.counts.score > ratioDetector && 'post-highlight'
       }`}
       open={open}
       onOpenChange={setOpen}
@@ -77,39 +74,37 @@ function Comment({
         {/* AVATAR PROFILE PICTURE */}
 
         <LemmyUser
-          post={post}
+          view={commentView}
           lemmyInstance={lemmyInstance}
-          community={community}
-          sort={sort}
           showInfoCard={showUserAvatar}
         />
 
-        {post?.comment.distinguished && <p className="post-alert">📌</p>}
+        {commentView?.comment.distinguished && <p className="post-alert">📌</p>}
 
         {/* Score Count / Upvotes / Downvotes */}
         <p className="post-vote-container">
-          {Number(post?.counts.downvotes) === 0 || (
+          {Number(commentView?.counts.downvotes) === 0 || (
             <sup className={`post-vote post-vote-upvotes`}>
-              {post?.counts.upvotes}
+              {commentView?.counts.upvotes}
             </sup>
           )}
           <span
             className={`post-vote commment-vote-score post-score-${
-              post?.counts.score > 0 ? 'positive' : 'negative'
+              commentView?.counts.score > 0 ? 'positive' : 'negative'
             }`}
           >
-            {post?.counts.score}
+            {commentView?.counts.score}
           </span>
-          {Number(post?.counts.downvotes) === 0 || (
+          {Number(commentView?.counts.downvotes) === 0 || (
             <sub className={`post-vote post-vote-downvotes`}>
-              {post?.counts.downvotes}
+              {commentView?.counts.downvotes}
             </sub>
           )}
         </p>
 
         {/* Timestamp */}
         <small className="post-timestamp">
-          <TimeAgo dateString={post?.comment.published} />
+          <TimeAgo dateString={commentView?.comment.published} />
         </small>
       </div>
       <Collapsible.Content>
@@ -118,39 +113,40 @@ function Comment({
           {commentDepth < 1 && (
             <a
               className="post-post"
-              href={post?.comment.ap_id}
+              href={commentView?.comment.ap_id}
               target="_blank"
               rel="noopener noreferrer"
             >
-              <small>{post?.post?.name}</small>
+              <small>{commentView?.post?.name}</small>
             </a>
           )}
 
           {commentDepth < 1 &&
-            post?.community?.id != community?.counts?.community_id && (
+            activeCommunity?.id != commentView?.community?.id && (
               <LemmyCommunity
-                post={post}
-                sort={sort as { value: SortType; label: string }}
-                // community={community}
+                view={commentView}
                 lemmyInstance={lemmyInstance}
-                showCommunityIcon={community?.id != post?.community?.id}
+                showCommunityIcon={
+                  activeCommunity?.id != commentView?.community?.id
+                }
               />
             )}
-          {commentDepth < 1 && (post?.post?.nsfw || post?.community?.nsfw) && (
-            <p className="post-alert">NSFW</p>
-          )}
+          {commentDepth < 1 &&
+            (commentView?.post?.nsfw || commentView?.community?.nsfw) && (
+              <p className="post-alert">NSFW</p>
+            )}
 
           {/* Comment Body */}
-          {post?.comment?.removed && (
+          {commentView?.comment?.removed && (
             <p className="comment-body">🚮 Comment removed.</p>
           )}
-          {post?.comment?.deleted && (
+          {commentView?.comment?.deleted && (
             <p className="comment-body">🗑️ Comment deleted.</p>
           )}
-          {!(post?.comment?.removed || post?.comment?.deleted) &&
-            post?.comment.content && (
+          {!(commentView?.comment?.removed || commentView?.comment?.deleted) &&
+            commentView?.comment.content && (
               <ReactMarkdown className="comment-body">
-                {post?.comment.content}
+                {commentView?.comment.content}
               </ReactMarkdown>
             )}
 
@@ -159,7 +155,7 @@ function Comment({
             className={`post-reply-container post-reply-depth-${(commentDepth % 7) + 1}`}
           >
             {/* Reply Count */}
-            {post?.counts.child_count > 0 && !replies && (
+            {commentView?.counts.child_count > 0 && !replies && (
               <p
                 className="reply-button"
                 role="button"
@@ -173,8 +169,8 @@ function Comment({
                 }}
               >
                 <span className="post-replycount-emoji">💬</span>
-                {`${post?.counts.child_count} repl${
-                  post?.counts.child_count > 1 ? 'ies' : 'y'
+                {`${commentView?.counts.child_count} repl${
+                  commentView?.counts.child_count > 1 ? 'ies' : 'y'
                 }`}
               </p>
             )}
@@ -182,16 +178,16 @@ function Comment({
             {/* Reply Comments */}
             {replies &&
               replies.map((reply, index) => {
-                if (reply.comment.id == post?.comment.id) return; // filter parent commment from API response
+                const { comment, creator } = reply;
+                if (comment.id == commentView?.comment.id) return; // filter parent commment from API response
                 return (
                   <Comment
-                    key={`${reply.creator.id}${reply.comment.id}${index}`}
-                    community={community}
-                    post={reply}
+                    key={`${creator.id}${comment.id}${index}`}
+                    commentView={reply}
                     lemmyInstance={lemmyInstance}
                     commentDepth={commentDepth + 1}
-                    sort={sort}
-                    ratioDetector={post?.counts.score}
+                    ratioDetector={commentView?.counts.score}
+                    commentSort={commentSort}
                   />
                 );
               })}

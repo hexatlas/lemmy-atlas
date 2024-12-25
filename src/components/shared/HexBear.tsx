@@ -48,26 +48,24 @@ function HexBear({
             posts.map((post, index) => (
               <Post
                 key={index}
-                post={post}
-                community={activeCommunity}
+                postView={post}
                 lemmyInstance={activeLemmyInstance}
-                activeListingType={activeListingType}
-                sort={activeSortType}
+                commentSort={activeSortType}
               />
             ))}
         </div>
       )}
       {comments &&
         comments.length > 0 &&
-        comments.map((comment, index) => {
+        comments.map((commentView, index) => {
+          const { counts } = commentView;
           return (
             <Comment
               key={index}
-              community={activeCommunity}
-              post={comment}
+              commentView={commentView}
               lemmyInstance={activeLemmyInstance}
-              sort={activeSortType}
-              ratioDetector={comment?.counts.score}
+              commentSort={activeSortType}
+              ratioDetector={counts.score}
               isOpen={false}
             />
           );

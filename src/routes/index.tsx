@@ -55,7 +55,7 @@ function AtlasHomeComponent() {
                 🛡️ <b>Security</b>
               </li>
               <li>
-                🏛️ <b>Institutions</b>
+                🏛️ <b>Government</b>
               </li>
             </ul>
           </li>

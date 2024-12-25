@@ -5,6 +5,7 @@ import {
   ListingType,
   SearchType,
   CommunityId,
+  CommentSortType,
 } from 'lemmy-js-client';
 
 /*
@@ -69,6 +70,19 @@ export const sortTypes: Array<AtlasLemmySortType> = [
   { value: 'TopNineMonths', label: '🔝9M' },
   { value: 'Old', label: '🕰️' },
   { value: 'Scaled', label: '⚖️' },
+];
+
+export interface AtlasLemmyCommentSortType {
+  value: CommentSortType;
+  label: string;
+}
+
+export const commentSortTypes: Array<AtlasLemmyCommentSortType> = [
+  { value: 'New', label: '🆕' },
+  { value: 'Hot', label: '🔥' },
+  { value: 'Controversial', label: '⚔️' },
+  { value: 'Old', label: '🕰️' },
+  { value: 'Top', label: '🔝W' },
 ];
 
 // ToDo: Implement DataSources

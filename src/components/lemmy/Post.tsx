@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import ReactMarkdown from 'react-markdown';
 
 // https://www.radix-ui.com/primitives/docs/components/collapsible
@@ -6,12 +6,7 @@ import * as Collapsible from '@radix-ui/react-collapsible';
 
 // https://github.com/LemmyNet/lemmy-js-client
 // https://join-lemmy.org/api/classes/LemmyHttp.html
-import {
-  CommentSortType,
-  CommentView,
-  GetComments,
-  LemmyHttp,
-} from 'lemmy-js-client';
+import { CommentView, GetComments, LemmyHttp, PostView } from 'lemmy-js-client';
 
 import { TimeAgo } from '../../hooks/useDataTransform';
 
@@ -19,41 +14,40 @@ import Comment from './Comment';
 import LemmyUser from './User';
 import LemmyCommunity from './Community';
 import {
+  AtlasLemmyCommentSortType,
   AtlasLemmyInstanceType,
-  AtlasLemmyListingType,
-  AtlasLemmySortType,
 } from '../../types/api.types';
+import { InformationContext } from '../../routes/information';
 
 interface PostProps {
-  post;
-  community;
-  lemmyInstance: { baseUrl: string };
-  sort: { value: CommentSortType; label: string };
-  activeListingType: AtlasLemmyListingType[];
+  postView: PostView;
+  lemmyInstance: AtlasLemmyInstanceType;
+  commentSort?: AtlasLemmyCommentSortType;
   commentDepth?: number;
   isOpen?: boolean;
 }
 
 function Post({
-  post,
-  community,
+  postView,
   lemmyInstance,
-  sort,
-  activeListingType,
+  commentSort,
   commentDepth = 0,
   isOpen = false,
 }: PostProps) {
   const [openPost, setOpenPost] = useState(isOpen);
   const [replies, setReplies] = useState<CommentView[]>([]);
 
+  const { activeCommunity, activeListingType } =
+    useContext(InformationContext)!;
+
   function handleReplies() {
     const client: LemmyHttp = new LemmyHttp(lemmyInstance?.baseUrl);
 
     const form: GetComments = {
-      post_id: post?.post.id,
-      sort: sort.value,
+      post_id: postView.post.id,
+      sort: commentSort?.value,
       max_depth: 1,
-      type_: activeListingType,
+      type_: activeListingType.value,
       limit: 0,
     };
     client.getComments(form).then((res) => {
@@ -64,7 +58,7 @@ function Post({
   return (
     <Collapsible.Root
       className={`community-post post-collapse-root ${
-        (post?.post.featured_community || post?.post.featured_local) &&
+        (postView?.post.featured_community || postView?.post.featured_local) &&
         'post-featured'
       }`}
       open={openPost}
@@ -72,26 +66,27 @@ function Post({
     >
       <div className="post-info-container">
         <div>
-          {(post?.post.featured_community || post?.post.featured_local) && (
+          {(postView?.post.featured_community ||
+            postView?.post.featured_local) && (
             <small className="post-pinned">📌</small>
           )}
           {/* Score Count / Upvotes / Downvotes */}
           <p className="post-vote-container">
-            {Number(post?.counts.downvotes) === 0 || (
+            {Number(postView?.counts.downvotes) === 0 || (
               <p className={`post-vote post-vote-upvotes`}>
-                {post?.counts.upvotes}
+                {postView?.counts.upvotes}
               </p>
             )}
             <span
               className={`post-vote commment-vote-score post-score-${
-                post?.counts.score > 0 ? 'positive' : 'negative'
+                postView?.counts.score > 0 ? 'positive' : 'negative'
               }`}
             >
-              {post?.counts.score}
+              {postView?.counts.score}
             </span>
-            {Number(post?.counts.downvotes) === 0 || (
+            {Number(postView?.counts.downvotes) === 0 || (
               <p className={`post-vote post-vote-downvotes`}>
-                {post?.counts.downvotes}
+                {postView?.counts.downvotes}
               </p>
             )}
           </p>
@@ -105,7 +100,7 @@ function Post({
         >
           <img
             className="post-thumbnail-image"
-            src={post?.post.thumbnail_url}
+            src={postView?.post.thumbnail_url}
             alt={`🪧`}
           />
         </Collapsible.Trigger>
@@ -113,63 +108,59 @@ function Post({
           {/* OP Post */}
           {commentDepth < 1 && (
             <div>
-              {post?.post.locked && <small className="post-pinned">🔒</small>}
+              {postView?.post.locked && (
+                <small className="post-pinned">🔒</small>
+              )}
               <a
                 className="post-post"
-                href={post?.post.ap_id}
+                href={postView?.post.ap_id}
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <small>{post?.post.name}</small>
+                <small>{postView?.post.name}</small>
               </a>
             </div>
           )}
 
           <div className="post-info-wrapper">
             {/* User / Poster */}
-            <LemmyUser
-              post={post}
-              lemmyInstance={lemmyInstance}
-              community={community}
-              sort={sort}
-            />
+            <LemmyUser view={postView} lemmyInstance={lemmyInstance} />
 
             {/* COMMUNITY */}
             {commentDepth < 1 &&
-              post?.community?.id != community?.counts?.community_id && (
+              postView?.community?.id !=
+                activeCommunity?.counts?.community_id && (
                 <LemmyCommunity
-                  post={post}
-                  sort={sort as AtlasLemmySortType}
-                  // community={community}
+                  view={postView}
                   lemmyInstance={lemmyInstance as AtlasLemmyInstanceType}
                 />
               )}
             {/* Timestamp */}
             <small className="post-timestamp">
-              <TimeAgo dateString={post?.post.published} />
+              <TimeAgo dateString={postView?.post.published} />
             </small>
           </div>
           {/* Reply Count */}
-          {post?.counts.comments > 0 && (
-            <p className="comment-count">{`💬 ${post?.counts.comments}`}</p>
+          {postView?.counts.comments > 0 && (
+            <p className="comment-count">{`💬 ${postView?.counts.comments}`}</p>
           )}
         </div>
       </div>
 
       <Collapsible.Content>
         <>
-          {post?.post.url && (
+          {postView?.post.url && (
             <a
-              href={post?.post.url}
+              href={postView?.post.url}
               target="_blank"
               rel="noopener noreferrer"
               className="post-url"
             >
-              🔗 {post?.post.url}
+              🔗 {postView?.post.url}
             </a>
           )}
 
-          {post?.post.thumbnail_url && (
+          {postView?.post.thumbnail_url && (
             <button
               className="post-image-container"
               tabIndex={0}
@@ -178,31 +169,32 @@ function Post({
             >
               <img
                 className="post-image"
-                src={post?.post.thumbnail_url}
+                src={postView?.post.thumbnail_url}
                 alt={`🧵`}
               />
             </button>
           )}
 
           {/* Post Body */}
-          {post?.post?.removed && (
+          {postView?.post?.removed && (
             <p className="post-body">🚮 Comment removed.</p>
           )}
-          {post?.post?.deleted && (
+          {postView?.post?.deleted && (
             <p className="post-body">🗑️ Comment deleted.</p>
           )}
-          {!(post?.post?.removed || post?.post?.deleted) && post?.post.body && (
-            <ReactMarkdown className="post-body">
-              {post?.post.body}
-            </ReactMarkdown>
-          )}
+          {!(postView?.post?.removed || postView?.post?.deleted) &&
+            postView?.post.body && (
+              <ReactMarkdown className="post-body">
+                {postView?.post.body}
+              </ReactMarkdown>
+            )}
 
           {/* Replies */}
           <div
             className={`post-reply-container post-reply-depth-${(commentDepth % 7) + 1}`}
           >
             {/* Reply Count */}
-            {post?.counts.comments > 0 && !replies && (
+            {postView?.counts.comments > 0 && replies.length === 0 && (
               <p
                 className="reply-button"
                 role="button"
@@ -216,24 +208,25 @@ function Post({
                 }}
               >
                 <span className="post-replycount-emoji">💬</span>
-                {`${post?.counts.comments} comment${
-                  post?.counts.comments > 1 ? 's' : ''
+                {`${postView?.counts.comments} comment${
+                  postView?.counts.comments > 1 ? 's' : ''
                 }`}
               </p>
             )}
 
             {/* Reply Comments */}
             {replies &&
-              replies.map((reply, index) => {
+              replies.map((commentView, index) => {
+                const { counts, creator } = commentView;
+
                 return (
                   <Comment
-                    key={`${reply.creator.id}${index}`}
-                    community={community}
-                    post={reply}
+                    key={`${creator.id}${index}`}
+                    commentView={commentView}
                     lemmyInstance={lemmyInstance as AtlasLemmyInstanceType}
                     commentDepth={commentDepth + 1}
-                    sort={sort}
-                    ratioDetector={reply?.counts.score}
+                    commentSort={commentSort}
+                    ratioDetector={counts.score}
                   />
                 );
               })}

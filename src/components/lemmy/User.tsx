@@ -2,43 +2,36 @@ import React from 'react';
 
 import { userPronouns } from '../../hooks/useDataTransform';
 import LemmyUserInfoCard from './UserInfoCard';
-import { Community, PostView } from 'lemmy-js-client';
-import { AtlasLemmySortType } from '../../types/api.types';
+import { CommentView, Person, PostView } from 'lemmy-js-client';
+import {
+  AtlasLemmyInstanceType,
+  AtlasLemmySortType,
+} from '../../types/api.types';
 
 interface AtlasLemmyUserProps {
-  post: PostView;
-  lemmyInstance: string; // Replace with the actual type if different
-  community: Community; // Assuming it's required; mark as optional (?) if not
-  sort: AtlasLemmySortType;
-  actor_id?: string;
-  avatar?: string;
-  display_name?: string;
-  name?: string;
+  view?: PostView | CommentView;
+  person?: Person;
+  lemmyInstance: AtlasLemmyInstanceType;
   showInfoCard?: boolean;
 }
 
 function AtlasLemmyUser({
-  post,
+  view,
+  person,
   lemmyInstance,
-  community,
-  sort,
-  // id = post?.creator?.id,
-  actor_id = post?.creator?.actor_id,
-  avatar = post?.creator?.avatar,
-  display_name = post?.creator?.display_name,
-  // banned = post?.creator?.banned,
-  name = post?.creator?.name,
   showInfoCard = true,
 }: AtlasLemmyUserProps) {
+  const { avatar, name, display_name, actor_id } = view?.creator || person!;
+
   const pronounsArray = userPronouns(display_name);
+
   return (
     <div className="user-wrapper">
       {showInfoCard ? (
         <LemmyUserInfoCard
-          post={post}
+          view={view!}
           lemmyInstance={lemmyInstance}
-          community={community}
-          sort={sort}
+          person={view?.creator || person!}
         >
           <div className="user-avatar-container" tabIndex={0}>
             <img

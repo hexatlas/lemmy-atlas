@@ -14,35 +14,43 @@ import {
 } from 'lemmy-js-client';
 
 import LemmyUser from './User';
-import {
-  AtlasLemmySortType,
-  AtlasLemmyInstanceType,
-} from '../../types/api.types';
+import { AtlasLemmyInstanceType } from '../../types/api.types';
 
 interface CommunityInfoCardProps {
-  children;
+  children: React.ReactNode;
   lemmyInstance: AtlasLemmyInstanceType;
-  sort: AtlasLemmySortType;
   community: Community;
 }
 
 function LemmyCommunityInfoCard({
   children,
   lemmyInstance,
-  sort,
   community,
 }: CommunityInfoCardProps) {
+  const {
+    id,
+    actor_id,
+    name,
+    icon,
+    banner,
+    description,
+    nsfw,
+    local,
+    published,
+    updated,
+  } = community;
+
   const [communityDetails, setCommunityDetails] =
     useState<GetCommunityResponse>();
 
-  const cakeDay = new Date(community?.published).toDateString();
-  const updateDay = new Date(community?.updated ?? '1970-01-01').toDateString();
+  const cakeDay = new Date(published).toDateString();
+  const updateDay = new Date(updated ?? '1970-01-01').toDateString();
 
   function loadCommunityDetails() {
     const client: LemmyHttp = new LemmyHttp(lemmyInstance?.baseUrl);
 
     const form: GetCommunity = {
-      id: community?.id,
+      id: id,
     };
     client.getCommunity(form).then((res) => {
       setCommunityDetails(res);
@@ -61,7 +69,7 @@ function LemmyCommunityInfoCard({
           // eslint-disable-next-line no-loss-of-precision
           collisionPadding={1.6180339887498948482 ^ 9}
           className={`community-info-card-content 
-          ${community.nsfw && 'community-info-card-content-hightlighted'}`}
+          ${nsfw && 'community-info-card-content-hightlighted'}`}
         >
           <div
             style={{
@@ -70,25 +78,19 @@ function LemmyCommunityInfoCard({
               gap: 7,
             }}
           >
-            {community?.banner && (
-              <img
-                className="banner-image"
-                src={community?.banner}
-                alt={community?.display_name || community?.name}
-              />
-            )}
-            {community?.icon && (
+            {banner && <img className="banner-image" src={banner} alt={name} />}
+            {icon && (
               <a
                 className={`user-avatar-container user-avatar-infocard ${
-                  community?.banner && 'user-avatar-banner-offset'
+                  banner && 'user-avatar-banner-offset'
                 }`}
-                href={community?.actor_id}
+                href={actor_id}
                 target="_blank"
                 rel="noopener noreferrer"
               >
                 <img
                   className="user-avatar-image"
-                  src={community?.icon}
+                  src={icon}
                   alt={'Community Icon'}
                 />
               </a>
@@ -102,22 +104,18 @@ function LemmyCommunityInfoCard({
               }}
             >
               <div>
-                {community.local && (
+                {local && (
                   <small className="user-mod">{lemmyInstance.baseUrl}</small>
                 )}
-                {community.nsfw && (
+                {nsfw && (
                   <small>
                     <p className="post-alert">NSFW</p>
                   </small>
                 )}
                 <h5 className="community-name">
-                  <a
-                    href={community?.actor_id}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
+                  <a href={actor_id} target="_blank" rel="noopener noreferrer">
                     <span className="prefix">c/</span>
-                    {community?.name}
+                    {name}
                   </a>
                 </h5>
 
@@ -160,16 +158,16 @@ function LemmyCommunityInfoCard({
                 </div>
 
                 <small>🎂 {cakeDay}</small>
-                {community?.updated && (
+                {updated && (
                   <>
                     <br />
                     <small>🖊️ {updateDay}</small>
                   </>
                 )}
               </div>
-              {community?.description && (
+              {description && (
                 <div className="user-bio">
-                  <ReactMarkdown>{community?.description}</ReactMarkdown>
+                  <ReactMarkdown>{description}</ReactMarkdown>
                 </div>
               )}
 
@@ -190,29 +188,23 @@ function LemmyCommunityInfoCard({
               <div className="mod-wrapper">
                 <small className="community-mod">Mods</small>
                 <div className="mod-list">
-                  {communityDetails?.moderators.map((moderators, index) => {
-                    const { moderator } = moderators;
-                    return (
-                      <div
-                        className="mod-user"
-                        key={`${index}${moderators.id}${Math.random()}`}
-                      >
-                        <LemmyUser
-                          post={moderator}
-                          community={community}
-                          sort={sort}
-                          // id={moderator?.id}
-                          actor_id={moderator?.actor_id}
-                          avatar={moderator?.avatar}
-                          display_name={moderator?.display_name}
-                          // banned={moderator?.banned}
-                          name={moderator?.name}
-                          lemmyInstance={lemmyInstance}
-                          showInfoCard={false}
-                        />
-                      </div>
-                    );
-                  })}
+                  {communityDetails?.moderators.map(
+                    (communityModeratorView, index) => {
+                      const { moderator } = communityModeratorView;
+                      return (
+                        <div
+                          className="mod-user"
+                          key={`${index}${moderator.id}${Math.random()}`}
+                        >
+                          <LemmyUser
+                            person={moderator}
+                            lemmyInstance={lemmyInstance}
+                            showInfoCard={false}
+                          />
+                        </div>
+                      );
+                    },
+                  )}
                 </div>
               </div>
             </div>

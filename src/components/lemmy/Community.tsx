@@ -1,34 +1,26 @@
 import React from 'react';
 
 import LemmyCommunityInfoCard from './CommunityInfoCard';
-import {
-  AtlasLemmyInstanceType,
-  AtlasLemmySortType,
-} from '../../types/api.types';
-import { PostView } from 'lemmy-js-client';
+import { AtlasLemmyInstanceType } from '../../types/api.types';
+import { CommentView, Community, PostView } from 'lemmy-js-client';
 
 interface AtlasLemmyCommunityProps {
-  post: PostView;
-  lemmyInstance: AtlasLemmyInstanceType; // Replace with the actual type if different
-  sort: AtlasLemmySortType;
+  view?: PostView | CommentView;
+  community?: Community;
+  lemmyInstance: AtlasLemmyInstanceType;
   showCommunityIcon?: boolean;
-  icon?: string;
-  display_name?: string;
-  name?: string;
   prefix?: string;
 }
 
 function AtlasLemmyCommunity({
-  post,
+  view,
+  community,
   lemmyInstance,
-  sort,
-  // community,
   showCommunityIcon = true,
-  icon = post?.community?.icon,
-  display_name = post?.community?.display_name,
-  name = post?.community?.name,
-  prefix = 'to',
+  prefix = '➡️',
 }: AtlasLemmyCommunityProps) {
+  const { icon, name, actor_id } = view?.community || community!;
+
   return (
     <div className="community-wrapper">
       {prefix && <small className="post-to">{prefix}</small>}
@@ -36,25 +28,15 @@ function AtlasLemmyCommunity({
       {showCommunityIcon && (
         <LemmyCommunityInfoCard
           lemmyInstance={lemmyInstance}
-          sort={sort}
-          community={post?.community}
+          community={view?.community || community!}
         >
           <div className="community-avatar-container" tabIndex={0}>
-            <img
-              className="community-avatar-image"
-              src={icon}
-              alt={(display_name && display_name[0]) || name[0]}
-            />
+            <img className="community-avatar-image" src={icon} alt={name} />
           </div>
         </LemmyCommunityInfoCard>
       )}
-      <a
-        href={post?.community?.actor_id}
-        // className="community-button"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        <small>{post?.community?.name}</small>
+      <a href={actor_id} target="_blank" rel="noopener noreferrer">
+        <small>{name}</small>
       </a>
     </div>
   );

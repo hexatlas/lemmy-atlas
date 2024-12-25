@@ -10,6 +10,7 @@ import {
   listingTypes,
   searchTypes,
   sortTypes,
+  AtlasLemmyCommentSortType,
 } from '../types/api.types';
 import { useStateStorage } from '../hooks/useAtlasUtils';
 import { InformationLemmyProps } from '../types/atlas.types';
@@ -52,8 +53,9 @@ function InformationRouteComponent() {
       listingTypes[1],
     ); // Default: Local
 
-  const [activeSortType, setActiveSortType] =
-    useStateStorage<AtlasLemmySortType>('activeSortType', sortTypes[1]); // Default: New Sort
+  const [activeSortType, setActiveSortType] = useStateStorage<
+    AtlasLemmySortType | AtlasLemmyCommentSortType
+  >('activeSortType', sortTypes[1]); // Default: New Sort
 
   const informationLemmyProps: InformationLemmyProps = {
     // Community
