@@ -5,7 +5,7 @@ import React, {
   useRef,
   createContext,
 } from 'react';
-import { Link, Outlet, createRootRoute } from '@tanstack/react-router';
+import { createRootRoute } from '@tanstack/react-router';
 import { TanStackRouterDevtools } from '@tanstack/router-devtools';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 
@@ -26,15 +26,45 @@ import {
   AtlasInterfaceProps,
   LocationSelection,
   NominatimResponse,
+  AtlasNavigation,
 } from '../types/atlas.types';
 
 import L from 'leaflet';
+import LegendNavigation from '../components/shared/AtlasNavigation';
 
 export const AtlasContext = createContext<AtlasInterfaceProps | null>(null);
 
 export const Route = createRootRoute({
   component: AtlasRootComponent,
 });
+
+const navigationLinks: AtlasNavigation[] = [
+  {
+    link: '/economy',
+    emoji: '🪙',
+    isDisabled: false,
+  },
+  {
+    link: '/information',
+    emoji: 'ℹ️',
+    isDisabled: false,
+  },
+  {
+    link: '/diplomacy',
+    emoji: '🕊️',
+    isDisabled: false,
+  },
+  {
+    link: '/military',
+    emoji: '🛡️',
+    isDisabled: false,
+  },
+  {
+    link: '/government',
+    emoji: '🏛️',
+    isDisabled: false,
+  },
+];
 
 const defaultAdministrativeRegionObject: AdministrativeRegionObject = {
   // START - Do not change as theres a lot of If(activeAdministrativeRegion.country === "country") that depends on this
@@ -277,7 +307,7 @@ function AtlasRootComponent() {
 
   return (
     <AtlasContext.Provider value={atlasInterfaceProps}>
-      <div
+      <main
         className={`atlas ${
           activeAdministrativeRegion.country !== 'Country' && 'atlas--active'
         }`}
@@ -290,32 +320,11 @@ function AtlasRootComponent() {
           {DisplayAtlasMap}
           {!isMobile && <AtlasInterface {...atlasInterfaceProps} />}
         </div>
-        <div
-          id="atlas-tabs"
-          className="atlas-tabs tabs-root light"
-          ref={atlasInterfaceProps.sideBarRef}
-        >
-          <div className="tabs-list" aria-label="Manage your account">
-            <Link className="tabs-trigger emoji-label" to="/economy">
-              🪙
-            </Link>
-            <Link className="tabs-trigger emoji-label" to="/information">
-              ℹ️
-            </Link>
-            <Link className="tabs-trigger emoji-label" to="/diplomacy">
-              🕊️
-            </Link>
-            <Link className="tabs-trigger emoji-label" to="/military">
-              🛡️
-            </Link>
-            <Link className="tabs-trigger emoji-label" to="/government">
-              🏛️
-            </Link>
-          </div>
-
-          <Outlet />
-        </div>
-      </div>
+        <LegendNavigation
+          links={navigationLinks}
+          route={Route}
+        ></LegendNavigation>
+      </main>
       <hr />
       <ReactQueryDevtools buttonPosition="bottom-right" />
       <TanStackRouterDevtools position="bottom-left" />

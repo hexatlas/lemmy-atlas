@@ -10,17 +10,17 @@ function LegendLayout({
   route?;
 }) {
   const layoutParams = route?.useSearch();
-  console.log(layoutParams, route._to);
+  console.log(layoutParams, route._to, 'layout');
 
   return (
-    <div id="legend-content" className={`atlas-legend ${className}`}>
+    <article className={`legend-content ${className}`}>
       {children}
-      <div className="legend-footer">
+      <footer className="legend-footer">
         <a href={`asdf`} target="_blank" rel="noopener noreferrer">
           FOOTER
         </a>
-      </div>
-    </div>
+      </footer>
+    </article>
   );
 }
 

@@ -1,7 +1,8 @@
+// Import Dependencies
 import React, { createContext } from 'react';
-import { createFileRoute, Link, Outlet } from '@tanstack/react-router';
+import { createFileRoute } from '@tanstack/react-router';
 import { CommunityView } from 'lemmy-js-client';
-
+// Import Types
 import {
   AtlasLemmyListingType,
   AtlasLemmySearchType,
@@ -12,8 +13,11 @@ import {
   sortTypes,
   AtlasLemmyCommentSortType,
 } from '../types/api.types';
+import { InformationLemmyProps, AtlasNavigation } from '../types/atlas.types';
+// Import Components
+import LegendNavigation from '../components/shared/AtlasNavigation';
+// Import Utils
 import { useStateStorage } from '../hooks/useAtlasUtils';
-import { InformationLemmyProps } from '../types/atlas.types';
 
 export const InformationContext = createContext<InformationLemmyProps | null>(
   null,
@@ -22,6 +26,29 @@ export const InformationContext = createContext<InformationLemmyProps | null>(
 export const Route = createFileRoute('/information')({
   component: InformationRouteComponent,
 });
+
+const navigationLinks: AtlasNavigation[] = [
+  {
+    link: '/information/links',
+    emoji: '🔗',
+    isDisabled: false,
+  },
+  {
+    link: '/information/map',
+    emoji: '🌐',
+    isDisabled: false,
+  },
+  {
+    link: '/information/nexus',
+    emoji: '📚',
+    isDisabled: false,
+  },
+  {
+    link: '/information/fediverse',
+    emoji: '👥',
+    isDisabled: false,
+  },
+];
 
 function InformationRouteComponent() {
   const defaultInstance = {
@@ -80,26 +107,10 @@ function InformationRouteComponent() {
 
   return (
     <InformationContext.Provider value={informationLemmyProps}>
-      <div id="atlas-tabs" className="atlas-tabs tabs-root">
-        <div className="tabs-list">
-          <Link className="tabs-trigger emoji-label" to="/information/links">
-            🔗
-          </Link>
-          <Link className="tabs-trigger emoji-label" to="/information/map">
-            🌐
-          </Link>
-          <Link className="tabs-trigger emoji-label" to="/information/nexus">
-            📚
-          </Link>
-          <Link
-            className="tabs-trigger emoji-label"
-            to="/information/fediverse"
-          >
-            👥
-          </Link>
-        </div>
-        <Outlet />
-      </div>
+      <LegendNavigation
+        links={navigationLinks}
+        route={Route}
+      ></LegendNavigation>
     </InformationContext.Provider>
   );
 }

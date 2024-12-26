@@ -1,35 +1,45 @@
 import * as React from 'react';
-import { createFileRoute, Link, Outlet } from '@tanstack/react-router';
+import { createFileRoute } from '@tanstack/react-router';
+import LegendNavigation from '../../components/shared/AtlasNavigation';
+import { AtlasNavigation } from '../../types/atlas.types';
 
 export const Route = createFileRoute('/economy/map')({
   component: MapRouteComponent,
 });
 
-function MapRouteComponent() {
-  return (
-    <>
-      <div className="tabs-list tabs-nexus" aria-label="Pick Fediverse">
-        <Link className="tabs-trigger" to="/economy/map/energy">
-          ⚡
-        </Link>
-        <Link className="tabs-trigger" to="/economy/map/industry">
-          🏭
-        </Link>
-        <Link className="tabs-trigger" to="/economy/map" disabled>
-          🌾
-        </Link>
-        <Link className="tabs-trigger" to="/economy/map" disabled>
-          📦
-        </Link>
-        <Link className="tabs-trigger" to="/economy/map" disabled>
-          🏦
-        </Link>
-        <Link className="tabs-trigger" to="/economy/map" disabled>
-          🚛
-        </Link>
-      </div>
+const navigationLinks: AtlasNavigation[] = [
+  {
+    link: '/economy/map/energy',
+    emoji: '⚡',
+    isDisabled: false,
+  },
+  {
+    link: '/economy/map/industry',
+    emoji: '🏭',
+    isDisabled: false,
+  },
+  {
+    link: '/economy/map',
+    emoji: '🌾',
+    isDisabled: true,
+  },
+  {
+    link: '/economy/map',
+    emoji: '📦',
+    isDisabled: true,
+  },
+  {
+    link: '/economy/map',
+    emoji: '🏦',
+    isDisabled: true,
+  },
+  {
+    link: '/economy/map',
+    emoji: '🚛',
+    isDisabled: true,
+  },
+];
 
-      <Outlet />
-    </>
-  );
+function MapRouteComponent() {
+  return <LegendNavigation links={navigationLinks} route={Route} />;
 }

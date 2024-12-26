@@ -1,28 +1,35 @@
 import React from 'react';
-import { createFileRoute, Link, Outlet } from '@tanstack/react-router';
+import { createFileRoute } from '@tanstack/react-router';
+import LegendNavigation from '../../components/shared/AtlasNavigation';
+import { AtlasNavigation } from '../../types/atlas.types';
 
 export const Route = createFileRoute('/information/nexus')({
   component: NexusRouteComponent,
 });
 
+const navigationLinks: AtlasNavigation[] = [
+  {
+    link: '/information/nexus/prolewiki',
+    emoji: 'ProleWiki',
+    isDisabled: false,
+  },
+  {
+    link: '/information/nexus/natopedia',
+    emoji: 'NATOPedia',
+    isDisabled: false,
+  },
+  {
+    link: '/information/nexus/72Tbulletins',
+    emoji: '72Ts Bulletins',
+    isDisabled: false,
+  },
+  {
+    link: '/information/nexus/anarchistlibrary',
+    emoji: 'Anarchist Library',
+    isDisabled: false,
+  },
+];
+
 function NexusRouteComponent() {
-  return (
-    <>
-      <div className="tabs-list tabs-nexus" aria-label="Pick Fediverse">
-        <Link className="tabs-trigger" to="/information/nexus/prolewiki">
-          ProleWiki
-        </Link>
-        <Link className="tabs-trigger" to="/information/nexus/natopedia">
-          NATOPedia
-        </Link>
-        <Link className="tabs-trigger" to="/information/nexus/72Tbulletins">
-          72Ts Bulletins
-        </Link>
-        <Link className="tabs-trigger" to="/information/nexus/anarchistlibrary">
-          Anarchist Library
-        </Link>
-      </div>
-      <Outlet />
-    </>
-  );
+  return <LegendNavigation links={navigationLinks} route={Route} />;
 }

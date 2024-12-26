@@ -1,26 +1,25 @@
 import React from 'react';
-import { createFileRoute, Link, Outlet } from '@tanstack/react-router';
+import { createFileRoute } from '@tanstack/react-router';
+import { AtlasNavigation } from '../types/atlas.types';
+import LegendNavigation from '../components/shared/AtlasNavigation';
 
 export const Route = createFileRoute('/diplomacy')({
   component: DiplomacyRouteComponent,
 });
 
+const navigationLinks: AtlasNavigation[] = [
+  {
+    link: '/diplomacy/links',
+    emoji: '🔗',
+    isDisabled: true,
+  },
+  {
+    link: '/diplomacy/map',
+    emoji: '🌐',
+    isDisabled: false,
+  },
+];
+
 function DiplomacyRouteComponent() {
-  return (
-    <div id="atlas-tabs" className="atlas-tabs tabs-root">
-      <div className="tabs-list">
-        <Link
-          className="tabs-trigger emoji-label"
-          to="/diplomacy/links"
-          disabled
-        >
-          🔗
-        </Link>
-        <Link className="tabs-trigger emoji-label" to="/diplomacy/map">
-          🌐
-        </Link>
-      </div>
-      <Outlet />
-    </div>
-  );
+  return <LegendNavigation links={navigationLinks} route={Route} />;
 }

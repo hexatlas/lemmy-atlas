@@ -1,31 +1,40 @@
 import React from 'react';
-import { createFileRoute, Link, Outlet } from '@tanstack/react-router';
+import { createFileRoute } from '@tanstack/react-router';
+import LegendNavigation from '../../components/shared/AtlasNavigation';
+import { AtlasNavigation } from '../../types/atlas.types';
 
 export const Route = createFileRoute('/government/map')({
   component: MapRouteComponent,
 });
 
+const navigationLinks: AtlasNavigation[] = [
+  {
+    link: '/government/map',
+    emoji: '🏥',
+    isDisabled: true,
+  },
+  {
+    link: '/government/map',
+    emoji: '🚒',
+    isDisabled: true,
+  },
+  {
+    link: '/government/map',
+    emoji: '🚓',
+    isDisabled: true,
+  },
+  {
+    link: '/government/map',
+    emoji: '🏞️',
+    isDisabled: true,
+  },
+  {
+    link: '/government/map',
+    emoji: '🪹',
+    isDisabled: true,
+  },
+];
+
 function MapRouteComponent() {
-  return (
-    <>
-      <div className="tabs-list tabs-nexus" aria-label="Pick Fediverse">
-        <Link className="tabs-trigger" to="/government/map" disabled>
-          🏥
-        </Link>
-        <Link className="tabs-trigger" to="/government/map" disabled>
-          🚒
-        </Link>
-        <Link className="tabs-trigger" to="/government/map" disabled>
-          🚓
-        </Link>
-        <Link className="tabs-trigger" to="/government/map" disabled>
-          🏞️
-        </Link>
-        <Link className="tabs-trigger" to="/government/map" disabled>
-          🪹
-        </Link>
-      </div>
-      <Outlet />
-    </>
-  );
+  return <LegendNavigation links={navigationLinks} route={Route} />;
 }
