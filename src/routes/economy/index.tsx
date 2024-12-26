@@ -44,10 +44,6 @@ function EconomyHomeComponent() {
           trends and patterns.
         </li>
       </ul>
-      <blockquote>
-        <b>Note:</b> Data availability and accuracy may vary depending on the
-        country and economic indicator.
-      </blockquote>
     </LegendLayout>
   );
 }
