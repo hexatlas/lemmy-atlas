@@ -24,7 +24,7 @@ function MastodonRouteComponent() {
 
   return (
     <LegendLayout route={Route}>
-      <div id="legend-content">
+      <>
         <h3>
           Latest Posts on{' '}
           {activeAdministrativeRegion[activeGeographicIdentifier]}
@@ -198,7 +198,7 @@ function MastodonRouteComponent() {
               </a>
             </div>
           ))}
-      </div>
+      </>
       <div className="legend-footer">
         <a
           href={`https://mastodon.social/tags/${activeAdministrativeRegion.country}`}

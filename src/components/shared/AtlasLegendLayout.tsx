@@ -9,16 +9,17 @@ function LegendLayout({
   className?;
   route?;
 }) {
-  const layoutParams = route?.useSearch();
-  console.log(layoutParams, route._to, 'layout');
-
   return (
-    <article className={`legend-content ${className}`}>
+    <article
+      className={`legend-content ${className}`}
+      aria-label="Legend Content"
+      aria-description="View the selected information"
+    >
       {children}
-      <footer className="legend-footer">
-        <a href={`asdf`} target="_blank" rel="noopener noreferrer">
-          FOOTER
-        </a>
+      <footer className="legend-footer" aria-label="Legend Footer">
+        <blockquote>
+          <b>Note:</b> Data availability and quality varies between locations.
+        </blockquote>
       </footer>
     </article>
   );

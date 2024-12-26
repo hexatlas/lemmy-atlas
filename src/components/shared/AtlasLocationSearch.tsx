@@ -39,8 +39,11 @@ function AtlasLocationSearch() {
   const { country } = activeAdministrativeRegion;
 
   return (
-    <div id="location-search">
-      <div className="search-input-wrapper search-input-interface">
+    <div id="location-search" aria-label="Location Search">
+      <div
+        className="search-input-wrapper search-input-interface"
+        aria-label="Location Search"
+      >
         {activeAdministrativeRegion.country === 'country' && (
           <button
             role="button"
@@ -56,20 +59,24 @@ function AtlasLocationSearch() {
           <button
             role="button"
             title="Reset Atlas to default settings"
-            aria-label="Styled Reset Atlas Settings to default settings"
+            aria-label="Reset Atlas"
             className="atlas-reset-button"
             onClick={resetAtlas}
           >
             {activeAdministrativeRegion[activeGeographicIdentifier]} ⨯
           </button>
         )}
-        <div className="search-form">
+        <form
+          className="search-form"
+          role="search"
+          aria-label="Search Location Form"
+        >
           <label htmlFor="search-input" className="sr-only">
             Search Location in {country}
           </label>
           <input
             className="search-input"
-            type="text"
+            type="search"
             placeholder={`Search Location ${
               country !== 'country' ? `in ${country}` : ''
             }`}
@@ -79,10 +86,10 @@ function AtlasLocationSearch() {
             value={searchTerm}
             onChange={handleSearchInputChange}
           />
-        </div>
+        </form>
       </div>
       {(searchTerm.trim() !== '' || searchResults.length > 0) && (
-        <ul className="search-results">
+        <ul className="search-results" aria-label="Search Results">
           {loading && <p className="search-loading-emoji">🔍</p>}
           {searchResults.map((result) => (
             <li key={result.place_id}>

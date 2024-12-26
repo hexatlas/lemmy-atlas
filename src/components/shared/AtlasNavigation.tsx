@@ -11,12 +11,9 @@ function LegendNavigation({
   className?;
   route?;
 }) {
-  const layoutParams = route?.useSearch();
-  console.log(layoutParams, route._to, 'navigation');
-
   return (
     <div className={`atlas-tabs tabs-root light`}>
-      <header>
+      <header aria-label={`Navigation Menu`}>
         <nav
           className={`tabs-list ${className}`}
           aria-label={`Navigation Links`}

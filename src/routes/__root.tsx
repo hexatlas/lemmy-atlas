@@ -314,18 +314,28 @@ function AtlasRootComponent() {
         style={{
           gridTemplateColumns: `1.6180339887498948482fr ${legendSize}px`,
         }}
+        aria-label="Atlas Main View"
       >
         {isMobile && <AtlasInterface {...atlasInterfaceProps} />}
-        <div className={`map-container`}>
+        <aside
+          className={`map-container`}
+          aria-label="Map"
+          role="application"
+          aria-description="Use arrow keys to pan, plus and minus to zoom"
+        >
           {DisplayAtlasMap}
           {!isMobile && <AtlasInterface {...atlasInterfaceProps} />}
-        </div>
-        <LegendNavigation
-          links={navigationLinks}
-          route={Route}
-        ></LegendNavigation>
+        </aside>
+        <article
+          aria-label="Legend"
+          aria-description="Find useful information pertaining to the selected location"
+        >
+          <LegendNavigation
+            links={navigationLinks}
+            route={Route}
+          ></LegendNavigation>
+        </article>
       </main>
-      <hr />
       <ReactQueryDevtools buttonPosition="bottom-right" />
       <TanStackRouterDevtools position="bottom-left" />
     </AtlasContext.Provider>

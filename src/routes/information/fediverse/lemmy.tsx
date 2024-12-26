@@ -75,7 +75,7 @@ function LemmyRouteComponent() {
 
   return (
     <LegendLayout route={Route}>
-      <div id="legend-content" className="legend-content-container">
+      <>
         {editLemmyInstance ? (
           <div className="search-input-wrapper">
             <button
@@ -90,13 +90,13 @@ function LemmyRouteComponent() {
               {activeLemmyInstance.baseUrl} ⨯
             </button>
 
-            <div className="search-form">
+            <form className="search-form" role="search">
               <label htmlFor="search-input" className="sr-only">
                 Paste Lemmy URL
               </label>
               <input
                 name="search-input"
-                type="text"
+                type="search"
                 className="search-input"
                 aria-label="Paste Lemmy URL"
                 placeholder="Paste Lemmy URL"
@@ -114,7 +114,7 @@ function LemmyRouteComponent() {
                 }}
               />
               {/* <button type="submit"></button> */}
-            </div>
+            </form>
           </div>
         ) : (
           <div className="lemmy-edit-instance">
@@ -166,20 +166,20 @@ function LemmyRouteComponent() {
               </button>
             </CommunityInfoCard>
           )}
-          <div className="search-form">
+          <form className="search-form">
             <label htmlFor="search-input" className="sr-only">
               Query Selected Location
             </label>
             <input
               name="search-input"
-              type="text"
+              type="search"
               className="search-input"
               aria-label="Query Selected Community about Region"
               placeholder={`Query ${activeAdministrativeRegion?.country !== 'country' ? activeAdministrativeRegion[activeGeographicIdentifier] : ''}`}
               value={locationQuery}
               onChange={handleSearch}
             />
-          </div>
+          </form>
         </div>
         <div className="community-list">
           {communityList &&
@@ -312,7 +312,7 @@ function LemmyRouteComponent() {
         >
           View More
         </button>
-      </div>
+      </>
       <div className="legend-footer">
         <a
           href={encodeURI(
