@@ -8,26 +8,21 @@ export const Route = createFileRoute('/information/nexus')({
 function NexusRouteComponent() {
   return (
     <>
-      <div className="nexus-card">
-        <div className="tabs-list tabs-nexus" aria-label="Pick Fediverse">
-          <Link className="tabs-trigger" to="/information/nexus/prolewiki">
-            ProleWiki
-          </Link>
-          <Link className="tabs-trigger" to="/information/nexus/natopedia">
-            NATOPedia
-          </Link>
-          <Link className="tabs-trigger" to="/information/nexus/72Tbulletins">
-            72Ts Bulletins
-          </Link>
-          <Link
-            className="tabs-trigger"
-            to="/information/nexus/anarchistlibrary"
-          >
-            Anarchist Library
-          </Link>
-        </div>
-        <Outlet />
+      <div className="tabs-list tabs-nexus" aria-label="Pick Fediverse">
+        <Link className="tabs-trigger" to="/information/nexus/prolewiki">
+          ProleWiki
+        </Link>
+        <Link className="tabs-trigger" to="/information/nexus/natopedia">
+          NATOPedia
+        </Link>
+        <Link className="tabs-trigger" to="/information/nexus/72Tbulletins">
+          72Ts Bulletins
+        </Link>
+        <Link className="tabs-trigger" to="/information/nexus/anarchistlibrary">
+          Anarchist Library
+        </Link>
       </div>
+      <Outlet />
     </>
   );
 }

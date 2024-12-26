@@ -1,5 +1,6 @@
 import React from 'react';
 import { createFileRoute } from '@tanstack/react-router';
+import LegendLayout from '../../../components/shared/AtlasLegendLayout';
 
 export const Route = createFileRoute('/information/fediverse/')({
   component: FediverseHomeComponent,
@@ -7,7 +8,7 @@ export const Route = createFileRoute('/information/fediverse/')({
 
 function FediverseHomeComponent() {
   return (
-    <div>
+    <LegendLayout route={Route}>
       <h1>Fediverse</h1>
       <p>
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum provident
@@ -27,6 +28,6 @@ function FediverseHomeComponent() {
         <b>Note:</b> Data availability and accuracy may vary depending on the
         country and economic indicator.
       </blockquote>
-    </div>
+    </LegendLayout>
   );
 }

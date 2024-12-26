@@ -6,6 +6,7 @@ import useOverpassLayer from '../../../data/shared/useOverpassLayer';
 import { iconMap } from '../../../data/economy/overpass/emoji/industry';
 import AtlasOSMSettings from '../../../components/shared/OSMSettings';
 import AtlasOSMInfoList from '../../../components/shared/OSMInfoList';
+import LegendLayout from '../../../components/shared/AtlasLegendLayout';
 
 export const Route = createFileRoute('/economy/map/industry')({
   component: IndustryRouteComponent,
@@ -45,7 +46,7 @@ function IndustryRouteComponent() {
   };
 
   return (
-    <div id="legend-content">
+    <LegendLayout route={Route}>
       <AtlasOSMSettings {...clusterSettings} />
       {isLoading && <p className="search-loading-emoji">🔍</p>}
 
@@ -59,6 +60,6 @@ function IndustryRouteComponent() {
           filterKeys={['industrial']}
         ></AtlasOSMInfoList>
       )}
-    </div>
+    </LegendLayout>
   );
 }

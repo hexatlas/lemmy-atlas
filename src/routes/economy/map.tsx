@@ -8,29 +8,28 @@ export const Route = createFileRoute('/economy/map')({
 function MapRouteComponent() {
   return (
     <>
-      <div className="nexus-card">
-        <div className="tabs-list tabs-nexus" aria-label="Pick Fediverse">
-          <Link className="tabs-trigger" to="/economy/map/energy">
-            ⚡
-          </Link>
-          <Link className="tabs-trigger" to="/economy/map/industry">
-            🏭
-          </Link>
-          <Link className="tabs-trigger" to="/economy/map" disabled>
-            🌾
-          </Link>
-          <Link className="tabs-trigger" to="/economy/map" disabled>
-            📦
-          </Link>
-          <Link className="tabs-trigger" to="/economy/map" disabled>
-            🏦
-          </Link>
-          <Link className="tabs-trigger" to="/economy/map" disabled>
-            🚛
-          </Link>
-        </div>
-        <Outlet />
+      <div className="tabs-list tabs-nexus" aria-label="Pick Fediverse">
+        <Link className="tabs-trigger" to="/economy/map/energy">
+          ⚡
+        </Link>
+        <Link className="tabs-trigger" to="/economy/map/industry">
+          🏭
+        </Link>
+        <Link className="tabs-trigger" to="/economy/map" disabled>
+          🌾
+        </Link>
+        <Link className="tabs-trigger" to="/economy/map" disabled>
+          📦
+        </Link>
+        <Link className="tabs-trigger" to="/economy/map" disabled>
+          🏦
+        </Link>
+        <Link className="tabs-trigger" to="/economy/map" disabled>
+          🚛
+        </Link>
       </div>
+
+      <Outlet />
     </>
   );
 }

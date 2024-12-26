@@ -9,6 +9,7 @@ import * as Collapsible from '@radix-ui/react-collapsible';
 import { AtlasContext } from '../__root';
 import useIMF from '../../data/economy/charts/useIMF';
 import { IMFIndicatorType } from '../../types/api.types';
+import LegendLayout from '../../components/shared/AtlasLegendLayout';
 
 export const Route = createFileRoute('/economy/charts')({
   component: ChartsRouteComponent,
@@ -330,7 +331,7 @@ function ChartsRouteComponent() {
     const years = Object.keys(yearsData);
     const [open, setOpen] = useState(false);
     return (
-      <div>
+      <>
         <LineChart data={yearsData} />
         <Collapsible.Root
           className="CollapsibleRoot"
@@ -391,12 +392,12 @@ function ChartsRouteComponent() {
             </table>
           </Collapsible.Content>
         </Collapsible.Root>
-      </div>
+      </>
     );
   };
 
   return (
-    <div id="legend-content" className="container">
+    <LegendLayout route={Route}>
       <div className="container">
         <h3>Where does line go? </h3>
         <select
@@ -470,6 +471,6 @@ function ChartsRouteComponent() {
           </p>
         </Collapsible.Content>
       </Collapsible.Root>
-    </div>
+    </LegendLayout>
   );
 }

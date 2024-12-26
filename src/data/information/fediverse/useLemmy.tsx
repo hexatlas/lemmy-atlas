@@ -77,8 +77,6 @@ function useLemmy(
   };
 
   function handleUpdate() {
-    console.log(posts, comments);
-
     if (locationQuery) {
       setCurrentCommunityPage(1);
       handleSearchCommunities(locationQuery);

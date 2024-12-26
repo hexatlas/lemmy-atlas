@@ -8,23 +8,21 @@ export const Route = createFileRoute('/military/map')({
 function MapRouteComponent() {
   return (
     <>
-      <div className="nexus-card">
-        <div className="tabs-list tabs-nexus" aria-label="Pick Fediverse">
-          <Link className="tabs-trigger" to="/military/map" disabled>
-            🏰
-          </Link>
-          <Link className="tabs-trigger" to="/military/map" disabled>
-            👽
-          </Link>
-          <Link className="tabs-trigger" to="/military/map" disabled>
-            🔫
-          </Link>
-          <Link className="tabs-trigger" to="/military/map" disabled>
-            🚁
-          </Link>
-        </div>
-        <Outlet />
+      <div className="tabs-list tabs-nexus" aria-label="Pick Fediverse">
+        <Link className="tabs-trigger" to="/military/map" disabled>
+          🏰
+        </Link>
+        <Link className="tabs-trigger" to="/military/map" disabled>
+          👽
+        </Link>
+        <Link className="tabs-trigger" to="/military/map" disabled>
+          🔫
+        </Link>
+        <Link className="tabs-trigger" to="/military/map" disabled>
+          🚁
+        </Link>
       </div>
+      <Outlet />
     </>
   );
 }

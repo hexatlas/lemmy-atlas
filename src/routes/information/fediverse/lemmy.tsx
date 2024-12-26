@@ -11,6 +11,7 @@ import CommunityInfoCard from '../../../components/lemmy/CommunityInfoCard';
 import * as Tabs from '@radix-ui/react-tabs';
 
 import { searchTypes } from '../../../types/api.types';
+import LegendLayout from '../../../components/shared/AtlasLegendLayout';
 
 export const Route = createFileRoute('/information/fediverse/lemmy')({
   component: LemmyRouteComponent,
@@ -70,16 +71,10 @@ function LemmyRouteComponent() {
     activeListingType,
     activeSortType,
   );
-  console.log(posts, 'posts');
-
-  console.log(comments, 'comments');
-
-  console.log(communityList, 'communityList');
-
   const [editLemmyInstance, setEditLemmyInstance] = useState<boolean>(false);
 
   return (
-    <>
+    <LegendLayout route={Route}>
       <div id="legend-content" className="legend-content-container">
         {editLemmyInstance ? (
           <div className="search-input-wrapper">
@@ -335,6 +330,6 @@ function LemmyRouteComponent() {
           🔗 view in {activeLemmyInstance.baseUrl}
         </a>
       </div>
-    </>
+    </LegendLayout>
   );
 }

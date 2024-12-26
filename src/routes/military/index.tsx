@@ -1,5 +1,6 @@
 import React from 'react';
 import { createFileRoute } from '@tanstack/react-router';
+import LegendLayout from '../../components/shared/AtlasLegendLayout';
 
 export const Route = createFileRoute('/military/')({
   component: MilitaryHomeComponent,
@@ -7,7 +8,7 @@ export const Route = createFileRoute('/military/')({
 
 function MilitaryHomeComponent() {
   return (
-    <div className="atlas-legend container">
+    <LegendLayout route={Route}>
       <h1>Military</h1>
       <p>
         This section provides an overview of the economic landscape, including
@@ -41,6 +42,6 @@ function MilitaryHomeComponent() {
         <b>Note:</b> Data availability and accuracy may vary depending on the
         country and economic indicator.
       </blockquote>
-    </div>
+    </LegendLayout>
   );
 }

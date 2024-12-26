@@ -1,5 +1,6 @@
 import React from 'react';
 import { createFileRoute } from '@tanstack/react-router';
+import LegendLayout from '../../components/shared/AtlasLegendLayout';
 
 export const Route = createFileRoute('/government/class')({
   component: RouteComponent,
@@ -7,7 +8,7 @@ export const Route = createFileRoute('/government/class')({
 
 function RouteComponent() {
   return (
-    <div className="legend-content-container class-structure">
+    <LegendLayout route={Route}>
       <h3>TO DO: Class Structure </h3>
       <h6>TO DO: LINK DISCUSSION THREAD TO EVENTUALLY FILL WITH REAL DATA</h6>
 
@@ -281,6 +282,6 @@ function RouteComponent() {
           </tr>
         </tbody>
       </table>
-    </div>
+    </LegendLayout>
   );
 }

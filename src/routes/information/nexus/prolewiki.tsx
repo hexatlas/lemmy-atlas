@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { createFileRoute } from '@tanstack/react-router';
 import { AtlasContext } from '../../__root';
 import useWiki from '../../../data/information/nexus/useWiki';
+import LegendLayout from '../../../components/shared/AtlasLegendLayout';
 
 export const Route = createFileRoute('/information/nexus/prolewiki')({
   component: RouteComponent,
@@ -22,8 +23,8 @@ function RouteComponent() {
   );
 
   return (
-    <>
-      <div id="legend-content">
+    <LegendLayout route={Route}>
+      <>
         {isProleWiki ? (
           <>
             <p>
@@ -84,7 +85,7 @@ function RouteComponent() {
             ></div>
           </>
         )}
-      </div>
+      </>
       <div className="legend-footer">
         <a
           href={`${wikiURL}?search=${encodeURI(
@@ -96,6 +97,6 @@ function RouteComponent() {
           View more on {wikiURL}
         </a>
       </div>
-    </>
+    </LegendLayout>
   );
 }

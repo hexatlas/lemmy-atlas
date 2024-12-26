@@ -7,6 +7,7 @@ import * as Collapsible from '@radix-ui/react-collapsible';
 import { AtlasContext } from '../../__root';
 import useMastodon from '../../../data/information/fediverse/useMastodon';
 import { TimeAgo } from '../../../hooks/useDataTransform';
+import LegendLayout from '../../../components/shared/AtlasLegendLayout';
 
 export const Route = createFileRoute('/information/fediverse/mastodon')({
   component: MastodonRouteComponent,
@@ -22,7 +23,7 @@ function MastodonRouteComponent() {
   );
 
   return (
-    <>
+    <LegendLayout route={Route}>
       <div id="legend-content">
         <h3>
           Latest Posts on{' '}
@@ -207,6 +208,6 @@ function MastodonRouteComponent() {
           View more on Mastodon.Social
         </a>
       </div>
-    </>
+    </LegendLayout>
   );
 }

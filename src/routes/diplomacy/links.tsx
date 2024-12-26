@@ -2,6 +2,7 @@ import * as React from 'react';
 import { useContext } from 'react';
 import { createFileRoute } from '@tanstack/react-router';
 import { AtlasContext } from '../__root';
+import LegendLayout from '../../components/shared/AtlasLegendLayout';
 
 export const Route = createFileRoute('/diplomacy/links')({
   component: LinksRouteComponent,
@@ -12,8 +13,8 @@ function LinksRouteComponent() {
     useContext(AtlasContext)!;
 
   return (
-    <div id="legend-content">
+    <LegendLayout route={Route}>
       <h3>🕊️ {activeAdministrativeRegion[activeGeographicIdentifier]} LINKS</h3>
-    </div>
+    </LegendLayout>
   );
 }

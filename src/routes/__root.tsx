@@ -312,6 +312,7 @@ function AtlasRootComponent() {
               🏛️
             </Link>
           </div>
+
           <Outlet />
         </div>
       </div>

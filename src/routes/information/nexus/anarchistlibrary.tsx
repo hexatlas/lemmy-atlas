@@ -9,6 +9,7 @@ import useAnarachistLibrary from '../../../data/information/nexus/useAnarachistL
 
 // Lemmy
 import HexBear from '../../../components/shared/HexBear';
+import LegendLayout from '../../../components/shared/AtlasLegendLayout';
 
 export const Route = createFileRoute('/information/nexus/anarchistlibrary')({
   component: RouteComponent,
@@ -24,7 +25,7 @@ function RouteComponent() {
   );
 
   return (
-    <div id="legend-content">
+    <LegendLayout route={Route}>
       <h3>Anarchist Library</h3>
       <a
         href={`https://theanarchistlibrary.org/search?query=${encodeURI(
@@ -85,6 +86,6 @@ function RouteComponent() {
             })}
         </>
       )}
-    </div>
+    </LegendLayout>
   );
 }

@@ -8,17 +8,16 @@ export const Route = createFileRoute('/information/fediverse')({
 function FediverseRouteComponent() {
   return (
     <>
-      <div className="nexus-card">
-        <div className="tabs-list tabs-nexus" aria-label="Pick Fediverse">
-          <Link className="tabs-trigger" to="/information/fediverse/lemmy">
-            Lemmy
-          </Link>
-          <Link className="tabs-trigger" to="/information/fediverse/mastodon">
-            Mastodon
-          </Link>
-        </div>
-        <Outlet />
+      <div className="tabs-list tabs-nexus" aria-label="Pick Fediverse">
+        <Link className="tabs-trigger" to="/information/fediverse/lemmy">
+          Lemmy
+        </Link>
+        <Link className="tabs-trigger" to="/information/fediverse/mastodon">
+          Mastodon
+        </Link>
       </div>
+
+      <Outlet />
     </>
   );
 }

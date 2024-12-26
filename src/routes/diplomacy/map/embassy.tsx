@@ -6,6 +6,7 @@ import AtlasOSMInfoList from '../../../components/shared/OSMInfoList';
 import AtlasOSMSettings from '../../../components/shared/OSMSettings';
 import { createFileRoute } from '@tanstack/react-router';
 import { AtlasContext } from '../../__root';
+import LegendLayout from '../../../components/shared/AtlasLegendLayout';
 
 export const Route = createFileRoute('/diplomacy/map/embassy')({
   component: EmbassyRouteComponent,
@@ -50,7 +51,7 @@ function EmbassyRouteComponent() {
   };
 
   return (
-    <div id="legend-content">
+    <LegendLayout route={Route}>
       {isLoading && <p className="search-loading-emoji">🔍</p>}
       <AtlasOSMSettings {...clusterSettings} />
       {data && (
@@ -63,6 +64,6 @@ function EmbassyRouteComponent() {
           filterKeys={['diplomatic']}
         ></AtlasOSMInfoList>
       )}
-    </div>
+    </LegendLayout>
   );
 }

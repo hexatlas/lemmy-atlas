@@ -4,6 +4,7 @@ import { AtlasContext } from '../../__root';
 import useNewsBulletins from '../../../data/information/nexus/useNewsBulletins';
 import ReactMarkdown from 'react-markdown';
 import HexBear from '../../../components/shared/HexBear';
+import LegendLayout from '../../../components/shared/AtlasLegendLayout';
 
 export const Route = createFileRoute('/information/nexus/72Tbulletins')({
   component: RouteComponent,
@@ -17,7 +18,7 @@ function RouteComponent() {
   );
 
   return (
-    <div id="legend-content" className="legend-content-container">
+    <LegendLayout route={Route}>
       <h3>Reading List</h3>
       <a
         href={`https://bulletins.hexbear.net/posts/readinglist/#${encodeURI(
@@ -68,6 +69,6 @@ function RouteComponent() {
             })}
         </>
       )}
-    </div>
+    </LegendLayout>
   );
 }

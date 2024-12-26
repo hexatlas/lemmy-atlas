@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { createFileRoute } from '@tanstack/react-router';
 import { AtlasContext } from '../__root';
+import LegendLayout from '../../components/shared/AtlasLegendLayout';
 
 export const Route = createFileRoute('/economy/links')({
   component: LinksRouteComponent,
@@ -11,7 +12,7 @@ function LinksRouteComponent() {
     useContext(AtlasContext)!;
 
   return (
-    <div id="legend-content">
+    <LegendLayout route={Route}>
       <h3>World Inequality Database</h3>
       <a
         href="https://wid.world/data/"
@@ -126,6 +127,6 @@ function LinksRouteComponent() {
       >
         🔗 World-Profitability Calculator
       </a>
-    </div>
+    </LegendLayout>
   );
 }
