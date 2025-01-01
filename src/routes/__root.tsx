@@ -336,8 +336,8 @@ function AtlasRootComponent() {
           ></LegendNavigation>
         </article>
       </main>
-      <ReactQueryDevtools buttonPosition="bottom-right" />
-      <TanStackRouterDevtools position="bottom-left" />
+      {/* <ReactQueryDevtools buttonPosition="bottom-right" />
+      <TanStackRouterDevtools position="bottom-left" /> */}
     </AtlasContext.Provider>
   );
 }
