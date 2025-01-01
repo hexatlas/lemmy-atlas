@@ -1,4 +1,7 @@
 import React, { useCallback, useState } from 'react';
+// https://www.radix-ui.com/primitives/docs/components/accordion
+import * as Accordion from '@radix-ui/react-accordion';
+
 import AtlasOSMInfoCard from './OSMInfoCard';
 
 import { OSMInfoListProps } from '../../types/atlas.types';
@@ -135,7 +138,9 @@ function AtlasOSMInfoList({
         </>
       )}
 
-      <div
+      <Accordion.Root
+        type="single"
+        collapsible
         className="overpass-list"
         role="list"
         aria-label={`${listName} in ${activeAdministrativeRegion['country']}`}
@@ -160,7 +165,7 @@ function AtlasOSMInfoList({
               ></AtlasOSMInfoCard>
             );
           })}
-      </div>
+      </Accordion.Root>
     </>
   );
 }

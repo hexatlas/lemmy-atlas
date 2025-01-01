@@ -2,6 +2,10 @@ import React from 'react';
 
 // https://www.radix-ui.com/primitives/docs/components/collapsible
 import * as Collapsible from '@radix-ui/react-collapsible';
+
+// https://www.radix-ui.com/primitives/docs/components/accordion
+import * as Accordion from '@radix-ui/react-accordion';
+
 import { OSMInfoCardProps } from '../../types/atlas.types';
 import { ReactNode } from '@tanstack/react-router';
 
@@ -19,21 +23,17 @@ function AtlasOSMInfoCard({
   const { name, wikidata } = element?.tags || {};
 
   return (
-    <Collapsible.Root
+    <Accordion.Item
       key={index}
+      value={name}
       className={`overpass-item ${element == activeElement && 'active'}`}
-      tabIndex={0}
+      // tabIndex={0}
       onMouseEnter={() => handleMouseEnter(element)} // Trigger zoom on hover
       onMouseLeave={() => handleMouseLeave(element)} // Revert zoom on leave
       onClick={() => handleClick(element)} // Fly to on click
-      onKeyDown={(e) => {
-        if (e.key === 'Enter' || e.key === ' ') {
-          e.preventDefault(); // Prevent default scrolling behavior on Space
-          handleClick(element);
-        }
-      }}
-      aria-label={name}
-      role="listitem"
+      onFocus={() => handleClick(element)}
+      // aria-label={name}
+      // role="listitem"
     >
       {iconMap && filterKeys && (
         <div aria-label="list header">
@@ -63,9 +63,7 @@ function AtlasOSMInfoCard({
               );
             })}
           </div>
-          <Collapsible.Trigger className="overpass-expand">
-            🗃️
-          </Collapsible.Trigger>
+          <Accordion.Trigger className="overpass-expand">🗃️</Accordion.Trigger>
         </div>
       )}
       {children}
@@ -135,10 +133,10 @@ function AtlasOSMInfoCard({
             );
           })}
       </div>
-      <Collapsible.Content className="overpass-json dark">
+      <Accordion.Content className="overpass-json dark">
         <pre>{JSON.stringify(element?.tags, undefined, 2)}</pre>
-      </Collapsible.Content>
-    </Collapsible.Root>
+      </Accordion.Content>
+    </Accordion.Item>
   );
 }
 
