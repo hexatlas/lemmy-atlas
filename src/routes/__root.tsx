@@ -38,34 +38,6 @@ export const Route = createRootRoute({
   component: AtlasRootComponent,
 });
 
-const navigationLinks: AtlasNavigation[] = [
-  {
-    link: '/economy',
-    emoji: '🪙',
-    isDisabled: false,
-  },
-  {
-    link: '/information',
-    emoji: 'ℹ️',
-    isDisabled: false,
-  },
-  {
-    link: '/diplomacy',
-    emoji: '🕊️',
-    isDisabled: false,
-  },
-  {
-    link: '/military',
-    emoji: '🛡️',
-    isDisabled: false,
-  },
-  {
-    link: '/government',
-    emoji: '🏛️',
-    isDisabled: false,
-  },
-];
-
 const defaultAdministrativeRegionObject: AdministrativeRegionObject = {
   // START - Do not change as theres a lot of If(activeAdministrativeRegion.country === "country") that depends on this
   country: 'country',
@@ -91,9 +63,11 @@ const defaultAdministrativeRegionObject: AdministrativeRegionObject = {
 
 function AtlasRootComponent() {
   const sideBarRef = useRef<HTMLInputElement>(null);
+
   /*
     useStates
   */
+
   // DEVICE
   const [isMobile, setIsMobile] = useState<boolean>(window.innerWidth < 768);
   const [legendSize, setLegendSize] = useState<number>(
@@ -226,39 +200,6 @@ function AtlasRootComponent() {
       });
   }
 
-  // Handle Browser Back Button
-  //  Start
-  // const handleBackButton = () => {
-  //   const administrativeRegionWindow = JSON.parse(
-  //     decodeURI(window.location.pathname.replace("/", ""))
-  //   );
-
-  //   const selectedAdministrativeRegion = administrativeRegionsData?.features.find(
-  //     (administrativeRegion) => administrativeRegion.properties.id === administrativeRegionWindow.id
-  //   );
-  //   if (selectedAdministrativeRegion) setActiveAdministrativeRegion(selectedAdministrativeRegion.properties);
-  // };
-
-  // useEffect(() => {
-  //   if (window.location.pathname.length > 1) handleBackButton();
-
-  //   window.addEventListener("popstate", handleBackButton);
-
-  //   return () => {
-  //     window.removeEventListener("popstate", handleBackButton);
-  //   };
-  // }, []);
-
-  // useEffect(() => {
-  //   if (window && activeAdministrativeRegion)
-  //     window.history.pushState(
-  //       null,
-  //       "",
-  //       `/${encodeURI(JSON.stringify(activeAdministrativeRegion))}`
-  //     );
-  // }, [activeAdministrativeRegion]);
-  // End
-
   const atlasInterfaceProps: AtlasInterfaceProps = {
     // Util
     isMobile,
@@ -341,3 +282,31 @@ function AtlasRootComponent() {
     </AtlasContext.Provider>
   );
 }
+
+const navigationLinks: AtlasNavigation[] = [
+  {
+    link: '/economy',
+    emoji: '🪙',
+    isDisabled: false,
+  },
+  {
+    link: '/information',
+    emoji: 'ℹ️',
+    isDisabled: false,
+  },
+  {
+    link: '/diplomacy',
+    emoji: '🕊️',
+    isDisabled: false,
+  },
+  {
+    link: '/military',
+    emoji: '🛡️',
+    isDisabled: false,
+  },
+  {
+    link: '/government',
+    emoji: '🏛️',
+    isDisabled: false,
+  },
+];

@@ -13,7 +13,7 @@ function LegendNavigation({
 }) {
   return (
     <div className={`atlas-tabs tabs-root light`}>
-      <header aria-label={`Navigation Menu`}>
+      <header aria-label={`Navigation Menu`} role="menubar">
         <nav
           className={`tabs-list ${className}`}
           aria-label={`Navigation Links`}

@@ -22,6 +22,7 @@ function AtlasOSMInfoCard({
     <Collapsible.Root
       key={index}
       className={`overpass-item ${element == activeElement && 'active'}`}
+      tabIndex={0}
       onMouseEnter={() => handleMouseEnter(element)} // Trigger zoom on hover
       onMouseLeave={() => handleMouseLeave(element)} // Revert zoom on leave
       onClick={() => handleClick(element)} // Fly to on click
@@ -32,39 +33,43 @@ function AtlasOSMInfoCard({
         }
       }}
       aria-label={name}
-      role="button"
+      role="listitem"
     >
       {iconMap && filterKeys && (
-        <div className="overpass-filterkey">
-          {iconMap[element?.tags[filterKeys[0]]]?.options?.html ? (
-            <span className="emoji">
-              {
-                iconMap[element?.tags[filterKeys[0]]]?.options
-                  ?.html as ReactNode
-              }
-            </span>
-          ) : (
-            <span className="emoji">
-              {iconMap['defaultIcon']?.options?.html as ReactNode}
-            </span>
-          )}
-          {filterKeys.map((filterKey, index) => {
-            if (index > 0) return;
-            return (
-              <>
-                {element?.tags[filterKey] && (
-                  <small key={index}>{element?.tags[filterKey]}</small>
-                )}
-              </>
-            );
-          })}
+        <div aria-label="list header">
+          <div className="overpass-filterkey" aria-label={`Filterkey`}>
+            {iconMap[element?.tags[filterKeys[0]]]?.options?.html ? (
+              <span className="emoji" aria-hidden="true">
+                {
+                  iconMap[element?.tags[filterKeys[0]]]?.options
+                    ?.html as ReactNode
+                }
+              </span>
+            ) : (
+              <span className="emoji" aria-hidden="true">
+                {iconMap['defaultIcon']?.options?.html as ReactNode}
+              </span>
+            )}
+            {filterKeys.map((filterKey, index) => {
+              if (index > 0) return;
+              return (
+                <div key={index}>
+                  {element?.tags[filterKey] && (
+                    <small key={index} aria-label={filterKey}>
+                      {element?.tags[filterKey]}
+                    </small>
+                  )}
+                </div>
+              );
+            })}
+          </div>
           <Collapsible.Trigger className="overpass-expand">
             🗃️
           </Collapsible.Trigger>
         </div>
       )}
       {children}
-      <div className="overpass-container">
+      <div className="overpass-container" aria-label="list body">
         <div className="overpass-name">
           {wikidata && (
             <a
@@ -72,6 +77,7 @@ function AtlasOSMInfoCard({
               target="_blank"
               rel="noopener noreferrer"
               className="wikidata"
+              aria-label="wikidata"
             >
               <WikiData />
             </a>
@@ -84,11 +90,11 @@ function AtlasOSMInfoCard({
             {filterKeys.map((filterKey, index) => {
               if (index < 1) return;
               return (
-                <>
+                <div key={index} aria-label={filterKey}>
                   {element?.tags[filterKey] && (
                     <small key={index}>{element?.tags[filterKey]}</small>
                   )}
-                </>
+                </div>
               );
             })}
           </div>
@@ -145,6 +151,7 @@ const WikiData = () => {
       width="100%"
       height="auto"
       preserveAspectRatio="xMidYMid meet"
+      aria-label="wikidata icon"
     >
       <path
         d="m 119.4207,543.01679 h 29.16277 V 43.052497 H 119.4207 V 543.01679 z m 60.27256,0 h 89.42926 V 43.052497 H 179.69326 V 543.01679 z M 298.29136,43.052497 V 542.99895 h 89.42926 V 43.052497 h -89.42926 z"

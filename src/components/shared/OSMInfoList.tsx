@@ -101,10 +101,18 @@ function AtlasOSMInfoList({
               found in {activeAdministrativeRegion['country']}
             </h5>
           </div>
-          <div className="filter-menu">
+          <div
+            className="filter-menu"
+            aria-label={`Filter options ${listName}`}
+            role="toolbar"
+          >
             {filterKeys &&
-              filterKeys.map((key) => (
-                <div key={key} className="filter-field">
+              filterKeys.map((key, index) => (
+                <div
+                  key={index}
+                  className="filter-field"
+                  aria-label={`${key} filter option`}
+                >
                   <label htmlFor={key} className="sr-only">
                     {key}
                   </label>
@@ -112,6 +120,7 @@ function AtlasOSMInfoList({
                     id={key}
                     value={selectedFilters[key] || ''}
                     onChange={(e) => handleFilterChange(key, e.target.value)}
+                    aria-controls="overpass-list"
                   >
                     <option value="">{key}</option>
                     {getFilterOptions(key).map((option: string, index) => (
@@ -126,7 +135,14 @@ function AtlasOSMInfoList({
         </>
       )}
 
-      <div className="overpass-list">
+      <div
+        className="overpass-list"
+        role="list"
+        aria-label={`${listName} in ${activeAdministrativeRegion['country']}`}
+        aria-description={`List of ${listName} in ${activeAdministrativeRegion['country']}`}
+        aria-live="polite"
+        id="overpass-list"
+      >
         {filteredData &&
           filteredData.map((element, index) => {
             return (
