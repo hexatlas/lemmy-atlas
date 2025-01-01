@@ -61,7 +61,7 @@ function EmbassyRouteComponent() {
           data={data}
           iconMap={iconMap}
           activeAdministrativeRegion={activeAdministrativeRegion}
-          filterKeys={['diplomatic']}
+          filterKeys={['diplomatic', 'target']}
         ></AtlasOSMInfoList>
       )}
     </LegendLayout>

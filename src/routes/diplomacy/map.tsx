@@ -1,11 +1,16 @@
-import * as React from 'react';
+import React from 'react';
 import { createFileRoute } from '@tanstack/react-router';
-import LegendNavigation from '../../components/shared/AtlasNavigation';
+
 import { AtlasNavigation } from '../../types/atlas.types';
 
+import MapRouteComponent from '../../components/shared/AtlasMapRouteComponent';
+
 export const Route = createFileRoute('/diplomacy/map')({
-  component: MapRouteComponent,
+  component: () => (
+    <MapRouteComponent navigationLinks={navigationLinks} route={Route} />
+  ),
 });
+
 const navigationLinks: AtlasNavigation[] = [
   {
     link: '/diplomacy/map/embassy',
@@ -23,7 +28,3 @@ const navigationLinks: AtlasNavigation[] = [
     isDisabled: true,
   },
 ];
-
-function MapRouteComponent() {
-  return <LegendNavigation links={navigationLinks} route={Route} />;
-}
