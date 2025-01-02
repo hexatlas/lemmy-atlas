@@ -32,8 +32,8 @@ function AtlasOSMInfoCard({
       onMouseLeave={() => handleMouseLeave(element)} // Revert zoom on leave
       onClick={() => handleClick(element)} // Fly to on click
       onFocus={() => handleClick(element)}
-      // aria-label={name}
-      // role="listitem"
+      aria-label={name}
+      role="listitem"
     >
       {iconMap && filterKeys && (
         <div aria-label="list header">
@@ -88,11 +88,15 @@ function AtlasOSMInfoCard({
             {filterKeys.map((filterKey, index) => {
               if (index < 1) return;
               return (
-                <div key={index} aria-label={filterKey}>
+                <p
+                  key={index}
+                  aria-label={element?.tags[filterKey]}
+                  aria-description={filterKey}
+                >
                   {element?.tags[filterKey] && (
                     <small key={index}>{element?.tags[filterKey]}</small>
                   )}
-                </div>
+                </p>
               );
             })}
           </div>
@@ -134,7 +138,7 @@ function AtlasOSMInfoCard({
           })}
       </div>
       <Accordion.Content className="overpass-json dark">
-        <pre>{JSON.stringify(element?.tags, undefined, 2)}</pre>
+        <pre>{JSON.stringify(element.tags, null, 2)}</pre>
       </Accordion.Content>
     </Accordion.Item>
   );

@@ -9,6 +9,7 @@ import AtlasOSMInfoCard from './OSMInfoCard';
 
 import { OSMInfoListProps } from '../../types/atlas.types';
 import { LatLngBoundsExpression } from 'leaflet';
+import { ReactNode } from '@tanstack/react-router';
 
 function AtlasOSMInfoList({
   listName,
@@ -99,19 +100,24 @@ function AtlasOSMInfoList({
     <>
       {filteredData && (
         <Collapsible.Root>
-          <Collapsible.Trigger className="filter-title">
-            <h5>
-              <span>{listName} </span>
-              found in {activeAdministrativeRegion['country']}
-            </h5>
-            <p>
-              {' '}
-              {filteredData.length}{' '}
-              {Object.entries(selectedFilters).map(([key, value]) => {
-                if (!value) return true; // No filter applied for this key
-                return `${value} `; // Element must match the filter
-              })}{' '}
-            </p>
+          <h5>
+            <span>{listName} </span>
+            found in {activeAdministrativeRegion['country']}
+          </h5>
+          <p>
+            {' '}
+            {filteredData.length}{' '}
+            {Object.entries(selectedFilters).map(([key, value]) => {
+              if (!value) return true; // No filter applied for this key
+              return `${
+                iconMap && iconMap[value as string] != undefined
+                  ? (iconMap[value as string]?.options?.html as ReactNode)
+                  : ''
+              } ${value} `; // Element must match the filter
+            })}{' '}
+          </p>
+          <Collapsible.Trigger className="filter-title emoji-label">
+            🎚️
           </Collapsible.Trigger>
           <Collapsible.Content
             className="filter-menu"
@@ -125,18 +131,26 @@ function AtlasOSMInfoList({
                   className="filter-field"
                   aria-label={`${key} filter option`}
                 >
-                  <label htmlFor={key}>{getFilterOptions(key).length}</label>
+                  <label htmlFor={key} className="sr-only">
+                    {getFilterOptions(key).length}
+                  </label>
                   <select
                     id={key}
                     value={selectedFilters[key] || ''}
                     onChange={(e) => handleFilterChange(key, e.target.value)}
                     aria-controls="overpass-list"
                   >
-                    <option value="">
-                      {getFilterOptions(key).length} {key}
+                    <option
+                      value=""
+                      className="filter-field-reset"
+                      defaultChecked
+                    >
+                      ({getFilterOptions(key).length}) {key}
                     </option>
                     {getFilterOptions(key).map((option: string, index) => (
                       <option key={index} value={option.toString()}>
+                        {iconMap &&
+                          (iconMap[option]?.options?.html as ReactNode)}{' '}
                         {option.toString()}
                       </option>
                     ))}
@@ -148,8 +162,7 @@ function AtlasOSMInfoList({
       )}
 
       <Accordion.Root
-        type="single"
-        collapsible
+        type="multiple"
         className="overpass-list"
         role="list"
         aria-label={`${listName} in ${activeAdministrativeRegion['country']}`}
