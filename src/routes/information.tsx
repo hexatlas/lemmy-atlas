@@ -48,6 +48,11 @@ const navigationLinks: AtlasNavigation[] = [
     emoji: '👥',
     isDisabled: false,
   },
+  {
+    link: '/information/',
+    emoji: '🗨️',
+    isDisabled: true,
+  },
 ];
 
 function InformationRouteComponent() {
