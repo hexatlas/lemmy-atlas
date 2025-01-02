@@ -2,6 +2,9 @@ import React, { useCallback, useState } from 'react';
 // https://www.radix-ui.com/primitives/docs/components/accordion
 import * as Accordion from '@radix-ui/react-accordion';
 
+// https://www.radix-ui.com/primitives/docs/components/accordion
+import * as Collapsible from '@radix-ui/react-collapsible';
+
 import AtlasOSMInfoCard from './OSMInfoCard';
 
 import { OSMInfoListProps } from '../../types/atlas.types';
@@ -95,16 +98,22 @@ function AtlasOSMInfoList({
   return (
     <>
       {filteredData && (
-        <>
-          <div className="filter-title">
+        <Collapsible.Root>
+          <Collapsible.Trigger className="filter-title">
             <h5>
-              <span>
-                {filteredData.length} {listName}
-              </span>{' '}
+              <span>{listName} </span>
               found in {activeAdministrativeRegion['country']}
             </h5>
-          </div>
-          <div
+            <p>
+              {' '}
+              {filteredData.length}{' '}
+              {Object.entries(selectedFilters).map(([key, value]) => {
+                if (!value) return true; // No filter applied for this key
+                return `${value} `; // Element must match the filter
+              })}{' '}
+            </p>
+          </Collapsible.Trigger>
+          <Collapsible.Content
             className="filter-menu"
             aria-label={`Filter options ${listName}`}
             role="toolbar"
@@ -116,16 +125,16 @@ function AtlasOSMInfoList({
                   className="filter-field"
                   aria-label={`${key} filter option`}
                 >
-                  <label htmlFor={key} className="sr-only">
-                    {key}
-                  </label>
+                  <label htmlFor={key}>{getFilterOptions(key).length}</label>
                   <select
                     id={key}
                     value={selectedFilters[key] || ''}
                     onChange={(e) => handleFilterChange(key, e.target.value)}
                     aria-controls="overpass-list"
                   >
-                    <option value="">{key}</option>
+                    <option value="">
+                      {getFilterOptions(key).length} {key}
+                    </option>
                     {getFilterOptions(key).map((option: string, index) => (
                       <option key={index} value={option.toString()}>
                         {option.toString()}
@@ -134,8 +143,8 @@ function AtlasOSMInfoList({
                   </select>
                 </div>
               ))}
-          </div>{' '}
-        </>
+          </Collapsible.Content>{' '}
+        </Collapsible.Root>
       )}
 
       <Accordion.Root
