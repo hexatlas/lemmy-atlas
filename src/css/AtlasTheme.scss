@@ -203,6 +203,14 @@ code {
       hsl(var(--atlas-color-dark) / calc(0.019 * var(--intensity)));
 }
 
+[data-theme='dark'] {
+  --atlas-color-light: 282.86 0% 13%;
+  --atlas-color-dark: 282.86 100% 98.5%;
+  input {
+    color: hsl(var(--atlas-color-dark));
+  }
+}
+
 /* 
     MIXINS
 */
