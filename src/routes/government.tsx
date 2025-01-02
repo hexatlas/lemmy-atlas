@@ -5,7 +5,7 @@ import { AtlasNavigation } from '../types/atlas.types';
 import LegendNavigation from '../components/shared/AtlasNavigation';
 
 export const Route = createFileRoute('/government')({
-  component: GovernmentRouteComponent,
+  component: () => <LegendNavigation links={navigationLinks} route={Route} />,
 });
 
 const navigationLinks: AtlasNavigation[] = [
@@ -25,7 +25,3 @@ const navigationLinks: AtlasNavigation[] = [
     isDisabled: false,
   },
 ];
-
-function GovernmentRouteComponent() {
-  return <LegendNavigation links={navigationLinks} route={Route} />;
-}
