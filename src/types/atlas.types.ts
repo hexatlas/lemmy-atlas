@@ -108,9 +108,6 @@ export interface AtlasInterfaceProps {
   setActiveLocationSelection: (
     activeLocationSelection: LocationSelection[],
   ) => void;
-
-  locationQuery: string;
-  setLocationQuery: (locationQuery: string) => void;
 }
 
 export interface LocationSelection {
@@ -145,6 +142,8 @@ export interface NominatimFeature {
 }
 
 export interface InformationLemmyProps {
+  locationQuery: string;
+  setLocationQuery: (locationQuery: string) => void;
   // Community
   defaultInstance;
   activeLemmyInstance;

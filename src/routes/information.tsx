@@ -64,6 +64,11 @@ function InformationRouteComponent() {
     default: true,
   };
 
+  const [locationQuery, setLocationQuery] = useStateStorage<string>(
+    'locationQuery',
+    '',
+  );
+
   // LEMMY
   const [activeLemmyInstance, setActiveLemmyInstance] =
     useStateStorage<AtlasLemmyInstanceType>(
@@ -90,6 +95,9 @@ function InformationRouteComponent() {
   >('activeSortType', sortTypes[1]); // Default: New Sort
 
   const informationLemmyProps: InformationLemmyProps = {
+    locationQuery,
+    setLocationQuery,
+
     // Community
     defaultInstance,
     activeLemmyInstance,

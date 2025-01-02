@@ -22,11 +22,11 @@ function LemmyRouteComponent() {
     // AtlasContext
     activeGeographicIdentifier,
     activeAdministrativeRegion,
-    locationQuery,
-    setLocationQuery,
   } = useContext(AtlasContext)!;
 
   const {
+    locationQuery,
+    setLocationQuery,
     // InformationContext
     defaultInstance,
     activeLemmyInstance,

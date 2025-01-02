@@ -92,11 +92,6 @@ function useAtlas(): AtlasInterfaceProps {
       geographicIdentifiers[1],
     ); // Default: Country Sort
 
-  const [locationQuery, setLocationQuery] = useStateStorage<string>(
-    'locationQuery',
-    '',
-  );
-
   const [activeLocationSelection, setActiveLocationSelection] = useStateStorage<
     LocationSelection[]
   >('activeLocationSelection', []);
@@ -169,7 +164,6 @@ function useAtlas(): AtlasInterfaceProps {
     setAdministrativeRegionClickHistoryArray([]);
     setActiveAdministrativeRegion(defaultAdministrativeRegionObject);
     setActiveGeographicIdentifier(geographicIdentifiers[1]); // Default: Country Sort
-    setLocationQuery('');
     setIsOpenAtlasMapInterface(!isMobile);
 
     if (sideBarRef.current)
@@ -215,9 +209,6 @@ function useAtlas(): AtlasInterfaceProps {
 
     administrativeRegionClickHistoryArray,
     setAdministrativeRegionClickHistoryArray,
-
-    locationQuery,
-    setLocationQuery,
   };
 }
 
