@@ -2,7 +2,26 @@
 import { useState, useEffect, SetStateAction, Dispatch } from 'react';
 import { FeatureCollection } from 'geojson';
 import geojsonData from '../assets/geojson/administrative_regions_extended.json';
-import { AdministrativeRegionObject } from '../types/atlas.types';
+import {
+  AdministrativeRegionObject,
+  GeographicIdentifier,
+} from '../types/atlas.types';
+
+// get
+
+export function getAdministrativeRegionObject(
+  GeographicIdentifier: GeographicIdentifier,
+  q: string,
+) {
+  const { features: administrativeRegionsData } =
+    geojsonData as FeatureCollection;
+
+  const match = administrativeRegionsData.find((administrativeRegionData) => {
+    if (administrativeRegionData.properties)
+      return q === administrativeRegionData.properties[GeographicIdentifier];
+  });
+  return match?.properties as AdministrativeRegionObject;
+}
 
 // HANDLE RANDOM
 

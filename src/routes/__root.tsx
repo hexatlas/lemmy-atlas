@@ -20,10 +20,14 @@ export const AtlasContext = createContext<AtlasInterfaceProps | null>(null);
 
 export const Route = createRootRoute({
   component: AtlasRootComponent,
+  validateSearch: (search: Record<string, unknown>) => {
+    const geographicIdentifier = Object.keys(search);
+    return { ...search.geographicIdentifier };
+  },
 });
 
 function AtlasRootComponent() {
-  const atlasInterfaceProps: AtlasInterfaceProps = useAtlas();
+  const atlasInterfaceProps: AtlasInterfaceProps = useAtlas(Route);
   const {
     // Util
     isMobile,
@@ -59,6 +63,7 @@ function AtlasRootComponent() {
           {!isMobile && <AtlasInterface {...atlasInterfaceProps} />}
         </aside>
         <article
+          id="atlas-legend"
           aria-label="Legend"
           aria-description="Find useful information pertaining to the selected location"
         >
@@ -77,7 +82,7 @@ function AtlasRootComponent() {
 const navigationLinks: AtlasNavigation[] = [
   {
     link: '/economy',
-    emoji: '🪙',
+    emoji: '💵',
     isDisabled: false,
   },
   {

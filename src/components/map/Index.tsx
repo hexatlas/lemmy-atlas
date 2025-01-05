@@ -38,7 +38,6 @@ export default function AtlasMap({
   setActiveAdministrativeRegion,
 }: AtlasInterfaceProps) {
   const administrativeRegionsData = geojsonData as FeatureCollection;
-
   /*
       Styles
   */

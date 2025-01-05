@@ -64,6 +64,21 @@ export interface AdministrativeRegionObject {
   id: string;
 }
 
+export interface AtlasSate {
+  // Util
+  isMobile: boolean;
+  legendSize: number;
+  isClustered: boolean;
+  map: L.Map | null;
+  isOpenAtlasMapInterface: boolean;
+  isLocationSelectMode: boolean;
+  nominatim: NominatimResponse | undefined;
+  activeGeographicIdentifier: GeographicIdentifier;
+  activeAdministrativeRegion: AdministrativeRegionObject;
+  administrativeRegionClickHistoryArray: LocationSelection[];
+  activeLocationSelection: LocationSelection[];
+}
+
 export interface AtlasInterfaceProps {
   // Util
   isMobile: boolean;

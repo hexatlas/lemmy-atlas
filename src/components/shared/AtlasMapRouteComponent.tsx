@@ -20,7 +20,6 @@ function MapRouteComponent({
   function updateMapLayer() {
     map?.eachLayer((layer) => {
       if (layer instanceof TileLayer) {
-        console.log(layer);
         map.removeLayer(layer);
       }
     });
