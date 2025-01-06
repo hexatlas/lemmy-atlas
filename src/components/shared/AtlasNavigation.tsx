@@ -26,6 +26,7 @@ function LegendNavigation({
                 className="tabs-trigger emoji-label"
                 to={link}
                 aria-label={link}
+                title={link}
                 disabled={isDisabled}
               >
                 {emoji}

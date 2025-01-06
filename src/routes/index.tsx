@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { createFileRoute } from '@tanstack/react-router';
+import { createFileRoute, Link } from '@tanstack/react-router';
 import BasedClientDetector from '../components/shared/BasedClientDetector';
 import LegendLayout from '../components/shared/AtlasLegendLayout';
 import { useStateStorage } from '../hooks/useAtlasUtils';
@@ -82,19 +82,54 @@ function AtlasHomeComponent() {
           <b>State Power Options:</b>
           <ul className="container">
             <li>
-              🪙 <b>Economy</b>
+              🪙{' '}
+              <Link
+                className="legend-link"
+                to={'/economy'}
+                aria-label={'economy link'}
+              >
+                Economy
+              </Link>
             </li>
             <li>
-              ℹ️ <b>Information</b>
+              ℹ️{' '}
+              <Link
+                className="legend-link"
+                to={'/information'}
+                aria-label={'information link'}
+              >
+                Information
+              </Link>
             </li>
             <li>
-              🕊️ <b>Diplomacy</b>
+              🕊️{' '}
+              <Link
+                className="legend-link"
+                to={'/diplomacy'}
+                aria-label={'diplomacy link'}
+              >
+                Diplomacy
+              </Link>
             </li>
             <li>
-              🛡️ <b>Security</b>
+              🛡️{' '}
+              <Link
+                className="legend-link"
+                to={'/military'}
+                aria-label={'security link'}
+              >
+                Security
+              </Link>
             </li>
             <li>
-              🏛️ <b>Government</b>
+              🏛️{' '}
+              <Link
+                className="legend-link"
+                to={'/government'}
+                aria-label={'government link'}
+              >
+                Government
+              </Link>
             </li>
           </ul>
         </li>
