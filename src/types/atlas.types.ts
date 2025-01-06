@@ -61,10 +61,10 @@ export interface AdministrativeRegionObject {
   'iso_3166-2': string;
   'ISO3166-1-Alpha-3': string;
   code: string;
-  id: string;
+  id: number;
 }
 
-export interface AtlasSate {
+export interface AtlasState {
   // Util
   isMobile: boolean;
   legendSize: number;
@@ -78,6 +78,20 @@ export interface AtlasSate {
   administrativeRegionClickHistoryArray: LocationSelection[];
   activeLocationSelection: LocationSelection[];
 }
+
+export type AtlasAction = {
+  type: string;
+  payload?:
+    | boolean
+    | number
+    | L.Map
+    | NominatimResponse
+    | GeographicIdentifier
+    | AdministrativeRegionObject
+    | LocationSelection[]
+    | undefined
+    | null;
+};
 
 export interface AtlasInterfaceProps {
   // Util
@@ -126,7 +140,7 @@ export interface AtlasInterfaceProps {
 }
 
 export interface LocationSelection {
-  activeSelection: string | undefined;
+  activeSelection: string | number | undefined;
   activeGeographicIdentifier: GeographicIdentifier;
   activeAdministrativeRegion: AdministrativeRegionObject;
 }

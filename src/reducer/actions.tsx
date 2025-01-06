@@ -15,7 +15,6 @@ export const SET_ACTIVE_GEOGRAPHIC_IDENTIFIER =
   'SET_ACTIVE_GEOGRAPHIC_IDENTIFIER';
 export const SET_ACTIVE_LOCATION_SELECTION = 'SET_ACTIVE_LOCATION_SELECTION';
 
-// Action creators
 export function setIsMobile(isMobile) {
   return { type: SET_IS_MOBILE, payload: isMobile };
 }

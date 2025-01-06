@@ -1,5 +1,12 @@
 // reducer.js
-import { AdministrativeRegionObject, AtlasSate } from '../types/atlas.types';
+import {
+  AdministrativeRegionObject,
+  AtlasAction,
+  AtlasState,
+  GeographicIdentifier,
+  LocationSelection,
+  NominatimResponse,
+} from '../types/atlas.types';
 import {
   SET_IS_MOBILE,
   SET_LEGEND_SIZE,
@@ -34,10 +41,10 @@ export const defaultAdministrativeRegionObject: AdministrativeRegionObject = {
   'iso_3166-2': '',
   'ISO3166-1-Alpha-3': '',
   code: '',
-  id: '',
+  id: 0,
 };
 
-export const initialState: AtlasSate = {
+export const initialState: AtlasState = {
   isMobile: window.innerWidth < 768,
   // eslint-disable-next-line no-loss-of-precision
   legendSize: 1.6180339887498948482 ^ 512,
@@ -53,45 +60,59 @@ export const initialState: AtlasSate = {
 };
 
 export default function atlasReducer(
-  state: AtlasSate = initialState,
-  action,
-): AtlasSate {
+  state: AtlasState = initialState,
+  action: AtlasAction,
+): AtlasState {
   switch (action.type) {
     case SET_IS_MOBILE:
-      return { ...state, isMobile: action.payload };
+      return { ...state, isMobile: action.payload as boolean };
 
     case SET_LEGEND_SIZE:
-      return { ...state, legendSize: action.payload };
+      return { ...state, legendSize: action.payload as number };
 
     case SET_IS_OPEN_ATLAS_MAP_INTERFACE:
-      return { ...state, isOpenAtlasMapInterface: action.payload };
+      return { ...state, isOpenAtlasMapInterface: action.payload as boolean };
 
     case SET_IS_LOCATION_SELECT_MODE:
-      return { ...state, isLocationSelectMode: action.payload };
+      return { ...state, isLocationSelectMode: action.payload as boolean };
 
     case SET_IS_CLUSTERED:
-      return { ...state, isClustered: action.payload };
+      return { ...state, isClustered: action.payload as boolean };
 
     case SET_MAP:
-      return { ...state, map: action.payload };
+      return { ...state, map: action.payload as L.Map };
 
     case SET_NOMINATIM:
-      return { ...state, nominatim: action.payload };
+      return {
+        ...state,
+        nominatim: action.payload as NominatimResponse | undefined,
+      };
 
     case SET_ADMINISTRATIVE_REGION_CLICK_HISTORY_ARRAY:
       return {
         ...state,
-        administrativeRegionClickHistoryArray: action.payload,
+        administrativeRegionClickHistoryArray:
+          action.payload as LocationSelection[],
       };
 
     case SET_ACTIVE_ADMINISTRATIVE_REGION:
-      return { ...state, activeAdministrativeRegion: action.payload };
+      return {
+        ...state,
+        activeAdministrativeRegion:
+          action.payload as AdministrativeRegionObject,
+      };
 
     case SET_ACTIVE_GEOGRAPHIC_IDENTIFIER:
-      return { ...state, activeGeographicIdentifier: action.payload };
+      return {
+        ...state,
+        activeGeographicIdentifier: action.payload as GeographicIdentifier,
+      };
 
     case SET_ACTIVE_LOCATION_SELECTION:
-      return { ...state, activeLocationSelection: action.payload };
+      return {
+        ...state,
+        activeLocationSelection: action.payload as LocationSelection[],
+      };
 
     default:
       return state;

@@ -20,6 +20,13 @@ export const AtlasContext = createContext<AtlasInterfaceProps | null>(null);
 
 export const Route = createRootRoute({
   component: AtlasRootComponent,
+  // validateSearch: (search: Record<string, unknown>) => {
+  //   const geographicIdentifier = Object.keys(search);
+  //   return {
+  //     [geographicIdentifier[0]]: search.geographicIdentifier as string | number,
+  //     id: search.id as number,
+  //   };
+  // },
 });
 
 function AtlasRootComponent() {
@@ -77,13 +84,13 @@ function AtlasRootComponent() {
 
 const navigationLinks: AtlasNavigation[] = [
   {
-    link: '/information',
-    emoji: 'ℹ️',
+    link: '/economy',
+    emoji: '💵',
     isDisabled: false,
   },
   {
-    link: '/economy',
-    emoji: '💵',
+    link: '/information',
+    emoji: 'ℹ️',
     isDisabled: false,
   },
   {

@@ -1,5 +1,5 @@
 // useAtlas.js
-import React, { useEffect, useRef, useReducer } from 'react';
+import React, { useEffect, useRef, useReducer, Reducer } from 'react';
 import atlasReducer from '../reducer/reducer';
 import { initialState } from '../reducer/reducer';
 
@@ -17,7 +17,13 @@ import {
   setAdministrativeRegionClickHistoryArray,
 } from '../reducer/actions';
 
-import { AtlasInterfaceProps, LocationSelection } from '../types/atlas.types';
+import {
+  AtlasState,
+  AtlasAction,
+  AtlasInterfaceProps,
+  GeographicIdentifier,
+  LocationSelection,
+} from '../types/atlas.types';
 import { defaultAdministrativeRegionObject } from '../reducer/reducer';
 import { useNavigate } from '@tanstack/react-router';
 import { getAdministrativeRegionObject } from './useAtlasUtils';
@@ -26,25 +32,27 @@ function useAtlas(Route): AtlasInterfaceProps {
   // Routing
   const search = Route.useSearch();
   const navigate = useNavigate({ from: Route.fullPath });
-  const geographicIdentifier = Object.keys(search);
-  const query = Object.values(search);
+
+  const navGeographicIdentifier = Object.keys(search);
+  const navGeographicIdentifierValue = Object.values(search);
 
   const navAdministrativeRegion = search['id']
     ? getAdministrativeRegionObject('id', search['id'])
-    : getAdministrativeRegionObject(geographicIdentifier[0], query[0]);
-  console.log(
-    navAdministrativeRegion,
-    geographicIdentifier,
-    query,
-    'Route.useSearch();',
-  );
+    : getAdministrativeRegionObject(
+        navGeographicIdentifier[0] as GeographicIdentifier,
+        navGeographicIdentifierValue[0] as string,
+      );
 
   const sideBarRef = useRef<HTMLInputElement>(null);
-  const [state, dispatch] = useReducer(atlasReducer, {
-    ...initialState,
-    activeAdministrativeRegion: navAdministrativeRegion,
-    activeGeographicIdentifier: geographicIdentifier[0],
-  });
+  const [state, dispatch] = useReducer<Reducer<AtlasState, AtlasAction>>(
+    atlasReducer,
+    {
+      ...initialState,
+      activeAdministrativeRegion: navAdministrativeRegion,
+      activeGeographicIdentifier:
+        navGeographicIdentifier[0] as GeographicIdentifier,
+    },
+  );
 
   const {
     isMobile,
@@ -62,7 +70,7 @@ function useAtlas(Route): AtlasInterfaceProps {
 
   // Handle resize
   const handleResize = () => {
-    setTimeout(() => state.map && state.map.invalidateSize(), 300);
+    setTimeout(() => map && map.invalidateSize(), 300);
     dispatch(setIsMobile(window.innerWidth < 768));
   };
 
@@ -78,19 +86,19 @@ function useAtlas(Route): AtlasInterfaceProps {
       useEffects
   */
   useEffect(() => {
-    if (state.isMobile && activeAdministrativeRegion?.country == 'country') {
+    if (isMobile && activeAdministrativeRegion?.country == 'country') {
       window.scrollTo({
         top: 0,
         behavior: 'smooth',
       });
     }
-    if (state.isMobile && activeAdministrativeRegion?.country !== 'country') {
+    if (isMobile && activeAdministrativeRegion?.country !== 'country') {
       window.scrollTo({
         top: (document.getElementById('atlas-legend')?.offsetTop ?? 0) * 1.312,
         behavior: 'smooth',
       });
     }
-  }, [state.activeAdministrativeRegion]);
+  }, [activeAdministrativeRegion]);
 
   useEffect(() => {
     navigate({
@@ -101,7 +109,7 @@ function useAtlas(Route): AtlasInterfaceProps {
       }),
     });
 
-    if (state.isMobile) {
+    if (isMobile) {
       dispatch(setIsOpenAtlasMapInterface(false));
     }
     // if (sideBarRef.current) sideBarRef.current.scrollTop = 0;
@@ -112,30 +120,25 @@ function useAtlas(Route): AtlasInterfaceProps {
       });
 
     const selection: LocationSelection = {
-      activeSelection:
-        state.activeAdministrativeRegion[state.activeGeographicIdentifier],
-      activeGeographicIdentifier: state.activeGeographicIdentifier,
-      activeAdministrativeRegion: state.activeAdministrativeRegion,
+      activeSelection: activeAdministrativeRegion[activeGeographicIdentifier],
+      activeGeographicIdentifier,
+      activeAdministrativeRegion,
     };
     dispatch(
       setAdministrativeRegionClickHistoryArray([
         selection,
-        ...state.administrativeRegionClickHistoryArray,
+        ...administrativeRegionClickHistoryArray,
       ]),
     );
-    if (state.isLocationSelectMode) {
+    if (isLocationSelectMode) {
       dispatch(
         setAdministrativeRegionClickHistoryArray([
           selection,
-          ...state.activeLocationSelection,
+          ...activeLocationSelection,
         ]),
       );
     }
-  }, [
-    state.activeAdministrativeRegion,
-    state.activeGeographicIdentifier,
-    state.nominatim,
-  ]);
+  }, [activeAdministrativeRegion, activeGeographicIdentifier, nominatim]);
 
   // resetAtlas function
   function resetAtlas() {
@@ -143,7 +146,7 @@ function useAtlas(Route): AtlasInterfaceProps {
     dispatch(setAdministrativeRegionClickHistoryArray([]));
     dispatch(setActiveAdministrativeRegion(defaultAdministrativeRegionObject));
     dispatch(setActiveGeographicIdentifier('country'));
-    dispatch(setIsOpenAtlasMapInterface(!state.isMobile));
+    dispatch(setIsOpenAtlasMapInterface(!isMobile));
     if (sideBarRef.current)
       sideBarRef.current.scrollTo({
         top: document.getElementById('atlas-tabs')?.offsetTop,

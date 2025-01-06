@@ -6,20 +6,28 @@ import {
   AdministrativeRegionObject,
   GeographicIdentifier,
 } from '../types/atlas.types';
+import { defaultAdministrativeRegionObject } from '../reducer/reducer';
 
 // get
 
 export function getAdministrativeRegionObject(
   GeographicIdentifier: GeographicIdentifier,
-  q: string,
+  value: string | number,
 ) {
+  if (value === undefined) return defaultAdministrativeRegionObject;
+
   const { features: administrativeRegionsData } =
     geojsonData as FeatureCollection;
 
   const match = administrativeRegionsData.find((administrativeRegionData) => {
     if (administrativeRegionData.properties)
-      return q === administrativeRegionData.properties[GeographicIdentifier];
+      return (
+        value === administrativeRegionData.properties[GeographicIdentifier]
+      );
   });
+
+  console.log(GeographicIdentifier, value, match?.properties);
+
   return match?.properties as AdministrativeRegionObject;
 }
 
