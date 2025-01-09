@@ -86,6 +86,7 @@
   }
 
   &:hover,
+  &.active:hover,
   &.active {
     background: hsl(var(--atlas-color-tertiary) / var(--atlas-opacity-2));
     color: hsl(var(--atlas-color-dark) / var(--atlas-opacity-3));
@@ -100,6 +101,11 @@
     .overpass-filterkeys {
       color: hsl(var(--atlas-color-dark) / var(--atlas-opacity-3));
     }
+  }
+
+  &:hover {
+    background: hsl(var(--atlas-color-tertiary) / var(--atlas-opacity-1));
+    color: hsl(var(--atlas-color-dark) / var(--atlas-opacity-3));
   }
 
   .overpass-container {
