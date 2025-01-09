@@ -102,6 +102,7 @@ function useAtlas(Route): AtlasInterfaceProps {
 
   useEffect(() => {
     navigate({
+      // @ts-expect-error Tsy
       search: () => ({
         [activeGeographicIdentifier]:
           activeAdministrativeRegion[activeGeographicIdentifier],
