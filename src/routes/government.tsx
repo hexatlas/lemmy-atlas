@@ -12,7 +12,7 @@ const navigationLinks: AtlasNavigation[] = [
   {
     link: '/government/links',
     emoji: '🔗',
-    isDisabled: true,
+    isDisabled: false,
   },
   {
     link: '/government/map',

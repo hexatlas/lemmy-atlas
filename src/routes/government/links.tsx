@@ -8,12 +8,54 @@ export const Route = createFileRoute('/government/links')({
 });
 
 function LinksRouteComponent() {
-  const { activeGeographicIdentifier, activeAdministrativeRegion } =
-    useContext(AtlasContext)!;
+  const { activeAdministrativeRegion } = useContext(AtlasContext)!;
 
   return (
     <LegendLayout route={Route}>
-      <h3>🏛️ {activeAdministrativeRegion[activeGeographicIdentifier]} LINKS</h3>
+      {activeAdministrativeRegion['region'] === 'Europe' && (
+        <>
+          <h3>🏛️ PolitPro: {activeAdministrativeRegion['country']} </h3>
+          <a
+            href={`https://politpro.eu/en/${activeAdministrativeRegion['country'].toLowerCase()}`}
+            target="_blank"
+            rel="noreferrer"
+          >
+            Election Trend
+          </a>
+          <br />
+          <a
+            href={`https://politpro.eu/en/${activeAdministrativeRegion['country'].toLowerCase()}/coalitions`}
+            target="_blank"
+            rel="noreferrer"
+          >
+            Possible coalitions
+          </a>
+          <br />
+          <a
+            href={`https://politpro.eu/en/${activeAdministrativeRegion['country'].toLowerCase()}/parties`}
+            target="_blank"
+            rel="noreferrer"
+          >
+            Political parties at a glance
+          </a>
+          <br />
+          <a
+            href={`https://politpro.eu/en/${activeAdministrativeRegion['country'].toLowerCase()}/parties`}
+            target="_blank"
+            rel="noreferrer"
+          >
+            Positions in comparison
+          </a>
+          <br />
+          <a
+            href={`https://politpro.eu/en/${activeAdministrativeRegion['country'].toLowerCase()}/polls`}
+            target="_blank"
+            rel="noreferrer"
+          >
+            Latest Polls
+          </a>
+        </>
+      )}
     </LegendLayout>
   );
 }
