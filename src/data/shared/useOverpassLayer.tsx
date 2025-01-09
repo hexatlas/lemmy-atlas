@@ -75,7 +75,7 @@ export default function useOverpassLayer(
     overpassLayer = L.layerGroup();
 
     // Process elements
-    data.elements.forEach((element) => {
+    data.forEach((element) => {
       if (element.type === 'node') {
         const { lat, lon, tags } = element;
         addMarkerToCluster(clusters, lat, lon, tags);
@@ -102,7 +102,7 @@ export default function useOverpassLayer(
     // Non-clustered layer group
     overpassLayer = L.layerGroup();
 
-    data.elements.forEach((element) => {
+    data.forEach((element) => {
       if (element.type === 'node') {
         const { lat, lon, tags } = element;
         const icon = iconMap[tags[filterKey]] || defaultIcon;

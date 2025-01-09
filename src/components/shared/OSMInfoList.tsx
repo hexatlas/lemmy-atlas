@@ -1,15 +1,10 @@
 import React, { useCallback, useState } from 'react';
 // https://www.radix-ui.com/primitives/docs/components/accordion
 import * as Accordion from '@radix-ui/react-accordion';
-
-// https://www.radix-ui.com/primitives/docs/components/accordion
-import * as Collapsible from '@radix-ui/react-collapsible';
-
 import AtlasOSMInfoCard from './OSMInfoCard';
 
 import { OSMInfoListProps } from '../../types/atlas.types';
 import { LatLngBoundsExpression } from 'leaflet';
-import { ReactNode } from '@tanstack/react-router';
 
 function AtlasOSMInfoList({
   listName,
@@ -23,7 +18,6 @@ function AtlasOSMInfoList({
     LatLngBoundsExpression | undefined
   >(map?.getBounds());
   const [activeElement, setActiveElement] = useState(null);
-  const [selectedFilters, setSelectedFilters] = useState({}); // Store selected values for each filterKey
 
   const showOnMap = useCallback(
     (element) => {
@@ -59,108 +53,24 @@ function AtlasOSMInfoList({
     showOnMap(element);
   };
 
+  let debounce: NodeJS.Timeout;
+
   const handleMouseEnter = (element) => {
-    setLastMapBounds(map?.getBounds());
-    showOnMap(element);
+    debounce = setTimeout(() => {
+      setLastMapBounds(map?.getBounds());
+      showOnMap(element);
+    }, 450);
   };
 
   const handleMouseLeave = () => {
+    clearTimeout(debounce);
     map?.flyToBounds(lastMapBounds as LatLngBoundsExpression, {
       duration: 1.35,
     });
   };
 
-  // Extract unique options for each filterKey from data
-  const getFilterOptions = (key) => {
-    const options = new Set();
-    data?.elements.forEach((element) => {
-      if (element?.tags[key]) {
-        options.add(element?.tags[key]);
-      }
-    });
-    return Array.from(options).sort(); // Convert Set to Array for dropdown
-  };
-
-  // Update selected filter for a specific key
-  const handleFilterChange = (key, value) => {
-    setSelectedFilters((prev) => ({
-      ...prev,
-      [key]: value,
-    }));
-  };
-
-  const filteredData = data?.elements?.filter((element) => {
-    return Object.entries(selectedFilters).every(([key, value]) => {
-      if (!value) return true; // No filter applied for this key
-      return element?.tags[key] === value; // Element must match the filter
-    });
-  });
-
   return (
     <>
-      {filteredData && (
-        <Collapsible.Root>
-          <h5>
-            <span>{listName} </span>
-            found in {activeAdministrativeRegion['country']}
-          </h5>
-          <p>
-            {' '}
-            {filteredData.length}{' '}
-            {Object.entries(selectedFilters).map(([key, value]) => {
-              if (!value) return true; // No filter applied for this key
-              return `${
-                iconMap && iconMap[value as string] != undefined
-                  ? (iconMap[value as string]?.options?.html as ReactNode)
-                  : ''
-              } ${value} `; // Element must match the filter
-            })}{' '}
-          </p>
-          <Collapsible.Trigger className="filter-title emoji-label">
-            🎚️
-          </Collapsible.Trigger>
-          <Collapsible.Content
-            className="filter-menu"
-            aria-label={`Filter options ${listName}`}
-            role="toolbar"
-          >
-            {filterKeys &&
-              filterKeys.map((key, index) => (
-                <div
-                  key={index}
-                  className="filter-field"
-                  aria-label={`${key} filter option`}
-                >
-                  <label htmlFor={key} className="sr-only">
-                    {getFilterOptions(key).length}
-                  </label>
-                  <select
-                    id={key}
-                    value={selectedFilters[key] || ''}
-                    onChange={(e) => handleFilterChange(key, e.target.value)}
-                    aria-controls="overpass-list"
-                  >
-                    <option
-                      value=""
-                      className="filter-field-reset"
-                      defaultChecked
-                    >
-                      ({getFilterOptions(key).length}) {key}
-                    </option>
-                    {getFilterOptions(key).map((option: string, index) => (
-                      <option key={index} value={option.toString()}>
-                        {iconMap &&
-                          (iconMap[option]?.options?.html as ReactNode)}{' '}
-                        {option.toString()}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-              ))}
-          </Collapsible.Content>{' '}
-        </Collapsible.Root>
-      )}
-
       <Accordion.Root
         type="multiple"
         className="overpass-list"
@@ -170,8 +80,8 @@ function AtlasOSMInfoList({
         aria-live="polite"
         id="overpass-list"
       >
-        {filteredData &&
-          filteredData.map((element, index) => {
+        {data &&
+          data.map((element, index) => {
             return (
               <AtlasOSMInfoCard
                 key={index}
