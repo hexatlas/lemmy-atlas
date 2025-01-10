@@ -48,7 +48,7 @@ function AtlasRootComponent() {
     <AtlasContext.Provider value={atlasInterfaceProps}>
       <main
         className={`atlas ${
-          activeAdministrativeRegion.country !== 'Country' && 'atlas--active'
+          activeAdministrativeRegion?.country !== 'country' && 'atlas--active'
         }`}
         style={{
           gridTemplateColumns: `1.6180339887498948482fr ${legendSize}px`,
@@ -66,7 +66,7 @@ function AtlasRootComponent() {
           {!isMobile && <AtlasInterface {...atlasInterfaceProps} />}
         </aside>
         <article
-          id="atlas-legend"
+          id="legend"
           aria-label="Legend"
           aria-description="Find useful information pertaining to the selected location"
         >

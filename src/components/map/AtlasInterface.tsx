@@ -50,25 +50,14 @@ export default function AtlasInterface({
       open={isOpenAtlasMapInterface}
       onOpenChange={setIsOpenAtlasMapInterface}
     >
-      {!isMobile && !isLocationSelectMode && (
-        <div className="administrative-region-flag-container">
-          <img
-            className="administrative-region-flag"
-            src={activeAdministrativeRegion.image}
-            alt={`Flag of ${activeAdministrativeRegion.country}`}
-          />
-        </div>
-      )}
-      <div className="right-slot">
-        <Collapsible.Trigger asChild>
-          <button
-            className="map-interface__expand"
-            title="Click to Expand and Collapse"
-          >
-            {isMobile ? '☰' : isOpenAtlasMapInterface ? '➖' : '➕'}
-          </button>
-        </Collapsible.Trigger>
-      </div>
+      <Collapsible.Trigger asChild>
+        <button
+          className="map-interface__expand"
+          title="Click to Expand and Collapse"
+        >
+          {isMobile ? '☰' : isOpenAtlasMapInterface ? '➖' : '➕'}
+        </button>
+      </Collapsible.Trigger>
 
       {!isMobile && (
         <>
@@ -82,13 +71,13 @@ export default function AtlasInterface({
             ↔️
           </button>
           {/* <button
-          role="button"
-          title="Select Locations"
-          aria-label="Click to Select Locations"
-          className="map-interface__resize"
-          onMouseDown={handleLocationSelection}
+            role="button"
+            title="Select Locations"
+            aria-label="Click to Select Locations"
+            className="map-interface__resize"
+            onMouseDown={handleLocationSelection}
           >
-          🖊️
+            🖊️
           </button> */}
         </>
       )}

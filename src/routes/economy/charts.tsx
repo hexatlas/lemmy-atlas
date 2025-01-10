@@ -143,7 +143,7 @@ function ChartsRouteComponent() {
         .attr('text-anchor', 'middle')
         .attr('x', width / 2)
         .attr('y', -margin.top / 2)
-        .text(`${activeAdministrativeRegion.country.toUpperCase()} | ${label}`)
+        .text(`${activeAdministrativeRegion?.country.toUpperCase()} | ${label}`)
         .style(
           'fill',
           'hsl(var(--atlas-color-tertiary) / var(--atlas-opacity-3))',

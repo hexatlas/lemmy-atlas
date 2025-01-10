@@ -22,7 +22,7 @@ function useAnarachistLibrary(
 
   let apiUrl;
 
-  if (activeAdministrativeRegion.country !== 'country') {
+  if (activeAdministrativeRegion?.country !== 'country') {
     apiUrl = `/.netlify/functions/anarchist_library/?country=${encodeURI(
       activeAdministrativeRegion[activeGeographicIdentifier],
     )}`;

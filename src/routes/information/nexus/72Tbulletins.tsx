@@ -22,7 +22,7 @@ function RouteComponent() {
       <h3>Reading List</h3>
       <a
         href={`https://bulletins.hexbear.net/posts/readinglist/#${encodeURI(
-          activeAdministrativeRegion.country,
+          activeAdministrativeRegion?.country,
         )
           .toLowerCase()
           .replace(/%20/g, '-')}`}
@@ -30,8 +30,8 @@ function RouteComponent() {
         rel="noopener noreferrer"
       >
         📚📕 Hexbear Reading List:
-        {activeAdministrativeRegion.country != 'country' &&
-          activeAdministrativeRegion.country}
+        {activeAdministrativeRegion?.country != 'country' &&
+          activeAdministrativeRegion?.country}
       </a>
 
       {isLoading && <p className="map-info__loading-emoji">🔍</p>}

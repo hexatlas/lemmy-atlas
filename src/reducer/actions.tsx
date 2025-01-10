@@ -15,6 +15,8 @@ export const SET_ACTIVE_GEOGRAPHIC_IDENTIFIER =
   'SET_ACTIVE_GEOGRAPHIC_IDENTIFIER';
 export const SET_ACTIVE_LOCATION_SELECTION = 'SET_ACTIVE_LOCATION_SELECTION';
 
+export const RESET_ATLAS = 'RESET_ATLAS';
+
 export function setIsMobile(isMobile) {
   return { type: SET_IS_MOBILE, payload: isMobile };
 }
@@ -73,5 +75,12 @@ export function setActiveLocationSelection(activeLocationSelection) {
   return {
     type: SET_ACTIVE_LOCATION_SELECTION,
     payload: activeLocationSelection,
+  };
+}
+
+export function initAtlas(initialState) {
+  return {
+    type: RESET_ATLAS,
+    payload: initialState,
   };
 }

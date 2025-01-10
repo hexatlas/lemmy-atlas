@@ -19,10 +19,11 @@ import {
   SET_ACTIVE_ADMINISTRATIVE_REGION,
   SET_ACTIVE_GEOGRAPHIC_IDENTIFIER,
   SET_ACTIVE_LOCATION_SELECTION,
+  RESET_ATLAS,
 } from './actions';
 
 export const defaultAdministrativeRegionObject: AdministrativeRegionObject = {
-  // START - Do not change as theres a lot of If(activeAdministrativeRegion.country === "country") that depends on this
+  // START - Do not change as theres a lot of If(activeAdministrativeRegion?.country === "country") that depends on this
   country: 'country',
   name: 'name',
   'intermediate-region': 'intermediate-region',
@@ -113,6 +114,9 @@ export default function atlasReducer(
         ...state,
         activeLocationSelection: action.payload as LocationSelection[],
       };
+
+    case RESET_ATLAS:
+      return action.payload as unknown as AtlasState;
 
     default:
       return state;

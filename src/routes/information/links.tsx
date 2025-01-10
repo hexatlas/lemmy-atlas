@@ -22,7 +22,7 @@ function LinksRouteComponent() {
         🔗 Recent Posts
       </a>
       <br />
-      {activeAdministrativeRegion.country != 'country' && (
+      {activeAdministrativeRegion?.country != 'country' && (
         <a
           href={`http://bannedthought.net/${encodeURI(
             activeAdministrativeRegion[activeGeographicIdentifier] as string,
@@ -35,7 +35,7 @@ function LinksRouteComponent() {
         </a>
       )}
       <h3>WorldAtlas.com</h3>
-      {activeAdministrativeRegion.country != 'country' && (
+      {activeAdministrativeRegion?.country != 'country' && (
         <>
           <a
             href={`https://www.worldatlas.com/maps/${encodeURI(

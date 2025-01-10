@@ -3,7 +3,7 @@ import { useQuery } from '@tanstack/react-query';
 function useMastodon(activeAdministrativeRegion, activeGeographicIdentifier) {
   let apiUrl;
 
-  if (activeAdministrativeRegion.country !== 'country') {
+  if (activeAdministrativeRegion?.country !== 'country') {
     apiUrl = `https://mastodon.social/api/v1/timelines/tag/${encodeURI(
       activeAdministrativeRegion[activeGeographicIdentifier],
     )

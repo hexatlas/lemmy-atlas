@@ -15,6 +15,7 @@ import {
   setActiveGeographicIdentifier,
   setActiveAdministrativeRegion,
   setAdministrativeRegionClickHistoryArray,
+  initAtlas,
 } from '../reducer/actions';
 
 import {
@@ -24,7 +25,7 @@ import {
   GeographicIdentifier,
   LocationSelection,
 } from '../types/atlas.types';
-import { defaultAdministrativeRegionObject } from '../reducer/reducer';
+
 import { useNavigate } from '@tanstack/react-router';
 import { getAdministrativeRegionObject } from './useAtlasUtils';
 
@@ -34,7 +35,8 @@ function useAtlas(Route): AtlasInterfaceProps {
   const navigate = useNavigate({ from: Route.fullPath });
 
   const navGeographicIdentifier = Object.keys(search);
-  const navGeographicIdentifierValue = Object.values(search);
+  const navGeographicIdentifierValue = Object.values(search).length;
+  console.log('navGeographicIdentifier', navGeographicIdentifier);
 
   const navAdministrativeRegion = search['id']
     ? getAdministrativeRegionObject('id', search['id'])
@@ -45,7 +47,7 @@ function useAtlas(Route): AtlasInterfaceProps {
 
   const navBounds = search['bounds'];
 
-  console.log(navBounds);
+  console.log('navBounds', navBounds);
 
   const sideBarRef = useRef<HTMLInputElement>(null);
   const [state, dispatch] = useReducer<Reducer<AtlasState, AtlasAction>>(
@@ -107,7 +109,7 @@ function useAtlas(Route): AtlasInterfaceProps {
     }
     if (isMobile && activeAdministrativeRegion?.country !== 'country') {
       window.scrollTo({
-        top: (document.getElementById('atlas-legend')?.offsetTop ?? 0) * 1.312,
+        top: (document.getElementById('legend')?.offsetTop ?? 0) * 1.312,
         behavior: 'smooth',
       });
     }
@@ -115,12 +117,12 @@ function useAtlas(Route): AtlasInterfaceProps {
 
   useEffect(() => {
     navigate({
-      // @ts-expect-error Tsy
+      // @ts-expect-error it works
       search: () => ({
         [activeGeographicIdentifier]:
           activeAdministrativeRegion[activeGeographicIdentifier],
         bounds: map?.getBounds().toBBoxString(),
-        id: activeAdministrativeRegion.id,
+        id: activeAdministrativeRegion?.id,
       }),
     });
 
@@ -157,11 +159,7 @@ function useAtlas(Route): AtlasInterfaceProps {
 
   // resetAtlas function
   function resetAtlas() {
-    dispatch(setActiveLocationSelection([]));
-    dispatch(setAdministrativeRegionClickHistoryArray([]));
-    dispatch(setActiveAdministrativeRegion(defaultAdministrativeRegionObject));
-    dispatch(setActiveGeographicIdentifier('country'));
-    dispatch(setIsOpenAtlasMapInterface(!isMobile));
+    dispatch(initAtlas(initialState));
     navigate({ to: '/' });
     if (sideBarRef.current)
       sideBarRef.current.scrollTo({

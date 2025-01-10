@@ -24,9 +24,18 @@ function AtlasGeographyOptions() {
 
   return (
     <>
-      {(activeAdministrativeRegion.country !== 'country' ||
+      {(activeAdministrativeRegion?.country !== 'country' ||
         isLocationSelectMode) && (
         <>
+          {!isMobile && !isLocationSelectMode && (
+            <div className="administrative-region-flag-container">
+              <img
+                className="administrative-region-flag"
+                src={activeAdministrativeRegion?.image}
+                alt={`Flag of ${activeAdministrativeRegion?.country}`}
+              />
+            </div>
+          )}
           <div className="right-slot">
             <button
               role="button"
@@ -45,7 +54,7 @@ function AtlasGeographyOptions() {
               'active-geographic-identifier'
             }`}
             role="button"
-            aria-label={`Select ${activeAdministrativeRegion.name}`}
+            aria-label={`Select ${activeAdministrativeRegion?.name}`}
             tabIndex={0}
             onClick={() =>
               setActiveGeographicIdentifier(geographicIdentifiers[0])
@@ -56,7 +65,7 @@ function AtlasGeographyOptions() {
               }
             }}
           >
-            {activeAdministrativeRegion.name}
+            {activeAdministrativeRegion?.name}
           </h1>
           <h5
             className={`country-name ${
@@ -64,7 +73,7 @@ function AtlasGeographyOptions() {
               'active-geographic-identifier'
             }`}
             role="button"
-            aria-label={`Select ${activeAdministrativeRegion.country}`}
+            aria-label={`Select ${activeAdministrativeRegion?.country}`}
             tabIndex={0}
             onClick={() =>
               setActiveGeographicIdentifier(geographicIdentifiers[1])
@@ -75,7 +84,7 @@ function AtlasGeographyOptions() {
               }
             }}
           >
-            {activeAdministrativeRegion.country}
+            {activeAdministrativeRegion?.country}
           </h5>
           {geographicIdentifiers.map((type, index) => {
             if (activeAdministrativeRegion[type] === '') return;
@@ -127,14 +136,14 @@ function AtlasGeographyOptions() {
               if (
                 index === 0 ||
                 index > 5 ||
-                adminregion.activeAdministrativeRegion.country === 'country'
+                adminregion.activeAdministrativeRegion?.country === 'country'
               )
                 return;
               return (
                 <div
                   key={index}
                   className="location-name-click-history-item"
-                  aria-label={`Select ${activeAdministrativeRegion.name} in ${activeAdministrativeRegion.country}`}
+                  aria-label={`Select ${activeAdministrativeRegion?.name} in ${activeAdministrativeRegion?.country}`}
                   role="button"
                   tabIndex={0}
                   onClick={() => {

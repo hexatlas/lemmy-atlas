@@ -44,9 +44,9 @@ function useNewsBulletins(
 
   let apiUrl;
 
-  if (activeAdministrativeRegion.country !== 'country') {
+  if (activeAdministrativeRegion?.country !== 'country') {
     apiUrl = `/.netlify/functions/72T_bulletins/?country=${encodeURI(
-      activeAdministrativeRegion.country,
+      activeAdministrativeRegion?.country,
     )
       .toLowerCase()
       .replace(/%20/g, '-')}`;

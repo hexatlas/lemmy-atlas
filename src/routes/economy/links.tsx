@@ -54,7 +54,7 @@ function LinksRouteComponent() {
       </a>
 
       <h3>International Energy Agency</h3>
-      {activeAdministrativeRegion.country != 'country' && (
+      {activeAdministrativeRegion?.country != 'country' && (
         <>
           <a
             href={`https://www.iea.org/search/charts?q=${encodeURI(
@@ -72,7 +72,7 @@ function LinksRouteComponent() {
       )}
 
       <h3>World Bank</h3>
-      {activeAdministrativeRegion.country != 'country' && (
+      {activeAdministrativeRegion?.country != 'country' && (
         <>
           <a
             href={`https://data.worldbank.org/country/${encodeURI(
@@ -88,7 +88,7 @@ function LinksRouteComponent() {
       )}
 
       <h3>OECD</h3>
-      {activeAdministrativeRegion.country != 'country' && (
+      {activeAdministrativeRegion?.country != 'country' && (
         <>
           <a
             href={`https://data.oecd.org/${encodeURI(

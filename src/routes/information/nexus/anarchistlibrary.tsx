@@ -35,7 +35,7 @@ function RouteComponent() {
         rel="noopener noreferrer"
       >
         📚📕 Books about{' '}
-        {activeAdministrativeRegion.country != 'country' &&
+        {activeAdministrativeRegion?.country != 'country' &&
           activeAdministrativeRegion[activeGeographicIdentifier]}
       </a>
 

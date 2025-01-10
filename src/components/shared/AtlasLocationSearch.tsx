@@ -44,7 +44,7 @@ function AtlasLocationSearch() {
         className="search-input-wrapper search-input-interface"
         aria-label="Location Search"
       >
-        {activeAdministrativeRegion.country === 'country' && (
+        {activeAdministrativeRegion?.country === 'country' && (
           <button
             role="button"
             title="Select Random Administrative Region"

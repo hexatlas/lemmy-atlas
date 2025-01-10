@@ -44,8 +44,8 @@ export default function AtlasMap({
       Styles
   */
   const style_locationDefault = {
-    color: 'hsl(var(--atlas-color-dark) / var(--atlas-opacity-3))',
-    fillOpacity: 0,
+    color: 'hsl(var(--atlas-color-dark) / 0)',
+    fillOpacity: 0.161,
     weight: 0.161,
   };
 
@@ -70,7 +70,7 @@ export default function AtlasMap({
   const style_locationNameHighlight = {
     color: 'hsl(var(--atlas-color-tertiary))',
     fillOpacity: 0.161,
-    weight: 1.161,
+    weight: 1.312,
   };
 
   const onClickAdministrativeRegion = useCallback(
@@ -148,7 +148,7 @@ export default function AtlasMap({
 
     // Check if region needs an update
     if (
-      activeAdministrativeRegion.country !== 'country' ||
+      activeAdministrativeRegion?.country !== 'country' ||
       nominatim?.features[0]
     ) {
       const isNameMatch = (region, name) =>
@@ -163,11 +163,13 @@ export default function AtlasMap({
         if (activeGeographicIdentifier === 'name') {
           if (
             !isNameMatch(region, nominatim?.features[0]?.properties.name) &&
-            isNameMatch(region, activeAdministrativeRegion.name)
+            isNameMatch(region, activeAdministrativeRegion?.name)
           ) {
             administrativeRegionArray.extend((region as Polyline).getBounds());
           }
-        } else if (isCountryMatch(region, activeAdministrativeRegion.country)) {
+        } else if (
+          isCountryMatch(region, activeAdministrativeRegion?.country)
+        ) {
           administrativeRegionArray.extend((region as Polyline).getBounds());
         }
       });
@@ -179,6 +181,7 @@ export default function AtlasMap({
         }
 
         if (
+          typeof (region as Path).setStyle === 'function' &&
           isTypeMatch(
             region,
             activeGeographicIdentifier,
@@ -188,10 +191,13 @@ export default function AtlasMap({
           (region as Path).setStyle(style_locationNameHighlight); // Highlight active location
         }
 
-        if (isCountryMatch(region, activeAdministrativeRegion.country)) {
+        if (
+          typeof (region as Path).setStyle === 'function' &&
+          isCountryMatch(region, activeAdministrativeRegion?.country)
+        ) {
           (region as Path).setStyle(style_activeLocationHighlight); // Highlight country match
           if (
-            isNameMatch(region, activeAdministrativeRegion.name) &&
+            isNameMatch(region, activeAdministrativeRegion?.name) &&
             !nominatim
           ) {
             (region as Path).setStyle(style_locationNameHighlight); // Highlight name match
@@ -199,6 +205,7 @@ export default function AtlasMap({
         }
 
         if (
+          typeof (region as Path).setStyle === 'function' &&
           !isNameMatch(region, nominatim?.features[0]?.properties.name) &&
           isTypeMatch(
             region,

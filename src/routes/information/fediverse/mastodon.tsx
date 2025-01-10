@@ -201,7 +201,7 @@ function MastodonRouteComponent() {
       </>
       <div className="legend__footer">
         <a
-          href={`https://mastodon.social/tags/${activeAdministrativeRegion.country}`}
+          href={`https://mastodon.social/tags/${activeAdministrativeRegion?.country}`}
           target="_blank"
           rel="noopener noreferrer"
         >
