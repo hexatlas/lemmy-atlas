@@ -716,7 +716,7 @@
 .tabs__trigger[data-status='active'] {
   animation: none;
   color: hsl(var(--atlas-color-dark) / var(--atlas-opacity-3));
-
+  @include atlas-shadow(var(--atlas-shadow-1));
   border: 1px solid hsl(var(--atlas-color-light) / var(--atlas-opacity-2));
   border-left: var(--atlas-size-14) solid
     hsl(var(--atlas-color-tertiary) / var(--atlas-opacity-3));
@@ -732,6 +732,8 @@
 }
 
 .tabs__trigger[aria-disabled='true'] {
+  @include atlas-shadow(none);
+  color: hsl(var(--atlas-color-dark) / var(--atlas-opacity-1));
   background-color: hsl(
     var(--atlas-color-grey) / var(--atlas-opacity-2)
   ) !important;
