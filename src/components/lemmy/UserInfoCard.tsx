@@ -178,40 +178,40 @@ function AtlasLemmyUserInfoCard({
                 value={activeUserTab}
                 onValueChange={setActiveUserTab}
               >
-                <Tabs.List className="tabs" aria-label="Pick User Info">
+                <Tabs.List className="tabs__list" aria-label="Pick User Info">
                   {bio && (
-                    <Tabs.Trigger className="tabs-trigger" value="Bio">
+                    <Tabs.Trigger className="tabs__trigger" value="Bio">
                       Bio
                     </Tabs.Trigger>
                   )}
                   {user?.moderates && user?.moderates.length > 0 && (
-                    <Tabs.Trigger className="tabs-trigger" value="Mods">
+                    <Tabs.Trigger className="tabs__trigger" value="Mods">
                       Mods
                     </Tabs.Trigger>
                   )}
                   {user?.posts && user?.posts.length > 0 && (
-                    <Tabs.Trigger className="tabs-trigger" value="Posts">
+                    <Tabs.Trigger className="tabs__trigger" value="Posts">
                       {user?.person_view?.counts?.post_count.toLocaleString()}{' '}
                       Posts
                     </Tabs.Trigger>
                   )}
 
                   {user?.comments && user?.comments.length > 0 && (
-                    <Tabs.Trigger className="tabs-trigger" value="Comments">
+                    <Tabs.Trigger className="tabs__trigger" value="Comments">
                       {user?.person_view?.counts?.comment_count.toLocaleString()}{' '}
                       Comments
                     </Tabs.Trigger>
                   )}
                 </Tabs.List>
                 {bio && (
-                  <Tabs.Content value="Bio" className="tabs-content">
+                  <Tabs.Content value="Bio" className="tabs__content">
                     <div className="user__bio">
                       <ReactMarkdown>{bio}</ReactMarkdown>
                     </div>
                   </Tabs.Content>
                 )}
                 {user?.moderates && user?.moderates.length > 0 && (
-                  <Tabs.Content value="Mods" className="tabs-content">
+                  <Tabs.Content value="Mods" className="tabs__content">
                     <div className="mod-wrapper">
                       <small className="community__mod">Mods</small>
                       <div className="mod-list">
@@ -236,7 +236,7 @@ function AtlasLemmyUserInfoCard({
                     </div>
                   </Tabs.Content>
                 )}
-                <Tabs.Content value="Posts" className="tabs-content">
+                <Tabs.Content value="Posts" className="tabs__content">
                   <div className="user__posts">
                     {user?.posts &&
                       user?.posts.length > 0 &&
@@ -252,7 +252,7 @@ function AtlasLemmyUserInfoCard({
                       })}
                   </div>
                 </Tabs.Content>
-                <Tabs.Content value="Comments" className="tabs-content">
+                <Tabs.Content value="Comments" className="tabs__content">
                   <div className="user__posts">
                     {user?.comments &&
                       user?.comments.length > 0 &&
