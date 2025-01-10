@@ -12,12 +12,9 @@ function LegendNavigation({
   route?;
 }) {
   return (
-    <div className={`atlas-tabs tabs-root light`}>
+    <div className={`tabs tabs__root light`}>
       <header aria-label={`Navigation Menu`} role="menubar">
-        <nav
-          className={`tabs-list ${className}`}
-          aria-label={`Navigation Links`}
-        >
+        <nav className={`tabs ${className}`} aria-label={`Navigation Links`}>
           {links.map((navLink, index) => {
             const { emoji, link, isDisabled } = navLink;
             return (

@@ -39,7 +39,7 @@ function RouteComponent() {
           activeAdministrativeRegion[activeGeographicIdentifier]}
       </a>
 
-      {isLoading && <p className="search-loading-emoji">🔍</p>}
+      {isLoading && <p className="map-info__loading-emoji">🔍</p>}
 
       {anarchistLibraryPosts?.length > 0 && (
         <>

@@ -14,7 +14,7 @@
   LEGEND
 */
 
-#legend-content {
+#legend {
   .search-input-wrapper {
     @include atlas-shadow(var(--atlas-shadow-1));
     position: sticky;
@@ -23,7 +23,7 @@
     background: white;
   }
 
-  .overpass-settings-container {
+  .settings {
     @include atlas-shadow(var(--atlas-shadow-1));
     font-family: var(--atlas-font-emoji);
     margin: var(--atlas-size-10);
@@ -34,7 +34,7 @@
       hsl(var(--atlas-color-secondary) / var(--atlas-opacity-3));
     border-radius: var(--atlas-border-radius-1);
     padding-top: var(--atlas-size-08);
-    .container-info {
+    .settings__label {
       left: 0;
     }
     display: grid;
@@ -59,8 +59,8 @@
 }
 
 @media only screen and (min-width: 768px) {
-  #legend-content {
-    .overpass-settings-container {
+  #legend {
+    .settings {
       position: fixed;
       left: 0;
       button {
@@ -70,7 +70,7 @@
   }
 }
 
-.legend-footer {
+.legend__footer {
   position: sticky;
   bottom: 0;
   z-index: 9999;
@@ -104,7 +104,7 @@
     color: hsl(var(--atlas-color-dark) / var(--atlas-opacity-2));
   }
 }
-.search-loading-emoji {
+.map-info__loading-emoji {
   animation: searchAnimation var(--atlas-timing-fast) alternate-reverse;
   font-family: var(--atlas-font-emoji);
 }
@@ -142,8 +142,8 @@
 }
 
 .reset-button,
-.reply-button,
-.legend-resize-button,
+.comment__reply-button,
+.map-interface__resize,
 .random-button {
   background-color: transparent;
   height: unset;
@@ -156,7 +156,7 @@
   transition: var(--atlas-transition-slow);
 }
 
-.legend-resize-button:hover,
+.map-interface__resize:hover,
 .random-button:hover {
   text-shadow: var(--atlas-shadow-text);
   color: hsl(var(--atlas-color-primary) / var(--atlas-opacity-3));
@@ -180,7 +180,7 @@
   transform: rotate(-90deg);
 }
 
-.map-interface-container {
+.map-interface {
   @include atlas-shadow(var(--atlas-shadow-1));
   z-index: 9999;
   position: absolute;
@@ -200,16 +200,19 @@
   border-radius: var(--atlas-border-radius-1);
 
   .administrative-region-flag-container {
+    // z-index: 9;
+    // top: 0;
+    // right: 0;
     display: grid;
     align-content: flex-end;
     width: 100%;
+    img {
+      // justify-self: flex-end;
+      max-width: var(--atlas-size-03);
+      filter: none !important;
+    }
   }
 
-  img.administrative-region-flag {
-    justify-self: flex-end;
-    max-width: var(--atlas-size-03);
-    filter: none !important;
-  }
   .country-emoji {
     font-family: var(--atlas-font-emoji);
   }
@@ -272,7 +275,7 @@
 }
 
 @media only screen and (max-width: 768px) {
-  .map-interface-container {
+  .map-interface {
     position: fixed;
     top: var(--atlas-size-14);
     left: 0;
@@ -508,7 +511,7 @@
   border: 1px solid hsl(var(--atlas-color-light) / var(--atlas-opacity-1));
   border-radius: var(--atlas-border-radius-1);
 }
-.atlas-expand-button {
+.map-interface__expand {
   font-family: var(--atlas-font-emoji);
   color: hsl(var(--atlas-color-light) / var(--atlas-opacity-3));
   background-color: transparent;
@@ -584,13 +587,13 @@
 
 // TABS
 
-.tabs-root {
+.tabs__root {
   display: flex;
   flex-direction: column;
   position: relative;
 }
 
-#atlas-tabs {
+#tabs {
   @include atlas-shadow(var(--atlas-shadow-1));
   padding-top: var(--atlas-size-12);
   z-index: 9999;
@@ -636,7 +639,7 @@
 }
 
 @media only screen and (max-width: 768px) {
-  #atlas-tabs {
+  #tabs {
     & > * {
       margin: 0;
     }

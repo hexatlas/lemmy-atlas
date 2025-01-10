@@ -38,15 +38,7 @@ function AtlasGeographyOptions() {
               🎲
             </button>
           </div>
-          {!isMobile && !isLocationSelectMode && (
-            <div className="administrative-region-flag-container">
-              <img
-                className="administrative-region-flag"
-                src={activeAdministrativeRegion.image}
-                alt={`Flag of ${activeAdministrativeRegion.country}`}
-              />
-            </div>
-          )}
+
           <h1
             className={`location-name ${
               activeGeographicIdentifier === 'name' &&

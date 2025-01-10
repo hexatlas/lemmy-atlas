@@ -49,7 +49,7 @@ function AtlasLocationSearch() {
             role="button"
             title="Select Random Administrative Region"
             aria-label="Random Button - Select Random Administrative Region"
-            className="button-emoji atlas-expand-button"
+            className="button-emoji map-interface__expand"
             onClick={() => handleRandom(setActiveAdministrativeRegion)}
           >
             🎲
@@ -90,7 +90,7 @@ function AtlasLocationSearch() {
       </div>
       {(searchTerm.trim() !== '' || searchResults.length > 0) && (
         <ul className="search-results" aria-label="Search Results">
-          {loading && <p className="search-loading-emoji">🔍</p>}
+          {loading && <p className="map-info__loading-emoji">🔍</p>}
           {searchResults.map((result) => (
             <li key={result.place_id}>
               <button

@@ -75,7 +75,7 @@ function RouteComponent() {
         )}
         <hr />
         <br />
-        {isLoading && <p className="search-loading-emoji">🔍</p>}
+        {isLoading && <p className="map-info__loading-emoji">🔍</p>}
         {wikiData && (
           <>
             <h3>{wikiData.title}</h3>
@@ -86,7 +86,7 @@ function RouteComponent() {
           </>
         )}
       </>
-      <div className="legend-footer">
+      <div className="legend__footer">
         <a
           href={`${wikiURL}?search=${encodeURI(
             activeAdministrativeRegion[activeGeographicIdentifier] as string,

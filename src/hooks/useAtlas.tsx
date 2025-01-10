@@ -43,6 +43,10 @@ function useAtlas(Route): AtlasInterfaceProps {
         navGeographicIdentifierValue[0] as string,
       );
 
+  const navBounds = search['bounds'];
+
+  console.log(navBounds);
+
   const sideBarRef = useRef<HTMLInputElement>(null);
   const [state, dispatch] = useReducer<Reducer<AtlasState, AtlasAction>>(
     atlasReducer,
@@ -85,6 +89,15 @@ function useAtlas(Route): AtlasInterfaceProps {
   /*
       useEffects
   */
+
+  // useEffect(() => {
+  //   if (map && navBounds)
+  //     map?.flyToBounds([
+  //       [navBounds[0], navBounds[1]],
+  //       [navBounds[2], navBounds[3]],
+  //     ]);
+  // }, [navBounds]);
+
   useEffect(() => {
     if (isMobile && activeAdministrativeRegion?.country == 'country') {
       window.scrollTo({
@@ -106,6 +119,7 @@ function useAtlas(Route): AtlasInterfaceProps {
       search: () => ({
         [activeGeographicIdentifier]:
           activeAdministrativeRegion[activeGeographicIdentifier],
+        bounds: map?.getBounds().toBBoxString(),
         id: activeAdministrativeRegion.id,
       }),
     });
@@ -148,6 +162,7 @@ function useAtlas(Route): AtlasInterfaceProps {
     dispatch(setActiveAdministrativeRegion(defaultAdministrativeRegionObject));
     dispatch(setActiveGeographicIdentifier('country'));
     dispatch(setIsOpenAtlasMapInterface(!isMobile));
+    navigate({ to: '/' });
     if (sideBarRef.current)
       sideBarRef.current.scrollTo({
         top: document.getElementById('atlas-tabs')?.offsetTop,

@@ -34,7 +34,7 @@ function RouteComponent() {
           activeAdministrativeRegion.country}
       </a>
 
-      {isLoading && <p className="search-loading-emoji">🔍</p>}
+      {isLoading && <p className="map-info__loading-emoji">🔍</p>}
 
       {newsBulletinsPosts && (
         <>

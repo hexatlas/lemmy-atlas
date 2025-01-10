@@ -26,7 +26,7 @@ function AtlasOSMInfoCard({
     <Accordion.Item
       key={index}
       value={name}
-      className={`overpass-item ${element == activeElement && 'active'}`}
+      className={`item ${element == activeElement && 'active'}`}
       // tabIndex={0}
       onMouseEnter={() => handleMouseEnter(element)} // Trigger zoom on hover
       onMouseLeave={() => handleMouseLeave(element)} // Revert zoom on leave
@@ -37,7 +37,7 @@ function AtlasOSMInfoCard({
     >
       {iconMap && filterKeys && (
         <div aria-label="list header">
-          <div className="overpass-filterkey" aria-label={`Filterkey`}>
+          <div className="item__filterkey" aria-label={`Filterkey`}>
             {iconMap[element?.tags[filterKeys[0]]]?.options?.html ? (
               <span className="emoji" aria-hidden="true">
                 {
@@ -63,12 +63,12 @@ function AtlasOSMInfoCard({
               );
             })}
           </div>
-          <Accordion.Trigger className="overpass-expand">🗃️</Accordion.Trigger>
+          <Accordion.Trigger className="item__expand">🗃️</Accordion.Trigger>
         </div>
       )}
       {children}
-      <div className="overpass-container" aria-label="list body">
-        <div className="overpass-name">
+      <div className="item__container" aria-label="list body">
+        <div className="item__name">
           {wikidata && (
             <a
               href={`https://www.wikidata.org/wiki/${wikidata}`}
@@ -84,7 +84,7 @@ function AtlasOSMInfoCard({
           {element?.tags['name:en'] && <h6>{element?.tags['name:en']}</h6>}
         </div>
         {iconMap && filterKeys && (
-          <div className="overpass-filterkeys">
+          <div className="item__filterkeys">
             {filterKeys.map((filterKey, index) => {
               if (index < 1) return;
               return (
@@ -111,7 +111,7 @@ function AtlasOSMInfoCard({
               if (error) return false;
             }
             return (
-              <div className="overpass-urls" key={index}>
+              <div className="item__urls" key={index}>
                 <>
                   {isUrl && (
                     <a
@@ -137,7 +137,7 @@ function AtlasOSMInfoCard({
             );
           })}
       </div>
-      <Accordion.Content className="overpass-json dark">
+      <Accordion.Content className="item__json dark">
         <pre>{JSON.stringify(element.tags, null, 2)}</pre>
       </Accordion.Content>
     </Accordion.Item>

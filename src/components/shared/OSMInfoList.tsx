@@ -73,12 +73,12 @@ function AtlasOSMInfoList({
     <>
       <Accordion.Root
         type="multiple"
-        className="overpass-list"
+        className="list"
         role="list"
         aria-label={`${listName} in ${activeAdministrativeRegion['country']}`}
         aria-description={`List of ${listName} in ${activeAdministrativeRegion['country']}`}
         aria-live="polite"
-        id="overpass-list"
+        id="list"
       >
         {data &&
           data.map((element, index) => {

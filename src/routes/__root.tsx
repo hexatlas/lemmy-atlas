@@ -40,7 +40,7 @@ function AtlasRootComponent() {
   } = atlasInterfaceProps;
 
   const DisplayAtlasMap = useMemo(
-    () => <AtlasMap {...atlasInterfaceProps} />,
+    () => <AtlasMap {...atlasInterfaceProps} route={Route} />,
     [activeAdministrativeRegion, activeGeographicIdentifier],
   );
 
@@ -57,7 +57,7 @@ function AtlasRootComponent() {
       >
         {isMobile && <AtlasInterface {...atlasInterfaceProps} />}
         <aside
-          className={`map-container`}
+          className={`map`}
           aria-label="Map"
           role="application"
           aria-description="Use arrow keys to pan, plus and minus to zoom"

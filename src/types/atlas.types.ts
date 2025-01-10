@@ -94,6 +94,7 @@ export type AtlasAction = {
 };
 
 export interface AtlasInterfaceProps {
+  route?;
   // Util
   isMobile: boolean;
   resetAtlas: () => void;

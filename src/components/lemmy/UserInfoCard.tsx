@@ -81,9 +81,9 @@ function AtlasLemmyUserInfoCard({
         <HoverCard.Content
           // eslint-disable-next-line no-loss-of-precision
           collisionPadding={1.6180339887498948482 ^ 9}
-          className={`user-info-card-content ${
+          className={`user__info-card-content ${
             (creator_is_admin || creator_is_moderator) &&
-            'user-info-card-content-hightlighted'
+            'user__info-card-content-hightlighted'
           }`}
         >
           <div
@@ -102,15 +102,15 @@ function AtlasLemmyUserInfoCard({
             )}
             {avatar && (
               <a
-                className={`user-avatar-container user-avatar-infocard ${
-                  banner && 'user-avatar-banner-offset'
+                className={`user__avatar user__avatar-infocard ${
+                  banner && 'user__avatar-banner-offset'
                 }`}
                 href={actor_id}
                 target="_blank"
                 rel="noopener noreferrer"
               >
                 <img
-                  className="user-avatar-image"
+                  className="user__avatar--image"
                   src={avatar}
                   alt={display_name || name}
                 />
@@ -125,9 +125,9 @@ function AtlasLemmyUserInfoCard({
               }}
             >
               <div>
-                {creator_is_admin && <small className="user-mod">Admin</small>}
+                {creator_is_admin && <small className="user__mod">Admin</small>}
                 {creator_is_moderator && (
-                  <small className="user-mod">Mod</small>
+                  <small className="user__mod">Mod</small>
                 )}
                 {banned && (
                   <small>
@@ -135,7 +135,7 @@ function AtlasLemmyUserInfoCard({
                       href={`${lemmyInstance.baseUrl}modlog?page=1&userId=${id}`}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="post-alert"
+                      className="comment__alert"
                     >
                       Banned
                     </a>
@@ -158,7 +158,7 @@ function AtlasLemmyUserInfoCard({
                   </h5>
                 )}
 
-                <div className="user-pronouns">
+                <div className="user__pronouns">
                   {pronounsArray &&
                     pronounsArray.map((pronoun, index) => (
                       <p key={index}>{pronoun}</p>
@@ -174,11 +174,11 @@ function AtlasLemmyUserInfoCard({
               </div>
 
               <Tabs.Root
-                className="user-card-tabs"
+                className="user__card-tabs"
                 value={activeUserTab}
                 onValueChange={setActiveUserTab}
               >
-                <Tabs.List className="tabs-list" aria-label="Pick User Info">
+                <Tabs.List className="tabs" aria-label="Pick User Info">
                   {bio && (
                     <Tabs.Trigger className="tabs-trigger" value="Bio">
                       Bio
@@ -205,7 +205,7 @@ function AtlasLemmyUserInfoCard({
                 </Tabs.List>
                 {bio && (
                   <Tabs.Content value="Bio" className="tabs-content">
-                    <div className="user-bio">
+                    <div className="user__bio">
                       <ReactMarkdown>{bio}</ReactMarkdown>
                     </div>
                   </Tabs.Content>
@@ -213,7 +213,7 @@ function AtlasLemmyUserInfoCard({
                 {user?.moderates && user?.moderates.length > 0 && (
                   <Tabs.Content value="Mods" className="tabs-content">
                     <div className="mod-wrapper">
-                      <small className="community-mod">Mods</small>
+                      <small className="community__mod">Mods</small>
                       <div className="mod-list">
                         {user?.moderates.map(
                           (communityModeratorView, index) => {
@@ -237,7 +237,7 @@ function AtlasLemmyUserInfoCard({
                   </Tabs.Content>
                 )}
                 <Tabs.Content value="Posts" className="tabs-content">
-                  <div className="user-posts">
+                  <div className="user__posts">
                     {user?.posts &&
                       user?.posts.length > 0 &&
                       user?.posts.map((postView, index) => {
@@ -253,7 +253,7 @@ function AtlasLemmyUserInfoCard({
                   </div>
                 </Tabs.Content>
                 <Tabs.Content value="Comments" className="tabs-content">
-                  <div className="user-posts">
+                  <div className="user__posts">
                     {user?.comments &&
                       user?.comments.length > 0 &&
                       user?.comments.map((commentView, index) => {
@@ -274,7 +274,7 @@ function AtlasLemmyUserInfoCard({
             </div>
           </div>
 
-          <HoverCard.Arrow className="user-info-card-arrow" />
+          <HoverCard.Arrow className="user__info-card-arrow" />
         </HoverCard.Content>
       </HoverCard.Portal>
     </HoverCard.Root>

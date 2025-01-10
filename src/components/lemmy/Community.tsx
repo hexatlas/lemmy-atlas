@@ -22,7 +22,7 @@ function AtlasLemmyCommunity({
   const { icon, name, actor_id } = view?.community || community!;
 
   return (
-    <div className="community-wrapper">
+    <div className="community__wrapper">
       {prefix && <small className="post-to">{prefix}</small>}
 
       {showCommunityIcon && (
@@ -30,8 +30,8 @@ function AtlasLemmyCommunity({
           lemmyInstance={lemmyInstance}
           community={view?.community || community!}
         >
-          <div className="community-avatar-container" tabIndex={0}>
-            <img className="community-avatar-image" src={icon} alt={name} />
+          <div className="community__avatar-container" tabIndex={0}>
+            <img className="community__avatar-image" src={icon} alt={name} />
           </div>
         </LemmyCommunityInfoCard>
       )}

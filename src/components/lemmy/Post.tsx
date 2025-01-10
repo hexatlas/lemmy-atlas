@@ -57,10 +57,11 @@ function Post({
 
   return (
     <Collapsible.Root
-      className={`community-post post-collapse-root ${
-        (postView?.post.featured_community || postView?.post.featured_local) &&
-        'post-featured'
-      }`}
+      className={`post comment__collapsible-root
+ ${
+   (postView?.post.featured_community || postView?.post.featured_local) &&
+   'post--featured'
+ }`}
       open={openPost}
       onOpenChange={setOpenPost}
     >
@@ -68,12 +69,15 @@ function Post({
         <div>
           {(postView?.post.featured_community ||
             postView?.post.featured_local) && (
-            <small className="post-pinned">📌</small>
+            <small className="post--pinned">📌</small>
           )}
           {/* Score Count / Upvotes / Downvotes */}
-          <p className="post-vote-container">
+          <p className="comment__votes">
             {Number(postView?.counts.downvotes) === 0 || (
-              <p className={`post-vote post-vote-upvotes`}>
+              <p
+                className={`post-vote comment__votes--up
+`}
+              >
                 {postView?.counts.upvotes}
               </p>
             )}
@@ -85,7 +89,7 @@ function Post({
               {postView?.counts.score}
             </span>
             {Number(postView?.counts.downvotes) === 0 || (
-              <p className={`post-vote post-vote-downvotes`}>
+              <p className={`post-vote comment__votes--down`}>
                 {postView?.counts.downvotes}
               </p>
             )}
@@ -93,23 +97,23 @@ function Post({
         </div>
         {/* Post Thumbnail */}
         <Collapsible.Trigger
-          className="post-thumbnail-container"
+          className="post__thumbnail"
           tabIndex={0}
           onClick={() => setOpenPost(!openPost)}
           aria-label="Expand Post"
         >
           <img
-            className="post-thumbnail-image"
+            className="post__thumbnail--image"
             src={postView?.post.thumbnail_url}
             alt={`🪧`}
           />
         </Collapsible.Trigger>
-        <div className="post-meta">
+        <div className="post__meta">
           {/* OP Post */}
           {commentDepth < 1 && (
             <div>
               {postView?.post.locked && (
-                <small className="post-pinned">🔒</small>
+                <small className="post--pinned">🔒</small>
               )}
               <a
                 className="post-post"
@@ -136,13 +140,13 @@ function Post({
                 />
               )}
             {/* Timestamp */}
-            <small className="post-timestamp">
+            <small className="comment__timestamp">
               <TimeAgo dateString={postView?.post.published} />
             </small>
           </div>
           {/* Reply Count */}
           {postView?.counts.comments > 0 && (
-            <p className="comment-count">{`💬 ${postView?.counts.comments}`}</p>
+            <p className="comment__count">{`💬 ${postView?.counts.comments}`}</p>
           )}
         </div>
       </div>
@@ -191,12 +195,12 @@ function Post({
 
           {/* Replies */}
           <div
-            className={`post-reply-container post-reply-depth-${(commentDepth % 7) + 1}`}
+            className={`comment__replies comment__replies--depth-${(commentDepth % 7) + 1}`}
           >
             {/* Reply Count */}
             {postView?.counts.comments > 0 && replies.length === 0 && (
               <p
-                className="reply-button"
+                className="comment__reply-button"
                 role="button"
                 tabIndex={0}
                 aria-label="Show Replies"
@@ -207,7 +211,7 @@ function Post({
                   }
                 }}
               >
-                <span className="post-replycount-emoji">💬</span>
+                <span className="comment__reply-button__emoji">💬</span>
                 {`${postView?.counts.comments} comment${
                   postView?.counts.comments > 1 ? 's' : ''
                 }`}

@@ -25,9 +25,6 @@ export function getAdministrativeRegionObject(
         value === administrativeRegionData.properties[GeographicIdentifier]
       );
   });
-
-  console.log(GeographicIdentifier, value, match?.properties);
-
   return match?.properties as AdministrativeRegionObject;
 }
 

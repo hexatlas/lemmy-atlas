@@ -10,11 +10,13 @@ import AtlasGeographyOptions from '../shared/AtlasGeographyOptions';
 export default function AtlasInterface({
   // Util
   isMobile,
+  isLocationSelectMode,
 
   // legendSize,
   setLegendSize,
 
   // Location
+  activeAdministrativeRegion,
   isOpenAtlasMapInterface,
   setIsOpenAtlasMapInterface,
 }: AtlasInterfaceProps) {
@@ -44,14 +46,23 @@ export default function AtlasInterface({
 
   return (
     <Collapsible.Root
-      className="map-interface-container"
+      className="map-interface"
       open={isOpenAtlasMapInterface}
       onOpenChange={setIsOpenAtlasMapInterface}
     >
+      {!isMobile && !isLocationSelectMode && (
+        <div className="administrative-region-flag-container">
+          <img
+            className="administrative-region-flag"
+            src={activeAdministrativeRegion.image}
+            alt={`Flag of ${activeAdministrativeRegion.country}`}
+          />
+        </div>
+      )}
       <div className="right-slot">
         <Collapsible.Trigger asChild>
           <button
-            className="atlas-expand-button"
+            className="map-interface__expand"
             title="Click to Expand and Collapse"
           >
             {isMobile ? '☰' : isOpenAtlasMapInterface ? '➖' : '➕'}
@@ -65,7 +76,7 @@ export default function AtlasInterface({
             role="button"
             title="Click and Drag to Resize"
             aria-label="Resize Button. Click and Drag to Resize"
-            className="legend-resize-button"
+            className="map-interface__resize"
             onMouseDown={handleNexusResize}
           >
             ↔️
@@ -74,7 +85,7 @@ export default function AtlasInterface({
           role="button"
           title="Select Locations"
           aria-label="Click to Select Locations"
-          className="legend-resize-button"
+          className="map-interface__resize"
           onMouseDown={handleLocationSelection}
           >
           🖊️

@@ -22,7 +22,7 @@ p.anarchist-library-author {
   width: fit-content;
 }
 
-.anarchist-library-item .reply-button {
+.anarchist-library-item .comment__reply-button {
   padding: 0;
 }
 
@@ -35,7 +35,7 @@ p.anarchist-library-author {
   border-radius: var(--atlas-border-radius-1);
 }
 
-.anarchist-library-item .reply-button {
+.anarchist-library-item .comment__reply-button {
   padding: 0 var(--atlas-size-10);
   padding-top: var(--atlas-size-10);
 }

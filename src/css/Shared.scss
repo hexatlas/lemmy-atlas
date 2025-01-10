@@ -1,4 +1,4 @@
-.overpass-filter {
+.item__filter {
   position: sticky;
   top: 0;
   background-color: transparent;
@@ -58,7 +58,7 @@
   }
 }
 
-.overpass-item {
+.item {
   @include atlas-shadow(var(--atlas-shadow-1));
   background: hsl(var(--atlas-color-dark) / var(--atlas-opacity-3));
   color: hsl(var(--atlas-color-light) / var(--atlas-opacity-3));
@@ -94,11 +94,11 @@
     a {
       color: hsl(var(--atlas-color-dark) / var(--atlas-opacity-3));
     }
-    .overpass-name {
+    .item__name {
       color: hsl(var(--atlas-color-dark) / var(--atlas-opacity-3));
       background: hsl(var(--atlas-color-tertiary) / var(--atlas-opacity-3));
     }
-    .overpass-filterkeys {
+    .item__filterkeys {
       color: hsl(var(--atlas-color-dark) / var(--atlas-opacity-3));
     }
   }
@@ -108,11 +108,11 @@
     color: hsl(var(--atlas-color-dark) / var(--atlas-opacity-3));
   }
 
-  .overpass-container {
+  .item__container {
     overflow-y: scroll;
   }
 
-  .overpass-name {
+  .item__name {
     @include atlas-shadow(var(--atlas-shadow-inset));
     border-radius: var(--atlas-border-radius-1);
     background: hsl(var(--atlas-color-light) / var(--atlas-opacity-1));
@@ -120,7 +120,7 @@
     margin-bottom: var(--atlas-size-12);
   }
 
-  .overpass-filterkeys {
+  .item__filterkeys {
     display: flex;
     flex-wrap: wrap;
     gap: 0 var(--atlas-size-10);
@@ -133,7 +133,7 @@
     margin-bottom: var(--atlas-size-12);
   }
 
-  .overpass-filterkey {
+  .item__filterkey {
     font-size: var(--atlas-size-07);
     font-family: var(--atlas-font-emoji);
     text-transform: uppercase;
@@ -165,7 +165,7 @@
     margin-bottom: var(--atlas-size-12);
   }
 
-  .overpass-urls {
+  .item__urls {
     display: grid;
     margin: var(--atlas-size-10) 0;
   }
@@ -177,7 +177,7 @@
     float: right;
   }
 
-  .overpass-expand {
+  .item__expand {
     @include atlas-shadow(var(--atlas-shadow-1));
     background: hsl(var(--atlas-color-dark) / var(--atlas-opacity-3));
     &:hover,
@@ -186,7 +186,7 @@
     }
   }
 
-  .overpass-json {
+  .item__json {
     @include atlas-shadow(var(--atlas-shadow-1));
     padding: var(--atlas-size-09);
     border-radius: var(--atlas-border-radius-1);

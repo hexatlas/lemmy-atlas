@@ -12,11 +12,8 @@ function AtlasOSMSettings({
   Children = <></>,
 }: OSMSettingsType) {
   return (
-    <div
-      className="overpass-settings-container light"
-      aria-label="overpass settings"
-    >
-      <div className="container-info secondary" aria-hidden>
+    <div className="settings light" aria-label="overpass settings">
+      <div className="settings__label secondary" aria-hidden>
         ⚙️
       </div>
       <button

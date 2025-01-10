@@ -422,7 +422,7 @@ function ChartsRouteComponent() {
           ))}
         </select>
       </div>
-      {isLoading && <p className="search-loading-emoji">🔍</p>}
+      {isLoading && <p className="map-info__loading-emoji">🔍</p>}
 
       {IMFData && (
         <YearsList

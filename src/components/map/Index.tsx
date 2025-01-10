@@ -18,10 +18,12 @@ import {
   AdministrativeRegionObject,
   AtlasInterfaceProps,
 } from '../../types/atlas.types';
+import UpdateURL from './UpdateURL';
 
 export default function AtlasMap({
   // Util
   isMobile,
+  route,
 
   // Location
   map,
@@ -236,6 +238,7 @@ export default function AtlasMap({
       ref={setMap}
       worldCopyJump
     >
+      <UpdateURL route={route} map={map} />
       <ScaleControl position="bottomleft" />
       <LayersControl position="bottomright">
         {baseLayers &&

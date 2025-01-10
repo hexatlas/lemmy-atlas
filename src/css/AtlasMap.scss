@@ -56,7 +56,7 @@
 
 /* ATLAS LEAFLET MAP */
 
-.map-container {
+.map {
   transition: all var(--atlas-transition-slow);
   height: 100vh;
   height: 100dvh;
@@ -70,7 +70,7 @@
     display: none;
   }
 
-  .map-container {
+  .map {
     transition: all var(--atlas-transition-slow);
     height: calc(100vh - var(--atlas-size-07));
     height: calc(100dvh - var(--atlas-size-07));
@@ -228,13 +228,13 @@
 }
 
 .leaflet-popup-content-wrapper,
-.tabs-root {
+.tabs__root {
   border-right: none !important ;
   border-left: var(--atlas-size-14) solid
     hsl(var(--atlas-color-tertiary) / var(--atlas-opacity-3)) !important;
 }
 
-.tabs-root {
+.tabs__root {
   border: none !important;
   background: hsl(var(--atlas-color-light) / var(--atlas-opacity-3));
 }

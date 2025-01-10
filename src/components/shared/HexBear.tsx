@@ -24,7 +24,7 @@ function HexBear({
     <div className="feed-community">
       {!isLoaded && (
         <p
-          className="reply-button"
+          className="comment__reply-button"
           role="button"
           tabIndex={0}
           aria-label="Show Replies"
@@ -35,11 +35,11 @@ function HexBear({
             }
           }}
         >
-          <span className="post-replycount-emoji">💬</span> {children}
+          <span className="comment__reply-button__emoji">💬</span> {children}
         </p>
       )}
       {posts.length > 0 && (
-        <div className="post-reply-container">
+        <div className="comment__replies">
           {posts.length > 0 &&
             posts.map((post, index) => (
               <Post

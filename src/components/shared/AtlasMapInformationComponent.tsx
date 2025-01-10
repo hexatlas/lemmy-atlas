@@ -83,7 +83,7 @@ function MapInformationComponent({
   return (
     <LegendLayout route={route}>
       <AtlasOSMSettings {...clusterSettings} />
-      {isLoading && <p className="search-loading-emoji">🔍</p>}
+      {isLoading && <p className="map-info__loading-emoji">🔍</p>}
       {data && (
         <Collapsible.Root>
           <h5>
@@ -92,7 +92,7 @@ function MapInformationComponent({
           </h5>
           <p>
             {' '}
-            {data.length}{' '}
+            {filteredData.length}{' '}
             {Object.entries(selectedFilters).map(([key, value]) => {
               if (!value) return true; // No filter applied for this key
               return `${
@@ -124,7 +124,7 @@ function MapInformationComponent({
                     id={key}
                     value={selectedFilters[key] || ''}
                     onChange={(e) => handleFilterChange(key, e.target.value)}
-                    aria-controls="overpass-list"
+                    aria-controls="list"
                   >
                     <option
                       value=""

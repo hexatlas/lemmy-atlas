@@ -26,25 +26,25 @@ function AtlasLemmyUser({
   const pronounsArray = userPronouns(display_name);
 
   return (
-    <div className="user-wrapper">
+    <div className="user">
       {showInfoCard ? (
         <LemmyUserInfoCard
           view={view!}
           lemmyInstance={lemmyInstance}
           person={view?.creator || person!}
         >
-          <div className="user-avatar-container" tabIndex={0}>
+          <div className="user__avatar" tabIndex={0}>
             <img
-              className="user-avatar-image"
+              className="user__avatar--image"
               src={avatar}
               alt={(display_name && display_name[0]) || name[0]}
             />
           </div>
         </LemmyUserInfoCard>
       ) : (
-        <div className="user-avatar-container" tabIndex={0}>
+        <div className="user__avatar" tabIndex={0}>
           <img
-            className="user-avatar-image"
+            className="user__avatar--image"
             src={avatar}
             alt={(display_name && display_name[0]) || name[0]}
           />
@@ -52,14 +52,14 @@ function AtlasLemmyUser({
       )}
       {/* User / Poster */}
       <a
-        className="post-creator"
+        className="user__name"
         href={actor_id}
         target="_blank"
         rel="noopener noreferrer"
       >
         {name}
       </a>
-      <div className="user-pronouns">
+      <div className="user__pronouns">
         {pronounsArray &&
           pronounsArray.map((pronoun, index) => <p key={index}>{pronoun}</p>)}
       </div>

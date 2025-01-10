@@ -30,19 +30,19 @@ function MastodonRouteComponent() {
           {activeAdministrativeRegion[activeGeographicIdentifier]}
         </h3>
 
-        {isLoading && <p className="search-loading-emoji">🔍</p>}
+        {isLoading && <p className="map-info__loading-emoji">🔍</p>}
         {mastodonPosts &&
           mastodonPosts.map((post, index) => (
             <div className="feed-item" key={index}>
               <Collapsible.Root className="feed-community">
                 <div className="feed-post-container">
                   <Collapsible.Trigger
-                    className="post-thumbnail-container"
+                    className="post__thumbnail"
                     tabIndex={0}
                     aria-label="Expand Post"
                   >
                     <img
-                      className="post-thumbnail-image"
+                      className="post__thumbnail--image"
                       src={post.account.avatar}
                       alt={post.account.username}
                     />
@@ -199,7 +199,7 @@ function MastodonRouteComponent() {
             </div>
           ))}
       </>
-      <div className="legend-footer">
+      <div className="legend__footer">
         <a
           href={`https://mastodon.social/tags/${activeAdministrativeRegion.country}`}
           target="_blank"

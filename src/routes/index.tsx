@@ -84,7 +84,7 @@ function AtlasHomeComponent() {
             <li>
               🪙{' '}
               <Link
-                className="legend-link"
+                className="legend__link"
                 to={'/economy'}
                 aria-label={'economy link'}
               >
@@ -94,7 +94,7 @@ function AtlasHomeComponent() {
             <li>
               ℹ️{' '}
               <Link
-                className="legend-link"
+                className="legend__link"
                 to={'/information'}
                 aria-label={'information link'}
               >
@@ -104,7 +104,7 @@ function AtlasHomeComponent() {
             <li>
               🕊️{' '}
               <Link
-                className="legend-link"
+                className="legend__link"
                 to={'/diplomacy'}
                 aria-label={'diplomacy link'}
               >
@@ -114,7 +114,7 @@ function AtlasHomeComponent() {
             <li>
               🛡️{' '}
               <Link
-                className="legend-link"
+                className="legend__link"
                 to={'/military'}
                 aria-label={'security link'}
               >
@@ -124,7 +124,7 @@ function AtlasHomeComponent() {
             <li>
               🏛️{' '}
               <Link
-                className="legend-link"
+                className="legend__link"
                 to={'/government'}
                 aria-label={'government link'}
               >

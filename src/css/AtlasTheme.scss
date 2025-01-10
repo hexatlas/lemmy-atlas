@@ -485,9 +485,9 @@ img:active,
 picture:active,
 img:target,
 picture:target,
-.post-thumbnail-image,
-.user-avatar-image,
-.community-avatar-image,
+.post__thumbnail--image,
+.user__avatar--image,
+.community__avatar-image,
 .banner-image {
   filter: none;
 }
@@ -541,7 +541,7 @@ td {
   border-radius: var(--atlas-border-radius-1);
 }
 
-.container-info {
+.settings__label {
   @include atlas-shadow(var(--atlas-shadow-1));
   position: absolute;
   border-radius: var(--atlas-border-radius-1);

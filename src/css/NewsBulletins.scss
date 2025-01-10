@@ -23,7 +23,9 @@
 
   &:hover {
     @include atlas-shadow(none);
-    background: hsl(var(--atlas-color-light) / var(--atlas-opacity-1)) !important;
+    background: hsl(
+      var(--atlas-color-light) / var(--atlas-opacity-1)
+    ) !important;
     opacity: 1;
     transition: var(--atlas-transition-fast);
   }
@@ -86,7 +88,7 @@
 .feed-post-container {
   display: flex;
   gap: var(--atlas-size-10);
-  button.post-thumbnail-container {
+  button.post__thumbnail {
     padding: 0;
   }
   .feed-post-stat {
@@ -117,7 +119,7 @@ p.feed-publish-date {
   max-height: var(--atlas-size-08);
 }
 
-.feed-item .reply-button {
+.feed-item .comment__reply-button {
   padding: 0;
 }
 
@@ -129,7 +131,7 @@ p.feed-publish-date {
   border-radius: var(--atlas-border-radius-1);
 }
 
-.feed-item .reply-button {
+.feed-item .comment__reply-button {
   padding: 0 var(--atlas-size-10);
   padding-top: var(--atlas-size-10);
 }

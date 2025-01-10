@@ -68,8 +68,8 @@ function LemmyCommunityInfoCard({
         <HoverCard.Content
           // eslint-disable-next-line no-loss-of-precision
           collisionPadding={1.6180339887498948482 ^ 9}
-          className={`community-info-card-content 
-          ${nsfw && 'community-info-card-content-hightlighted'}`}
+          className={`community__info-card-content 
+          ${nsfw && 'community__info-card-content-hightlighted'}`}
         >
           <div
             style={{
@@ -81,15 +81,15 @@ function LemmyCommunityInfoCard({
             {banner && <img className="banner-image" src={banner} alt={name} />}
             {icon && (
               <a
-                className={`user-avatar-container user-avatar-infocard ${
-                  banner && 'user-avatar-banner-offset'
+                className={`user__avatar user__avatar-infocard ${
+                  banner && 'user__avatar-banner-offset'
                 }`}
                 href={actor_id}
                 target="_blank"
                 rel="noopener noreferrer"
               >
                 <img
-                  className="user-avatar-image"
+                  className="user__avatar--image"
                   src={icon}
                   alt={'Community Icon'}
                 />
@@ -105,21 +105,21 @@ function LemmyCommunityInfoCard({
             >
               <div>
                 {local && (
-                  <small className="user-mod">{lemmyInstance.baseUrl}</small>
+                  <small className="user__mod">{lemmyInstance.baseUrl}</small>
                 )}
                 {nsfw && (
                   <small>
-                    <p className="post-alert">NSFW</p>
+                    <p className="comment__alert">NSFW</p>
                   </small>
                 )}
-                <h5 className="community-name">
+                <h5 className="community__name">
                   <a href={actor_id} target="_blank" rel="noopener noreferrer">
                     <span className="prefix">c/</span>
                     {name}
                   </a>
                 </h5>
 
-                <div className="community-stats">
+                <div className="community__stats">
                   <p>
                     <b>
                       {communityDetails?.community_view.counts.subscribers.toLocaleString()}{' '}
@@ -166,7 +166,7 @@ function LemmyCommunityInfoCard({
                 )}
               </div>
               {description && (
-                <div className="user-bio">
+                <div className="user__bio">
                   <ReactMarkdown>{description}</ReactMarkdown>
                 </div>
               )}
@@ -186,7 +186,7 @@ function LemmyCommunityInfoCard({
                 </div>
               </div>
               <div className="mod-wrapper">
-                <small className="community-mod">Mods</small>
+                <small className="community__mod">Mods</small>
                 <div className="mod-list">
                   {communityDetails?.moderators.map(
                     (communityModeratorView, index) => {
@@ -209,7 +209,7 @@ function LemmyCommunityInfoCard({
               </div>
             </div>
           </div>
-          <HoverCard.Arrow className="user-info-card-arrow" />
+          <HoverCard.Arrow className="user__info-card-arrow" />
         </HoverCard.Content>
       </HoverCard.Portal>
     </HoverCard.Root>

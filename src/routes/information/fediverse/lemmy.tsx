@@ -117,7 +117,7 @@ function LemmyRouteComponent() {
             </form>
           </div>
         ) : (
-          <div className="lemmy-edit-instance">
+          <div className="edit-instance">
             <button
               role="button"
               title="Change Lemmy Instance"
@@ -181,17 +181,17 @@ function LemmyRouteComponent() {
             />
           </form>
         </div>
-        <div className="community-list">
+        <div className="communities">
           {communityList &&
             communityList.map((communityView) => {
               const { community, counts } = communityView;
               return (
                 <button
                   key={counts?.community_id}
-                  className={`community-button ${
+                  className={`community__button ${
                     counts?.community_id ===
                       activeCommunity?.counts?.community_id &&
-                    'community-button-active'
+                    'community__button-active'
                   }`}
                   role="button"
                   aria-label={`${community?.name} community filter`}
@@ -208,20 +208,20 @@ function LemmyRouteComponent() {
               );
             })}
         </div>
-        <div className="lemmy-settings">
+        <div className="settings">
           <Tabs.Root
             value={activeSearchType}
             onValueChange={setActiveSearchType}
           >
             <Tabs.List
-              className="lemmy-setting-container"
+              className="setting-container"
               aria-label="Select SearchType"
             >
               {searchTypes.map((searchType, index) => (
                 <Tabs.Trigger
                   key={index}
                   value={searchType as unknown as string}
-                  className="lemmy-setting"
+                  className="setting"
                 >
                   {searchType.label}
                 </Tabs.Trigger>
@@ -234,14 +234,14 @@ function LemmyRouteComponent() {
             onValueChange={setActiveListingType}
           >
             <Tabs.List
-              className="lemmy-setting-container"
+              className="setting-container"
               aria-label="Select ListingType"
             >
               {listingTypes.map((listingType, index) => (
                 <Tabs.Trigger
                   key={index}
                   value={listingType as unknown as string}
-                  className="lemmy-setting"
+                  className="setting"
                 >
                   {listingType.label}
                 </Tabs.Trigger>
@@ -251,14 +251,14 @@ function LemmyRouteComponent() {
 
           <Tabs.Root value={activeSortType} onValueChange={setActiveSortType}>
             <Tabs.List
-              className="lemmy-setting-container"
+              className="setting-container"
               aria-label="Select SortType"
             >
               {sortTypes.map((sortType, index) => (
                 <Tabs.Trigger
                   key={index}
                   value={sortType as unknown as string}
-                  className="lemmy-setting"
+                  className="setting"
                 >
                   {sortType.label}
                 </Tabs.Trigger>
@@ -267,7 +267,7 @@ function LemmyRouteComponent() {
           </Tabs.Root>
         </div>
         {comments && activeSearchType.value === 'Comments' && (
-          <div className="post-reply-container">
+          <div className="comment__replies">
             {comments.length > 0 &&
               comments.map((commentView, index) => {
                 const { comment } = commentView;
@@ -288,7 +288,7 @@ function LemmyRouteComponent() {
           </div>
         )}
         {posts && activeSearchType.value === 'Posts' && (
-          <div className="post-reply-container">
+          <div className="comment__replies">
             {posts.length > 0 &&
               posts.map((postView, index) => {
                 const { post } = postView;
@@ -313,7 +313,7 @@ function LemmyRouteComponent() {
           View More
         </button>
       </>
-      <div className="legend-footer">
+      <div className="legend__footer">
         <a
           href={encodeURI(
             `${activeLemmyInstance.baseUrl}search?q=${encodeURIComponent(

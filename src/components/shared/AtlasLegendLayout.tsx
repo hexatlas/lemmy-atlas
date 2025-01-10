@@ -11,12 +11,12 @@ function LegendLayout({
 }) {
   return (
     <article
-      className={`legend-content ${className}`}
+      className={`layout ${className}`}
       aria-label="Legend Content"
       aria-description="View the selected information"
     >
       {children}
-      <footer className="legend-footer" aria-label="Legend Footer">
+      <footer className="legend__footer" aria-label="Legend Footer">
         <blockquote>
           <b>Note:</b> Data availability and quality varies between locations.
         </blockquote>

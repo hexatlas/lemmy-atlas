@@ -61,15 +61,19 @@ function Comment({
 
   return (
     <Collapsible.Root
-      className={`community-reply post-collapse-root ${
-        commentView?.counts.score > ratioDetector && 'post-highlight'
-      }`}
+      className={`comment comment__collapsible-root
+ ${commentView?.counts.score > ratioDetector && 'post-highlight'}`}
       open={open}
       onOpenChange={setOpen}
     >
-      <div className="comment-info-container">
+      <div className="comment__info-container">
         <Collapsible.Trigger>
-          <div className="post-collapse-trigger">{open ? '⊟' : '⊞'}</div>
+          <div
+            className="comment__collapsible-trigger
+"
+          >
+            {open ? '⊟' : '⊞'}
+          </div>
         </Collapsible.Trigger>
         {/* AVATAR PROFILE PICTURE */}
 
@@ -79,12 +83,17 @@ function Comment({
           showInfoCard={showUserAvatar}
         />
 
-        {commentView?.comment.distinguished && <p className="post-alert">📌</p>}
+        {commentView?.comment.distinguished && (
+          <p className="comment__alert">📌</p>
+        )}
 
         {/* Score Count / Upvotes / Downvotes */}
-        <p className="post-vote-container">
+        <p className="comment__votes">
           {Number(commentView?.counts.downvotes) === 0 || (
-            <sup className={`post-vote post-vote-upvotes`}>
+            <sup
+              className={`post-vote comment__votes--up
+`}
+            >
               {commentView?.counts.upvotes}
             </sup>
           )}
@@ -96,14 +105,14 @@ function Comment({
             {commentView?.counts.score}
           </span>
           {Number(commentView?.counts.downvotes) === 0 || (
-            <sub className={`post-vote post-vote-downvotes`}>
+            <sub className={`post-vote comment__votes--down`}>
               {commentView?.counts.downvotes}
             </sub>
           )}
         </p>
 
         {/* Timestamp */}
-        <small className="post-timestamp">
+        <small className="comment__timestamp">
           <TimeAgo dateString={commentView?.comment.published} />
         </small>
       </div>
@@ -133,31 +142,31 @@ function Comment({
             )}
           {commentDepth < 1 &&
             (commentView?.post?.nsfw || commentView?.community?.nsfw) && (
-              <p className="post-alert">NSFW</p>
+              <p className="comment__alert">NSFW</p>
             )}
 
           {/* Comment Body */}
           {commentView?.comment?.removed && (
-            <p className="comment-body">🚮 Comment removed.</p>
+            <p className="comment__body">🚮 Comment removed.</p>
           )}
           {commentView?.comment?.deleted && (
-            <p className="comment-body">🗑️ Comment deleted.</p>
+            <p className="comment__body">🗑️ Comment deleted.</p>
           )}
           {!(commentView?.comment?.removed || commentView?.comment?.deleted) &&
             commentView?.comment.content && (
-              <ReactMarkdown className="comment-body">
+              <ReactMarkdown className="comment__body">
                 {commentView?.comment.content}
               </ReactMarkdown>
             )}
 
           {/* Replies */}
           <div
-            className={`post-reply-container post-reply-depth-${(commentDepth % 7) + 1}`}
+            className={`comment__replies comment__replies--depth-${(commentDepth % 7) + 1}`}
           >
             {/* Reply Count */}
             {commentView?.counts.child_count > 0 && !replies && (
               <p
-                className="reply-button"
+                className="comment__reply-button"
                 role="button"
                 tabIndex={0}
                 aria-label="Show Replies"
@@ -168,7 +177,7 @@ function Comment({
                   }
                 }}
               >
-                <span className="post-replycount-emoji">💬</span>
+                <span className="comment__reply-button__emoji">💬</span>
                 {`${commentView?.counts.child_count} repl${
                   commentView?.counts.child_count > 1 ? 'ies' : 'y'
                 }`}
