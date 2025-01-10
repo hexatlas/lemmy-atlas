@@ -53,7 +53,7 @@ function AtlasOSMInfoList({
     showOnMap(element);
   };
 
-  let debounce: NodeJS.Timeout;
+  let debounce;
 
   const handleMouseEnter = (element) => {
     debounce = setTimeout(() => {
