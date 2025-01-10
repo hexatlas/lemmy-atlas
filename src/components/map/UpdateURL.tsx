@@ -16,6 +16,7 @@ function UpdateURL({ route, map }: { route; map }) {
       }),
     });
   }
+  return null;
 }
 
 export default UpdateURL;
