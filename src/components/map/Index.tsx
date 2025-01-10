@@ -53,8 +53,14 @@ export default function AtlasMap({
     weight: 0.161,
   };
 
+  const style_locationHover = {
+    color: 'hsl(var(--atlas-color-light) / var(--atlas-opacity-2))',
+    fillOpacity: 0.161,
+    weight: 0.161,
+  };
+
   const style_activeLocationHighlight = {
-    color: 'hsl(var(--atlas-color-tertiary))',
+    color: 'hsl(var(--atlas-color-tertiary) / var(--atlas-opacity-2))',
     fillOpacity: 0.161,
     weight: 0.161,
   };
@@ -80,33 +86,38 @@ export default function AtlasMap({
     administrativeRegion: { properties: AdministrativeRegionObject },
     layer: L.Layer,
   ) => {
-    let tempStyle;
     layer
       .bindPopup(
         `
       <div style="display: grid; grid-auto-flow: column; gap: var(--atlas-size-10); align-items: center;">
-        <h3 style="margin: 0;" class="emoji">${administrativeRegion.properties['emoji']}</h3>
-        <div>
-          <b><i>${administrativeRegion.properties.name}</i></b><br>
-          ${administrativeRegion.properties.country}
-        </div>
+      <h3 style="margin: 0;" class="emoji">${administrativeRegion.properties['emoji']}</h3>
+      <div>
+      <b><i>${administrativeRegion.properties.name}</i></b><br>
+      ${administrativeRegion.properties.country}
       </div>
-    `,
+      </div>
+      `,
       )
       .getPopup();
 
+    let tempStyle;
+
     layer.on({
       mouseover: (e) => {
-        // Highlight AdministrativeRegions on mouse hover
-        tempStyle = e.target?.options;
-        if (!isLocationSelectMode)
-          e.target?.setStyle(style_activeLocationHighlight);
+        // Store the original style before applying hover style
+        tempStyle = { ...e.target.options };
+        if (!isLocationSelectMode) {
+          e.target.setStyle(style_locationHover);
+        }
       },
 
       mouseout: (e) => {
-        if (!isLocationSelectMode)
-          e.target?.setStyle({ color: tempStyle.color });
+        if (!isLocationSelectMode && tempStyle) {
+          // Restore the original style
+          e.target.setStyle(tempStyle);
+        }
       },
+
       click: (e: {
         target: {
           feature: { properties: AdministrativeRegionObject };
@@ -172,7 +183,7 @@ export default function AtlasMap({
             activeAdministrativeRegion[activeGeographicIdentifier],
           )
         ) {
-          (region as Path).setStyle(style_activeLocationHighlight); // Highlight active location
+          (region as Path).setStyle(style_locationNameHighlight); // Highlight active location
         }
 
         if (isCountryMatch(region, activeAdministrativeRegion.country)) {
