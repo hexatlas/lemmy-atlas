@@ -99,9 +99,9 @@ function AtlasGeographyOptions() {
             if (type === 'region-code') return;
             if (type === 'sub-region-code') return;
             if (type === 'intermediate-region-code') return;
-            if (isLocationSelectMode && type === 'emoji') return;
-            if (isLocationSelectMode && type === 'alpha-2') return;
-            if (isLocationSelectMode && type === 'alpha-3') return;
+            if (type === 'emoji') return;
+            if (type === 'alpha-2') return;
+            if (type === 'alpha-3') return;
 
             return (
               <p
@@ -126,6 +126,8 @@ function AtlasGeographyOptions() {
           })}
         </>
       )}
+
+      {/* CLICK HISTORY */}
       {administrativeRegionClickHistoryArray.length > 2 && (
         <div className="location-name-click-history">
           {administrativeRegionClickHistoryArray.map(
