@@ -14,7 +14,6 @@ export function getAdministrativeRegionObject(
   GeographicIdentifier: GeographicIdentifier,
   value: string | number,
 ) {
-  if (value === undefined) return defaultAdministrativeRegionObject;
   if (GeographicIdentifier && value === 'country')
     return defaultAdministrativeRegionObject;
 
@@ -27,6 +26,8 @@ export function getAdministrativeRegionObject(
         value === administrativeRegionData.properties[GeographicIdentifier]
       );
   });
+
+  if (match === undefined) return defaultAdministrativeRegionObject;
   return match?.properties as AdministrativeRegionObject;
 }
 
