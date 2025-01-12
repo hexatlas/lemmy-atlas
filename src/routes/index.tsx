@@ -1,8 +1,9 @@
-import React, { useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { createFileRoute, Link } from '@tanstack/react-router';
 import BasedClientDetector from '../components/shared/BasedClientDetector';
 import LegendLayout from '../components/shared/AtlasLegendLayout';
 import { useStateStorage } from '../hooks/useAtlasUtils';
+import { AtlasContext } from './__root';
 
 export const Route = createFileRoute('/')({
   component: AtlasHomeComponent,
@@ -58,6 +59,8 @@ function AtlasHomeComponent() {
     setCurrentTheme(event.target.value);
   };
 
+  const search = Route.useSearch();
+
   return (
     <LegendLayout route={Route}>
       <h2 className="emoji" title="emoji" aria-label="emoji">
@@ -86,7 +89,7 @@ function AtlasHomeComponent() {
             <li>
               🪙{' '}
               <Link
-                search={{ country: 'country', bounds: '0,0,0,0', id: 0 }}
+                search={search}
                 className="legend__link"
                 to={'/economy'}
                 aria-label={'economy link'}
@@ -97,7 +100,7 @@ function AtlasHomeComponent() {
             <li>
               ℹ️{' '}
               <Link
-                search={{ country: 'country', bounds: '0,0,0,0', id: 0 }}
+                search={search}
                 className="legend__link"
                 to={'/information'}
                 aria-label={'information link'}
@@ -108,7 +111,7 @@ function AtlasHomeComponent() {
             <li>
               🕊️{' '}
               <Link
-                search={{ country: 'country', bounds: '0,0,0,0', id: 0 }}
+                search={search}
                 className="legend__link"
                 to={'/diplomacy'}
                 aria-label={'diplomacy link'}
@@ -119,7 +122,7 @@ function AtlasHomeComponent() {
             <li>
               🛡️{' '}
               <Link
-                search={{ country: 'country', bounds: '0,0,0,0', id: 0 }}
+                search={search}
                 className="legend__link"
                 to={'/military'}
                 aria-label={'security link'}
@@ -130,7 +133,7 @@ function AtlasHomeComponent() {
             <li>
               🏛️{' '}
               <Link
-                search={{ country: 'country', bounds: '0,0,0,0', id: 0 }}
+                search={search}
                 className="legend__link"
                 to={'/government'}
                 aria-label={'government link'}

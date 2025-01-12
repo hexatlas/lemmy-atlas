@@ -1,6 +1,6 @@
 import React from 'react';
 import { AtlasNavigation } from '../../types/atlas.types';
-import { Link, Outlet } from '@tanstack/react-router';
+import { Link, Outlet, useNavigate } from '@tanstack/react-router';
 
 function LegendNavigation({
   links,
@@ -11,6 +11,8 @@ function LegendNavigation({
   className?;
   route?;
 }) {
+  const search = route.useSearch();
+
   return (
     <div className={`tabs tabs__root light`}>
       <header aria-label={`Navigation Menu`} role="menubar">
@@ -28,6 +30,7 @@ function LegendNavigation({
                 aria-label={link}
                 title={link}
                 disabled={isDisabled}
+                search={search}
               >
                 {emoji}
               </Link>
