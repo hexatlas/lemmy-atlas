@@ -9,6 +9,8 @@ export const Route = createFileRoute('/')({
 });
 
 function AtlasHomeComponent() {
+  console.count('<AtlasHomeComponent />');
+
   const [currentTheme, setCurrentTheme] = useStateStorage<string>(
     'AtlasTheme',
     'system',
@@ -84,6 +86,7 @@ function AtlasHomeComponent() {
             <li>
               🪙{' '}
               <Link
+                search={{ country: 'country', bounds: '0,0,0,0', id: 0 }}
                 className="legend__link"
                 to={'/economy'}
                 aria-label={'economy link'}
@@ -94,6 +97,7 @@ function AtlasHomeComponent() {
             <li>
               ℹ️{' '}
               <Link
+                search={{ country: 'country', bounds: '0,0,0,0', id: 0 }}
                 className="legend__link"
                 to={'/information'}
                 aria-label={'information link'}
@@ -104,6 +108,7 @@ function AtlasHomeComponent() {
             <li>
               🕊️{' '}
               <Link
+                search={{ country: 'country', bounds: '0,0,0,0', id: 0 }}
                 className="legend__link"
                 to={'/diplomacy'}
                 aria-label={'diplomacy link'}
@@ -114,6 +119,7 @@ function AtlasHomeComponent() {
             <li>
               🛡️{' '}
               <Link
+                search={{ country: 'country', bounds: '0,0,0,0', id: 0 }}
                 className="legend__link"
                 to={'/military'}
                 aria-label={'security link'}
@@ -124,6 +130,7 @@ function AtlasHomeComponent() {
             <li>
               🏛️{' '}
               <Link
+                search={{ country: 'country', bounds: '0,0,0,0', id: 0 }}
                 className="legend__link"
                 to={'/government'}
                 aria-label={'government link'}

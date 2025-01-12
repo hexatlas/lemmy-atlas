@@ -183,22 +183,21 @@
 
 .map-interface {
   @include atlas-shadow(var(--atlas-shadow-1));
-  z-index: 9999;
   position: absolute;
-  max-width: calc(100% - var(--atlas-size-06));
-
-  padding: var(--atlas-size-08) var(--atlas-size-08);
-  width: fit-content;
   top: var(--atlas-size-10);
   right: var(--atlas-size-10);
   z-index: 999;
-  text-align: end;
+
+  padding: var(--atlas-size-08) var(--atlas-size-08);
+  max-width: calc(100% - var(--atlas-size-06));
+  width: fit-content;
 
   background-color: hsl(var(--atlas-color-light) / var(--atlas-opacity-3));
   border: 1px solid hsl(var(--atlas-color-light) / var(--atlas-opacity-3));
   border-right: var(--atlas-size-14) solid
     hsl(var(--atlas-color-secondary) / var(--atlas-opacity-3));
   border-radius: var(--atlas-border-radius-1);
+  text-align: end;
 
   .administrative-region-flag-container {
     // z-index: 9;

@@ -1,4 +1,8 @@
 import React, { useContext } from 'react';
+
+// https://www.radix-ui.com/primitives/docs/components/collapsible
+import * as Collapsible from '@radix-ui/react-collapsible';
+
 import { AtlasContext } from '../../routes/__root';
 
 import {
@@ -11,10 +15,11 @@ import { handleRandom } from '../../hooks/useAtlasUtils';
 function AtlasGeographyOptions() {
   const {
     isMobile,
-    activeGeographicIdentifier,
-
     isLocationSelectMode,
+    isOpenAtlasMapInterface,
+    setIsOpenAtlasMapInterface,
 
+    activeGeographicIdentifier,
     setActiveGeographicIdentifier,
 
     activeAdministrativeRegion,
@@ -130,47 +135,61 @@ function AtlasGeographyOptions() {
 
       {/* CLICK HISTORY */}
       {administrativeRegionClickHistoryArray.length > 2 && (
-        <div className="location-name-click-history">
-          {administrativeRegionClickHistoryArray.map(
-            (adminregion: LocationSelection, index) => {
-              if (
-                index === 0 ||
-                index > 5 ||
-                adminregion.activeAdministrativeRegion?.country === 'country'
-              )
-                return;
-              return (
-                <div
-                  key={index}
-                  className="location-name-click-history-item"
-                  aria-label={`Select ${activeAdministrativeRegion?.name} in ${activeAdministrativeRegion?.country}`}
-                  role="button"
-                  tabIndex={0}
-                  onClick={() => {
-                    setActiveAdministrativeRegion(
-                      adminregion.activeAdministrativeRegion,
-                    );
-                    setActiveGeographicIdentifier(
-                      adminregion.activeGeographicIdentifier,
-                    );
-                  }}
-                  onKeyDown={(e) => {
-                    if (e.key === 'Enter' || e.key === 'Space') {
-                      setActiveAdministrativeRegion(
-                        adminregion.activeAdministrativeRegion,
-                      );
-                      setActiveGeographicIdentifier(
-                        adminregion.activeGeographicIdentifier,
-                      );
-                    }
-                  }}
-                >
-                  <small>{adminregion.activeSelection}</small>
-                </div>
-              );
-            },
-          )}
-        </div>
+        <Collapsible.Root
+          className="history"
+          open={isOpenAtlasMapInterface}
+          onOpenChange={setIsOpenAtlasMapInterface}
+        >
+          <Collapsible.Trigger asChild>
+            <button className="expand" title="Click to Expand and Collapse">
+              {isMobile ? '☰' : isOpenAtlasMapInterface ? '➖' : '🕔'}
+            </button>
+          </Collapsible.Trigger>
+          <Collapsible.Content>
+            <div className="location-name-click-history">
+              {administrativeRegionClickHistoryArray.map(
+                (adminregion: LocationSelection, index) => {
+                  if (
+                    index === 0 ||
+                    index > 5 ||
+                    adminregion.activeAdministrativeRegion?.country ===
+                      'country'
+                  )
+                    return;
+                  return (
+                    <div
+                      key={index}
+                      className="location-name-click-history-item"
+                      aria-label={`Select ${activeAdministrativeRegion?.name} in ${activeAdministrativeRegion?.country}`}
+                      role="button"
+                      tabIndex={0}
+                      onClick={() => {
+                        setActiveAdministrativeRegion(
+                          adminregion.activeAdministrativeRegion,
+                        );
+                        setActiveGeographicIdentifier(
+                          adminregion.activeGeographicIdentifier,
+                        );
+                      }}
+                      onKeyDown={(e) => {
+                        if (e.key === 'Enter' || e.key === 'Space') {
+                          setActiveAdministrativeRegion(
+                            adminregion.activeAdministrativeRegion,
+                          );
+                          setActiveGeographicIdentifier(
+                            adminregion.activeGeographicIdentifier,
+                          );
+                        }
+                      }}
+                    >
+                      <small>{adminregion.activeSelection}</small>
+                    </div>
+                  );
+                },
+              )}
+            </div>
+          </Collapsible.Content>
+        </Collapsible.Root>
       )}
     </>
   );

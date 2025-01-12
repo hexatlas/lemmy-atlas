@@ -7,7 +7,9 @@ function NotFoundComponent({ data }: { data: unknown }) {
     <LegendLayout>
       <h1>🚫</h1>
       <p>NOT FOUND</p>
-      <Link to="/">Home</Link>
+      <Link to="/" search={{ country: 'country', bounds: '0,0,0,0', id: 0 }}>
+        Home
+      </Link>
       <code>
         <pre>{JSON.stringify(data, null, 2)}</pre>
       </code>

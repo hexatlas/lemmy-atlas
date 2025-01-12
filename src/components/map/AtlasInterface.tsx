@@ -1,8 +1,5 @@
 import React from 'react';
 
-// https://www.radix-ui.com/primitives/docs/components/collapsible
-import * as Collapsible from '@radix-ui/react-collapsible';
-
 import { AtlasInterfaceProps } from '../../types/atlas.types';
 import AtlasLocationSearch from '../shared/AtlasLocationSearch';
 import AtlasGeographyOptions from '../shared/AtlasGeographyOptions';
@@ -10,16 +7,11 @@ import AtlasGeographyOptions from '../shared/AtlasGeographyOptions';
 export default function AtlasInterface({
   // Util
   isMobile,
-  isLocationSelectMode,
 
   // legendSize,
   setLegendSize,
-
-  // Location
-  activeAdministrativeRegion,
-  isOpenAtlasMapInterface,
-  setIsOpenAtlasMapInterface,
 }: AtlasInterfaceProps) {
+  console.count('<AtlasInterface />');
   /* 
     Handlers
  */
@@ -33,7 +25,6 @@ export default function AtlasInterface({
     document.body.addEventListener('mousemove', onMouseMove);
     document.body.addEventListener('mouseup', onMouseUp, { once: true });
   };
-
   // const handleLocationSelection = () => {
   //   resetAtlas();
   //   setIsOpenAtlasMapInterface(true);
@@ -45,20 +36,7 @@ export default function AtlasInterface({
   */
 
   return (
-    <Collapsible.Root
-      className="map-interface"
-      open={isOpenAtlasMapInterface}
-      onOpenChange={setIsOpenAtlasMapInterface}
-    >
-      <Collapsible.Trigger asChild>
-        <button
-          className="map-interface__expand"
-          title="Click to Expand and Collapse"
-        >
-          {isMobile ? '☰' : isOpenAtlasMapInterface ? '➖' : '➕'}
-        </button>
-      </Collapsible.Trigger>
-
+    <div className="map-interface">
       {!isMobile && (
         <>
           <button
@@ -81,11 +59,8 @@ export default function AtlasInterface({
           </button> */}
         </>
       )}
-      <AtlasLocationSearch></AtlasLocationSearch>
-
-      <Collapsible.Content>
-        <AtlasGeographyOptions />
-      </Collapsible.Content>
-    </Collapsible.Root>
+      <AtlasLocationSearch />
+      <AtlasGeographyOptions />
+    </div>
   );
 }

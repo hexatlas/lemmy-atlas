@@ -15,6 +15,8 @@ export function getAdministrativeRegionObject(
   value: string | number,
 ) {
   if (value === undefined) return defaultAdministrativeRegionObject;
+  if (GeographicIdentifier && value === 'country')
+    return defaultAdministrativeRegionObject;
 
   const { features: administrativeRegionsData } =
     geojsonData as FeatureCollection;

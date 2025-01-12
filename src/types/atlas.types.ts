@@ -71,11 +71,11 @@ export interface AtlasState {
   isClustered: boolean;
   map: L.Map | null;
   isOpenAtlasMapInterface: boolean;
-  isLocationSelectMode: boolean;
   nominatim: NominatimResponse | undefined;
   activeGeographicIdentifier: GeographicIdentifier;
   activeAdministrativeRegion: AdministrativeRegionObject;
   administrativeRegionClickHistoryArray: LocationSelection[];
+  isLocationSelectMode: boolean;
   activeLocationSelection: LocationSelection[];
 }
 

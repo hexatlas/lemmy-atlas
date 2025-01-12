@@ -30,24 +30,25 @@ import { useNavigate } from '@tanstack/react-router';
 import { getAdministrativeRegionObject } from './useAtlasUtils';
 
 function useAtlas(Route): AtlasInterfaceProps {
+  console.count('useAtlas');
+
   // Routing
   const search = Route.useSearch();
   const navigate = useNavigate({ from: Route.fullPath });
 
   const navGeographicIdentifier = Object.keys(search);
-  const navGeographicIdentifierValue = Object.values(search).length;
-  console.log('navGeographicIdentifier', navGeographicIdentifier);
+  const navGeographicIdentifierValue = Object.values(search);
 
   const navAdministrativeRegion = search['id']
     ? getAdministrativeRegionObject('id', search['id'])
     : getAdministrativeRegionObject(
         navGeographicIdentifier[0] as GeographicIdentifier,
-        navGeographicIdentifierValue[0] as string,
+        navGeographicIdentifierValue[0] as string | number,
       );
 
   const navBounds = search['bounds'];
 
-  console.log('navBounds', navBounds);
+  console.log('useAtlas: navBounds', navBounds);
 
   const sideBarRef = useRef<HTMLInputElement>(null);
   const [state, dispatch] = useReducer<Reducer<AtlasState, AtlasAction>>(
@@ -160,7 +161,7 @@ function useAtlas(Route): AtlasInterfaceProps {
   // resetAtlas function
   function resetAtlas() {
     dispatch(initAtlas(initialState));
-    navigate({ to: '/' });
+    navigate({ to: '/', search });
     if (sideBarRef.current)
       sideBarRef.current.scrollTo({
         top: document.getElementById('atlas-tabs')?.offsetTop,

@@ -49,7 +49,7 @@ export const initialState: AtlasState = {
   isMobile: window.innerWidth < 768,
   // eslint-disable-next-line no-loss-of-precision
   legendSize: 1.6180339887498948482 ^ 512,
-  isOpenAtlasMapInterface: !(window.innerWidth < 768),
+  isOpenAtlasMapInterface: false,
   isLocationSelectMode: false,
   isClustered: true,
   map: null,
