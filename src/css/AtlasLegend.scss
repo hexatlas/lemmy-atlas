@@ -15,11 +15,14 @@
 */
 
 #legend {
+  height: 100vh;
+  max-height: 100vh;
+  z-index: 999;
+  position: relative;
   .search-input-wrapper {
     @include atlas-shadow(var(--atlas-shadow-1));
     position: sticky;
     top: 0;
-    z-index: 9999;
     background: white;
   }
 
@@ -71,9 +74,6 @@
 }
 
 .legend__footer {
-  position: sticky;
-  bottom: 0;
-  z-index: 9999;
   margin: var(--atlas-size-12);
   padding: var(--atlas-size-10);
   border-radius: var(--atlas-border-radius-1);
@@ -512,7 +512,7 @@
   border: 1px solid hsl(var(--atlas-color-light) / var(--atlas-opacity-1));
   border-radius: var(--atlas-border-radius-1);
 }
-.map-interface__expand {
+.expand {
   font-family: var(--atlas-font-emoji);
   color: hsl(var(--atlas-color-light) / var(--atlas-opacity-3));
   background-color: transparent;
@@ -589,6 +589,7 @@
 // TABS
 
 .tabs__root {
+  height: 100%;
   display: flex;
   flex-direction: column;
   position: relative;
