@@ -20,13 +20,18 @@ export const AtlasContext = createContext<AtlasInterfaceProps | null>(null);
 
 export const Route = createRootRoute({
   component: AtlasRootComponent,
-  // validateSearch: (search: Record<string, unknown>) => {
-  //   const geographicIdentifier = Object.keys(search);
-  //   return {
-  //     [geographicIdentifier[0]]: search.geographicIdentifier as string | number,
-  //     id: search.id as number,
-  //   };
-  // },
+  validateSearch: (search: Record<string, unknown>) => {
+    // Extract the first key from the search object
+    const geographicIdentifier = Object.keys(search)[0];
+
+    // If no geographicIdentifier exists, fall back to 'country'
+    const location = geographicIdentifier || 'country';
+
+    return {
+      [location]: search[location] as string | number,
+      id: search.id as number,
+    };
+  },
 });
 
 function AtlasRootComponent() {
