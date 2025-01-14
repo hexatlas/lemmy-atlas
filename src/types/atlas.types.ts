@@ -7,19 +7,15 @@ export type GeographicIdentifier =
   | 'country'
   | 'emoji'
   | 'image'
-  | 'alpha-2'
-  | 'alpha-3'
+  | 'ISO3166-2'
+  | 'ISO3166-3'
   | 'sub-region'
   | 'intermediate-region'
   | 'region'
-  | 'unicode'
   | 'country-code'
   | 'sub-region-code'
   | 'intermediate-region-code'
   | 'region-code'
-  | 'iso_3166-2'
-  | 'ISO3166-1-Alpha-3'
-  | 'code'
   | 'id';
 
 export const geographicIdentifiers: Array<GeographicIdentifier> = [
@@ -27,19 +23,15 @@ export const geographicIdentifiers: Array<GeographicIdentifier> = [
   'country',
   'emoji',
   'image',
-  'alpha-2',
-  'alpha-3',
+  'ISO3166-2',
+  'ISO3166-3',
   'sub-region',
   'intermediate-region',
   'region',
-  'unicode',
   'country-code',
   'sub-region-code',
   'intermediate-region-code',
   'region-code',
-  'iso_3166-2',
-  'ISO3166-1-Alpha-3',
-  'code',
   'id',
 ];
 
@@ -48,19 +40,15 @@ export interface AdministrativeRegionObject {
   country: string;
   emoji: string;
   image?: string;
-  'alpha-2': string;
-  'alpha-3': string;
+  'ISO3166-2': string;
+  'ISO3166-3': string;
   'sub-region': string;
   'intermediate-region': string;
   region: string;
-  unicode: string;
   'country-code': string;
   'sub-region-code': string;
   'intermediate-region-code': string;
   'region-code': string;
-  'iso_3166-2': string;
-  'ISO3166-1-Alpha-3': string;
-  code: string;
   id: number;
 }
 

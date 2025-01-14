@@ -55,7 +55,7 @@ function useNewsBulletins(
   }
 
   const { data: newsBulletinsPosts, isLoading } = useQuery({
-    queryKey: [`newsBulletins-${activeAdministrativeRegion['alpha-2']}`],
+    queryKey: [`newsBulletins-${activeAdministrativeRegion['ISO3166-2']}`],
     queryFn: () => fetchBulletinsRSS(apiUrl),
     staleTime: Infinity,
     refetchInterval: false,

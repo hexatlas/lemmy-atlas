@@ -428,7 +428,7 @@ function ChartsRouteComponent() {
         <YearsList
           data={IMFData}
           indicator={activeIndicator}
-          country={activeAdministrativeRegion['ISO3166-1-Alpha-3']}
+          country={activeAdministrativeRegion['ISO3166-3']}
         />
       )}
 

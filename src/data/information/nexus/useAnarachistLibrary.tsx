@@ -31,7 +31,7 @@ function useAnarachistLibrary(
   }
 
   const { data: anarchistLibraryPosts, isLoading } = useQuery({
-    queryKey: [`anarchistLibrary-${activeAdministrativeRegion['alpha-2']}`],
+    queryKey: [`anarchistLibrary-${activeAdministrativeRegion['ISO3166-2']}`],
     queryFn: () => fetchAnarchistLibrary(apiUrl),
     staleTime: Infinity,
     refetchInterval: false,

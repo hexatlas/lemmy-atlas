@@ -76,7 +76,7 @@ function LinksRouteComponent() {
         <>
           <a
             href={`https://data.worldbank.org/country/${encodeURI(
-              activeAdministrativeRegion['alpha-2'],
+              activeAdministrativeRegion['ISO3166-2'],
             )}`}
             target="_blank"
             rel="noopener noreferrer"

@@ -17,7 +17,7 @@ function useNominatim(
   setIsOpenAtlasMapInterface,
   map,
 ) {
-  const { 'alpha-2': alpha2, country } = activeAdministrativeRegion;
+  const { 'ISO3166-2': alpha2, country } = activeAdministrativeRegion;
 
   const [searchTerm, setSearchTerm] = useState<string>('');
   const [searchResults, setSearchResults] = useState<
@@ -91,7 +91,7 @@ function useNominatim(
         const matchedGeoJSon = administrativeRegionsData?.features.find(
           (adminstrativeRegion) =>
             adminstrativeRegion.properties &&
-            adminstrativeRegion.properties['alpha-2'] ===
+            adminstrativeRegion.properties['ISO3166-2'] ===
               result.features[0].properties.address.country_code.toUpperCase(),
         );
         if (matchedGeoJSon?.properties?.name)

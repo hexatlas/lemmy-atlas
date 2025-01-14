@@ -6,7 +6,7 @@ function useEconomyIndustry(activeAdministrativeRegion) {
     [out:json][timeout:90];
     
     // Fetch area for the selected region
-    area["ISO3166-1"="${activeAdministrativeRegion['alpha-2']}"]->.name;
+    area["ISO3166-1"="${activeAdministrativeRegion['ISO3166-2']}"]->.name;
     (
       // Fetch various industrial infrastructure features
       nwr["industrial"](area.name);
@@ -16,7 +16,7 @@ function useEconomyIndustry(activeAdministrativeRegion) {
   `;
 
   const industry = useQuery({
-    queryKey: [`Industry-${activeAdministrativeRegion['alpha-2']}`],
+    queryKey: [`Industry-${activeAdministrativeRegion['ISO3166-2']}`],
     queryFn: () => useOverpassAPI(overpassQuery),
     staleTime: Infinity,
     refetchInterval: false,

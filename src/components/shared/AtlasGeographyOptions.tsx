@@ -95,19 +95,15 @@ function AtlasGeographyOptions() {
             if (activeAdministrativeRegion[type] === '') return;
             if (type === 'name') return;
             if (type === 'country') return;
-            if (type === 'unicode') return;
             if (type === 'image') return;
-            if (type === 'code') return;
             if (type === 'id') return;
-            if (type === 'iso_3166-2') return;
-            if (type === 'ISO3166-1-Alpha-3') return;
             if (type === 'country-code') return;
             if (type === 'region-code') return;
             if (type === 'sub-region-code') return;
             if (type === 'intermediate-region-code') return;
             if (type === 'emoji') return;
-            if (type === 'alpha-2') return;
-            if (type === 'alpha-3') return;
+            if (type === 'ISO3166-2') return;
+            if (type === 'ISO3166-3') return;
 
             return (
               <p

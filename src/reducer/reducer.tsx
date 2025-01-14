@@ -32,16 +32,12 @@ export const defaultAdministrativeRegionObject: AdministrativeRegionObject = {
   // END
   emoji: '',
   image: '',
-  'alpha-2': '',
-  'alpha-3': '',
-  unicode: '',
+  'ISO3166-2': '',
+  'ISO3166-3': '',
   'country-code': '',
   'sub-region-code': '',
   'intermediate-region-code': '',
   'region-code': '',
-  'iso_3166-2': '',
-  'ISO3166-1-Alpha-3': '',
-  code: '',
   id: 0,
 };
 

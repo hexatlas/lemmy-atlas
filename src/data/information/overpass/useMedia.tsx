@@ -6,7 +6,7 @@ function useInformationMedia(activeAdministrativeRegion) {
     [out:json][timeout:90];
     
     // Fetch area for the selected region
-    area["ISO3166-1"="${activeAdministrativeRegion['alpha-2']}"]->.name;
+    area["ISO3166-1"="${activeAdministrativeRegion['ISO3166-2']}"]->.name;
     (
       // Fetch print media (newspapers)
       nwr["type"="newspaper"](area.name);
@@ -26,7 +26,7 @@ function useInformationMedia(activeAdministrativeRegion) {
   `;
 
   const media = useQuery({
-    queryKey: [`Media-${activeAdministrativeRegion['alpha-2']}`],
+    queryKey: [`Media-${activeAdministrativeRegion['ISO3166-2']}`],
     queryFn: () => useOverpassAPI(overpassQuery),
     staleTime: Infinity,
     refetchInterval: false,

@@ -57,10 +57,10 @@ function useIMF(activeAdministrativeRegion) {
     }
   };
 
-  const apiUrl = `/.netlify/functions/data_imf_api/?indicator=${activeIndicator.name}&country=${activeAdministrativeRegion['ISO3166-1-Alpha-3']}/`;
+  const apiUrl = `/.netlify/functions/data_imf_api/?indicator=${activeIndicator.name}&country=${activeAdministrativeRegion['ISO3166-3']}/`;
 
   const { data: IMFData, isLoading } = useQuery({
-    queryKey: [`AL-${activeAdministrativeRegion['alpha-2']}`],
+    queryKey: [`AL-${activeAdministrativeRegion['ISO3166-2']}`],
     queryFn: () => fetchData(apiUrl),
     staleTime: Infinity,
     refetchInterval: false,
