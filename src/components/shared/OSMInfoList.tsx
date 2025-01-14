@@ -19,24 +19,21 @@ function AtlasOSMInfoList({
   >(map?.getBounds());
   const [activeElement, setActiveElement] = useState(null);
 
-  const showOnMap = useCallback(
-    (element) => {
-      if (element.lat && element.lon) {
-        map?.flyTo([element.lat, element.lon], 15, { duration: 2.7 });
-      } else if (element?.bounds) {
-        map?.flyToBounds(
-          [
-            [element.bounds.minlat, element.bounds.minlon],
-            [element.bounds.maxlat, element.bounds.maxlon],
-          ],
-          { duration: 2.7 },
-        );
-      }
-    },
-    [map],
-  );
+  const showOnMap = useCallback((element) => {
+    if (element.lat && element.lon) {
+      map?.flyTo([element.lat, element.lon], 15, { duration: 2.7 });
+    } else if (element?.bounds) {
+      map?.flyToBounds(
+        [
+          [element.bounds.minlat, element.bounds.minlon],
+          [element.bounds.maxlat, element.bounds.maxlon],
+        ],
+        { duration: 2.7 },
+      );
+    }
+  }, []);
 
-  const handleClick = (element) => {
+  const handleClick = useCallback((element) => {
     if (element.lat && element.lon) {
       setLastMapBounds([
         [element.lat, element.lon],
@@ -51,23 +48,23 @@ function AtlasOSMInfoList({
     if (element) setActiveElement(element);
     if (element === activeElement) setActiveElement(null);
     showOnMap(element);
-  };
+  }, []);
 
   let debounce;
 
-  const handleMouseEnter = (element) => {
+  const handleMouseEnter = useCallback((element) => {
     debounce = setTimeout(() => {
       setLastMapBounds(map?.getBounds());
       showOnMap(element);
     }, 450);
-  };
+  }, []);
 
-  const handleMouseLeave = () => {
+  const handleMouseLeave = useCallback(() => {
     clearTimeout(debounce);
     map?.flyToBounds(lastMapBounds as LatLngBoundsExpression, {
       duration: 1.35,
     });
-  };
+  }, [lastMapBounds]);
 
   return (
     <>
@@ -102,4 +99,4 @@ function AtlasOSMInfoList({
   );
 }
 
-export default AtlasOSMInfoList;
+export default React.memo(AtlasOSMInfoList);

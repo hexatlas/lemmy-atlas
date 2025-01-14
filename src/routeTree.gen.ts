@@ -28,7 +28,6 @@ import { Route as InformationNexusImport } from './routes/information/nexus'
 import { Route as InformationMapImport } from './routes/information/map'
 import { Route as InformationLinksImport } from './routes/information/links'
 import { Route as InformationFediverseImport } from './routes/information/fediverse'
-import { Route as InformationChatImport } from './routes/information/chat'
 import { Route as GovernmentMapImport } from './routes/government/map'
 import { Route as GovernmentLinksImport } from './routes/government/links'
 import { Route as GovernmentClassImport } from './routes/government/class'
@@ -155,12 +154,6 @@ const InformationLinksRoute = InformationLinksImport.update({
 const InformationFediverseRoute = InformationFediverseImport.update({
   id: '/fediverse',
   path: '/fediverse',
-  getParentRoute: () => InformationRoute,
-} as any)
-
-const InformationChatRoute = InformationChatImport.update({
-  id: '/chat',
-  path: '/chat',
   getParentRoute: () => InformationRoute,
 } as any)
 
@@ -412,13 +405,6 @@ declare module '@tanstack/react-router' {
       fullPath: '/government/map'
       preLoaderRoute: typeof GovernmentMapImport
       parentRoute: typeof GovernmentImport
-    }
-    '/information/chat': {
-      id: '/information/chat'
-      path: '/chat'
-      fullPath: '/information/chat'
-      preLoaderRoute: typeof InformationChatImport
-      parentRoute: typeof InformationImport
     }
     '/information/fediverse': {
       id: '/information/fediverse'
@@ -754,7 +740,6 @@ const InformationNexusRouteWithChildren =
   InformationNexusRoute._addFileChildren(InformationNexusRouteChildren)
 
 interface InformationRouteChildren {
-  InformationChatRoute: typeof InformationChatRoute
   InformationFediverseRoute: typeof InformationFediverseRouteWithChildren
   InformationLinksRoute: typeof InformationLinksRoute
   InformationMapRoute: typeof InformationMapRouteWithChildren
@@ -763,7 +748,6 @@ interface InformationRouteChildren {
 }
 
 const InformationRouteChildren: InformationRouteChildren = {
-  InformationChatRoute: InformationChatRoute,
   InformationFediverseRoute: InformationFediverseRouteWithChildren,
   InformationLinksRoute: InformationLinksRoute,
   InformationMapRoute: InformationMapRouteWithChildren,
@@ -818,7 +802,6 @@ export interface FileRoutesByFullPath {
   '/government/class': typeof GovernmentClassRoute
   '/government/links': typeof GovernmentLinksRoute
   '/government/map': typeof GovernmentMapRouteWithChildren
-  '/information/chat': typeof InformationChatRoute
   '/information/fediverse': typeof InformationFediverseRouteWithChildren
   '/information/links': typeof InformationLinksRoute
   '/information/map': typeof InformationMapRouteWithChildren
@@ -855,7 +838,6 @@ export interface FileRoutesByTo {
   '/economy/links': typeof EconomyLinksRoute
   '/government/class': typeof GovernmentClassRoute
   '/government/links': typeof GovernmentLinksRoute
-  '/information/chat': typeof InformationChatRoute
   '/information/links': typeof InformationLinksRoute
   '/military/links': typeof MilitaryLinksRoute
   '/diplomacy': typeof DiplomacyIndexRoute
@@ -897,7 +879,6 @@ export interface FileRoutesById {
   '/government/class': typeof GovernmentClassRoute
   '/government/links': typeof GovernmentLinksRoute
   '/government/map': typeof GovernmentMapRouteWithChildren
-  '/information/chat': typeof InformationChatRoute
   '/information/fediverse': typeof InformationFediverseRouteWithChildren
   '/information/links': typeof InformationLinksRoute
   '/information/map': typeof InformationMapRouteWithChildren
@@ -944,7 +925,6 @@ export interface FileRouteTypes {
     | '/government/class'
     | '/government/links'
     | '/government/map'
-    | '/information/chat'
     | '/information/fediverse'
     | '/information/links'
     | '/information/map'
@@ -980,7 +960,6 @@ export interface FileRouteTypes {
     | '/economy/links'
     | '/government/class'
     | '/government/links'
-    | '/information/chat'
     | '/information/links'
     | '/military/links'
     | '/diplomacy'
@@ -1020,7 +999,6 @@ export interface FileRouteTypes {
     | '/government/class'
     | '/government/links'
     | '/government/map'
-    | '/information/chat'
     | '/information/fediverse'
     | '/information/links'
     | '/information/map'
@@ -1119,7 +1097,6 @@ export const routeTree = rootRoute
     "/information": {
       "filePath": "information.tsx",
       "children": [
-        "/information/chat",
         "/information/fediverse",
         "/information/links",
         "/information/map",
@@ -1178,10 +1155,6 @@ export const routeTree = rootRoute
       "children": [
         "/government/map/"
       ]
-    },
-    "/information/chat": {
-      "filePath": "information/chat.tsx",
-      "parent": "/information"
     },
     "/information/fediverse": {
       "filePath": "information/fediverse.tsx",

@@ -172,4 +172,4 @@ const WikiData = () => {
   );
 };
 
-export default AtlasOSMInfoCard;
+export default React.memo(AtlasOSMInfoCard);

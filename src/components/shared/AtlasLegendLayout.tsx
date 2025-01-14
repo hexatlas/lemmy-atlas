@@ -27,4 +27,4 @@ function LegendLayout({
   );
 }
 
-export default LegendLayout;
+export default React.memo(LegendLayout);

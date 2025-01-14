@@ -37,4 +37,4 @@ function AtlasOSMSettings({
   );
 }
 
-export default AtlasOSMSettings;
+export default React.memo(AtlasOSMSettings);

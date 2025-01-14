@@ -43,4 +43,4 @@ function LegendNavigation({
   );
 }
 
-export default LegendNavigation;
+export default React.memo(LegendNavigation);

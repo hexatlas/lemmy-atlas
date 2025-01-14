@@ -31,4 +31,4 @@ function MapRouteComponent({
   return <LegendNavigation links={navigationLinks} route={route} />;
 }
 
-export default MapRouteComponent;
+export default React.memo(MapRouteComponent);

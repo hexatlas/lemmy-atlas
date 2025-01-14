@@ -160,4 +160,4 @@ function MapInformationComponent({
   );
 }
 
-export default MapInformationComponent;
+export default React.memo(MapInformationComponent);

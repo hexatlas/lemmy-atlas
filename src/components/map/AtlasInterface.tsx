@@ -3,8 +3,9 @@ import React from 'react';
 import { AtlasInterfaceProps } from '../../types/atlas.types';
 import AtlasLocationSearch from '../shared/AtlasLocationSearch';
 import AtlasGeographyOptions from '../shared/AtlasGeographyOptions';
+import { setActiveGeographicIdentifier } from '../../reducer/actions';
 
-export default function AtlasInterface({
+function AtlasInterface({
   // Util
   isMobile,
 
@@ -64,3 +65,5 @@ export default function AtlasInterface({
     </div>
   );
 }
+
+export default React.memo(AtlasInterface);
