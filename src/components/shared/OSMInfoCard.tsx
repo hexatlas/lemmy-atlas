@@ -12,8 +12,8 @@ function AtlasOSMInfoCard({
   iconMap = {},
   filterKeys = [],
   children = <></>,
-  handleMouseEnter,
-  handleMouseLeave,
+  // handleMouseEnter,
+  // handleMouseLeave,
   handleClick,
   activeElement,
 }: OSMInfoCardProps) {
@@ -25,8 +25,8 @@ function AtlasOSMInfoCard({
       value={name}
       className={`item ${element == activeElement && 'active'}`}
       // tabIndex={0}
-      onMouseEnter={() => handleMouseEnter(element)} // Trigger zoom on hover
-      onMouseLeave={() => handleMouseLeave(element)} // Revert zoom on leave
+      // onMouseEnter={() => handleMouseEnter(element)} // Trigger zoom on hover
+      // onMouseLeave={() => handleMouseLeave(element)} // Revert zoom on leave
       onClick={() => handleClick(element)} // Fly to on click
       onFocus={() => handleClick(element)}
       aria-label={name}
