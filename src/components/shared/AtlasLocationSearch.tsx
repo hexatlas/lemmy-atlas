@@ -49,7 +49,7 @@ function AtlasLocationSearch() {
             role="button"
             title="Select Random Administrative Region"
             aria-label="Random Button - Select Random Administrative Region"
-            className="button-emoji expand"
+            className="button-emoji accent"
             onClick={() => handleRandom(setActiveAdministrativeRegion)}
           >
             🎲

@@ -6,6 +6,7 @@ import AtlasLocationSearch from '../components/shared/AtlasLocationSearch';
 
 import leaflet from '../assets/icons/leaflet.svg';
 import openstreetmap from '../assets/icons/openstreetmap.svg';
+import openweather from '../assets/icons/openweather.svg';
 import hexbear from '../assets/icons/hexbear.svg';
 import lemmy from '../assets/icons/lemmy.svg';
 import mastodon from '../assets/icons/mastodon.svg';
@@ -125,6 +126,18 @@ function AtlasHomeComponent() {
                 />{' '}
               </a>
             </li>
+
+            <li>
+              <a
+                className="wrapper"
+                href="https://github.com/LemmyNet"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <img src={lemmy} alt="Lemmy Logo" className="custom-icon" />{' '}
+              </a>
+            </li>
+
             <li>
               <a
                 className="wrapper"
@@ -150,6 +163,20 @@ function AtlasHomeComponent() {
                 <img
                   src={mastodon}
                   alt="Mastodon Logo"
+                  className="custom-icon"
+                />{' '}
+              </a>
+            </li>
+            <li>
+              <a
+                className="wrapper"
+                href="https://openweather.co.uk"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <img
+                  src={openweather}
+                  alt="Openweather Logo"
                   className="custom-icon"
                 />{' '}
               </a>
