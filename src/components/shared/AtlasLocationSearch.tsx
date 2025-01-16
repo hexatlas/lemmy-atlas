@@ -102,7 +102,7 @@ function AtlasLocationSearch() {
               </button>
             </li>
           ))}
-          {!loading && searchResults.length = 0 && <p>🪹</p>}
+          {!loading && searchResults.length >= 0 && <p>🪹</p>}
           <small className="search-licence">{searchResults[0]?.licence}</small>
         </ul>
       )}
