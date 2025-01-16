@@ -434,34 +434,30 @@ h5 {
 
 h1 {
   font-family: var(--atlas-font-cursive);
-  /* font-size: var(--atlas-size-04); */
   font-size: clamp(var(--atlas-size-09), 11.089vw + 1rem, var(--atlas-size-07));
   font-weight: 900;
 }
 
 h2 {
-  /* font-size: var(--atlas-size-05); */
+  text-transform: uppercase;
   font-size: clamp(var(--atlas-size-10), 6.854vw + 1rem, var(--atlas-size-08));
-  font-weight: 400;
+  font-weight: 900;
 }
 
 /* Subheadings */
 
 h3 {
-  /* font-size: var(--atlas-size-07); */
   font-size: clamp(var(--atlas-size-10), 4.236vw + 1rem, var(--atlas-size-08));
   font-weight: 400;
 }
 
 h4 {
-  /* font-size: var(--atlas-size-07); */
   font-size: clamp(var(--atlas-size-09), 2.618vw + 1rem, var(--atlas-size-08));
   text-transform: uppercase;
   font-weight: 900;
 }
 
 h5 {
-  /* font-size: var(--atlas-size-09); */
   font-size: clamp(var(--atlas-size-09), 1.618vw + 1rem, var(--atlas-size-08));
   text-transform: uppercase;
 }
