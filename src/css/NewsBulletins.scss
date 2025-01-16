@@ -2,7 +2,6 @@
   @include atlas-shadow(var(--atlas-shadow-inset));
   background: hsl(var(--atlas-color-light) / var(--atlas-opacity-1));
   margin-top: var(--atlas-size-10);
-  border-radius: var(--atlas-border-radius-1);
 
   display: grid;
   grid-template-columns: 1fr auto;
@@ -17,7 +16,7 @@
 .post-card {
   @include atlas-shadow(var(--atlas-shadow-1));
   background: hsl(var(--atlas-color-dark) / var(--atlas-opacity-3)) !important;
-  border-radius: var(--atlas-border-radius-1);
+
   overflow: hidden;
   display: grid;
 
@@ -77,7 +76,7 @@
 .post-stats {
   @include atlas-shadow(var(--atlas-shadow-inset));
   background: hsl(var(--atlas-color-dark) / var(--atlas-opacity-1)) !important;
-  border-radius: var(--atlas-border-radius-1);
+
   display: flex;
   justify-content: space-between;
   padding: var(--atlas-size-12) var(--atlas-size-10);
@@ -101,7 +100,6 @@
   margin: var(--atlas-size-10) 0;
   background: hsl(var(--atlas-color-light) / var(--atlas-opacity-1));
   padding: var(--atlas-size-10);
-  border-radius: var(--atlas-border-radius-1);
 }
 
 .feed-link {
@@ -128,7 +126,6 @@ p.feed-publish-date {
   background: hsl(var(--atlas-color-dark) / var(--atlas-opacity-3));
   margin: var(--atlas-size-14);
   padding: var(--atlas-size-10);
-  border-radius: var(--atlas-border-radius-1);
 }
 
 .feed-item .comment__reply-button {

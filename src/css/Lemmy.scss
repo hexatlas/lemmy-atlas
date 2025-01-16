@@ -18,7 +18,7 @@
   color: hsl(var(--atlas-color-dark) / var(--atlas-opacity-3));
 
   &.community__button-active {
-    background-color: hsl(var(--atlas-color-tertiary) / var(--atlas-opacity-3));
+    background-color: hsl(var(--atlas-color-accent) / var(--atlas-opacity-3));
   }
   &:hover {
     background-color: hsl(var(--atlas-color-primary) / var(--atlas-opacity-3));
@@ -41,7 +41,7 @@ summary.view-more {
   margin: var(--atlas-size-12) 0;
   padding: var(--atlas-size-10);
   display: inline-block;
-  border-radius: var(--atlas-border-radius-1);
+
   cursor: pointer;
 }
 
@@ -76,7 +76,7 @@ summary.view-more {
   gap: var(--atlas-size-12);
 
   // background-color: hsl(var(--atlas-color-light) / var(--atlas-opacity-1));
-  border-radius: var(--atlas-border-radius-1);
+
   @include atlas-shadow(var(--atlas-shadow-inset));
   overflow: hidden;
   overflow-x: scroll;
@@ -86,7 +86,7 @@ summary.view-more {
     gap: var(--atlas-size-14);
     background-color: hsl(var(--atlas-color-primary) / var(--atlas-opacity-3));
     // padding: var(--atlas-size-16);
-    border-radius: var(--atlas-border-radius-1);
+
     @include atlas-shadow(var(--atlas-shadow-1));
   }
 
@@ -103,9 +103,7 @@ summary.view-more {
     }
     &[data-state='active'] {
       color: hsl(var(--atlas-color-dark) / var(--atlas-opacity-3));
-      background-color: hsl(
-        var(--atlas-color-tertiary) / var(--atlas-opacity-3)
-      );
+      background-color: hsl(var(--atlas-color-accent) / var(--atlas-opacity-3));
 
       // z-index: 1;
     }
@@ -167,7 +165,6 @@ summary.view-more {
   margin-top: var(--atlas-size-10);
   overflow: hidden;
   height: unset;
-  border-radius: var(--atlas-border-radius-1);
 }
 
 .post-info-container button {
@@ -178,7 +175,6 @@ summary.view-more {
   @include atlas-shadow(var(--atlas-shadow-inset));
   background-color: hsl(var(--atlas-color-light) / var(--atlas-opacity-1));
   padding: var(--atlas-size-10);
-  border-radius: var(--atlas-border-radius-1);
 }
 
 .user__pronouns p,
@@ -188,7 +184,7 @@ summary.view-more {
   font-size: var(--atlas-size-09);
   font-weight: 900;
   padding: var(--atlas-size-12) var(--atlas-size-10);
-  border-radius: var(--atlas-border-radius-1);
+
   background-color: hsl(var(--atlas-color-light) / var(--atlas-opacity-1));
   color: hsl(var(--atlas-color-light) / var(--atlas-opacity-2));
 }
@@ -225,12 +221,12 @@ p.post-vote {
 }
 
 .commment-vote-score {
-  color: hsl(var(--atlas-color-tertiary) / var(--atlas-opacity-3));
+  color: hsl(var(--atlas-color-accent) / var(--atlas-opacity-3));
   font-weight: 900;
 }
 
 .post-score-positive {
-  color: hsl(var(--atlas-color-tertiary) / var(--atlas-opacity-3));
+  color: hsl(var(--atlas-color-accent) / var(--atlas-opacity-3));
 }
 .post-score-negative {
   color: hsl(var(--atlas-color-secondary) / var(--atlas-opacity-3));
@@ -238,8 +234,8 @@ p.post-vote {
 
 .post-highlight > div > .comment__body {
   @include atlas-shadow(var(--atlas-shadow-inset));
-  background: hsl(var(--atlas-color-tertiary) / var(--atlas-opacity-3));
-  border-radius: var(--atlas-border-radius-1);
+  background: hsl(var(--atlas-color-accent) / var(--atlas-opacity-3));
+
   padding: var(--atlas-size-10);
   margin: var(--atlas-size-10);
   position: relative;
@@ -304,7 +300,7 @@ p.post-vote {
   /* font-weight: 900; */
 }
 .comment__reply-button:hover {
-  color: hsl(var(--atlas-color-tertiary) / var(--atlas-opacity-3));
+  color: hsl(var(--atlas-color-accent) / var(--atlas-opacity-3));
 }
 
 .comment__reply-button__emoji {
@@ -411,7 +407,7 @@ p.post-vote {
   margin-top: var(--atlas-size-15);
   margin-bottom: 0;
   padding: 0 var(--atlas-size-15);
-  border-radius: var(--atlas-border-radius-1);
+
   border-top: none;
   border-bottom: none;
 }
@@ -459,7 +455,7 @@ p.post-vote {
 .user__card-tabs {
   background-color: hsl(var(--atlas-color-dark) / var(--atlas-opacity-2));
   padding: var(--atlas-size-10);
-  border-radius: var(--atlas-border-radius-1);
+
   @include atlas-shadow(var(--atlas-shadow-1));
 }
 
@@ -472,7 +468,6 @@ p.post-vote {
 
   width: var(--atlas-size-08);
   height: var(--atlas-size-08);
-  border-radius: var(--atlas-border-radius-1);
 
   cursor: pointer;
   background-color: hsl(var(--atlas-color-light) / var(--atlas-opacity-1));
@@ -539,7 +534,6 @@ p.post-vote {
 }
 
 .banner-image {
-  border-radius: var(--atlas-border-radius-1);
 }
 
 a.user__name {
@@ -576,8 +570,7 @@ a.user__name {
   background-color: hsl(var(--atlas-color-light) / var(--atlas-opacity-3));
   border: 1px solid hsl(var(--atlas-color-light) / var(--atlas-opacity-3));
   border-left: var(--atlas-size-14) solid
-    hsl(var(--atlas-color-tertiary) / var(--atlas-opacity-3));
-  border-radius: var(--atlas-border-radius-1);
+    hsl(var(--atlas-color-accent) / var(--atlas-opacity-3));
 
   animation-duration: var(--atlas-time-1);
   animation-timing-function: var(--atlas-timing-function);
@@ -598,12 +591,12 @@ a.user__name {
 }
 
 .mod-list {
-  background: hsl(var(--atlas-color-tertiary) / var(--atlas-opacity-2));
+  background: hsl(var(--atlas-color-accent) / var(--atlas-opacity-2));
   padding: var(--atlas-size-10);
   display: grid;
   gap: var(--atlas-size-10);
   @include atlas-shadow(var(--atlas-shadow-1));
-  border-radius: var(--atlas-border-radius-1);
+
   max-height: var(--atlas-size-00);
   overflow-y: scroll;
 }
@@ -630,8 +623,8 @@ a.user__name {
   @include atlas-shadow(var(--atlas-shadow-inset));
   padding: var(--atlas-size-12) var(--atlas-size-10);
   margin-bottom: var(--atlas-size-12);
-  border-radius: var(--atlas-border-radius-1);
-  background-color: hsl(var(--atlas-color-tertiary) / var(--atlas-opacity-3));
+
+  background-color: hsl(var(--atlas-color-accent) / var(--atlas-opacity-3));
   color: hsl(var(--atlas-color-dark) / var(--atlas-opacity-3));
 }
 
@@ -646,7 +639,7 @@ a.user__name {
 }
 
 .user__info-card-content-hightlighted {
-  background-color: hsl(var(--atlas-color-tertiary) / var(--atlas-opacity-3));
+  background-color: hsl(var(--atlas-color-accent) / var(--atlas-opacity-3));
 }
 
 .user__info-card-content-hightlighted .user__pronouns p {
@@ -684,7 +677,7 @@ a.user__name {
   background-color: hsl(var(--atlas-color-dark) / var(--atlas-opacity-3));
   color: hsl(var(--atlas-color-light) / var(--atlas-opacity-3));
   padding: var(--atlas-size-10);
-  border-radius: var(--atlas-border-radius-1);
+
   max-height: calc(var(--atlas-size-00) * 2);
   overflow-y: scroll;
   @include atlas-shadow(var(--atlas-shadow-1));
@@ -698,7 +691,7 @@ a.user__name {
   &:hover,
   &:focus {
     cursor: pointer;
-    color: hsl(var(--atlas-color-tertiary) / var(--atlas-opacity-3));
+    color: hsl(var(--atlas-color-accent) / var(--atlas-opacity-3));
   }
 }
 
@@ -709,8 +702,7 @@ a.user__name {
 .post[data-state='open'] {
   padding-left: var(--atlas-size-10);
   border-left: var(--atlas-size-14) solid
-    hsl(var(--atlas-color-tertiary) / var(--atlas-opacity-3));
-  border-radius: var(--atlas-border-radius-1);
+    hsl(var(--atlas-color-accent) / var(--atlas-opacity-3));
 }
 
 [data-state='open'] > [data-state='open'] {

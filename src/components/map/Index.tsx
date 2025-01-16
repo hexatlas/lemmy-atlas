@@ -62,13 +62,13 @@ export default function AtlasMap({
   };
 
   const style_activeLocationHighlight = {
-    color: 'hsl(var(--atlas-color-tertiary) / var(--atlas-opacity-2))',
+    color: 'hsl(var(--atlas-color-accent) / var(--atlas-opacity-2))',
     fillOpacity: 0.161,
     weight: 0.161,
   };
 
   const style_locationNameHighlight = {
-    color: 'hsl(var(--atlas-color-tertiary))',
+    color: 'hsl(var(--atlas-color-accent))',
     fillOpacity: 0.161,
     weight: 1.312,
   };

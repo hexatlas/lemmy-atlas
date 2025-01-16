@@ -21,6 +21,7 @@ function AtlasHomeComponent() {
   const themes = [
     { value: 'dark', label: '🌙 Dark' },
     { value: 'light', label: '☀️ Light' },
+    { value: 'red', label: '✊ Red' },
     { value: 'system', label: '⚙️ System' },
   ];
 
@@ -63,12 +64,14 @@ function AtlasHomeComponent() {
 
   return (
     <LegendLayout route={Route}>
-      <h2 className="emoji" title="emoji" aria-label="emoji">
-        🇪⠀🇲⠀🇴⠀🇯⠀🇮
-      </h2>
-      <h1 className="emoji" title="atlas" aria-label="atlas">
-        🅰️⠀🇹⠀🇱⠀🇦⠀🇸
-      </h1>
+      <div className="container primary">
+        <h2 className="container accent" title="emoji" aria-label="emoji">
+          #8a0000
+        </h2>
+        <h1 className="emoji" title="atlas" aria-label="atlas">
+          🅰️⠀🇹⠀🇱⠀🇦⠀🇸
+        </h1>
+      </div>
       <p>
         <span> </span>
         This Atlas uses OpenStreetMaps, Overpass, Nominatim, ProleWiki,
@@ -177,7 +180,7 @@ function AtlasHomeComponent() {
           <i>option</i>
         </span>{' '}
         to reveal{' '}
-        <span className="tertiary">
+        <span className="accent">
           <i>selected information</i>
         </span>
         .

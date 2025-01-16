@@ -16,7 +16,6 @@
     height: var(--atlas-size-07);
     padding: var(--atlas-size-10);
     background-color: hsl(var(--atlas-color-light) / var(--atlas-opacity-3));
-    border-radius: var(--atlas-border-radius-1);
   }
   .cluster-emoji {
     font-size: var(--atlas-size-08);
@@ -37,9 +36,8 @@
     padding: var(--atlas-size-10);
     font-weight: bold;
     font-size: var(--atlas-size-09);
-    color: hsl(var(--atlas-color-tertiary) / var(--atlas-opacity-3));
+    color: hsl(var(--atlas-color-accent) / var(--atlas-opacity-3));
     background-color: hsl(var(--atlas-color-dark) / var(--atlas-opacity-3));
-    border-radius: var(--atlas-border-radius-1);
   }
 }
 
@@ -189,7 +187,6 @@
 
 .marker-cluster {
   background-clip: padding-box;
-  border-radius: var(--atlas-border-radius-1);
 }
 .marker-cluster div {
   width: var(--atlas-size-08);
@@ -198,7 +195,6 @@
   margin-top: var(--atlas-size-10);
 
   text-align: center;
-  border-radius: var(--atlas-border-radius-1);
 }
 .marker-cluster span {
   line-height: var(--atlas-size-08);
@@ -231,7 +227,7 @@
 .tabs__root {
   border-right: none !important ;
   border-left: var(--atlas-size-14) solid
-    hsl(var(--atlas-color-tertiary) / var(--atlas-opacity-3)) !important;
+    hsl(var(--atlas-color-accent) / var(--atlas-opacity-3)) !important;
 }
 
 .tabs__root {
@@ -280,7 +276,6 @@
 
 .leaflet-control:hover {
   background: hsl(var(--atlas-color-light) / var(--atlas-opacity-2)) !important;
-  border-radius: var(--atlas-border-radius-1);
 }
 
 .leaflet-control-zoom {

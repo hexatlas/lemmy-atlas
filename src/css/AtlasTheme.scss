@@ -64,8 +64,8 @@ code {
   /* https://colordesigner.io/#FFCC0D-FF7326-FF194D-BF2669-702A8C */
   --atlas-color-primary: 282.86 53.85% 35.69%;
   --atlas-color-secondary: 333.73 66.81% 44.9%;
-  --atlas-color-tertiary: 47.36 100% 52.55%;
-  --atlas-color-accent: 346.43 100% 54.9%;
+  --atlas-color-tertiary: 346.43 100% 54.9%;
+  --atlas-color-accent: 47.36 100% 52.55%;
   --atlas-color-link: 165 59% 62%;
 
   --atlas-color-post-red: hsla(0, 35%, 50%, 0.5);
@@ -211,6 +211,20 @@ code {
   }
 }
 
+[data-theme='red'] {
+  --atlas-color-primary: 0 100% 27%; /* Dark Red (#8B0000) */
+  --atlas-color-secondary: 0 0% 0%; /* Black (#000000) */
+  --atlas-color-tertiary: 30 51% 26%; /* Dark Brown (#654321) */
+  --atlas-color-accent: 45 61% 50%; /* Gold (#CD7F32) */
+  --atlas-color-link: 0 59% 41%; /* Dark Crimson (#A52A2A) */
+  --atlas-color-dark: 0 100% 6%;
+  --atlas-color-light: 0 100% 99%;
+
+  input {
+    color: hsl(var(--atlas-color-dark));
+  }
+}
+
 /* 
     MIXINS
 */
@@ -244,11 +258,13 @@ code {
     color: hsl($color_greyscale / $opacity);
     background: hsl($color_identity);
     border-color: hsl($color_greyscale / $opacity);
+    border-radius: var(--atlas-border-radius-1);
   }
   .#{$name}--invert {
     background: hsl($color_greyscale / $opacity);
     color: hsl($color_identity);
     border-color: hsl($color_identity);
+    border-radius: var(--atlas-border-radius-1);
   }
 }
 
@@ -281,7 +297,7 @@ code {
 @include color_background_setting(
   'accent',
   var(--atlas-color-accent),
-  var(--atlas-color-light),
+  var(--atlas-color-dark),
   var(--atlas-opacity-3)
 );
 
@@ -396,6 +412,12 @@ a {
     opacity: var(--atlas-opacity-2);
     transition: var(--atlas-transition-fast);
   }
+}
+
+span,
+i,
+b {
+  padding: 0 var(--atlas-size-14);
 }
 
 h1,
@@ -538,13 +560,26 @@ td {
 .container {
   @include atlas-shadow(var(--atlas-shadow-1));
   padding: var(--atlas-size-09);
-  border-radius: var(--atlas-border-radius-1);
+
+  max-width: var(--atlas-max-width);
+}
+
+.wrapper {
+  display: grid;
+  gap: var(--atlas-size-09);
+  padding: var(--atlas-size-10);
+}
+
+@media only screen and (min-width: 768px) {
+  .wrapper {
+    grid-template-columns: repeat(auto-fit, minmax(var(--atlas-size-08), 1fr));
+  }
 }
 
 .settings__label {
   @include atlas-shadow(var(--atlas-shadow-1));
   position: absolute;
-  border-radius: var(--atlas-border-radius-1);
+
   padding: var(--atlas-size-10);
   transform: translate(
     calc(var(--atlas-size-08) * 1),
@@ -558,6 +593,6 @@ td {
   color: hsl(var(--atlas-color-tertiary) / var(--atlas-opacity-3));
   padding: 0 var(--atlas-size-10);
   margin-right: var(--atlas-size-12);
-  border-radius: var(--atlas-border-radius-1);
+
   font-weight: 900;
 }
