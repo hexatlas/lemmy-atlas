@@ -23,7 +23,7 @@ function AtlasOSMInfoCard({
     <Accordion.Item
       key={index}
       value={name}
-      className={`item light ${element == activeElement && 'active'}`}
+      className={`item dark ${element == activeElement && 'active'}`}
       // tabIndex={0}
       // onMouseEnter={() => handleMouseEnter(element)} // Trigger zoom on hover
       // onMouseLeave={() => handleMouseLeave(element)} // Revert zoom on leave
