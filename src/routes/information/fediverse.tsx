@@ -3,6 +3,9 @@ import { createFileRoute } from '@tanstack/react-router';
 import LegendNavigation from '../../components/shared/AtlasNavigation';
 import { AtlasNavigation } from '../../types/atlas.types';
 
+import hexbear from '../../assets/icons/hexbear.svg';
+import mastodon from '../../assets/icons/mastodon.svg';
+
 export const Route = createFileRoute('/information/fediverse')({
   component: FediverseRouteComponent,
 });
@@ -10,12 +13,16 @@ export const Route = createFileRoute('/information/fediverse')({
 const navigationLinks: AtlasNavigation[] = [
   {
     link: '/information/fediverse/lemmy',
-    emoji: 'Lemmy',
+    emoji: (
+      <img src={hexbear} alt="Hexbear" className="tabs__trigger--custom" />
+    ),
     isDisabled: false,
   },
   {
     link: '/information/fediverse/mastodon',
-    emoji: 'Mastodon',
+    emoji: (
+      <img src={mastodon} alt="Mastodon" className="tabs__trigger--custom" />
+    ),
     isDisabled: false,
   },
 ];

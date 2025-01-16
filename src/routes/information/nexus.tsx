@@ -3,6 +3,10 @@ import { createFileRoute } from '@tanstack/react-router';
 import LegendNavigation from '../../components/shared/AtlasNavigation';
 import { AtlasNavigation } from '../../types/atlas.types';
 
+import prolewiki from '../../assets/icons/prolewiki.png';
+import natopedia from '../../assets/icons/natopedia.svg';
+import anarchistlibrary from '../../assets/icons/anarchistlibrary.png';
+
 export const Route = createFileRoute('/information/nexus')({
   component: NexusRouteComponent,
 });
@@ -10,22 +14,32 @@ export const Route = createFileRoute('/information/nexus')({
 const navigationLinks: AtlasNavigation[] = [
   {
     link: '/information/nexus/prolewiki',
-    emoji: 'ProleWiki',
+    emoji: (
+      <img src={prolewiki} alt="ProleWiki" className="tabs__trigger--custom" />
+    ),
     isDisabled: false,
   },
   {
     link: '/information/nexus/natopedia',
-    emoji: 'NATOPedia',
+    emoji: (
+      <img src={natopedia} alt="NatoWiki" className="tabs__trigger--custom" />
+    ),
     isDisabled: false,
   },
   {
     link: '/information/nexus/72Tbulletins',
-    emoji: '72Ts Bulletins',
+    emoji: '7️⃣2️⃣🇹',
     isDisabled: false,
   },
   {
     link: '/information/nexus/anarchistlibrary',
-    emoji: 'Anarchist Library',
+    emoji: (
+      <img
+        src={anarchistlibrary}
+        alt="Anarchist Libaray"
+        className="tabs__trigger--custom"
+      />
+    ),
     isDisabled: false,
   },
 ];

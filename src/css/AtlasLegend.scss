@@ -238,7 +238,6 @@
   }
   .button-emoji,
   .atlas-reset-button {
-    height: var(--atlas-size-0);
     font-family: var(--atlas-font-emoji);
   }
 
@@ -701,6 +700,11 @@
 .emoji-label {
   font-size: var(--atlas-size-08);
   font-family: var(--atlas-font-emoji);
+}
+
+.tabs__trigger--custom {
+  height: var(--atlas-size-08);
+  filter: none;
 }
 
 .tabs__trigger:hover {

@@ -1,6 +1,7 @@
 // Important: Needs to match geoJSON properties with the imported administrativeRegionsData in src/geojson that get's imported in Atlas.tsx
 
 import { ReactNode, ToPathOption } from '@tanstack/react-router';
+import { ReactElement } from 'react';
 
 export type GeographicIdentifier =
   | 'name'
@@ -147,7 +148,7 @@ export interface MapState {
 
 export interface AtlasNavigation {
   link: ToPathOption;
-  emoji: string;
+  emoji: ReactElement | string;
   isDisabled: boolean;
 }
 
