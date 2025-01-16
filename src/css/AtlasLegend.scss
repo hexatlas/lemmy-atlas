@@ -199,12 +199,20 @@
 
   text-align: end;
 
-  .administrative-region-flag-container {
-    // z-index: 9;
-    // top: 0;
-    // right: 0;
+  .administrative-region {
+    position: relative;
     display: grid;
-    align-content: flex-end;
+    justify-items: center;
+    align-items: flex-end;
+  }
+
+  .administrative-region-flag-container {
+    position: absolute;
+    display: grid;
+    justify-items: center;
+    align-items: flex-end;
+    z-index: -1;
+    opacity: var(--atlas-opacity-1);
     width: 100%;
     img {
       // justify-self: flex-end;

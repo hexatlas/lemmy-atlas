@@ -40,10 +40,28 @@ function AtlasLocationSearch() {
 
   return (
     <div id="location-search" aria-label="Location Search">
-      <div
-        className="search-input-wrapper search-input-interface"
-        aria-label="Location Search"
-      >
+      <div className="wrapper " aria-label="Location Search">
+        <form
+          className="search-form wrapper"
+          role="search"
+          aria-label="Search Location Form"
+        >
+          <label htmlFor="search-input" className="sr-only">
+            Search Location in {country}
+          </label>
+          <input
+            className="search-input"
+            type="search"
+            placeholder={`Search Location ${
+              country !== 'country' ? `in ${country}` : ''
+            }`}
+            aria-label={`Search Location ${
+              country !== 'country' ? `in ${country}` : ''
+            }`}
+            value={searchTerm}
+            onChange={handleSearchInputChange}
+          />
+        </form>{' '}
         {activeAdministrativeRegion?.country === 'country' && (
           <button
             role="button"
@@ -66,27 +84,6 @@ function AtlasLocationSearch() {
             {activeAdministrativeRegion['emoji']} ⨯
           </button>
         )}
-        <form
-          className="search-form"
-          role="search"
-          aria-label="Search Location Form"
-        >
-          <label htmlFor="search-input" className="sr-only">
-            Search Location in {country}
-          </label>
-          <input
-            className="search-input"
-            type="search"
-            placeholder={`Search Location ${
-              country !== 'country' ? `in ${country}` : ''
-            }`}
-            aria-label={`Search Location ${
-              country !== 'country' ? `in ${country}` : ''
-            }`}
-            value={searchTerm}
-            onChange={handleSearchInputChange}
-          />
-        </form>
       </div>
       {searchTerm.trim() !== '' && (
         <ul className="search-results light" aria-label="Search Results">
