@@ -74,6 +74,8 @@
 .legend__footer {
   margin: var(--atlas-size-12);
   padding: var(--atlas-size-10);
+  position: sticky;
+  bottom: 0;
 
   @include atlas-shadow(var(--atlas-shadow-1));
   background: hsl(var(--atlas-color-dark) / var(--atlas-opacity-3));
@@ -442,8 +444,7 @@
   max-width: var(--atlas-size-00);
 }
 
-.dropdown-menu-subtrigger[data-state='open'],
-.dropdown-menu-subtrigger[data-state='open'] .right-slot {
+.dropdown-menu-subtrigger[data-state='open'] {
   background-color: hsl(var(--atlas-color-primary) / var(--atlas-opacity-3));
   color: hsl(var(--atlas-color-light) / var(--atlas-opacity-3));
 }
@@ -521,18 +522,6 @@
 }
 .button-emoji:focus {
   box-shadow: var(--atlas-shadow-text);
-}
-
-.right-slot {
-  justify-self: end;
-  margin-left: auto;
-  color: hsl(var(--atlas-color-dark) / var(--atlas-opacity-3));
-}
-[data-highlighted] > .right-slot {
-  color: hsl(var(--atlas-color-light) / var(--atlas-opacity-3));
-}
-[data-disabled] .right-slot {
-  color: hsl(var(--atlas-color-dark) / var(--atlas-opacity-1));
 }
 
 @keyframes slideUpAndFade {

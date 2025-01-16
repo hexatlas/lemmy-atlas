@@ -41,17 +41,6 @@ function AtlasGeographyOptions() {
               />
             </div>
           )}
-          <div className="right-slot">
-            <button
-              role="button"
-              title="Select Random Administrative Region"
-              aria-label="Random Button - Select Random Administrative Region"
-              className="random-button emoji"
-              onClick={() => handleRandom(setActiveAdministrativeRegion)}
-            >
-              🎲
-            </button>
-          </div>
 
           <h1
             className={`location-name ${

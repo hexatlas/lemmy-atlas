@@ -63,7 +63,7 @@ function AtlasLocationSearch() {
             className="atlas-reset-button"
             onClick={resetAtlas}
           >
-            {activeAdministrativeRegion[activeGeographicIdentifier]} ⨯
+            {activeAdministrativeRegion['emoji']} ⨯
           </button>
         )}
         <form

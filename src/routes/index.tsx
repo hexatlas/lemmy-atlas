@@ -7,6 +7,7 @@ import AtlasLocationSearch from '../components/shared/AtlasLocationSearch';
 import leaflet from '../assets/icons/leaflet.svg';
 import openstreetmap from '../assets/icons/openstreetmap.svg';
 import hexbear from '../assets/icons/hexbear.svg';
+import lemmy from '../assets/icons/lemmy.svg';
 import mastodon from '../assets/icons/mastodon.svg';
 import prolewiki from '../assets/icons/prolewiki.png';
 import natopedia from '../assets/icons/natopedia.svg';
@@ -69,7 +70,94 @@ function AtlasHomeComponent() {
   const search = Route.useSearch();
 
   return (
-    <LegendLayout route={Route}>
+    <LegendLayout
+      route={Route}
+      footer={
+        <section>
+          <small>Powered by:</small>
+          <ul className="container wrapper light">
+            <li>
+              <a
+                className="wrapper"
+                href="https://hexbear.net"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <img src={hexbear} alt="Lemmy Logo" className="custom-icon" />{' '}
+              </a>
+            </li>
+
+            <li>
+              <a
+                className="wrapper"
+                href="https://leafletjs.com"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <img src={leaflet} alt="Leaflet Logo" className="custom-icon" />{' '}
+              </a>
+            </li>
+            <li>
+              <a
+                className="wrapper"
+                href="https://www.openstreetmap.org"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <img
+                  src={openstreetmap}
+                  alt="OpenStreetMaps Logo"
+                  className="custom-icon"
+                />{' '}
+              </a>
+            </li>
+            <li>
+              <a
+                className="wrapper"
+                href="https://prolewiki.org"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <img
+                  src={prolewiki}
+                  alt="ProleWiki Logo"
+                  className="custom-icon"
+                />{' '}
+              </a>
+            </li>
+            <li>
+              <a
+                className="wrapper"
+                href="https://wikipedia.org"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <img
+                  src={natopedia}
+                  alt="Wikipedia Logo"
+                  className="custom-icon"
+                />{' '}
+              </a>
+            </li>
+
+            <li>
+              <a
+                className="wrapper"
+                href="https://mastodon.social"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <img
+                  src={mastodon}
+                  alt="Mastodon Logo"
+                  className="custom-icon"
+                />{' '}
+              </a>
+            </li>
+          </ul>
+        </section>
+      }
+    >
       <section className="container primary">
         <h2 className="container accent" title="emoji" aria-label="emoji">
           #8a0000
@@ -80,7 +168,7 @@ function AtlasHomeComponent() {
       </section>
       <section>
         <h2>Instructions</h2>
-        <ul className="container dark">
+        <ul className="container tertiary">
           <li>
             <b>Select Country:</b> Use the search or click on the map, or 🎲 for
             a random pick.
@@ -88,8 +176,8 @@ function AtlasHomeComponent() {
           </li>
           <li>
             <b>State Power Options:</b>
-            <ul className="container">
-              <li>
+            <ul className="wrapper">
+              <li className="container accent">
                 🪙{' '}
                 <Link
                   search={search}
@@ -100,7 +188,7 @@ function AtlasHomeComponent() {
                   Economy
                 </Link>
               </li>
-              <li>
+              <li className="container accent">
                 ℹ️{' '}
                 <Link
                   search={search}
@@ -111,7 +199,7 @@ function AtlasHomeComponent() {
                   Information
                 </Link>
               </li>
-              <li>
+              <li className="container accent">
                 🕊️{' '}
                 <Link
                   search={search}
@@ -122,7 +210,7 @@ function AtlasHomeComponent() {
                   Diplomacy
                 </Link>
               </li>
-              <li>
+              <li className="container accent">
                 🛡️{' '}
                 <Link
                   search={search}
@@ -133,7 +221,7 @@ function AtlasHomeComponent() {
                   Security
                 </Link>
               </li>
-              <li>
+              <li className="container accent">
                 🏛️{' '}
                 <Link
                   search={search}
@@ -161,7 +249,9 @@ function AtlasHomeComponent() {
       <section>
         <h2>Theme</h2>
         <div className="theme-selector">
-          <label htmlFor="theme-select">Select: </label>
+          <label htmlFor="theme-select" className="sr-only">
+            Select:{' '}
+          </label>
           <select
             id="theme-select"
             value={currentTheme}
@@ -174,7 +264,7 @@ function AtlasHomeComponent() {
               </option>
             ))}
           </select>
-          <blockquote>
+          <blockquote className="container light">
             <i className="secondary">Attention:</i> Select an{' '}
             <span className="primary">
               <i>option</i>
@@ -186,90 +276,6 @@ function AtlasHomeComponent() {
             .
           </blockquote>
         </div>
-      </section>
-
-      <section>
-        <small>Powered by:</small>
-        <ul className="container wrapper light">
-          <li>
-            <a
-              className="wrapper"
-              href="https://leafletjs.com"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <img src={leaflet} alt="Leaflet Logo" className="custom-icon" />{' '}
-              Leaflet
-            </a>
-          </li>
-          <li>
-            <a
-              className="wrapper"
-              href="https://www.openstreetmap.org"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <img
-                src={openstreetmap}
-                alt="OpenStreetMaps Logo"
-                className="custom-icon"
-              />{' '}
-              OpenStreetMaps
-            </a>
-          </li>
-          <li>
-            <a
-              className="wrapper"
-              href="https://prolewiki.org"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <img
-                src={prolewiki}
-                alt="ProleWiki Logo"
-                className="custom-icon"
-              />{' '}
-              ProleWiki
-            </a>
-          </li>
-          <li>
-            <a
-              className="wrapper"
-              href="https://wikipedia.org"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <img
-                src={natopedia}
-                alt="Wikipedia Logo"
-                className="custom-icon"
-              />{' '}
-              NATOpedia
-            </a>
-          </li>
-          <li>
-            <a
-              className="wrapper"
-              href="https://lemmy.ml"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <img src={hexbear} alt="Lemmy Logo" className="custom-icon" />{' '}
-              Hexbear/Lemmy
-            </a>
-          </li>
-          <li>
-            <a
-              className="wrapper"
-              href="https://mastodon.social"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <img src={mastodon} alt="Mastodon Logo" className="custom-icon" />{' '}
-              Mastodon
-            </a>
-          </li>
-        </ul>
       </section>
     </LegendLayout>
   );
