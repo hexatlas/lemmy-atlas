@@ -122,6 +122,7 @@ function useNominatim(
     const bounds = latLngBounds(corner1, corner2);
     map?.fitBounds(bounds);
     setActiveSearchResult(result);
+    setSearchResults([]);
   };
 
   return {

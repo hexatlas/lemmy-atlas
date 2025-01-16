@@ -4,6 +4,7 @@ import BasedClientDetector from '../components/shared/BasedClientDetector';
 import LegendLayout from '../components/shared/AtlasLegendLayout';
 import { useStateStorage } from '../hooks/useAtlasUtils';
 import { AtlasContext } from './__root';
+import AtlasLocationSearch from '../components/shared/AtlasLocationSearch';
 
 export const Route = createFileRoute('/')({
   component: AtlasHomeComponent,
@@ -85,6 +86,7 @@ function AtlasHomeComponent() {
         <li>
           <b>Select Country:</b> Use the search or click on the map, or 🎲 for a
           random pick.
+          <AtlasLocationSearch />
         </li>
         <li>
           <b>State Power Options:</b>

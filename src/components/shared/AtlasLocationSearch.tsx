@@ -88,8 +88,8 @@ function AtlasLocationSearch() {
           />
         </form>
       </div>
-      {(searchTerm.trim() !== '' || searchResults.length > 0) && (
-        <ul className="search-results" aria-label="Search Results">
+      {searchTerm.trim() !== '' && (
+        <ul className="search-results light" aria-label="Search Results">
           {loading && <p className="map-info__loading-emoji">🔍</p>}
           {searchResults.map((result) => (
             <li key={result.place_id}>
@@ -102,7 +102,7 @@ function AtlasLocationSearch() {
               </button>
             </li>
           ))}
-          {!loading && searchResults.length <= 0 && <p>🪹</p>}
+          {!loading && searchResults.length = 0 && <p>🪹</p>}
           <small className="search-licence">{searchResults[0]?.licence}</small>
         </ul>
       )}
