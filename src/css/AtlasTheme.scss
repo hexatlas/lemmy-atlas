@@ -286,7 +286,7 @@ code {
 @include color_background_setting(
   'tertiary',
   var(--atlas-color-tertiary),
-  var(--atlas-color-dark),
+  var(--atlas-color-light),
   var(--atlas-opacity-3)
 );
 
@@ -405,7 +405,7 @@ a {
   transition: var(--atlas-transition-slow);
 
   &:hover {
-    /* border-bottom: var(--atlas-size-11) solid; */
+    color: hsl(var(--atlas-color-light) / var(--atlas-opacity-4));
     opacity: var(--atlas-opacity-2);
     transition: var(--atlas-transition-fast);
   }
@@ -562,8 +562,9 @@ td {
 }
 
 .wrapper {
-  display: grid;
-  gap: var(--atlas-size-09);
+  display: flex;
+  align-items: center;
+  gap: var(--atlas-size-10);
   padding: var(--atlas-size-10);
 }
 

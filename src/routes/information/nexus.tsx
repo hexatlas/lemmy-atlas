@@ -14,16 +14,12 @@ export const Route = createFileRoute('/information/nexus')({
 const navigationLinks: AtlasNavigation[] = [
   {
     link: '/information/nexus/prolewiki',
-    emoji: (
-      <img src={prolewiki} alt="ProleWiki" className="tabs__trigger--custom" />
-    ),
+    emoji: <img src={prolewiki} alt="ProleWiki" className="custom-icon" />,
     isDisabled: false,
   },
   {
     link: '/information/nexus/natopedia',
-    emoji: (
-      <img src={natopedia} alt="NatoWiki" className="tabs__trigger--custom" />
-    ),
+    emoji: <img src={natopedia} alt="NatoWiki" className="custom-icon" />,
     isDisabled: false,
   },
   {
@@ -37,7 +33,7 @@ const navigationLinks: AtlasNavigation[] = [
       <img
         src={anarchistlibrary}
         alt="Anarchist Libaray"
-        className="tabs__trigger--custom"
+        className="custom-icon"
       />
     ),
     isDisabled: false,

@@ -13,16 +13,12 @@ export const Route = createFileRoute('/information/fediverse')({
 const navigationLinks: AtlasNavigation[] = [
   {
     link: '/information/fediverse/lemmy',
-    emoji: (
-      <img src={hexbear} alt="Hexbear" className="tabs__trigger--custom" />
-    ),
+    emoji: <img src={hexbear} alt="Hexbear" className="custom-icon" />,
     isDisabled: false,
   },
   {
     link: '/information/fediverse/mastodon',
-    emoji: (
-      <img src={mastodon} alt="Mastodon" className="tabs__trigger--custom" />
-    ),
+    emoji: <img src={mastodon} alt="Mastodon" className="custom-icon" />,
     isDisabled: false,
   },
 ];

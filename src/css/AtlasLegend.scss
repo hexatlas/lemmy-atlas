@@ -20,10 +20,8 @@
   z-index: 999;
   position: relative;
   .search-input-wrapper {
-    @include atlas-shadow(var(--atlas-shadow-1));
     position: sticky;
     top: 0;
-    background: white;
   }
 
   .settings {
@@ -379,7 +377,8 @@
     // z-index: 9;
 
     .search-input {
-      background: transparent;
+      background: white;
+      @include atlas-shadow(var(--atlas-shadow-inset));
       width: 100%;
     }
   }
@@ -702,7 +701,7 @@
   font-family: var(--atlas-font-emoji);
 }
 
-.tabs__trigger--custom {
+.custom-icon {
   height: var(--atlas-size-08);
   filter: none;
 }

@@ -401,7 +401,7 @@ function ChartsRouteComponent() {
       <div className="container">
         <h3>Where does line go? </h3>
         <select
-          className="secondary"
+          className="accent"
           value={activeIndicator?.name}
           onChange={(e) => {
             return setActiveIndicator(
