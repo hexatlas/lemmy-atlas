@@ -188,9 +188,9 @@ function AtlasHomeComponent() {
         </div>
       </section>
 
-      <div className="container light">
+      <section>
         <small>Powered by:</small>
-        <ul>
+        <ul className="container wrapper light">
           <li>
             <a
               className="wrapper"
@@ -214,13 +214,13 @@ function AtlasHomeComponent() {
                 alt="OpenStreetMaps Logo"
                 className="custom-icon"
               />{' '}
-              OpenStreetMaps | Overpass | Nominatim
+              OpenStreetMaps
             </a>
           </li>
           <li>
             <a
               className="wrapper"
-              href="https://prolewiki.com"
+              href="https://prolewiki.org"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -233,7 +233,6 @@ function AtlasHomeComponent() {
             </a>
           </li>
           <li>
-            {/* Placeholder URL; replace with the correct URL if available */}
             <a
               className="wrapper"
               href="https://wikipedia.org"
@@ -271,7 +270,7 @@ function AtlasHomeComponent() {
             </a>
           </li>
         </ul>
-      </div>
+      </section>
     </LegendLayout>
   );
 }

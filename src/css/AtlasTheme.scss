@@ -542,16 +542,12 @@ td {
   vertical-align: top;
 }
 
-.sr-only {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border: 0;
+.layout {
+  padding: var(--atlas-size-10);
+  overflow: scroll;
+  > * {
+    margin-bottom: var(--atlas-size-09);
+  }
 }
 
 .container {
@@ -563,6 +559,7 @@ td {
 
 .wrapper {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   gap: var(--atlas-size-10);
   padding: var(--atlas-size-10);
@@ -593,4 +590,16 @@ td {
   margin-right: var(--atlas-size-12);
 
   font-weight: 900;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
