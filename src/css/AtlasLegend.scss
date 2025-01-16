@@ -735,7 +735,7 @@
   @include atlas-shadow(none);
   color: hsl(var(--atlas-color-dark) / var(--atlas-opacity-1));
   background-color: hsl(
-    var(--atlas-color-grey) / var(--atlas-opacity-2)
+    var(--atlas-color-dark) / var(--atlas-opacity-2)
   ) !important;
 }
 

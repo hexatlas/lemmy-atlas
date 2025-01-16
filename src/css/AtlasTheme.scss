@@ -61,12 +61,11 @@ code {
 
 :root {
   /* colors */
-  /* https://colordesigner.io/#FFCC0D-FF7326-FF194D-BF2669-702A8C */
-  --atlas-color-primary: 282.86 53.85% 35.69%;
-  --atlas-color-secondary: 333.73 66.81% 44.9%;
-  --atlas-color-tertiary: 346.43 100% 54.9%;
-  --atlas-color-accent: 47.36 100% 52.55%;
-  --atlas-color-link: 165 59% 62%;
+  --atlas-color-primary: 0 100% 27%; /* Dark Red (#8B0000) */
+  --atlas-color-secondary: 0 0% 0%; /* Black (#000000) */
+  --atlas-color-tertiary: 30 51% 26%; /* Dark Brown (#654321) */
+  --atlas-color-accent: 45 61% 50%; /* Gold (#CD7F32) */
+  --atlas-color-link: 0 59% 41%; /* Dark Crimson (#A52A2A) */
 
   --atlas-color-post-red: hsla(0, 35%, 50%, 0.5);
   --atlas-color-post-yellow: hsla(50, 35%, 50%, 0.5);
@@ -76,10 +75,8 @@ code {
   --atlas-color-post-purple: hsla(250, 35%, 50%, 0.5);
   --atlas-color-post-pink: hsla(300, 35%, 50%, 0.5);
 
-  --atlas-color-dark: 282.86 0% 13%;
-  --atlas-color-grey: 282.86 0% 27%;
-  --atlas-color-lightgrey: 282.86 0% 80%;
-  --atlas-color-light: 282.86 100% 98.5%;
+  --atlas-color-dark: 0 100% 6%;
+  --atlas-color-light: 0 100% 99%;
 
   --atlas-color-info: 226.43 100% 54.9%;
   --atlas-color-success: 166.43 100% 54.9%;
@@ -217,8 +214,8 @@ code {
   --atlas-color-tertiary: 30 51% 26%; /* Dark Brown (#654321) */
   --atlas-color-accent: 45 61% 50%; /* Gold (#CD7F32) */
   --atlas-color-link: 0 59% 41%; /* Dark Crimson (#A52A2A) */
-  --atlas-color-dark: 0 100% 6%;
-  --atlas-color-light: 0 100% 99%;
+  --atlas-color-dark: 0 100% 98%;
+  --atlas-color-light: 0 100% 27%;
 
   input {
     color: hsl(var(--atlas-color-dark));
