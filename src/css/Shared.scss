@@ -150,8 +150,13 @@
   }
 
   .wrapper {
-    display: flex;
-    margin: var(--atlas-size-12) 0;
+    &.wrapper__search {
+      .search-input {
+        width: 100%;
+      }
+      align-items: flex-end;
+      // margin: var(--atlas-size-12) 0;
+    }
   }
 
   .highlight {

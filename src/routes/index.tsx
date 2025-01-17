@@ -71,123 +71,10 @@ function AtlasHomeComponent() {
   const search = Route.useSearch();
 
   return (
-    <LegendLayout
-      route={Route}
-      footer={
-        <section>
-          <small>Powered by:</small>
-          <ul className="container wrapper light">
-            <li>
-              <a
-                className="wrapper"
-                href="https://hexbear.net"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <img src={hexbear} alt="Lemmy Logo" className="custom-icon" />{' '}
-              </a>
-            </li>
-
-            <li>
-              <a
-                className="wrapper"
-                href="https://leafletjs.com"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <img src={leaflet} alt="Leaflet Logo" className="custom-icon" />{' '}
-              </a>
-            </li>
-            <li>
-              <a
-                className="wrapper"
-                href="https://www.openstreetmap.org"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <img
-                  src={openstreetmap}
-                  alt="OpenStreetMaps Logo"
-                  className="custom-icon"
-                />{' '}
-              </a>
-            </li>
-            <li>
-              <a
-                className="wrapper"
-                href="https://prolewiki.org"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <img
-                  src={prolewiki}
-                  alt="ProleWiki Logo"
-                  className="custom-icon"
-                />{' '}
-              </a>
-            </li>
-
-            <li>
-              <a
-                className="wrapper"
-                href="https://github.com/LemmyNet"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <img src={lemmy} alt="Lemmy Logo" className="custom-icon" />{' '}
-              </a>
-            </li>
-
-            <li>
-              <a
-                className="wrapper"
-                href="https://wikipedia.org"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <img
-                  src={natopedia}
-                  alt="Wikipedia Logo"
-                  className="custom-icon"
-                />{' '}
-              </a>
-            </li>
-
-            <li>
-              <a
-                className="wrapper"
-                href="https://mastodon.social"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <img
-                  src={mastodon}
-                  alt="Mastodon Logo"
-                  className="custom-icon"
-                />{' '}
-              </a>
-            </li>
-            <li>
-              <a
-                className="wrapper"
-                href="https://openweather.co.uk"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <img
-                  src={openweather}
-                  alt="Openweather Logo"
-                  className="custom-icon"
-                />{' '}
-              </a>
-            </li>
-          </ul>
-        </section>
-      }
-    >
+    <LegendLayout route={Route}>
       <section className="container primary">
         <h2 className="container accent" title="emoji" aria-label="emoji">
-          #8a0000
+          #AC1300
         </h2>
         <h1 className="emoji" title="atlas" aria-label="atlas">
           🅰️⠀🇹⠀🇱⠀🇦⠀🇸
@@ -303,6 +190,111 @@ function AtlasHomeComponent() {
             .
           </blockquote>
         </div>
+      </section>
+      <section>
+        <small>Powered by:</small>
+        <ul className="container wrapper light">
+          <li>
+            <a
+              className="wrapper"
+              href="https://hexbear.net"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <img src={hexbear} alt="Lemmy Logo" className="custom-icon" />{' '}
+            </a>
+          </li>
+
+          <li>
+            <a
+              className="wrapper"
+              href="https://leafletjs.com"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <img src={leaflet} alt="Leaflet Logo" className="custom-icon" />{' '}
+            </a>
+          </li>
+          <li>
+            <a
+              className="wrapper"
+              href="https://www.openstreetmap.org"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <img
+                src={openstreetmap}
+                alt="OpenStreetMaps Logo"
+                className="custom-icon"
+              />{' '}
+            </a>
+          </li>
+          <li>
+            <a
+              className="wrapper"
+              href="https://prolewiki.org"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <img
+                src={prolewiki}
+                alt="ProleWiki Logo"
+                className="custom-icon"
+              />{' '}
+            </a>
+          </li>
+
+          <li>
+            <a
+              className="wrapper"
+              href="https://github.com/LemmyNet"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <img src={lemmy} alt="Lemmy Logo" className="custom-icon" />{' '}
+            </a>
+          </li>
+
+          <li>
+            <a
+              className="wrapper"
+              href="https://wikipedia.org"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <img
+                src={natopedia}
+                alt="Wikipedia Logo"
+                className="custom-icon"
+              />{' '}
+            </a>
+          </li>
+
+          <li>
+            <a
+              className="wrapper"
+              href="https://mastodon.social"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <img src={mastodon} alt="Mastodon Logo" className="custom-icon" />{' '}
+            </a>
+          </li>
+          <li>
+            <a
+              className="wrapper"
+              href="https://openweather.co.uk"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <img
+                src={openweather}
+                alt="Openweather Logo"
+                className="custom-icon"
+              />{' '}
+            </a>
+          </li>
+        </ul>
       </section>
     </LegendLayout>
   );

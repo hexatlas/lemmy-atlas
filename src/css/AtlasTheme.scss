@@ -44,6 +44,41 @@ code {
 }
 
 /* 
+    MIXINS
+*/
+
+/* shadows */
+
+@mixin atlas-shadow($shadow) {
+  -webkit-box-shadow: $shadow;
+  -moz-box-shadow: $shadow;
+  box-shadow: $shadow;
+  text-shadow: var(--atlas-shadow-text);
+}
+
+/* colors */
+
+@mixin color_background_setting(
+  $name,
+  $color_identity,
+  $color_greyscale,
+  $opacity
+) {
+  .#{$name} {
+    color: hsl($color_greyscale / $opacity);
+    background: hsl($color_identity);
+    border-color: hsl($color_greyscale / $opacity);
+    border-radius: var(--atlas-border-radius-1);
+  }
+  .#{$name}--invert {
+    background: hsl($color_greyscale / $opacity);
+    color: hsl($color_identity);
+    border-color: hsl($color_identity);
+    border-radius: var(--atlas-border-radius-1);
+  }
+}
+
+/* 
     FONT
 */
 
@@ -61,7 +96,7 @@ code {
 
 :root {
   /* colors */
-  --atlas-color-primary: 0 100% 16%; /* Dark Red (#8B0000) */
+  --atlas-color-primary: 6.63 100% 33.73%; /* Dark Red (#AC130000) */
   --atlas-color-secondary: 1 61% 31%; /* Black (#000000) */
   --atlas-color-tertiary: 1 61% 31%; /* Dark Brown (#654321) */
   --atlas-color-accent: 45 100% 61%; /* Gold (#CD7F32) */
@@ -219,49 +254,6 @@ code {
 
   input {
     color: hsl(var(--atlas-color-dark));
-  }
-}
-
-/* 
-    MIXINS
-*/
-
-/* 
-    UTIL
-*/
-
-@mixin atlas-shadow($shadow) {
-  -webkit-box-shadow: $shadow;
-  -moz-box-shadow: $shadow;
-  box-shadow: $shadow;
-  text-shadow: var(--atlas-shadow-text);
-}
-
-/*
-    GLASS
-*/
-
-/* 
-    COLORS
-*/
-
-@mixin color_background_setting(
-  $name,
-  $color_identity,
-  $color_greyscale,
-  $opacity
-) {
-  .#{$name} {
-    color: hsl($color_greyscale / $opacity);
-    background: hsl($color_identity);
-    border-color: hsl($color_greyscale / $opacity);
-    border-radius: var(--atlas-border-radius-1);
-  }
-  .#{$name}--invert {
-    background: hsl($color_greyscale / $opacity);
-    color: hsl($color_identity);
-    border-color: hsl($color_identity);
-    border-radius: var(--atlas-border-radius-1);
   }
 }
 

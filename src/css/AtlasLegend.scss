@@ -78,8 +78,8 @@
   bottom: 0;
 
   @include atlas-shadow(var(--atlas-shadow-1));
-  background: hsl(var(--atlas-color-dark) / var(--atlas-opacity-3));
-  color: hsl(var(--atlas-color-light) / var(--atlas-opacity-3));
+  background: hsl(var(--atlas-color-dark) / var(--atlas-opacity-1));
+  color: hsl(var(--atlas-color-dark) / var(--atlas-opacity-2));
 }
 
 /* MAP INTERFACE */
@@ -377,11 +377,6 @@
   overflow: hidden;
 
   .search-form {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--atlas-size-14);
-    align-items: center;
-    width: 100%;
     @include atlas-shadow(var(--atlas-shadow-inset));
 
     // z-index: 9;
@@ -389,7 +384,7 @@
     .search-input {
       background: white;
       @include atlas-shadow(var(--atlas-shadow-inset));
-      width: 100%;
+      // width: 100%;
     }
   }
 }
