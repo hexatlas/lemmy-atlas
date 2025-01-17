@@ -509,7 +509,7 @@ progress {
   height: var(--atlas-size-07);
   border-width: 0;
   border-radius: var(--atlas-border-radius-1);
-  max-width: var(--atlas-size-00);
+  flex: auto;
   transition: border-radius var(--atlas-transition-fast);
 }
 
@@ -548,6 +548,7 @@ td {
 .wrapper {
   display: flex;
   flex-wrap: wrap;
+  flex: auto;
   align-items: center;
   gap: var(--atlas-size-10);
   padding: var(--atlas-size-10);
