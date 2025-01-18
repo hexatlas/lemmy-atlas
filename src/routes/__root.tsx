@@ -35,8 +35,10 @@ function AtlasRootComponent() {
   const atlasInterfaceProps: AtlasInterfaceProps = useAtlas(Route);
   const {
     // Util
+    map,
     isMobile,
     legendSize,
+    setLegendSize,
     activeGeographicIdentifier,
     activeAdministrativeRegion,
   } = atlasInterfaceProps;
@@ -47,6 +49,22 @@ function AtlasRootComponent() {
   );
 
   console.count('<AtlasRootComponent />');
+
+  /* 
+    Handlers
+ */
+  const handleLegendResize = () => {
+    function onMouseMove(mouseMoveEvent) {
+      setLegendSize(document.body.clientWidth - mouseMoveEvent.clientX);
+      map?.invalidateSize();
+    }
+    function onMouseUp() {
+      document.body.removeEventListener('mousemove', onMouseMove);
+    }
+
+    document.body.addEventListener('mousemove', onMouseMove);
+    document.body.addEventListener('mouseup', onMouseUp, { once: true });
+  };
 
   return (
     <AtlasContext.Provider value={atlasInterfaceProps}>
@@ -78,6 +96,19 @@ function AtlasRootComponent() {
             links={navigationLinks}
             route={Route}
           ></LegendNavigation>
+          {!isMobile && (
+            <>
+              <button
+                role="button"
+                title="Click and Drag to Resize"
+                aria-label="Resize Button. Click and Drag to Resize"
+                className="legend__resize"
+                onMouseDown={handleLegendResize}
+              >
+                ↔️
+              </button>
+            </>
+          )}
         </article>
       </main>
       {/* <ReactQueryDevtools buttonPosition="bottom-right" />

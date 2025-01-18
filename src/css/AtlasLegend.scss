@@ -58,6 +58,25 @@
     }
   }
 
+  .legend__resize {
+    @include atlas-shadow(var(--atlas-shadow-1));
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    margin: auto 0;
+    transform: translateX(calc(-100% + var(--atlas-size-12)));
+    border: 1px solid hsl(var(--atlas-color-light) / var(--atlas-opacity-1));
+    border-right: var(--atlas-size-14) solid
+      hsl(var(--atlas-color-secondary) / var(--atlas-opacity-3));
+    background-color: hsl(var(--atlas-color-light) / var(--atlas-opacity-3));
+
+    &:hover {
+      background-color: hsl(
+        var(--atlas-color-primary) / var(--atlas-opacity-3)
+      );
+    }
+  }
+
   .hero {
     position: relative;
     .background {
