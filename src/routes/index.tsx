@@ -30,6 +30,7 @@ function AtlasHomeComponent() {
     { value: 'dark', label: '🌙 Dark' },
     { value: 'light', label: '☀️ Light' },
     { value: 'red', label: '✊ Red' },
+    { value: 'old', label: '🧭 Old' },
     { value: 'system', label: '⚙️ System' },
   ];
 

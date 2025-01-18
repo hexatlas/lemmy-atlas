@@ -258,6 +258,32 @@ code {
   );
 }
 
+[data-theme='old'] {
+  --coffee: hsla(20, 25%, 35%, 1);
+  --ash-gray: hsla(152, 9%, 61%, 1);
+  --rose-ebony: hsla(9, 19%, 29%, 1);
+  --van-dyke: hsla(8, 23%, 20%, 1);
+  --lion: hsla(35, 26%, 53%, 1);
+
+  /* colors */
+  --atlas-color-primary: 20 25% 35%; /* Dark Red (#AC130000) */
+  --atlas-color-secondary: 152 40% 70%; /* Black (#000000) */
+  --atlas-color-tertiary: 9 19% 29%; /* Dark Brown (#654321) */
+  --atlas-color-link: 9 80% 20%; /* Dark Crimson (#A52A2A) */
+  --atlas-color-accent: 152 80% 70%; /* Gold (#CD7F32) */
+
+  --atlas-color-dark: 8 23% 20%;
+  --atlas-color-light: 35 40% 60%;
+
+  /* SECONDARY */
+  @include color_background_setting(
+    'secondary',
+    var(--atlas-color-secondary),
+    var(--atlas-color-dark),
+    var(--atlas-opacity-3)
+  );
+}
+
 /*  IDENTITY */
 /* PRIMARY */
 @include color_background_setting(
