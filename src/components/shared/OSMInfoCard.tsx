@@ -17,7 +17,13 @@ function AtlasOSMInfoCard({
   handleClick,
   activeElement,
 }: OSMInfoCardProps) {
-  const { name, wikidata } = element?.tags || {};
+  const {
+    name,
+    wikidata,
+    'name:en': nameEN,
+    source,
+    website,
+  } = element?.tags || {};
 
   return (
     <Accordion.Item
@@ -27,7 +33,7 @@ function AtlasOSMInfoCard({
       // tabIndex={0}
       // onMouseEnter={() => handleMouseEnter(element)} // Trigger zoom on hover
       // onMouseLeave={() => handleMouseLeave(element)} // Revert zoom on leave
-      onClick={() => handleClick(element)} // Fly to on click
+      onClick={() => handleClick(element)}
       onFocus={() => handleClick(element)}
       aria-label={name}
       role="listitem"
@@ -78,7 +84,7 @@ function AtlasOSMInfoCard({
             </a>
           )}
           {name && <h4>{name}</h4>}
-          {element?.tags['name:en'] && <h6>{element?.tags['name:en']}</h6>}
+          {nameEN && <h6>{nameEN}</h6>}
         </div>
         {iconMap && filterKeys && (
           <div className="item__filterkeys">
@@ -98,8 +104,8 @@ function AtlasOSMInfoCard({
             })}
           </div>
         )}
-        {element?.tags?.source &&
-          [...new Set(element.tags.source.split(';'))].map((url, index) => {
+        {source &&
+          [...new Set(source.split(';'))].map((url, index) => {
             let isUrl;
 
             try {
@@ -120,13 +126,9 @@ function AtlasOSMInfoCard({
                       🔗 {url.toString()}
                     </a>
                   )}
-                  {element?.tags?.website && (
-                    <a
-                      href={element?.tags?.website}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      🔗 {element?.tags?.website}
+                  {website && (
+                    <a href={website} target="_blank" rel="noopener noreferrer">
+                      🔗 {website}
                     </a>
                   )}
                 </>
@@ -134,8 +136,9 @@ function AtlasOSMInfoCard({
             );
           })}
       </div>
+
       <Accordion.Content className="item__json dark">
-        <pre>{JSON.stringify(element.tags, null, 2)}</pre>
+        <pre>{JSON.stringify(element?.tags, null, 2)}</pre>
       </Accordion.Content>
     </Accordion.Item>
   );
