@@ -72,13 +72,14 @@ function AtlasHomeComponent() {
 
   return (
     <LegendLayout route={Route}>
-      <section className="container primary">
+      <section className="container primary hero">
         <h2 className="container accent" title="emoji" aria-label="emoji">
           #AC1300
         </h2>
         <h1 className="emoji" title="atlas" aria-label="atlas">
           🅰️TLAS
         </h1>
+        <div className="background">🗺️</div>
       </section>
       <section>
         <h2>Instructions</h2>

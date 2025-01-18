@@ -57,6 +57,19 @@
       }
     }
   }
+
+  .hero {
+    position: relative;
+    .background {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      font-size: var(--atlas-size-06);
+      margin: 0 var(--atlas-size-09);
+      opacity: var(--atlas-opacity-2);
+      filter: grayscale(0.8);
+    }
+  }
 }
 
 @media only screen and (min-width: 768px) {
@@ -83,7 +96,9 @@
 /* MAP INTERFACE */
 
 .active-geographic-identifier {
-  color: hsl(var(--atlas-color-accent)) !important;
+  color: hsl(var(--atlas-color-dark) / var(--atlas-opacity-3)) !important;
+  background: hsl(var(--atlas-color-accent) / var(--atlas-opacity-2));
+  @include atlas-shadow(var(--atlas-shadow-1));
 }
 
 .map-interface {
@@ -109,6 +124,12 @@
     display: grid;
     justify-items: flex-end;
     overflow: hidden;
+  }
+
+  .administrative-region-container {
+    width: 100%;
+    overflow: hidden;
+    border-radius: var(--atlas-border-radius-1);
   }
 
   .administrative-region-flag-container {
@@ -159,7 +180,7 @@
     &:hover {
       @include atlas-shadow(var(--atlas-shadow-inset));
       background-color: hsl(
-        var(--atlas-color-primary) / var(--atlas-opacity-3)
+        var(--atlas-color-primary) / var(--atlas-opacity-2)
       );
       color: hsl(var(--atlas-color-light) / var(--atlas-opacity-3));
     }
