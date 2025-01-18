@@ -149,36 +149,9 @@
     }
   }
 
-  .wrapper {
-    &.wrapper__search {
-      padding: 0;
-
-      .search-input {
-        width: 100%;
-      }
-    }
-  }
-
-  form.wrapper.wrapper__search {
-    padding: 0;
-  }
-
-  .highlight {
-    padding: 0;
-    margin: 0;
-    margin-bottom: var(--atlas-size-12);
-  }
-
   .item__urls {
     display: grid;
     margin: var(--atlas-size-10) 0;
-  }
-
-  .wikidata {
-    max-width: var(--atlas-size-06);
-    padding: var(--atlas-size-09);
-    display: block;
-    float: right;
   }
 
   .item__expand {
@@ -188,6 +161,13 @@
     &[data-state='open'] {
       background: hsl(var(--atlas-color-accent) / var(--atlas-opacity-2));
     }
+
+    .wikidata {
+      max-width: var(--atlas-size-06);
+      padding: var(--atlas-size-09);
+      display: block;
+      float: right;
+    }
   }
 
   .item__json {
@@ -196,5 +176,15 @@
 
     overflow-y: scroll;
     grid-column: 1 / -1;
+  }
+}
+
+.wrapper {
+  .wrapper__search {
+    padding: 0;
+
+    .search-input {
+      width: 100%;
+    }
   }
 }

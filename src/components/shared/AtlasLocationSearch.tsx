@@ -40,7 +40,7 @@ function AtlasLocationSearch() {
 
   return (
     <div id="location-search" aria-label="Location Search">
-      <div className="wrapper wrapper__search" aria-label="Location Search">
+      <div className="wrapper" aria-label="Location Search">
         <form
           className="wrapper wrapper__search"
           role="search"

@@ -77,7 +77,7 @@ function AtlasHomeComponent() {
           #AC1300
         </h2>
         <h1 className="emoji" title="atlas" aria-label="atlas">
-          🅰️⠀🇹⠀🇱⠀🇦⠀🇸
+          🅰️TLAS
         </h1>
       </section>
       <section>
