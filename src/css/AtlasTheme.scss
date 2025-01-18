@@ -244,17 +244,18 @@ code {
 }
 
 [data-theme='red'] {
-  --atlas-color-primary: 0 100% 27%; /* Dark Red (#8B0000) */
-  --atlas-color-secondary: 0 0% 0%; /* Black (#000000) */
-  --atlas-color-tertiary: 30 51% 26%; /* Dark Brown (#654321) */
-  --atlas-color-accent: 45 61% 50%; /* Gold (#CD7F32) */
-  --atlas-color-link: 0 59% 41%; /* Dark Crimson (#A52A2A) */
+  --atlas-color-primary: 0 100% 6%;
+  --atlas-color-secondary: 0 0% 0%;
+  --atlas-color-link: 0 59% 41%;
   --atlas-color-dark: 0 100% 98%;
   --atlas-color-light: 0 100% 27%;
 
-  input {
-    color: hsl(var(--atlas-color-dark));
-  }
+  @include color_background_setting(
+    'tertiary',
+    var(--atlas-color-tertiary),
+    var(--atlas-color-dark),
+    var(--atlas-opacity-3)
+  );
 }
 
 /*  IDENTITY */

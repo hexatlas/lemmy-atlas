@@ -161,13 +161,6 @@
     &[data-state='open'] {
       background: hsl(var(--atlas-color-accent) / var(--atlas-opacity-2));
     }
-
-    .wikidata {
-      max-width: var(--atlas-size-06);
-      padding: var(--atlas-size-09);
-      display: block;
-      float: right;
-    }
   }
 
   .item__json {
@@ -176,6 +169,13 @@
 
     overflow-y: scroll;
     grid-column: 1 / -1;
+  }
+
+  .wikidata {
+    max-width: var(--atlas-size-06);
+    padding: var(--atlas-size-09);
+    display: block;
+    float: right;
   }
 }
 
