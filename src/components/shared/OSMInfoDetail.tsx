@@ -55,14 +55,14 @@ function AtlasOSMInfoDetail({
             aria-label={`Filterkey`}
           >
             {iconMap[activeElement?.tags[filterKeys[0]]]?.options?.html ? (
-              <span className="emoji" aria-hidden="true">
+              <span className="emoji-label" aria-hidden="true">
                 {
                   iconMap[activeElement?.tags[filterKeys[0]]]?.options
                     ?.html as ReactNode
                 }
               </span>
             ) : (
-              <span className="emoji default" aria-hidden="true">
+              <span className="emoji-label" aria-hidden="true">
                 {iconMap['defaultIcon']?.options?.html as ReactNode}
               </span>
             )}
@@ -123,9 +123,8 @@ function AtlasOSMInfoDetail({
       )}
       <div className="container container--inset">
         {source &&
-          [...new Set(source.split(';'))].map((url, index) => {
+          [...new Set(source.split(';'))].map((url: string, index) => {
             let isUrl;
-
             try {
               isUrl = new URL(url.toString());
             } catch (error) {

@@ -68,23 +68,25 @@ function AtlasOSMInfoCard({
       {children}
       <div className="item__container" aria-label="list body">
         <div className="item__name">
+          <div className="wrapper">
+            {wikidata && (
+              <a
+                href={`https://www.wikidata.org/wiki/${wikidata}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="wikidata"
+              >
+                <img
+                  src={wikidataIcon}
+                  alt="Lemmy Logo"
+                  className="custom-icon"
+                />{' '}
+              </a>
+            )}
+            {source && <span>🔗</span>}
+          </div>
           {name && <h4>{name}</h4>}
           {nameEN && <h6>{nameEN}</h6>}
-          {wikidata && (
-            <a
-              href={`https://www.wikidata.org/wiki/${wikidata}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="wikidata"
-              aria-label="wikidata"
-            >
-              <img
-                src={wikidataIcon}
-                alt="Lemmy Logo"
-                className="custom-icon"
-              />{' '}
-            </a>
-          )}
         </div>
         {iconMap && filterKeys && (
           <div className="item__filterkeys">
@@ -101,40 +103,9 @@ function AtlasOSMInfoCard({
                   )}
                 </p>
               );
-            })}
+            })}{' '}
           </div>
         )}
-        {source &&
-          [...new Set(source.split(';'))].map((url, index) => {
-            let isUrl;
-
-            try {
-              isUrl = new URL(url.toString());
-            } catch (error) {
-              if (error) return false;
-            }
-            return (
-              <div className="item__urls" key={index}>
-                <>
-                  {isUrl && (
-                    <a
-                      key={index}
-                      href={isUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      🔗 {url.toString()}
-                    </a>
-                  )}
-                  {website && (
-                    <a href={website} target="_blank" rel="noopener noreferrer">
-                      🔗 {website}
-                    </a>
-                  )}
-                </>
-              </div>
-            );
-          })}
       </div>
     </Accordion.Item>
   );
