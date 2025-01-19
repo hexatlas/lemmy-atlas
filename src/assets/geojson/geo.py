@@ -10,7 +10,7 @@ def transform_geojson(geojson_data):
             'country': properties.get('country'),
             'emoji': properties.get('emoji'),
             'image': properties.get('image'),
-            'ISO3166-2': properties.get('iso_3166-2'),
+            'ISO3166-2': properties.get('alpha-2'),
             'ISO3166-3': properties.get('alpha-3'),
             'sub-region': properties.get('sub-region'),
             'intermediate-region': properties.get('intermediate-region'),
