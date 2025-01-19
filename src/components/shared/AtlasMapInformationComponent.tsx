@@ -1,12 +1,12 @@
 import React, { useContext, useEffect, useState } from 'react';
-// https://www.radix-ui.com/primitives/docs/components/accordion
-import * as Collapsible from '@radix-ui/react-collapsible';
+
 import { ReactNode } from '@tanstack/react-router';
 import { AtlasContext } from '../../routes/__root';
 import useOverpassLayer from '../../data/shared/useOverpassLayer';
 import LegendLayout from './AtlasLegendLayout';
 import AtlasOSMSettings from './OSMSettings';
 import AtlasOSMInfoList from './OSMInfoList';
+import AtlasOSMInfoFilter from './OSMInfoFilter';
 
 function MapInformationComponent({
   name,
@@ -58,25 +58,6 @@ function MapInformationComponent({
     };
   }, [map, filteredData, isClustered]);
 
-  // Extract unique options for each filterKey from data
-  const getFilterOptions = (key) => {
-    const options = new Set();
-    data?.elements.forEach((element) => {
-      if (element?.tags[key]) {
-        options.add(element?.tags[key]);
-      }
-    });
-    return Array.from(options).sort(); // Convert Set to Array for dropdown
-  };
-
-  // Update selected filter for a specific key
-  const handleFilterChange = (key, value) => {
-    setSelectedFilters((prev) => ({
-      ...prev,
-      [key]: value,
-    }));
-  };
-
   const clusterSettings = {
     isClustered,
     setIsClustered,
@@ -84,70 +65,20 @@ function MapInformationComponent({
 
   return (
     <LegendLayout route={route}>
+      <h5>
+        <span>{name} </span>
+        found in {activeAdministrativeRegion['country']}
+      </h5>
       <AtlasOSMSettings {...clusterSettings} />
+      <AtlasOSMInfoFilter
+        data={data}
+        selectedFilters={selectedFilters}
+        setSelectedFilters={setSelectedFilters}
+        filteredData={filteredData}
+        iconMap={iconMap}
+        filterKeys={filterKeys}
+      />
       {isLoading && <p className="map-info__loading-emoji">🔍</p>}
-      {data && (
-        <Collapsible.Root>
-          <h5>
-            <span>{name} </span>
-            found in {activeAdministrativeRegion['country']}
-          </h5>
-          <p>
-            {' '}
-            {filteredData.length}{' '}
-            {Object.entries(selectedFilters).map(([key, value]) => {
-              if (!value) return true; // No filter applied for this key
-              return `${
-                iconMap && iconMap[value as string] != undefined
-                  ? (iconMap[value as string]?.options?.html as ReactNode)
-                  : ''
-              } ${value} `; // Element must match the filter
-            })}{' '}
-          </p>
-          <Collapsible.Trigger className="filter-title emoji-label">
-            🎚️
-          </Collapsible.Trigger>
-          <Collapsible.Content
-            className="filter-menu"
-            aria-label={`Filter options ${name}`}
-            role="toolbar"
-          >
-            {filterKeys &&
-              filterKeys.map((key, index) => (
-                <div
-                  key={index}
-                  className="filter-field"
-                  aria-label={`${key} filter option`}
-                >
-                  <label htmlFor={key} className="sr-only">
-                    {getFilterOptions(key).length}
-                  </label>
-                  <select
-                    id={key}
-                    value={selectedFilters[key] || ''}
-                    onChange={(e) => handleFilterChange(key, e.target.value)}
-                    aria-controls="list"
-                  >
-                    <option
-                      value=""
-                      className="filter-field-reset"
-                      defaultChecked
-                    >
-                      ({getFilterOptions(key).length}) {key}
-                    </option>
-                    {getFilterOptions(key).map((option: string, index) => (
-                      <option key={index} value={option.toString()}>
-                        {iconMap &&
-                          (iconMap[option]?.options?.html as ReactNode)}{' '}
-                        {option.toString()}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-              ))}
-          </Collapsible.Content>{' '}
-        </Collapsible.Root>
-      )}
       {filteredData && (
         <AtlasOSMInfoList
           listName={name}

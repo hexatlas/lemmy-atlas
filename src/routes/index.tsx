@@ -94,7 +94,7 @@ function AtlasHomeComponent() {
             <b>State Power Options:</b>
             <ul className="wrapper">
               <li className="container accent">
-                🪙{' '}
+                💵{' '}
                 <Link
                   search={search}
                   className="legend__link"
