@@ -3,7 +3,7 @@ import { createFileRoute } from '@tanstack/react-router';
 
 import { AtlasNavigation } from '../../types/atlas.types';
 
-import MapRouteComponent from '../../components/shared/AtlasMapRouteComponent';
+import MapRouteComponent from '../../components/shared/MapRouteComponent';
 
 export const Route = createFileRoute('/diplomacy/map')({
   component: () => (

@@ -2,7 +2,7 @@ import React from 'react';
 import { createFileRoute } from '@tanstack/react-router';
 
 import { AtlasNavigation } from '../types/atlas.types';
-import LegendNavigation from '../components/shared/AtlasNavigation';
+import LegendNavigation from '../components/shared/Navigation';
 
 export const Route = createFileRoute('/government')({
   component: () => <LegendNavigation links={navigationLinks} route={Route} />,

@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { createFileRoute } from '@tanstack/react-router';
 import { AtlasContext } from '../../__root';
 import useWiki from '../../../data/information/nexus/useWiki';
-import LegendLayout from '../../../components/shared/AtlasLegendLayout';
+import LegendLayout from '../../../components/shared/LegendLayout';
 
 export const Route = createFileRoute('/information/nexus/natopedia')({
   component: RouteComponent,

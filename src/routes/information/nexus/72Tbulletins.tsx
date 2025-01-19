@@ -4,7 +4,7 @@ import { AtlasContext } from '../../__root';
 import useNewsBulletins from '../../../data/information/nexus/useNewsBulletins';
 import ReactMarkdown from 'react-markdown';
 import HexBear from '../../../components/shared/HexBear';
-import LegendLayout from '../../../components/shared/AtlasLegendLayout';
+import LegendLayout from '../../../components/shared/LegendLayout';
 
 export const Route = createFileRoute('/information/nexus/72Tbulletins')({
   component: RouteComponent,

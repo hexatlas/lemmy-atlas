@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from '@tanstack/react-router';
-import LegendLayout from './AtlasLegendLayout';
+import LegendLayout from './LegendLayout';
 
 function NotFoundComponent({ data }: { data: unknown }) {
   return (

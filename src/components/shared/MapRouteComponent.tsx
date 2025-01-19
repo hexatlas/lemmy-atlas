@@ -1,5 +1,5 @@
 import React from 'react';
-import LegendNavigation from './AtlasNavigation';
+import LegendNavigation from './Navigation';
 import { AtlasContext } from '../../routes/__root';
 import { TileLayer, tileLayer } from 'leaflet';
 import { AtlasNavigation } from '../../types/atlas.types';

@@ -1,7 +1,7 @@
 import React from 'react';
 import { createFileRoute } from '@tanstack/react-router';
 
-import MapInformationComponent from '../../../components/shared/AtlasMapInformationComponent';
+import MapInformationComponent from '../../../components/shared/MapInformationComponent';
 import useDiplomacyEmbassies from '../../../data/diplomacy/overpass/useDiplomatic';
 import { iconMap } from '../../../data/diplomacy/overpass/emoji/diplomatic';
 

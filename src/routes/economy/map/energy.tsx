@@ -1,7 +1,7 @@
 import React from 'react';
 import { createFileRoute } from '@tanstack/react-router';
 
-import MapInformationComponent from '../../../components/shared/AtlasMapInformationComponent';
+import MapInformationComponent from '../../../components/shared/MapInformationComponent';
 import useEconomyEnergy from '../../../data/economy/overpass/useEnergy';
 import { iconMap } from '../../../data/economy/overpass/emoji/energy';
 

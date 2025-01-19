@@ -9,7 +9,7 @@ import useAnarachistLibrary from '../../../data/information/nexus/useAnarachistL
 
 // Lemmy
 import HexBear from '../../../components/shared/HexBear';
-import LegendLayout from '../../../components/shared/AtlasLegendLayout';
+import LegendLayout from '../../../components/shared/LegendLayout';
 
 export const Route = createFileRoute('/information/nexus/anarchistlibrary')({
   component: RouteComponent,

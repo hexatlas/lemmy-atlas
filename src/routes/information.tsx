@@ -15,7 +15,7 @@ import {
 } from '../types/api.types';
 import { InformationLemmyProps, AtlasNavigation } from '../types/atlas.types';
 // Import Components
-import LegendNavigation from '../components/shared/AtlasNavigation';
+import LegendNavigation from '../components/shared/Navigation';
 // Import Utils
 import { useStateStorage } from '../hooks/useAtlasUtils';
 

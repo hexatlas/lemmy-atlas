@@ -13,7 +13,7 @@ import AtlasInterface from '../components/map/AtlasInterface';
 // Types
 import { AtlasInterfaceProps, AtlasNavigation } from '../types/atlas.types';
 
-import LegendNavigation from '../components/shared/AtlasNavigation';
+import LegendNavigation from '../components/shared/Navigation';
 import useAtlas from '../hooks/useAtlas';
 
 export const AtlasContext = createContext<AtlasInterfaceProps | null>(null);

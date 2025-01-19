@@ -1,6 +1,6 @@
 import React from 'react';
 import { createFileRoute } from '@tanstack/react-router';
-import LegendLayout from '../../components/shared/AtlasLegendLayout';
+import LegendLayout from '../../components/shared/LegendLayout';
 
 export const Route = createFileRoute('/economy/')({
   component: EconomyHomeComponent,

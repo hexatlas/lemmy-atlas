@@ -9,7 +9,7 @@ import * as Collapsible from '@radix-ui/react-collapsible';
 import { AtlasContext } from '../__root';
 import useIMF from '../../data/economy/charts/useIMF';
 import { IMFIndicatorType } from '../../types/api.types';
-import LegendLayout from '../../components/shared/AtlasLegendLayout';
+import LegendLayout from '../../components/shared/LegendLayout';
 
 export const Route = createFileRoute('/economy/charts')({
   component: ChartsRouteComponent,

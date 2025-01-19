@@ -1,8 +1,8 @@
 import React from 'react';
 
 import { AtlasInterfaceProps } from '../../types/atlas.types';
-import AtlasLocationSearch from '../shared/AtlasLocationSearch';
-import AtlasGeographyOptions from '../shared/AtlasGeographyOptions';
+import AtlasLocationSearch from '../shared/LocationSearch';
+import AtlasGeographyOptions from '../shared/GeographyOptions';
 
 function AtlasInterface({ isMobile }: AtlasInterfaceProps) {
   console.count('<AtlasInterface />');

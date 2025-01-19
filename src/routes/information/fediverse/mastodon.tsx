@@ -7,7 +7,7 @@ import * as Collapsible from '@radix-ui/react-collapsible';
 import { AtlasContext } from '../../__root';
 import useMastodon from '../../../data/information/fediverse/useMastodon';
 import { TimeAgo } from '../../../hooks/useDataTransform';
-import LegendLayout from '../../../components/shared/AtlasLegendLayout';
+import LegendLayout from '../../../components/shared/LegendLayout';
 
 export const Route = createFileRoute('/information/fediverse/mastodon')({
   component: MastodonRouteComponent,

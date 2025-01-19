@@ -1,6 +1,6 @@
 import React from 'react';
 import { createFileRoute } from '@tanstack/react-router';
-import LegendNavigation from '../../components/shared/AtlasNavigation';
+import LegendNavigation from '../../components/shared/Navigation';
 import { AtlasNavigation } from '../../types/atlas.types';
 
 import prolewiki from '../../assets/icons/prolewiki.png';

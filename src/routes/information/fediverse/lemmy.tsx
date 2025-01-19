@@ -11,7 +11,7 @@ import CommunityInfoCard from '../../../components/lemmy/CommunityInfoCard';
 import * as Tabs from '@radix-ui/react-tabs';
 
 import { searchTypes } from '../../../types/api.types';
-import LegendLayout from '../../../components/shared/AtlasLegendLayout';
+import LegendLayout from '../../../components/shared/LegendLayout';
 
 export const Route = createFileRoute('/information/fediverse/lemmy')({
   component: LemmyRouteComponent,

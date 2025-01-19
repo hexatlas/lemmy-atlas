@@ -3,7 +3,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { ReactNode } from '@tanstack/react-router';
 import { AtlasContext } from '../../routes/__root';
 import useOverpassLayer from '../../data/shared/useOverpassLayer';
-import LegendLayout from './AtlasLegendLayout';
+import LegendLayout from './LegendLayout';
 import AtlasOSMSettings from './OSMSettings';
 import AtlasOSMInfoList from './OSMInfoList';
 import AtlasOSMInfoFilter from './OSMInfoFilter';

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { createFileRoute } from '@tanstack/react-router';
 import { AtlasNavigation } from '../../types/atlas.types';
-import MapRouteComponent from '../../components/shared/AtlasMapRouteComponent';
+import MapRouteComponent from '../../components/shared/MapRouteComponent';
 
 export const Route = createFileRoute('/economy/map')({
   component: () => (
