@@ -46,7 +46,7 @@ function AtlasOSMInfoDetail({
   }, [wikidata]);
 
   return (
-    <div className="container container--inset accent--invert">
+    <div className="container accent--invert sticky">
       {iconMap && filterKeys && (
         <div className="wrapper">
           {/* FILTER EMOJI */}

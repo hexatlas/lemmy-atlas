@@ -601,6 +601,11 @@ td {
   );
 }
 
+.sticky {
+  position: sticky;
+  top: var(--atlas-size-12);
+}
+
 .highlight {
   @include atlas-shadow(var(--atlas-shadow-inset));
   background: hsl(var(--atlas-color-light) / var(--atlas-opacity-1));
