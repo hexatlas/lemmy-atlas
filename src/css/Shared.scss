@@ -166,7 +166,6 @@
   .item__json {
     @include atlas-shadow(var(--atlas-shadow-1));
     padding: var(--atlas-size-09);
-
     overflow-y: scroll;
     grid-column: 1 / -1;
   }

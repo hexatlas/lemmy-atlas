@@ -8,6 +8,7 @@ export default function useOverpassLayer(
   iconMap,
   filterKey,
   isClustered = true,
+  setActiveElement,
 ) {
   const { defaultIcon } = iconMap;
 
@@ -39,24 +40,31 @@ export default function useOverpassLayer(
   };
 
   // Helper function: Add marker to appropriate cluster
-  const addMarkerToCluster = (clusters, lat, lon, tags) => {
+  const addMarkerToCluster = (clusters, lat, lon, tags, element) => {
     const clusterKey = tags[filterKey] || 'defaultIcon';
     const icon = iconMap[tags[filterKey]] || defaultIcon;
     const clusterGroup = getClusterGroup(clusters, clusterKey);
 
     const marker = L.marker([lat, lon], { icon });
-    const popup = L.popup().setContent(`
+    const popupContent = `
       <h1 class="emoji">${iconMap[clusterKey]?.options?.html || 'N/A'}</h1>
       <h4>${tags?.name || 'Unnamed'}</h4>
       <p>${tags['name:en'] || ''}</p>
       <pre>${JSON.stringify(tags, null, 2)}</pre>
-    `);
+    `;
+    const popup = L.popup().setContent(popupContent);
     marker.bindPopup(popup);
+
+    // Add event listener for popup open
+    marker.on('popupopen', () => {
+      setActiveElement(element);
+    });
+
     clusterGroup.addLayer(marker);
   };
 
   // Helper function: Add polyline with optional marker
-  const addPolylineWithMarker = (clusters, coordinates, tags) => {
+  const addPolylineWithMarker = (clusters, coordinates, tags, element) => {
     if (coordinates.length === 0) return;
 
     const polyline = L.polyline(coordinates, {
@@ -65,9 +73,8 @@ export default function useOverpassLayer(
     });
     overpassLayer.addLayer(polyline);
 
-    // Add a marker at the start of the polyline for clustering
     const [lat, lon] = coordinates[0];
-    addMarkerToCluster(clusters, lat, lon, tags);
+    addMarkerToCluster(clusters, lat, lon, tags, element);
   };
 
   if (isClustered) {
@@ -78,11 +85,11 @@ export default function useOverpassLayer(
     data.forEach((element) => {
       if (element.type === 'node') {
         const { lat, lon, tags } = element;
-        addMarkerToCluster(clusters, lat, lon, tags);
+        addMarkerToCluster(clusters, lat, lon, tags, element);
       } else if (element.type === 'way') {
         const { geometry, tags } = element;
         const coordinates = geometry.map((point) => [point.lat, point.lon]);
-        addPolylineWithMarker(clusters, coordinates, tags);
+        addPolylineWithMarker(clusters, coordinates, tags, element);
       } else if (element.type === 'relation') {
         const { members, tags } = element;
         const wayMembers = members.filter((member) => member.type === 'way');
@@ -93,7 +100,7 @@ export default function useOverpassLayer(
               point.lat,
               point.lon,
             ]);
-            addPolylineWithMarker(clusters, coordinates, tags);
+            addPolylineWithMarker(clusters, coordinates, tags, element);
           }
         });
       }
@@ -107,13 +114,19 @@ export default function useOverpassLayer(
         const { lat, lon, tags } = element;
         const icon = iconMap[tags[filterKey]] || defaultIcon;
         const marker = L.marker([lat, lon], { icon });
-        const popup = L.popup().setContent(`
+        const popupContent = `
           <h1 class="emoji">${iconMap[filterKey]?.options?.html || 'N/A'}</h1>
           <h4>${tags?.name || 'Unnamed'}</h4>
           <p>${tags['name:en'] || ''}</p>
           <pre>${JSON.stringify(tags, null, 2)}</pre>
-        `);
+        `;
+        const popup = L.popup().setContent(popupContent);
         marker.bindPopup(popup);
+
+        marker.on('popupopen', () => {
+          setActiveElement(element);
+        });
+
         overpassLayer.addLayer(marker);
       } else if (element.type === 'way') {
         const { geometry, tags } = element;
@@ -128,13 +141,20 @@ export default function useOverpassLayer(
         if (coordinates.length > 0) {
           const icon = iconMap[tags[filterKey]] || defaultIcon;
           const marker = L.marker(coordinates[0], { icon });
-          const popup = L.popup().setContent(`
+          const popupContent = `
             <h1 class="emoji">${iconMap[filterKey]?.options?.html || 'N/A'}</h1>
             <h4>${tags?.name || 'Unnamed'}</h4>
             <p>${tags['name:en'] || ''}</p>
             <pre>${JSON.stringify(tags, null, 2)}</pre>
-          `);
+          `;
+          const popup = L.popup().setContent(popupContent);
           marker.bindPopup(popup);
+
+          // Add event listener for popup open
+          marker.on('popupopen', () => {
+            setActiveElement(element);
+          });
+
           overpassLayer.addLayer(marker);
         }
       }

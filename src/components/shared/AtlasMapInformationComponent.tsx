@@ -30,6 +30,7 @@ function MapInformationComponent({
   } = useContext(AtlasContext)!;
   const { data, isLoading } = useMapInformation(activeAdministrativeRegion);
 
+  const [activeElement, setActiveElement] = useState(null);
   const [selectedFilters, setSelectedFilters] = useState({}); // Store selected values for each filterKey
   const filteredData = data?.elements?.filter((element) => {
     return Object.entries(selectedFilters).every(([key, value]) => {
@@ -47,6 +48,7 @@ function MapInformationComponent({
         iconMap,
         filterKeys[0], // first filterkey is used set emojis on map
         isClustered,
+        setActiveElement,
       );
     }
     return () => {
@@ -154,6 +156,8 @@ function MapInformationComponent({
           iconMap={iconMap}
           activeAdministrativeRegion={activeAdministrativeRegion}
           filterKeys={filterKeys}
+          activeElement={activeElement}
+          setActiveElement={setActiveElement}
         ></AtlasOSMInfoList>
       )}
     </LegendLayout>

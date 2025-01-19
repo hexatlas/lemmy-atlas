@@ -222,4 +222,6 @@ export interface OSMInfoListProps {
   filterKeys: string[];
   data;
   activeAdministrativeRegion: AdministrativeRegionObject;
+  activeElement;
+  setActiveElement;
 }

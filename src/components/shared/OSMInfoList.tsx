@@ -13,11 +13,12 @@ function AtlasOSMInfoList({
   filterKeys,
   data,
   activeAdministrativeRegion,
+  activeElement,
+  setActiveElement,
 }: OSMInfoListProps) {
   const [lastMapBounds, setLastMapBounds] = useState<
     LatLngBoundsExpression | undefined
   >(map?.getBounds());
-  const [activeElement, setActiveElement] = useState(null);
 
   const showOnMap = useCallback((element) => {
     if (element.lat && element.lon) {
