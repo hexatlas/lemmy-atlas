@@ -568,8 +568,11 @@ td {
 .container {
   @include atlas-shadow(var(--atlas-shadow-1));
   padding: var(--atlas-size-09);
-
   max-width: var(--atlas-max-width);
+}
+
+.container--inset {
+  @include atlas-shadow(var(--atlas-shadow-inset));
 }
 
 .wrapper {

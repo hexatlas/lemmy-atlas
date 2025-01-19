@@ -1,12 +1,13 @@
 import React, { useContext, useEffect, useState } from 'react';
 
-import { ReactNode } from '@tanstack/react-router';
 import { AtlasContext } from '../../routes/__root';
 import useOverpassLayer from '../../data/shared/useOverpassLayer';
+
 import LegendLayout from './LegendLayout';
 import AtlasOSMSettings from './OSMSettings';
 import AtlasOSMInfoList from './OSMInfoList';
 import AtlasOSMInfoFilter from './OSMInfoFilter';
+import AtlasOSMInfoDetail from './OSMInfoDetail';
 
 function MapInformationComponent({
   name,
@@ -65,11 +66,20 @@ function MapInformationComponent({
 
   return (
     <LegendLayout route={route}>
-      <h5>
+      <h1>
         <span>{name} </span>
-        found in {activeAdministrativeRegion['country']}
-      </h5>
+        in {activeAdministrativeRegion['emoji']}{' '}
+        {activeAdministrativeRegion['country']}
+      </h1>
       <AtlasOSMSettings {...clusterSettings} />
+      {isLoading && <p className="map-info__loading-emoji">🔍</p>}
+      {activeElement && (
+        <AtlasOSMInfoDetail
+          filterKeys={filterKeys}
+          iconMap={iconMap}
+          activeElement={activeElement}
+        />
+      )}
       <AtlasOSMInfoFilter
         data={data}
         selectedFilters={selectedFilters}
@@ -78,7 +88,6 @@ function MapInformationComponent({
         iconMap={iconMap}
         filterKeys={filterKeys}
       />
-      {isLoading && <p className="map-info__loading-emoji">🔍</p>}
       {filteredData && (
         <AtlasOSMInfoList
           listName={name}
