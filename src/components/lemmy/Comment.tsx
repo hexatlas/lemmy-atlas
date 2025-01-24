@@ -1,5 +1,4 @@
 import React, { useContext, useEffect, useState } from 'react';
-import ReactMarkdown from 'react-markdown';
 
 // https://www.radix-ui.com/primitives/docs/components/collapsible
 import * as Collapsible from '@radix-ui/react-collapsible';
@@ -16,6 +15,7 @@ import {
   AtlasLemmyInstanceType,
 } from '../../types/api.types';
 import { InformationContext } from '../../routes/information';
+import Markdown from '../shared/Markdown';
 
 interface CommentProps {
   commentView: CommentView;
@@ -154,9 +154,9 @@ function Comment({
           )}
           {!(commentView?.comment?.removed || commentView?.comment?.deleted) &&
             commentView?.comment.content && (
-              <ReactMarkdown className="comment__body">
+              <Markdown className="comment__body">
                 {commentView?.comment.content}
-              </ReactMarkdown>
+              </Markdown>
             )}
 
           {/* Replies */}

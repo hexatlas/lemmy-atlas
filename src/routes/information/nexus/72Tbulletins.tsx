@@ -2,9 +2,9 @@ import React, { useContext } from 'react';
 import { createFileRoute } from '@tanstack/react-router';
 import { AtlasContext } from '../../__root';
 import useNewsBulletins from '../../../data/information/nexus/useNewsBulletins';
-import ReactMarkdown from 'react-markdown';
 import HexBear from '../../../components/shared/HexBear';
 import LegendLayout from '../../../components/shared/LegendLayout';
+import Markdown from '../../../components/shared/Markdown';
 
 export const Route = createFileRoute('/information/nexus/72Tbulletins')({
   component: RouteComponent,
@@ -62,7 +62,7 @@ function RouteComponent() {
                   >
                     🔗 {bulletin.title}
                   </a>
-                  <ReactMarkdown>{`📰 ${bulletin.description}`}</ReactMarkdown>
+                  <Markdown>{`📰 ${bulletin.description}`}</Markdown>
                   <HexBear query={bulletin.link as string}>c/news</HexBear>
                 </div>
               );

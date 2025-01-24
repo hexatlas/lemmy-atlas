@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import ReactMarkdown from 'react-markdown';
 
 // https://www.radix-ui.com/primitives/docs/components/hover-card
 import * as HoverCard from '@radix-ui/react-hover-card';
@@ -15,6 +14,7 @@ import {
 
 import LemmyUser from './User';
 import { AtlasLemmyInstanceType } from '../../types/api.types';
+import Markdown from '../shared/Markdown';
 
 interface CommunityInfoCardProps {
   children: React.ReactNode;
@@ -167,7 +167,7 @@ function LemmyCommunityInfoCard({
               </div>
               {description && (
                 <div className="user__bio">
-                  <ReactMarkdown>{description}</ReactMarkdown>
+                  <Markdown>{description}</Markdown>
                 </div>
               )}
 

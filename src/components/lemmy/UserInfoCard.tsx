@@ -1,6 +1,4 @@
 import React, { useState } from 'react';
-import ReactMarkdown from 'react-markdown';
-
 // https://www.radix-ui.com/primitives/docs/components/hover-card
 import * as HoverCard from '@radix-ui/react-hover-card';
 
@@ -22,6 +20,7 @@ import Post from './Post';
 import Comment from './Comment';
 import { AtlasLemmyInstanceType } from '../../types/api.types';
 import { userPronouns } from '../../hooks/useDataTransform';
+import Markdown from '../shared/Markdown';
 
 interface AtlasLemmyUserInfoCardProps {
   children: React.ReactNode;
@@ -206,7 +205,7 @@ function AtlasLemmyUserInfoCard({
                 {bio && (
                   <Tabs.Content value="Bio" className="tabs__content">
                     <div className="user__bio">
-                      <ReactMarkdown>{bio}</ReactMarkdown>
+                      <Markdown>{bio}</Markdown>
                     </div>
                   </Tabs.Content>
                 )}

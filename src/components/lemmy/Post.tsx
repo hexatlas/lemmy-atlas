@@ -1,5 +1,4 @@
 import React, { useContext, useState } from 'react';
-import ReactMarkdown from 'react-markdown';
 
 // https://www.radix-ui.com/primitives/docs/components/collapsible
 import * as Collapsible from '@radix-ui/react-collapsible';
@@ -18,6 +17,7 @@ import {
   AtlasLemmyInstanceType,
 } from '../../types/api.types';
 import { InformationContext } from '../../routes/information';
+import Markdown from '../shared/Markdown';
 
 interface PostProps {
   postView: PostView;
@@ -163,7 +163,6 @@ function Post({
               🔗 {postView?.post.url}
             </a>
           )}
-
           {postView?.post.thumbnail_url && (
             <button
               className="post-image-container"
@@ -178,7 +177,6 @@ function Post({
               />
             </button>
           )}
-
           {/* Post Body */}
           {postView?.post?.removed && (
             <p className="post-body">🚮 Comment removed.</p>
@@ -188,9 +186,7 @@ function Post({
           )}
           {!(postView?.post?.removed || postView?.post?.deleted) &&
             postView?.post.body && (
-              <ReactMarkdown className="post-body">
-                {postView?.post.body}
-              </ReactMarkdown>
+              <Markdown className="post-body">{postView?.post.body}</Markdown>
             )}
 
           {/* Replies */}
