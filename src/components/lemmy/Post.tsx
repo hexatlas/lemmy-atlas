@@ -18,6 +18,7 @@ import {
 } from '../../types/api.types';
 import { InformationContext } from '../../routes/information';
 import Markdown from '../shared/Markdown';
+import { AtlasContext } from '../../routes/__root';
 
 interface PostProps {
   postView: PostView;
@@ -39,6 +40,9 @@ function Post({
 
   const { activeCommunity, activeListingType } =
     useContext(InformationContext)!;
+
+  const { activeAdministrativeRegion, activeGeographicIdentifier } =
+    useContext(AtlasContext)!;
 
   function handleReplies() {
     const client: LemmyHttp = new LemmyHttp(lemmyInstance?.baseUrl);
@@ -186,7 +190,17 @@ function Post({
           )}
           {!(postView?.post?.removed || postView?.post?.deleted) &&
             postView?.post.body && (
-              <Markdown className="post-body">{postView?.post.body}</Markdown>
+              <Markdown
+                highlight={[
+                  activeAdministrativeRegion[
+                    activeGeographicIdentifier as string
+                  ],
+                  activeAdministrativeRegion.country,
+                ]}
+                className="post-body"
+              >
+                {postView?.post.body}
+              </Markdown>
             )}
 
           {/* Replies */}

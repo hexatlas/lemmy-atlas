@@ -16,6 +16,7 @@ import {
 } from '../../types/api.types';
 import { InformationContext } from '../../routes/information';
 import Markdown from '../shared/Markdown';
+import { AtlasContext } from '../../routes/__root';
 
 interface CommentProps {
   commentView: CommentView;
@@ -40,6 +41,8 @@ function Comment({
   const [replies, setReplies] = useState<CommentView[]>();
 
   const { activeCommunity } = useContext(InformationContext)!;
+  const { activeAdministrativeRegion, activeGeographicIdentifier } =
+    useContext(AtlasContext)!;
 
   function handleReplies() {
     const client: LemmyHttp = new LemmyHttp(lemmyInstance?.baseUrl);
@@ -154,7 +157,15 @@ function Comment({
           )}
           {!(commentView?.comment?.removed || commentView?.comment?.deleted) &&
             commentView?.comment.content && (
-              <Markdown className="comment__body">
+              <Markdown
+                className="comment__body"
+                highlight={[
+                  activeAdministrativeRegion[
+                    activeGeographicIdentifier as string
+                  ],
+                  activeAdministrativeRegion.country,
+                ]}
+              >
                 {commentView?.comment.content}
               </Markdown>
             )}

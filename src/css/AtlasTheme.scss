@@ -609,11 +609,11 @@ td {
 
 .highlight {
   @include atlas-shadow(var(--atlas-shadow-inset));
-  background: hsl(var(--atlas-color-light) / var(--atlas-opacity-1));
-  color: hsl(var(--atlas-color-tertiary) / var(--atlas-opacity-3));
+  background: hsl(var(--atlas-color-accent) / var(--atlas-opacity-3));
+  color: hsl(var(--atlas-color-dark) / var(--atlas-opacity-3));
   padding: 0 var(--atlas-size-10);
+  border-radius: var(--atlas-border-radius-1);
   margin-right: var(--atlas-size-12);
-
   font-weight: 900;
 }
 
@@ -637,7 +637,8 @@ details {
 
   summary {
     padding: var(--atlas-size-10);
-    background-color: hsl(var(--atlas-color-accent) / var(--atlas-opacity-3));
+    background-color: hsl(var(--atlas-color-dark) / var(--atlas-opacity-3));
+    color: hsl(var(--atlas-color-accent) / var(--atlas-opacity-3));
     border-radius: var(--atlas-border-radius-1);
     list-style: none;
     cursor: pointer;
@@ -654,6 +655,7 @@ details {
   }
   &[open] {
     @include atlas-shadow(var(--atlas-shadow-inset));
+    background-color: hsl(var(--atlas-color-dark) / var(--atlas-opacity-1));
     summary {
     }
     summary:before {

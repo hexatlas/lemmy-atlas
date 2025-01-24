@@ -11,7 +11,8 @@ export const Route = createFileRoute('/information/nexus/72Tbulletins')({
 });
 
 function RouteComponent() {
-  const { activeAdministrativeRegion } = useContext(AtlasContext)!;
+  const { activeAdministrativeRegion, activeGeographicIdentifier } =
+    useContext(AtlasContext)!;
 
   const { newsBulletinsPosts, isLoading } = useNewsBulletins(
     activeAdministrativeRegion,
@@ -62,7 +63,14 @@ function RouteComponent() {
                   >
                     🔗 {bulletin.title}
                   </a>
-                  <Markdown>{`📰 ${bulletin.description}`}</Markdown>
+                  <Markdown
+                    highlight={[
+                      activeAdministrativeRegion[
+                        activeGeographicIdentifier as string
+                      ],
+                      activeAdministrativeRegion.country,
+                    ]}
+                  >{`📰 ${bulletin.description}`}</Markdown>
                   <HexBear query={bulletin.link as string}>c/news</HexBear>
                 </div>
               );
