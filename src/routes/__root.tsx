@@ -77,7 +77,6 @@ function AtlasRootComponent() {
         }}
         aria-label="Atlas Main View"
       >
-        {isMobile && <AtlasInterface {...atlasInterfaceProps} />}
         <aside
           className={`map`}
           aria-label="Map"
@@ -92,6 +91,7 @@ function AtlasRootComponent() {
           aria-label="Legend"
           aria-description="Find useful information pertaining to the selected location"
         >
+          {isMobile && <AtlasInterface {...atlasInterfaceProps} />}
           <LegendNavigation
             links={navigationLinks}
             route={Route}

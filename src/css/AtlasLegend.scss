@@ -264,12 +264,12 @@
 
 @media only screen and (max-width: 768px) {
   .map-interface {
-    position: fixed;
+    position: relative;
+    z-index: 0;
     top: var(--atlas-size-14);
     left: 0;
     right: 0;
     padding: 0;
-    margin: 0 var(--atlas-size-10);
     width: unset;
     max-width: unset;
 

@@ -17,7 +17,7 @@ function AtlasInterface({ isMobile }: AtlasInterfaceProps) {
   // };
 
   return (
-    <div className="map-interface">
+    <div className="map-interface map-interface__mobile">
       {!isMobile && (
         <>
           {/* <button
