@@ -91,14 +91,20 @@
   }
 }
 
+#credits {
+  img {
+    filter: grayscale(var(--atlas-opacity-3));
+    &:hover {
+      filter: none;
+    }
+  }
+}
+
 @media only screen and (min-width: 768px) {
   #legend {
     .settings {
       position: fixed;
       left: 0;
-      button {
-        // background: none;
-      }
     }
   }
 }

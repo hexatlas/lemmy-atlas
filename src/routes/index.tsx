@@ -193,7 +193,7 @@ function AtlasHomeComponent() {
           </blockquote>
         </div>
       </section>
-      <section>
+      <section id="credits">
         <small>Powered by:</small>
         <ul className="container wrapper light">
           <li>
