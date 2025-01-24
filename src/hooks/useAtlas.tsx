@@ -1,5 +1,11 @@
 // useAtlas.js
-import React, { useEffect, useRef, useReducer, Reducer } from 'react';
+import React, {
+  useEffect,
+  useRef,
+  useReducer,
+  Reducer,
+  useCallback,
+} from 'react';
 import atlasReducer from '../reducer/reducer';
 import { initialState } from '../reducer/reducer';
 
@@ -168,53 +174,91 @@ function useAtlas(Route): AtlasInterfaceProps {
         behavior: 'smooth',
       });
   }
+  const setLegendSizeCallback = useCallback(
+    (legendSize) => dispatch(setLegendSize(legendSize)),
+    [dispatch],
+  );
 
-  return {
-    isMobile,
-    resetAtlas,
-    sideBarRef,
+  const setIsClusteredCallback = useCallback(
+    (isClustered) => dispatch(setIsClustered(isClustered)),
+    [dispatch],
+  );
 
-    legendSize,
-    setLegendSize: (legendSize) => dispatch(setLegendSize(legendSize)),
+  const setMapCallback = useCallback(
+    (map) => dispatch(setMap(map)),
+    [dispatch],
+  );
 
-    isClustered,
-    setIsClustered: (isClustered) => dispatch(setIsClustered(isClustered)),
-
-    map,
-    setMap: (map) => dispatch(setMap(map)),
-
-    isOpenAtlasMapInterface,
-    setIsOpenAtlasMapInterface: (isOpenAtlasMapInterface) =>
+  const setIsOpenAtlasMapInterfaceCallback = useCallback(
+    (isOpenAtlasMapInterface) =>
       dispatch(setIsOpenAtlasMapInterface(isOpenAtlasMapInterface)),
+    [dispatch],
+  );
 
-    isLocationSelectMode,
-    setIsLocationSelectMode: (isLocationSelectMode) =>
+  const setIsLocationSelectModeCallback = useCallback(
+    (isLocationSelectMode) =>
       dispatch(setIsLocationSelectMode(isLocationSelectMode)),
+    [dispatch],
+  );
 
-    activeLocationSelection,
-    setActiveLocationSelection: (activeLocationSelection) =>
+  const setActiveLocationSelectionCallback = useCallback(
+    (activeLocationSelection) =>
       dispatch(setActiveLocationSelection(activeLocationSelection)),
+    [dispatch],
+  );
 
-    nominatim,
-    setNominatim: (nominatim) => dispatch(setNominatim(nominatim)),
+  const setNominatimCallback = useCallback(
+    (nominatim) => dispatch(setNominatim(nominatim)),
+    [dispatch],
+  );
 
-    activeGeographicIdentifier,
-    setActiveGeographicIdentifier: (activeGeographicIdentifier) =>
+  const setActiveGeographicIdentifierCallback = useCallback(
+    (activeGeographicIdentifier) =>
       dispatch(setActiveGeographicIdentifier(activeGeographicIdentifier)),
+    [dispatch],
+  );
 
-    activeAdministrativeRegion,
-    setActiveAdministrativeRegion: (activeAdministrativeRegion) =>
+  const setActiveAdministrativeRegionCallback = useCallback(
+    (activeAdministrativeRegion) =>
       dispatch(setActiveAdministrativeRegion(activeAdministrativeRegion)),
+    [dispatch],
+  );
 
-    administrativeRegionClickHistoryArray,
-    setAdministrativeRegionClickHistoryArray: (
-      administrativeRegionClickHistoryArray,
-    ) =>
+  const setAdministrativeRegionClickHistoryArrayCallback = useCallback(
+    (administrativeRegionClickHistoryArray) =>
       dispatch(
         setAdministrativeRegionClickHistoryArray(
           administrativeRegionClickHistoryArray,
         ),
       ),
+    [dispatch],
+  );
+
+  return {
+    isMobile,
+    resetAtlas,
+    sideBarRef,
+    legendSize,
+    setLegendSize: setLegendSizeCallback,
+    isClustered,
+    setIsClustered: setIsClusteredCallback,
+    map,
+    setMap: setMapCallback,
+    isOpenAtlasMapInterface,
+    setIsOpenAtlasMapInterface: setIsOpenAtlasMapInterfaceCallback,
+    isLocationSelectMode,
+    setIsLocationSelectMode: setIsLocationSelectModeCallback,
+    activeLocationSelection,
+    setActiveLocationSelection: setActiveLocationSelectionCallback,
+    nominatim,
+    setNominatim: setNominatimCallback,
+    activeGeographicIdentifier,
+    setActiveGeographicIdentifier: setActiveGeographicIdentifierCallback,
+    activeAdministrativeRegion,
+    setActiveAdministrativeRegion: setActiveAdministrativeRegionCallback,
+    administrativeRegionClickHistoryArray,
+    setAdministrativeRegionClickHistoryArray:
+      setAdministrativeRegionClickHistoryArrayCallback,
   };
 }
 export default useAtlas;
