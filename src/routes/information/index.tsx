@@ -11,32 +11,36 @@ function InformationHomeComponent() {
     <LegendLayout route={Route}>
       <h1>Information</h1>
       <p>
-        This section provides an overview of the economic landscape, including
-        key sectors, trade relationships, and economic indicators. It utilizes
-        data from reputable sources such as IMF, Comtrade, ILOSTAT, and World
-        Bank to offer insights into the economic structures of different
-        countries.
+        This section examines how information is used as a tool of state power.
+        It highlights the role of media, education, and communication systems in
+        shaping public perception, promoting state ideology, and silencing
+        dissent.
       </p>
+
       <h2>Instructions</h2>
 
       <ul className="container dark">
+        {' '}
         <li>
-          <b>🔗 External Resources:</b> Click to access additional information
-          from sources like Comtrade, ILOSTAT, and World Bank.
-        </li>
+          🗺️ <b>Show on Map:</b> Look for 📍 to pinpoint locations of media
+          outlets, educational institutions, or propaganda campaigns. Analyze
+          how these locations reflect the concentration of information power and
+          the promotion of capitalist narratives.
+        </li>{' '}
         <li>
-          <b>🌐 Information Locations:</b> Use to explore Energy, Industrial, or
-          Transport locations on the map.
+          🔗 <b>Extra Resources:</b> Click for further reading on:
           <ul className="container">
+            <li>The role of corporate media in shaping public opinion</li>
             <li>
-              🏛️ <b>Embassy</b>
+              Historical examples of propaganda campaigns to justify capitalist
+              interests
+            </li>
+            <li>
+              Case studies of censorship and suppression of anti-capitalist
+              ideas
             </li>
           </ul>
-        </li>
-        <li>
-          <b>📈 Economic Data:</b> View economic charts and graphs to understand
-          trends and patterns.
-        </li>
+        </li>{' '}
       </ul>
     </LegendLayout>
   );

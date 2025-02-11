@@ -11,32 +11,37 @@ function GovernmentHomeComponent() {
     <LegendLayout route={Route}>
       <h1>Government</h1>
       <p>
-        This section provides an overview of the economic landscape, including
-        key sectors, trade relationships, and economic indicators. It utilizes
-        data from reputable sources such as IMF, Comtrade, ILOSTAT, and World
-        Bank to offer insights into the economic structures of different
-        countries.
+        This section examines how government structures operate as tools of
+        class rule. It highlights the role of state institutions in maintaining
+        power dynamics that favor the class in power.
       </p>
+
       <h2>Instructions</h2>
 
       <ul className="container dark">
+        {' '}
         <li>
-          <b>🔗 External Resources:</b> Click to access additional information
-          from sources like Comtrade, ILOSTAT, and World Bank.
-        </li>
+          🗺️ <b>Show on Map:</b> Look for 📍 to pinpoint locations of key
+          government institutions, corporate headquarters, or areas of state
+          repression. Analyze how these locations reflect the concentration of
+          power and the enforcement of capitalist policies.
+        </li>{' '}
         <li>
-          <b>🌐 Economic Locations:</b> Use to explore Energy, Industrial, or
-          Transport locations on the map.
+          🔗 <b>Extra Resources:</b> Click for further reading on:
           <ul className="container">
             <li>
-              🏛️ <b>Embassy</b>
+              The role of government in enforcing austerity measures that
+              benefit capital
+            </li>
+            <li>
+              Historical examples of state violence against labor movements
+            </li>
+            <li>
+              Legislation that prioritizes corporate interests over workers'
+              rights
             </li>
           </ul>
-        </li>
-        <li>
-          <b>📈 Economic Data:</b> View economic charts and graphs to understand
-          trends and patterns.
-        </li>
+        </li>{' '}
       </ul>
     </LegendLayout>
   );

@@ -11,31 +11,54 @@ function DiplomacyHomeComponent() {
     <LegendLayout route={Route}>
       <h1>Diplomacy</h1>
       <p>
-        This section provides an overview of the economic landscape, including
-        key sectors, trade relationships, and economic indicators. It utilizes
-        data from reputable sources such as IMF, Comtrade, ILOSTAT, and World
-        Bank to offer insights into the economic structures of different
-        countries.
+        This section provides tools for an analysis of diplomatic interactions
+        through a Marxist lens, focusing on the interplay between economic
+        structures and geopolitical relationships. The following points
+        highlight key contradictions and class dynamics that underpin
+        international diplomacy.
       </p>
-      <h2>Instructions</h2>
+
+      <h2>Key Contradictions in Diplomatic Relations</h2>
+
+      <ul className="wrapper">
+        <li>
+          <b>Capital vs Labor:</b> Explore the global class struggle and its
+          impact on international relations. The exploitation of labor in
+          developing nations often creates tensions between industrialized
+          powers and emerging economies.
+        </li>
+
+        <li>
+          <b>Imperialism and Global Power Struggles:</b> Analyze how capitalist
+          nations compete for control over resources and markets, leading to
+          geopolitical conflicts and diplomatic crises.
+        </li>
+
+        <li>
+          <b>Economic Inequality:</b> Examine the role of economic disparities
+          in shaping foreign policy. Wealthy nations often impose trade policies
+          that favor their interests while exploiting poorer countries.
+        </li>
+      </ul>
+
+      <h2>Material Context and Historical Analysis</h2>
+
+      <p>
+        The Marxist perspective on diplomacy emphasizes the material conditions
+        that drive international conflict. By examining historical examples such
+        as colonialism, trade imbalances, and resource extraction, we can better
+        understand how economic systems shape geopolitical relations.
+      </p>
+
+      <h2>Menu</h2>
 
       <ul className="container dark">
+        {' '}
         <li>
-          <b>🔗 External Resources:</b> Click to access additional information
-          from sources like Comtrade, ILOSTAT, and World Bank.
-        </li>
+          🌐 <b>Show on Map:</b> Look for 📍 to pinpoint locations.{' '}
+        </li>{' '}
         <li>
-          <b>🌐 Economic Locations:</b> Use to explore Energy, Industrial, or
-          Transport locations on the map.
-          <ul className="container">
-            <li>
-              🏛️ <b>Embassy</b>
-            </li>
-          </ul>
-        </li>
-        <li>
-          <b>📈 Economic Data:</b> View economic charts and graphs to understand
-          trends and patterns.
+          🔗 <b>Extra Resources:</b> Click for further reading.{' '}
         </li>
       </ul>
     </LegendLayout>

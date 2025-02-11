@@ -11,31 +11,35 @@ function MilitaryHomeComponent() {
     <LegendLayout route={Route}>
       <h1>Military</h1>
       <p>
-        This section provides an overview of the economic landscape, including
-        key sectors, trade relationships, and economic indicators. It utilizes
-        data from reputable sources such as IMF, Comtrade, ILOSTAT, and World
-        Bank to offer insights into the economic structures of different
-        countries.
+        This section examines how military power is used to enforce capitalist
+        interests and maintain global economic dominance. It highlights the role
+        of armed forces in suppressing dissent, controlling territories, and
+        ensuring access to resources for capital accumulation.
       </p>
+
       <h2>Instructions</h2>
 
       <ul className="container dark">
+        {' '}
         <li>
-          <b>🔗 External Resources:</b> Click to access additional information
-          from sources like Comtrade, ILOSTAT, and World Bank.
+          🗺️ <b>Show on Map:</b> Look for 📍 to pinpoint locations of military
+          bases, resource extraction sites, or areas of geopolitical conflict.
+          Analyze how these locations reflect imperialist strategies and the
+          enforcement of capitalist interests.
         </li>
         <li>
-          <b>🌐 Economic Locations:</b> Use to explore Energy, Industrial, or
-          Transport locations on the map.
+          🔗 <b>Extra Resources:</b> Click for further reading on:
           <ul className="container">
             <li>
-              🏛️ <b>Embassy</b>
+              Historical examples of military interventions to protect
+              capitalist interests
+            </li>
+            <li>The role of arms trade in perpetuating global inequality</li>
+            <li>
+              Case studies of military suppression of labor movements and
+              anti-capitalist uprisings
             </li>
           </ul>
-        </li>
-        <li>
-          <b>📈 Economic Data:</b> View economic charts and graphs to understand
-          trends and patterns.
         </li>
       </ul>
     </LegendLayout>

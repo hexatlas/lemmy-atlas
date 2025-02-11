@@ -11,37 +11,42 @@ function EconomyHomeComponent() {
     <LegendLayout route={Route}>
       <h1>Economy</h1>
       <p>
-        This section provides an overview of the economic landscape, including
-        key sectors, trade relationships, and economic indicators. It utilizes
-        data from reputable sources such as IMF, Comtrade, ILOSTAT, and World
-        Bank to offer insights into the economic structures of different
-        countries.
+        This section provides tools for a critical analysis of global economic
+        structures through a Marxist lens. It examines how capitalism drives
+        inequality, exploitation, and class struggle while utilizing data from
+        reputable sources like IMF, Comtrade, ILOSTAT, and World Bank to reveal
+        the underlying dynamics of wealth accumulation and labor oppression.
       </p>
+
       <h2>Instructions</h2>
 
       <ul className="container dark">
         <li>
-          <b>🔗 External Resources:</b> Click to access additional information
-          from sources like Comtrade, ILOSTAT, and World Bank.
+          <b>🔗 External Resources:</b> Access additional information from
+          sources like Comtrade, ILOSTAT, and World Bank to analyze global trade
+          patterns, labor conditions, and wealth distribution. Use these
+          resources to explore how capitalist economies exploit peripheral
+          nations for raw materials and cheap labor.
         </li>
+
         <li>
-          <b>🌐 Economic Locations:</b> Use to explore Energy, Industrial, or
-          Transport locations on the map.
+          <b>🌐 Economic Locations:</b> Explore key industrial, energy, and
+          transport locations on the map through a Marxist critique:
           <ul className="container">
             <li>
-              🏭 <b>Industry</b>
+              🏭 <b>Industry:</b> Analyze how multinational corporations exploit
+              cheap labor in developing nations while maintaining monopolies in
+              developed countries.
             </li>
             <li>
-              ⚡ <b>Energy</b>
-            </li>
-            <li>
-              🚈 <b>Transport</b>
+              ⚡ <b>Energy:</b> Investigate the role of fossil fuel extraction
+              and energy imperialism in global economic inequality.
             </li>
           </ul>
         </li>
+
         <li>
-          <b>📈 Economic Data:</b> View economic charts and graphs to understand
-          trends and patterns.
+          <b>📈 Economic Data:</b> Where does the line go?
         </li>
       </ul>
     </LegendLayout>

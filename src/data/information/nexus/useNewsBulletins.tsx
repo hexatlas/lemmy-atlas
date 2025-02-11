@@ -45,13 +45,13 @@ function useNewsBulletins(
   let apiUrl;
 
   if (activeAdministrativeRegion?.country !== 'country') {
-    apiUrl = `/.netlify/functions/72T_bulletins/?country=${encodeURI(
+    apiUrl = `${import.meta.env.VITE_DATA_API_ENDPOINT}72T_bulletins?country=${encodeURI(
       activeAdministrativeRegion?.country,
     )
       .toLowerCase()
       .replace(/%20/g, '-')}`;
   } else {
-    apiUrl = `/.netlify/functions/72T_bulletins/?index=true`;
+    apiUrl = `${import.meta.env.VITE_DATA_API_ENDPOINT}72T_bulletins?index=true`;
   }
 
   const { data: newsBulletinsPosts, isLoading } = useQuery({

@@ -23,11 +23,11 @@ function useAnarachistLibrary(
   let apiUrl;
 
   if (activeAdministrativeRegion?.country !== 'country') {
-    apiUrl = `/.netlify/functions/anarchist_library/?country=${encodeURI(
+    apiUrl = `${import.meta.env.VITE_DATA_API_ENDPOINT}anarchist_library?country=${encodeURI(
       activeAdministrativeRegion[activeGeographicIdentifier],
     )}`;
   } else {
-    apiUrl = `/.netlify/functions/anarchist_library/`;
+    apiUrl = `${import.meta.env.VITE_DATA_API_ENDPOINT}anarchist_library/`;
   }
 
   const { data: anarchistLibraryPosts, isLoading } = useQuery({

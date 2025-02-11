@@ -20,7 +20,7 @@ function useWiki(
     }
   };
 
-  const apiUrl = `/.netlify/functions/wiki/?country=${encodeURI(
+  const apiUrl = `${import.meta.env.VITE_DATA_API_ENDPOINT}wiki?country=${encodeURI(
     activeAdministrativeRegion[activeGeographicIdentifier],
   )}&wiki=${wikiURL}`;
 

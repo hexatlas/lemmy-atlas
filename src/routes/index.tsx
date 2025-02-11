@@ -86,10 +86,12 @@ function AtlasHomeComponent() {
         <h2>Instructions</h2>
         <ul className="container tertiary">
           <li>
-            <b>Select Country:</b> Use the search or click on the map, or 🎲 for
-            a random pick.
+            <b>Select Country:</b> Choose a country, by using search, clicking
+            on the map, or 🎲 for a random pick to analyze its tools of state
+            power.
             <AtlasLocationSearch />
           </li>
+
           <li>
             <b>State Power Options:</b>
             <ul className="wrapper">
@@ -134,7 +136,7 @@ function AtlasHomeComponent() {
                   to={'/military'}
                   aria-label={'security link'}
                 >
-                  Security
+                  Military Power
                 </Link>
               </li>
               <li className="container accent">
@@ -154,14 +156,9 @@ function AtlasHomeComponent() {
             🗺️ <b>Map Layers:</b> Switch between satellite, terrain, or
             boundaries.
           </li>
-          <li>
-            🌐 <b>Show on Map:</b> Look for 📍 to pinpoint locations.
-          </li>
-          <li>
-            🔗 <b>Extra Resources:</b> Click for further reading.
-          </li>
         </ul>
       </section>
+
       <section>
         <h2>Theme</h2>
         <div className="theme-selector">

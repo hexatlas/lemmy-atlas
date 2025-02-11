@@ -72,7 +72,7 @@ function useNominatim(
   const handleLookUp = async () => {
     try {
       if (searchTerm.trim() !== '') {
-        const url2 = `/.netlify/functions/nominatim/?query=${encodeURI(
+        const url2 = `${import.meta.env.VITE_DATA_API_ENDPOINT}nominatim?query=${encodeURI(
           searchTerm,
         )}&endpoint=lookup&osm_ids=${activeSearchResult?.osm_type[0]}${
           activeSearchResult?.osm_id

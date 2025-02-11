@@ -57,7 +57,7 @@ function useIMF(activeAdministrativeRegion) {
     }
   };
 
-  const apiUrl = `/.netlify/functions/data_imf_api/?indicator=${activeIndicator.name}&country=${activeAdministrativeRegion['ISO3166-3']}/`;
+  const apiUrl = `${import.meta.env.VITE_DATA_API_ENDPOINT}data_imf_api?indicator=${activeIndicator.name}&country=${activeAdministrativeRegion['ISO3166-3']}/`;
 
   const { data: IMFData, isLoading } = useQuery({
     queryKey: [`AL-${activeAdministrativeRegion['ISO3166-2']}`],
