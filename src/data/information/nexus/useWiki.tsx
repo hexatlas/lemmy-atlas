@@ -3,7 +3,6 @@ import { useQuery } from '@tanstack/react-query';
 function useWiki(
   activeAdministrativeRegion,
   activeGeographicIdentifier,
-  wikiURL,
   isProleWiki,
 ) {
   const fetchProleWiki = async (url) => {
@@ -20,9 +19,9 @@ function useWiki(
     }
   };
 
-  const apiUrl = `${import.meta.env.VITE_DATA_API_ENDPOINT}wiki?country=${encodeURI(
+  const apiUrl = `${import.meta.env.VITE_DATA_API_ENDPOINT}${isProleWiki ? 'prolewiki' : 'natopedia'}?country=${encodeURI(
     activeAdministrativeRegion[activeGeographicIdentifier],
-  )}&wiki=${wikiURL}`;
+  )}`;
 
   const { data: wikiData, isLoading } = useQuery({
     queryKey: [

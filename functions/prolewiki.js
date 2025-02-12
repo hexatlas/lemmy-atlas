@@ -4,9 +4,9 @@ import fetch from 'node-fetch';
 
 export const handler = async function (event) {
   try {
-    const { country, wiki } = event.queryStringParameters || {};
+    const { country } = event.queryStringParameters || {};
 
-    const apiUrl = `${wiki}/api.php?action=parse&page=${country}&format=json&redirects`;
+    const apiUrl = `https://en.prolewiki.org/api.php?action=parse&page=${country}&format=json&redirects`;
 
     const response = await fetch(apiUrl);
     const data = await response.json();

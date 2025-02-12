@@ -18,7 +18,6 @@ function RouteComponent() {
   const { wikiData, isLoading } = useWiki(
     activeAdministrativeRegion,
     activeGeographicIdentifier,
-    wikiURL,
     isProleWiki,
   );
 
