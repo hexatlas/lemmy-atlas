@@ -1,116 +1,234 @@
-# Main Component Tree
+# redAtlas Frontend
+
+Geopolitical visualization platform for socioeconomic, military, and infrastructure data analysis.
+
+![HexAtlas](https://redatlas.netlify.app/safari-pinned-tab.svg)
+
+## Key Features
+
+- 🌍 Interactive Map Layers with minimap navigation
+- 📊 Multi-dimensional data categories:
+  - **Economy**: Industrial centers, trade flows, commodities
+  - **Military**: Bases, forces, defense industry
+  - **Government**: Public infrastructure, class structure
+  - **Diplomacy**: Embassy networks, diplomatic corps
+- 🎨 Consistent visual language with semantic coloring
+- 🔗 Real-time data integration from multiple sources
+
+## Atlas Component Hierarchy
 
 ```
-Atlas
-   Map
-      Interface
-      Minimap
-
-   Legend
-      Economy
-         Links
-         Map
-            Industrial Centers
-            Commodities
-            Energy
-            Ports
-            etc.
-
-            Trade
-               Imports
-               Exports
-         Charts // Todo
-            GDP based on PPP, share of world
-
-      Information
-         Links
-         Map // Todo
-            Media Landscape
-            Think Tanks
-            Diplomats
-            etc.
-
-         Fediverse
-            Lemmy
-               Community
-                  CommunityInfoCard
-               User
-                  UserInfoCard
-               Posts
-               Comments
-            Mastodon
-
-         Nexus
-            ProleWiki
-            NATOPedia
-            72Ts News Bulletins
-            Anarchist Library
-            etc.
-
-
-      Dipolomacy
-         Links // Todo
-         Map // Todo
-            Embassies, Consulates
-            Ambassadors
-            etc.
-
-      Military
-         Links // Todo
-         Map // Todo
-            Bases
-            Forces
-            Industry
-            etc.
-
-      Government
-         Links
-         Map // Todo
-            Hospitals
-            Firedepartmens
-            Policedepartments
-            Parks
-            Abandoned
-            etc.
-
-         Class Structure // Todo
-            Industrialists
-            Finance Capitalists
-            Landowners
-            Intelligentsia
-            Bourgeoise
-            Proletariat
-            Armed Forces
+- Atlas
+  ├── Map
+  │   ├── Interface
+  │   └── Minimap
+  │
+  └── Legend
+      ├── Economy
+      │   ├── Links
+      │   ├── Map
+      │   │   ├── Industrial Centers
+      │   │   ├── Commodities
+      │   │   ├── Energy
+      │   │   ├── Ports
+      │   │   ├── etc.
+      │   │   └── Trade
+      │   │       ├── Imports
+      │   │       └── Exports
+      │   └── Charts (// Todo)
+      │       └── GDP based on PPP, share of world
+      │
+      ├── Information
+      │   ├── Links
+      │   ├── Map (// Todo)
+      │   │   ├── Media Landscape
+      │   │   ├── Think Tanks
+      │   │   ├── Diplomats
+      │   │   └── etc.
+      │   ├── Fediverse
+      │   │   ├── Lemmy
+      │   │   │   ├── Community
+      │   │   │   │   └── CommunityInfoCard
+      │   │   │   ├── User
+      │   │   │   │   └── UserInfoCard
+      │   │   │   ├── Posts
+      │   │   │   └── Comments
+      │   │   └── Mastodon
+      │   └── Nexus
+      │       ├── ProleWiki
+      │       ├── NATOPedia
+      │       ├── 72Ts News Bulletins
+      │       ├── Anarchist Library
+      │       └── etc.
+      │
+      ├── Dipolomacy
+      │   ├── Links (// Todo)
+      │   └── Map (// Todo)
+      │       ├── Embassies, Consulates
+      │       ├── Ambassadors
+      │       └── etc.
+      │
+      ├── Military
+      │   ├── Links (// Todo)
+      │   └── Map (// Todo)
+      │       ├── Bases
+      │       ├── Forces
+      │       ├── Industry
+      │       └── etc.
+      │
+      └── Government
+          ├── Links
+          ├── Map (// Todo)
+          │   ├── Hospitals
+          │   ├── Firedepartmens
+          │   ├── Policedepartments
+          │   ├── Parks
+          │   ├── Abandoned
+          │   └── etc.
+          └── Class Structure (// Todo)
+              ├── Industrialists
+              ├── Finance Capitalists
+              ├── Landowners
+              ├── Intelligentsia
+              ├── Bourgeoise
+              ├── Proletariat
+              └── Armed Forces
 ```
 
-# Atlas Visual Language
+## Visual Language
 
-## Colors
+### Color Scheme
+
+| Purpose   | Color     | Example Use   |
+| --------- | --------- | ------------- |
+| Primary   | `#AC1200` | Main actions  |
+| Secondary | `#13AB00` | Notifications |
+| Tertiary  | `#ACAB00` | Highlights    |
 
 _Attention_ [Secondary]: Select an _option_ [Primary] to reveal _selected information_ [Tertiary].
 
-Primary [Purple]
-Secondary [Pink]
-Tertiary [Yellow]
+### Sizes
 
-## Sizes
+- Base unit: ϕ (phi = 1.618 ratio)
+- Header sizes: ϕ³ → ϕ² → ϕ
+- Body text: 1rem (16px)
 
-ϕ
+## Development Setup
 
-## Assets
+### Prerequisites
 
-Unicode
+- Node.js v18+
+- npm v9+
+- Optional: API keys for:
+  - OpenWeather (`VITE_OPENWEATHER_API_KEY`)
+  - DeepSeek (`VITE_OPEN_AI_API_KEY`)
 
-iso3166-region-codes.json
-https://github.com/lukes/ISO-3166-Countries-with-Regional-Codes/blob/master/all/all.json
+### Installation
 
-## Add 🌐 Layer
+```bash
+cd atlas/frontend
+npm install
+cp .env
+```
 
-- [ ] Create Overpass Query Hook data/[instrument]/overpass/use[Layer]Query.tsx
-- [ ] Create Emoji IconMap in data/[instrument]/overpass/emoji/[layer].tsx
-- [ ] Create Map Layer in routes/[instrument]/map/[layer].tsx
-- [ ] Add Link in routes/[instrument]/map.tsx
+Configure `.env`:
 
-## Comments
+```env
+VITE_DATA_API_ENDPOINT=http://localhost:8080/api/
+VITE_OPENWEATHER_API_KEY=your_key_here
+VITE_OPEN_AI_API_KEY=sk-your_key_here
+```
 
-https://patorjk.com/software/taag/#p=display&f=Big%20Money-ne
+VITE_DATA_API_ENDPOINT must point to redatlas/backend.
+
+### Running Dev Server
+
+```bash
+npm run dev
+```
+
+## Adding New Layers
+
+1. **Create Overpass Query Hook**
+
+```tsx
+// src/data/[instrument]/overpass/use[Layer]Query.tsx
+export default const useLayerQuery = () => {
+
+  const overpassQuery = `
+      // Overpass Query
+    `;
+
+  const layer = useQuery({
+    queryKey: [`Layer-${activeAdministrativeRegion['ISO3166-2']}`],
+    queryFn: () => useOverpassAPI(overpassQuery),
+    staleTime: Infinity,
+    refetchInterval: false,
+    refetchOnMount: false,
+  });
+
+  return layer;
+}
+
+```
+
+2. **Define Emoji Icon Mapping**
+
+```tsx
+// src/data/[instrument]/overpass/emoji/[layer].tsx
+import L from 'leaflet';
+
+const defaultIcon = L.divIcon({
+  html: '🕊️', // Default for any unclassified diplomatic location
+  className: 'emoji-icon',
+});
+
+const embassy = L.divIcon({
+  html: '🏛️', // Embassy
+  className: 'emoji-icon',
+});
+
+// etc.
+
+export const iconMap = {
+  defaultIcon,
+  embassy,
+  // etc.
+};
+```
+
+3. **Implement Map Layer Route**
+
+```tsx
+// src/routes/[instrument]/map/[layer].tsx
+export const Route = createFileRoute('/instrument/map/layer')({
+  component: () => (
+    <MapInformationComponent
+      name={'Layer Locations'}
+      useMapInformation={useLayer}
+      filterKeys={['osm_key_1', 'osm_key_2']}
+      iconMap={iconMap}
+      route={Route}
+    />
+  ),
+});
+```
+
+4.  **Add Route/Link**
+
+```tsx
+// src/routes/[instrument]/map.tsx;
+
+const navigationLinks: AtlasNavigation[] = [
+  {
+    link: '/instrument/map/layer',
+    emoji: '🪈',
+    isDisabled: false,
+  },
+  // other routes
+];
+```
+
+---
+
+> **Note**: Frontend requires active [redAtlas backend](https://github.com/your-org/redatlas) instance for data operations. Use matching port configurations in both services.
