@@ -5,7 +5,7 @@ import { InformationContext } from '../../routes/information';
 import useHexbear from '../../data/shared/useHexbear';
 
 function HexBear({
-  children = <>Search on hexbear.net</>,
+  children = <>Search on chapo.chat</>,
   query,
 }: {
   children;
