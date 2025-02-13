@@ -1,21 +1,21 @@
 .anarchist-library-item {
-  @include atlas-shadow(var(--atlas-shadow-inset));
-  background: hsl(var(--atlas-color-light) / var(--atlas-opacity-1));
-  margin-top: var(--atlas-size-10);
-  padding-top: var(--atlas-size-10);
-  padding-bottom: var(--atlas-size-12);
+  @include atlas-shadow(var(--shadow-atlas-inset));
+  background: hsl(var(--color-atlas-light) / var(--opacity-atlas-1));
+  margin-top: var(--size-atlas-10);
+  padding-top: var(--size-atlas-10);
+  padding-bottom: var(--size-atlas-12);
 
-  gap: var(--atlas-size-12);
+  gap: var(--size-atlas-12);
 }
 
 .anarchist-library-item > * {
-  margin: var(--atlas-size-10) var(--atlas-size-09);
+  margin: var(--size-atlas-10) var(--size-atlas-09);
 }
 
 p.anarchist-library-author {
-  @include atlas-shadow(var(--atlas-shadow-inset));
-  background: hsl(var(--atlas-color-dark) / var(--atlas-opacity-3));
-  padding: var(--atlas-size-12) var(--atlas-size-10);
+  @include atlas-shadow(var(--shadow-atlas-inset));
+  background: hsl(var(--color-atlas-dark) / var(--opacity-atlas-3));
+  padding: var(--size-atlas-12) var(--size-atlas-10);
   justify-self: flex-end;
   grid-column: 2 / -1;
   height: fit-content;
@@ -27,20 +27,20 @@ p.anarchist-library-author {
 }
 
 .anarchist-library-community {
-  @include atlas-shadow(var(--atlas-shadow-inset));
-  background: hsl(var(--atlas-color-dark) / var(--atlas-opacity-3));
-  margin: var(--atlas-size-12);
-  padding: var(--atlas-size-12);
+  @include atlas-shadow(var(--shadow-atlas-inset));
+  background: hsl(var(--color-atlas-dark) / var(--opacity-atlas-3));
+  margin: var(--size-atlas-12);
+  padding: var(--size-atlas-12);
 }
 
 .anarchist-library-item .comment__reply-button {
-  padding: 0 var(--atlas-size-10);
-  padding-top: var(--atlas-size-10);
+  padding: 0 var(--size-atlas-10);
+  padding-top: var(--size-atlas-10);
 }
 
 .anarchist-library-container {
   display: flex;
-  gap: var(--atlas-size-10);
+  gap: var(--size-atlas-10);
 }
 
 .anarchist-library-readmore {

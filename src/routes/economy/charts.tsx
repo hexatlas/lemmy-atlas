@@ -90,7 +90,7 @@ function ChartsRouteComponent() {
         .attr('transform', 'rotate(-45)')
         .style(
           'color',
-          'hsl(var(--atlas-color-light) / var(--atlas-opacity-1))',
+          'hsl(var(--color-atlas-light) / var(--opacity-atlas-1))',
         )
         .style('text-anchor', 'end');
 
@@ -104,9 +104,9 @@ function ChartsRouteComponent() {
         .text('Year')
         .style(
           'fill',
-          'hsl(var(--atlas-color-tertiary) / var(--atlas-opacity-3))',
+          'hsl(var(--color-atlas-tertiary) / var(--opacity-atlas-3))',
         )
-        .style('font-size', 'var(--atlas-size-09)');
+        .style('font-size', 'var(--size-atlas-09)');
 
       // Add Source
       svg
@@ -115,8 +115,8 @@ function ChartsRouteComponent() {
         .attr('x', 0)
         .attr('y', height + margin.bottom * 1.312)
         .text(`${String(source).toUpperCase()} | data.imf.org`)
-        .style('fill', 'hsl(var(--atlas-color-light) / var(--atlas-opacity-2))')
-        .style('font-size', 'var(--atlas-size-09)');
+        .style('fill', 'hsl(var(--color-atlas-light) / var(--opacity-atlas-2))')
+        .style('font-size', 'var(--size-atlas-09)');
 
       // Add Y axis with label
       svg.append('g').call(d3.axisLeft(y));
@@ -132,9 +132,9 @@ function ChartsRouteComponent() {
         .text(unit)
         .style(
           'fill',
-          'hsl(var(--atlas-color-tertiary) / var(--atlas-opacity-3))',
+          'hsl(var(--color-atlas-tertiary) / var(--opacity-atlas-3))',
         )
-        .style('font-size', 'var(--atlas-size-09)');
+        .style('font-size', 'var(--size-atlas-09)');
 
       // Add chart title (optional)
       svg
@@ -146,9 +146,9 @@ function ChartsRouteComponent() {
         .text(`${activeAdministrativeRegion?.country.toUpperCase()} | ${label}`)
         .style(
           'fill',
-          'hsl(var(--atlas-color-tertiary) / var(--atlas-opacity-3))',
+          'hsl(var(--color-atlas-tertiary) / var(--opacity-atlas-3))',
         )
-        .style('font-size', 'var(--atlas-size-09)')
+        .style('font-size', 'var(--size-atlas-09)')
         .style('font-weight', 'bold');
 
       // Add horizontal grid lines
@@ -157,7 +157,7 @@ function ChartsRouteComponent() {
         .attr('class', 'grid')
         .call(d3.axisLeft(y).tickSize(-width).tickFormat(''))
         .style('stroke-dasharray', '2,2')
-        .style('stroke-opacity', 'var(--atlas-opacity-1)');
+        .style('stroke-opacity', 'var(--opacity-atlas-1)');
 
       // Add vertical grid lines
       svg
@@ -166,7 +166,7 @@ function ChartsRouteComponent() {
         .attr('transform', `translate(0,${height})`)
         .call(d3.axisBottom(x).tickSize(-height).tickFormat(''))
         .style('stroke-dasharray', '2,2')
-        .style('stroke-opacity', 'var(--atlas-opacity-1)');
+        .style('stroke-opacity', 'var(--opacity-atlas-1)');
 
       svg
         .append('path')
@@ -174,7 +174,7 @@ function ChartsRouteComponent() {
         .attr('fill', 'none')
         .attr(
           'stroke',
-          'hsl(var(--atlas-color-tertiary) / var(--atlas-opacity-2))',
+          'hsl(var(--color-atlas-tertiary) / var(--opacity-atlas-2))',
         )
         .attr('stroke-width', 1.312)
         .attr('d', line);
@@ -187,15 +187,15 @@ function ChartsRouteComponent() {
         .style('position', 'absolute')
         .style(
           'background-color',
-          'hsl(var(--atlas-color-dark) / var(--atlas-opacity-2))',
+          'hsl(var(--color-atlas-dark) / var(--opacity-atlas-2))',
         )
         .style(
           'color',
-          'hsl(var(--atlas-color-tertiary) / var(--atlas-opacity-3))',
+          'hsl(var(--color-atlas-tertiary) / var(--opacity-atlas-3))',
         )
-        .style('padding', 'var(--atlas-size-09)')
+        .style('padding', 'var(--size-atlas-09)')
         .style('border-radius', 'var(--atlas-border-radius-1)')
-        .style('font-size', 'var(--atlas-size-09)')
+        .style('font-size', 'var(--size-atlas-09)')
         .style('pointer-events', 'none')
         .style('opacity', 0);
 
@@ -205,7 +205,7 @@ function ChartsRouteComponent() {
         .attr('class', 'helper-line')
         .style(
           'stroke',
-          'hsl(var(--atlas-color-tertiary) / var(--atlas-opacity-2))',
+          'hsl(var(--color-atlas-tertiary) / var(--opacity-atlas-2))',
         )
         .style('stroke-dasharray', '2,2')
         .style('opacity', 0);
@@ -215,7 +215,7 @@ function ChartsRouteComponent() {
         .attr('class', 'helper-line')
         .style(
           'stroke',
-          'hsl(var(--atlas-color-tertiary) / var(--atlas-opacity-2))',
+          'hsl(var(--color-atlas-tertiary) / var(--opacity-atlas-2))',
         )
         .style('stroke-dasharray', '2,2')
         .style('opacity', 0);
@@ -228,10 +228,10 @@ function ChartsRouteComponent() {
         .append('circle')
         .attr('cx', (d) => x(d.year))
         .attr('cy', (d) => y(d.value))
-        .attr('r', 'var(--atlas-size-14)')
+        .attr('r', 'var(--size-atlas-14)')
         .attr(
           'fill',
-          'hsl(var(--atlas-color-tertiary) / var(--atlas-opacity-3))',
+          'hsl(var(--color-atlas-tertiary) / var(--opacity-atlas-3))',
         )
         .on('mouseover', function (event, d) {
           // const [mouseX, mouseY] = d3.pointer(event);
@@ -261,10 +261,10 @@ function ChartsRouteComponent() {
 
           // Highlight point
           d3.select(this)
-            .attr('r', 'var(--atlas-size-09)')
+            .attr('r', 'var(--size-atlas-09)')
             .attr(
               'fill',
-              'hsl(var(--atlas-color-tertiary) / var(--atlas-opacity-2))',
+              'hsl(var(--color-atlas-tertiary) / var(--opacity-atlas-2))',
             );
         })
         .on('mouseout', function () {
@@ -277,10 +277,10 @@ function ChartsRouteComponent() {
 
           // Reset point
           d3.select(this)
-            .attr('r', 'var(--atlas-size-14)')
+            .attr('r', 'var(--size-atlas-14)')
             .attr(
               'fill',
-              'hsl(var(--atlas-color-tertiary) / var(--atlas-opacity-3))',
+              'hsl(var(--color-atlas-tertiary) / var(--opacity-atlas-3))',
             );
         });
 
@@ -401,7 +401,7 @@ function ChartsRouteComponent() {
       <div className="container">
         <h3>Where does line go? </h3>
         <select
-          className="accent"
+          className="action"
           value={activeIndicator?.name}
           onChange={(e) => {
             return setActiveIndicator(

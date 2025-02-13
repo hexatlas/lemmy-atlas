@@ -11,20 +11,20 @@
 
 .mbox,
 .metadata {
-  background: hsl(var(--atlas-color-light) / var(--atlas-opacity-1)) !important;
+  background: hsl(var(--color-atlas-light) / var(--opacity-atlas-1)) !important;
   border-left: none !important;
-  border: 1px solid hsl(var(--atlas-color-accent) / var(--atlas-opacity-2)) !important;
-  margin-bottom: var(--atlas-size-10) !important;
+  border: 1px solid hsl(var(--color-atlas-accent) / var(--opacity-atlas-2)) !important;
+  margin-bottom: var(--size-atlas-10) !important;
 }
 
 .infobox {
-  @include atlas-shadow(var(--atlas-shadow-inset));
+  @include atlas-shadow(var(--shadow-atlas-inset));
   width: 100% !important;
-  background: hsl(var(--atlas-color-light) / var(--atlas-opacity-1));
-  padding: var(--atlas-size-10) !important;
-  border: 1px solid hsl(var(--atlas-color-accent) / var(--atlas-opacity-2));
+  background: hsl(var(--color-atlas-light) / var(--opacity-atlas-1));
+  padding: var(--size-atlas-10) !important;
+  border: 1px solid hsl(var(--color-atlas-accent) / var(--opacity-atlas-2));
   border-radius: var(--atlas-border-radius-1) !important;
-  margin-bottom: var(--atlas-size-10);
+  margin-bottom: var(--size-atlas-10);
   border-collapse: inherit !important;
   border-spacing: 0 !important;
 }
@@ -36,7 +36,7 @@
 .infobox th,
 .infobox td {
   border-color: hsl(
-    var(--atlas-color-light) / var(--atlas-opacity-1)
+    var(--color-atlas-light) / var(--opacity-atlas-1)
   ) !important;
   /* border: none !important; */
 }

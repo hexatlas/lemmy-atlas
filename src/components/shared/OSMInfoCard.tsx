@@ -29,7 +29,7 @@ function AtlasOSMInfoCard({
     <Accordion.Item
       key={index}
       value={name}
-      className={`item dark ${element == activeElement && 'active'}`}
+      className={`item neutral ${element == activeElement && 'active'}`}
       onClick={() => handleClick(element)}
       onFocus={() => handleClick(element)}
       aria-label={name}

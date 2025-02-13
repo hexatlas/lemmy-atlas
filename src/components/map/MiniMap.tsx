@@ -29,7 +29,7 @@ const POSITION_CLASSES: PositionClasses = {
 
 const BOUNDS_STYLE: PathOptions = {
   weight: 0.161,
-  color: 'hsl(var(--atlas-color-primary))',
+  color: 'hsl(var(--color-atlas-primary))',
 };
 
 function MinimapBounds({

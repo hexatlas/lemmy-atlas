@@ -46,12 +46,12 @@ function AtlasOSMInfoDetail({
   }, [wikidata]);
 
   return (
-    <div className="container accent--invert sticky">
+    <div className="container neutral sticky">
       {iconMap && filterKeys && (
         <div className="wrapper">
           {/* FILTER EMOJI */}
           <div
-            className="container container--inset accent"
+            className="container container--inset info"
             aria-label={`Filterkey`}
           >
             {iconMap[activeElement?.tags[filterKeys[0]]]?.options?.html ? (
@@ -81,7 +81,7 @@ function AtlasOSMInfoDetail({
               );
             })}
           </div>
-          <div className="container accent--invert">
+          <div className="container">
             {name && <h2>{name}</h2>}
             {nameEN && <h6>{nameEN}</h6>}
           </div>
@@ -104,7 +104,7 @@ function AtlasOSMInfoDetail({
       )}
 
       {iconMap && filterKeys && (
-        <div className="container dark">
+        <div className="container info">
           {filterKeys.map((filterKey, index) => {
             if (index < 1) return;
             return (

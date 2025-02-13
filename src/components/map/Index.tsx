@@ -44,31 +44,31 @@ export default function AtlasMap({
       Styles
   */
   const style_locationDefault = {
-    color: 'hsl(var(--atlas-color-dark) / 0)',
+    color: 'hsl(var(--color-atlas-dark) / 0)',
     fillOpacity: 0.161,
     weight: 0.161,
   };
 
   const style_locationMuted = {
-    color: 'hsl(var(--atlas-color-primary) / var(--atlas-opacity-2))',
+    color: 'hsl(var(--color-atlas-primary) / var(--opacity-atlas-2))',
     fillOpacity: 0.161,
     weight: 0.161,
   };
 
   const style_locationHover = {
-    color: 'hsl(var(--atlas-color-light) / var(--atlas-opacity-2))',
+    color: 'hsl(var(--color-atlas-light) / var(--opacity-atlas-2))',
     fillOpacity: 0.161,
     weight: 0.161,
   };
 
   const style_activeLocationHighlight = {
-    color: 'hsl(var(--atlas-color-accent) / var(--atlas-opacity-2))',
+    color: 'hsl(var(--color-atlas-accent) / var(--opacity-atlas-2))',
     fillOpacity: 0.161,
     weight: 0.161,
   };
 
   const style_locationNameHighlight = {
-    color: 'hsl(var(--atlas-color-accent))',
+    color: 'hsl(var(--color-atlas-accent))',
     fillOpacity: 0.161,
     weight: 1.312,
   };
@@ -91,7 +91,7 @@ export default function AtlasMap({
     layer
       .bindPopup(
         `
-      <div style="display: grid; grid-auto-flow: column; gap: var(--atlas-size-10); align-items: center;">
+      <div style="display: grid; grid-auto-flow: column; gap: var(--size-atlas-10); align-items: center;">
       <h3 style="margin: 0;" class="emoji">${administrativeRegion.properties['emoji']}</h3>
       <div>
       <b><i>${administrativeRegion.properties.name}</i></b><br>
@@ -287,7 +287,7 @@ export default function AtlasMap({
       />
 
       {!isMobile && (
-        <Minimap position={'topleft'} zoom={3} size={'var(--atlas-size-02)'} />
+        <Minimap position={'topleft'} zoom={3} size={'var(--size-atlas-02)'} />
       )}
     </MapContainer>
   );

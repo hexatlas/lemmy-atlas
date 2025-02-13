@@ -68,7 +68,7 @@ export default function useOverpassLayer(
     if (coordinates.length === 0) return;
 
     const polyline = L.polyline(coordinates, {
-      color: 'hsl(var(--atlas-color-accent) / var(--atlas-opacity-3))',
+      color: 'hsl(var(--color-atlas-accent) / var(--opacity-atlas-3))',
       weight: 8,
     });
     overpassLayer.addLayer(polyline);
@@ -133,7 +133,7 @@ export default function useOverpassLayer(
         const coordinates = geometry.map((point) => [point.lat, point.lon]);
 
         const polyline = L.polyline(coordinates, {
-          color: 'hsl(var(--atlas-color-accent) / var(--atlas-opacity-3))',
+          color: 'hsl(var(--color-atlas-accent) / var(--opacity-atlas-3))',
           weight: 8,
         });
         overpassLayer.addLayer(polyline);

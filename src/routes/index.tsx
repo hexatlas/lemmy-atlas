@@ -73,18 +73,15 @@ function AtlasHomeComponent() {
 
   return (
     <LegendLayout route={Route}>
-      <section className="container primary hero">
-        <h2 className="container accent" title="emoji" aria-label="emoji">
-          #AC1300
-        </h2>
+      <section className="container hero option">
         <h1 className="emoji" title="atlas" aria-label="atlas">
-          🅰️TLAS
+          red🅰️TLAS
         </h1>
         <div className="background">🗺️</div>
       </section>
       <section>
         <h2>Instructions</h2>
-        <ul className="container tertiary">
+        <ul className="container neutral">
           <li>
             <b>Select Country:</b> Choose a country, by using search, clicking
             on the map, or 🎲 for a random pick to analyze its tools of state
@@ -95,7 +92,7 @@ function AtlasHomeComponent() {
           <li>
             <b>State Power Options:</b>
             <ul className="wrapper">
-              <li className="container accent">
+              <li className="container action">
                 💵{' '}
                 <Link
                   search={search}
@@ -106,7 +103,7 @@ function AtlasHomeComponent() {
                   Economy
                 </Link>
               </li>
-              <li className="container accent">
+              <li className="container action">
                 ℹ️{' '}
                 <Link
                   search={search}
@@ -117,7 +114,7 @@ function AtlasHomeComponent() {
                   Information
                 </Link>
               </li>
-              <li className="container accent">
+              <li className="container action">
                 🕊️{' '}
                 <Link
                   search={search}
@@ -128,7 +125,7 @@ function AtlasHomeComponent() {
                   Diplomacy
                 </Link>
               </li>
-              <li className="container accent">
+              <li className="container action">
                 🛡️{' '}
                 <Link
                   search={search}
@@ -139,7 +136,7 @@ function AtlasHomeComponent() {
                   Military Power
                 </Link>
               </li>
-              <li className="container accent">
+              <li className="container action">
                 🏛️{' '}
                 <Link
                   search={search}
@@ -178,12 +175,12 @@ function AtlasHomeComponent() {
             ))}
           </select>
           <blockquote className="container light">
-            <i className="secondary">Attention:</i> Select an{' '}
-            <span className="primary">
+            <i className="option">Attention:</i> Select an{' '}
+            <span className="action">
               <i>option</i>
             </span>{' '}
             to reveal{' '}
-            <span className="accent">
+            <span className="info">
               <i>selected information</i>
             </span>
             .
