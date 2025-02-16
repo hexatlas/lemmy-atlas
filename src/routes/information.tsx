@@ -51,7 +51,7 @@ const navigationLinks: AtlasNavigation[] = [
   {
     link: '/information/chat',
     emoji: '🗨️',
-    isDisabled: true,
+    isDisabled: false,
   },
 ];
 
