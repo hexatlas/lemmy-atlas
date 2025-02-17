@@ -12,6 +12,8 @@ import lemmy from '../assets/icons/lemmy.svg';
 import mastodon from '../assets/icons/mastodon.svg';
 import prolewiki from '../assets/icons/prolewiki.png';
 import natopedia from '../assets/icons/natopedia.svg';
+import ollamaLogo from '../assets/icons/ollama.png';
+import deepseek from '../assets/icons/deepseek.svg';
 
 export const Route = createFileRoute('/')({
   component: AtlasHomeComponent,
@@ -248,6 +250,28 @@ function AtlasHomeComponent() {
               rel="noopener noreferrer"
             >
               <img src={lemmy} alt="Lemmy Logo" className="custom-icon" />{' '}
+            </a>
+          </li>
+
+          <li>
+            <a
+              className="wrapper"
+              href="https://chat.deepseek.com"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <img src={deepseek} alt="deepseek Logo" className="custom-icon" />{' '}
+            </a>
+          </li>
+
+          <li>
+            <a
+              className="wrapper"
+              href="https://ollama.com"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <img src={ollamaLogo} alt="ollama Logo" className="custom-icon" />{' '}
             </a>
           </li>
 

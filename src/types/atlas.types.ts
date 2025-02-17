@@ -1,6 +1,7 @@
 // Important: Needs to match geoJSON properties with the imported administrativeRegionsData in src/geojson that get's imported in Atlas.tsx
 
 import { ReactNode, ToPathOption } from '@tanstack/react-router';
+import { Message } from 'ollama/browser';
 import { ReactElement } from 'react';
 
 export type GeographicIdentifier =
@@ -225,3 +226,8 @@ export interface OSMInfoListProps {
   activeElement;
   setActiveElement;
 }
+
+export type MessageWithThinking = Message & {
+  finishedThinking?: boolean;
+  think?: string;
+};
