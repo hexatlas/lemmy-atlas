@@ -4,7 +4,7 @@ import LLMao from '../../components/shared/LLMao';
 import LegendLayout from '../../components/shared/LegendLayout';
 
 import Markdown from '../../components/shared/Markdown';
-import ollama from 'ollama';
+import ollama from 'ollama/browser';
 
 type Message = {
   role: 'user' | 'assistant' | 'tool' | 'system';
@@ -127,7 +127,6 @@ function ChatRouteComponent() {
     });
     if (stream) {
       let assistantResponse = '';
-
       for await (const part of stream) {
         assistantResponse += part.message.content;
         console.log(assistantResponse);
