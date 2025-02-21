@@ -236,4 +236,5 @@ export interface ModelConfig {
   baseURL: string;
   apiKey: string;
   model: string;
+  max_tokens: number;
 }

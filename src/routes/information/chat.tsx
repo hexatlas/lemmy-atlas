@@ -22,6 +22,7 @@ function ChatRouteComponent() {
       baseURL: 'https://api.deepseek.com',
       apiKey: '',
       model: 'deepseek-chat',
+      max_tokens: 3500,
     },
     true,
   );
@@ -64,6 +65,7 @@ function ChatRouteComponent() {
       baseURL: data.get('baseURL') as string,
       apiKey: data.get('apiKey') as string,
       model: data.get('model') as string,
+      max_tokens: Number(data.get('max_tokens')),
     }));
 
     setIsEditModelConfig(!isEditModelConfig);
@@ -94,6 +96,8 @@ function ChatRouteComponent() {
         </select>
       </label>
 
+      {/* Troubleshoot  */}
+
       {models.length === 0 && (
         <>
           <small>Ollama not found</small>
@@ -108,6 +112,10 @@ function ChatRouteComponent() {
               >
                 ollama.com
               </a>
+            </li>
+            <li>
+              Pull a model e.g.
+              <code>{`ollama pull deepseek-r1:7b`}</code>
             </li>
             <li>
               If redAtlas is not running on the same machine as ollama, add
@@ -127,6 +135,7 @@ function ChatRouteComponent() {
           onSubmit={handleSetOpenAIModel}
           className="container wrapper chat__config"
         >
+          <label htmlFor="">{modelConfig.model}</label>
           {isEditModelConfig && (
             <>
               <input
@@ -147,9 +156,29 @@ function ChatRouteComponent() {
                 defaultValue={modelConfig.model}
                 placeholder="model e.g. deepseek-chat"
               />
+              <label htmlFor="max_tokens">
+                {modelConfig.max_tokens}
+
+                <input
+                  name="max_tokens"
+                  type="range"
+                  min={1}
+                  max={8192}
+                  defaultValue={modelConfig.max_tokens}
+                  onChange={(e) => {
+                    setModelConfig((prev) => ({
+                      max_tokens: Number(e.target.value),
+                      baseURL: prev.baseURL,
+                      apiKey: prev.apiKey,
+                      model: prev.model,
+                    }));
+                  }}
+                  placeholder="model e.g. deepseek-chat"
+                />
+              </label>
             </>
           )}
-          <button type="submit">{isEditModelConfig ? 'Save' : 'Edit'}</button>
+          <button type="submit">{isEditModelConfig ? '💾' : '✍'}</button>
         </form>
       )}
 

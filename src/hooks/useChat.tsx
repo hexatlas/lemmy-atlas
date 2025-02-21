@@ -11,6 +11,7 @@ function useChat({
     baseURL: import.meta.env.VITE_MODEL_BASEURL,
     apiKey: import.meta.env.VITE_MODEL_API_KEY,
     model: import.meta.env.VITE_MODEL_NAME,
+    max_tokens: 3500,
   },
 }: {
   activeModel: string;
@@ -25,7 +26,7 @@ function useChat({
   boolean,
   ListResponse,
 ] {
-  const { baseURL, apiKey, model } = modelConfig;
+  const { baseURL, apiKey, model, max_tokens } = modelConfig;
 
   const [models, setModels] = useState<ListResponse>({ models: [] });
   const [systemPrompt, setSystemPrompt] = useState(
@@ -105,6 +106,7 @@ function useChat({
         messages: messagesWithInput as ChatCompletionMessageParam[],
         model,
         stream: true,
+        max_tokens: Number(max_tokens),
       });
 
       if (completion) {
