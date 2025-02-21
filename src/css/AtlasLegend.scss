@@ -19,6 +19,7 @@
   max-height: 100vh;
   z-index: 999;
   position: relative;
+  background: hsla(var(--color-atlas-light) / var(--opacity-atlas-2));
   .search-input-wrapper {
     position: sticky;
     top: 0;
