@@ -578,6 +578,10 @@ textarea {
   width: 100%;
 }
 
+input[type='checkbox'] {
+  height: unset;
+}
+
 input[type='text'],
 input[type='model'] {
   width: 100%;
