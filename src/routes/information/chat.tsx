@@ -132,10 +132,11 @@ function ChatRouteComponent() {
 
       {activeModel === 'open-ai' && (
         <form
+          name="modelConfig"
           onSubmit={handleSetOpenAIModel}
           className="container wrapper chat__config"
         >
-          <label htmlFor="">{modelConfig.model}</label>
+          <label htmlFor="modelConfig">{modelConfig.model}</label>
           {isEditModelConfig && (
             <>
               <input
@@ -157,25 +158,25 @@ function ChatRouteComponent() {
                 placeholder="model e.g. deepseek-chat"
               />
               <label htmlFor="max_tokens">
-                {modelConfig.max_tokens}
-
-                <input
-                  name="max_tokens"
-                  type="range"
-                  min={1}
-                  max={8192}
-                  defaultValue={modelConfig.max_tokens}
-                  onChange={(e) => {
-                    setModelConfig((prev) => ({
-                      max_tokens: Number(e.target.value),
-                      baseURL: prev.baseURL,
-                      apiKey: prev.apiKey,
-                      model: prev.model,
-                    }));
-                  }}
-                  placeholder="model e.g. deepseek-chat"
-                />
+                Max Tokens: {modelConfig.max_tokens}
               </label>
+              <input
+                name="max_tokens"
+                type="range"
+                min={0}
+                max={8192}
+                step={10}
+                defaultValue={modelConfig.max_tokens}
+                onChange={(e) => {
+                  setModelConfig((prev) => ({
+                    max_tokens: Number(e.target.value),
+                    baseURL: prev.baseURL,
+                    apiKey: prev.apiKey,
+                    model: prev.model,
+                  }));
+                }}
+                placeholder="model e.g. deepseek-chat"
+              />
             </>
           )}
           <button type="submit">{isEditModelConfig ? '💾' : '✍'}</button>
