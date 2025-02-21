@@ -1,11 +1,11 @@
-import React, { useMemo, useState } from 'react';
-import ollama, { Message } from 'ollama/browser';
+import React, { useEffect, useMemo, useState } from 'react';
+import ollama, { ListResponse, Message } from 'ollama/browser';
 import { MessageWithThinking } from '../types/atlas.types';
 
 function useChat({
-  model,
+  activeModel,
 }: {
-  model: string;
+  activeModel: string;
 }): [
   string,
   React.Dispatch<React.SetStateAction<string>>,
@@ -14,7 +14,9 @@ function useChat({
   MessageWithThinking[],
   (e: React.FormEvent<HTMLFormElement>) => Promise<void>,
   boolean,
+  ListResponse,
 ] {
+  const [models, setModels] = useState<ListResponse>({ models: [] });
   const [systemPrompt, setSystemPrompt] = useState(
     `
       [Core Framework]
@@ -80,13 +82,14 @@ function useChat({
       ...messages,
       { role: 'user', content: userPrompt },
     ];
-    setMessages(messagesWithInput);
+    setMessages(() => messagesWithInput);
 
     const stream = await ollama.chat({
-      model,
+      model: activeModel,
       messages: messagesWithInput,
       stream: true,
     });
+
     if (stream) {
       let assistantResponse = '';
       for await (const part of stream) {
@@ -103,6 +106,21 @@ function useChat({
     }
     setLoading(false);
   };
+
+  useEffect(() => {
+    const fetchModels = async () => {
+      try {
+        const response = await ollama.list();
+        setModels(response);
+      } catch (error) {
+        console.error('Error fetching models:', error);
+      }
+    };
+    fetchModels();
+  }, []);
+
+  console.log(systemPrompt);
+
   return [
     systemPrompt,
     setSystemPrompt,
@@ -111,6 +129,7 @@ function useChat({
     messagesWithThinkingSplit,
     handleSendPrompt,
     loading,
+    models,
   ];
 }
 
