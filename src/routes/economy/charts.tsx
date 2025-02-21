@@ -194,7 +194,7 @@ function ChartsRouteComponent() {
           'hsl(var(--color-atlas-tertiary) / var(--opacity-atlas-3))',
         )
         .style('padding', 'var(--size-atlas-09)')
-        .style('border-radius', 'var(--atlas-border-radius-1)')
+        .style('border-radius', 'var(--border-radius-atlas-1)')
         .style('font-size', 'var(--size-atlas-09)')
         .style('pointer-events', 'none')
         .style('opacity', 0);

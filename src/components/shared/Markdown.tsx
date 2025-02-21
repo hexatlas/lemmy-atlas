@@ -76,7 +76,7 @@ const Markdown = ({
       const wordsPattern = highlight.map(escapeRegExp).join('|');
       const regex = new RegExp(`(<[^>]*>)|\\b(${wordsPattern})\\b`, 'gi');
       processed = processed.replace(regex, (_, tag, word) =>
-        tag ? tag : `<span class="highlight">${word}</span>`,
+        tag ? tag : word && `<span class="highlight">${word}</span>`,
       );
     }
 

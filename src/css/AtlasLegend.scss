@@ -164,7 +164,7 @@
   .administrative-region-container {
     width: 100%;
     overflow: hidden;
-    border-radius: var(--atlas-border-radius-1);
+    border-radius: var(--border-radius-atlas-1);
   }
 
   .administrative-region-flag-container {
@@ -192,7 +192,7 @@
       );
       width: 100%;
       height: 100%;
-      border-radius: var(--atlas-border-radius-1);
+      border-radius: var(--border-radius-atlas-1);
       top: 0;
     }
   }
@@ -687,7 +687,7 @@
 }
 
 .tabs__trigger:hover {
-  background-color: var(--surface-atlas-action) !important;
+  background-color: var(--surface-atlas-option) !important;
 }
 .tabs__trigger[data-status='active'] {
   @include atlas-shadow(var(--shadow-atlas-1));
@@ -701,7 +701,7 @@
 .tabs__trigger:focus {
   position: relative;
   @include atlas-shadow(var(--shadow-atlas-1));
-  background-color: var(--surface-atlas-action);
+  background-color: var(--surface-atlas-option);
 }
 
 .tabs__trigger[aria-disabled='true'] {

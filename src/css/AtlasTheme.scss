@@ -68,7 +68,7 @@ code {
     color: hsl($color_greyscale / $opacity);
     background: hsl($color_identity);
     border-color: hsl($color_greyscale / $opacity);
-    border-radius: var(--atlas-border-radius-1);
+    border-radius: var(--border-radius-atlas-1);
   }
   .#{$name} a {
     color: hsl($color_greyscale / $opacity);
@@ -77,7 +77,7 @@ code {
     background: hsl($color_greyscale / $opacity);
     color: hsl($color_identity);
     border-color: hsl($color_identity);
-    border-radius: var(--atlas-border-radius-1);
+    border-radius: var(--border-radius-atlas-1);
   }
   .#{$name}--invert a {
     color: hsl($color_greyscale / $opacity);
@@ -245,7 +245,7 @@ code {
 
   // Surface Colors
   --surface-atlas-page: hsl(var(--color-atlas-red-50) / var(--opacity-atlas-3));
-  --surface-atlas-action: hsl(var(--color-atlas-green-300));
+  --surface-atlas-action: hsl(var(--color-atlas-red-700));
   --surface-atlas-disabled: hsl(var(--color-atlas-neutral-100));
   --surface-atlas-info: hsl(
     var(--color-atlas-yellow-500) / var(--opacity-atlas-3)
@@ -263,8 +263,8 @@ code {
   --border-atlas-error: hsl(var(--color-atlas-error-500));
   --border-atlas-disabled: hsl(var(--color-atlas-neutral-200));
 
-  --atlas-border-radius-1: var(--size-atlas-12) 0;
-  --atlas-border-radius-2: var(--size-atlas-14);
+  --border-radius-atlas-1: var(--size-atlas-12) 0;
+  --border-radius-atlas-2: var(--size-atlas-14);
 
   // Timing
   --transition-atlas-fast: var(--time-atlas-1) var(--timing-atlas-function);
@@ -567,9 +567,15 @@ progress {
   padding: 0 var(--size-atlas-10);
   height: var(--size-atlas-07);
   border-width: 0;
-  border-radius: var(--atlas-border-radius-1);
+  border-radius: var(--border-radius-atlas-1);
   flex: auto;
   transition: border-radius var(--transition-atlas-fast);
+}
+
+textarea {
+  padding: var(--size-atlas-10);
+  height: var(--size-atlas-05);
+  width: 100%;
 }
 
 input[type='text'] {
@@ -643,10 +649,10 @@ td {
 
 .highlight {
   @include atlas-shadow(var(--shadow-atlas-inset));
-  background: var(--surface-altas-info);
+  background: var(--surface-atlas-info);
   color: var(--text-atlas-body);
   padding: 0 var(--size-atlas-10);
-  border-radius: var(--atlas-border-radius-1);
+  border-radius: var(--border-radius-atlas-1);
   margin-right: var(--size-atlas-12);
   font-weight: 900;
 }
@@ -667,13 +673,13 @@ td {
 
 details {
   @include atlas-shadow(var(--shadow-atlas-inset));
-  border-radius: var(--atlas-border-radius-1);
+  border-radius: var(--border-radius-atlas-1);
 
   summary {
     padding: var(--size-atlas-10);
-    background-color: var(--surface-atlas-action);
+    background-color: var(--surface-atlas-info);
     color: var(--text-atlas-action);
-    border-radius: var(--atlas-border-radius-1);
+    border-radius: var(--border-radius-atlas-1);
     list-style: none;
     cursor: pointer;
     &::-webkit-details-marker {

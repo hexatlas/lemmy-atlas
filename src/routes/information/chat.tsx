@@ -47,16 +47,22 @@ function ChatRouteComponent() {
           />
         ))}
 
-      <form onSubmit={handleSendPrompt} className="container wrapper">
-        <span>💬</span>
+      <form
+        onSubmit={handleSendPrompt}
+        className="container wrapper ask__container"
+      >
         <textarea
           value={userPrompt}
           disabled={loading}
           placeholder="Ask LLMao"
           onChange={(e) => setUserPrompt(e.target.value)}
         />
-        <button type="submit" disabled={loading || !userPrompt.trim()}>
-          {loading ? <div className="loading"></div> : '📨'}
+        <button
+          className="ask__button"
+          type="submit"
+          disabled={loading || !userPrompt.trim()}
+        >
+          {loading ? <div className="loading">💬</div> : '📨'}
         </button>
       </form>
     </LegendLayout>

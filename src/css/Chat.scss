@@ -1,0 +1,10 @@
+.ask__container {
+  background: hsla(var(--color-atlas-light));
+  padding: var(--size-atlas-12);
+  position: sticky;
+  bottom: var(--size-atlas-12);
+  border-radius: var(--border-radius-atlas-1);
+  .ask__button {
+    background: var(--surface-atlas-action);
+  }
+}

@@ -8,6 +8,7 @@ import { AtlasContext } from '../../__root';
 import useMastodon from '../../../data/information/fediverse/useMastodon';
 import { TimeAgo } from '../../../hooks/useDataTransform';
 import LegendLayout from '../../../components/shared/LegendLayout';
+import Markdown from '../../../components/shared/Markdown';
 
 export const Route = createFileRoute('/information/fediverse/mastodon')({
   component: MastodonRouteComponent,
@@ -21,6 +22,14 @@ function MastodonRouteComponent() {
     activeAdministrativeRegion,
     activeGeographicIdentifier,
   );
+
+  const highlightArray = [
+    activeAdministrativeRegion.name,
+    activeAdministrativeRegion.country,
+    activeAdministrativeRegion.region,
+    activeAdministrativeRegion['sub-region'],
+    activeAdministrativeRegion['intermediate-region'],
+  ];
 
   return (
     <LegendLayout route={Route}>
@@ -129,7 +138,7 @@ function MastodonRouteComponent() {
                   })}
                 </div>
               )}
-              <div dangerouslySetInnerHTML={{ __html: post?.content }}></div>
+              <Markdown highlight={highlightArray}>{post?.content}</Markdown>
 
               {post?.card && (
                 <a
