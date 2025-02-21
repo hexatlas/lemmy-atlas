@@ -52,9 +52,7 @@ function useIMF(activeAdministrativeRegion) {
 
       const result = await response.json();
       return result.values;
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
   };
 
   const apiUrl = `${import.meta.env.VITE_DATA_API_ENDPOINT}data_imf_api?indicator=${activeIndicator.name}&country=${activeAdministrativeRegion['ISO3166-3']}/`;

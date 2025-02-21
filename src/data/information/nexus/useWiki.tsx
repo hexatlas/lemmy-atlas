@@ -14,9 +14,7 @@ function useWiki(
       }
       const result = await response.json();
       return result?.parse;
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
   };
 
   const apiUrl = `${import.meta.env.VITE_DATA_API_ENDPOINT}${isProleWiki ? 'prolewiki' : 'natopedia'}?country=${encodeURI(

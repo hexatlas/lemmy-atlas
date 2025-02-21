@@ -20,8 +20,6 @@ export const Route = createFileRoute('/')({
 });
 
 function AtlasHomeComponent() {
-  console.count('<AtlasHomeComponent />');
-
   const [currentTheme, setCurrentTheme] = useStateStorage<string>(
     'AtlasTheme',
     'system',

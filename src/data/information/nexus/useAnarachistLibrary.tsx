@@ -15,9 +15,7 @@ function useAnarachistLibrary(
       const AnarchistLibraryArray = await response.json(); // Retrieve response as text
 
       return AnarchistLibraryArray;
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
   };
 
   let apiUrl;

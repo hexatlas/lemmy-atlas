@@ -5,7 +5,6 @@ import AtlasLocationSearch from '../shared/LocationSearch';
 import AtlasGeographyOptions from '../shared/GeographyOptions';
 
 function AtlasInterface({ isMobile }: AtlasInterfaceProps) {
-  console.count('<AtlasInterface />');
   /* 
     Handlers
  */

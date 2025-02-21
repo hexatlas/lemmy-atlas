@@ -54,9 +54,7 @@ function getSavedValue(key, initialValue, storage) {
     if (savedValue) return savedValue;
     if (initialValue instanceof Function) return initialValue();
     return initialValue;
-  } catch (error) {
-    console.log(error);
-  }
+  } catch (error) {}
 }
 
 export function useStateStorage<T>(

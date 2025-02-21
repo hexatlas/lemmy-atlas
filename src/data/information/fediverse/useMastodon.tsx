@@ -28,9 +28,7 @@ function useMastodon(activeAdministrativeRegion, activeGeographicIdentifier) {
 
       const mastondonPostsData = await response.json(); // Retrieve response as text
       return mastondonPostsData;
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
   };
   return { mastodonPosts, isLoading };
 }

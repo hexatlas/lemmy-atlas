@@ -94,7 +94,7 @@ function useChat({
       let assistantResponse = '';
       for await (const part of stream) {
         assistantResponse += part.message.content;
-        console.log(assistantResponse);
+
         setMessages([
           ...messagesWithInput,
           {
@@ -112,14 +112,10 @@ function useChat({
       try {
         const response = await ollama.list();
         setModels(response);
-      } catch (error) {
-        console.error('Error fetching models:', error);
-      }
+      } catch (error) {}
     };
     fetchModels();
   }, []);
-
-  console.log(systemPrompt);
 
   return [
     systemPrompt,

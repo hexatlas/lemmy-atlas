@@ -37,9 +37,7 @@ function useNewsBulletins(
       };
 
       return parsedData;
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
   };
 
   let apiUrl;

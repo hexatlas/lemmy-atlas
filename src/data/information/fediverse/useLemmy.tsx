@@ -47,7 +47,7 @@ function useLemmy(
   //   if (sideBarRef.current.scrollTop > sideBarRef.current.scrollTopMax - 69) {
   //     // Fetch more comments if there are more to fetch
   //     if (hasMore) {
-  //       console.log('SCROLL');
+  //
 
   //       setCurrentSearchResultPage(currentSearchResultPage + 1);
   //     }

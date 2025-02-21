@@ -34,11 +34,7 @@ function AtlasOSMInfoDetail({
         // Fetch the data from Wikidata API
         const response = await fetch(url);
         const data = await response.json();
-
-        console.log(data);
-      } catch (error) {
-        console.error(error);
-      }
+      } catch (error) {}
     };
 
     // Fetch data on component mount

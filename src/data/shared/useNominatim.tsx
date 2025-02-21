@@ -64,7 +64,6 @@ function useNominatim(
         setLoading(false);
       }
     } catch (error) {
-      console.error('Invalid regular expression:', error.message);
       setSearchResults([]);
     }
   };
@@ -105,7 +104,6 @@ function useNominatim(
         setIsOpenAtlasMapInterface(false);
       }
     } catch (error) {
-      console.error('Invalid regular expression:', error.message);
       setSearchResults([]);
     }
   };

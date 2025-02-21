@@ -11,9 +11,7 @@ async function useOverpassAPI(query, url?) {
     }
     const json = await response.json();
     return json;
-  } catch (error) {
-    console.error(error.message);
-  }
+  } catch (error) {}
 }
 
 export default useOverpassAPI;

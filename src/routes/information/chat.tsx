@@ -58,7 +58,6 @@ function ChatRouteComponent() {
         Select Model
         <select id="models" onChange={(e) => setActiveModel(e.target.value)}>
           {models.map((model, index) => {
-            console.log(model);
             return (
               <option value={model.name} key={index}>
                 {model.name}

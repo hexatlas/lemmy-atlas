@@ -48,8 +48,6 @@ function AtlasRootComponent() {
     [activeAdministrativeRegion, activeGeographicIdentifier],
   );
 
-  console.count('<AtlasRootComponent />');
-
   /* 
     Handlers
  */

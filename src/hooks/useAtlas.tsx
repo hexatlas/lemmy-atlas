@@ -36,8 +36,6 @@ import { useNavigate } from '@tanstack/react-router';
 import { getAdministrativeRegionObject } from './useAtlasUtils';
 
 function useAtlas(Route): AtlasInterfaceProps {
-  console.count('useAtlas');
-
   // Routing
   const search = Route.useSearch();
   const navigate = useNavigate({ from: Route.fullPath });
@@ -53,8 +51,6 @@ function useAtlas(Route): AtlasInterfaceProps {
       );
 
   const navBounds = search['bounds'];
-
-  console.log('useAtlas: navBounds', navBounds);
 
   const sideBarRef = useRef<HTMLInputElement>(null);
   const [state, dispatch] = useReducer<Reducer<AtlasState, AtlasAction>>(
