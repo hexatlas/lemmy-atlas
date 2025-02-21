@@ -7,19 +7,23 @@ import useChat from '../../hooks/useChat';
 import ChatMessage from '../../components/shared/ChatMessage';
 import { AtlasContext } from '../__root';
 import { useStateStorage } from '../../hooks/useAtlasUtils';
+import { ModelConfig } from '../../types/atlas.types';
 
 export const Route = createFileRoute('/information/chat')({
   component: ChatRouteComponent,
 });
 
 function ChatRouteComponent() {
-  const [activeModel, setActiveModel] = useState(
-    import.meta.env.VITE_MODEL_NAME,
-  );
-
-  const [modelAPIKey, setModelAPIKey] = useStateStorage<string>(
-    'modelAPIKey',
-    '',
+  const [activeModel, setActiveModel] = useState('open-ai');
+  const [isEditModelConfig, setIsEditModelConfig] = useState(true);
+  const [modelConfig, setModelConfig] = useStateStorage<ModelConfig>(
+    'modelConfig',
+    {
+      baseURL: 'https://api.deepseek.com',
+      apiKey: '',
+      model: 'deepseek-chat',
+    },
+    true,
   );
 
   const [
@@ -31,7 +35,7 @@ function ChatRouteComponent() {
     handleSendPrompt,
     loading,
     { models },
-  ] = useChat({ activeModel });
+  ] = useChat({ activeModel, modelConfig });
 
   const { activeAdministrativeRegion, activeGeographicIdentifier } =
     useContext(AtlasContext)!;
@@ -50,13 +54,32 @@ function ChatRouteComponent() {
     `Analysis of ${activeAdministrativeRegion[activeGeographicIdentifier]}'s colonial history and its material consequences today.`,
   ];
 
+  function handleSetOpenAIModel(e: React.FormEvent) {
+    e.preventDefault();
+    const data = new FormData(e.target as HTMLFormElement);
+    console.log(modelConfig);
+
+    setModelConfig((prev) => ({
+      ...prev,
+      baseURL: data.get('baseURL') as string,
+      apiKey: data.get('apiKey') as string,
+      model: data.get('model') as string,
+    }));
+
+    setIsEditModelConfig(!isEditModelConfig);
+  }
+
   return (
     <LegendLayout className="chat__layout">
-      {/* Model Selection */}
+      {/* Ollama Model Selection */}
 
-      <label>
+      <label className="wrapper">
         Select Model
         <select id="models" onChange={(e) => setActiveModel(e.target.value)}>
+          {' '}
+          <option value={'ollama'} disabled>
+            ### ollama ###
+          </option>
           {models.map((model, index) => {
             return (
               <option value={model.name} key={index}>
@@ -64,18 +87,71 @@ function ChatRouteComponent() {
               </option>
             );
           })}
-          {/* <option value={'deepseek-r1'}>deepseek-r1</option> */}
+          <option value={'open-ai'} disabled>
+            ### open-ai ###
+          </option>
+          <option value={'open-ai'}>OpenAI - Config</option>
         </select>
       </label>
-      {/* 
-      {activeModel === 'deepseek-r1' && modelAPIKey.length !== 35 && (
-        <input
-          className="wrapper"
-          type="password"
-          placeholder="API Key for deepseek.com e.g. sk-13abac12..."
-          onChange={(e) => setModelAPIKey(e.target.value)}
-        />
-      )} */}
+
+      {models.length === 0 && (
+        <>
+          <small>Ollama not found</small>
+          <h6>Troubleshoot</h6>
+          <ul>
+            <li>
+              Install ollama via{' '}
+              <a
+                href="https://ollama.com/download"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                ollama.com
+              </a>
+            </li>
+            <li>
+              If redAtlas is not running on the same machine as ollama, add
+              origin
+              <code>
+                {`OLLAMA_ORIGINS=${window.location.origin} ollama serve`}
+              </code>
+            </li>
+          </ul>
+        </>
+      )}
+
+      {/* OpenAI Model Selection */}
+
+      {activeModel === 'open-ai' && (
+        <form
+          onSubmit={handleSetOpenAIModel}
+          className="container wrapper chat__config"
+        >
+          {isEditModelConfig && (
+            <>
+              <input
+                name="baseURL"
+                type="url"
+                defaultValue={modelConfig.baseURL}
+                placeholder="baseURL e.g. https://api.deepseek.com"
+              />
+              <input
+                name="apiKey"
+                type="password"
+                defaultValue={modelConfig.apiKey}
+                placeholder="apiKey e.g. sk-13abac12..."
+              />
+              <input
+                name="model"
+                type="text"
+                defaultValue={modelConfig.model}
+                placeholder="model e.g. deepseek-chat"
+              />
+            </>
+          )}
+          <button type="submit">{isEditModelConfig ? 'Save' : 'Edit'}</button>
+        </form>
+      )}
 
       {/*  System Prompt */}
 
@@ -134,6 +210,7 @@ function ChatRouteComponent() {
           <ChatMessage
             key={index}
             message={m}
+            model={activeModel}
             activeAdministrativeRegion={activeAdministrativeRegion}
           />
         ))}

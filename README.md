@@ -135,6 +135,10 @@ Configure `.env`:
 ```env
 VITE_DATA_API_ENDPOINT=http://localhost:8080/api/
 VITE_OPENWEATHER_API_KEY=your_key_here
+VITE_MODEL_BASEURL=https://api.deepseek.com
+VITE_MODEL_APIKEY=sk-13abac12..
+VITE_MODEL_NAME=deepseek-chat
+
 ```
 
 VITE_DATA_API_ENDPOINT must point to redatlas/backend.

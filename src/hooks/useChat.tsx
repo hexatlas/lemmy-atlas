@@ -1,11 +1,20 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import ollama, { ListResponse, Message } from 'ollama/browser';
-import { MessageWithThinking } from '../types/atlas.types';
+import OpenAI from 'openai';
+
+import { MessageWithThinking, ModelConfig } from '../types/atlas.types';
+import { ChatCompletionMessageParam } from 'openai/resources/index.mjs';
 
 function useChat({
   activeModel,
+  modelConfig = {
+    baseURL: import.meta.env.VITE_MODEL_BASEURL,
+    apiKey: import.meta.env.VITE_MODEL_API_KEY,
+    model: import.meta.env.VITE_MODEL_NAME,
+  },
 }: {
   activeModel: string;
+  modelConfig: ModelConfig;
 }): [
   string,
   React.Dispatch<React.SetStateAction<string>>,
@@ -16,6 +25,8 @@ function useChat({
   boolean,
   ListResponse,
 ] {
+  const { baseURL, apiKey, model } = modelConfig;
+
   const [models, setModels] = useState<ListResponse>({ models: [] });
   const [systemPrompt, setSystemPrompt] = useState(
     `
@@ -66,8 +77,8 @@ function useChat({
       `,
   );
   const [userPrompt, setUserPrompt] = useState('');
-  const [messages, setMessages] = useState<Message[]>([
-    { role: 'system', content: systemPrompt as string },
+  const [messages, setMessages] = useState([
+    { role: 'system', content: systemPrompt },
   ]);
   const [loading, setLoading] = useState(false);
 
@@ -84,24 +95,53 @@ function useChat({
     ];
     setMessages(() => messagesWithInput);
 
-    const stream = await ollama.chat({
-      model: activeModel,
-      messages: messagesWithInput,
-      stream: true,
-    });
+    if (activeModel === 'open-ai') {
+      const openai = new OpenAI({
+        baseURL,
+        apiKey,
+        dangerouslyAllowBrowser: true,
+      });
+      const completion = await openai.chat.completions.create({
+        messages: messagesWithInput as ChatCompletionMessageParam[],
+        model,
+        stream: true,
+      });
 
-    if (stream) {
-      let assistantResponse = '';
-      for await (const part of stream) {
-        assistantResponse += part.message.content;
+      if (completion) {
+        let assistantResponse = '';
+        for await (const part of completion) {
+          assistantResponse += part.choices[0].delta.content;
 
-        setMessages([
-          ...messagesWithInput,
-          {
-            role: 'assistant',
-            content: assistantResponse,
-          },
-        ]);
+          setMessages([
+            ...messagesWithInput,
+            {
+              role: 'assistant',
+              content: assistantResponse,
+            },
+          ]);
+        }
+      }
+    }
+    if (activeModel !== 'open-ai') {
+      const ollamaStream = await ollama.chat({
+        model: activeModel,
+        messages: messagesWithInput as Message[],
+        stream: true,
+      });
+
+      if (ollamaStream) {
+        let assistantResponse = '';
+        for await (const part of ollamaStream) {
+          assistantResponse += part.message.content;
+
+          setMessages([
+            ...messagesWithInput,
+            {
+              role: 'assistant',
+              content: assistantResponse,
+            },
+          ]);
+        }
       }
     }
     setLoading(false);
@@ -112,7 +152,9 @@ function useChat({
       try {
         const response = await ollama.list();
         setModels(response);
-      } catch (error) {}
+      } catch (error) {
+        console.log(error);
+      }
     };
     fetchModels();
   }, []);

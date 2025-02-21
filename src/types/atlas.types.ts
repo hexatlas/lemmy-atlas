@@ -231,3 +231,9 @@ export type MessageWithThinking = Message & {
   finishedThinking?: boolean;
   think?: string;
 };
+
+export interface ModelConfig {
+  baseURL: string;
+  apiKey: string;
+  model: string;
+}

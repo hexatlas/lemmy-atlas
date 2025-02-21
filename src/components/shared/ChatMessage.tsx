@@ -4,9 +4,10 @@ import Markdown from '../../components/shared/Markdown';
 import { MessageWithThinking } from '../../types/atlas.types';
 
 const ChatMessage: React.FC<{
+  model: string;
   message: MessageWithThinking;
   activeAdministrativeRegion;
-}> = ({ message, activeAdministrativeRegion }) => {
+}> = ({ model, message, activeAdministrativeRegion }) => {
   const highlightArray = [
     activeAdministrativeRegion.name,
     activeAdministrativeRegion.country,
@@ -25,7 +26,7 @@ const ChatMessage: React.FC<{
             ? '⏳'
             : '🤖'}
 
-        <span>{message.role === 'user' ? 'You' : 'LLMao'}</span>
+        <span>{message.role === 'user' ? 'You' : `LLMao (${model})`}</span>
       </span>
       {message.role === 'assistant' && (
         <details open={!message.finishedThinking}>
