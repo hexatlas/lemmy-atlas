@@ -2,7 +2,11 @@ import React, { useMemo, useState } from 'react';
 import ollama, { Message } from 'ollama/browser';
 import { MessageWithThinking } from '../types/atlas.types';
 
-function useChat(): [
+function useChat({
+  model,
+}: {
+  model: string;
+}): [
   string,
   React.Dispatch<React.SetStateAction<string>>,
   string,
@@ -79,7 +83,7 @@ function useChat(): [
     setMessages(messagesWithInput);
 
     const stream = await ollama.chat({
-      model: 'deepseek-r1:14b',
+      model,
       messages: messagesWithInput,
       stream: true,
     });

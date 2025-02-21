@@ -15,7 +15,9 @@ const ChatMessage: React.FC<{
     activeAdministrativeRegion['intermediate-region'],
   ];
   return (
-    <div className={`${message.role === 'user' && 'container neutral'}`}>
+    <div
+      className={`${message.role === 'user' && 'container neutral chat__message'}`}
+    >
       <span className="">
         {message.role === 'user'
           ? '🚩'

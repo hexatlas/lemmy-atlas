@@ -8,3 +8,13 @@
     background: var(--surface-atlas-action);
   }
 }
+.chat__layout {
+  display: grid;
+}
+
+.chat__message {
+  word-wrap: break-word;
+  justify-self: flex-end;
+  width: fit-content;
+  max-width: 80%;
+}

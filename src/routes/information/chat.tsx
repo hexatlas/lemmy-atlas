@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { createFileRoute } from '@tanstack/react-router';
 import LLMao from '../../components/shared/LLMao';
 import LegendLayout from '../../components/shared/LegendLayout';
@@ -12,6 +12,8 @@ export const Route = createFileRoute('/information/chat')({
 });
 
 function ChatRouteComponent() {
+  const [model, setModel] = useState(import.meta.env.VITE_OLLAMA_MODEL);
+
   const [
     systemPrompt,
     setSystemPrompt,
@@ -20,13 +22,20 @@ function ChatRouteComponent() {
     messagesWithThinkingSplit,
     handleSendPrompt,
     loading,
-  ] = useChat();
+  ] = useChat({ model });
 
   const { activeAdministrativeRegion } = useContext(AtlasContext)!;
 
   return (
-    <LegendLayout>
-      <LLMao />
+    <LegendLayout className="chat__layout">
+      <input
+        type="model"
+        name="model"
+        placeholder="Select any Ollama Model - deepseek-r1 recommended"
+        value={model}
+        onChange={(e) => setModel(e.target.value)}
+      />
+
       <details>
         <summary>System Prompt</summary>
         <textarea
@@ -36,6 +45,7 @@ function ChatRouteComponent() {
           onChange={(e) => setSystemPrompt(e.target.value)}
         />
       </details>
+      <LLMao />
 
       {messagesWithThinkingSplit
         .filter(({ role }) => role === 'user' || role === 'assistant')

@@ -559,6 +559,7 @@ picture:target,
 }
 
 input[type='search'],
+input[type='model'],
 textarea,
 select,
 button,
@@ -578,7 +579,8 @@ textarea {
   width: 100%;
 }
 
-input[type='text'] {
+input[type='text'],
+input[type='model'] {
   width: 100%;
 }
 

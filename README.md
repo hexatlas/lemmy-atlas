@@ -121,7 +121,6 @@ _Attention_ [Secondary]: Select an _option_ [Primary] to reveal _selected inform
 - npm v9+
 - Optional: API keys for:
   - OpenWeather (`VITE_OPENWEATHER_API_KEY`)
-  - DeepSeek (`VITE_OPEN_AI_API_KEY`)
 
 ### Installation
 
@@ -136,7 +135,6 @@ Configure `.env`:
 ```env
 VITE_DATA_API_ENDPOINT=http://localhost:8080/api/
 VITE_OPENWEATHER_API_KEY=your_key_here
-VITE_OPEN_AI_API_KEY=sk-your_key_here
 ```
 
 VITE_DATA_API_ENDPOINT must point to redatlas/backend.
