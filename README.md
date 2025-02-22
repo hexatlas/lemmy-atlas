@@ -1,4 +1,4 @@
-# redAtlas Frontend
+# red🅰️TLAS
 
 Geopolitical visualization platform for socioeconomic, military, and infrastructure data analysis.
 
