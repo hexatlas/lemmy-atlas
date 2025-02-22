@@ -665,6 +665,7 @@
 
   border-bottom: none;
   border-bottom-right-radius: 0;
+  background: var(--surface-atlas-option);
   animation: tab-animation var(--time-atlas-4) var(--timing-atlas-function)
     infinite alternate-reverse;
   &:nth-child(even),
