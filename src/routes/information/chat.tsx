@@ -57,17 +57,20 @@ function ChatRouteComponent() {
 
   function handleSetOpenAIModel(e: React.FormEvent) {
     e.preventDefault();
+
     const data = new FormData(e.target as HTMLFormElement);
-    console.log(modelConfig);
 
-    setModelConfig((prev) => ({
-      ...prev,
-      baseURL: data.get('baseURL') as string,
-      apiKey: data.get('apiKey') as string,
-      model: data.get('model') as string,
-      max_tokens: Number(data.get('max_tokens')),
-    }));
+    const isEmpty = data.entries().next().done;
 
+    if (!isEmpty) {
+      setModelConfig((prev) => ({
+        ...prev,
+        baseURL: data.get('baseURL') as string,
+        apiKey: data.get('apiKey') as string,
+        model: data.get('model') as string,
+        max_tokens: Number(data.get('max_tokens')),
+      }));
+    }
     setIsEditModelConfig(!isEditModelConfig);
   }
 
