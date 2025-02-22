@@ -1,6 +1,6 @@
 import React from 'react';
 import { AtlasNavigation } from '../../types/atlas.types';
-import { Link, Outlet, useNavigate } from '@tanstack/react-router';
+import { Link, Outlet } from '@tanstack/react-router';
 
 function LegendNavigation({
   links,

@@ -437,8 +437,30 @@ html {
 } /*16px*/
 
 body {
+  background-image: linear-gradient(
+      #ffffff var(--size-atlas-16),
+      transparent var(--size-atlas-16)
+    ),
+    linear-gradient(
+      90deg,
+      #ffffff var(--size-atlas-16),
+      transparent var(--size-atlas-16)
+    ),
+    linear-gradient(
+      #ffffff var(--size-atlas-15),
+      transparent var(--size-atlas-15)
+    ),
+    linear-gradient(
+      90deg,
+      #ffffff var(--size-atlas-15),
+      #ffeeee var(--size-atlas-15)
+    );
+  background-size:
+    var(--size-atlas-07) var(--size-atlas-07),
+    var(--size-atlas-07) var(--size-atlas-07),
+    var(--size-atlas-12) var(--size-atlas-12),
+    var(--size-atlas-12) var(--size-atlas-12);
   background-color: var(--surface-atlas-page);
-  opacity: 1;
   font-family: var(--font-atlas-sans);
   font-weight: 400;
   line-height: var(--line-height-atlas);
@@ -471,7 +493,8 @@ h1,
 h2,
 h3,
 h4,
-h5 {
+h5,
+h6 {
   font-family: var(--font-atlas-sans);
   font-weight: 400;
   line-height: 1;
@@ -486,12 +509,20 @@ h1 {
   font-family: var(--font-atlas-cursive);
   font-size: clamp(var(--size-atlas-09), 11.089vw + 1rem, var(--size-atlas-07));
   font-weight: 900;
+  &:after {
+    content: ' »';
+    opacity: var(--opacity-atlas-1);
+  }
 }
 
 h2 {
   text-transform: uppercase;
   font-size: clamp(var(--size-atlas-10), 6.854vw + 1rem, var(--size-atlas-08));
   font-weight: 900;
+  &:before {
+    content: '░ ';
+    opacity: var(--opacity-atlas-2);
+  }
 }
 
 /* Subheadings */
