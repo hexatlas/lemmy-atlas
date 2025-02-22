@@ -578,7 +578,8 @@ textarea {
   width: 100%;
 }
 
-input[type='checkbox'] {
+input[type='checkbox'],
+input[type='radio'] {
   height: unset;
 }
 
