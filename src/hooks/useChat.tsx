@@ -101,6 +101,11 @@ function useChat({
         baseURL,
         apiKey,
         dangerouslyAllowBrowser: true,
+        defaultHeaders: {
+          'x-stainless-retry-count': null,
+          'x-stainless-timeout': null,
+        },
+        timeout: 60 * 1000,
       });
       const completion = await openai.chat.completions.create({
         messages: messagesWithInput as ChatCompletionMessageParam[],
