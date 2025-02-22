@@ -14,12 +14,14 @@ function useWiki(
       }
       const result = await response.json();
       return result?.parse;
-    } catch (error) {}
+    } catch (error) {
+      console.log(error);
+    }
   };
 
-  const apiUrl = `${import.meta.env.VITE_DATA_API_ENDPOINT}${isProleWiki ? 'prolewiki' : 'natopedia'}?country=${encodeURI(
+  const apiUrl = `${isProleWiki ? 'https://en.prolewiki.org' : 'https://en.wikipedia.org/w'}/api.php?action=parse&page=${encodeURI(
     activeAdministrativeRegion[activeGeographicIdentifier],
-  )}`;
+  )}&format=json&origin=*&redirects`;
 
   const { data: wikiData, isLoading } = useQuery({
     queryKey: [
