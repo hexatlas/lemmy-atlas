@@ -74,7 +74,7 @@ function LemmyRouteComponent() {
   const [editLemmyInstance, setEditLemmyInstance] = useState<boolean>(false);
 
   return (
-    <LegendLayout route={Route}>
+    <LegendLayout route={Route} className={'lemmy'}>
       <>
         {editLemmyInstance ? (
           <div className="search-input-wrapper">

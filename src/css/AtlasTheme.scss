@@ -564,28 +564,10 @@ img,
 picture {
   max-width: 100%;
   display: block;
-  filter: blur(var(--size-atlas-08));
   transition: var(--transition-atlas-slow);
   user-select: none;
   -webkit-user-select: none;
   -webkit-touch-callout: none;
-}
-
-img:hover,
-picture:hover,
-img:focus,
-picture:focus,
-img[title],
-picture[title],
-img:active,
-picture:active,
-img:target,
-picture:target,
-.post__thumbnail--image,
-.user__avatar--image,
-.community__avatar-image,
-.banner-image {
-  filter: none;
 }
 
 input,
@@ -681,6 +663,7 @@ td {
 .sticky {
   position: sticky;
   top: var(--size-atlas-12);
+  z-index: 9;
 }
 
 .highlight {

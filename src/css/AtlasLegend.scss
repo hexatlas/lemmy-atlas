@@ -179,7 +179,6 @@
     img {
       // justify-self: flex-end;
       max-width: var(--size-atlas-01);
-      filter: none !important;
     }
     &::before {
       @include atlas-shadow(var(--shadow-atlas-inset));
@@ -267,7 +266,6 @@
 }
 
 .proletarian {
-  filter: none;
 }
 
 @media only screen and (max-width: 768px) {
@@ -685,7 +683,6 @@
 
 .custom-icon {
   height: var(--size-atlas-08);
-  filter: none;
 }
 
 .tabs__trigger:hover {

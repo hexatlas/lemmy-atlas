@@ -5,6 +5,7 @@ import React, { useEffect } from 'react';
 import * as Collapsible from '@radix-ui/react-collapsible';
 
 import wikidataIcon from '../../assets/icons/wikidata.svg';
+import useWikiDataImages from '../../data/shared/useWikiDataImages';
 
 function AtlasOSMInfoDetail({
   activeElement,
@@ -23,23 +24,7 @@ function AtlasOSMInfoDetail({
     website,
   } = activeElement?.tags || {};
 
-  // https://www.wikidata.org/w/api.php?action=wbgetclaims&property=P18&entity=Qxxx
-
-  useEffect(() => {
-    const fetchImageData = async () => {
-      try {
-        // Construct the API URL
-        const url = `https://www.wikidata.org/w/api.php?action=wbgetentities&ids=${wikidata}&props=claims&format=json`;
-
-        // Fetch the data from Wikidata API
-        const response = await fetch(url);
-        const data = await response.json();
-      } catch (error) {}
-    };
-
-    // Fetch data on component mount
-    if (wikidata) fetchImageData();
-  }, [wikidata]);
+  const imagesArray = useWikiDataImages(wikidata);
 
   return (
     <div className="container neutral sticky">
@@ -96,6 +81,9 @@ function AtlasOSMInfoDetail({
               />{' '}
             </a>
           )}
+          {imagesArray.map((image, index) => {
+            return <img src={image} key={index} alt="WikiData Image" />;
+          })}
         </div>
       )}
 

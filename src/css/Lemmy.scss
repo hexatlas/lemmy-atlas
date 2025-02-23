@@ -1,3 +1,19 @@
+// CW Filter
+
+.lemmy img {
+  filter: blur(var(--size-atlas-08));
+  &:hover,
+  &:target,
+  &:focus,
+  &:active,
+  &.post__thumbnail--image,
+  &.user__avatar--image,
+  &.community__avatar-image,
+  &.banner-image {
+    filter: none;
+  }
+}
+
 /* Lemmy */
 
 .prefix {
