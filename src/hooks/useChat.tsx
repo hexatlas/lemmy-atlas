@@ -75,7 +75,7 @@ function useChat({
       2. Minimum material context required for Marxist phase
       3. Auto-escalate abstraction after 3 contradictions
       4. Default phase rotation: Socratic → Hegelian → Marxist
-      `,
+    `,
   );
   const [userPrompt, setUserPrompt] = useState('');
   const [messages, setMessages] = useState([
@@ -96,6 +96,7 @@ function useChat({
     ];
     setMessages(() => messagesWithInput);
 
+    // OPEN AI
     if (activeModel === 'open-ai') {
       const openai = new OpenAI({
         baseURL,
@@ -129,6 +130,7 @@ function useChat({
         }
       }
     }
+    // OLLAMA
     if (activeModel !== 'open-ai') {
       const ollamaStream = await ollama.chat({
         model: activeModel,
