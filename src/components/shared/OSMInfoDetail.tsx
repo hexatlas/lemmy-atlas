@@ -24,7 +24,9 @@ function AtlasOSMInfoDetail({
     website,
   } = activeElement?.tags || {};
 
-  const imagesArray = useWikiDataImages(wikidata);
+  const [imagesArray] = useWikiDataImages(wikidata);
+
+  console.log(imagesArray);
 
   return (
     <div className="container neutral sticky">
@@ -81,9 +83,13 @@ function AtlasOSMInfoDetail({
               />{' '}
             </a>
           )}
-          {imagesArray.map((image, index) => {
-            return <img src={image} key={index} alt="WikiData Image" />;
-          })}
+          {imagesArray && imagesArray.length > 0 && (
+            <div className="wikidata__container">
+              {imagesArray.map((image, index) => {
+                return <img src={image} key={index} alt="WikiData Image" />;
+              })}
+            </div>
+          )}
         </div>
       )}
 

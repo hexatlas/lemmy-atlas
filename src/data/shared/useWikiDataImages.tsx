@@ -1,53 +1,46 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
+import { useQuery } from '@tanstack/react-query';
 
 function useWikiDataImages(wikidata) {
-  const [imagesArray, setImagesArray] = useState([]);
+  const apiUrl = `https://www.wikidata.org/w/api.php?action=wbgetentities&ids=${wikidata}&props=claims&format=json&origin=*`;
 
-  // https://www.wikidata.org/w/api.php?action=wbgetclaims&property=P18&entity=Qxxx&origin=*
+  const { data: imagesArray, isLoading } = useQuery({
+    queryKey: [`wikidata-${wikidata}`],
+    queryFn: () => fetchImageData(apiUrl),
+    staleTime: Infinity,
+    refetchInterval: false,
+    refetchOnMount: false,
+  });
 
-  useEffect(() => {
-    setImagesArray([]);
-    const fetchImageData = async () => {
-      const apiUrl = `https://www.wikidata.org/w/api.php?action=wbgetentities&ids=${wikidata}&props=claims&format=json&origin=*`;
+  const fetchImageData = async (apiUrl) => {
+    try {
+      const response = await fetch(apiUrl);
+      const data = await response.json();
 
-      try {
-        const response = await fetch(apiUrl);
-        const data = await response.json();
+      const entity = data.entities[wikidata];
+      if (!entity?.claims?.P18) return [];
 
-        const entity = data.entities[wikidata];
-        if (!entity?.claims?.P18) return [];
+      // Process all image claims
+      return entity.claims.P18.filter(
+        (claim) => claim.mainsnak?.datavalue?.value,
+      ) // Filter valid claims
+        .map((claim) => {
+          const filename = claim.mainsnak.datavalue.value;
 
-        // Process all image claims
-        return entity.claims.P18.filter(
-          (claim) => claim.mainsnak?.datavalue?.value,
-        ) // Filter valid claims
-          .map((claim) => {
-            const filename = claim.mainsnak.datavalue.value;
+          // Format filename and create URL
+          const formattedFilename = filename
+            .replace(/ /g, '_') // Replace spaces with underscores
+            .replace(/"/g, ''); // Remove quotes if present
 
-            // Format filename and create URL
-            const formattedFilename = filename
-              .replace(/ /g, '_') // Replace spaces with underscores
-              .replace(/"/g, ''); // Remove quotes if present
-
-            return `https://commons.wikimedia.org/wiki/Special:FilePath/${encodeURIComponent(formattedFilename)}`;
-          });
-      } catch (error) {
-        console.error('Error fetching Wikidata data:', error);
-        return [];
-      }
-    };
-
-    // Fetch data on component mount
-    if (wikidata) {
-      fetchImageData().then((imageUrls) => {
-        if (imageUrls.length > 0) {
-          setImagesArray(imageUrls);
-        }
-      });
+          return `https://commons.wikimedia.org/wiki/Special:FilePath/${encodeURIComponent(formattedFilename)}`;
+        });
+    } catch (error) {
+      console.error('Error fetching Wikidata data:', error);
+      return [];
     }
-  }, [wikidata]);
+  };
 
-  return imagesArray;
+  return [imagesArray, isLoading];
 }
 
 export default useWikiDataImages;
