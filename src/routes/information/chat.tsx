@@ -17,6 +17,7 @@ function ChatRouteComponent() {
   const [activeModel, setActiveModel] = useState('open-ai');
   const [isEditModelConfig, setIsEditModelConfig] = useState(true);
   const [modelConfig, setModelConfig] = useStateStorage<ModelConfig>(
+    // Default Config
     'modelConfig',
     {
       baseURL: 'https://api.deepseek.com',
@@ -102,12 +103,12 @@ function ChatRouteComponent() {
       {/* Troubleshoot  */}
 
       {models.length === 0 && (
-        <>
-          <small>Ollama not found</small>
-          <h6>Troubleshoot</h6>
+        <details>
+          <summary>Ollama not found</summary>
+          <h5>Troubleshoot</h5>
           <ul>
             <li>
-              Install ollama via{' '}
+              1. Install ollama via{' '}
               <a
                 href="https://ollama.com/download"
                 target="_blank"
@@ -117,73 +118,78 @@ function ChatRouteComponent() {
               </a>
             </li>
             <li>
-              Pull a model e.g.
+              2. Pull a model e.g.
               <code>{`ollama pull deepseek-r1:7b`}</code>
             </li>
             <li>
-              If redAtlas is not running on the same machine as ollama, add
+              3. If redAtlas is not running on the same machine as ollama, add
               origin
               <code>
                 {`OLLAMA_ORIGINS=${window.location.origin} ollama serve`}
               </code>
             </li>
           </ul>
-        </>
+        </details>
       )}
 
       {/* OpenAI Model Selection */}
 
       {activeModel === 'open-ai' && (
-        <form
-          name="modelConfig"
-          onSubmit={handleSetOpenAIModel}
-          className="container wrapper chat__config"
-        >
-          <label htmlFor="modelConfig">{modelConfig.model}</label>
-          {isEditModelConfig && (
-            <>
-              <input
-                name="baseURL"
-                type="url"
-                defaultValue={modelConfig.baseURL}
-                placeholder="baseURL e.g. https://api.deepseek.com"
-              />
-              <input
-                name="apiKey"
-                type="password"
-                defaultValue={modelConfig.apiKey}
-                placeholder="apiKey e.g. sk-13abac12..."
-              />
-              <input
-                name="model"
-                type="text"
-                defaultValue={modelConfig.model}
-                placeholder="model e.g. deepseek-chat"
-              />
-              <label htmlFor="max_tokens">
-                Max Tokens: {modelConfig.max_tokens}
-              </label>
-              <input
-                name="max_tokens"
-                type="range"
-                min={0}
-                max={8192}
-                step={10}
-                defaultValue={modelConfig.max_tokens}
-                onChange={(e) => {
-                  setModelConfig((prev) => ({
-                    max_tokens: Number(e.target.value),
-                    baseURL: prev.baseURL,
-                    apiKey: prev.apiKey,
-                    model: prev.model,
-                  }));
-                }}
-                placeholder="model e.g. deepseek-chat"
-              />
-            </>
-          )}
-          <button type="submit">{isEditModelConfig ? '💾' : '✍'}</button>
-        </form>
+        <details>
+          <summary>
+            {modelConfig.model} - {modelConfig.baseURL}
+          </summary>
+          <form
+            name="modelConfig"
+            onSubmit={handleSetOpenAIModel}
+            className="container wrapper chat__config"
+          >
+            <input
+              disabled={!isEditModelConfig}
+              name="baseURL"
+              type="url"
+              defaultValue={modelConfig.baseURL}
+              placeholder="baseURL e.g. https://api.deepseek.com"
+            />
+            <input
+              disabled={!isEditModelConfig}
+              name="apiKey"
+              type="password"
+              defaultValue={modelConfig.apiKey}
+              placeholder="apiKey e.g. sk-13abac12..."
+            />
+            <input
+              disabled={!isEditModelConfig}
+              name="model"
+              type="text"
+              defaultValue={modelConfig.model}
+              placeholder="model e.g. deepseek-chat"
+            />
+            <label htmlFor="max_tokens">
+              Max Tokens: {modelConfig.max_tokens}
+            </label>
+            <input
+              disabled={!isEditModelConfig}
+              name="max_tokens"
+              type="range"
+              min={0}
+              max={8192}
+              step={10}
+              defaultValue={modelConfig.max_tokens}
+              onChange={(e) => {
+                setModelConfig((prev) => ({
+                  max_tokens: Number(e.target.value),
+                  baseURL: prev.baseURL,
+                  apiKey: prev.apiKey,
+                  model: prev.model,
+                }));
+              }}
+              placeholder="model e.g. deepseek-chat"
+            />
+
+            <button type="submit">{isEditModelConfig ? '💾' : '✍'}</button>
+          </form>
+        </details>
       )}
 
       {/*  System Prompt */}

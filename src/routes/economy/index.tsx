@@ -12,7 +12,7 @@ function EconomyHomeComponent() {
       <h1>Economy</h1>
       <p>
         This section provides tools for a critical analysis of global economic
-        structures through a Marxist lens. It examines how capitalism drives
+        structures through a Marxist lens. Examine how capitalism drives
         inequality, exploitation, and class struggle while utilizing data from
         reputable sources like IMF, Comtrade, ILOSTAT, and World Bank to reveal
         the underlying dynamics of wealth accumulation and labor oppression.
