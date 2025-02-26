@@ -3,6 +3,8 @@ import React from 'react';
 import { AtlasInterfaceProps } from '../../types/atlas.types';
 import AtlasLocationSearch from '../shared/LocationSearch';
 import AtlasGeographyOptions from '../shared/GeographyOptions';
+import CurrentUTC from '../shared/CurrentUTC';
+// import LocalWeather from '../shared/LocalWeather';
 
 function AtlasInterface({ isMobile }: AtlasInterfaceProps) {
   /* 
@@ -30,6 +32,8 @@ function AtlasInterface({ isMobile }: AtlasInterfaceProps) {
           </button> */}
         </>
       )}
+      <CurrentUTC />
+      {/* <LocalWeather /> */}
       <AtlasLocationSearch />
       <AtlasGeographyOptions />
     </div>

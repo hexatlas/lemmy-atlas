@@ -676,6 +676,10 @@ td {
   font-weight: 900;
 }
 
+.mute {
+  opacity: var(--opacity-atlas-2);
+}
+
 .sr-only {
   position: absolute;
   width: 1px;

@@ -26,8 +26,6 @@ function AtlasOSMInfoDetail({
 
   const [imagesArray] = useWikiDataImages(wikidata);
 
-  console.log(imagesArray);
-
   return (
     <div className="container neutral sticky">
       {iconMap && filterKeys && (
