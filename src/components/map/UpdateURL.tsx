@@ -5,7 +5,7 @@ import { useMapEvent } from 'react-leaflet';
 function UpdateURL({ route, map }: { route; map }) {
   const navigate = useNavigate({ from: route.fullPath });
 
-  useMapEvent('movestart', updateURL);
+  // useMapEvent('movestart', updateURL);
 
   function updateURL() {
     navigate({

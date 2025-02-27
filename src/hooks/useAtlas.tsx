@@ -24,6 +24,8 @@ import {
   initAtlas,
 } from '../reducer/actions';
 
+import { Layer, LatLngExpression, latLngBounds, Path, Polyline } from 'leaflet';
+
 import {
   AtlasState,
   AtlasAction,
@@ -92,16 +94,20 @@ function useAtlas(Route): AtlasInterfaceProps {
   }, []);
 
   /*
-      useEffects
+  useEffects
   */
 
-  // useEffect(() => {
-  //   if (map && navBounds)
-  //     map?.flyToBounds([
-  //       [navBounds[0], navBounds[1]],
-  //       [navBounds[2], navBounds[3]],
-  //     ]);
-  // }, [navBounds]);
+  console.count('useAtlas');
+
+  useEffect(() => {
+    console.log(navBounds, 'navBounds');
+    updateMap();
+    // if (map && navBounds)
+    //   map?.flyToBounds([
+    //     [navBounds[0], navBounds[1]],
+    //     [navBounds[2], navBounds[3]],
+    //   ]);
+  });
 
   useEffect(() => {
     if (isMobile && activeAdministrativeRegion?.country == 'country') {
@@ -119,16 +125,6 @@ function useAtlas(Route): AtlasInterfaceProps {
   }, [activeAdministrativeRegion]);
 
   useEffect(() => {
-    navigate({
-      // @ts-expect-error it works
-      search: () => ({
-        [activeGeographicIdentifier]:
-          activeAdministrativeRegion[activeGeographicIdentifier],
-        bounds: map?.getBounds().toBBoxString(),
-        id: activeAdministrativeRegion?.id,
-      }),
-    });
-
     if (isMobile) {
       dispatch(setIsOpenAtlasMapInterface(false));
     }
@@ -158,7 +154,123 @@ function useAtlas(Route): AtlasInterfaceProps {
         ]),
       );
     }
+    updateMap();
   }, [activeAdministrativeRegion, activeGeographicIdentifier, nominatim]);
+
+  const style_locationMuted = {
+    color: 'var(--surface-atlas-disabled)',
+    fillOpacity: 0.161,
+    weight: 0.161,
+  };
+
+  const style_activeLocationHighlight = {
+    color: 'var(--surface-atlas-info)',
+    fillOpacity: 0.161,
+    weight: 0.161,
+  };
+
+  const style_locationNameHighlight = {
+    color: 'var(--surface-atlas-info)',
+    fillOpacity: 0.161,
+    weight: 1.312,
+  };
+
+  function updateMap() {
+    // Initialize Empty LatLngBounds to keep extending
+    const administrativeRegionArray = latLngBounds(
+      null as unknown as LatLngExpression,
+      null as unknown as LatLngExpression,
+    );
+
+    // Check if region needs an update
+    if (
+      activeAdministrativeRegion?.country !== 'country' ||
+      nominatim?.features[0]
+    ) {
+      const isNameMatch = (region, name) =>
+        region.feature?.properties.name === name;
+      const isCountryMatch = (region, country) =>
+        region.feature?.properties.country === country;
+      const isTypeMatch = (region, type, value) =>
+        region.feature?.properties[type] === value;
+
+      // Updates Map View on Location Type or Region Change
+      map?.eachLayer((region: Layer) => {
+        if (activeGeographicIdentifier === 'name') {
+          if (
+            !isNameMatch(region, nominatim?.features[0]?.properties.name) &&
+            isNameMatch(region, activeAdministrativeRegion?.name)
+          ) {
+            administrativeRegionArray.extend((region as Polyline).getBounds());
+          }
+        } else if (
+          isCountryMatch(region, activeAdministrativeRegion?.country)
+        ) {
+          administrativeRegionArray.extend((region as Polyline).getBounds());
+        }
+      });
+
+      // Highlight and Get Bounds
+      map?.eachLayer((region: Layer) => {
+        if (typeof (region as Path).setStyle === 'function' && !nominatim) {
+          (region as Path).setStyle(style_locationMuted); // Mute all regions
+        }
+
+        if (
+          typeof (region as Path).setStyle === 'function' &&
+          isTypeMatch(
+            region,
+            activeGeographicIdentifier,
+            activeAdministrativeRegion[activeGeographicIdentifier],
+          )
+        ) {
+          (region as Path).setStyle(style_locationNameHighlight); // Highlight active location
+        }
+
+        if (
+          typeof (region as Path).setStyle === 'function' &&
+          isCountryMatch(region, activeAdministrativeRegion?.country)
+        ) {
+          (region as Path).setStyle(style_activeLocationHighlight); // Highlight country match
+          if (
+            isNameMatch(region, activeAdministrativeRegion?.name) &&
+            !nominatim
+          ) {
+            (region as Path).setStyle(style_locationNameHighlight); // Highlight name match
+          }
+        }
+
+        if (
+          typeof (region as Path).setStyle === 'function' &&
+          !isNameMatch(region, nominatim?.features[0]?.properties.name) &&
+          isTypeMatch(
+            region,
+            activeGeographicIdentifier,
+            activeAdministrativeRegion[activeGeographicIdentifier],
+          )
+        ) {
+          administrativeRegionArray.extend((region as Polyline).getBounds()); // Extend bounds for matched regions
+        }
+      });
+
+      // Refreshes Map after initial region selection
+      setTimeout(() => map?.invalidateSize(), 300);
+
+      if (Object.keys(administrativeRegionArray).length !== 0) {
+        map?.fitBounds(administrativeRegionArray);
+
+        navigate({
+          // @ts-expect-error it works
+          search: () => ({
+            [activeGeographicIdentifier]:
+              activeAdministrativeRegion[activeGeographicIdentifier],
+            // bounds: administrativeRegionArray.toBBoxString(),
+            id: activeAdministrativeRegion?.id,
+          }),
+        });
+      }
+    }
+  }
 
   // resetAtlas function
   function resetAtlas() {
@@ -170,6 +282,7 @@ function useAtlas(Route): AtlasInterfaceProps {
         behavior: 'smooth',
       });
   }
+
   const setLegendSizeCallback = useCallback(
     (legendSize) => dispatch(setLegendSize(legendSize)),
     [dispatch],

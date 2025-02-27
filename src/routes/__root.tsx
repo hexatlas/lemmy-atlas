@@ -26,7 +26,7 @@ export const Route = createRootRoute({
     return {
       [location]: search[location] as string | number,
       id: search.id as number,
-      bounds: search.bounds,
+      bounds: search.bounds as string,
     };
   },
 });
@@ -109,8 +109,6 @@ function AtlasRootComponent() {
           )}
         </article>
       </main>
-      {/* <ReactQueryDevtools buttonPosition="bottom-right" />
-      <TanStackRouterDevtools position="bottom-left" /> */}
     </AtlasContext.Provider>
   );
 }
