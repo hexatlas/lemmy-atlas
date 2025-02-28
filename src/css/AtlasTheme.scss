@@ -244,15 +244,15 @@ code {
   --text-atlas-error: hsl(var(--color-atlas-red-700) / var(--opacity-atlas-3));
 
   // Surface Colors
-  --surface-atlas-page: hsl(var(--color-atlas-red-50) / var(--opacity-atlas-3));
-  --surface-atlas-action: hsl(var(--color-atlas-red-700));
-  --surface-atlas-disabled: hsl(var(--color-atlas-neutral-100));
   --surface-atlas-info: hsl(
     var(--color-atlas-yellow-500) / var(--opacity-atlas-3)
   );
+  --surface-atlas-action: hsl(var(--color-atlas-red-700));
   --surface-atlas-option: hsl(
     var(--color-atlas-green-400) / var(--opacity-atlas-3)
   );
+  --surface-atlas-disabled: hsl(var(--color-atlas-neutral-100));
+  --surface-atlas-page: hsl(var(--color-atlas-red-50) / var(--opacity-atlas-3));
   --surface-atlas-success: hsl(var(--color-atlas-success-100));
   --surface-atlas-warning: hsl(var(--color-atlas-warning-100));
   --surface-atlas-error: hsl(var(--color-atlas-error-100));

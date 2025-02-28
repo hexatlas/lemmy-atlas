@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { useCallback, useEffect } from 'react';
+import { useCallback } from 'react';
 import {
   MapContainer,
   TileLayer,
@@ -8,7 +8,7 @@ import {
   LayersControl,
   ScaleControl,
 } from 'react-leaflet';
-import { Layer, LatLngExpression, latLngBounds, Path, Polyline } from 'leaflet';
+import { LatLngExpression } from 'leaflet';
 import { FeatureCollection } from 'geojson';
 import geojsonData from '../../assets/geojson/administrative_regions_extended.json';
 
@@ -30,10 +30,6 @@ export default function AtlasMap({
   setMap,
 
   isLocationSelectMode,
-
-  nominatim,
-
-  activeGeographicIdentifier,
   setActiveGeographicIdentifier,
 
   activeAdministrativeRegion,
@@ -44,33 +40,15 @@ export default function AtlasMap({
       Styles
   */
   const style_locationDefault = {
-    color: 'hsl(var(--color-atlas-dark) / 0)',
-    fillOpacity: 0.161,
-    weight: 0.161,
-  };
-
-  const style_locationMuted = {
-    color: 'hsl(var(--color-atlas-primary) / var(--opacity-atlas-2))',
+    color: 'var(--surface-atlas-disabled)',
     fillOpacity: 0.161,
     weight: 0.161,
   };
 
   const style_locationHover = {
-    color: 'hsl(var(--color-atlas-light) / var(--opacity-atlas-2))',
+    color: 'var(--surface-atlas-option)',
     fillOpacity: 0.161,
     weight: 0.161,
-  };
-
-  const style_activeLocationHighlight = {
-    color: 'hsl(var(--color-atlas-accent) / var(--opacity-atlas-2))',
-    fillOpacity: 0.161,
-    weight: 0.161,
-  };
-
-  const style_locationNameHighlight = {
-    color: 'hsl(var(--color-atlas-accent))',
-    fillOpacity: 0.161,
-    weight: 1.312,
   };
 
   const onClickAdministrativeRegion = useCallback(
@@ -91,13 +69,13 @@ export default function AtlasMap({
     layer
       .bindPopup(
         `
-      <div style="display: grid; grid-auto-flow: column; gap: var(--size-atlas-10); align-items: center;">
-      <h3 style="margin: 0;" class="emoji">${administrativeRegion.properties['emoji']}</h3>
-      <div>
-      <b><i>${administrativeRegion.properties.name}</i></b><br>
-      ${administrativeRegion.properties.country}
-      </div>
-      </div>
+        <div style="display: grid; grid-auto-flow: column; gap: var(--size-atlas-10); align-items: center;">
+          <h3 style="margin: 0;" class="emoji">${administrativeRegion.properties['emoji']}</h3>
+          <div>
+            <b><i>${administrativeRegion.properties.name}</i></b><br>
+            ${administrativeRegion.properties.country}
+          </div>
+        </div>
       `,
       )
       .getPopup();
@@ -138,97 +116,6 @@ export default function AtlasMap({
       },
     });
   };
-
-  function updateMap() {
-    // Initialize Empty LatLngBounds to keep extending
-    const administrativeRegionArray = latLngBounds(
-      null as unknown as LatLngExpression,
-      null as unknown as LatLngExpression,
-    );
-
-    // Check if region needs an update
-    if (
-      activeAdministrativeRegion?.country !== 'country' ||
-      nominatim?.features[0]
-    ) {
-      const isNameMatch = (region, name) =>
-        region.feature?.properties.name === name;
-      const isCountryMatch = (region, country) =>
-        region.feature?.properties.country === country;
-      const isTypeMatch = (region, type, value) =>
-        region.feature?.properties[type] === value;
-
-      // Updates Map View on Location Type or Region Change
-      map?.eachLayer((region: Layer) => {
-        if (activeGeographicIdentifier === 'name') {
-          if (
-            !isNameMatch(region, nominatim?.features[0]?.properties.name) &&
-            isNameMatch(region, activeAdministrativeRegion?.name)
-          ) {
-            administrativeRegionArray.extend((region as Polyline).getBounds());
-          }
-        } else if (
-          isCountryMatch(region, activeAdministrativeRegion?.country)
-        ) {
-          administrativeRegionArray.extend((region as Polyline).getBounds());
-        }
-      });
-
-      // Highlight and Get Bounds
-      map?.eachLayer((region: Layer) => {
-        if (typeof (region as Path).setStyle === 'function' && !nominatim) {
-          (region as Path).setStyle(style_locationMuted); // Mute all regions
-        }
-
-        if (
-          typeof (region as Path).setStyle === 'function' &&
-          isTypeMatch(
-            region,
-            activeGeographicIdentifier,
-            activeAdministrativeRegion[activeGeographicIdentifier],
-          )
-        ) {
-          (region as Path).setStyle(style_locationNameHighlight); // Highlight active location
-        }
-
-        if (
-          typeof (region as Path).setStyle === 'function' &&
-          isCountryMatch(region, activeAdministrativeRegion?.country)
-        ) {
-          (region as Path).setStyle(style_activeLocationHighlight); // Highlight country match
-          if (
-            isNameMatch(region, activeAdministrativeRegion?.name) &&
-            !nominatim
-          ) {
-            (region as Path).setStyle(style_locationNameHighlight); // Highlight name match
-          }
-        }
-
-        if (
-          typeof (region as Path).setStyle === 'function' &&
-          !isNameMatch(region, nominatim?.features[0]?.properties.name) &&
-          isTypeMatch(
-            region,
-            activeGeographicIdentifier,
-            activeAdministrativeRegion[activeGeographicIdentifier],
-          )
-        ) {
-          administrativeRegionArray.extend((region as Polyline).getBounds()); // Extend bounds for matched regions
-        }
-      });
-
-      // Refreshes Map after initial region selection
-      setTimeout(() => map?.invalidateSize(), 300);
-
-      if (Object.keys(administrativeRegionArray).length !== 0) {
-        map?.fitBounds(administrativeRegionArray);
-      }
-    }
-  }
-
-  useEffect(() => {
-    updateMap();
-  }, [activeAdministrativeRegion, activeGeographicIdentifier]);
 
   return (
     <MapContainer
