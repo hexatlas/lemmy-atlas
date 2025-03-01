@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { createFileRoute, Link } from '@tanstack/react-router';
 import LegendLayout from '../components/shared/LegendLayout';
-import { useStateStorage } from '../hooks/useAtlasUtils';
+import { useStateStorage } from '../hooks/useUtils';
 import AtlasLocationSearch from '../components/shared/LocationSearch';
 
 import leaflet from '../assets/icons/leaflet.svg';

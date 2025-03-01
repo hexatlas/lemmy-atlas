@@ -10,8 +10,6 @@ import {
   LocationSelection,
 } from '../../types/atlas.types';
 
-import { handleRandom } from '../../hooks/useAtlasUtils';
-
 function AtlasGeographyOptions() {
   const {
     isMobile,

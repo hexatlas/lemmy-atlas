@@ -1,6 +1,6 @@
 // https://www.imf.org/external/datamapper/api/v1/indicators
 import { indicators } from '../../../data/economy/charts/indicatorsIMF.json';
-import { useStateStorage } from '../../../hooks/useAtlasUtils';
+import { useStateStorage } from '../../../hooks/useUtils';
 import { useQuery } from '@tanstack/react-query';
 import { IMFIndicatorType } from '../../../types/api.types';
 

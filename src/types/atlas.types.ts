@@ -128,6 +128,8 @@ export interface AtlasInterfaceProps {
   setActiveLocationSelection: (
     activeLocationSelection: LocationSelection[],
   ) => void;
+
+  handleRandom;
 }
 
 export interface LocationSelection {

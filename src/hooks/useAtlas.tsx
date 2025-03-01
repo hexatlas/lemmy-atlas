@@ -7,7 +7,10 @@ import React, {
   useCallback,
 } from 'react';
 import atlasReducer from '../reducer/reducer';
-import { initialState } from '../reducer/reducer';
+import {
+  initialState,
+  defaultAdministrativeRegionObject,
+} from '../reducer/reducer';
 
 import {
   setIsMobile,
@@ -32,10 +35,15 @@ import {
   AtlasInterfaceProps,
   GeographicIdentifier,
   LocationSelection,
+  AdministrativeRegionObject,
 } from '../types/atlas.types';
 
+import geojsonData from '../assets/geojson/administrative_regions_extended.json';
+const administrativeRegionsData = geojsonData as FeatureCollection;
+
 import { useNavigate } from '@tanstack/react-router';
-import { getAdministrativeRegionObject } from './useAtlasUtils';
+
+import { FeatureCollection } from 'geojson';
 
 function useAtlas(Route): AtlasInterfaceProps {
   // Routing
@@ -78,20 +86,6 @@ function useAtlas(Route): AtlasInterfaceProps {
     activeAdministrativeRegion,
     administrativeRegionClickHistoryArray,
   } = state;
-
-  // Handle resize
-  const handleResize = () => {
-    setTimeout(() => map && map.invalidateSize(), 300);
-    dispatch(setIsMobile(window.innerWidth < 768));
-  };
-
-  useEffect(() => {
-    handleResize();
-    window.addEventListener('resize', handleResize);
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
-  }, []);
 
   /*
   useEffects
@@ -175,6 +169,46 @@ function useAtlas(Route): AtlasInterfaceProps {
     weight: 1.312,
   };
 
+  //  FUNCTIONS
+
+  // Handle resize
+  const handleResize = () => {
+    setTimeout(() => map && map.invalidateSize(), 300);
+    dispatch(setIsMobile(window.innerWidth < 768));
+  };
+
+  useEffect(() => {
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
+  // Handle random
+  function handleRandom() {
+    const random = Math.floor(
+      administrativeRegionsData?.features.length * Math.random(),
+    );
+
+    const randomAdministrativeRegion = administrativeRegionsData?.features[
+      random
+    ].properties as AdministrativeRegionObject;
+
+    dispatch(setActiveAdministrativeRegion(randomAdministrativeRegion));
+
+    navigate({
+      // @ts-expect-error it works
+      search: () => ({
+        [activeGeographicIdentifier]:
+          randomAdministrativeRegion[activeGeographicIdentifier],
+        // bounds: administrativeRegionArray.toBBoxString(),
+        id: randomAdministrativeRegion?.id,
+      }),
+    }).then(() => location.reload());
+  }
+
+  //  Update Map
   function updateMap() {
     // Initialize Empty LatLngBounds to keep extending
     const administrativeRegionArray = latLngBounds(
@@ -368,6 +402,30 @@ function useAtlas(Route): AtlasInterfaceProps {
     administrativeRegionClickHistoryArray,
     setAdministrativeRegionClickHistoryArray:
       setAdministrativeRegionClickHistoryArrayCallback,
+    handleRandom,
   };
 }
 export default useAtlas;
+
+// getAdministrativeRegionObject
+
+export function getAdministrativeRegionObject(
+  GeographicIdentifier: GeographicIdentifier,
+  value: string | number,
+) {
+  if (GeographicIdentifier && value === 'country')
+    return defaultAdministrativeRegionObject;
+
+  const { features: administrativeRegionsData } =
+    geojsonData as FeatureCollection;
+
+  const match = administrativeRegionsData.find((administrativeRegionData) => {
+    if (administrativeRegionData.properties)
+      return (
+        value === administrativeRegionData.properties[GeographicIdentifier]
+      );
+  });
+
+  if (match === undefined) return defaultAdministrativeRegionObject;
+  return match?.properties as AdministrativeRegionObject;
+}

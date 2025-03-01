@@ -17,7 +17,7 @@ import { InformationLemmyProps, AtlasNavigation } from '../types/atlas.types';
 // Import Components
 import LegendNavigation from '../components/shared/Navigation';
 // Import Utils
-import { useStateStorage } from '../hooks/useAtlasUtils';
+import { useStateStorage } from '../hooks/useUtils';
 
 export const InformationContext = createContext<InformationLemmyProps | null>(
   null,

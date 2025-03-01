@@ -1,50 +1,5 @@
 // import center from "@turf/center";
 import { useState, useEffect, SetStateAction, Dispatch } from 'react';
-import { FeatureCollection } from 'geojson';
-import geojsonData from '../assets/geojson/administrative_regions_extended.json';
-import {
-  AdministrativeRegionObject,
-  GeographicIdentifier,
-} from '../types/atlas.types';
-import { defaultAdministrativeRegionObject } from '../reducer/reducer';
-
-// get
-
-export function getAdministrativeRegionObject(
-  GeographicIdentifier: GeographicIdentifier,
-  value: string | number,
-) {
-  if (GeographicIdentifier && value === 'country')
-    return defaultAdministrativeRegionObject;
-
-  const { features: administrativeRegionsData } =
-    geojsonData as FeatureCollection;
-
-  const match = administrativeRegionsData.find((administrativeRegionData) => {
-    if (administrativeRegionData.properties)
-      return (
-        value === administrativeRegionData.properties[GeographicIdentifier]
-      );
-  });
-
-  if (match === undefined) return defaultAdministrativeRegionObject;
-  return match?.properties as AdministrativeRegionObject;
-}
-
-// HANDLE RANDOM
-
-export function handleRandom(
-  setActiveAdministrativeRegion: Dispatch<
-    SetStateAction<AdministrativeRegionObject>
-  >,
-) {
-  const administrativeRegionsData = geojsonData as FeatureCollection;
-  setActiveAdministrativeRegion(
-    administrativeRegionsData?.features[
-      Math.floor(administrativeRegionsData?.features.length * Math.random())
-    ].properties as AdministrativeRegionObject,
-  );
-}
 
 // STORAGE
 
@@ -54,7 +9,9 @@ function getSavedValue(key, initialValue, storage) {
     if (savedValue) return savedValue;
     if (initialValue instanceof Function) return initialValue();
     return initialValue;
-  } catch (error) {}
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 export function useStateStorage<T>(

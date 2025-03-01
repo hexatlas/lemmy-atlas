@@ -1,7 +1,6 @@
 import React, { useContext } from 'react';
 
 import { AtlasContext } from '../../routes/__root';
-import { handleRandom } from '../../hooks/useAtlasUtils';
 import useNominatim from '../../data/shared/useNominatim';
 
 function AtlasLocationSearch() {
@@ -14,7 +13,7 @@ function AtlasLocationSearch() {
     setIsOpenAtlasMapInterface,
     setNominatim,
 
-    activeGeographicIdentifier,
+    handleRandom,
     setActiveGeographicIdentifier,
 
     activeAdministrativeRegion,
@@ -68,7 +67,7 @@ function AtlasLocationSearch() {
             title="Select Random Administrative Region"
             aria-label="Random Button - Select Random Administrative Region"
             className="button-emoji action"
-            onClick={() => handleRandom(setActiveAdministrativeRegion)}
+            onClick={handleRandom}
           >
             🎲
           </button>

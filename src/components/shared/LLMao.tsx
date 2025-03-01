@@ -1,5 +1,5 @@
 import React from 'react';
-import { useStateStorage } from '../../hooks/useAtlasUtils';
+import { useStateStorage } from '../../hooks/useUtils';
 
 function LLMao() {
   const [consent, setConsent] = useStateStorage('consent', false);

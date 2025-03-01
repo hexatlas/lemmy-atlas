@@ -6,7 +6,7 @@ import LegendLayout from '../../components/shared/LegendLayout';
 import useChat from '../../hooks/useChat';
 import ChatMessage from '../../components/shared/ChatMessage';
 import { AtlasContext } from '../__root';
-import { useStateStorage } from '../../hooks/useAtlasUtils';
+import { useStateStorage } from '../../hooks/useUtils';
 import { ModelConfig } from '../../types/atlas.types';
 
 export const Route = createFileRoute('/information/chat')({
